@@ -44,7 +44,7 @@ export function MarketLanding({ cfg }: { cfg: MarketConfig }) {
           <div className="mt-10 grid lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-8">
               <p className="eyebrow" data-anim="2"><span className="dot" />{cfg.hero.eyebrow}</p>
-              <h1 className="display text-[clamp(40px,7vw,100px)] mt-3" data-anim="3">
+              <h1 className="display mt-3" style={{ fontSize: "var(--fs-hero)" }} data-anim="3">
                 {cfg.flag}&nbsp;{cfg.hero.title}<br />
                 <em>{cfg.hero.titleEm}</em>
               </h1>

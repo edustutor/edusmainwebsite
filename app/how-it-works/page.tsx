@@ -12,7 +12,7 @@ export default function Page() {
         </div>
         <div className="container-edge">
           <p className="eyebrow"><span className="dot" />How it works</p>
-          <h1 className="display text-[clamp(48px,8vw,120px)] mt-3 max-w-4xl">
+          <h1 className="display mt-3 max-w-4xl" style={{ fontSize: "var(--fs-hero)" }}>
             From sign-up to <em>steady progress</em>.
           </h1>
           <p className="text-[#2B3458] max-w-xl mt-5 text-[17px]">

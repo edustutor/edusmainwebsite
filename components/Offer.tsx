@@ -41,12 +41,12 @@ const ROWS = [
 
 export function Offer() {
   return (
-    <section className="relative py-28 border-t border-[rgba(10,18,48,0.06)]">
+    <section className="relative py-20 md:py-24 border-t border-[rgba(10,18,48,0.06)]">
       <div className="container-edge">
         <div className="flex items-end justify-between flex-wrap gap-4 mb-12">
           <div>
             <p className="eyebrow"><span className="dot" />02 · What EDUS offers</p>
-            <h2 className="display text-5xl md:text-6xl mt-4">
+            <h2 className="display mt-4" style={{ fontSize: "var(--fs-display)" }}>
               Three offers. <em>No overlap.</em>
             </h2>
           </div>

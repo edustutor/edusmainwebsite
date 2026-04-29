@@ -16,13 +16,13 @@
   --sun: #FFC21A;
   --sun-deep: #B07A00;
 
-  /* Typography scale — fluid */
-  --fs-hero: clamp(44px, 7.5vw, 112px);
-  --fs-display: clamp(36px, 5vw, 64px);
-  --fs-h2: clamp(28px, 3.5vw, 44px);
-  --fs-h3: clamp(20px, 1.6vw, 26px);
-  --fs-body: 16px;
-  --fs-lead: 17px;
+  /* Typography scale — fluid, tightened */
+  --fs-hero: clamp(36px, 5.4vw, 78px);
+  --fs-display: clamp(30px, 3.6vw, 52px);
+  --fs-h2: clamp(26px, 2.6vw, 38px);
+  --fs-h3: clamp(19px, 1.4vw, 24px);
+  --fs-body: 15.5px;
+  --fs-lead: 16.5px;
   --fs-small: 13px;
 }
 
@@ -45,35 +45,38 @@ body {
 ::selection { background: #FFC21A; color: #0A1230; }
 
 /* ---------------------------------------------------------------- */
-/* Background atmosphere — fixed, performant, soft global glow      */
+/* Background atmosphere — fixed, performant, layered blurred orbs  */
 /* ---------------------------------------------------------------- */
 .app-atmosphere {
   position: fixed; inset: 0; z-index: -1; pointer-events: none;
   overflow: hidden;
-  background: radial-gradient(1200px 800px at 50% -10%, #EAF2FF 0%, transparent 60%),
-              radial-gradient(900px 600px at 95% 10%, #FFF6D1 0%, transparent 55%),
-              radial-gradient(900px 700px at 5% 30%, #E6EBFF 0%, transparent 55%),
-              #FBFCFF;
+  background:
+    radial-gradient(1100px 700px at 50% -15%, #DCE7FF 0%, transparent 55%),
+    radial-gradient(800px 600px at 100% 5%, #FFEDB0 0%, transparent 50%),
+    radial-gradient(900px 700px at 0% 35%, #DDE4FF 0%, transparent 55%),
+    radial-gradient(700px 500px at 90% 70%, #E9DEFF 0%, transparent 50%),
+    radial-gradient(600px 500px at 10% 90%, #D9F1FF 0%, transparent 55%),
+    #F6F8FF;
 }
 .app-atmosphere::before,
 .app-atmosphere::after {
   content: ""; position: absolute; border-radius: 9999px;
-  filter: blur(120px); will-change: auto;
+  filter: blur(110px);
 }
 .app-atmosphere::before {
-  width: 60vmax; height: 60vmax; left: -15vmax; top: -10vmax;
-  background: radial-gradient(circle, rgba(46,115,255,0.40), transparent 60%);
+  width: 48vmax; height: 48vmax; left: -10vmax; top: -8vmax;
+  background: radial-gradient(circle, rgba(46,115,255,0.45), transparent 65%);
 }
 .app-atmosphere::after {
-  width: 50vmax; height: 50vmax; right: -10vmax; top: 25vh;
-  background: radial-gradient(circle, rgba(255,194,26,0.35), transparent 60%);
+  width: 42vmax; height: 42vmax; right: -8vmax; top: 22vh;
+  background: radial-gradient(circle, rgba(255,194,26,0.40), transparent 65%);
 }
 
-/* Decorative glow blob — used inline per section */
+/* Decorative glow orb — used inline per section */
 .glow {
   position: absolute; border-radius: 9999px;
-  filter: blur(110px);
-  opacity: .55;
+  filter: blur(95px);
+  opacity: .65;
   pointer-events: none;
   mix-blend-mode: multiply;
 }

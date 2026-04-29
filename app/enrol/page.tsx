@@ -20,7 +20,7 @@ export default function EnrolPage() {
 
       <div className="mx-auto max-w-4xl px-6 sm:px-8">
         <p className="eyebrow"><span className="dot" />Enrol · Multi-step · Progressive disclosure</p>
-        <h1 className="display text-[clamp(40px,6vw,72px)] mt-3">
+        <h1 className="display mt-3" style={{ fontSize: "var(--fs-hero)" }}>
           Start your <em>EDUS journey.</em>
         </h1>
         <p className="text-[#2B3458] mt-4 max-w-xl">

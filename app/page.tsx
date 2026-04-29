@@ -5,6 +5,8 @@ import { WhyJoin } from "@/components/WhyJoin";
 import { Success } from "@/components/Success";
 import { JoinFlow } from "@/components/JoinFlow";
 import { LearningExperience } from "@/components/LearningExperience";
+import { Onboarding } from "@/components/Onboarding";
+import { Accreditations } from "@/components/Accreditations";
 import { Marquee } from "@/components/Marquee";
 import { CTA } from "@/components/CTA";
 
@@ -16,8 +18,10 @@ export default function Home() {
       <Offer />
       <Marquee />
       <WhyJoin />
-      <Success />
       <LearningExperience />
+      <Onboarding />
+      <Success />
+      <Accreditations />
       <JoinFlow />
       <CTA />
     </>

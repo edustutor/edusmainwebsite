@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function CTA() {
   return (
-    <section className="relative py-28">
+    <section className="relative py-20 md:py-24">
       <div className="container-edge">
         <div className="relative rounded-[36px] glass-strong p-10 md:p-16 overflow-hidden">
           <div aria-hidden className="absolute inset-0 -z-10">
@@ -13,7 +13,7 @@ export function CTA() {
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7">
               <p className="eyebrow"><span className="dot" />Step 02 · Begin</p>
-              <h2 className="display text-5xl md:text-7xl mt-4">
+              <h2 className="display mt-4" style={{ fontSize: "var(--fs-display)" }}>
                 A clearer path to better grades. <em>Open today.</em>
               </h2>
               <p className="text-[#2B3458] max-w-xl mt-5 text-[17px]">

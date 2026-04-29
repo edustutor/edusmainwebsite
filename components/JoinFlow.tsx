@@ -10,12 +10,12 @@ const STEPS = [
 
 export function JoinFlow() {
   return (
-    <section className="relative py-28 border-t border-[rgba(10,18,48,0.06)]">
+    <section className="relative py-20 md:py-24 border-t border-[rgba(10,18,48,0.06)]">
       <div className="container-edge">
         <div className="grid lg:grid-cols-12 gap-10">
           <div className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start">
             <p className="eyebrow"><span className="dot" />05 · How to join</p>
-            <h2 className="display text-5xl md:text-6xl mt-4">
+            <h2 className="display mt-4" style={{ fontSize: "var(--fs-display)" }}>
               One unified <em>join flow.</em>
             </h2>
             <p className="text-[#5C6485] mt-5 max-w-sm">

@@ -45,7 +45,7 @@ export function SiteFooter() {
         <div className="grid lg:grid-cols-12 gap-10">
           <div className="lg:col-span-5">
             <p className="eyebrow"><span className="dot" />Edustutor.com</p>
-            <h3 className="display text-4xl md:text-5xl mt-4">
+            <h3 className="display mt-4" style={{ fontSize: "var(--fs-display)" }}>
               The right syllabus, <em>in the right format</em>, with the right support.
             </h3>
             <p className="text-[#5C6485] max-w-md mt-5">

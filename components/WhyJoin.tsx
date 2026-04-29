@@ -33,7 +33,7 @@ const REASONS = [
 
 export function WhyJoin() {
   return (
-    <section className="relative py-28 border-t border-[rgba(10,18,48,0.06)] overflow-hidden">
+    <section className="relative py-20 md:py-24 border-t border-[rgba(10,18,48,0.06)] overflow-hidden">
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="glow" style={{ top: "10%", right: "-10%", width: 520, height: 520, background: "#CFE0FF" }} />
       </div>
@@ -41,7 +41,7 @@ export function WhyJoin() {
       <div className="container-edge">
         <div className="max-w-2xl">
           <p className="eyebrow"><span className="dot" />03 · Why families choose EDUS</p>
-          <h2 className="display text-5xl md:text-6xl mt-4">
+          <h2 className="display mt-4" style={{ fontSize: "var(--fs-display)" }}>
             Built for results. <em>Designed for trust.</em>
           </h2>
         </div>

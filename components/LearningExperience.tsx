@@ -9,7 +9,7 @@ const SEQUENCE = [
 
 export function LearningExperience() {
   return (
-    <section className="relative py-28 border-t border-[rgba(10,18,48,0.06)] overflow-hidden">
+    <section className="relative py-20 md:py-24 border-t border-[rgba(10,18,48,0.06)] overflow-hidden">
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-grid opacity-60" />
         <div className="glow" style={{ bottom: -200, left: "30%", width: 600, height: 600, background: "#CFE0FF" }} />
@@ -18,7 +18,7 @@ export function LearningExperience() {
       <div className="container-edge">
         <div className="max-w-2xl">
           <p className="eyebrow"><span className="dot" />06 · How learning works</p>
-          <h2 className="display text-5xl md:text-6xl mt-4">
+          <h2 className="display mt-4" style={{ fontSize: "var(--fs-display)" }}>
             Live, recorded, <em>tracked.</em>
           </h2>
           <p className="text-[#2B3458] mt-5">

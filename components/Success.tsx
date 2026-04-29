@@ -16,12 +16,14 @@ type Story = {
 };
 
 const STORIES: Story[] = [
-  { market: "SL", flag: "🇱🇰", syllabus: "G.C.E. O/L", grade: "Grade 11", subject: "Mathematics", before: "C", after: "A", quote: "The recordings let me revisit anything I missed. Group classes felt small enough to ask questions.", name: "Hasini P.", role: "Student", location: "Kandy, Sri Lanka" },
-  { market: "IN", flag: "🇮🇳", syllabus: "CBSE", grade: "Grade 10", subject: "Science", before: "76%", after: "94%", quote: "Weekly parent updates kept us aligned. The tutor knew exactly where my son needed support.", name: "Rakesh M.", role: "Parent", location: "Bengaluru, India" },
+  { market: "SL", flag: "🇱🇰", syllabus: "National", grade: "Cambridge", subject: "Platform", before: "Hesitant", after: "Confident", quote: "EDUS's platform is incredibly user-friendly. I can access my courses and materials anytime.", name: "K. Ellakiya", role: "Student", location: "Kandy, Sri Lanka" },
+  { market: "SL", flag: "🇱🇰", syllabus: "Cambridge", grade: "O/L", subject: "Cambridge courses", before: "Isolated", after: "Connected", quote: "Their Cambridge courses are great, but the best part is the online forums and the community.", name: "P. Vijithan", role: "Student", location: "Colombo, Sri Lanka" },
+  { market: "SL", flag: "🇱🇰", syllabus: "National", grade: "Grade 8", subject: "Flexibility", before: "Schedule clash", after: "On-track", quote: "EDUS is perfect for working moms! Their online platform lets my daughter learn anytime.", name: "T. Kalaivani", role: "Parent", location: "Kalmunai, Sri Lanka" },
+  { market: "SL", flag: "🇱🇰", syllabus: "National", grade: "A/L", subject: "Affordability", before: "Costly options", after: "Value-rich", quote: "EDUS provides affordable and high-quality online courses that cater to diverse needs.", name: "A. Chellakumar, LLB", role: "Parent", location: "Galle, Sri Lanka" },
+  { market: "SL", flag: "🇱🇰", syllabus: "National", grade: "Grade 11", subject: "Community", before: "Online = lonely", after: "Online = together", quote: "What I love about EDUS is the community. Even online, I feel connected to my peers.", name: "C. Kajansika", role: "Student", location: "Batticaloa, Sri Lanka" },
   { market: "GL", flag: "🌐", syllabus: "Cambridge IGCSE", grade: "Year 10", subject: "Physics", before: "Predicted 5", after: "Achieved 8", quote: "I had a tutor matched to my time zone in 48 hours. The flexibility was the whole reason it worked.", name: "Adaeze N.", role: "Student", location: "Lagos, Nigeria" },
-  { market: "SL", flag: "🇱🇰", syllabus: "G.C.E. A/L", grade: "Grade 13", subject: "Combined Maths", before: "Failing", after: "B Pass", quote: "The pace of revision and exam-style practice closer to A/Ls made all the difference.", name: "Imran S.", role: "Student", location: "Colombo, Sri Lanka" },
+  { market: "IN", flag: "🇮🇳", syllabus: "CBSE", grade: "Grade 10", subject: "Science", before: "76%", after: "94%", quote: "Weekly parent updates kept us aligned. The tutor knew exactly where my son needed support.", name: "Rakesh M.", role: "Parent", location: "Bengaluru, India" },
   { market: "GL", flag: "🌐", syllabus: "IB Diploma", grade: "Year 12", subject: "Economics", before: "5", after: "7", quote: "One-to-one means the tutor adapts to me. Not a class of 30 working at someone else's pace.", name: "Sofia R.", role: "Student", location: "Madrid, Spain" },
-  { market: "IN", flag: "🇮🇳", syllabus: "NCERT", grade: "Grade 8", subject: "English", before: "Hesitant reader", after: "Top 10% in class", quote: "Live online turned out to be more focused than the offline tuitions we tried. Worth every rupee.", name: "Priya K.", role: "Parent", location: "Pune, India" },
 ];
 
 const FILTERS = [
@@ -36,12 +38,12 @@ export function Success() {
   const visible = filter === "ALL" ? STORIES : STORIES.filter((s) => s.market === filter);
 
   return (
-    <section className="relative py-28 border-t border-[rgba(10,18,48,0.06)]">
+    <section className="relative py-20 md:py-24 border-t border-[rgba(10,18,48,0.06)]">
       <div className="container-edge">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-10">
           <div>
             <p className="eyebrow"><span className="dot" />04 · What success looks like</p>
-            <h2 className="display text-5xl md:text-6xl mt-4">
+            <h2 className="display mt-4" style={{ fontSize: "var(--fs-display)" }}>
               Real outcomes, <em>filterable by market.</em>
             </h2>
           </div>

@@ -1,10 +1,10 @@
 export function WhatIsEdus() {
   return (
-    <section className="relative py-28 border-t border-[rgba(10,18,48,0.06)]">
+    <section className="relative py-20 md:py-24 border-t border-[rgba(10,18,48,0.06)]">
       <div className="container-edge grid lg:grid-cols-12 gap-10">
         <div className="lg:col-span-4">
           <p className="eyebrow"><span className="dot" />01 · What EDUS is</p>
-          <h2 className="display text-5xl md:text-6xl mt-4">
+          <h2 className="display mt-4" style={{ fontSize: "var(--fs-display)" }}>
             A smarter <em>front door</em> to live online learning.
           </h2>
         </div>
