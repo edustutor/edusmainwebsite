@@ -8,6 +8,7 @@ import { Success } from "@/components/Success";
 import { JoinFlow } from "@/components/JoinFlow";
 import { ResourceSupport } from "@/components/ResourceSupport";
 import { FAQ } from "@/components/FAQ";
+import { HelpBanner } from "@/components/HelpBanner";
 import { CTA } from "@/components/CTA";
 import { HomeJsonLd } from "@/components/JsonLd";
 
@@ -35,9 +36,11 @@ export default function Home() {
       <ResourceSupport />
       {/* 10. FAQ */}
       <FAQ />
-      {/* 11. Final CTA */}
+      {/* 11. Help banner — separate from footer */}
+      <HelpBanner />
+      {/* 12. Final CTA */}
       <CTA />
-      {/* 12. Footer is in layout */}
+      {/* 13. Footer is in layout */}
     </>
   );
 }
