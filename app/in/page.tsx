@@ -90,7 +90,7 @@ export default function IndiaPage() {
       </section>
 
       {/* PILLARS */}
-      <section className="relative py-20 md:py-24">
+      <section className="relative py-20 md:py-24 overflow-hidden">
         <div className="container-edge">
           <div className="text-center max-w-2xl mx-auto">
             <p className="eyebrow"><span className="dot" />The EDUS Difference</p>
@@ -124,7 +124,7 @@ export default function IndiaPage() {
       </section>
 
       {/* ACADEMIC STRUCTURE */}
-      <section className="relative py-20 md:py-24">
+      <section className="relative py-20 md:py-24 overflow-hidden">
         <div className="container-edge">
           <div className="text-center max-w-2xl mx-auto">
             <p className="eyebrow"><span className="dot" />Academic Structure</p>
@@ -205,7 +205,7 @@ export default function IndiaPage() {
       </section>
 
       {/* PRICING */}
-      <section id="pricing" className="relative py-20 md:py-24">
+      <section id="pricing" className="relative py-20 md:py-24 overflow-hidden">
         <div className="container-edge">
           <div className="text-center max-w-2xl mx-auto">
             <p className="eyebrow"><span className="dot" />Fees</p>

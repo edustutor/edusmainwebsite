@@ -122,7 +122,7 @@ export function Subjects() {
   const current = PATHWAYS.find((p) => p.code === active) ?? PATHWAYS[0];
 
   return (
-    <section id="subjects" className="relative py-20 md:py-28 scroll-mt-24">
+    <section id="subjects" className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden">
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="blob" style={{ top: "10%", left: "-8%", width: 420, height: 420, background: "#2563EB", opacity: 0.18 }} />
         <div className="blob" style={{ bottom: "0%", right: "-6%", width: 380, height: 380, background: "#22C55E", opacity: 0.14 }} />

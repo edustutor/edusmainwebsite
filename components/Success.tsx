@@ -93,7 +93,7 @@ export function Success() {
   const visible = filter === "ALL" ? STORIES : STORIES.filter((s) => s.market === filter);
 
   return (
-    <section id="stories" className="relative py-20 md:py-28 scroll-mt-24">
+    <section id="stories" className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden">
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="blob" style={{ top: "20%", left: "-8%", width: 420, height: 420, background: "#FACC15", opacity: 0.16 }} />
         <div className="blob" style={{ bottom: "10%", right: "-8%", width: 420, height: 420, background: "#06B6D4", opacity: 0.16 }} />

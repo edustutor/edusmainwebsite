@@ -34,7 +34,10 @@
 html, body {
   background: var(--bg);
   color: var(--ink);
+  overflow-x: hidden;
 }
+html { -webkit-text-size-adjust: 100%; }
+body { position: relative; }
 
 body {
   font-family: var(--font-sans), "Open Sans", system-ui, sans-serif;

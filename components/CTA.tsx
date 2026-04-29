@@ -5,7 +5,7 @@ import { staggerContainer, fadeUp, floatingBlob, inViewClose } from "@/lib/motio
 
 export function CTA() {
   return (
-    <section className="relative py-20 md:py-28">
+    <section className="relative py-20 md:py-28 overflow-hidden">
       <div className="container-edge">
         <m.div
           className="relative rounded-[36px] glass-strong p-8 md:p-14 overflow-hidden text-center"

@@ -91,7 +91,7 @@ export function MarketLanding({ cfg }: { cfg: MarketConfig }) {
       </section>
 
       {/* CATALOGUE */}
-      <section className="relative py-20 md:py-24">
+      <section className="relative py-20 md:py-24 overflow-hidden">
         <div className="container-edge">
           <div className="text-center max-w-2xl mx-auto">
             <p className="eyebrow"><span className="dot" />Catalogue</p>

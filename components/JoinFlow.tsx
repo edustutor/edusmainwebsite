@@ -13,7 +13,7 @@ const STEPS = [
 
 export function JoinFlow() {
   return (
-    <section id="enrolment" className="relative py-20 md:py-28 scroll-mt-24">
+    <section id="enrolment" className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden">
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="blob" style={{ top: "20%", right: "-6%", width: 380, height: 380, background: "#22C55E", opacity: 0.14 }} />
       </div>

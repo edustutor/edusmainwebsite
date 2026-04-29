@@ -5,7 +5,7 @@ import { fadeUp, sectionReveal, inView } from "@/lib/motion";
 
 export function HelpBanner() {
   return (
-    <section className="relative py-10 md:py-14">
+    <section className="relative py-10 md:py-14 overflow-hidden">
       <div className="container-edge">
         <m.div
           variants={sectionReveal}

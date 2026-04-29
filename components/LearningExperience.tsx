@@ -15,7 +15,7 @@ const TINTS = ["#2563EB", "#8B5CF6", "#06B6D4", "#22C55E", "#FACC15", "#2563EB"]
 
 export function LearningExperience() {
   return (
-    <section id="how" className="relative py-20 md:py-28 scroll-mt-24">
+    <section id="how" className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden">
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="blob" style={{ top: "20%", right: "-8%", width: 420, height: 420, background: "#8B5CF6", opacity: 0.18 }} />
       </div>

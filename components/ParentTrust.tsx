@@ -14,7 +14,7 @@ const POINTS = [
 
 export function ParentTrust() {
   return (
-    <section id="parent-trust" className="relative py-20 md:py-28 scroll-mt-24">
+    <section id="parent-trust" className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden">
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="blob" style={{ top: "10%", right: "-8%", width: 380, height: 380, background: "#06B6D4", opacity: 0.16 }} />
         <div className="blob" style={{ bottom: "0%", left: "-6%", width: 360, height: 360, background: "#2563EB", opacity: 0.18 }} />
