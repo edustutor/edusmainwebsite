@@ -27,10 +27,10 @@ export function CTA() {
         >
           {/* Breathing color glows */}
           <div aria-hidden className="absolute inset-0 -z-10">
-            <AmbientGlow top="-10%" left="-10%" size={380} color="#2563EB" opacity={[0.18, 0.32]} duration={18} />
-            <AmbientGlow top="-10%" right="-10%" size={340} color="#8B5CF6" opacity={[0.18, 0.32]} duration={20} delay={2} />
-            <AmbientGlow bottom="-15%" left="30%" size={400} color="#06B6D4" opacity={[0.14, 0.26]} duration={22} delay={4} />
-            <AmbientGlow bottom="-15%" right="20%" size={300} color="#FACC15" opacity={[0.18, 0.30]} duration={16} delay={1} />
+            <AmbientGlow top="-8%" left="-4%" size={200} color="#2563EB" opacity={[0.12, 0.22]} duration={20} blur={80} />
+            <AmbientGlow top="-8%" right="-4%" size={200} color="#8B5CF6" opacity={[0.12, 0.22]} duration={22} delay={2} blur={80} />
+            <AmbientGlow bottom="-12%" left="35%" size={220} color="#06B6D4" opacity={[0.10, 0.18]} duration={24} delay={4} blur={80} />
+            <AmbientGlow bottom="-12%" right="20%" size={180} color="#FACC15" opacity={[0.12, 0.20]} duration={18} delay={1} blur={70} />
           </div>
 
           <m.div
@@ -40,11 +40,14 @@ export function CTA() {
             viewport={inViewClose}
           >
             <m.p variants={fadeUp} className="eyebrow"><span className="dot" />Ready When You Are</m.p>
-            <m.h2 variants={fadeUp} className="heading mt-5" style={{ fontSize: "clamp(32px, 4.5vw, 56px)" }}>
-              Give your child a smarter<br />
-              <em>online learning experience.</em>
+            <m.h2
+              variants={fadeUp}
+              className="heading mt-5"
+              style={{ fontSize: "clamp(28px, 3.4vw, 44px)", lineHeight: 1.15 }}
+            >
+              Give your child a smarter <em>online learning experience.</em>
             </m.h2>
-            <m.p variants={fadeUp} className="text-[#2B3950] text-[17px] max-w-2xl mx-auto mt-6 leading-[1.7]">
+            <m.p variants={fadeUp} className="text-[#2B3950] text-[15.5px] max-w-2xl mx-auto mt-5 leading-[1.7]">
               Join EDUS and help your child learn with live classes, expert tutors, structured academic
               support, parent updates, recordings, and clear progress tracking.
             </m.p>
@@ -68,7 +71,8 @@ export function CTA() {
                 <m.div
                   key={s.v}
                   variants={fadeUp}
-                  className="rounded-2xl bg-white/80 border border-white/80 px-3 py-3.5 text-center"
+                  whileHover={{ y: -2, transition: { duration: 0.2 } }}
+                  className="rounded-2xl bg-white/85 border border-[rgba(16,32,51,0.10)] px-3 py-3.5 text-center shadow-[0_2px_8px_-4px_rgba(16,32,51,0.06)]"
                 >
                   <p className="font-[family-name:var(--font-display)] font-700 text-[18px] text-[#102033]">{s.k}</p>
                   <p className="text-[11.5px] text-[#5A6A82] mt-0.5">{s.v}</p>

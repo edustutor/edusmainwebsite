@@ -91,10 +91,10 @@ export function RegionSelector() {
     >
       <div aria-hidden className="absolute inset-0 -z-10">
         <m.div className="absolute inset-0" style={{ y: blobAY }}>
-          <AmbientGlow top="10%" right="-8%" size={400} color="#2563EB" opacity={[0.12, 0.22]} duration={18} />
+          <AmbientGlow top="12%" right="-4%" size={240} color="#2563EB" opacity={[0.08, 0.16]} duration={20} blur={80} />
         </m.div>
         <m.div className="absolute inset-0" style={{ y: blobBY }}>
-          <AmbientGlow bottom="0%" left="-6%" size={380} color="#8B5CF6" opacity={[0.10, 0.20]} duration={22} delay={3} />
+          <AmbientGlow bottom="6%" left="-4%" size={220} color="#8B5CF6" opacity={[0.08, 0.14]} duration={24} delay={3} blur={80} />
         </m.div>
       </div>
 

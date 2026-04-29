@@ -24,20 +24,26 @@ type Props = {
 };
 
 /**
- * AmbientGlow — a section-level decorative orb that gently breathes and
- * drifts. Pure transform/opacity animation. Use 1–2 per section behind
- * content; everything else is the global Atmosphere layer.
+ * AmbientGlow — small, refined section-level breathing orb.
+ *
+ * Defaults are deliberately tiny and slow so they read as ambient texture,
+ * not animation. Tighter scale (0.97–1.04), small drift (±10–14px),
+ * narrow opacity envelope (0.10–0.18), and a heavier blur so the orb is
+ * a soft halo rather than a circle.
+ *
+ * Pure transform + opacity. GPU-only. Honours prefers-reduced-motion via
+ * the global MotionConfig in <MotionProvider>.
  */
 export function AmbientGlow({
   color,
   top, bottom, left, right,
-  size = 420,
-  opacity = [0.15, 0.28],
-  scale = [0.95, 1.08],
-  drift = { x: [-15, 15], y: [10, -10] },
-  duration = 14,
+  size = 280,
+  opacity = [0.10, 0.18],
+  scale = [0.97, 1.04],
+  drift = { x: [-10, 10], y: [8, -8] },
+  duration = 18,
   delay = 0,
-  blur = 100,
+  blur = 90,
 }: Props) {
   return (
     <m.div
@@ -46,7 +52,7 @@ export function AmbientGlow({
       style={{
         width: size,
         height: size,
-        background: `radial-gradient(circle at 35% 30%, ${color}E6, ${color}66 50%, transparent 75%)`,
+        background: `radial-gradient(circle at 32% 28%, ${color}D9, ${color}55 55%, transparent 78%)`,
         filter: `blur(${blur}px)`,
         top, bottom, left, right,
         mixBlendMode: "multiply",

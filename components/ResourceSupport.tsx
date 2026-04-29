@@ -48,9 +48,9 @@ export function ResourceSupport() {
     >
       <div aria-hidden className="absolute inset-0 -z-10">
         <m.div className="absolute inset-0" style={{ y: blobY }}>
-          <AmbientGlow top="10%" left="-8%" size={400} color="#FACC15" opacity={[0.08, 0.20]} duration={22} />
+          <AmbientGlow top="14%" left="-4%" size={220} color="#FACC15" opacity={[0.06, 0.14]} duration={22} blur={80} />
         </m.div>
-        <AmbientGlow bottom="0%" right="-8%" size={360} color="#06B6D4" opacity={[0.08, 0.18]} duration={26} delay={3} />
+        <AmbientGlow bottom="6%" right="-4%" size={220} color="#06B6D4" opacity={[0.06, 0.14]} duration={26} delay={3} blur={80} />
       </div>
 
       <div className="container-edge">

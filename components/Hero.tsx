@@ -170,7 +170,7 @@ export function Hero() {
                     transition: { delay: 0.7 + i * 0.1, duration: 0.5 },
                   }}
                   whileHover={{ y: -4, transition: { duration: 0.25 } }}
-                  className="rounded-2xl bg-white/80 border border-white/80 p-5"
+                  className="rounded-2xl bg-white/85 border border-[rgba(16,32,51,0.10)] p-5 shadow-[0_2px_8px_-4px_rgba(16,32,51,0.06)]"
                 >
                   <div
                     className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"

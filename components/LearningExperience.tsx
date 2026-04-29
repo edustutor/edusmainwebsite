@@ -32,9 +32,9 @@ export function LearningExperience() {
     >
       <div aria-hidden className="absolute inset-0 -z-10">
         <m.div className="absolute inset-0" style={{ y: blobY }}>
-          <AmbientGlow top="20%" right="-8%" size={440} color="#8B5CF6" opacity={[0.10, 0.24]} duration={22} />
+          <AmbientGlow top="18%" right="-4%" size={240} color="#8B5CF6" opacity={[0.08, 0.16]} duration={22} blur={80} />
         </m.div>
-        <AmbientGlow bottom="10%" left="-6%" size={360} color="#2563EB" opacity={[0.08, 0.18]} duration={26} delay={4} />
+        <AmbientGlow bottom="10%" left="-4%" size={220} color="#2563EB" opacity={[0.08, 0.14]} duration={26} delay={4} blur={80} />
       </div>
 
       <div className="container-edge">

@@ -217,9 +217,10 @@ body {
 }
 .heading em {
   font-style: normal;
-  background: linear-gradient(90deg, #2563EB, #8B5CF6);
+  background: linear-gradient(90deg, #2563EB 0%, #4F6DDB 60%, #6E5BC8 100%);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-weight: 700;
 }
 
 .eyebrow {

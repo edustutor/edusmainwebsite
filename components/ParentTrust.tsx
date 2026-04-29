@@ -32,10 +32,10 @@ export function ParentTrust() {
     >
       <div aria-hidden className="absolute inset-0 -z-10">
         <m.div className="absolute inset-0" style={{ y: blobAY }}>
-          <AmbientGlow top="10%" right="-8%" size={400} color="#06B6D4" opacity={[0.08, 0.20]} duration={20} />
+          <AmbientGlow top="12%" right="-4%" size={240} color="#06B6D4" opacity={[0.06, 0.14]} duration={22} blur={80} />
         </m.div>
         <m.div className="absolute inset-0" style={{ y: blobBY }}>
-          <AmbientGlow bottom="0%" left="-6%" size={380} color="#2563EB" opacity={[0.10, 0.22]} duration={24} delay={2} />
+          <AmbientGlow bottom="6%" left="-4%" size={220} color="#2563EB" opacity={[0.08, 0.16]} duration={26} delay={2} blur={80} />
         </m.div>
       </div>
 

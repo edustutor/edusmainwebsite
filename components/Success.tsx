@@ -110,10 +110,10 @@ export function Success() {
     >
       <div aria-hidden className="absolute inset-0 -z-10">
         <m.div className="absolute inset-0" style={{ y: blobAY }}>
-          <AmbientGlow top="20%" left="-8%" size={440} color="#FACC15" opacity={[0.08, 0.20]} duration={22} />
+          <AmbientGlow top="18%" left="-4%" size={240} color="#FACC15" opacity={[0.06, 0.14]} duration={22} blur={80} />
         </m.div>
         <m.div className="absolute inset-0" style={{ y: blobBY }}>
-          <AmbientGlow bottom="10%" right="-8%" size={440} color="#06B6D4" opacity={[0.08, 0.20]} duration={26} delay={3} />
+          <AmbientGlow bottom="10%" right="-4%" size={240} color="#06B6D4" opacity={[0.08, 0.14]} duration={26} delay={3} blur={80} />
         </m.div>
       </div>
 

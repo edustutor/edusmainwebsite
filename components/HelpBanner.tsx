@@ -27,10 +27,10 @@ export function HelpBanner() {
         >
           <div aria-hidden className="absolute inset-0 -z-10">
             <m.div className="absolute inset-0" style={{ y: blobAY }}>
-              <AmbientGlow top="-20%" left="-8%" size={300} color="#2563EB" opacity={[0.10, 0.22]} duration={16} />
+              <AmbientGlow top="-15%" left="-4%" size={180} color="#2563EB" opacity={[0.10, 0.18]} duration={18} blur={70} />
             </m.div>
             <m.div className="absolute inset-0" style={{ y: blobBY }}>
-              <AmbientGlow bottom="-30%" right="-6%" size={280} color="#8B5CF6" opacity={[0.10, 0.22]} duration={20} delay={2} />
+              <AmbientGlow bottom="-15%" right="-4%" size={180} color="#8B5CF6" opacity={[0.10, 0.18]} duration={22} delay={2} blur={70} />
             </m.div>
           </div>
 

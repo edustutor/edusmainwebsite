@@ -31,10 +31,10 @@ export function WhyJoin() {
     >
       <div aria-hidden className="absolute inset-0 -z-10">
         <m.div className="absolute inset-0" style={{ y: blobAY }}>
-          <AmbientGlow top="10%" left="-8%" size={440} color="#06B6D4" opacity={[0.10, 0.22]} duration={20} />
+          <AmbientGlow top="12%" left="-4%" size={240} color="#06B6D4" opacity={[0.08, 0.14]} duration={22} blur={80} />
         </m.div>
         <m.div className="absolute inset-0" style={{ y: blobBY }}>
-          <AmbientGlow bottom="0%" right="-6%" size={400} color="#FACC15" opacity={[0.10, 0.20]} duration={24} delay={2} />
+          <AmbientGlow bottom="6%" right="-4%" size={220} color="#FACC15" opacity={[0.08, 0.14]} duration={26} delay={2} blur={80} />
         </m.div>
       </div>
 
