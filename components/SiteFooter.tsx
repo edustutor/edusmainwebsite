@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const COL = [
   { title: "Markets", links: [
@@ -39,22 +40,13 @@ export function SiteFooter() {
         <div className="glass-strong rounded-[32px] p-8 md:p-12">
           <div className="grid lg:grid-cols-12 gap-10">
             <div className="lg:col-span-5">
-              <div className="flex items-center gap-3">
-                <span className="relative inline-flex items-center justify-center w-11 h-11 rounded-2xl overflow-hidden">
-                  <span className="absolute inset-0 bg-gradient-to-br from-[#2563EB] via-[#8B5CF6] to-[#06B6D4]" />
-                  <span className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.55),transparent_55%)]" />
-                  <span className="relative font-[family-name:var(--font-display)] text-white text-[19px] font-700 leading-none">e</span>
-                  <span className="absolute -right-0.5 -bottom-0.5 w-3 h-3 rounded-full bg-[#FACC15] border border-white" />
-                </span>
-                <div>
-                  <p className="font-[family-name:var(--font-display)] font-700 text-[20px] tracking-[-0.02em] text-[#102033] leading-none">
-                    EDUS
-                  </p>
-                  <p className="text-[11px] uppercase tracking-[0.16em] text-[#5A6A82] mt-1">
-                    Tutor · Est. 2020
-                  </p>
-                </div>
-              </div>
+              <Image
+                src="/edus_logo_blue.webp"
+                alt="EDUS"
+                width={220}
+                height={68}
+                className="h-12 w-auto"
+              />
 
               <h3 className="heading mt-7" style={{ fontSize: "26px" }}>
                 Learn the right syllabus, in the <em>right format</em>.

@@ -1,3 +1,7 @@
+"use client";
+import { m } from "@/components/Motion";
+import { fadeUp, staggerContainer, sectionReveal, inView } from "@/lib/motion";
+
 const REASONS = [
   { icon: "🎯", title: "Personalised attention", body: "Tutor matching, small groups, and one-to-one timing flexibility built around the student.", tint: "#2563EB" },
   { icon: "📊", title: "Weekly parent reports", body: "Attendance, homework completion, and topic-by-topic progress shared every week.", tint: "#8B5CF6" },
@@ -16,7 +20,13 @@ export function WhyJoin() {
       </div>
 
       <div className="container-edge">
-        <div className="text-center max-w-2xl mx-auto">
+        <m.div
+          className="text-center max-w-2xl mx-auto"
+          variants={sectionReveal}
+          initial="hidden"
+          whileInView="show"
+          viewport={inView}
+        >
           <p className="eyebrow"><span className="dot" />Why Choose EDUS</p>
           <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
             Built for results. <em>Designed for trust.</em>
@@ -24,13 +34,21 @@ export function WhyJoin() {
           <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
             Six standards that come with every learner — across Sri Lanka, India, and the world.
           </p>
-        </div>
+        </m.div>
 
-        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <m.div
+          className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={inView}
+        >
           {REASONS.map((r) => (
-            <article
+            <m.article
               key={r.title}
-              className="glass rounded-[24px] p-7 lift relative overflow-hidden"
+              variants={fadeUp}
+              whileHover={{ y: -4, transition: { duration: 0.25 } }}
+              className="glass rounded-[24px] p-7 relative overflow-hidden cursor-default"
             >
               <span aria-hidden className="blob" style={{ top: -50, right: -50, width: 180, height: 180, background: r.tint, opacity: 0.20 }} />
               <div className="relative">
@@ -43,9 +61,9 @@ export function WhyJoin() {
                 <h3 className="heading mt-6" style={{ fontSize: "19px" }}>{r.title}</h3>
                 <p className="text-[#2B3950] text-[14px] mt-2.5 leading-[1.65]">{r.body}</p>
               </div>
-            </article>
+            </m.article>
           ))}
-        </div>
+        </m.div>
       </div>
     </section>
   );

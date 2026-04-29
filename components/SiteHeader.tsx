@@ -1,6 +1,9 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useState } from "react";
+import { useScroll, useTransform } from "framer-motion";
+import { m, AnimatePresence } from "@/components/Motion";
 
 const NAV = [
   { label: "Why EDUS", href: "/#why" },
@@ -11,27 +14,41 @@ const NAV = [
 ];
 
 export function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  // Smoothly transition pill spacing, blur, and shadow as user scrolls.
+  const paddingTop = useTransform(scrollY, [0, 80], [20, 12]);
+  const blurPx = useTransform(scrollY, [0, 80], [12, 24]);
+  const bgAlpha = useTransform(scrollY, [0, 80], [0.55, 0.85]);
+  const shadowOpacity = useTransform(scrollY, [0, 80], [0.04, 0.16]);
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50">
-      <div className={`container-edge transition-all duration-300 ${scrolled ? "pt-3" : "pt-5"}`}>
-        <div className={`relative flex items-center justify-between rounded-full px-3 sm:px-4 py-2 ${scrolled ? "glass-strong" : "glass"}`}>
+    <m.header className="fixed top-0 inset-x-0 z-50">
+      <m.div className="container-edge" style={{ paddingTop }}>
+        <m.div
+          className="relative flex items-center justify-between rounded-full px-3 sm:px-4 py-2"
+          style={{
+            backdropFilter: useTransform(blurPx, (v) => `blur(${v}px) saturate(170%)`),
+            WebkitBackdropFilter: useTransform(blurPx, (v) => `blur(${v}px) saturate(170%)`),
+            backgroundColor: useTransform(bgAlpha, (v) => `rgba(255,255,255,${v})`),
+            boxShadow: useTransform(
+              shadowOpacity,
+              (v) => `inset 0 1px 0 rgba(255,255,255,0.95), 0 12px 36px -16px rgba(16,32,51,${v})`,
+            ),
+            border: "1px solid rgba(255,255,255,0.7)",
+          }}
+        >
           {/* Wordmark */}
-          <Link href="/" className="flex items-center gap-2.5 pl-2">
-            <Logo />
-            <span className="font-[family-name:var(--font-display)] text-[19px] font-700 tracking-[-0.02em] text-[#102033]">EDUS</span>
-            <span className="hidden sm:inline-block text-[10.5px] font-medium uppercase tracking-[0.16em] text-[#5A6A82]">
-              Tutor
-            </span>
+          <Link href="/" aria-label="EDUS" className="flex items-center pl-1.5">
+            <Image
+              src="/edus_logo_blue.webp"
+              alt="EDUS"
+              width={180}
+              height={56}
+              priority
+              className="h-10 sm:h-11 w-auto"
+            />
           </Link>
 
           {/* Nav */}
@@ -40,7 +57,7 @@ export function SiteHeader() {
               <Link
                 key={n.href}
                 href={n.href}
-                className="px-3.5 py-1.5 rounded-full text-[#2B3950] hover:text-[#102033] hover:bg-white/70 transition"
+                className="px-3.5 py-1.5 rounded-full text-[#2B3950] hover:text-[#102033] hover:bg-white/70 transition-colors"
               >
                 {n.label}
               </Link>
@@ -68,39 +85,37 @@ export function SiteHeader() {
               </svg>
             </button>
           </div>
-        </div>
+        </m.div>
 
         {/* Mobile sheet */}
-        {open && (
-          <div className="lg:hidden mt-2 glass-strong rounded-3xl p-3 grid gap-1">
-            {NAV.map((n) => (
-              <Link
-                key={n.href}
-                href={n.href}
-                onClick={() => setOpen(false)}
-                className="px-4 py-3 rounded-2xl text-[#2B3950] hover:bg-white/70 text-[15px]"
-              >
-                {n.label}
-              </Link>
-            ))}
-            <div className="grid grid-cols-2 gap-2 mt-2">
-              <Link href="/enrol" className="btn btn-ghost justify-center" onClick={() => setOpen(false)}>Enrol</Link>
-              <Link href="/signup" className="btn btn-primary justify-center" onClick={() => setOpen(false)}>Sign Up</Link>
-            </div>
-          </div>
-        )}
-      </div>
-    </header>
+        <AnimatePresence>
+          {open && (
+            <m.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25, ease: [0.25, 0.8, 0.3, 1] }}
+              className="lg:hidden mt-2 glass-strong rounded-3xl p-3 grid gap-1"
+            >
+              {NAV.map((n) => (
+                <Link
+                  key={n.href}
+                  href={n.href}
+                  onClick={() => setOpen(false)}
+                  className="px-4 py-3 rounded-2xl text-[#2B3950] hover:bg-white/70 text-[15px]"
+                >
+                  {n.label}
+                </Link>
+              ))}
+              <div className="grid grid-cols-2 gap-2 mt-2">
+                <Link href="/enrol" className="btn btn-ghost justify-center" onClick={() => setOpen(false)}>Enrol</Link>
+                <Link href="/signup" className="btn btn-primary justify-center" onClick={() => setOpen(false)}>Sign Up</Link>
+              </div>
+            </m.div>
+          )}
+        </AnimatePresence>
+      </m.div>
+    </m.header>
   );
 }
 
-function Logo() {
-  return (
-    <span className="relative inline-flex items-center justify-center w-9 h-9 rounded-2xl overflow-hidden">
-      <span className="absolute inset-0 bg-gradient-to-br from-[#2563EB] via-[#8B5CF6] to-[#06B6D4]" />
-      <span className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.55),transparent_55%)]" />
-      <span className="relative font-[family-name:var(--font-display)] text-white text-[16px] font-700 leading-none">e</span>
-      <span className="absolute -right-0.5 -bottom-0.5 w-3 h-3 rounded-full bg-[#FACC15] border border-white shadow-[0_0_10px_#FACC15]" />
-    </span>
-  );
-}

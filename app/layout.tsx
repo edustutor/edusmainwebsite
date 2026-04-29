@@ -3,6 +3,7 @@ import { Poppins, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { MotionProvider } from "@/components/Motion";
 
 // Headings — Poppins. Friendly geometric sans, high recognition, optimised
 // for education and family-facing platforms.
@@ -46,6 +47,13 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", title: "EDUS Tutor" },
   robots: { index: true, follow: true },
+  icons: {
+    icon: [
+      { url: "/edus_favicon.webp", type: "image/webp" },
+    ],
+    shortcut: ["/edus_favicon.webp"],
+    apple: [{ url: "/edus_favicon.webp" }],
+  },
 };
 
 export const viewport = {
@@ -58,10 +66,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
       <body className="bg-[#F8FBFF] text-[#102033] antialiased">
-        <div className="app-atmosphere" aria-hidden />
-        <SiteHeader />
-        <main>{children}</main>
-        <SiteFooter />
+        <MotionProvider>
+          <div className="app-atmosphere" aria-hidden />
+          <SiteHeader />
+          <main>{children}</main>
+          <SiteFooter />
+        </MotionProvider>
       </body>
     </html>
   );

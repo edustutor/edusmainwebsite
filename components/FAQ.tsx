@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { m, AnimatePresence } from "@/components/Motion";
+import { fadeUp, staggerContainer, sectionReveal, accordionMotion, inView } from "@/lib/motion";
 
 const FAQS = [
   {
@@ -46,7 +48,13 @@ export function FAQ() {
       </div>
 
       <div className="container-edge">
-        <div className="text-center max-w-2xl mx-auto">
+        <m.div
+          className="text-center max-w-2xl mx-auto"
+          variants={sectionReveal}
+          initial="hidden"
+          whileInView="show"
+          viewport={inView}
+        >
           <p className="eyebrow"><span className="dot" />Frequently Asked</p>
           <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
             Questions parents ask. <em>Answered.</em>
@@ -55,40 +63,57 @@ export function FAQ() {
             Can't find what you're looking for? Book a free consultation and our team will walk you
             through everything.
           </p>
-        </div>
+        </m.div>
 
-        <div className="mt-12 max-w-3xl mx-auto space-y-3">
+        <m.div
+          className="mt-12 max-w-3xl mx-auto space-y-3"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={inView}
+        >
           {FAQS.map((f, i) => {
             const isOpen = open === i;
             return (
-              <div key={i} className="glass rounded-[20px] overflow-hidden">
+              <m.div key={i} variants={fadeUp} className="glass rounded-[20px] overflow-hidden">
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
                   aria-expanded={isOpen}
                 >
                   <span className="heading text-[16.5px] flex-1">{f.q}</span>
-                  <span
-                    className={`shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition ${
-                      isOpen ? "bg-[#2563EB] text-white" : "bg-white border border-[rgba(16,32,51,0.10)] text-[#102033]"
-                    }`}
+                  <m.span
+                    animate={{
+                      rotate: isOpen ? 180 : 0,
+                      backgroundColor: isOpen ? "#2563EB" : "#FFFFFF",
+                      color: isOpen ? "#FFFFFF" : "#102033",
+                    }}
+                    transition={{ duration: 0.25, ease: [0.25, 0.8, 0.3, 1] }}
+                    className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center border border-[rgba(16,32,51,0.10)]"
                   >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" className={`transition-transform ${isOpen ? "rotate-180" : ""}`} aria-hidden>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
                       <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                  </span>
+                  </m.span>
                 </button>
-                <div
-                  className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
-                >
-                  <div className="overflow-hidden">
-                    <p className="px-6 pb-5 text-[#2B3950] text-[14.5px] leading-[1.7]">{f.a}</p>
-                  </div>
-                </div>
-              </div>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <m.div
+                      key="content"
+                      variants={accordionMotion}
+                      initial="collapsed"
+                      animate="open"
+                      exit="collapsed"
+                      className="overflow-hidden"
+                    >
+                      <p className="px-6 pb-5 text-[#2B3950] text-[14.5px] leading-[1.7]">{f.a}</p>
+                    </m.div>
+                  )}
+                </AnimatePresence>
+              </m.div>
             );
           })}
-        </div>
+        </m.div>
       </div>
     </section>
   );

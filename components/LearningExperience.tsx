@@ -1,3 +1,7 @@
+"use client";
+import { m } from "@/components/Motion";
+import { sectionReveal, stepReveal, inView } from "@/lib/motion";
+
 const SEQUENCE = [
   { tag: "Live", title: "Live lesson", body: "Interactive online classroom with discussion, polls, and real-time Q&A.", time: "Weekly" },
   { tag: "Practice", title: "Assignments", body: "Tutor-set exercises that reinforce the lesson, returned with feedback.", time: "After class" },
@@ -17,7 +21,13 @@ export function LearningExperience() {
       </div>
 
       <div className="container-edge">
-        <div className="text-center max-w-2xl mx-auto">
+        <m.div
+          className="text-center max-w-2xl mx-auto"
+          variants={sectionReveal}
+          initial="hidden"
+          whileInView="show"
+          viewport={inView}
+        >
           <p className="eyebrow"><span className="dot" />How Learning Works</p>
           <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
             Live, recorded, <em>tracked.</em>
@@ -26,11 +36,20 @@ export function LearningExperience() {
             Six steps from live delivery to long-term progress — designed so families always know
             where their student stands.
           </p>
-        </div>
+        </m.div>
 
         <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {SEQUENCE.map((s, i) => (
-            <article key={s.tag} className="glass rounded-[24px] p-6 lift relative overflow-hidden">
+            <m.article
+              key={s.tag}
+              custom={i}
+              variants={stepReveal}
+              initial="hidden"
+              whileInView="show"
+              viewport={inView}
+              whileHover={{ y: -4, transition: { duration: 0.25 } }}
+              className="glass rounded-[24px] p-6 relative overflow-hidden"
+            >
               <span aria-hidden className="blob" style={{ top: -50, right: -50, width: 160, height: 160, background: TINTS[i], opacity: 0.18 }} />
               <div className="relative">
                 <div className="flex items-center justify-between">
@@ -48,15 +67,20 @@ export function LearningExperience() {
                 <p className="text-[#2B3950] text-[14px] mt-2.5 leading-[1.65]">{s.body}</p>
                 <div className="mt-5 flex gap-1">
                   {Array.from({ length: 6 }).map((_, j) => (
-                    <span
+                    <m.span
                       key={j}
-                      className="h-1 flex-1 rounded-full transition-colors"
-                      style={{ background: j <= i ? TINTS[i] : "rgba(16,32,51,0.08)" }}
+                      className="h-1 flex-1 rounded-full"
+                      initial={{ background: "rgba(16,32,51,0.08)" }}
+                      whileInView={{
+                        background: j <= i ? TINTS[i] : "rgba(16,32,51,0.08)",
+                      }}
+                      transition={{ duration: 0.4, delay: 0.05 * j + 0.2 }}
+                      viewport={inView}
                     />
                   ))}
                 </div>
               </div>
-            </article>
+            </m.article>
           ))}
         </div>
       </div>

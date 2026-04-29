@@ -1,4 +1,7 @@
+"use client";
 import Link from "next/link";
+import { m } from "@/components/Motion";
+import { sectionReveal, stepReveal, inView } from "@/lib/motion";
 
 const STEPS = [
   { n: "01", title: "Choose Your Region", body: "Sri Lanka, India, or global one-to-one. We'll show only what's available in your market.", tint: "#2563EB" },
@@ -17,7 +20,13 @@ export function JoinFlow() {
 
       <div className="container-edge">
         <div className="grid lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start">
+          <m.div
+            className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start"
+            variants={sectionReveal}
+            initial="hidden"
+            whileInView="show"
+            viewport={inView}
+          >
             <p className="eyebrow"><span className="dot" />Enrolment Flow</p>
             <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
               From sign-up to <em>steady progress.</em>
@@ -30,11 +39,20 @@ export function JoinFlow() {
               <Link href="/enrol" className="btn btn-primary">Start Enrolment</Link>
               <Link href="/contact" className="btn btn-ghost">Talk to EDUS Team</Link>
             </div>
-          </div>
+          </m.div>
 
           <ol className="lg:col-span-8 space-y-4">
-            {STEPS.map((s) => (
-              <li key={s.n} className="glass rounded-[22px] p-6 lift flex items-start gap-5">
+            {STEPS.map((s, i) => (
+              <m.li
+                key={s.n}
+                custom={i}
+                variants={stepReveal}
+                initial="hidden"
+                whileInView="show"
+                viewport={inView}
+                whileHover={{ y: -3, transition: { duration: 0.25 } }}
+                className="glass rounded-[22px] p-6 flex items-start gap-5"
+              >
                 <span
                   className="inline-flex w-12 h-12 rounded-2xl items-center justify-center font-[family-name:var(--font-display)] font-700 text-[16px] text-white shrink-0"
                   style={{
@@ -48,7 +66,7 @@ export function JoinFlow() {
                   <h3 className="heading" style={{ fontSize: "19px" }}>{s.title}</h3>
                   <p className="text-[#2B3950] text-[14.5px] mt-2 leading-[1.65]">{s.body}</p>
                 </div>
-              </li>
+              </m.li>
             ))}
           </ol>
         </div>
