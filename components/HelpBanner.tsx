@@ -1,23 +1,32 @@
 "use client";
+import { useRef } from "react";
 import Link from "next/link";
+import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
-import { fadeUp, sectionReveal, inView } from "@/lib/motion";
+import { fadeUp, scaleIn, inView } from "@/lib/motion";
 
 export function HelpBanner() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const blobAY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
+  const blobBY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+
   return (
-    <section className="relative py-10 md:py-14 overflow-hidden">
+    <section ref={ref} className="relative py-10 md:py-14 overflow-hidden">
       <div className="container-edge">
         <m.div
-          variants={sectionReveal}
+          variants={scaleIn}
           initial="hidden"
           whileInView="show"
           viewport={inView}
           className="relative glass-strong rounded-[28px] p-6 md:p-10 overflow-hidden"
         >
-          {/* gentle floating accents */}
           <div aria-hidden className="absolute inset-0 -z-10">
-            <div className="blob" style={{ top: "-20%", left: "-8%", width: 280, height: 280, background: "#2563EB", opacity: 0.20 }} />
-            <div className="blob" style={{ bottom: "-30%", right: "-6%", width: 260, height: 260, background: "#8B5CF6", opacity: 0.20 }} />
+            <m.div className="blob" style={{ top: "-20%", left: "-8%", width: 280, height: 280, background: "#2563EB", opacity: 0.20, y: blobAY }} />
+            <m.div className="blob" style={{ bottom: "-30%", right: "-6%", width: 260, height: 260, background: "#8B5CF6", opacity: 0.20, y: blobBY }} />
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 items-center">

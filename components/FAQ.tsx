@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useScroll, useTransform } from "framer-motion";
 import { m, AnimatePresence } from "@/components/Motion";
-import { fadeUp, staggerContainer, sectionReveal, accordionMotion, inView } from "@/lib/motion";
+import { fadeUp, staggerContainer, sectionRevealStrong, accordionMotion, inView } from "@/lib/motion";
 
 const FAQS = [
   {
@@ -40,17 +41,27 @@ const FAQS = [
 
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const blobY = useTransform(scrollYProgress, [0, 1], [-40, 60]);
 
   return (
-    <section id="faq" className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden">
+    <section
+      ref={ref}
+      id="faq"
+      className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
+    >
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="blob" style={{ top: "10%", right: "-6%", width: 360, height: 360, background: "#8B5CF6", opacity: 0.14 }} />
+        <m.div className="blob" style={{ top: "10%", right: "-6%", width: 360, height: 360, background: "#8B5CF6", opacity: 0.14, y: blobY }} />
       </div>
 
       <div className="container-edge">
         <m.div
           className="text-center max-w-2xl mx-auto"
-          variants={sectionReveal}
+          variants={sectionRevealStrong}
           initial="hidden"
           whileInView="show"
           viewport={inView}

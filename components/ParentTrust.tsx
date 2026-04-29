@@ -1,7 +1,9 @@
 "use client";
+import { useRef } from "react";
 import Link from "next/link";
+import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
-import { fadeUp, staggerContainer, sectionReveal, inView } from "@/lib/motion";
+import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 
 const POINTS = [
   { title: "Clear class schedules", body: "Structured timetables and clear learning plans so families always know what's next." },
@@ -13,17 +15,29 @@ const POINTS = [
 ];
 
 export function ParentTrust() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const blobAY = useTransform(scrollYProgress, [0, 1], [-40, 60]);
+  const blobBY = useTransform(scrollYProgress, [0, 1], [40, -60]);
+
   return (
-    <section id="parent-trust" className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden">
+    <section
+      ref={ref}
+      id="parent-trust"
+      className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
+    >
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="blob" style={{ top: "10%", right: "-8%", width: 380, height: 380, background: "#06B6D4", opacity: 0.16 }} />
-        <div className="blob" style={{ bottom: "0%", left: "-6%", width: 360, height: 360, background: "#2563EB", opacity: 0.18 }} />
+        <m.div className="blob" style={{ top: "10%", right: "-8%", width: 380, height: 380, background: "#06B6D4", opacity: 0.16, y: blobAY }} />
+        <m.div className="blob" style={{ bottom: "0%", left: "-6%", width: 360, height: 360, background: "#2563EB", opacity: 0.18, y: blobBY }} />
       </div>
 
       <div className="container-edge">
         <m.div
           className="text-center max-w-2xl mx-auto"
-          variants={sectionReveal}
+          variants={sectionRevealStrong}
           initial="hidden"
           whileInView="show"
           viewport={inView}

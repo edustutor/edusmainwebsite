@@ -1,7 +1,11 @@
 "use client";
+import { useRef } from "react";
 import Link from "next/link";
+import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
-import { fadeUp, staggerContainer, sectionReveal, glassHover, inView } from "@/lib/motion";
+import {
+  fadeUp, staggerContainer, sectionRevealStrong, glassHover, inView,
+} from "@/lib/motion";
 
 type Region = {
   flag: string;
@@ -31,9 +35,7 @@ const REGIONS: Region[] = [
     ],
     cta: "Explore Sri Lanka Classes",
     href: "/sl",
-    tint: "#2563EB",
-    tintSoft: "#EEF6FF",
-    index: "01",
+    tint: "#2563EB", tintSoft: "#EEF6FF", index: "01",
   },
   {
     flag: "🇮🇳",
@@ -49,9 +51,7 @@ const REGIONS: Region[] = [
     ],
     cta: "Explore India Classes",
     href: "/in",
-    tint: "#8B5CF6",
-    tintSoft: "#F4EEFF",
-    index: "02",
+    tint: "#8B5CF6", tintSoft: "#F4EEFF", index: "02",
   },
   {
     flag: "🌐",
@@ -67,24 +67,36 @@ const REGIONS: Region[] = [
     ],
     cta: "Book One to One Tuition",
     href: "/global",
-    tint: "#06B6D4",
-    tintSoft: "#E6FAFD",
-    index: "03",
+    tint: "#06B6D4", tintSoft: "#E6FAFD", index: "03",
   },
 ];
 
 export function RegionSelector() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Background blobs drift opposite to scroll
+  const blobAY = useTransform(scrollYProgress, [0, 1], [-40, 80]);
+  const blobBY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+
   return (
-    <section id="regions" className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden">
+    <section
+      ref={ref}
+      id="regions"
+      className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
+    >
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="blob" style={{ top: "10%", right: "-8%", width: 380, height: 380, background: "#2563EB", opacity: 0.18 }} />
-        <div className="blob" style={{ bottom: "0%", left: "-6%", width: 360, height: 360, background: "#8B5CF6", opacity: 0.15 }} />
+        <m.div className="blob" style={{ top: "10%", right: "-8%", width: 380, height: 380, background: "#2563EB", opacity: 0.18, y: blobAY }} />
+        <m.div className="blob" style={{ bottom: "0%", left: "-6%", width: 360, height: 360, background: "#8B5CF6", opacity: 0.15, y: blobBY }} />
       </div>
 
       <div className="container-edge">
         <m.div
           className="text-center max-w-2xl mx-auto"
-          variants={sectionReveal}
+          variants={sectionRevealStrong}
           initial="hidden"
           whileInView="show"
           viewport={inView}
@@ -123,12 +135,13 @@ export function RegionSelector() {
 
                   <div className="relative">
                     <div className="flex items-center justify-between">
-                      <span
+                      <m.span
                         className="inline-flex items-center justify-center w-14 h-14 rounded-2xl text-3xl"
                         style={{ background: r.tintSoft, border: `1px solid ${r.tint}20` }}
+                        whileHover={{ rotate: [0, -6, 6, 0], transition: { duration: 0.5 } }}
                       >
                         {r.flag}
-                      </span>
+                      </m.span>
                       <span className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.16em] uppercase text-[#5A6A82]">
                         {r.index} / 03
                       </span>
@@ -144,8 +157,18 @@ export function RegionSelector() {
                     </p>
 
                     <ul className="mt-4 space-y-2 text-[13.5px]">
-                      {r.features.map((f) => (
-                        <li key={f} className="flex items-start gap-2.5 text-[#2B3950]">
+                      {r.features.map((f, i) => (
+                        <m.li
+                          key={f}
+                          initial={{ opacity: 0, x: -8 }}
+                          whileInView={{
+                            opacity: 1,
+                            x: 0,
+                            transition: { delay: 0.1 + i * 0.05, duration: 0.4 },
+                          }}
+                          viewport={inView}
+                          className="flex items-start gap-2.5 text-[#2B3950]"
+                        >
                           <span
                             className="inline-flex w-4 h-4 mt-0.5 rounded-full items-center justify-center shrink-0"
                             style={{ background: `${r.tint}1A` }}
@@ -155,7 +178,7 @@ export function RegionSelector() {
                             </svg>
                           </span>
                           {f}
-                        </li>
+                        </m.li>
                       ))}
                     </ul>
 
@@ -182,9 +205,15 @@ export function RegionSelector() {
           ))}
         </m.div>
 
-        <p className="mt-8 text-center text-[13px] text-[#5A6A82]">
+        <m.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={inView}
+          className="mt-8 text-center text-[13px] text-[#5A6A82]"
+        >
           Not sure which path fits? <Link href="/contact" className="text-[#2563EB] font-medium hover:underline">Talk to EDUS Team</Link>.
-        </p>
+        </m.p>
       </div>
     </section>
   );

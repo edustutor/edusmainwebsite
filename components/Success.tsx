@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useScroll, useTransform } from "framer-motion";
 import { m, AnimatePresence } from "@/components/Motion";
-import { fadeUp, staggerContainer, sectionReveal, inView } from "@/lib/motion";
+import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 
 type Story = {
   market: "SL" | "IN" | "GL";
@@ -92,17 +93,29 @@ export function Success() {
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["code"]>("ALL");
   const visible = filter === "ALL" ? STORIES : STORIES.filter((s) => s.market === filter);
 
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const blobAY = useTransform(scrollYProgress, [0, 1], [-50, 60]);
+  const blobBY = useTransform(scrollYProgress, [0, 1], [50, -60]);
+
   return (
-    <section id="stories" className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden">
+    <section
+      ref={ref}
+      id="stories"
+      className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
+    >
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="blob" style={{ top: "20%", left: "-8%", width: 420, height: 420, background: "#FACC15", opacity: 0.16 }} />
-        <div className="blob" style={{ bottom: "10%", right: "-8%", width: 420, height: 420, background: "#06B6D4", opacity: 0.16 }} />
+        <m.div className="blob" style={{ top: "20%", left: "-8%", width: 420, height: 420, background: "#FACC15", opacity: 0.16, y: blobAY }} />
+        <m.div className="blob" style={{ bottom: "10%", right: "-8%", width: 420, height: 420, background: "#06B6D4", opacity: 0.16, y: blobBY }} />
       </div>
 
       <div className="container-edge">
         <m.div
           className="text-center max-w-2xl mx-auto"
-          variants={sectionReveal}
+          variants={sectionRevealStrong}
           initial="hidden"
           whileInView="show"
           viewport={inView}

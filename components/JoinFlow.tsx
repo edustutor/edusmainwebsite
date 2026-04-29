@@ -1,7 +1,9 @@
 "use client";
+import { useRef } from "react";
 import Link from "next/link";
+import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
-import { sectionReveal, stepReveal, inView } from "@/lib/motion";
+import { sectionRevealStrong, stepReveal, inView, slideInLeft } from "@/lib/motion";
 
 const STEPS = [
   { n: "01", title: "Choose Market", body: "Select Sri Lanka, India, or Global.", tint: "#2563EB" },
@@ -12,17 +14,29 @@ const STEPS = [
 ];
 
 export function JoinFlow() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const blobY = useTransform(scrollYProgress, [0, 1], [-40, 60]);
+  const lineHeight = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "100%"]);
+
   return (
-    <section id="enrolment" className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden">
+    <section
+      ref={ref}
+      id="enrolment"
+      className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
+    >
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="blob" style={{ top: "20%", right: "-6%", width: 380, height: 380, background: "#22C55E", opacity: 0.14 }} />
+        <m.div className="blob" style={{ top: "20%", right: "-6%", width: 380, height: 380, background: "#22C55E", opacity: 0.14, y: blobY }} />
       </div>
 
       <div className="container-edge">
         <div className="grid lg:grid-cols-12 gap-10">
           <m.div
             className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start"
-            variants={sectionReveal}
+            variants={sectionRevealStrong}
             initial="hidden"
             whileInView="show"
             viewport={inView}
@@ -40,34 +54,51 @@ export function JoinFlow() {
             </div>
           </m.div>
 
-          <ol className="lg:col-span-8 space-y-4">
-            {STEPS.map((s, i) => (
-              <m.li
-                key={s.n}
-                custom={i}
-                variants={stepReveal}
-                initial="hidden"
-                whileInView="show"
-                viewport={inView}
-                whileHover={{ y: -3, transition: { duration: 0.25 } }}
-                className="glass rounded-[22px] p-6 flex items-start gap-5"
-              >
-                <span
-                  className="inline-flex w-12 h-12 rounded-2xl items-center justify-center font-[family-name:var(--font-display)] font-700 text-[16px] text-white shrink-0"
-                  style={{
-                    background: `linear-gradient(180deg, ${s.tint}DD, ${s.tint})`,
-                    boxShadow: `0 10px 22px -8px ${s.tint}80`,
-                  }}
+          <div className="lg:col-span-8 relative">
+            {/* Scroll-driven connecting line */}
+            <div aria-hidden className="absolute left-[28px] top-0 bottom-0 w-px bg-[rgba(16,32,51,0.10)] hidden sm:block" />
+            <m.div
+              aria-hidden
+              style={{ height: lineHeight }}
+              className="absolute left-[28px] top-0 w-px bg-gradient-to-b from-[#2563EB] via-[#8B5CF6] to-[#FACC15] hidden sm:block origin-top"
+            />
+
+            <ol className="space-y-4 relative">
+              {STEPS.map((s, i) => (
+                <m.li
+                  key={s.n}
+                  custom={i}
+                  variants={stepReveal}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={inView}
+                  whileHover={{ y: -3, transition: { duration: 0.25 } }}
+                  className="glass rounded-[22px] p-6 flex items-start gap-5 relative"
                 >
-                  {s.n}
-                </span>
-                <div>
-                  <h3 className="heading" style={{ fontSize: "19px" }}>{s.title}</h3>
-                  <p className="text-[#2B3950] text-[14.5px] mt-2 leading-[1.65]">{s.body}</p>
-                </div>
-              </m.li>
-            ))}
-          </ol>
+                  <m.span
+                    className="inline-flex w-12 h-12 rounded-2xl items-center justify-center font-[family-name:var(--font-display)] font-700 text-[16px] text-white shrink-0 relative z-10"
+                    style={{
+                      background: `linear-gradient(180deg, ${s.tint}DD, ${s.tint})`,
+                      boxShadow: `0 10px 22px -8px ${s.tint}80`,
+                    }}
+                    initial={{ scale: 0.7 }}
+                    whileInView={{
+                      scale: 1,
+                      transition: { duration: 0.4, delay: i * 0.08 + 0.15, ease: [0.25, 0.8, 0.3, 1] },
+                    }}
+                    viewport={inView}
+                    whileHover={{ scale: 1.06, transition: { duration: 0.25 } }}
+                  >
+                    {s.n}
+                  </m.span>
+                  <m.div variants={slideInLeft} initial="hidden" whileInView="show" viewport={inView}>
+                    <h3 className="heading" style={{ fontSize: "19px" }}>{s.title}</h3>
+                    <p className="text-[#2B3950] text-[14.5px] mt-2 leading-[1.65]">{s.body}</p>
+                  </m.div>
+                </m.li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
     </section>

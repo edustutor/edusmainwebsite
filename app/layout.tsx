@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { MotionProvider } from "@/components/Motion";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 // Headings — Poppins. Friendly geometric sans, high recognition, optimised
 // for education and family-facing platforms.
@@ -90,6 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-[#F8FBFF] text-[#102033] antialiased">
         <MotionProvider>
           <div className="app-atmosphere" aria-hidden />
+          <ScrollProgress />
           <SiteHeader />
           <main>{children}</main>
           <SiteFooter />

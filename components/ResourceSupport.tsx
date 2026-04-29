@@ -1,6 +1,8 @@
 "use client";
+import { useRef } from "react";
+import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
-import { fadeUp, staggerContainer, sectionReveal, inView } from "@/lib/motion";
+import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 
 const CARDS = [
   {
@@ -30,16 +32,27 @@ const CARDS = [
 ];
 
 export function ResourceSupport() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const blobY = useTransform(scrollYProgress, [0, 1], [-40, 60]);
+
   return (
-    <section id="resources" className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden">
+    <section
+      ref={ref}
+      id="resources"
+      className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
+    >
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="blob" style={{ top: "10%", left: "-8%", width: 380, height: 380, background: "#FACC15", opacity: 0.16 }} />
+        <m.div className="blob" style={{ top: "10%", left: "-8%", width: 380, height: 380, background: "#FACC15", opacity: 0.16, y: blobY }} />
       </div>
 
       <div className="container-edge">
         <m.div
           className="text-center max-w-2xl mx-auto"
-          variants={sectionReveal}
+          variants={sectionRevealStrong}
           initial="hidden"
           whileInView="show"
           viewport={inView}

@@ -1,18 +1,28 @@
 "use client";
+import { useRef } from "react";
 import Link from "next/link";
+import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
-import { staggerContainer, fadeUp, floatingBlob, inViewClose } from "@/lib/motion";
+import { staggerContainer, fadeUp, floatingBlob, scaleIn, inViewClose } from "@/lib/motion";
 
 export function CTA() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const cardY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden">
+    <section ref={ref} className="relative py-20 md:py-28 overflow-hidden">
       <div className="container-edge">
         <m.div
           className="relative rounded-[36px] glass-strong p-8 md:p-14 overflow-hidden text-center"
-          initial={{ opacity: 0, scale: 0.96, y: 16 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          variants={scaleIn}
+          initial="hidden"
+          whileInView="show"
           viewport={inViewClose}
-          transition={{ duration: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
+          style={{ y: cardY }}
         >
           {/* Floating blobs */}
           <div aria-hidden className="absolute inset-0 -z-10">
