@@ -3,12 +3,42 @@ import { m } from "@/components/Motion";
 import { fadeUp, staggerContainer, sectionReveal, inView } from "@/lib/motion";
 
 const REASONS = [
-  { icon: "🎯", title: "Personalised attention", body: "Tutor matching, small groups, and one-to-one timing flexibility built around the student.", tint: "#2563EB" },
-  { icon: "📊", title: "Weekly parent reports", body: "Attendance, homework completion, and topic-by-topic progress shared every week.", tint: "#8B5CF6" },
-  { icon: "🎥", title: "Recordings & revision", body: "Every live class is recorded. Periodic exams and revision keep students on track.", tint: "#06B6D4" },
-  { icon: "🤖", title: "AI Study Buddy", body: "A smart companion for revision questions and self-paced learning between classes.", tint: "#22C55E" },
-  { icon: "🗄️", title: "Resource Vault", body: "Past papers and curated notes by syllabus, subject, and grade — owned by EDUS.", tint: "#FACC15" },
-  { icon: "🛡️", title: "Safeguarding first", body: "Vetted tutors, monitored classrooms, and parent-grade safety standards by default.", tint: "#2563EB" },
+  {
+    icon: "🎥",
+    title: "Live Online Classes",
+    body: "Students learn through interactive online classes led by qualified tutors. Lessons are structured, scheduled, and easy to access from home.",
+    tint: "#2563EB",
+  },
+  {
+    icon: "👩‍🏫",
+    title: "Expert Tutors",
+    body: "EDUS works with trained tutors who understand school subjects, exam expectations, and student learning gaps.",
+    tint: "#8B5CF6",
+  },
+  {
+    icon: "📊",
+    title: "Parent Updates",
+    body: "Parents stay informed about attendance, class participation, assessments, and learning progress.",
+    tint: "#06B6D4",
+  },
+  {
+    icon: "🎬",
+    title: "Class Recordings",
+    body: "Students can revise missed or difficult lessons through recordings and learning support materials.",
+    tint: "#22C55E",
+  },
+  {
+    icon: "📝",
+    title: "Exams and Assessments",
+    body: "Regular exams and academic reviews help students understand their progress and improve before school exams.",
+    tint: "#FACC15",
+  },
+  {
+    icon: "📚",
+    title: "Resource Support",
+    body: "Students get access to useful learning resources, past paper support, study materials, and guided academic content.",
+    tint: "#2563EB",
+  },
 ];
 
 export function WhyJoin() {
@@ -29,10 +59,12 @@ export function WhyJoin() {
         >
           <p className="eyebrow"><span className="dot" />Why Choose EDUS</p>
           <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-            Built for results. <em>Designed for trust.</em>
+            Why families <em>choose EDUS.</em>
           </h2>
           <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-            Six standards that come with every learner — across Sri Lanka, India, and the world.
+            EDUS is built for parents who want more than a normal online class. We combine live teaching,
+            structured monitoring, learning resources, and parent communication so students stay supported
+            from enrolment to progress review.
           </p>
         </m.div>
 

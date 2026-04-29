@@ -4,11 +4,11 @@ import { m } from "@/components/Motion";
 import { sectionReveal, stepReveal, inView } from "@/lib/motion";
 
 const STEPS = [
-  { n: "01", title: "Choose Your Region", body: "Sri Lanka, India, or global one-to-one. We'll show only what's available in your market.", tint: "#2563EB" },
-  { n: "02", title: "Pick Class Type", body: "Group classes for structured weekly progress, or one-to-one for personal pace and timing.", tint: "#8B5CF6" },
-  { n: "03", title: "Select Grade & Subject", body: "Filter by grade, syllabus, and the subjects your student needs. We match you with a tutor.", tint: "#06B6D4" },
-  { n: "04", title: "Book a Free Consultation", body: "Talk to an EDUS advisor who'll confirm your plan and walk through next steps with no pressure.", tint: "#22C55E" },
-  { n: "05", title: "Start Learning", body: "Secure payment, instant confirmation, recordings from day one, and weekly parent updates.", tint: "#FACC15" },
+  { n: "01", title: "Choose Market", body: "Select Sri Lanka, India, or Global.", tint: "#2563EB" },
+  { n: "02", title: "Choose Class Type", body: "Pick group class, one to one tuition, or consultation support.", tint: "#8B5CF6" },
+  { n: "03", title: "Select Grade and Subject", body: "Choose the grade, subject, syllabus, and preferred learning option.", tint: "#06B6D4" },
+  { n: "04", title: "Submit Parent Details", body: "Share the student and guardian details for admission support.", tint: "#22C55E" },
+  { n: "05", title: "Confirm and Start", body: "Complete the enrolment process and begin learning with EDUS.", tint: "#FACC15" },
 ];
 
 export function JoinFlow() {
@@ -29,11 +29,10 @@ export function JoinFlow() {
           >
             <p className="eyebrow"><span className="dot" />Enrolment Flow</p>
             <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-              From sign-up to <em>steady progress.</em>
+              Start learning with EDUS in <em>a few simple steps.</em>
             </h2>
             <p className="text-[#2B3950] mt-5 text-[15.5px] leading-[1.7]">
-              Five simple steps. No fragmented forms, no guesswork. Real human consultants from start
-              to finish.
+              The EDUS enrolment process helps parents choose the correct learning path without confusion.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link href="/enrol" className="btn btn-primary">Start Enrolment</Link>

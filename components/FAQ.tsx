@@ -5,36 +5,36 @@ import { fadeUp, staggerContainer, sectionReveal, accordionMotion, inView } from
 
 const FAQS = [
   {
-    q: "Is EDUS only for students under 18?",
-    a: "Yes. EDUS is designed for school-age students from Grade 1 through A-Level. Parents are partners in the journey through weekly reports and a dedicated parent app.",
+    q: "What is EDUS?",
+    a: "EDUS is an online education platform that provides live online tuition, group classes, one to one learning, academic monitoring, learning resources, and parent updates for school students.",
   },
   {
-    q: "Are all classes taught in English?",
-    a: "Our international and India offerings are 100% English medium. The Sri Lanka programme additionally offers Sinhala and Tamil medium for the National syllabus where required.",
+    q: "Who can join EDUS classes?",
+    a: "Students can join based on their region, grade, syllabus, subject, and learning need. EDUS currently supports Sri Lanka classes, India Grades 6 to 10, and global one to one learning pathways.",
   },
   {
-    q: "How qualified are EDUS tutors?",
-    a: "Every tutor is screened, demo-tested, interviewed, and trained on our academic SOPs before teaching a single class. Qualified subject specialists only — no juniors or generalists.",
+    q: "Are classes conducted live?",
+    a: "Yes. EDUS classes are conducted live online with trained tutors. Students can interact, ask questions, and follow a structured lesson plan.",
   },
   {
-    q: "Can my child join part-way through a term?",
-    a: "Yes. We share recordings of every prior class, plus a one-to-one catch-up plan from your tutor so your student is never behind.",
+    q: "Can parents track student progress?",
+    a: "Yes. EDUS supports parent communication through attendance updates, progress reviews, exam feedback, and academic monitoring.",
   },
   {
-    q: "What syllabuses do you cover?",
-    a: "Sri Lanka National (G.C.E. O/L and A/L), Cambridge IGCSE & A-Level, Edexcel, IB Diploma, CBSE, and Indian matriculation boards. Filtering shows only what's offered in your market.",
+    q: "Are recordings available?",
+    a: "Yes. Class recordings and learning resources may be provided depending on the class type and learning plan.",
   },
   {
-    q: "What does the free consultation include?",
-    a: "A 20-minute call with an EDUS advisor: we review the student's grade and goals, recommend tutors, walk you through the platform, and answer every parent question — no commitment.",
+    q: "Does EDUS offer one to one tuition?",
+    a: "Yes. EDUS offers one to one online tuition for students who need personalised support, flexible timing, and subject specific attention.",
   },
   {
-    q: "Are recordings included in every class?",
-    a: "Yes. Every live class is recorded and added to the student's library. They can rewatch any topic, anytime, from the EDUS Tutor app or web platform.",
+    q: "What subjects are available for India?",
+    a: "The India launch focuses on English medium Grades 6 to 10 with Tamil, Hindi, English, Maths, Science, and Social Science.",
   },
   {
-    q: "What payment methods do you accept?",
-    a: "Cards, bank transfers, UPI, Google Pay, PhonePe, and Razorpay (India). All payments are secure and you'll receive an instant confirmation.",
+    q: "How do I enrol?",
+    a: "Choose your region, select the class type, choose the grade and subject, submit parent details, and the EDUS team will guide you through the next step.",
   },
 ];
 
@@ -55,9 +55,9 @@ export function FAQ() {
           whileInView="show"
           viewport={inView}
         >
-          <p className="eyebrow"><span className="dot" />Frequently Asked</p>
+          <p className="eyebrow"><span className="dot" />FAQ</p>
           <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-            Questions parents ask. <em>Answered.</em>
+            Frequently asked <em>questions.</em>
           </h2>
           <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
             Can't find what you're looking for? Book a free consultation and our team will walk you

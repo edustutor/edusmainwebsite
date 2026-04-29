@@ -6,7 +6,8 @@ import { fadeUp, staggerContainer, sectionReveal, glassHover, inView } from "@/l
 type Region = {
   flag: string;
   title: string;
-  pitch: string;
+  description: string;
+  suitableFor: string;
   features: string[];
   cta: string;
   href: string;
@@ -19,9 +20,16 @@ const REGIONS: Region[] = [
   {
     flag: "🇱🇰",
     title: "Sri Lanka Classes",
-    pitch: "Live online tuition for the National syllabus, Cambridge & Edexcel — Grade 1 to A/L.",
-    features: ["Grade 1 – A/L", "Group + Individual", "Sinhala · Tamil · English", "From LKR 1,000 / month"],
-    cta: "Explore Sri Lanka",
+    description: "Live online group classes and one to one support for students following the Sri Lankan school curriculum.",
+    suitableFor: "Grade 1 to G.C.E A/L students",
+    features: [
+      "National syllabus classes",
+      "Group and individual class options",
+      "Grade based subject support",
+      "Recordings, exams, and resources",
+      "Parent communication and progress updates",
+    ],
+    cta: "Explore Sri Lanka Classes",
     href: "/sl",
     tint: "#2563EB",
     tintSoft: "#EEF6FF",
@@ -29,10 +37,17 @@ const REGIONS: Region[] = [
   },
   {
     flag: "🇮🇳",
-    title: "India · Grades 6 to 10",
-    pitch: "Premium structured tuition for Chennai families — CBSE & matriculation aligned.",
-    features: ["Grades 6 – 10", "English medium", "Weekly parent reports", "From ₹1,000 per subject"],
-    cta: "Explore India",
+    title: "India Grades 6 to 10",
+    description: "Premium structured online tuition for English medium students in Chennai and across India.",
+    suitableFor: "Grade 6 to Grade 10 students",
+    features: [
+      "English medium classes",
+      "Tamil, Hindi, English, Maths, Science, Social Science",
+      "Weekly academic monitoring",
+      "Exam focused learning",
+      "Parent reports and disciplined class tracking",
+    ],
+    cta: "Explore India Classes",
     href: "/in",
     tint: "#8B5CF6",
     tintSoft: "#F4EEFF",
@@ -40,10 +55,17 @@ const REGIONS: Region[] = [
   },
   {
     flag: "🌐",
-    title: "Global One-to-One Classes",
-    pitch: "Personal tutors matched to your syllabus and timezone within 48 hours.",
-    features: ["Cambridge · Edexcel · IB", "30+ countries served", "Demo before you commit", "Flexible scheduling"],
-    cta: "Explore Global",
+    title: "Global One to One Classes",
+    description: "Flexible one to one online tuition for students who need personalised academic support from anywhere.",
+    suitableFor: "International students and custom learning needs",
+    features: [
+      "Personal tutor matching",
+      "Flexible class timing",
+      "Syllabus based support",
+      "Individual attention",
+      "Progress focused learning",
+    ],
+    cta: "Book One to One Tuition",
     href: "/global",
     tint: "#06B6D4",
     tintSoft: "#E6FAFD",
@@ -67,13 +89,13 @@ export function RegionSelector() {
           whileInView="show"
           viewport={inView}
         >
-          <p className="eyebrow"><span className="dot" />Choose Your Region</p>
+          <p className="eyebrow"><span className="dot" />Choose Your Path</p>
           <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-            One brand. <em>Three immediate doors.</em>
+            Choose the learning path that <em>fits your child.</em>
           </h2>
           <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-            A single decision routes you to a tailored experience. You can switch any time from the
-            top header.
+            EDUS gives every student a clear route based on country, grade, syllabus, and learning need.
+            Select the right path and start with a focused learning experience.
           </p>
         </m.div>
 
@@ -95,7 +117,7 @@ export function RegionSelector() {
               <m.div variants={glassHover}>
                 <Link
                   href={r.href}
-                  className="group relative glass rounded-[28px] p-7 overflow-hidden block"
+                  className="group relative glass rounded-[28px] p-7 overflow-hidden block h-full"
                 >
                   <span aria-hidden className="blob" style={{ top: -50, right: -50, width: 200, height: 200, background: r.tint, opacity: 0.30 }} />
 
@@ -115,13 +137,17 @@ export function RegionSelector() {
                     <h3 className="heading mt-7" style={{ fontSize: "21px", lineHeight: 1.25 }}>
                       {r.title}
                     </h3>
-                    <p className="text-[#2B3950] text-[14px] mt-2.5 leading-[1.65]">{r.pitch}</p>
+                    <p className="text-[#2B3950] text-[14px] mt-2.5 leading-[1.6]">{r.description}</p>
 
-                    <ul className="mt-5 space-y-2.5 text-[13.5px]">
+                    <p className="mt-4 text-[12px] font-[family-name:var(--font-display)] font-600 uppercase tracking-[0.12em]" style={{ color: r.tint }}>
+                      Suitable for · {r.suitableFor}
+                    </p>
+
+                    <ul className="mt-4 space-y-2 text-[13.5px]">
                       {r.features.map((f) => (
-                        <li key={f} className="flex items-center gap-2.5 text-[#2B3950]">
+                        <li key={f} className="flex items-start gap-2.5 text-[#2B3950]">
                           <span
-                            className="inline-flex w-4 h-4 rounded-full items-center justify-center"
+                            className="inline-flex w-4 h-4 mt-0.5 rounded-full items-center justify-center shrink-0"
                             style={{ background: `${r.tint}1A` }}
                           >
                             <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke={r.tint} strokeWidth="3.5" aria-hidden>
@@ -157,7 +183,7 @@ export function RegionSelector() {
         </m.div>
 
         <p className="mt-8 text-center text-[13px] text-[#5A6A82]">
-          Looking for another country or syllabus? You can switch any time from the header.
+          Not sure which path fits? <Link href="/contact" className="text-[#2563EB] font-medium hover:underline">Talk to EDUS Team</Link>.
         </p>
       </div>
     </section>

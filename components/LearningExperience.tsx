@@ -2,13 +2,13 @@
 import { m } from "@/components/Motion";
 import { sectionReveal, stepReveal, inView } from "@/lib/motion";
 
-const SEQUENCE = [
-  { tag: "Live", title: "Live lesson", body: "Interactive online classroom with discussion, polls, and real-time Q&A.", time: "Weekly" },
-  { tag: "Practice", title: "Assignments", body: "Tutor-set exercises that reinforce the lesson, returned with feedback.", time: "After class" },
-  { tag: "Watch", title: "Revision recordings", body: "Every lesson archived so students can rewatch any topic anytime.", time: "On demand" },
-  { tag: "Test", title: "Periodic exams", body: "Term and unit exams modelled on real exam structure to test progress.", time: "Each term" },
-  { tag: "Update", title: "Parent updates", body: "Attendance, performance, and tutor notes pushed to the parent app.", time: "Continuous" },
-  { tag: "Support", title: "Resource library", body: "Past papers, study notes, and AI Study Buddy for self-paced practice.", time: "Always-on" },
+const STEPS = [
+  { tag: "Region", title: "Choose Your Region", body: "Select Sri Lanka, India, or Global learning support based on your child's location and academic need." },
+  { tag: "Grade", title: "Select Grade and Subject", body: "Choose the right grade, subject, syllabus, and class type." },
+  { tag: "Live", title: "Join Live Classes", body: "Attend scheduled online classes with trained tutors through a structured learning plan." },
+  { tag: "Practice", title: "Practice and Revise", body: "Use assignments, recordings, resources, and revision support to strengthen understanding." },
+  { tag: "Track", title: "Track Progress", body: "Monitor attendance, exams, learning improvement, and tutor feedback." },
+  { tag: "Updates", title: "Get Parent Updates", body: "Parents receive clear updates so they know how their child is performing." },
 ];
 
 const TINTS = ["#2563EB", "#8B5CF6", "#06B6D4", "#22C55E", "#FACC15", "#2563EB"];
@@ -30,16 +30,16 @@ export function LearningExperience() {
         >
           <p className="eyebrow"><span className="dot" />How Learning Works</p>
           <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-            Live, recorded, <em>tracked.</em>
+            A simple online learning process for <em>every student.</em>
           </h2>
           <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-            Six steps from live delivery to long-term progress — designed so families always know
-            where their student stands.
+            EDUS keeps the learning journey clear. Students join the right class, attend live lessons,
+            complete practice work, review recordings, and receive regular academic support.
           </p>
         </m.div>
 
         <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {SEQUENCE.map((s, i) => (
+          {STEPS.map((s, i) => (
             <m.article
               key={s.tag}
               custom={i}
@@ -60,7 +60,7 @@ export function LearningExperience() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="text-[11px] font-medium uppercase tracking-wider text-[#5A6A82]">
-                    {s.time}
+                    {s.tag}
                   </span>
                 </div>
                 <h3 className="heading mt-5" style={{ fontSize: "19px" }}>{s.title}</h3>

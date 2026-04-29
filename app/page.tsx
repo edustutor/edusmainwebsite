@@ -3,14 +3,18 @@ import { RegionSelector } from "@/components/RegionSelector";
 import { WhyJoin } from "@/components/WhyJoin";
 import { LearningExperience } from "@/components/LearningExperience";
 import { Subjects } from "@/components/Subjects";
+import { ParentTrust } from "@/components/ParentTrust";
 import { Success } from "@/components/Success";
 import { JoinFlow } from "@/components/JoinFlow";
+import { ResourceSupport } from "@/components/ResourceSupport";
 import { FAQ } from "@/components/FAQ";
 import { CTA } from "@/components/CTA";
+import { HomeJsonLd } from "@/components/JsonLd";
 
 export default function Home() {
   return (
     <>
+      <HomeJsonLd />
       {/* 1. Hero */}
       <Hero />
       {/* 2. Region Chooser */}
@@ -21,15 +25,19 @@ export default function Home() {
       <LearningExperience />
       {/* 5. Subjects */}
       <Subjects />
-      {/* 6. Success Stories */}
+      {/* 6. Parent Trust */}
+      <ParentTrust />
+      {/* 7. Success Stories */}
       <Success />
-      {/* 7. Enrolment Flow */}
+      {/* 8. Enrolment Flow */}
       <JoinFlow />
-      {/* 8. FAQ */}
+      {/* 9. Resource & Learning Support */}
+      <ResourceSupport />
+      {/* 10. FAQ */}
       <FAQ />
-      {/* 9. Final CTA */}
+      {/* 11. Final CTA */}
       <CTA />
-      {/* 10. Footer is in layout */}
+      {/* 12. Footer is in layout */}
     </>
   );
 }

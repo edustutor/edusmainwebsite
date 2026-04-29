@@ -16,6 +16,15 @@ const HERO_BLOBS = [
   { bottom: "-10%", left: "20%", w: 380, h: 380, color: "#22C55E", opacity: 0.20, delay: 3 },
 ];
 
+const SUPPORTING = [
+  "Live online classes for school students",
+  "Group and one to one learning options",
+  "Structured academic monitoring",
+  "Class recordings and learning resources",
+  "Parent updates and progress tracking",
+  "Easy enrolment and online support",
+];
+
 export function Hero() {
   return (
     <section className="relative pt-32 sm:pt-36 pb-20 overflow-hidden">
@@ -49,20 +58,18 @@ export function Hero() {
         initial="hidden"
         animate="show"
       >
-        {/* Badge */}
+        {/* Status badge */}
         <m.div className="flex justify-center" variants={fadeUp}>
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass text-[12.5px] font-medium text-[#2B3950]">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full rounded-full bg-[#22C55E]/60 animate-ping" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22C55E]" />
             </span>
-            Live · Term 2 · 2026 enrolments open
-            <span className="text-[#5A6A82]">·</span>
-            <span className="text-[#2563EB] font-semibold">English-medium</span>
+            Live online tuition · Sri Lanka, India & Global
           </div>
         </m.div>
 
-        {/* Headline */}
+        {/* H1 */}
         <m.div className="mt-8 text-center max-w-5xl mx-auto" variants={fadeUp}>
           <h1 className="heading" style={{ fontSize: "var(--fs-hero)" }}>
             Learn the <em>right syllabus</em>,<br />
@@ -71,17 +78,15 @@ export function Hero() {
           </h1>
         </m.div>
 
-        <m.div
-          className="mt-7 max-w-2xl mx-auto text-center"
-          variants={fadeUp}
-        >
+        {/* Subheading */}
+        <m.div className="mt-7 max-w-2xl mx-auto text-center" variants={fadeUp}>
           <p className="text-[#2B3950] text-[17px] leading-[1.65]">
-            Premium online tuition for students under 18 — taught live, in English, by qualified
-            tutors. Choose your country below and start with a free consultation.
+            EDUS helps students learn online through live classes, expert tutors, structured lessons,
+            progress tracking, recordings, exams, and parent updates.
           </p>
         </m.div>
 
-        {/* CTAs — delayed reveal via buttonGlow */}
+        {/* CTAs */}
         <m.div
           className="mt-9 flex flex-wrap justify-center gap-3"
           variants={buttonGlow}
@@ -95,36 +100,41 @@ export function Hero() {
             </svg>
           </Link>
           <Link href="/contact" className="btn btn-yellow">Book a Free Consultation</Link>
-          <Link href="/enrol" className="btn btn-ghost">Start Enrolment</Link>
         </m.div>
 
-        {/* Trust strip */}
-        <m.div
-          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto"
+        {/* Supporting points list */}
+        <m.ul
+          className="mt-10 max-w-3xl mx-auto grid sm:grid-cols-2 gap-x-6 gap-y-2.5"
           variants={staggerContainer}
         >
-          {[
-            { k: "5+", v: "Years of experience" },
-            { k: "530+", v: "Live classes" },
-            { k: "Grade 1 – A/L", v: "Full coverage" },
-            { k: "24 / 7", v: "Student support" },
-          ].map((s, i) => (
-            <m.div
-              key={i}
+          {SUPPORTING.map((s) => (
+            <m.li
+              key={s}
               variants={fadeUp}
-              className="glass rounded-2xl px-5 py-5 text-center"
+              className="flex items-center gap-2.5 text-[#2B3950] text-[14px]"
             >
-              <p className="font-[family-name:var(--font-display)] font-700 text-[26px] tnum text-[#102033]">
-                {s.k}
-              </p>
-              <p className="text-[12px] text-[#5A6A82] mt-1.5 font-medium">{s.v}</p>
-            </m.div>
+              <span className="inline-flex w-5 h-5 rounded-full bg-[#22C55E]/15 items-center justify-center">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="3.5" aria-hidden>
+                  <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              {s}
+            </m.li>
           ))}
-        </m.div>
+        </m.ul>
 
-        {/* Dashboard preview — gentle float */}
+        {/* Trust line */}
+        <m.p
+          variants={fadeUp}
+          className="mt-10 text-center text-[13px] text-[#5A6A82] max-w-2xl mx-auto"
+        >
+          Trusted online learning support for students, parents, and tutors across Sri Lanka, India,
+          and global learning pathways.
+        </m.p>
+
+        {/* Dashboard preview */}
         <m.div
-          className="mt-16 max-w-5xl mx-auto"
+          className="mt-14 max-w-5xl mx-auto"
           variants={fadeUp}
           animate={{
             y: [0, -8, 0],
@@ -140,9 +150,9 @@ export function Hero() {
           <div className="relative glass-strong rounded-[28px] p-6 md:p-8">
             <div className="grid md:grid-cols-3 gap-4">
               {[
-                { icon: "🎓", k: "Live Classes", v: "Interactive lessons with qualified tutors. Recordings available 24/7.", tint: "#2563EB" },
-                { icon: "👨‍👩‍👧", k: "Parent Updates", v: "Weekly progress reports — attendance, homework, and exam results.", tint: "#8B5CF6" },
-                { icon: "📚", k: "Resource Vault", v: "Past papers, study notes, and an AI Study Buddy for revision.", tint: "#06B6D4" },
+                { icon: "🎓", k: "Live Online Classes", v: "Interactive lessons led by qualified tutors. Recordings included.", tint: "#2563EB" },
+                { icon: "📊", k: "Parent Updates", v: "Attendance, exam reviews, and progress tracking shared with parents.", tint: "#8B5CF6" },
+                { icon: "📚", k: "Resource Vault", v: "Past papers, study materials, and AI study support for revision.", tint: "#06B6D4" },
               ].map((c, i) => (
                 <m.div
                   key={i}

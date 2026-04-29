@@ -49,14 +49,14 @@ export function CTA() {
             whileInView="show"
             viewport={inViewClose}
           >
-            <m.p variants={fadeUp} className="eyebrow"><span className="dot" />Ready when you are</m.p>
+            <m.p variants={fadeUp} className="eyebrow"><span className="dot" />Ready When You Are</m.p>
             <m.h2 variants={fadeUp} className="heading mt-5" style={{ fontSize: "clamp(32px, 4.5vw, 56px)" }}>
-              A clearer path<br />
-              to <em>better grades.</em>
+              Give your child a smarter<br />
+              <em>online learning experience.</em>
             </m.h2>
-            <m.p variants={fadeUp} className="text-[#2B3950] text-[17px] max-w-xl mx-auto mt-6 leading-[1.7]">
-              Pick your region, see the offer that's actually for you, and join with a guided
-              five-step flow. No fragmented forms. Just one well-built education platform.
+            <m.p variants={fadeUp} className="text-[#2B3950] text-[17px] max-w-2xl mx-auto mt-6 leading-[1.7]">
+              Join EDUS and help your child learn with live classes, expert tutors, structured academic
+              support, parent updates, recordings, and clear progress tracking.
             </m.p>
 
             <m.div variants={fadeUp} className="mt-9 flex flex-wrap justify-center gap-3">
