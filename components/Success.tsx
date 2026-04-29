@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import { useScroll, useTransform } from "framer-motion";
 import { m, AnimatePresence } from "@/components/Motion";
+import { AmbientGlow } from "@/components/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 
 type Story = {
@@ -108,8 +109,12 @@ export function Success() {
       className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
     >
       <div aria-hidden className="absolute inset-0 -z-10">
-        <m.div className="blob" style={{ top: "20%", left: "-8%", width: 420, height: 420, background: "#FACC15", opacity: 0.16, y: blobAY }} />
-        <m.div className="blob" style={{ bottom: "10%", right: "-8%", width: 420, height: 420, background: "#06B6D4", opacity: 0.16, y: blobBY }} />
+        <m.div className="absolute inset-0" style={{ y: blobAY }}>
+          <AmbientGlow top="20%" left="-8%" size={440} color="#FACC15" opacity={[0.08, 0.20]} duration={22} />
+        </m.div>
+        <m.div className="absolute inset-0" style={{ y: blobBY }}>
+          <AmbientGlow bottom="10%" right="-8%" size={440} color="#06B6D4" opacity={[0.08, 0.20]} duration={26} delay={3} />
+        </m.div>
       </div>
 
       <div className="container-edge">

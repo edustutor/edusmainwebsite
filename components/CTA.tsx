@@ -3,7 +3,8 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
-import { staggerContainer, fadeUp, floatingBlob, scaleIn, inViewClose } from "@/lib/motion";
+import { AmbientGlow } from "@/components/AmbientGlow";
+import { staggerContainer, fadeUp, scaleIn, inViewClose } from "@/lib/motion";
 
 export function CTA() {
   const ref = useRef<HTMLElement>(null);
@@ -24,33 +25,12 @@ export function CTA() {
           viewport={inViewClose}
           style={{ y: cardY }}
         >
-          {/* Floating blobs */}
+          {/* Breathing color glows */}
           <div aria-hidden className="absolute inset-0 -z-10">
-            {[
-              { top: "-10%", left: "-10%", w: 360, h: 360, c: "#2563EB", o: 0.30, delay: 0 },
-              { top: "-10%", right: "-10%", w: 320, h: 320, c: "#8B5CF6", o: 0.30, delay: 2 },
-              { bottom: "-15%", left: "30%", w: 380, h: 380, c: "#06B6D4", o: 0.25, delay: 4 },
-              { bottom: "-15%", right: "20%", w: 280, h: 280, c: "#FACC15", o: 0.30, delay: 1 },
-            ].map((b, i) => (
-              <m.div
-                key={i}
-                className="blob"
-                style={{
-                  ...b,
-                  width: b.w,
-                  height: b.h,
-                  background: b.c,
-                  opacity: b.o,
-                  left: b.left as string | undefined,
-                  right: b.right as string | undefined,
-                  top: b.top as string | undefined,
-                  bottom: b.bottom as string | undefined,
-                }}
-                variants={floatingBlob(b.delay)}
-                initial="initial"
-                animate="animate"
-              />
-            ))}
+            <AmbientGlow top="-10%" left="-10%" size={380} color="#2563EB" opacity={[0.18, 0.32]} duration={18} />
+            <AmbientGlow top="-10%" right="-10%" size={340} color="#8B5CF6" opacity={[0.18, 0.32]} duration={20} delay={2} />
+            <AmbientGlow bottom="-15%" left="30%" size={400} color="#06B6D4" opacity={[0.14, 0.26]} duration={22} delay={4} />
+            <AmbientGlow bottom="-15%" right="20%" size={300} color="#FACC15" opacity={[0.18, 0.30]} duration={16} delay={1} />
           </div>
 
           <m.div

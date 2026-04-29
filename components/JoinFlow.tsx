@@ -3,6 +3,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
+import { AmbientGlow } from "@/components/AmbientGlow";
 import { sectionRevealStrong, stepReveal, inView, slideInLeft } from "@/lib/motion";
 
 const STEPS = [
@@ -29,7 +30,10 @@ export function JoinFlow() {
       className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
     >
       <div aria-hidden className="absolute inset-0 -z-10">
-        <m.div className="blob" style={{ top: "20%", right: "-6%", width: 380, height: 380, background: "#22C55E", opacity: 0.14, y: blobY }} />
+        <m.div className="absolute inset-0" style={{ y: blobY }}>
+          <AmbientGlow top="20%" right="-6%" size={400} color="#22C55E" opacity={[0.08, 0.18]} duration={22} />
+        </m.div>
+        <AmbientGlow bottom="10%" left="-8%" size={360} color="#8B5CF6" opacity={[0.08, 0.18]} duration={26} delay={3} />
       </div>
 
       <div className="container-edge">

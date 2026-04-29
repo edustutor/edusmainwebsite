@@ -3,6 +3,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
+import { AmbientGlow } from "@/components/AmbientGlow";
 import { fadeUp, scaleIn, inView } from "@/lib/motion";
 
 export function HelpBanner() {
@@ -25,8 +26,12 @@ export function HelpBanner() {
           className="relative glass-strong rounded-[28px] p-6 md:p-10 overflow-hidden"
         >
           <div aria-hidden className="absolute inset-0 -z-10">
-            <m.div className="blob" style={{ top: "-20%", left: "-8%", width: 280, height: 280, background: "#2563EB", opacity: 0.20, y: blobAY }} />
-            <m.div className="blob" style={{ bottom: "-30%", right: "-6%", width: 260, height: 260, background: "#8B5CF6", opacity: 0.20, y: blobBY }} />
+            <m.div className="absolute inset-0" style={{ y: blobAY }}>
+              <AmbientGlow top="-20%" left="-8%" size={300} color="#2563EB" opacity={[0.10, 0.22]} duration={16} />
+            </m.div>
+            <m.div className="absolute inset-0" style={{ y: blobBY }}>
+              <AmbientGlow bottom="-30%" right="-6%" size={280} color="#8B5CF6" opacity={[0.10, 0.22]} duration={20} delay={2} />
+            </m.div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 items-center">

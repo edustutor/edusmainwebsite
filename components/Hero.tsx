@@ -3,19 +3,19 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
+import { AmbientGlow } from "@/components/AmbientGlow";
 import {
   fadeUp,
   staggerContainer,
   buttonGlow,
-  floatingBlob,
 } from "@/lib/motion";
 
-const HERO_BLOBS = [
-  { top: "-8%", left: "-8%", w: 460, h: 460, color: "#2563EB", opacity: 0.35, delay: 0, parallax: -60 },
-  { top: "10%", right: "-10%", w: 480, h: 480, color: "#8B5CF6", opacity: 0.30, delay: 2, parallax: 80 },
-  { top: "55%", left: "30%", w: 420, h: 420, color: "#06B6D4", opacity: 0.25, delay: 4, parallax: -40 },
-  { top: "20%", right: "30%", w: 280, h: 280, color: "#FACC15", opacity: 0.30, delay: 1, parallax: 60 },
-  { bottom: "-10%", left: "20%", w: 380, h: 380, color: "#22C55E", opacity: 0.20, delay: 3, parallax: -90 },
+const HERO_GLOWS = [
+  { top: "-8%", left: "-8%", size: 480, color: "#2563EB", opacity: [0.22, 0.36] as [number, number], duration: 14, delay: 0, parallax: -60 },
+  { top: "10%", right: "-10%", size: 500, color: "#8B5CF6", opacity: [0.20, 0.32] as [number, number], duration: 16, delay: 2, parallax: 80 },
+  { top: "55%", left: "30%", size: 440, color: "#06B6D4", opacity: [0.16, 0.28] as [number, number], duration: 18, delay: 4, parallax: -40 },
+  { top: "20%", right: "30%", size: 300, color: "#FACC15", opacity: [0.20, 0.32] as [number, number], duration: 12, delay: 1, parallax: 60 },
+  { bottom: "-10%", left: "20%", size: 400, color: "#22C55E", opacity: [0.12, 0.22] as [number, number], duration: 20, delay: 3, parallax: -90 },
 ];
 
 const SUPPORTING = [
@@ -42,10 +42,10 @@ export function Hero() {
 
   return (
     <section ref={ref} className="relative pt-32 sm:pt-36 pb-20 overflow-hidden">
-      {/* Parallax blurred blobs */}
+      {/* Parallax breathing glows */}
       <m.div aria-hidden className="absolute inset-0 -z-10" style={{ opacity: heroOpacity }}>
-        {HERO_BLOBS.map((b, i) => (
-          <ParallaxedBlob key={i} {...b} />
+        {HERO_GLOWS.map((g, i) => (
+          <ParallaxedGlow key={i} {...g} />
         ))}
       </m.div>
 
@@ -190,12 +190,17 @@ export function Hero() {
   );
 }
 
-/** Inline parallaxed blob — listens to nearest scrollable parent. */
-function ParallaxedBlob({
-  top, left, right, bottom, w, h, color, opacity, delay, parallax,
+/**
+ * Parallaxed breathing glow.
+ * Wraps an AmbientGlow in a scroll-driven y-translate so it drifts as the
+ * user scrolls past the hero, while the glow itself breathes opacity + scale.
+ */
+function ParallaxedGlow({
+  top, left, right, bottom, size, color, opacity, duration, delay, parallax,
 }: {
   top?: string; left?: string; right?: string; bottom?: string;
-  w: number; h: number; color: string; opacity: number; delay: number; parallax: number;
+  size: number; color: string; opacity: [number, number];
+  duration: number; delay: number; parallax: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -205,16 +210,12 @@ function ParallaxedBlob({
   const y = useTransform(scrollYProgress, [0, 1], [0, parallax]);
 
   return (
-    <m.div
-      ref={ref}
-      className="blob"
-      style={{
-        top, left, right, bottom,
-        width: w, height: h, background: color, opacity, y,
-      }}
-      variants={floatingBlob(delay)}
-      initial="initial"
-      animate="animate"
-    />
+    <m.div ref={ref} className="absolute inset-0" style={{ y }}>
+      <AmbientGlow
+        top={top} left={left} right={right} bottom={bottom}
+        size={size} color={color} opacity={opacity}
+        duration={duration} delay={delay} blur={110}
+      />
+    </m.div>
   );
 }

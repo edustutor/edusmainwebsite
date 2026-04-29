@@ -31,13 +31,17 @@
 
 * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
-html, body {
+html {
   background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+html, body {
   color: var(--ink);
   overflow-x: hidden;
 }
-html { -webkit-text-size-adjust: 100%; }
-body { position: relative; }
+body {
+  background: transparent;
+}
 
 body {
   font-family: var(--font-sans), "Open Sans", system-ui, sans-serif;

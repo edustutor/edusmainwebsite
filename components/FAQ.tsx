@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import { useScroll, useTransform } from "framer-motion";
 import { m, AnimatePresence } from "@/components/Motion";
+import { AmbientGlow } from "@/components/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, accordionMotion, inView } from "@/lib/motion";
 
 const FAQS = [
@@ -55,7 +56,10 @@ export function FAQ() {
       className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
     >
       <div aria-hidden className="absolute inset-0 -z-10">
-        <m.div className="blob" style={{ top: "10%", right: "-6%", width: 360, height: 360, background: "#8B5CF6", opacity: 0.14, y: blobY }} />
+        <m.div className="absolute inset-0" style={{ y: blobY }}>
+          <AmbientGlow top="10%" right="-6%" size={380} color="#8B5CF6" opacity={[0.08, 0.18]} duration={22} />
+        </m.div>
+        <AmbientGlow bottom="10%" left="-8%" size={340} color="#2563EB" opacity={[0.08, 0.16]} duration={26} delay={3} />
       </div>
 
       <div className="container-edge">

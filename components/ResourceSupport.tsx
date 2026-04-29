@@ -2,6 +2,7 @@
 import { useRef } from "react";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
+import { AmbientGlow } from "@/components/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 
 const CARDS = [
@@ -46,7 +47,10 @@ export function ResourceSupport() {
       className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
     >
       <div aria-hidden className="absolute inset-0 -z-10">
-        <m.div className="blob" style={{ top: "10%", left: "-8%", width: 380, height: 380, background: "#FACC15", opacity: 0.16, y: blobY }} />
+        <m.div className="absolute inset-0" style={{ y: blobY }}>
+          <AmbientGlow top="10%" left="-8%" size={400} color="#FACC15" opacity={[0.08, 0.20]} duration={22} />
+        </m.div>
+        <AmbientGlow bottom="0%" right="-8%" size={360} color="#06B6D4" opacity={[0.08, 0.18]} duration={26} delay={3} />
       </div>
 
       <div className="container-edge">

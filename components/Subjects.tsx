@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
 import { m, AnimatePresence } from "@/components/Motion";
+import { AmbientGlow } from "@/components/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 
 type Group = { title: string; subjects: string[] };
@@ -137,8 +138,12 @@ export function Subjects() {
       className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
     >
       <div aria-hidden className="absolute inset-0 -z-10">
-        <m.div className="blob" style={{ top: "10%", left: "-8%", width: 420, height: 420, background: "#2563EB", opacity: 0.18, y: blobAY }} />
-        <m.div className="blob" style={{ bottom: "0%", right: "-6%", width: 380, height: 380, background: "#22C55E", opacity: 0.14, y: blobBY }} />
+        <m.div className="absolute inset-0" style={{ y: blobAY }}>
+          <AmbientGlow top="10%" left="-8%" size={440} color="#2563EB" opacity={[0.10, 0.22]} duration={20} />
+        </m.div>
+        <m.div className="absolute inset-0" style={{ y: blobBY }}>
+          <AmbientGlow bottom="0%" right="-6%" size={400} color="#22C55E" opacity={[0.08, 0.18]} duration={24} delay={3} />
+        </m.div>
       </div>
 
       <div className="container-edge">

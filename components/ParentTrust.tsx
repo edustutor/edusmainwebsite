@@ -3,6 +3,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
+import { AmbientGlow } from "@/components/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 
 const POINTS = [
@@ -30,8 +31,12 @@ export function ParentTrust() {
       className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
     >
       <div aria-hidden className="absolute inset-0 -z-10">
-        <m.div className="blob" style={{ top: "10%", right: "-8%", width: 380, height: 380, background: "#06B6D4", opacity: 0.16, y: blobAY }} />
-        <m.div className="blob" style={{ bottom: "0%", left: "-6%", width: 360, height: 360, background: "#2563EB", opacity: 0.18, y: blobBY }} />
+        <m.div className="absolute inset-0" style={{ y: blobAY }}>
+          <AmbientGlow top="10%" right="-8%" size={400} color="#06B6D4" opacity={[0.08, 0.20]} duration={20} />
+        </m.div>
+        <m.div className="absolute inset-0" style={{ y: blobBY }}>
+          <AmbientGlow bottom="0%" left="-6%" size={380} color="#2563EB" opacity={[0.10, 0.22]} duration={24} delay={2} />
+        </m.div>
       </div>
 
       <div className="container-edge">
