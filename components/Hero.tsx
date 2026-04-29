@@ -1,103 +1,112 @@
 import Link from "next/link";
-import { RegionSelector } from "./RegionSelector";
-import { Ticker } from "./Ticker";
 
 export function Hero() {
   return (
-    <section className="relative pt-20 overflow-hidden">
-      {/* Top meta bar — editorial dateline */}
-      <div className="border-b border-[rgba(14,20,33,0.10)] bg-[#F4F2ED]/40">
-        <div className="container-wide flex items-center justify-between py-2.5 text-[10.5px] font-mono tracking-[0.2em] uppercase text-[#6B7390]">
-          <div className="flex items-center gap-4" data-anim>
-            <span>Vol. V · No. 26</span>
-            <span className="hidden sm:inline w-px h-3 bg-[rgba(14,20,33,0.20)]" />
-            <span className="hidden sm:inline">Term II · 2026</span>
-            <span className="hidden md:inline w-px h-3 bg-[rgba(14,20,33,0.20)]" />
-            <span className="hidden md:inline">Colombo · Chennai · London</span>
-          </div>
-          <div className="flex items-center gap-4" data-anim="2">
-            <span className="text-[#1640D8]">● Enrolments Open</span>
-          </div>
-        </div>
+    <section className="relative pt-32 sm:pt-36 pb-20 overflow-hidden">
+      {/* Blurred floating circles */}
+      <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="blob" style={{ top: "-8%", left: "-8%", width: 460, height: 460, background: "#2563EB", opacity: 0.35 }} />
+        <div className="blob" style={{ top: "10%", right: "-10%", width: 480, height: 480, background: "#8B5CF6", opacity: 0.30 }} />
+        <div className="blob" style={{ top: "55%", left: "30%", width: 420, height: 420, background: "#06B6D4", opacity: 0.25 }} />
+        <div className="blob" style={{ top: "20%", right: "30%", width: 280, height: 280, background: "#FACC15", opacity: 0.30 }} />
+        <div className="blob" style={{ bottom: "-10%", left: "20%", width: 380, height: 380, background: "#22C55E", opacity: 0.20 }} />
       </div>
 
-      {/* MASTHEAD — newspaper-grade hero */}
-      <div className="container-wide pt-12 md:pt-16">
-        {/* Title block — full-width masthead */}
-        <div className="grid grid-cols-12 gap-6 items-end">
-          <div className="col-span-12 lg:col-span-9" data-anim="3">
-            <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[#1640D8] mb-5">
-              Sri Lankan Learning · <span className="text-[#0E1421]">Global Success</span>
-            </p>
-            <h1 className="masthead" style={{ fontSize: "var(--fs-mast)" }}>
-              The right<br />
-              <span className="italic">syllabus.</span>
-            </h1>
-          </div>
-
-          <aside className="col-span-12 lg:col-span-3 lg:pb-4" data-anim="4">
-            <div className="rule-strong mb-4" />
-            <p className="eyebrow mb-3"><span className="square" />The Brief</p>
-            <p className="text-[#2C334A] text-[14.5px] leading-[1.55]">
-              Live online tuition, intelligently routed. National syllabus group classes for
-              Sri Lanka, premium structured tuition for Chennai Grades 6–10, and one-to-one
-              for global learners.
-            </p>
-          </aside>
-        </div>
-
-        {/* Lower split — italic continuation + meta */}
-        <div className="grid grid-cols-12 gap-6 mt-2 lg:mt-1" data-anim="4">
-          <div className="col-span-12 lg:col-span-9">
-            <h1 className="masthead" style={{ fontSize: "var(--fs-mast)" }}>
-              <span className="italic">In the right format.</span><br />
-              <span className="text-[#1640D8]">With the right support.</span>
-            </h1>
-          </div>
-          <div className="col-span-12 lg:col-span-3 lg:pb-2 flex flex-col justify-end">
-            <div className="rule mb-4" />
-            <div className="flex flex-wrap gap-2">
-              <Link href="#choose-region" className="btn btn-primary">Choose your region</Link>
-              <Link href="/how-it-works" className="btn btn-ghost">The Method</Link>
-            </div>
-            <p className="font-mono text-[10.5px] tracking-[0.2em] uppercase text-[#6B7390] mt-4">
-              Choose one of three doors below ↓
-            </p>
+      <div className="container-edge">
+        {/* Badge */}
+        <div className="flex justify-center" data-anim>
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass text-[12.5px] font-medium text-[#2B3950]">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-[#22C55E]/60 animate-ping" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22C55E]" />
+            </span>
+            Live · Term 2 · 2026 enrolments open
+            <span className="text-[#5A6A82]">·</span>
+            <span className="text-[#2563EB] font-semibold">English-medium</span>
           </div>
         </div>
 
-        {/* Stats row — editorial datapoints */}
-        <div className="rule-strong mt-14" />
-        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[rgba(14,20,33,0.10)]" data-anim="5">
+        {/* Headline */}
+        <div className="mt-8 text-center max-w-5xl mx-auto" data-anim="2">
+          <h1 className="heading" style={{ fontSize: "var(--fs-hero)" }}>
+            Learn the <em>right syllabus</em>,<br />
+            in the <em>right format</em>,<br />
+            with the <em>right support</em>.
+          </h1>
+        </div>
+
+        <div className="mt-7 max-w-2xl mx-auto text-center" data-anim="3">
+          <p className="text-[#2B3950] text-[17px] leading-[1.65]">
+            Premium online tuition for students under 18 — taught live, in English, by qualified
+            tutors. Choose your country below and start with a free consultation.
+          </p>
+        </div>
+
+        {/* Primary CTAs */}
+        <div className="mt-9 flex flex-wrap justify-center gap-3" data-anim="4">
+          <Link href="#regions" className="btn btn-primary">
+            Explore Classes
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+              <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+          <Link href="/contact" className="btn btn-yellow">Book a Free Consultation</Link>
+          <Link href="/enrol" className="btn btn-ghost">Start Enrolment</Link>
+        </div>
+
+        {/* Trust strip */}
+        <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto" data-anim="5">
           {[
-            { k: "5+", v: "Years operating", note: "Since 2020" },
-            { k: "530+", v: "Live classes", note: "In session weekly" },
-            { k: "30+", v: "Countries served", note: "One-to-one global" },
-            { k: "G1 → A/L", v: "Coverage span", note: "All key subjects" },
+            { k: "5+", v: "Years of experience" },
+            { k: "530+", v: "Live classes" },
+            { k: "Grade 1 – A/L", v: "Full coverage" },
+            { k: "24 / 7", v: "Student support" },
           ].map((s, i) => (
-            <div key={i} className="px-5 md:px-7 py-7 first:pl-0">
-              <p className="font-mono text-[10.5px] tracking-[0.2em] uppercase text-[#6B7390]">
-                {String(i + 1).padStart(2, "0")} / 04
-              </p>
-              <p className="font-display text-[40px] md:text-[52px] leading-[0.95] tnum text-[#0E1421] mt-2">
-                {s.k}
-              </p>
-              <p className="text-[14px] text-[#0E1421] mt-3 font-medium">{s.v}</p>
-              <p className="text-[12px] text-[#6B7390] mt-0.5">{s.note}</p>
+            <div key={i} className="glass rounded-2xl px-5 py-5 text-center">
+              <p className="font-[family-name:var(--font-display)] font-700 text-[26px] tnum text-[#102033]">{s.k}</p>
+              <p className="text-[12px] text-[#5A6A82] mt-1.5 font-medium">{s.v}</p>
             </div>
           ))}
         </div>
-        <div className="rule-strong" />
-      </div>
 
-      {/* Ticker — corporate signature */}
-      <div className="mt-2">
-        <Ticker tone="ink" />
-      </div>
-
-      {/* Region selector */}
-      <div id="choose-region" className="container-wide pt-20 md:pt-24 scroll-mt-24" data-anim="6">
-        <RegionSelector />
+        {/* Hero card preview — featured visual */}
+        <div className="mt-16 max-w-5xl mx-auto" data-anim="6">
+          <div className="relative glass-strong rounded-[28px] p-6 md:p-8">
+            <div className="grid md:grid-cols-3 gap-4">
+              {[
+                {
+                  icon: "🎓",
+                  k: "Live Classes",
+                  v: "Interactive lessons with qualified tutors. Recordings available 24/7.",
+                  tint: "#2563EB",
+                },
+                {
+                  icon: "👨‍👩‍👧",
+                  k: "Parent Updates",
+                  v: "Weekly progress reports — attendance, homework, and exam results delivered.",
+                  tint: "#8B5CF6",
+                },
+                {
+                  icon: "📚",
+                  k: "Resource Vault",
+                  v: "Past papers, study notes, and an AI Study Buddy for revision between classes.",
+                  tint: "#06B6D4",
+                },
+              ].map((c, i) => (
+                <div key={i} className="rounded-2xl bg-white/80 border border-white/80 p-5">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
+                    style={{ background: `${c.tint}1A`, color: c.tint }}
+                  >
+                    {c.icon}
+                  </div>
+                  <p className="mt-4 font-[family-name:var(--font-display)] font-600 text-[17px] text-[#102033]">{c.k}</p>
+                  <p className="text-[13.5px] text-[#5A6A82] mt-1.5 leading-relaxed">{c.v}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -2,54 +2,46 @@ import Link from "next/link";
 
 export function CTA() {
   return (
-    <section className="relative py-24 md:py-32 border-t border-[rgba(14,20,33,0.10)] glass-ink">
-      <div className="container-wide">
-        <div className="grid grid-cols-12 gap-6 items-end">
-          <div className="col-span-12 md:col-span-8">
-            <p className="font-mono text-[10.5px] tracking-[0.22em] uppercase text-[#D9A441]">
-              <span className="font-display italic text-[#D9A441]">§ 10 ·</span> Begin
-            </p>
-            <h2 className="masthead text-[#F4F2ED] mt-7" style={{ fontSize: "var(--fs-mast)", lineHeight: 0.92 }}>
-              A clearer path<br />
-              <em className="text-[#D9A441]">to better grades.</em>
-            </h2>
+    <section className="relative py-20 md:py-28">
+      <div className="container-edge">
+        <div className="relative rounded-[36px] glass-strong p-8 md:p-14 overflow-hidden text-center">
+          {/* Floating circles inside the CTA card */}
+          <div aria-hidden className="absolute inset-0 -z-10">
+            <div className="blob" style={{ top: "-10%", left: "-10%", width: 360, height: 360, background: "#2563EB", opacity: 0.30 }} />
+            <div className="blob" style={{ top: "-10%", right: "-10%", width: 320, height: 320, background: "#8B5CF6", opacity: 0.30 }} />
+            <div className="blob" style={{ bottom: "-15%", left: "30%", width: 380, height: 380, background: "#06B6D4", opacity: 0.25 }} />
+            <div className="blob" style={{ bottom: "-15%", right: "20%", width: 280, height: 280, background: "#FACC15", opacity: 0.30 }} />
           </div>
 
-          <div className="col-span-12 md:col-span-4 md:pb-3">
-            <p className="text-[#F4F2ED]/70 text-[15.5px] leading-[1.65]">
-              Pick your door, see the offer that's actually for you, and join with a guided five-step
-              flow. Live online tuition that works.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/signup" className="btn btn-gold">Sign Up</Link>
-              <Link href="/enrol" className="btn btn-ghost border-white/20 text-[#F4F2ED] hover:border-[#D9A441]">
-                Enrol
-              </Link>
-            </div>
-          </div>
-        </div>
+          <p className="eyebrow"><span className="dot" />Ready when you are</p>
+          <h2 className="heading mt-5" style={{ fontSize: "clamp(32px, 4.5vw, 56px)" }}>
+            A clearer path<br />
+            to <em>better grades.</em>
+          </h2>
+          <p className="text-[#2B3950] text-[17px] max-w-xl mx-auto mt-6 leading-[1.7]">
+            Pick your region, see the offer that's actually for you, and join with a guided
+            five-step flow. No fragmented forms. Just one well-built education platform.
+          </p>
 
-        <div className="mt-16 pt-10 border-t border-white/15 grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/15">
-          {[
-            { k: "Sri Lanka", v: "Group · 1:1 · National + Cambridge", href: "/sl" },
-            { k: "India · Chennai", v: "Premium tuition · Grades 6–10", href: "/in" },
-            { k: "Global · 1:1", v: "Cambridge · Edexcel · IB", href: "/global" },
-            { k: "Resource Vault", v: "Past papers & study notes", href: "/resources" },
-          ].map((c) => (
-            <Link
-              key={c.k}
-              href={c.href}
-              className="bg-[#0E1421] hover:bg-[#141B2C] p-7 transition group"
-            >
-              <p className="font-display text-[22px] text-[#F4F2ED]">{c.k}</p>
-              <p className="text-[12px] font-mono text-[#F4F2ED]/55 mt-2 uppercase tracking-wider">
-                {c.v}
-              </p>
-              <span className="mt-5 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.16em] text-[#D9A441]">
-                Open <span className="font-display italic text-lg leading-none">→</span>
-              </span>
-            </Link>
-          ))}
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
+            <Link href="/enrol" className="btn btn-primary">Start Enrolment</Link>
+            <Link href="/contact" className="btn btn-yellow">Book a Free Consultation</Link>
+            <Link href="/contact" className="btn btn-ghost">Talk to EDUS Team</Link>
+          </div>
+
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
+            {[
+              { k: "Free", v: "Consultation" },
+              { k: "48 hr", v: "Tutor matching" },
+              { k: "Weekly", v: "Parent reports" },
+              { k: "24 / 7", v: "Student support" },
+            ].map((s) => (
+              <div key={s.v} className="rounded-2xl bg-white/80 border border-white/80 px-3 py-3.5 text-center">
+                <p className="font-[family-name:var(--font-display)] font-700 text-[18px] text-[#102033]">{s.k}</p>
+                <p className="text-[11.5px] text-[#5A6A82] mt-0.5">{s.v}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

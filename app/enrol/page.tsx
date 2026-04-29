@@ -13,45 +13,34 @@ export default function EnrolPage() {
   const back = () => setStep((s) => Math.max(0, s - 1));
 
   return (
-    <section className="relative pt-20 pb-28 min-h-screen">
-      <div className="border-b border-[rgba(14,20,33,0.10)] bg-[#F4F2ED]/40">
-        <div className="container-wide flex items-center justify-between py-2.5 text-[10.5px] font-mono tracking-[0.2em] uppercase text-[#6B7390]">
-          <span>edustutor.com / enrol</span>
-          <span className="text-[#1640D8]">Multi-step · Progressive disclosure</span>
-        </div>
+    <section className="relative pt-32 sm:pt-36 pb-28 min-h-screen overflow-hidden">
+      <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="blob" style={{ top: "-8%", left: "-8%", width: 460, height: 460, background: "#2563EB", opacity: 0.25 }} />
+        <div className="blob" style={{ top: "30%", right: "-10%", width: 460, height: 460, background: "#8B5CF6", opacity: 0.25 }} />
       </div>
 
-      <div className="container-edge pt-12 md:pt-16">
-        <div className="grid grid-cols-12 gap-6 items-end">
-          <div className="col-span-12 md:col-span-8">
-            <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[#1640D8]">
-              <span className="font-display italic text-[#0E1421] mr-2">§</span>
-              Enrolment
-            </p>
-            <h1 className="masthead mt-5" style={{ fontSize: "var(--fs-hero)", lineHeight: 1.0 }}>
-              Start your <em className="text-[#1640D8]">EDUS journey.</em>
-            </h1>
-          </div>
-          <div className="col-span-12 md:col-span-4 md:pb-3">
-            <p className="text-[#2C334A] text-[14.5px] leading-relaxed">
-              Only the fields that matter — revealed as you make each choice. Five short steps.
-              WhatsApp is available as a fallback if you'd prefer to talk first.
-            </p>
-          </div>
+      <div className="container-edge max-w-4xl mx-auto">
+        <div className="text-center">
+          <p className="eyebrow"><span className="dot" />Enrolment · Multi-step</p>
+          <h1 className="heading mt-5" style={{ fontSize: "var(--fs-hero)" }}>
+            Start your <em>EDUS journey.</em>
+          </h1>
+          <p className="text-[#2B3950] mt-5 max-w-xl mx-auto text-[16px] leading-[1.65]">
+            Only the fields that matter — revealed as you make each choice. Five short steps.
+            WhatsApp is available as a fallback if you'd prefer to talk first.
+          </p>
         </div>
 
-        <div className="rule-strong mt-12 mb-8" />
-
-        <div className="border border-[rgba(14,20,33,0.10)] bg-white/40 p-1 flex gap-px">
+        <div className="mt-10 glass rounded-full p-1.5 flex gap-1">
           {STEPS.map((s, i) => (
             <div
               key={s}
-              className={`flex-1 text-center px-3 py-2 text-[10.5px] font-mono uppercase tracking-[0.16em] ${
+              className={`flex-1 text-center px-3 py-2 rounded-full text-[10.5px] font-medium font-[family-name:var(--font-display)] uppercase tracking-[0.14em] transition ${
                 i === step
-                  ? "bg-[#0E1421] text-[#F4F2ED]"
+                  ? "bg-[#102033] text-white"
                   : i < step
-                    ? "bg-white text-[#1640D8]"
-                    : "bg-white text-[#6B7390]"
+                    ? "text-[#2563EB]"
+                    : "text-[#5A6A82]"
               }`}
             >
               {String(i + 1).padStart(2, "0")} · {s}
@@ -59,7 +48,7 @@ export default function EnrolPage() {
           ))}
         </div>
 
-        <div className="mt-8 border border-[#0E1421] bg-white/60 p-8 md:p-12 min-h-[420px]">
+        <div className="mt-8 glass-strong rounded-[28px] p-8 md:p-12 min-h-[420px]">
           {step === 0 && (
             <Step title="Where are you based?" sub="We only show classes valid for your market.">
               <Choices
@@ -89,7 +78,7 @@ export default function EnrolPage() {
             <Step title="Grade & syllabus" sub="So we can match you to the right tutor.">
               <div className="grid sm:grid-cols-2 gap-4">
                 <Field label="Grade / Year">
-                  <select value={data.grade || ""} onChange={(e) => set("grade", e.target.value)} className="w-full bg-white border border-[rgba(10,18,48,0.10)] rounded-xl px-4 py-3 text-[#0A1230]">
+                  <select value={data.grade || ""} onChange={(e) => set("grade", e.target.value)} className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[#102033]">
                     <option value="">Select grade</option>
                     {["Grade 6","Grade 7","Grade 8","Grade 9","Grade 10","Grade 11","Year 12","Year 13"].map((g) => (
                       <option key={g}>{g}</option>
@@ -97,7 +86,7 @@ export default function EnrolPage() {
                   </select>
                 </Field>
                 <Field label="Syllabus / Board">
-                  <select value={data.syllabus || ""} onChange={(e) => set("syllabus", e.target.value)} className="w-full bg-white border border-[rgba(10,18,48,0.10)] rounded-xl px-4 py-3 text-[#0A1230]">
+                  <select value={data.syllabus || ""} onChange={(e) => set("syllabus", e.target.value)} className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[#102033]">
                     <option value="">Select syllabus</option>
                     {["G.C.E. National","CBSE / NCERT","Cambridge IGCSE","Edexcel","IB Diploma","ICSE / ISC"].map((s) => (
                       <option key={s}>{s}</option>
@@ -105,10 +94,10 @@ export default function EnrolPage() {
                   </select>
                 </Field>
                 <Field label="Subject(s)">
-                  <input value={data.subject || ""} onChange={(e) => set("subject", e.target.value)} placeholder="e.g. Maths, Physics" className="w-full bg-white border border-[rgba(10,18,48,0.10)] rounded-xl px-4 py-3 text-[#0A1230] placeholder:text-[#5C6485]" />
+                  <input value={data.subject || ""} onChange={(e) => set("subject", e.target.value)} placeholder="e.g. Maths, Physics" className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[#102033] placeholder:text-[#5A6A82]" />
                 </Field>
                 <Field label="Medium">
-                  <select value={data.medium || ""} onChange={(e) => set("medium", e.target.value)} className="w-full bg-white border border-[rgba(10,18,48,0.10)] rounded-xl px-4 py-3 text-[#0A1230]">
+                  <select value={data.medium || ""} onChange={(e) => set("medium", e.target.value)} className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[#102033]">
                     <option value="">Select medium</option>
                     {["English","Sinhala","Tamil"].map((m) => <option key={m}>{m}</option>)}
                   </select>
@@ -120,32 +109,32 @@ export default function EnrolPage() {
             <Step title="Your details" sub="The tutor coordinator will reach out within one business day.">
               <div className="grid sm:grid-cols-2 gap-4">
                 <Field label="Student name">
-                  <input value={data.student || ""} onChange={(e) => set("student", e.target.value)} className="w-full bg-white border border-[rgba(10,18,48,0.10)] rounded-xl px-4 py-3 text-[#0A1230]" />
+                  <input value={data.student || ""} onChange={(e) => set("student", e.target.value)} className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[#102033]" />
                 </Field>
                 <Field label="Guardian name">
-                  <input value={data.guardian || ""} onChange={(e) => set("guardian", e.target.value)} className="w-full bg-white border border-[rgba(10,18,48,0.10)] rounded-xl px-4 py-3 text-[#0A1230]" />
+                  <input value={data.guardian || ""} onChange={(e) => set("guardian", e.target.value)} className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[#102033]" />
                 </Field>
                 <Field label="Email">
-                  <input type="email" value={data.email || ""} onChange={(e) => set("email", e.target.value)} className="w-full bg-white border border-[rgba(10,18,48,0.10)] rounded-xl px-4 py-3 text-[#0A1230]" />
+                  <input type="email" value={data.email || ""} onChange={(e) => set("email", e.target.value)} className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[#102033]" />
                 </Field>
                 <Field label="Phone (with country code)">
-                  <input value={data.phone || ""} onChange={(e) => set("phone", e.target.value)} className="w-full bg-white border border-[rgba(10,18,48,0.10)] rounded-xl px-4 py-3 text-[#0A1230]" />
+                  <input value={data.phone || ""} onChange={(e) => set("phone", e.target.value)} className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[#102033]" />
                 </Field>
                 <Field label="Preferred start" className="sm:col-span-2">
-                  <input value={data.start || ""} onChange={(e) => set("start", e.target.value)} placeholder="e.g. Next term" className="w-full bg-white border border-[rgba(10,18,48,0.10)] rounded-xl px-4 py-3 text-[#0A1230] placeholder:text-[#5C6485]" />
+                  <input value={data.start || ""} onChange={(e) => set("start", e.target.value)} placeholder="e.g. Next term" className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[#102033] placeholder:text-[#5A6A82]" />
                 </Field>
               </div>
             </Step>
           )}
           {step === 4 && (
             <Step title="You're all set." sub="A real human at EDUS will follow up. Welcome.">
-              <div className="rounded-2xl bg-white border border-[rgba(10,18,48,0.08)] p-6">
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#5C6485] mb-4">Submission preview</p>
+              <div className="rounded-2xl bg-white border border-[rgba(16,32,51,0.08)] p-6">
+                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#5A6A82] mb-4">Submission preview</p>
                 <ul className="space-y-2 text-sm">
                   {Object.entries(data).map(([k, v]) => (
                     <li key={k} className="flex justify-between gap-4">
-                      <span className="text-[#5C6485] capitalize font-mono text-xs">{k}</span>
-                      <span className="text-[#0A1230]">{v}</span>
+                      <span className="text-[#5A6A82] capitalize font-mono text-xs">{k}</span>
+                      <span className="text-[#102033]">{v}</span>
                     </li>
                   ))}
                 </ul>
@@ -174,7 +163,7 @@ export default function EnrolPage() {
               </svg>
             </button>
           ) : (
-            <span className="text-xs font-mono text-[#5C6485]">Last step</span>
+            <span className="text-xs font-mono text-[#5A6A82]">Last step</span>
           )}
         </div>
       </div>
@@ -185,8 +174,8 @@ export default function EnrolPage() {
 function Step({ title, sub, children }: { title: string; sub: string; children: React.ReactNode }) {
   return (
     <div>
-      <h2 className="display text-3xl md:text-4xl">{title}</h2>
-      <p className="text-[#5C6485] mt-2 text-sm">{sub}</p>
+      <h2 className="heading" style={{ fontSize: "26px" }}>{title}</h2>
+      <p className="text-[#5A6A82] mt-2 text-[14px]">{sub}</p>
       <div className="mt-7">{children}</div>
     </div>
   );
@@ -206,14 +195,14 @@ function Choices({
           <button
             key={o.v}
             onClick={() => onChange(o.v)}
-            className={`text-left rounded-2xl p-5 border ${
+            className={`text-left rounded-2xl p-5 border transition ${
               active
-                ? "bg-[#FFC21A] text-[#0A1230] border-[#FFC21A]"
-                : "bg-white border-[rgba(10,18,48,0.10)] hover:border-[rgba(10,18,48,0.25)]"
+                ? "bg-[#2563EB] text-white border-[#2563EB] shadow-[0_10px_24px_-8px_rgba(37,99,235,0.45)]"
+                : "bg-white border-[rgba(16,32,51,0.10)] hover:border-[rgba(37,99,235,0.30)]"
             }`}
           >
-            <p className={`font-display text-2xl ${active ? "text-[#0A1230]" : "text-[#0A1230]"}`}>{o.label}</p>
-            <p className={`text-xs font-mono mt-1 uppercase tracking-wider ${active ? "text-[#0A1230]/70" : "text-[#5C6485]"}`}>{o.note}</p>
+            <p className={`font-[family-name:var(--font-display)] font-600 text-[18px] ${active ? "text-white" : "text-[#102033]"}`}>{o.label}</p>
+            <p className={`text-[11.5px] mt-1 ${active ? "text-white/80" : "text-[#5A6A82]"}`}>{o.note}</p>
           </button>
         );
       })}
@@ -223,7 +212,7 @@ function Choices({
 function Field({ label, children, className = "" }: { label: string; children: React.ReactNode; className?: string }) {
   return (
     <label className={`block ${className}`}>
-      <span className="block text-xs font-mono uppercase tracking-[0.18em] text-[#5C6485] mb-2">{label}</span>
+      <span className="block text-[11.5px] font-[family-name:var(--font-display)] font-600 uppercase tracking-[0.14em] text-[#5A6A82] mb-2">{label}</span>
       {children}
     </label>
   );

@@ -1,56 +1,62 @@
 const SEQUENCE = [
-  { tag: "Live", title: "Live lesson", body: "Interactive online classroom with real-time discussion, polls, and Q&A.", time: "Weekly" },
+  { tag: "Live", title: "Live lesson", body: "Interactive online classroom with discussion, polls, and real-time Q&A.", time: "Weekly" },
   { tag: "Practice", title: "Assignments", body: "Tutor-set exercises that reinforce the lesson, returned with feedback.", time: "After class" },
-  { tag: "Recordings", title: "Revision recordings", body: "Every lesson archived so students can rewatch any topic.", time: "On demand" },
-  { tag: "Assessments", title: "Periodic exams", body: "Term and unit exams modelled on real exam structure to test progress.", time: "Each term" },
-  { tag: "Parents", title: "Parent updates", body: "Attendance, performance, and tutor notes pushed to the parent app.", time: "Continuous" },
+  { tag: "Watch", title: "Revision recordings", body: "Every lesson archived so students can rewatch any topic anytime.", time: "On demand" },
+  { tag: "Test", title: "Periodic exams", body: "Term and unit exams modelled on real exam structure to test progress.", time: "Each term" },
+  { tag: "Update", title: "Parent updates", body: "Attendance, performance, and tutor notes pushed to the parent app.", time: "Continuous" },
   { tag: "Support", title: "Resource library", body: "Past papers, study notes, and AI Study Buddy for self-paced practice.", time: "Always-on" },
 ];
 
+const TINTS = ["#2563EB", "#8B5CF6", "#06B6D4", "#22C55E", "#FACC15", "#2563EB"];
+
 export function LearningExperience() {
   return (
-    <section className="relative py-24 md:py-32 border-t border-[rgba(14,20,33,0.10)]">
-      <div className="container-wide">
-        <div className="grid grid-cols-12 gap-6 items-end">
-          <div className="col-span-12 md:col-span-8">
-            <p className="kicker">
-              <span className="kicker-num">§ 06</span>
-              Method / How learning works
-            </p>
-            <h2 className="display mt-5" style={{ fontSize: "var(--fs-hero)", lineHeight: 1.0 }}>
-              Live, recorded, <em className="accent">tracked.</em>
-            </h2>
-          </div>
-          <div className="col-span-12 md:col-span-4 md:pb-3">
-            <p className="text-[#2C334A] text-[14.5px] leading-relaxed">
-              Families buy the learning process before they buy the brand story. Here's exactly how a class
-              goes from live delivery to long-term progress.
-            </p>
-          </div>
+    <section id="how" className="relative py-20 md:py-28 scroll-mt-24">
+      <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="blob" style={{ top: "20%", right: "-8%", width: 420, height: 420, background: "#8B5CF6", opacity: 0.18 }} />
+      </div>
+
+      <div className="container-edge">
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="eyebrow"><span className="dot" />How Learning Works</p>
+          <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
+            Live, recorded, <em>tracked.</em>
+          </h2>
+          <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
+            Six steps from live delivery to long-term progress — designed so families always know
+            where their student stands.
+          </p>
         </div>
 
-        <div className="rule-strong mt-10" />
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {SEQUENCE.map((s, i) => (
-            <div
-              key={s.tag}
-              className={`p-7 lg:p-9 border-b border-[rgba(14,20,33,0.10)] ${(i + 1) % 3 !== 0 ? "lg:border-r border-[rgba(14,20,33,0.10)]" : ""} ${i % 2 !== 0 ? "md:border-l border-[rgba(14,20,33,0.10)]" : ""}`}
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[#1640D8]">
-                  {String(i + 1).padStart(2, "0")} · {s.tag}
-                </span>
-                <span className="font-mono text-[10px] text-[#6B7390]">{s.time}</span>
+            <article key={s.tag} className="glass rounded-[24px] p-6 lift relative overflow-hidden">
+              <span aria-hidden className="blob" style={{ top: -50, right: -50, width: 160, height: 160, background: TINTS[i], opacity: 0.18 }} />
+              <div className="relative">
+                <div className="flex items-center justify-between">
+                  <span
+                    className="inline-flex items-center justify-center w-9 h-9 rounded-full font-[family-name:var(--font-display)] font-700 text-[13px] text-white"
+                    style={{ background: TINTS[i] }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-[11px] font-medium uppercase tracking-wider text-[#5A6A82]">
+                    {s.time}
+                  </span>
+                </div>
+                <h3 className="heading mt-5" style={{ fontSize: "19px" }}>{s.title}</h3>
+                <p className="text-[#2B3950] text-[14px] mt-2.5 leading-[1.65]">{s.body}</p>
+                <div className="mt-5 flex gap-1">
+                  {Array.from({ length: 6 }).map((_, j) => (
+                    <span
+                      key={j}
+                      className="h-1 flex-1 rounded-full transition-colors"
+                      style={{ background: j <= i ? TINTS[i] : "rgba(16,32,51,0.08)" }}
+                    />
+                  ))}
+                </div>
               </div>
-              <h3 className="display mt-7" style={{ fontSize: "var(--fs-h3)" }}>{s.title}</h3>
-              <p className="text-[#2C334A] text-[14px] mt-3 leading-[1.65]">{s.body}</p>
-              <div className="mt-7 flex gap-1">
-                {Array.from({ length: 6 }).map((_, j) => (
-                  <span key={j} className={`h-px flex-1 ${j <= i ? "bg-[#0E1421]" : "bg-[rgba(14,20,33,0.15)]"}`} />
-                ))}
-              </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

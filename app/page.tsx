@@ -1,29 +1,35 @@
 import { Hero } from "@/components/Hero";
-import { WhatIsEdus } from "@/components/WhatIsEdus";
-import { Offer } from "@/components/Offer";
+import { RegionSelector } from "@/components/RegionSelector";
 import { WhyJoin } from "@/components/WhyJoin";
+import { LearningExperience } from "@/components/LearningExperience";
+import { Subjects } from "@/components/Subjects";
 import { Success } from "@/components/Success";
 import { JoinFlow } from "@/components/JoinFlow";
-import { LearningExperience } from "@/components/LearningExperience";
-import { Onboarding } from "@/components/Onboarding";
-import { Accreditations } from "@/components/Accreditations";
-import { Marquee } from "@/components/Marquee";
+import { FAQ } from "@/components/FAQ";
 import { CTA } from "@/components/CTA";
 
 export default function Home() {
   return (
     <>
+      {/* 1. Hero */}
       <Hero />
-      <WhatIsEdus />
-      <Offer />
-      <Marquee />
+      {/* 2. Region Chooser */}
+      <RegionSelector />
+      {/* 3. Why Choose EDUS */}
       <WhyJoin />
+      {/* 4. How Learning Works */}
       <LearningExperience />
-      <Onboarding />
+      {/* 5. Subjects */}
+      <Subjects />
+      {/* 6. Success Stories */}
       <Success />
-      <Accreditations />
+      {/* 7. Enrolment Flow */}
       <JoinFlow />
+      {/* 8. FAQ */}
+      <FAQ />
+      {/* 9. Final CTA */}
       <CTA />
+      {/* 10. Footer is in layout */}
     </>
   );
 }

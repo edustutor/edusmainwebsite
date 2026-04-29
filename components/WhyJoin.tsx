@@ -1,50 +1,48 @@
 const REASONS = [
-  { idx: "01", title: "Personalised attention", body: "Tutor-matching, small group sizes, and one-to-one timing flexibility built around the student." },
-  { idx: "02", title: "Parent updates that mean something", body: "Attendance monitoring, term reports, and a parent app so you never wonder how it's going." },
-  { idx: "03", title: "Recordings, revision, exams", body: "Every live class is recorded. Periodic assessments and exam prep keep students on track." },
-  { idx: "04", title: "AI Study Buddy", body: "A focused, beta companion for revision questions and self-paced learning between classes." },
-  { idx: "05", title: "Resource vault", body: "Past papers and filtered resources by provider, medium, subject, and grade — owned by EDUS." },
-  { idx: "06", title: "Single source of truth", body: "One controlled set of metrics, contacts, and proof. No mixed claims across pages or apps." },
+  { icon: "🎯", title: "Personalised attention", body: "Tutor matching, small groups, and one-to-one timing flexibility built around the student.", tint: "#2563EB" },
+  { icon: "📊", title: "Weekly parent reports", body: "Attendance, homework completion, and topic-by-topic progress shared every week.", tint: "#8B5CF6" },
+  { icon: "🎥", title: "Recordings & revision", body: "Every live class is recorded. Periodic exams and revision keep students on track.", tint: "#06B6D4" },
+  { icon: "🤖", title: "AI Study Buddy", body: "A smart companion for revision questions and self-paced learning between classes.", tint: "#22C55E" },
+  { icon: "🗄️", title: "Resource Vault", body: "Past papers and curated notes by syllabus, subject, and grade — owned by EDUS.", tint: "#FACC15" },
+  { icon: "🛡️", title: "Safeguarding first", body: "Vetted tutors, monitored classrooms, and parent-grade safety standards by default.", tint: "#2563EB" },
 ];
 
 export function WhyJoin() {
   return (
-    <section className="relative py-24 md:py-32 border-t border-[rgba(14,20,33,0.10)]">
-      <div className="container-wide">
-        <div className="grid grid-cols-12 gap-6 items-end">
-          <div className="col-span-12 md:col-span-8">
-            <p className="kicker">
-              <span className="kicker-num">§ 04</span>
-              Differentiators / Why families choose EDUS
-            </p>
-            <h2 className="display mt-5" style={{ fontSize: "var(--fs-hero)", lineHeight: 1.0 }}>
-              Built for results.<br />
-              <em className="accent">Designed for trust.</em>
-            </h2>
-          </div>
-          <div className="col-span-12 md:col-span-4 md:pb-3">
-            <p className="font-mono text-[10.5px] tracking-[0.2em] uppercase text-[#6B7390]">
-              Six standards, every learner
-            </p>
-          </div>
+    <section id="why" className="relative py-20 md:py-28 scroll-mt-24">
+      <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="blob" style={{ top: "10%", left: "-8%", width: 420, height: 420, background: "#06B6D4", opacity: 0.18 }} />
+        <div className="blob" style={{ bottom: "0%", right: "-6%", width: 380, height: 380, background: "#FACC15", opacity: 0.16 }} />
+      </div>
+
+      <div className="container-edge">
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="eyebrow"><span className="dot" />Why Choose EDUS</p>
+          <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
+            Built for results. <em>Designed for trust.</em>
+          </h2>
+          <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
+            Six standards that come with every learner — across Sri Lanka, India, and the world.
+          </p>
         </div>
 
-        <div className="rule-strong mt-10" />
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3">
-          {REASONS.map((r, i) => (
+        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {REASONS.map((r) => (
             <article
-              key={r.idx}
-              className={`p-7 lg:p-9 border-b border-[rgba(14,20,33,0.10)] ${(i + 1) % 3 !== 0 ? "lg:border-r border-[rgba(14,20,33,0.10)]" : ""} ${i % 2 !== 0 ? "md:border-r-0 md:border-l border-[rgba(14,20,33,0.10)]" : ""}`}
+              key={r.title}
+              className="glass rounded-[24px] p-7 lift relative overflow-hidden"
             >
-              <div className="flex items-baseline justify-between mb-7">
-                <span className="font-display italic text-[20px] text-[#1640D8]">{r.idx} ·</span>
-                <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[#6B7390]">
-                  Standard
-                </span>
+              <span aria-hidden className="blob" style={{ top: -50, right: -50, width: 180, height: 180, background: r.tint, opacity: 0.20 }} />
+              <div className="relative">
+                <div
+                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
+                  style={{ background: `${r.tint}15`, border: `1px solid ${r.tint}25` }}
+                >
+                  {r.icon}
+                </div>
+                <h3 className="heading mt-6" style={{ fontSize: "19px" }}>{r.title}</h3>
+                <p className="text-[#2B3950] text-[14px] mt-2.5 leading-[1.65]">{r.body}</p>
               </div>
-              <h3 className="display leading-[1.1]" style={{ fontSize: "var(--fs-h3)" }}>{r.title}</h3>
-              <p className="text-[#2C334A] text-[14px] mt-3 leading-[1.65]">{r.body}</p>
             </article>
           ))}
         </div>

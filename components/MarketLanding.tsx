@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Ticker } from "./Ticker";
 
 export type MarketConfig = {
   code: "SL" | "IN" | "GL";
@@ -13,125 +12,116 @@ export type MarketConfig = {
   ctaText: string;
 };
 
-export function MarketLanding({ cfg }: { cfg: MarketConfig }) {
-  const numeral = cfg.code === "SL" ? "I" : cfg.code === "IN" ? "II" : "III";
+const TINTS = ["#2563EB", "#8B5CF6", "#06B6D4", "#22C55E"];
 
+export function MarketLanding({ cfg }: { cfg: MarketConfig }) {
   return (
     <>
-      {/* Top bar */}
-      <section className="relative pt-20">
-        <div className="border-b border-[rgba(14,20,33,0.10)] bg-[#F4F2ED]/40">
-          <div className="container-wide flex items-center justify-between py-2.5 text-[10.5px] font-mono tracking-[0.2em] uppercase text-[#6B7390]">
-            <div className="flex items-center gap-4">
-              <Link href="/#choose-region" className="hover:text-[#0E1421]">← All markets</Link>
-              <span className="hidden sm:inline w-px h-3 bg-[rgba(14,20,33,0.20)]" />
-              <span className="hidden sm:inline">{cfg.url}</span>
-            </div>
-            <span className="text-[#1640D8]">{cfg.flag} {cfg.region}</span>
-          </div>
+      <section className="relative pt-32 sm:pt-36 pb-20 overflow-hidden">
+        <div aria-hidden className="absolute inset-0 -z-10">
+          <div className="blob" style={{ top: "-8%", left: "-8%", width: 460, height: 460, background: "#06B6D4", opacity: 0.30 }} />
+          <div className="blob" style={{ top: "20%", right: "-10%", width: 480, height: 480, background: "#8B5CF6", opacity: 0.30 }} />
+          <div className="blob" style={{ bottom: "0%", left: "30%", width: 380, height: 380, background: "#2563EB", opacity: 0.22 }} />
         </div>
 
-        {/* Hero — Global edition: centered editorial column */}
-        <div className="container-wide pt-12 md:pt-20">
-          <div className="text-center max-w-5xl mx-auto" data-anim>
-            <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[#1640D8] mb-6">
-              <span className="font-display italic text-[#0E1421] mr-2">N° {numeral}</span>
-              {cfg.hero.eyebrow}
-            </p>
-            <h1 className="masthead" style={{ fontSize: "var(--fs-mast)" }}>
-              {cfg.hero.title}<br />
-              <em className="text-[#1640D8]">{cfg.hero.titleEm}</em>
+        <div className="container-edge">
+          <div className="flex justify-center" data-anim>
+            <Link href="/#regions" className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-[12.5px] font-medium text-[#2B3950]">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+                <path d="M19 12H5M12 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              All markets
+              <span className="text-[#5A6A82]">·</span>
+              <span className="text-[#06B6D4]">{cfg.flag} {cfg.region}</span>
+            </Link>
+          </div>
+
+          <div className="mt-8 text-center max-w-4xl mx-auto" data-anim="2">
+            <p className="eyebrow">{cfg.hero.eyebrow}</p>
+            <h1 className="heading mt-5" style={{ fontSize: "var(--fs-hero)" }}>
+              {cfg.hero.title} <em>{cfg.hero.titleEm}</em>
             </h1>
-            <p className="mt-10 text-[#2C334A] text-[17px] leading-[1.65] max-w-2xl mx-auto">
+            <p className="text-[#2B3950] text-[17px] mt-6 leading-[1.65] max-w-2xl mx-auto">
               {cfg.hero.sub}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3 justify-center">
+            <div className="mt-8 flex flex-wrap justify-center gap-3" data-anim="3">
               <Link href="/enrol" className="btn btn-primary">{cfg.ctaText}</Link>
-              <Link href="/contact" className="btn btn-ghost">Book consultation</Link>
+              <Link href="/contact" className="btn btn-yellow">Book Free Consultation</Link>
             </div>
           </div>
-
-          <div className="rule-strong mt-16" />
 
           {/* Pillars */}
-          <div className="grid md:grid-cols-3" data-anim="2">
-            {cfg.pillars.map((p, i) => (
-              <Link
-                key={p.tag}
-                href={p.href}
-                className={`p-7 lg:p-10 border-b border-[rgba(14,20,33,0.10)] md:border-b-0 ${i !== 0 ? "md:border-l border-[rgba(14,20,33,0.10)]" : ""} hover:bg-[rgba(14,20,33,0.02)] transition-colors group`}
-              >
-                <p className="font-mono text-[10.5px] tracking-[0.22em] uppercase text-[#1640D8]">
-                  Pillar {String(i + 1).padStart(2, "0")} · {p.tag}
-                </p>
-                <h3 className="display mt-7" style={{ fontSize: "var(--fs-h2)" }}>{p.title}</h3>
-                <p className="text-[#2C334A] text-[14.5px] mt-3 leading-[1.65]">{p.body}</p>
-                <span className="mt-7 inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.18em] uppercase text-[#0E1421] group-hover:text-[#1640D8] transition">
-                  Open <span className="font-display italic text-lg leading-none">→</span>
-                </span>
-              </Link>
-            ))}
-          </div>
-          <div className="rule-strong" />
-        </div>
-
-        <Ticker tone="paper" />
-      </section>
-
-      {/* Catalogue */}
-      <section className="relative py-24 md:py-32 border-t border-[rgba(14,20,33,0.10)]">
-        <div className="container-wide">
-          <div className="grid grid-cols-12 gap-6 items-end">
-            <div className="col-span-12 md:col-span-7">
-              <p className="kicker"><span className="kicker-num">§ {numeral}.01</span> Catalogue</p>
-              <h2 className="display mt-5" style={{ fontSize: "var(--fs-hero)", lineHeight: 1.0 }}>
-                Only valid <em className="accent">combinations.</em>
-              </h2>
-            </div>
-            <div className="col-span-12 md:col-span-5 md:pb-3">
-              <p className="text-[#2C334A] text-[14.5px] leading-relaxed">
-                The class catalogue filters by syllabus, level, subject, and class type — only what's
-                offered in {cfg.region}.
-              </p>
-            </div>
+          <div className="mt-14 grid md:grid-cols-3 gap-4" data-anim="4">
+            {cfg.pillars.map((p, i) => {
+              const tint = TINTS[i % TINTS.length];
+              return (
+                <Link key={p.tag} href={p.href} className="glass rounded-[24px] p-7 lift relative overflow-hidden block">
+                  <span aria-hidden className="blob" style={{ top: -50, right: -50, width: 200, height: 200, background: tint, opacity: 0.22 }} />
+                  <div className="relative">
+                    <span
+                      className="inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-[family-name:var(--font-display)] font-600 tracking-[0.12em] uppercase"
+                      style={{ background: `${tint}15`, color: tint }}
+                    >
+                      Pillar {String(i + 1).padStart(2, "0")} · {p.tag}
+                    </span>
+                    <h3 className="heading mt-6" style={{ fontSize: "20px" }}>{p.title}</h3>
+                    <p className="text-[#2B3950] text-[14px] mt-2.5 leading-[1.65]">{p.body}</p>
+                    <span className="mt-6 inline-flex items-center gap-2 font-[family-name:var(--font-display)] font-600 text-[14px]" style={{ color: tint }}>
+                      Open
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+                        <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
 
-          <div className="rule-strong mt-10" />
-
-          {cfg.filters.map((f, i) => (
-            <div key={f.label} className={`grid grid-cols-12 gap-6 py-9 ${i !== cfg.filters.length - 1 ? "border-b border-[rgba(14,20,33,0.10)]" : ""}`}>
-              <div className="col-span-12 lg:col-span-3">
-                <p className="font-mono text-[10.5px] tracking-[0.22em] uppercase text-[#1640D8]">
-                  N° {String(i + 1).padStart(2, "0")} · {f.label}
-                </p>
-              </div>
-              <div className="col-span-12 lg:col-span-9 flex flex-wrap gap-1.5">
-                {f.options.map((o) => (
-                  <span key={o} className="px-3 py-1.5 text-[12.5px] font-medium border border-[rgba(14,20,33,0.18)] bg-white/40">
-                    {o}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-
-          <div className="rule-strong" />
-        </div>
-      </section>
-
-      {/* Facts */}
-      <section className="relative py-20 border-t border-[rgba(14,20,33,0.10)]">
-        <div className="container-wide">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[rgba(14,20,33,0.10)] border-y border-[rgba(14,20,33,0.10)]">
+          {/* Trust strip */}
+          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto">
             {cfg.facts.map((f, i) => (
-              <div key={f.k} className="px-5 md:px-7 py-8">
-                <p className="font-mono text-[10.5px] tracking-[0.2em] uppercase text-[#6B7390]">
-                  {String(i + 1).padStart(2, "0")} / 04
-                </p>
-                <p className="font-display text-[40px] leading-none tnum text-[#0E1421] mt-3">{f.k}</p>
-                <p className="text-[12.5px] text-[#2C334A] mt-2">{f.v}</p>
+              <div key={i} className="glass rounded-2xl px-5 py-4 text-center">
+                <p className="font-[family-name:var(--font-display)] font-700 text-[22px] tnum text-[#102033]">{f.k}</p>
+                <p className="text-[11.5px] text-[#5A6A82] mt-1">{f.v}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CATALOGUE */}
+      <section className="relative py-20 md:py-24">
+        <div className="container-edge">
+          <div className="text-center max-w-2xl mx-auto">
+            <p className="eyebrow"><span className="dot" />Catalogue</p>
+            <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
+              Only valid <em>combinations.</em>
+            </h2>
+            <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
+              The class catalogue filters by syllabus, level, subject, and class type — only what's
+              offered in {cfg.region}.
+            </p>
+          </div>
+
+          <div className="mt-12 space-y-4">
+            {cfg.filters.map((f, i) => {
+              const tint = TINTS[i % TINTS.length];
+              return (
+                <div key={f.label} className="glass rounded-[24px] p-7">
+                  <p className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.12em] uppercase" style={{ color: tint }}>
+                    {f.label}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {f.options.map((o) => (
+                      <span key={o} className="px-3 py-1.5 rounded-full bg-white border border-[rgba(16,32,51,0.08)] text-[13px] text-[#102033]">
+                        {o}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

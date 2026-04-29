@@ -51,13 +51,13 @@ export const metadata: Metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#FBFCFF",
+  themeColor: "#F8FBFF",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
-      <body className="bg-[#FBFCFF] text-[#0A1230] antialiased">
+    <html lang="en" className={`${display.variable} ${sans.variable}`}>
+      <body className="bg-[#F8FBFF] text-[#102033] antialiased">
         <div className="app-atmosphere" aria-hidden />
         <SiteHeader />
         <main>{children}</main>
