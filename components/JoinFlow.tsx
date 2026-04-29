@@ -10,34 +10,37 @@ const STEPS = [
 
 export function JoinFlow() {
   return (
-    <section className="relative py-20 md:py-24 border-t border-[rgba(10,18,48,0.06)]">
-      <div className="container-edge">
-        <div className="grid lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start">
-            <p className="eyebrow"><span className="dot" />05 · How to join</p>
-            <h2 className="display mt-4" style={{ fontSize: "var(--fs-display)" }}>
-              One unified <em>join flow.</em>
+    <section className="relative py-24 md:py-32 border-t border-[rgba(14,20,33,0.10)]">
+      <div className="container-wide">
+        <div className="grid grid-cols-12 gap-10">
+          <div className="col-span-12 lg:col-span-4 lg:sticky lg:top-24 lg:self-start">
+            <p className="kicker">
+              <span className="kicker-num">§ 08</span>
+              Process / How to join
+            </p>
+            <h2 className="display mt-5" style={{ fontSize: "var(--fs-hero)", lineHeight: 1.0 }}>
+              One unified <em className="accent">join flow.</em>
             </h2>
-            <p className="text-[#5C6485] mt-5 max-w-sm">
-              No more half-finished forms or WhatsApp-only paths. Five clean steps, progressive disclosure, and a confirmation
-              you can act on.
+            <p className="text-[#2C334A] mt-5 max-w-sm text-[14.5px] leading-relaxed">
+              No more half-finished forms or WhatsApp-only paths. Five clean steps, progressive
+              disclosure, and a confirmation you can act on.
             </p>
             <div className="mt-7 flex gap-3">
-              <Link href="/enrol" className="btn btn-sun">Start enrolment</Link>
+              <Link href="/enrol" className="btn btn-primary">Start enrolment</Link>
               <Link href="/contact" className="btn btn-ghost">Book a call</Link>
             </div>
           </div>
 
-          <ol className="lg:col-span-8 relative">
-            <span aria-hidden className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-transparent via-[rgba(10,18,48,0.10)] to-transparent" />
+          <ol className="col-span-12 lg:col-span-8">
+            <div className="rule-strong" />
             {STEPS.map((s) => (
-              <li key={s.n} className="relative pl-14 pb-9 last:pb-0">
-                <span className="absolute left-0 top-0 w-9 h-9 rounded-full glass-tint flex items-center justify-center font-mono text-[11px] tracking-wider text-[#0A55F5]">
-                  {s.n}
-                </span>
-                <div className="glass rounded-2xl p-6 lift">
-                  <h3 className="display text-2xl">{s.title}</h3>
-                  <p className="text-[#2B3458] mt-2 text-sm leading-relaxed">{s.body}</p>
+              <li key={s.n} className="grid grid-cols-12 gap-6 py-8 border-b border-[rgba(14,20,33,0.10)]">
+                <div className="col-span-2 md:col-span-1">
+                  <p className="font-display italic text-[28px] leading-none text-[#1640D8]">{s.n}</p>
+                </div>
+                <div className="col-span-10 md:col-span-11">
+                  <h3 className="display leading-tight" style={{ fontSize: "var(--fs-h2)" }}>{s.title}</h3>
+                  <p className="text-[#2C334A] mt-3 text-[15px] leading-[1.65] max-w-xl">{s.body}</p>
                 </div>
               </li>
             ))}

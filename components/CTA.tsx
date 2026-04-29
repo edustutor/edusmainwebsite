@@ -2,56 +2,54 @@ import Link from "next/link";
 
 export function CTA() {
   return (
-    <section className="relative py-20 md:py-24">
-      <div className="container-edge">
-        <div className="relative rounded-[36px] glass-strong p-10 md:p-16 overflow-hidden">
-          <div aria-hidden className="absolute inset-0 -z-10">
-            <div className="glow" style={{ top: -150, right: -150, width: 480, height: 480, background: "#FFE08A", opacity: 0.55 }} />
-            <div className="glow" style={{ bottom: -200, left: -100, width: 520, height: 520, background: "#9CC0FF", opacity: 0.6 }} />
+    <section className="relative py-24 md:py-32 border-t border-[rgba(14,20,33,0.10)] glass-ink">
+      <div className="container-wide">
+        <div className="grid grid-cols-12 gap-6 items-end">
+          <div className="col-span-12 md:col-span-8">
+            <p className="font-mono text-[10.5px] tracking-[0.22em] uppercase text-[#D9A441]">
+              <span className="font-display italic text-[#D9A441]">§ 10 ·</span> Begin
+            </p>
+            <h2 className="masthead text-[#F4F2ED] mt-7" style={{ fontSize: "var(--fs-mast)", lineHeight: 0.92 }}>
+              A clearer path<br />
+              <em className="text-[#D9A441]">to better grades.</em>
+            </h2>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-7">
-              <p className="eyebrow"><span className="dot" />Step 02 · Begin</p>
-              <h2 className="display mt-4" style={{ fontSize: "var(--fs-display)" }}>
-                A clearer path to better grades. <em>Open today.</em>
-              </h2>
-              <p className="text-[#2B3458] max-w-xl mt-5 text-[17px]">
-                Pick your door, see the offer that's actually for you, and join with a guided five-step flow.
-                No fragmented forms. No mismatched proof claims. Just one well-built education platform.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <Link href="/signup" className="btn btn-primary">Sign Up</Link>
-                <Link href="/#choose-region" className="btn btn-ghost">Choose region</Link>
-                <Link href="/contact" className="btn btn-ghost">Book a consultation</Link>
-              </div>
-            </div>
-            <div className="lg:col-span-5">
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { k: "Sri Lanka", v: "Group · 1:1", href: "/sl" },
-                  { k: "India · 6–10", v: "CBSE / NCERT", href: "/in" },
-                  { k: "Global · 1:1", v: "30+ countries", href: "/global" },
-                  { k: "Resource Vault", v: "Past papers", href: "/resources" },
-                ].map((c) => (
-                  <Link
-                    key={c.k}
-                    href={c.href}
-                    className="rounded-2xl bg-white border border-[rgba(10,18,48,0.06)] p-5 hover:border-[rgba(10,18,48,0.18)]"
-                  >
-                    <p className="font-display text-xl text-[#0A1230]">{c.k}</p>
-                    <p className="text-xs font-mono text-[#5C6485] mt-1 uppercase tracking-wider">{c.v}</p>
-                    <span className="mt-4 inline-flex items-center gap-1 text-xs text-[#0A55F5]">
-                      Open
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                  </Link>
-                ))}
-              </div>
+          <div className="col-span-12 md:col-span-4 md:pb-3">
+            <p className="text-[#F4F2ED]/70 text-[15.5px] leading-[1.65]">
+              Pick your door, see the offer that's actually for you, and join with a guided five-step
+              flow. Live online tuition that works.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/signup" className="btn btn-gold">Sign Up</Link>
+              <Link href="/enrol" className="btn btn-ghost border-white/20 text-[#F4F2ED] hover:border-[#D9A441]">
+                Enrol
+              </Link>
             </div>
           </div>
+        </div>
+
+        <div className="mt-16 pt-10 border-t border-white/15 grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/15">
+          {[
+            { k: "Sri Lanka", v: "Group · 1:1 · National + Cambridge", href: "/sl" },
+            { k: "India · Chennai", v: "Premium tuition · Grades 6–10", href: "/in" },
+            { k: "Global · 1:1", v: "Cambridge · Edexcel · IB", href: "/global" },
+            { k: "Resource Vault", v: "Past papers & study notes", href: "/resources" },
+          ].map((c) => (
+            <Link
+              key={c.k}
+              href={c.href}
+              className="bg-[#0E1421] hover:bg-[#141B2C] p-7 transition group"
+            >
+              <p className="font-display text-[22px] text-[#F4F2ED]">{c.k}</p>
+              <p className="text-[12px] font-mono text-[#F4F2ED]/55 mt-2 uppercase tracking-wider">
+                {c.v}
+              </p>
+              <span className="mt-5 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.16em] text-[#D9A441]">
+                Open <span className="font-display italic text-lg leading-none">→</span>
+              </span>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

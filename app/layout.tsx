@@ -1,32 +1,23 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { Poppins, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
-// Display: Fraunces — a confident, high-contrast contemporary serif used by
-// many premium global brands; works for editorial trust and modern polish.
-const display = Fraunces({
+// Headings — Poppins. Friendly geometric sans, high recognition, optimised
+// for education and family-facing platforms.
+const display = Poppins({
   subsets: ["latin"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-display",
   display: "swap",
 });
 
-// Body: Inter — the global standard for product UI; excellent legibility at
-// every size, world-class language coverage, and strong on Core Web Vitals.
-const sans = Inter({
+// Body — Open Sans. Best-in-class legibility for parents and students.
+const sans = Open_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans",
-  display: "swap",
-});
-
-// Mono: JetBrains Mono — for eyebrows, metadata, and tabular numerics.
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono",
   display: "swap",
 });
 

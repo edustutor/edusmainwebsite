@@ -2,98 +2,105 @@ import Link from "next/link";
 
 const ROWS = [
   {
-    tag: "SL",
+    n: "I",
     flag: "🇱🇰",
-    title: "Sri Lanka",
-    sub: "National-syllabus group classes plus one-to-one support.",
-    items: [
-      { label: "Grade 1 – A/L", note: "All grades · all key subjects" },
-      { label: "Sinhala · Tamil · English medium", note: "Region-aware filtering" },
-      { label: "Group + Individual", note: "Recordings · revision · exams" },
-    ],
+    market: "Sri Lanka",
+    title: "National syllabus, group plus one-to-one.",
+    sub: "The flagship offer.",
+    items: ["Grade 1 – A/L", "Sinhala · Tamil · English", "Group + Individual"],
     href: "/sl",
   },
   {
-    tag: "IN",
+    n: "II",
     flag: "🇮🇳",
-    title: "India · Launch",
-    sub: "English-medium tuition for CBSE/NCERT-aligned Grades 6–10.",
-    items: [
-      { label: "Grades 6 – 10", note: "Focused launch scope" },
-      { label: "CBSE · NCERT-aligned", note: "Board-level language" },
-      { label: "Live · Recorded · Tracked", note: "Parent updates included" },
-    ],
+    market: "India · Chennai",
+    title: "Premium structured tuition for Grades 6–10.",
+    sub: "Disciplined monitoring. Weekly reports.",
+    items: ["Grade 6 – 10", "CBSE / Matriculation", "₹1,000 per subject"],
     href: "/in",
   },
   {
-    tag: "GL",
+    n: "III",
     flag: "🌐",
-    title: "Global · One-to-one",
-    sub: "Personal tutors matched to your syllabus, timezone, and goals.",
-    items: [
-      { label: "Cambridge · Edexcel · IB", note: "Major international boards" },
-      { label: "Flexible timings", note: "Across 30+ countries" },
-      { label: "Tutor-match in 48 hrs", note: "Demo before you commit" },
-    ],
+    market: "Global",
+    title: "One-to-one tutors, matched within 48 hours.",
+    sub: "International syllabuses, flexible timings.",
+    items: ["Cambridge · Edexcel · IB", "30+ countries", "Demo before commit"],
     href: "/global",
   },
 ];
 
 export function Offer() {
   return (
-    <section className="relative py-20 md:py-24 border-t border-[rgba(10,18,48,0.06)]">
-      <div className="container-edge">
-        <div className="flex items-end justify-between flex-wrap gap-4 mb-12">
-          <div>
-            <p className="eyebrow"><span className="dot" />02 · What EDUS offers</p>
-            <h2 className="display mt-4" style={{ fontSize: "var(--fs-display)" }}>
-              Three offers. <em>No overlap.</em>
+    <section className="relative py-24 md:py-32 border-t border-[rgba(14,20,33,0.10)]">
+      <div className="container-wide">
+        <div className="grid grid-cols-12 gap-6 items-end">
+          <div className="col-span-12 md:col-span-8">
+            <p className="kicker">
+              <span className="kicker-num">§ 03</span>
+              Offer / What EDUS does
+            </p>
+            <h2 className="display mt-5" style={{ fontSize: "var(--fs-hero)", lineHeight: 1.0 }}>
+              Three offers. <em className="accent">No overlap.</em>
             </h2>
           </div>
-          <p className="text-[#5C6485] max-w-md">
-            Each market only ever shows valid combinations — Indian parents never see G.C.E. resources;
-            Sri Lankan students never see global one-to-one pricing.
-          </p>
+          <div className="col-span-12 md:col-span-4 md:pb-3">
+            <p className="text-[#2C334A] text-[14.5px] leading-relaxed">
+              Each market only ever shows valid combinations — Indian parents never see G.C.E.
+              resources; Sri Lankan students never see global one-to-one pricing.
+            </p>
+          </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="rule-strong mt-10" />
+
+        {/* Table-style rows */}
+        <div>
           {ROWS.map((row, i) => (
             <Link
               href={row.href}
-              key={row.tag}
-              className="group block relative rounded-3xl glass lift overflow-hidden"
+              key={row.n}
+              className="group block py-9 lg:py-12 border-b border-[rgba(14,20,33,0.10)] hover:bg-[rgba(14,20,33,0.02)] transition-colors"
             >
-              <div className="grid lg:grid-cols-12 gap-6 p-7 lg:p-8 items-center">
-                <div className="lg:col-span-3 flex items-center gap-4">
-                  <span className="text-4xl">{row.flag}</span>
-                  <div>
-                    <p className="font-mono text-[11px] tracking-[0.18em] text-[#5C6485] uppercase">
-                      0{i + 1} · /{row.tag.toLowerCase()}/
-                    </p>
-                    <h3 className="display text-3xl mt-1">{row.title}</h3>
+              <div className="grid grid-cols-12 gap-6 items-start">
+                <div className="col-span-12 lg:col-span-1">
+                  <p className="font-display italic text-[32px] leading-none text-[#0E1421]">
+                    {row.n}.
+                  </p>
+                </div>
+
+                <div className="col-span-12 lg:col-span-4">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">{row.flag}</span>
+                    <span className="font-mono text-[10.5px] tracking-[0.22em] uppercase text-[#1640D8]">
+                      {row.market}
+                    </span>
                   </div>
+                  <h3 className="display mt-3 leading-[1.06]" style={{ fontSize: "var(--fs-h2)" }}>
+                    {row.title}
+                  </h3>
+                  <p className="text-[#6B7390] text-[13px] mt-2 italic">{row.sub}</p>
                 </div>
-                <div className="lg:col-span-4">
-                  <p className="text-[#2B3458]">{row.sub}</p>
+
+                <div className="col-span-12 lg:col-span-5">
+                  <ul className="space-y-2">
+                    {row.items.map((it, j) => (
+                      <li key={it} className="flex items-baseline gap-3 text-[14px]">
+                        <span className="font-mono text-[10px] text-[#6B7390] tnum w-6">
+                          {String(j + 1).padStart(2, "0")}
+                        </span>
+                        <span className="text-[#0E1421]">{it}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="lg:col-span-5 grid sm:grid-cols-3 gap-3">
-                  {row.items.map((it) => (
-                    <div key={it.label} className="rounded-2xl bg-white border border-[rgba(10,18,48,0.06)] p-3">
-                      <p className="text-[13px] font-medium text-[#0A1230]">{it.label}</p>
-                      <p className="text-[11px] font-mono text-[#5C6485] mt-0.5 uppercase tracking-wider">
-                        {it.note}
-                      </p>
-                    </div>
-                  ))}
+
+                <div className="col-span-12 lg:col-span-2 flex lg:justify-end items-center">
+                  <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.18em] uppercase text-[#0E1421] group-hover:text-[#1640D8] transition">
+                    Open
+                    <span className="font-display italic text-2xl leading-none">→</span>
+                  </span>
                 </div>
-              </div>
-              <div
-                aria-hidden
-                className="absolute right-6 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-[rgba(10,18,48,0.08)] bg-white flex items-center justify-center text-[#2B3458]"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
-                  <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
               </div>
             </Link>
           ))}

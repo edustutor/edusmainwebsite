@@ -13,31 +13,45 @@ export default function EnrolPage() {
   const back = () => setStep((s) => Math.max(0, s - 1));
 
   return (
-    <section className="relative pt-36 pb-28 overflow-hidden min-h-screen">
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-grid" />
+    <section className="relative pt-20 pb-28 min-h-screen">
+      <div className="border-b border-[rgba(14,20,33,0.10)] bg-[#F4F2ED]/40">
+        <div className="container-wide flex items-center justify-between py-2.5 text-[10.5px] font-mono tracking-[0.2em] uppercase text-[#6B7390]">
+          <span>edustutor.com / enrol</span>
+          <span className="text-[#1640D8]">Multi-step · Progressive disclosure</span>
+        </div>
       </div>
 
-      <div className="mx-auto max-w-4xl px-6 sm:px-8">
-        <p className="eyebrow"><span className="dot" />Enrol · Multi-step · Progressive disclosure</p>
-        <h1 className="display mt-3" style={{ fontSize: "var(--fs-hero)" }}>
-          Start your <em>EDUS journey.</em>
-        </h1>
-        <p className="text-[#2B3458] mt-4 max-w-xl">
-          Only the fields that matter — revealed as you make each choice. Five short steps. WhatsApp is
-          available as a fallback if you'd prefer to talk first.
-        </p>
+      <div className="container-edge pt-12 md:pt-16">
+        <div className="grid grid-cols-12 gap-6 items-end">
+          <div className="col-span-12 md:col-span-8">
+            <p className="font-mono text-[11px] tracking-[0.26em] uppercase text-[#1640D8]">
+              <span className="font-display italic text-[#0E1421] mr-2">§</span>
+              Enrolment
+            </p>
+            <h1 className="masthead mt-5" style={{ fontSize: "var(--fs-hero)", lineHeight: 1.0 }}>
+              Start your <em className="text-[#1640D8]">EDUS journey.</em>
+            </h1>
+          </div>
+          <div className="col-span-12 md:col-span-4 md:pb-3">
+            <p className="text-[#2C334A] text-[14.5px] leading-relaxed">
+              Only the fields that matter — revealed as you make each choice. Five short steps.
+              WhatsApp is available as a fallback if you'd prefer to talk first.
+            </p>
+          </div>
+        </div>
 
-        <div className="mt-10 glass rounded-full p-1.5 flex gap-1">
+        <div className="rule-strong mt-12 mb-8" />
+
+        <div className="border border-[rgba(14,20,33,0.10)] bg-white/40 p-1 flex gap-px">
           {STEPS.map((s, i) => (
             <div
               key={s}
-              className={`flex-1 text-center px-3 py-2 rounded-full text-xs font-mono uppercase tracking-wider ${
+              className={`flex-1 text-center px-3 py-2 text-[10.5px] font-mono uppercase tracking-[0.16em] ${
                 i === step
-                  ? "bg-[#0A1230] text-white"
+                  ? "bg-[#0E1421] text-[#F4F2ED]"
                   : i < step
-                    ? "text-[#0A55F5]"
-                    : "text-[#5C6485]"
+                    ? "bg-white text-[#1640D8]"
+                    : "bg-white text-[#6B7390]"
               }`}
             >
               {String(i + 1).padStart(2, "0")} · {s}
@@ -45,7 +59,7 @@ export default function EnrolPage() {
           ))}
         </div>
 
-        <div className="mt-8 glass-strong rounded-3xl p-8 md:p-10 min-h-[420px]">
+        <div className="mt-8 border border-[#0E1421] bg-white/60 p-8 md:p-12 min-h-[420px]">
           {step === 0 && (
             <Step title="Where are you based?" sub="We only show classes valid for your market.">
               <Choices

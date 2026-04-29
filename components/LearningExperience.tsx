@@ -9,43 +9,45 @@ const SEQUENCE = [
 
 export function LearningExperience() {
   return (
-    <section className="relative py-20 md:py-24 border-t border-[rgba(10,18,48,0.06)] overflow-hidden">
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-grid opacity-60" />
-        <div className="glow" style={{ bottom: -200, left: "30%", width: 600, height: 600, background: "#CFE0FF" }} />
-      </div>
-
-      <div className="container-edge">
-        <div className="max-w-2xl">
-          <p className="eyebrow"><span className="dot" />06 · How learning works</p>
-          <h2 className="display mt-4" style={{ fontSize: "var(--fs-display)" }}>
-            Live, recorded, <em>tracked.</em>
-          </h2>
-          <p className="text-[#2B3458] mt-5">
-            Families buy the learning process before they buy the brand story. Here's exactly how a class
-            goes from live delivery to long-term progress.
-          </p>
+    <section className="relative py-24 md:py-32 border-t border-[rgba(14,20,33,0.10)]">
+      <div className="container-wide">
+        <div className="grid grid-cols-12 gap-6 items-end">
+          <div className="col-span-12 md:col-span-8">
+            <p className="kicker">
+              <span className="kicker-num">§ 06</span>
+              Method / How learning works
+            </p>
+            <h2 className="display mt-5" style={{ fontSize: "var(--fs-hero)", lineHeight: 1.0 }}>
+              Live, recorded, <em className="accent">tracked.</em>
+            </h2>
+          </div>
+          <div className="col-span-12 md:col-span-4 md:pb-3">
+            <p className="text-[#2C334A] text-[14.5px] leading-relaxed">
+              Families buy the learning process before they buy the brand story. Here's exactly how a class
+              goes from live delivery to long-term progress.
+            </p>
+          </div>
         </div>
 
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {SEQUENCE.map((s, i) => (
-            <div key={s.tag} className="relative glass rounded-3xl p-7 lift overflow-hidden">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] tracking-[0.2em] text-[#0A55F5] uppercase">
-                  Step {String(i + 1).padStart(2, "0")} · {s.tag}
-                </span>
-                <span className="text-[10px] font-mono text-[#5C6485]">{s.time}</span>
-              </div>
-              <h3 className="display text-2xl mt-6">{s.title}</h3>
-              <p className="text-[#2B3458] text-sm mt-2 leading-relaxed">{s.body}</p>
+        <div className="rule-strong mt-10" />
 
-              <div className="mt-6 h-px bg-gradient-to-r from-transparent via-[rgba(10,18,48,0.12)] to-transparent" />
-              <div className="mt-4 flex gap-1.5">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3">
+          {SEQUENCE.map((s, i) => (
+            <div
+              key={s.tag}
+              className={`p-7 lg:p-9 border-b border-[rgba(14,20,33,0.10)] ${(i + 1) % 3 !== 0 ? "lg:border-r border-[rgba(14,20,33,0.10)]" : ""} ${i % 2 !== 0 ? "md:border-l border-[rgba(14,20,33,0.10)]" : ""}`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[#1640D8]">
+                  {String(i + 1).padStart(2, "0")} · {s.tag}
+                </span>
+                <span className="font-mono text-[10px] text-[#6B7390]">{s.time}</span>
+              </div>
+              <h3 className="display mt-7" style={{ fontSize: "var(--fs-h3)" }}>{s.title}</h3>
+              <p className="text-[#2C334A] text-[14px] mt-3 leading-[1.65]">{s.body}</p>
+              <div className="mt-7 flex gap-1">
                 {Array.from({ length: 6 }).map((_, j) => (
-                  <span
-                    key={j}
-                    className={`h-1 flex-1 rounded-full ${j <= i ? "bg-[#FFC21A]" : "bg-[rgba(10,18,48,0.08)]"}`}
-                  />
+                  <span key={j} className={`h-px flex-1 ${j <= i ? "bg-[#0E1421]" : "bg-[rgba(14,20,33,0.15)]"}`} />
                 ))}
               </div>
             </div>

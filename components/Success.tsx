@@ -16,9 +16,9 @@ type Story = {
 };
 
 const STORIES: Story[] = [
-  { market: "SL", flag: "🇱🇰", syllabus: "National", grade: "Cambridge", subject: "Platform", before: "Hesitant", after: "Confident", quote: "EDUS's platform is incredibly user-friendly. I can access my courses and materials anytime.", name: "K. Ellakiya", role: "Student", location: "Kandy, Sri Lanka" },
-  { market: "SL", flag: "🇱🇰", syllabus: "Cambridge", grade: "O/L", subject: "Cambridge courses", before: "Isolated", after: "Connected", quote: "Their Cambridge courses are great, but the best part is the online forums and the community.", name: "P. Vijithan", role: "Student", location: "Colombo, Sri Lanka" },
-  { market: "SL", flag: "🇱🇰", syllabus: "National", grade: "Grade 8", subject: "Flexibility", before: "Schedule clash", after: "On-track", quote: "EDUS is perfect for working moms! Their online platform lets my daughter learn anytime.", name: "T. Kalaivani", role: "Parent", location: "Kalmunai, Sri Lanka" },
+  { market: "SL", flag: "🇱🇰", syllabus: "Cambridge", grade: "Year 11", subject: "Platform", before: "Hesitant", after: "Confident", quote: "EDUS's platform is incredibly user-friendly. I can access my courses and materials anytime.", name: "K. Ellakiya", role: "Student", location: "Kandy, Sri Lanka" },
+  { market: "SL", flag: "🇱🇰", syllabus: "Cambridge", grade: "O/L", subject: "Cambridge Courses", before: "Isolated", after: "Connected", quote: "Their Cambridge courses are great, but the best part is the online forums and the community.", name: "P. Vijithan", role: "Student", location: "Colombo, Sri Lanka" },
+  { market: "SL", flag: "🇱🇰", syllabus: "National", grade: "Grade 8", subject: "Flexibility", before: "Schedule clash", after: "On-track", quote: "EDUS is perfect for working moms. Their online platform lets my daughter learn anytime.", name: "T. Kalaivani", role: "Parent", location: "Kalmunai, Sri Lanka" },
   { market: "SL", flag: "🇱🇰", syllabus: "National", grade: "A/L", subject: "Affordability", before: "Costly options", after: "Value-rich", quote: "EDUS provides affordable and high-quality online courses that cater to diverse needs.", name: "A. Chellakumar, LLB", role: "Parent", location: "Galle, Sri Lanka" },
   { market: "SL", flag: "🇱🇰", syllabus: "National", grade: "Grade 11", subject: "Community", before: "Online = lonely", after: "Online = together", quote: "What I love about EDUS is the community. Even online, I feel connected to my peers.", name: "C. Kajansika", role: "Student", location: "Batticaloa, Sri Lanka" },
   { market: "GL", flag: "🌐", syllabus: "Cambridge IGCSE", grade: "Year 10", subject: "Physics", before: "Predicted 5", after: "Achieved 8", quote: "I had a tutor matched to my time zone in 48 hours. The flexibility was the whole reason it worked.", name: "Adaeze N.", role: "Student", location: "Lagos, Nigeria" },
@@ -27,7 +27,7 @@ const STORIES: Story[] = [
 ];
 
 const FILTERS = [
-  { code: "ALL", label: "All markets" },
+  { code: "ALL", label: "All" },
   { code: "SL", label: "Sri Lanka" },
   { code: "IN", label: "India" },
   { code: "GL", label: "Global" },
@@ -38,57 +38,67 @@ export function Success() {
   const visible = filter === "ALL" ? STORIES : STORIES.filter((s) => s.market === filter);
 
   return (
-    <section className="relative py-20 md:py-24 border-t border-[rgba(10,18,48,0.06)]">
-      <div className="container-edge">
-        <div className="flex items-end justify-between flex-wrap gap-6 mb-10">
-          <div>
-            <p className="eyebrow"><span className="dot" />04 · What success looks like</p>
-            <h2 className="display mt-4" style={{ fontSize: "var(--fs-display)" }}>
-              Real outcomes, <em>filterable by market.</em>
+    <section className="relative py-24 md:py-32 border-t border-[rgba(14,20,33,0.10)]">
+      <div className="container-wide">
+        <div className="grid grid-cols-12 gap-6 items-end">
+          <div className="col-span-12 md:col-span-7">
+            <p className="kicker">
+              <span className="kicker-num">§ 05</span>
+              Outcomes / What success looks like
+            </p>
+            <h2 className="display mt-5" style={{ fontSize: "var(--fs-hero)", lineHeight: 1.0 }}>
+              Real outcomes, <em className="accent">filterable by market.</em>
             </h2>
           </div>
-          <div className="glass rounded-full p-1 flex flex-wrap gap-1">
-            {FILTERS.map((f) => (
-              <button
-                key={f.code}
-                onClick={() => setFilter(f.code)}
-                className={`px-4 py-2 rounded-full text-sm font-medium ${
-                  filter === f.code
-                    ? "bg-[#0A1230] text-white"
-                    : "text-[#2B3458] hover:text-[#0A1230]"
-                }`}
-              >
-                {f.label}
-              </button>
-            ))}
+          <div className="col-span-12 md:col-span-5 md:pb-3 flex md:justify-end">
+            <div className="border border-[rgba(14,20,33,0.20)] flex">
+              {FILTERS.map((f) => (
+                <button
+                  key={f.code}
+                  onClick={() => setFilter(f.code)}
+                  className={`px-4 py-2 font-mono text-[11px] tracking-[0.16em] uppercase border-l first:border-l-0 border-[rgba(14,20,33,0.20)] transition ${
+                    filter === f.code
+                      ? "bg-[#0E1421] text-[#F4F2ED]"
+                      : "text-[#2C334A] hover:bg-[rgba(14,20,33,0.04)]"
+                  }`}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="rule-strong mt-10" />
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3">
           {visible.map((s, i) => (
-            <article key={i} className="glass rounded-3xl p-7 lift relative overflow-hidden">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-[#5C6485]">
-                  <span>{s.flag}</span>{s.syllabus} · {s.grade}
+            <article
+              key={i}
+              className={`p-7 lg:p-9 border-b border-[rgba(14,20,33,0.10)] ${(i + 1) % 3 !== 0 ? "lg:border-r border-[rgba(14,20,33,0.10)]" : ""} ${i % 2 !== 0 ? "md:border-l border-[rgba(14,20,33,0.10)]" : ""}`}
+            >
+              <div className="flex items-center justify-between mb-7">
+                <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-[#1640D8]">
+                  {s.flag} {s.syllabus} · {s.grade}
                 </span>
-                <span className="font-mono text-[10px] tracking-[0.2em] text-[#5C6485]">{s.subject}</span>
+                <span className="font-mono text-[10px] text-[#6B7390]">No. {String(i + 1).padStart(2, "0")}</span>
               </div>
 
-              <p className="display text-xl leading-snug mt-6 text-[#0A1230]">"{s.quote}"</p>
+              <p className="font-display text-[20px] leading-[1.4] text-[#0E1421]">
+                "{s.quote}"
+              </p>
 
-              <div className="mt-6 pt-5 border-t border-[rgba(10,18,48,0.06)] flex items-end justify-between gap-4">
+              <div className="mt-7 pt-5 border-t border-[rgba(14,20,33,0.10)] flex items-end justify-between gap-4">
                 <div>
-                  <p className="text-sm font-medium text-[#0A1230]">{s.name}</p>
-                  <p className="text-xs text-[#5C6485] font-mono">{s.role} · {s.location}</p>
+                  <p className="text-[14px] font-medium text-[#0E1421]">{s.name}</p>
+                  <p className="text-[11px] text-[#6B7390] font-mono mt-0.5">{s.role} · {s.location}</p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-1 rounded-full bg-white border border-[rgba(10,18,48,0.10)] text-[11px] font-mono text-[#5C6485]">
+                <div className="flex items-center gap-2 text-[10.5px] font-mono">
+                  <span className="px-2 py-0.5 border border-[rgba(14,20,33,0.20)] text-[#6B7390]">
                     {s.before}
                   </span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[#0A55F5]">
-                    <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <span className="px-2.5 py-1 rounded-full bg-[#FFC21A]/20 border border-[#FFC21A]/50 text-[11px] font-mono text-[#7A5500]">
+                  <span className="text-[#0E1421]">→</span>
+                  <span className="px-2 py-0.5 bg-[#0E1421] text-[#D9A441]">
                     {s.after}
                   </span>
                 </div>
