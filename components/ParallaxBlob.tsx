@@ -1,6 +1,6 @@
 "use client";
-import { useRef } from "react";
-import { useScroll, useTransform, type CSSProperties } from "framer-motion";
+import { useRef, type CSSProperties } from "react";
+import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
 
 type Props = {
