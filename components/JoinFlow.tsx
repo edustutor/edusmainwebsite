@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
 import { AmbientGlow } from "@/components/AmbientGlow";
+import { useIsMobile } from "@/lib/useIsMobile";
 import { sectionRevealStrong, stepReveal, inView, slideInLeft } from "@/lib/motion";
 
 const STEPS = [
@@ -16,11 +17,12 @@ const STEPS = [
 
 export function JoinFlow() {
   const ref = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const blobY = useTransform(scrollYProgress, [0, 1], [-40, 60]);
+  const blobY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-40, 60]);
   const lineHeight = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "100%"]);
 
   return (
@@ -53,7 +55,7 @@ export function JoinFlow() {
               The EDUS enrolment process helps parents choose the correct learning path without confusion.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Link href="/enrol" className="btn btn-primary">Start Enrolment</Link>
+              <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Enrolment</a>
               <Link href="/contact" className="btn btn-ghost">Talk to EDUS Team</Link>
             </div>
           </m.div>

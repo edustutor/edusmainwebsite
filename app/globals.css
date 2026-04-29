@@ -29,6 +29,13 @@
   --glass-blur: 22px;
 }
 
+/* Mobile: lighter backdrop-filter — still glassy, far cheaper. */
+@media (max-width: 768px) {
+  :root {
+    --glass-blur: 12px;
+  }
+}
+
 * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
 html {
@@ -115,6 +122,12 @@ body {
     0 1px 2px rgba(16,32,51,0.05),
     0 30px 80px -28px rgba(37,99,235,0.18);
 }
+@media (max-width: 768px) {
+  .glass-strong {
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+  }
+}
 
 .glass-tint-blue {
   position: relative;
@@ -125,6 +138,12 @@ body {
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,1),
     0 18px 50px -22px rgba(37,99,235,0.18);
+}
+@media (max-width: 768px) {
+  .glass-tint-blue {
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+  }
 }
 
 /* Glass top sheen */

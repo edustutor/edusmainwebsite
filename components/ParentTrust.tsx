@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
 import { AmbientGlow } from "@/components/AmbientGlow";
+import { useIsMobile } from "@/lib/useIsMobile";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 
 const POINTS = [
@@ -17,12 +18,13 @@ const POINTS = [
 
 export function ParentTrust() {
   const ref = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const blobAY = useTransform(scrollYProgress, [0, 1], [-40, 60]);
-  const blobBY = useTransform(scrollYProgress, [0, 1], [40, -60]);
+  const blobAY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-40, 60]);
+  const blobBY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [40, -60]);
 
   return (
     <section

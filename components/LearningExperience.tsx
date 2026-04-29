@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
 import { AmbientGlow } from "@/components/AmbientGlow";
+import { useIsMobile } from "@/lib/useIsMobile";
 import { sectionRevealStrong, stepReveal, inView } from "@/lib/motion";
 
 const STEPS = [
@@ -18,11 +19,12 @@ const TINTS = ["#2563EB", "#8B5CF6", "#06B6D4", "#22C55E", "#FACC15", "#2563EB"]
 
 export function LearningExperience() {
   const ref = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const blobY = useTransform(scrollYProgress, [0, 1], [-50, 60]);
+  const blobY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-50, 60]);
 
   return (
     <section

@@ -4,15 +4,17 @@ import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
 import { AmbientGlow } from "@/components/AmbientGlow";
+import { useIsMobile } from "@/lib/useIsMobile";
 import { staggerContainer, fadeUp, scaleIn, inViewClose } from "@/lib/motion";
 
 export function CTA() {
   const ref = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const cardY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const cardY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [40, -40]);
 
   return (
     <section ref={ref} className="relative py-20 md:py-28 overflow-hidden">
@@ -53,7 +55,7 @@ export function CTA() {
             </m.p>
 
             <m.div variants={fadeUp} className="mt-9 flex flex-wrap justify-center gap-3">
-              <Link href="/enrol" className="btn btn-primary">Start Enrolment</Link>
+              <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Enrolment</a>
               <Link href="/contact" className="btn btn-yellow">Book a Free Consultation</Link>
               <Link href="/contact" className="btn btn-ghost">Talk to EDUS Team</Link>
             </m.div>

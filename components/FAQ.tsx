@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { useScroll, useTransform } from "framer-motion";
 import { m, AnimatePresence } from "@/components/Motion";
 import { AmbientGlow } from "@/components/AmbientGlow";
+import { useIsMobile } from "@/lib/useIsMobile";
 import { fadeUp, staggerContainer, sectionRevealStrong, accordionMotion, inView } from "@/lib/motion";
 
 const FAQS = [
@@ -43,11 +44,12 @@ const FAQS = [
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   const ref = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const blobY = useTransform(scrollYProgress, [0, 1], [-40, 60]);
+  const blobY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-40, 60]);
 
   return (
     <section

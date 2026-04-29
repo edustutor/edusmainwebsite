@@ -15,7 +15,7 @@ const PATHS = [
   { label: "India · Grades 6 to 10", href: "/in" },
   { label: "Global · One to One", href: "/global" },
   { label: "Resource Vault", href: "/#resources" },
-  { label: "Enrol", href: "/enrol" },
+  { label: "Enrol", href: "https://signup.edustutor.com/", external: true },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -77,7 +77,7 @@ function FooterCol({
   items,
 }: {
   title: string;
-  items: { label: string; href: string }[];
+  items: { label: string; href: string; external?: boolean }[];
 }) {
   return (
     <div>
@@ -87,9 +87,20 @@ function FooterCol({
       <ul className="space-y-1.5 text-[13.5px]">
         {items.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="text-[#2B3950] hover:text-[#2563EB] transition">
-              {l.label}
-            </Link>
+            {l.external ? (
+              <a
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#2B3950] hover:text-[#2563EB] transition"
+              >
+                {l.label}
+              </a>
+            ) : (
+              <Link href={l.href} className="text-[#2B3950] hover:text-[#2563EB] transition">
+                {l.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

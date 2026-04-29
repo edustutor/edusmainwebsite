@@ -1,14 +1,17 @@
 "use client";
+import { useEffect, useState } from "react";
 import { m } from "@/components/Motion";
 
 /**
- * Animated background atmosphere — softly drifting blue/violet glows.
+ * Animated background atmosphere — heavily blurred 3D blue spheres
+ * drifting slowly across the viewport.
  *
- * Spacious by design: just 4 well-separated orbs at low opacity.
- * The goal is "calm, premium, barely there" — felt more than seen.
- *
- * Pure transform + opacity. GPU-only, no layout thrash. Honours
- * prefers-reduced-motion via the global MotionConfig.
+ * Mobile-optimised:
+ * - Detects viewport width once and serves a lighter sphere config to
+ *   phones (smaller, fewer, less blur, no mix-blend) — `filter: blur()`
+ *   on huge layers is the single biggest paint cost on mobile.
+ * - Pure transform/opacity. GPU-only, no layout thrash.
+ * - Honours prefers-reduced-motion via global MotionConfig.
  */
 
 type Sphere = {
@@ -28,8 +31,7 @@ type Sphere = {
   blur: number;
 };
 
-const SPHERES: Sphere[] = [
-  // Top-right primary blue
+const DESKTOP_SPHERES: Sphere[] = [
   {
     size: 620,
     colorLight: "#BFD7FF",
@@ -44,7 +46,6 @@ const SPHERES: Sphere[] = [
     delay: 0,
     blur: 110,
   },
-  // Bottom-left mid blue
   {
     size: 540,
     colorLight: "#C7DCFF",
@@ -59,7 +60,6 @@ const SPHERES: Sphere[] = [
     delay: 4,
     blur: 120,
   },
-  // Center violet drift — far away from the other two
   {
     size: 420,
     colorLight: "#D6CCFF",
@@ -74,7 +74,6 @@ const SPHERES: Sphere[] = [
     delay: 8,
     blur: 130,
   },
-  // Subtle warm yellow accent — barely there, breaks the all-blue feel
   {
     size: 360,
     colorLight: "#FFF1B8",
@@ -91,7 +90,53 @@ const SPHERES: Sphere[] = [
   },
 ];
 
-function Sphere({ s }: { s: Sphere }) {
+/** Mobile build — fewer spheres, smaller, much less blur. */
+const MOBILE_SPHERES: Sphere[] = [
+  {
+    size: 360,
+    colorLight: "#BFD7FF",
+    colorDeep: "#2563EB",
+    opacity: 0.30,
+    top: "-8%",
+    right: "-8%",
+    driftX: [0, -20, 15, 0],
+    driftY: [0, 25, -15, 0],
+    scale: [1, 1.03, 0.97, 1],
+    duration: 36,
+    delay: 0,
+    blur: 50,
+  },
+  {
+    size: 320,
+    colorLight: "#C7DCFF",
+    colorDeep: "#1D4ED8",
+    opacity: 0.26,
+    bottom: "-8%",
+    left: "-6%",
+    driftX: [0, 20, -15, 0],
+    driftY: [0, -20, 25, 0],
+    scale: [1, 1.03, 0.97, 1],
+    duration: 40,
+    delay: 4,
+    blur: 50,
+  },
+  {
+    size: 240,
+    colorLight: "#D6CCFF",
+    colorDeep: "#8B5CF6",
+    opacity: 0.18,
+    top: "45%",
+    left: "55%",
+    driftX: [0, -15, 15, 0],
+    driftY: [0, 15, -15, 0],
+    scale: [1, 1.03, 0.97, 1],
+    duration: 44,
+    delay: 8,
+    blur: 50,
+  },
+];
+
+function Sphere({ s, isMobile }: { s: Sphere; isMobile: boolean }) {
   return (
     <m.div
       className="absolute rounded-full"
@@ -112,8 +157,10 @@ function Sphere({ s }: { s: Sphere }) {
             ${s.colorDeep}00 80%
           )
         `,
-        mixBlendMode: "multiply",
+        // mix-blend-mode is expensive on mobile; skip it there.
+        mixBlendMode: isMobile ? "normal" : "multiply",
         willChange: "transform",
+        transform: "translateZ(0)",
       }}
       animate={{
         x: s.driftX,
@@ -133,6 +180,18 @@ function Sphere({ s }: { s: Sphere }) {
 }
 
 export function Atmosphere() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  const spheres = isMobile ? MOBILE_SPHERES : DESKTOP_SPHERES;
+
   return (
     <div
       aria-hidden
@@ -143,21 +202,23 @@ export function Atmosphere() {
           "radial-gradient(1400px 1000px at 50% -20%, #F0F6FF 0%, transparent 60%), #F8FBFF",
       }}
     >
-      {SPHERES.map((s, i) => (
-        <Sphere key={i} s={s} />
+      {spheres.map((s, i) => (
+        <Sphere key={i} s={s} isMobile={isMobile} />
       ))}
 
-      {/* Faint film grain to kill banding, no weight added */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E\")",
-          opacity: 0.02,
-          mixBlendMode: "multiply",
-        }}
-      />
+      {/* Faint film grain — desktop only (mobile skips this layer). */}
+      {!isMobile && (
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E\")",
+            opacity: 0.02,
+            mixBlendMode: "multiply",
+          }}
+        />
+      )}
     </div>
   );
 }

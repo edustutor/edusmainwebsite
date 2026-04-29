@@ -45,7 +45,7 @@ export function MarketLanding({ cfg }: { cfg: MarketConfig }) {
               {cfg.hero.sub}
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3" data-anim="3">
-              <Link href="/enrol" className="btn btn-primary">{cfg.ctaText}</Link>
+              <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">{cfg.ctaText}</a>
               <Link href="/contact" className="btn btn-yellow">Book Free Consultation</Link>
             </div>
           </div>

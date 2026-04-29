@@ -13,11 +13,12 @@ const NAV = [
   { label: "FAQ", href: "/#faq" },
 ];
 
+export const SIGN_UP_URL = "https://signup.edustutor.com/";
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const { scrollY } = useScroll();
 
-  // Smoothly transition pill spacing, blur, and shadow as user scrolls.
   const paddingTop = useTransform(scrollY, [0, 80], [20, 12]);
   const blurPx = useTransform(scrollY, [0, 80], [12, 24]);
   const bgAlpha = useTransform(scrollY, [0, 80], [0.55, 0.85]);
@@ -39,7 +40,6 @@ export function SiteHeader() {
             border: "1px solid rgba(255,255,255,0.7)",
           }}
         >
-          {/* Wordmark */}
           <Link href="/" aria-label="EDUS" className="flex items-center pl-1.5">
             <Image
               src="/edus_logo_blue.webp"
@@ -51,7 +51,6 @@ export function SiteHeader() {
             />
           </Link>
 
-          {/* Nav */}
           <nav className="hidden lg:flex items-center gap-1 text-[14px]">
             {NAV.map((n) => (
               <Link
@@ -64,30 +63,36 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          {/* CTA */}
           <div className="flex items-center gap-2">
-            <Link href="/enrol" className="hidden sm:inline-flex btn btn-ghost text-[13px] py-2 px-4">
-              Enrol
-            </Link>
-            <Link href="/signup" className="btn btn-primary text-[13px] py-2 px-4">
+            <a
+              href={SIGN_UP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary text-[13px] py-2 px-4"
+            >
               Sign Up
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
                 <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </Link>
+            </a>
             <button
               aria-label="Menu"
+              aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
               className="lg:hidden ml-1 inline-flex items-center justify-center w-9 h-9 rounded-full border border-[rgba(16,32,51,0.10)] bg-white/70 backdrop-blur text-[#102033]"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                <path d="M4 7h16M4 12h16M4 17h16" />
+                {open ? (
+                  <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+                ) : (
+                  <path d="M4 7h16M4 12h16M4 17h16" />
+                )}
               </svg>
             </button>
           </div>
         </m.div>
 
-        {/* Mobile sheet */}
+        {/* Mobile sheet — pure white solid (no glass) so background text never bleeds through */}
         <AnimatePresence>
           {open && (
             <m.div
@@ -95,22 +100,30 @@ export function SiteHeader() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25, ease: [0.25, 0.8, 0.3, 1] }}
-              className="lg:hidden mt-2 glass-strong rounded-3xl p-3 grid gap-1"
+              className="lg:hidden mt-2 rounded-3xl p-4 grid gap-1 bg-white border border-[rgba(16,32,51,0.10)] shadow-[0_18px_40px_-16px_rgba(16,32,51,0.18)]"
             >
               {NAV.map((n) => (
                 <Link
                   key={n.href}
                   href={n.href}
                   onClick={() => setOpen(false)}
-                  className="px-4 py-3 rounded-2xl text-[#2B3950] hover:bg-white/70 text-[15px]"
+                  className="px-4 py-3 rounded-2xl text-[#2B3950] hover:bg-[#F4F8FF] text-[15px] font-medium"
                 >
                   {n.label}
                 </Link>
               ))}
-              <div className="grid grid-cols-2 gap-2 mt-2">
-                <Link href="/enrol" className="btn btn-ghost justify-center" onClick={() => setOpen(false)}>Enrol</Link>
-                <Link href="/signup" className="btn btn-primary justify-center" onClick={() => setOpen(false)}>Sign Up</Link>
-              </div>
+              <a
+                href={SIGN_UP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary justify-center mt-2"
+                onClick={() => setOpen(false)}
+              >
+                Sign Up
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+                  <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
             </m.div>
           )}
         </AnimatePresence>
@@ -118,4 +131,3 @@ export function SiteHeader() {
     </m.header>
   );
 }
-

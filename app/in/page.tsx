@@ -66,7 +66,7 @@ export default function IndiaPage() {
               measurable progress between Grade 6 and Grade 10.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3" data-anim="3">
-              <Link href="/enrol" className="btn btn-primary">Reserve a Seat</Link>
+              <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Reserve a Seat</a>
               <Link href="#pricing" className="btn btn-yellow">View Fees</Link>
               <Link href="https://wa.me/" className="btn btn-ghost">WhatsApp Ms. Preethi</Link>
             </div>
@@ -247,9 +247,9 @@ export default function IndiaPage() {
                     ))}
                   </ul>
 
-                  <Link href="/enrol" className={`mt-7 w-full justify-center btn ${p.featured ? "btn-primary" : "btn-outline"}`}>
+                  <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className={`mt-7 w-full justify-center btn ${p.featured ? "btn-primary" : "btn-outline"}`}>
                     Enrol
-                  </Link>
+                  </a>
                 </div>
               </article>
             ))}

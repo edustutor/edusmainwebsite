@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
 import { AmbientGlow } from "@/components/AmbientGlow";
+import { useIsMobile } from "@/lib/useIsMobile";
 import {
   fadeUp, staggerContainer, sectionRevealStrong, glassHover, inView,
 } from "@/lib/motion";
@@ -74,14 +75,16 @@ const REGIONS: Region[] = [
 
 export function RegionSelector() {
   const ref = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  // Background blobs drift opposite to scroll
-  const blobAY = useTransform(scrollYProgress, [0, 1], [-40, 80]);
-  const blobBY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  // Skip parallax on mobile — scroll-linked transforms on heavily blurred
+  // layers are the main mobile-jank culprit.
+  const blobAY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-40, 80]);
+  const blobBY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [60, -60]);
 
   return (
     <section

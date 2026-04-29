@@ -1,23 +1,17 @@
 "use client";
+import { useEffect, useState } from "react";
 import { m } from "@/components/Motion";
 
 type Props = {
-  /** Hex color of the glow. */
   color: string;
-  /** Inline-position style. */
   top?: string;
   bottom?: string;
   left?: string;
   right?: string;
-  /** Diameter in px. */
   size?: number;
-  /** Min/max opacity over the breathing cycle. */
   opacity?: [number, number];
-  /** Min/max scale over the cycle. */
   scale?: [number, number];
-  /** Subtle drift (px) on x and y. */
   drift?: { x: [number, number]; y: [number, number] };
-  /** Loop duration in seconds. */
   duration?: number;
   delay?: number;
   blur?: number;
@@ -26,41 +20,54 @@ type Props = {
 /**
  * AmbientGlow — small, refined section-level breathing orb.
  *
- * Defaults are deliberately tiny and slow so they read as ambient texture,
- * not animation. Tighter scale (0.97–1.04), small drift (±10–14px),
- * narrow opacity envelope (0.10–0.18), and a heavier blur so the orb is
- * a soft halo rather than a circle.
- *
- * Pure transform + opacity. GPU-only. Honours prefers-reduced-motion via
- * the global MotionConfig in <MotionProvider>.
+ * Mobile-tuned: filter blur is the heaviest paint cost on phones, so
+ * we trim it ~45% on viewports ≤768px, drop the orb size, and skip
+ * `mix-blend-mode` (also expensive). Result is buttery smooth scrolling
+ * on iPhone Safari and mid-range Android.
  */
 export function AmbientGlow({
   color,
   top, bottom, left, right,
-  size = 280,
+  size = 240,
   opacity = [0.10, 0.18],
   scale = [0.97, 1.04],
   drift = { x: [-10, 10], y: [8, -8] },
   duration = 18,
   delay = 0,
-  blur = 90,
+  blur = 80,
 }: Props) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  // Mobile-tuned values
+  const finalSize = isMobile ? Math.round(size * 0.7) : size;
+  const finalBlur = isMobile ? Math.min(45, Math.round(blur * 0.55)) : blur;
+  const driftScale = isMobile ? 0.6 : 1;
+
   return (
     <m.div
       aria-hidden
       className="absolute rounded-full pointer-events-none"
       style={{
-        width: size,
-        height: size,
+        width: finalSize,
+        height: finalSize,
         background: `radial-gradient(circle at 32% 28%, ${color}D9, ${color}55 55%, transparent 78%)`,
-        filter: `blur(${blur}px)`,
+        filter: `blur(${finalBlur}px)`,
         top, bottom, left, right,
-        mixBlendMode: "multiply",
+        mixBlendMode: isMobile ? "normal" : "multiply",
         willChange: "transform, opacity",
+        transform: "translateZ(0)",
       }}
       animate={{
-        x: [drift.x[0], drift.x[1], drift.x[0]],
-        y: [drift.y[0], drift.y[1], drift.y[0]],
+        x: [drift.x[0] * driftScale, drift.x[1] * driftScale, drift.x[0] * driftScale],
+        y: [drift.y[0] * driftScale, drift.y[1] * driftScale, drift.y[0] * driftScale],
         scale: [scale[0], scale[1], scale[0]],
         opacity: [opacity[0], opacity[1], opacity[0]],
       }}

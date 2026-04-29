@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
@@ -10,12 +10,19 @@ import {
   buttonGlow,
 } from "@/lib/motion";
 
-const HERO_GLOWS = [
+const DESKTOP_HERO_GLOWS = [
   { top: "-8%", left: "-8%", size: 480, color: "#2563EB", opacity: [0.22, 0.36] as [number, number], duration: 14, delay: 0, parallax: -60 },
   { top: "10%", right: "-10%", size: 500, color: "#8B5CF6", opacity: [0.20, 0.32] as [number, number], duration: 16, delay: 2, parallax: 80 },
   { top: "55%", left: "30%", size: 440, color: "#06B6D4", opacity: [0.16, 0.28] as [number, number], duration: 18, delay: 4, parallax: -40 },
   { top: "20%", right: "30%", size: 300, color: "#FACC15", opacity: [0.20, 0.32] as [number, number], duration: 12, delay: 1, parallax: 60 },
   { bottom: "-10%", left: "20%", size: 400, color: "#22C55E", opacity: [0.12, 0.22] as [number, number], duration: 20, delay: 3, parallax: -90 },
+];
+
+// Mobile uses 3 glows, no parallax (parallax = 0).
+const MOBILE_HERO_GLOWS = [
+  { top: "-6%", left: "-6%", size: 280, color: "#2563EB", opacity: [0.20, 0.32] as [number, number], duration: 16, delay: 0, parallax: 0 },
+  { top: "8%", right: "-8%", size: 280, color: "#8B5CF6", opacity: [0.18, 0.30] as [number, number], duration: 18, delay: 2, parallax: 0 },
+  { bottom: "-8%", left: "20%", size: 240, color: "#06B6D4", opacity: [0.14, 0.24] as [number, number], duration: 20, delay: 4, parallax: 0 },
 ];
 
 const SUPPORTING = [
@@ -29,22 +36,35 @@ const SUPPORTING = [
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
-  // Parallax content as user scrolls past hero.
-  const headlineY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const dashboardY = useTransform(scrollYProgress, [0, 1], [0, -120]);
-  const dashboardScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
+  // Parallax content as user scrolls past hero. On mobile, scroll-driven
+  // transforms force constant repaints of huge blurred layers — kill them.
+  const headlineY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, -60]);
+  const dashboardY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, -120]);
+  const dashboardScale = useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [1, 0.96]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
+  const heroGlows = isMobile ? MOBILE_HERO_GLOWS : DESKTOP_HERO_GLOWS;
 
   return (
     <section ref={ref} className="relative pt-32 sm:pt-36 pb-20 overflow-hidden">
-      {/* Parallax breathing glows */}
+      {/* Breathing glows. Parallax disabled on mobile via parallax: 0. */}
       <m.div aria-hidden className="absolute inset-0 -z-10" style={{ opacity: heroOpacity }}>
-        {HERO_GLOWS.map((g, i) => (
+        {heroGlows.map((g, i) => (
           <ParallaxedGlow key={i} {...g} />
         ))}
       </m.div>
@@ -194,8 +214,36 @@ export function Hero() {
  * Parallaxed breathing glow.
  * Wraps an AmbientGlow in a scroll-driven y-translate so it drifts as the
  * user scrolls past the hero, while the glow itself breathes opacity + scale.
+ *
+ * If `parallax === 0` (mobile config), the scroll listener is skipped
+ * entirely — saves a `useScroll` subscription per glow on phones.
  */
 function ParallaxedGlow({
+  top, left, right, bottom, size, color, opacity, duration, delay, parallax,
+}: {
+  top?: string; left?: string; right?: string; bottom?: string;
+  size: number; color: string; opacity: [number, number];
+  duration: number; delay: number; parallax: number;
+}) {
+  if (parallax === 0) {
+    return (
+      <div className="absolute inset-0">
+        <AmbientGlow
+          top={top} left={left} right={right} bottom={bottom}
+          size={size} color={color} opacity={opacity}
+          duration={duration} delay={delay} blur={60}
+        />
+      </div>
+    );
+  }
+  return <ParallaxedGlowActive
+    top={top} left={left} right={right} bottom={bottom}
+    size={size} color={color} opacity={opacity}
+    duration={duration} delay={delay} parallax={parallax}
+  />;
+}
+
+function ParallaxedGlowActive({
   top, left, right, bottom, size, color, opacity, duration, delay, parallax,
 }: {
   top?: string; left?: string; right?: string; bottom?: string;

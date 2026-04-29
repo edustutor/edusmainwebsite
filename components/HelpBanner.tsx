@@ -4,16 +4,18 @@ import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/Motion";
 import { AmbientGlow } from "@/components/AmbientGlow";
+import { useIsMobile } from "@/lib/useIsMobile";
 import { fadeUp, scaleIn, inView } from "@/lib/motion";
 
 export function HelpBanner() {
   const ref = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const blobAY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
-  const blobBY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const blobAY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-30, 30]);
+  const blobBY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [30, -30]);
 
   return (
     <section ref={ref} className="relative py-10 md:py-14 overflow-hidden">
@@ -46,7 +48,7 @@ export function HelpBanner() {
               </p>
             </m.div>
             <m.div variants={fadeUp} className="flex flex-wrap gap-3 md:justify-end">
-              <Link href="/enrol" className="btn btn-primary">Start Enrolment</Link>
+              <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Enrolment</a>
               <Link href="/contact" className="btn btn-ghost">Talk to EDUS Team</Link>
             </m.div>
           </div>

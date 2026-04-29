@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { useScroll, useTransform } from "framer-motion";
 import { m, AnimatePresence } from "@/components/Motion";
 import { AmbientGlow } from "@/components/AmbientGlow";
+import { useIsMobile } from "@/lib/useIsMobile";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 
 type Story = {
@@ -95,12 +96,13 @@ export function Success() {
   const visible = filter === "ALL" ? STORIES : STORIES.filter((s) => s.market === filter);
 
   const ref = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const blobAY = useTransform(scrollYProgress, [0, 1], [-50, 60]);
-  const blobBY = useTransform(scrollYProgress, [0, 1], [50, -60]);
+  const blobAY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-50, 60]);
+  const blobBY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [50, -60]);
 
   return (
     <section

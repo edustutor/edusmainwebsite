@@ -64,7 +64,7 @@ export default function SriLankaPage() {
               one-to-one at <strong>LKR 2,500/hour</strong>.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3" data-anim="3">
-              <Link href="/enrol" className="btn btn-primary">Start Enrolment</Link>
+              <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Enrolment</a>
               <Link href="tel:+94707072072" className="btn btn-yellow">Call +94 70 707 2072</Link>
               <Link href="/contact" className="btn btn-ghost">Book Free Consultation</Link>
             </div>
@@ -231,12 +231,14 @@ export default function SriLankaPage() {
                     ))}
                   </ul>
 
-                  <Link
-                    href="/enrol"
+                  <a
+                    href="https://signup.edustutor.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={`mt-7 w-full justify-center btn ${p.featured ? "btn-primary" : "btn-outline"}`}
                   >
                     Enrol
-                  </Link>
+                  </a>
                 </div>
               </article>
             ))}
