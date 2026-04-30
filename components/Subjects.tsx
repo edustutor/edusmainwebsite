@@ -76,8 +76,8 @@ const PATHWAYS: Pathway[] = [
   {
     code: "GL",
     flag: "🌐",
-    label: "Global · One to One",
-    region: "International Syllabus",
+    label: "Global",
+    region: "International Syllabus · One to One",
     description:
       "Personal tutor matching with flexible timing for international students. Cambridge, Edexcel, and core academic subjects supported.",
     groups: [
@@ -166,22 +166,22 @@ export function Subjects() {
           </p>
         </m.div>
 
-        {/* Pathway tabs */}
+        {/* Pathway tabs — always one row */}
         <m.div
-          className="mt-10 flex flex-wrap justify-center gap-2"
+          className="mt-10 flex justify-center px-4"
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
           viewport={inView}
         >
-          <div className="inline-flex glass rounded-full p-1.5 gap-1 flex-wrap justify-center">
+          <div className="inline-flex glass rounded-full p-1 sm:p-1.5 gap-0.5 sm:gap-1">
             {PATHWAYS.map((p) => {
               const isActive = active === p.code;
               return (
                 <button
                   key={p.code}
                   onClick={() => setActive(p.code)}
-                  className={`relative px-4 py-2 rounded-full text-[13px] font-medium font-[family-name:var(--font-display)] transition-colors ${
+                  className={`relative px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[12px] sm:text-[13px] font-medium font-[family-name:var(--font-display)] transition-colors whitespace-nowrap shrink-0 ${
                     isActive ? "text-white" : "text-[#2B3950] hover:text-[#102033]"
                   }`}
                 >

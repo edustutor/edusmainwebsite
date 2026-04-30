@@ -85,10 +85,10 @@ const STORIES: Story[] = [
 ];
 
 const FILTERS = [
-  { code: "ALL", label: "All Stories" },
-  { code: "SL", label: "🇱🇰 Sri Lanka" },
-  { code: "IN", label: "🇮🇳 India" },
-  { code: "GL", label: "🌐 Global" },
+  { code: "ALL", label: "All", flag: null },
+  { code: "SL", label: "Sri Lanka", flag: "🇱🇰" },
+  { code: "IN", label: "India", flag: "🇮🇳" },
+  { code: "GL", label: "Global", flag: "🌐" },
 ] as const;
 
 export function Success() {
@@ -138,18 +138,18 @@ export function Success() {
 
         {/* Country filter */}
         <m.div
-          className="mt-8 flex justify-center"
+          className="mt-8 flex justify-center px-4"
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
           viewport={inView}
         >
-          <div className="inline-flex glass rounded-full p-1.5 gap-1 flex-wrap justify-center">
+          <div className="inline-flex glass rounded-full p-1 sm:p-1.5 gap-0.5 sm:gap-1">
             {FILTERS.map((f) => (
               <button
                 key={f.code}
                 onClick={() => setFilter(f.code)}
-                className={`relative px-4 py-2 rounded-full text-[13px] font-medium font-[family-name:var(--font-display)] transition-colors ${
+                className={`relative px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[12px] sm:text-[13px] font-medium font-[family-name:var(--font-display)] transition-colors whitespace-nowrap shrink-0 ${
                   filter === f.code ? "text-white" : "text-[#2B3950] hover:text-[#102033]"
                 }`}
               >
@@ -160,7 +160,10 @@ export function Success() {
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
-                <span className="relative z-10">{f.label}</span>
+                <span className="relative z-10 inline-flex items-center gap-1">
+                  {f.flag && <span aria-hidden>{f.flag}</span>}
+                  {f.label}
+                </span>
               </button>
             ))}
           </div>
