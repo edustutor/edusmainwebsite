@@ -93,7 +93,7 @@ export function ParentTrust() {
           viewport={inView}
           className="mt-10 flex justify-center"
         >
-          <Link href="/contact" className="btn btn-primary">Talk to EDUS Team</Link>
+          <Link href="/contact" className="btn btn-primary">Talk to US</Link>
         </m.div>
       </div>
     </section>

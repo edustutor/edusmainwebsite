@@ -49,7 +49,7 @@ export function HelpBanner() {
             </m.div>
             <m.div variants={fadeUp} className="flex flex-wrap gap-3 md:justify-end">
               <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Enrolment</a>
-              <Link href="/contact" className="btn btn-ghost">Talk to EDUS Team</Link>
+              <Link href="/contact" className="btn btn-ghost">Talk to US</Link>
             </m.div>
           </div>
         </m.div>

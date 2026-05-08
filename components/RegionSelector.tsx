@@ -239,7 +239,7 @@ export function RegionSelector() {
           viewport={inView}
           className="mt-8 text-center text-[13px] text-[#5A6A82]"
         >
-          Not sure which path fits? <Link href="/contact" className="text-[#2563EB] font-medium hover:underline">Talk to EDUS Team</Link>.
+          Not sure which path fits? <Link href="/contact" className="text-[#2563EB] font-medium hover:underline">Talk to US</Link>.
         </m.p>
       </div>
     </section>

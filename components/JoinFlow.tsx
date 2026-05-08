@@ -56,7 +56,7 @@ export function JoinFlow() {
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Enrolment</a>
-              <Link href="/contact" className="btn btn-ghost">Talk to EDUS Team</Link>
+              <Link href="/contact" className="btn btn-ghost">Talk to US</Link>
             </div>
           </m.div>
 
