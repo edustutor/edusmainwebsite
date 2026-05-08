@@ -183,7 +183,7 @@ export function Subjects() {
         >
           <p className="eyebrow"><span className="dot" />Subjects</p>
           <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-            Subjects designed for <em>school success.</em>
+            Exclusive group & individual classes for <em>extra-ordinary success.</em>
           </h2>
           <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
             Each EDUS pathway has its own subject list, mapped to the right syllabus and grade. Pick

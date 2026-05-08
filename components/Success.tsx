@@ -147,7 +147,7 @@ export function Success() {
             Student progress starts with the <em>right support.</em>
           </h2>
           <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-            Filter by country to see stories from Sri Lanka, India, and global one to one learners.
+            Filter by country to see stories from Sri Lanka, India, and global learners.
           </p>
         </m.div>
 
