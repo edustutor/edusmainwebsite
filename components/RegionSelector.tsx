@@ -97,7 +97,7 @@ export function RegionSelector() {
     offset: ["start end", "end start"],
   });
 
-  // Skip parallax on mobile — scroll-linked transforms on heavily blurred
+  // Skip parallax on mobile - scroll-linked transforms on heavily blurred
   // layers are the main mobile-jank culprit.
   const blobAY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-40, 80]);
   const blobBY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [60, -60]);

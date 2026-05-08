@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  /* Brand palette — exact spec */
+  /* Brand palette - exact spec */
   --bg: #F8FBFF;
   --bg-2: #EEF6FF;
   --ink: #102033;
@@ -29,7 +29,7 @@
   --glass-blur: 22px;
 }
 
-/* Mobile: lighter backdrop-filter — still glassy, far cheaper. */
+/* Mobile: lighter backdrop-filter - still glassy, far cheaper. */
 @media (max-width: 768px) {
   :root {
     --glass-blur: 12px;
@@ -61,7 +61,7 @@ body {
 ::selection { background: #FACC15; color: #102033; }
 
 /* ---------------------------------------------------------------- */
-/* Atmosphere — bright premium with blurred floating circles        */
+/* Atmosphere - bright premium with blurred floating circles        */
 /* ---------------------------------------------------------------- */
 .app-atmosphere {
   position: fixed; inset: 0; z-index: -1; pointer-events: none;
@@ -97,7 +97,7 @@ body {
 }
 
 /* ---------------------------------------------------------------- */
-/* Liquid glass — pillar of the design system                       */
+/* Liquid glass - pillar of the design system                       */
 /* ---------------------------------------------------------------- */
 .glass {
   position: relative;
@@ -158,7 +158,7 @@ body {
 }
 
 /* ---------------------------------------------------------------- */
-/* Buttons — rounded pill, conversion-focused                       */
+/* Buttons - rounded pill, conversion-focused                       */
 /* ---------------------------------------------------------------- */
 .btn {
   display: inline-flex; align-items: center; gap: .55rem;
@@ -225,7 +225,7 @@ body {
 }
 
 /* ---------------------------------------------------------------- */
-/* Headings — Poppins                                                */
+/* Headings - Poppins                                                */
 /* ---------------------------------------------------------------- */
 .heading {
   font-family: var(--font-display), "Poppins", sans-serif;
@@ -258,7 +258,7 @@ body {
 .tnum { font-variant-numeric: tabular-nums; }
 
 /* ---------------------------------------------------------------- */
-/* Animation — minimal first-paint reveal                           */
+/* Animation - minimal first-paint reveal                           */
 /* ---------------------------------------------------------------- */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(10px); }

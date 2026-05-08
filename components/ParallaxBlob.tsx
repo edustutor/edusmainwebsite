@@ -22,7 +22,7 @@ type Props = {
 /**
  * Scroll-linked floating blob.
  * Listens to its parent section's scroll progress and translates Y + scales
- * via transform — GPU-only, no reflow. Respects prefers-reduced-motion via
+ * via transform - GPU-only, no reflow. Respects prefers-reduced-motion via
  * MotionConfig.
  */
 export function ParallaxBlob({

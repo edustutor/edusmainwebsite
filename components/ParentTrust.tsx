@@ -11,7 +11,7 @@ const POINTS = [
   { title: "Clear class schedules", body: "Structured timetables and clear learning plans so families always know what's next." },
   { title: "Attendance & progress", body: "Attendance and progress monitoring shared with parents on a regular cycle." },
   { title: "Beyond the live class", body: "Academic support continues after class with recordings, resources, and revision." },
-  { title: "Parent friendly updates", body: "Simple, parent friendly communication — no academic jargon, no surprises." },
+  { title: "Parent friendly updates", body: "Simple, parent friendly communication - no academic jargon, no surprises." },
   { title: "Tutor quality monitored", body: "Structured tutor screening and monitored class quality across every subject." },
   { title: "Simple online process", body: "A simple online enrolment and support process that respects your time." },
 ];

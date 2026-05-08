@@ -11,7 +11,7 @@ const cfg: MarketConfig = {
     eyebrow: "Global · One-to-One · 30+ Countries",
     title: "Personal tutors,",
     titleEm: "matched to your syllabus and timezone.",
-    sub: "One-to-one tuition for international students — Cambridge, Edexcel, IB, and more. A demo-first journey, with tutor-matching in 48 hours.",
+    sub: "One-to-one tuition for international students - Cambridge, Edexcel, IB, and more. A demo-first journey, with tutor-matching in 48 hours.",
   },
   pillars: [
     { tag: "MATCH", title: "Tutor matching", body: "Vetted tutors selected on syllabus, level, subject expertise, and your preferred timing window.", href: "/global/match" },

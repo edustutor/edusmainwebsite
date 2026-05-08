@@ -18,7 +18,7 @@ type Props = {
 };
 
 /**
- * AmbientGlow — small, refined section-level breathing orb.
+ * AmbientGlow - small, refined section-level breathing orb.
  *
  * Mobile-tuned: filter blur is the heaviest paint cost on phones, so
  * we trim it ~45% on viewports ≤768px, drop the orb size, and skip

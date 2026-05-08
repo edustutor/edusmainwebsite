@@ -36,8 +36,8 @@ export default function Home() {
       <ResourceSupport />
       {/* 10. FAQ */}
       <FAQ />
-      {/* 11. Help banner — separate from footer */}
-      <HelpBanner />
+      {/* 11. Help banner - separate from footer */}
+      {/* <HelpBanner /> */}
       {/* 12. Final CTA */}
       <CTA />
       {/* 13. Footer is in layout */}

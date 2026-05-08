@@ -15,7 +15,7 @@ export default function Page() {
             Real outcomes. <em>Real families.</em>
           </h1>
           <p className="text-[#2B3950] text-[17px] mt-6 leading-[1.65] max-w-2xl mx-auto">
-            Filter by market to see the stories that matter for you — Sri Lanka, India, or global
+            Filter by market to see the stories that matter for you - Sri Lanka, India, or global
             one-to-one.
           </p>
         </div>

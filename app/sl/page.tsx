@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CTA } from "@/components/CTA";
 
 export const metadata = {
-  title: "Sri Lanka — National Syllabus, Cambridge & Edexcel · Online Tuition",
+  title: "Sri Lanka - National Syllabus, Cambridge & Edexcel · Online Tuition",
   description:
     "Live online classes for Grade 1 to A/L, Cambridge & Edexcel, in Sinhala, Tamil, and English medium. Group and individual tuition with AI Study Buddy and Resource Vault.",
 };
@@ -73,7 +73,7 @@ export default function SriLankaPage() {
           {/* Three pillar cards */}
           <div className="mt-14 grid md:grid-cols-3 gap-4" data-anim="4">
             {[
-              { icon: "👥", title: "Group Classes", body: "Structured weekly classes by grade and subject — recordings, exams, and parent updates included.", tint: "#2563EB" },
+              { icon: "👥", title: "Group Classes", body: "Structured weekly classes by grade and subject - recordings, exams, and parent updates included.", tint: "#2563EB" },
               { icon: "👤", title: "Individual Classes", body: "One-to-one tutor matching with no fixed timetable. Pay per hour. Flexible across mediums and subjects.", tint: "#8B5CF6" },
               { icon: "🤖", title: "Resource Vault & AI", body: "Past papers, study notes, and the EDUS AI Study Buddy for self-paced revision between classes.", tint: "#06B6D4" },
             ].map((p) => (
@@ -123,7 +123,7 @@ export default function SriLankaPage() {
               Three curricula. <em>Every key subject.</em>
             </h2>
             <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-              Sri Lankan National Syllabus, Cambridge, and Edexcel — taught in Sinhala, Tamil, and
+              Sri Lankan National Syllabus, Cambridge, and Edexcel - taught in Sinhala, Tamil, and
               English medium.
             </p>
           </div>

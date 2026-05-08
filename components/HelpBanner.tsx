@@ -44,7 +44,7 @@ export function HelpBanner() {
               </h3>
               <p className="text-[#2B3950] text-[14.5px] mt-2 max-w-xl leading-[1.65]">
                 Our team is happy to walk you through Sri Lanka classes, India tuition, Maldives classes, and global one
-                to one options — with no pressure.
+                to one options - with no pressure.
               </p>
             </m.div>
             <m.div variants={fadeUp} className="flex flex-wrap gap-3 md:justify-end">

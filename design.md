@@ -13,9 +13,9 @@ and component patterns used across the site.
 
 ### Audience
 
-- **Primary** — Parents of school-age students (Grade 1 → A-Level).
-- **Secondary** — Students under 18 making the choice with their parents.
-- **Tertiary** — Tutors and education partners.
+- **Primary** - Parents of school-age students (Grade 1 → A-Level).
+- **Secondary** - Students under 18 making the choice with their parents.
+- **Tertiary** - Tutors and education partners.
 
 ### Voice & tone
 
@@ -89,7 +89,7 @@ self-hosted.
 | Poppins   | Headings    | 400, 500, 600, 700, 800 | `--font-display` |
 | Open Sans | Body        | 300, 400, 500, 600, 700 | `--font-sans`    |
 
-### Heading utility — `.heading`
+### Heading utility - `.heading`
 
 ```css
 .heading {
@@ -110,7 +110,7 @@ self-hosted.
 }
 ```
 
-### Eyebrow — `.eyebrow`
+### Eyebrow - `.eyebrow`
 
 ```css
 .eyebrow {
@@ -199,7 +199,7 @@ The signature material across the entire site.
 ### Three glass variants
 
 ```css
-/* .glass — standard glass card */
+/* .glass - standard glass card */
 background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.55));
 backdrop-filter: blur(22px) saturate(170%);
 border: 1px solid rgba(255,255,255,0.7);
@@ -208,12 +208,12 @@ box-shadow:
   0 1px 1px rgba(16,32,51,0.04),           /* contact shadow */
   0 12px 36px -16px rgba(16,32,51,0.12);    /* soft drop */
 
-/* .glass-strong — featured/hero panels */
+/* .glass-strong - featured/hero panels */
 backdrop-filter: blur(28px) saturate(180%);
 background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.74));
 box-shadow: 0 30px 80px -28px rgba(37,99,235,0.18);
 
-/* .glass-tint-blue — region accent panels */
+/* .glass-tint-blue - region accent panels */
 background: linear-gradient(180deg, rgba(238,246,255,0.9), rgba(238,246,255,0.6));
 border: 1px solid rgba(37,99,235,0.10);
 ```
@@ -245,7 +245,7 @@ bg-white/85 border border-[rgba(16,32,51,0.10)]
 shadow-[0_2px_8px_-4px_rgba(16,32,51,0.06)]
 ```
 
-**Avoid `border-white/80`** — it disappears on white cards.
+**Avoid `border-white/80`** - it disappears on white cards.
 
 ---
 
@@ -275,7 +275,7 @@ All buttons share the `.btn` base: `border-radius: 999px`, Poppins 500,
 
 Two layers of color glow, both pure transform/opacity (GPU-only).
 
-### Layer 1 — `<Atmosphere />` (page-wide, fixed)
+### Layer 1 - `<Atmosphere />` (page-wide, fixed)
 
 Four well-separated spheres drift slowly across the viewport. `position: fixed`,
 `z-index: 0`, `pointer-events: none`.
@@ -290,7 +290,7 @@ Four well-separated spheres drift slowly across the viewport. `position: fixed`,
 Each sphere has a 4-keyframe drift on x/y (±40-60px), plus scale 0.95–1.05.
 `mixBlendMode: multiply` so it tints the white base correctly.
 
-### Layer 2 — `<AmbientGlow />` (per-section)
+### Layer 2 - `<AmbientGlow />` (per-section)
 
 Small, refined breathing orbs (200–240px, blur 80px, opacity 0.06–0.16)
 behind every section. Each one breathes opacity + scale on a 22–26s loop.
@@ -310,9 +310,9 @@ Two per section by default.
 Many ambient glows are wrapped in a parallax `<m.div>` that translates Y
 based on scroll position so they drift as the user scrolls.
 
-### Hero — special treatment
+### Hero - special treatment
 
-Hero gets 5 `ParallaxedGlow`s instead of `AmbientGlow`s — each is bigger
+Hero gets 5 `ParallaxedGlow`s instead of `AmbientGlow`s - each is bigger
 (300–500px), more saturated (0.16–0.36 opacity), and parallax-translates
 across the hero scroll range.
 
@@ -327,7 +327,7 @@ for a single coherent feel.
 
 | Variant                | Use                                         | Duration |
 | ---------------------- | ------------------------------------------- | -------- |
-| `fadeUp`               | Default reveal — title, paragraph, item.    | 0.55s    |
+| `fadeUp`               | Default reveal - title, paragraph, item.    | 0.55s    |
 | `staggerContainer`     | Wrap a list of children to stagger them.    | 70ms apart |
 | `fastStagger`          | Tight stagger for chips/microcopy.          | 30ms apart |
 | `sectionReveal`        | Section heading reveal.                     | 0.6s     |
@@ -338,7 +338,7 @@ for a single coherent feel.
 | `glassHover`           | Card lift on `whileHover`.                  | 0.25s    |
 | `floatingBlob(delay)`  | Slow ambient drift (background blobs).      | 18s loop |
 | `buttonGlow`           | Delayed hero CTA reveal.                    | 0.5s     |
-| `stepReveal(i)`        | Indexed reveal — flow steps, story cards.   | 0.5s     |
+| `stepReveal(i)`        | Indexed reveal - flow steps, story cards.   | 0.5s     |
 | `accordionMotion`      | FAQ open/close.                             | 0.3-0.4s |
 
 ### Default viewport options
@@ -359,7 +359,7 @@ inViewClose = { once: true, amount: 0.35 }
 ### Respect reduced-motion
 
 The global `<MotionProvider>` wraps everything in `<MotionConfig reducedMotion="user">`.
-No further per-component handling needed — all animations skip when
+No further per-component handling needed - all animations skip when
 `prefers-reduced-motion: reduce` is set.
 
 ---
@@ -368,19 +368,19 @@ No further per-component handling needed — all animations skip when
 
 ### Homepage section order
 
-1. **Hero** — H1, subhead, primary CTAs, supporting list, trust line, dashboard preview.
-2. **RegionSelector** — 3 path cards (Sri Lanka / India / Global).
-3. **WhyJoin** — 6 benefit cards.
-4. **LearningExperience** — 6 process steps with progress dots.
-5. **Subjects** — 3-tab pathway switcher with grade-grouped subject lists.
-6. **ParentTrust** — 6 trust points + Talk to EDUS Team CTA.
-7. **Success** — Country-tagged testimonials with filter (All / SL / IN / GL).
-8. **JoinFlow** — 5 enrolment steps (sticky title + scroll-driven progress line).
-9. **ResourceSupport** — 4 resource cards (Vault / Recordings / AI / Exams).
-10. **FAQ** — 8 questions with smooth glass accordion.
-11. **HelpBanner** — Need help choosing? CTA.
-12. **CTA** — Final glass card with 4 supporting stats.
-13. **Footer** — Compact 3-column with Quick Links / Learning Paths / Legal.
+1. **Hero** - H1, subhead, primary CTAs, supporting list, trust line, dashboard preview.
+2. **RegionSelector** - 3 path cards (Sri Lanka / India / Global).
+3. **WhyJoin** - 6 benefit cards.
+4. **LearningExperience** - 6 process steps with progress dots.
+5. **Subjects** - 3-tab pathway switcher with grade-grouped subject lists.
+6. **ParentTrust** - 6 trust points + Talk to EDUS Team CTA.
+7. **Success** - Country-tagged testimonials with filter (All / SL / IN / GL).
+8. **JoinFlow** - 5 enrolment steps (sticky title + scroll-driven progress line).
+9. **ResourceSupport** - 4 resource cards (Vault / Recordings / AI / Exams).
+10. **FAQ** - 8 questions with smooth glass accordion.
+11. **HelpBanner** - Need help choosing? CTA.
+12. **CTA** - Final glass card with 4 supporting stats.
+13. **Footer** - Compact 3-column with Quick Links / Learning Paths / Legal.
 
 ### Inner pages
 
@@ -411,7 +411,7 @@ glass · rounded-[28px] · p-7 · overflow-hidden
 [CTA arrow with translateX hover]
 ```
 
-Hover: `glassHover` variant — `y: -4`.
+Hover: `glassHover` variant - `y: -4`.
 
 ### Step / number card pattern
 
@@ -433,8 +433,8 @@ bg-white/85 · rounded-2xl · px-3 py-3.5
 border: rgba(16,32,51,0.10)
 shadow: 0 2px 8px -4px rgba(16,32,51,0.06)
 
-[Big stat — Poppins 700]
-[Caption — 11.5px ink-mute]
+[Big stat - Poppins 700]
+[Caption - 11.5px ink-mute]
 ```
 
 Always use the ink-tinted border, never `border-white/80`.
@@ -445,7 +445,7 @@ Always use the ink-tinted border, never `border-white/80`.
 glass · rounded-[24px] · p-7
 
 [Country chip (tinted bg)] [★★★★★ yellow]
-[Italic quote — 15.5px Poppins]
+[Italic quote - 15.5px Poppins]
 [Hairline divider]
 [Avatar circle (initials, tint bg)] [Name + role]
 ```
@@ -454,8 +454,8 @@ glass · rounded-[24px] · p-7
 
 ```
 inline-flex · glass · rounded-full · p-1.5 · gap-1
-  [button — text only when inactive]
-  [button — Framer layoutId="filter-pill" sliding background when active]
+  [button - text only when inactive]
+  [button - Framer layoutId="filter-pill" sliding background when active]
 ```
 
 The active pill is animated with `<m.span layoutId>` so changing filters
@@ -465,10 +465,10 @@ slides the dark pill smoothly between options.
 
 ```
 glass · rounded-[20px] · overflow-hidden
-[Button — full width, flex justify-between]
+[Button - full width, flex justify-between]
   [Question heading]
   [Animated +/− icon (rotates 180 + bg color flip on open)]
-[AnimatePresence + accordionMotion variant — height auto/0]
+[AnimatePresence + accordionMotion variant - height auto/0]
 ```
 
 ---
@@ -563,7 +563,7 @@ both CTAs.
 - **`willChange: transform`** on background spheres; nothing else (don't promote
   too many layers).
 - **`mix-blend-mode: multiply`** on glows so they tint without needing extra opacity layers.
-- **Images** via `next/image` (logo) — sized exactly, lazy by default, priority on hero logo.
+- **Images** via `next/image` (logo) - sized exactly, lazy by default, priority on hero logo.
 - **Splash content** above the fold uses `priority` for fonts and images.
 - **Build target:** All routes static (`○ Static`) wherever possible.
 
@@ -632,16 +632,16 @@ edus-web/
 
 ## 17. Changelog
 
-- **v1.0** — Initial bright premium glassmorphism system with Poppins +
+- **v1.0** - Initial bright premium glassmorphism system with Poppins +
   Open Sans, exact `#F8FBFF / #2563EB / #06B6D4 / #8B5CF6 / #22C55E /
   #FACC15 / #102033` palette.
-- **v1.1** — Added Framer Motion variants library; added scroll-progress
+- **v1.1** - Added Framer Motion variants library; added scroll-progress
   bar; added scroll-parallax blobs.
-- **v1.2** — Added `<Atmosphere />` (4 spheres) + `<AmbientGlow />` per-section
+- **v1.2** - Added `<Atmosphere />` (4 spheres) + `<AmbientGlow />` per-section
   breathing glows; tightened ambient defaults to 200–240px / 0.06–0.16 opacity.
-- **v1.3** — Country-tagged testimonials with All/SL/IN/GL filter; pathway
+- **v1.3** - Country-tagged testimonials with All/SL/IN/GL filter; pathway
   Subjects switcher with grade-grouped lists.
-- **v1.4** — Help banner extracted from footer; legal column added; footer compacted.
-- **v1.5** — Heading gradient softened to three-stop blue→navy→violet;
+- **v1.4** - Help banner extracted from footer; legal column added; footer compacted.
+- **v1.5** - Heading gradient softened to three-stop blue→navy→violet;
   CTA headline scale tightened.
-- **v1.6** — Inner tile borders fixed (`rgba(16,32,51,0.10)` not `white/80`).
+- **v1.6** - Inner tile borders fixed (`rgba(16,32,51,0.10)` not `white/80`).

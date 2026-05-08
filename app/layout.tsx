@@ -7,7 +7,7 @@ import { MotionProvider } from "@/components/Motion";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Atmosphere } from "@/components/Atmosphere";
 
-// Headings — Poppins. Friendly geometric sans, high recognition, optimised
+// Headings - Poppins. Friendly geometric sans, high recognition, optimised
 // for education and family-facing platforms.
 const display = Poppins({
   subsets: ["latin"],
@@ -16,7 +16,7 @@ const display = Poppins({
   display: "swap",
 });
 
-// Body — Open Sans. Best-in-class legibility for parents and students.
+// Body - Open Sans. Best-in-class legibility for parents and students.
 const sans = Open_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],

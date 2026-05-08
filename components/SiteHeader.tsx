@@ -175,7 +175,7 @@ export function SiteHeader() {
           </div>
         </m.div>
 
-        {/* Mobile sheet — pure white */}
+        {/* Mobile sheet - pure white */}
         <AnimatePresence>
           {open && (
             <m.div

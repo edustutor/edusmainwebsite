@@ -17,7 +17,7 @@ export default function Page() {
           </h1>
           <p className="text-[#2B3950] text-[17px] mt-6 leading-[1.65] max-w-2xl mx-auto">
             EDUS unifies a fragmented journey into one process. Choose your market, get matched,
-            and start learning live online — with parents and tutors aligned every step.
+            and start learning live online - with parents and tutors aligned every step.
           </p>
         </div>
       </section>

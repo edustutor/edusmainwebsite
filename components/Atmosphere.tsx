@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { m } from "@/components/Motion";
 
 /**
- * Animated background atmosphere — heavily blurred 3D blue spheres
+ * Animated background atmosphere - heavily blurred 3D blue spheres
  * drifting slowly across the viewport.
  *
  * Mobile-optimised:
  * - Detects viewport width once and serves a lighter sphere config to
- *   phones (smaller, fewer, less blur, no mix-blend) — `filter: blur()`
+ *   phones (smaller, fewer, less blur, no mix-blend) - `filter: blur()`
  *   on huge layers is the single biggest paint cost on mobile.
  * - Pure transform/opacity. GPU-only, no layout thrash.
  * - Honours prefers-reduced-motion via global MotionConfig.
@@ -90,7 +90,7 @@ const DESKTOP_SPHERES: Sphere[] = [
   },
 ];
 
-/** Mobile build — fewer spheres, smaller, much less blur. */
+/** Mobile build - fewer spheres, smaller, much less blur. */
 const MOBILE_SPHERES: Sphere[] = [
   {
     size: 360,
@@ -206,7 +206,7 @@ export function Atmosphere() {
         <Sphere key={i} s={s} isMobile={isMobile} />
       ))}
 
-      {/* Faint film grain — desktop only (mobile skips this layer). */}
+      {/* Faint film grain - desktop only (mobile skips this layer). */}
       {!isMobile && (
         <div
           aria-hidden

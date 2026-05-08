@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CTA } from "@/components/CTA";
 
 export const metadata = {
-  title: "India · Chennai — Premium Online Tuition for Grades 6–10 · EDUS",
+  title: "India · Chennai - Premium Online Tuition for Grades 6–10 · EDUS",
   description:
     "Premium structured online tuition with disciplined academic monitoring. CBSE & matriculation aligned, Grades 6–10, English medium. Weekly reports, exam analytics, monthly progress to parents.",
 };
@@ -26,7 +26,7 @@ const PRICING = [
   { tag: "All-Subject Package", price: "₹5,000", unit: "/ month", bullets: ["All 6 subjects covered", "Save vs. per-subject", "Priority parent support"], tint: "#8B5CF6", featured: true },
 ];
 const PILLARS = [
-  { icon: "📈", title: "Structured monitoring", body: "Class observation, tutor feedback, and academic SOPs run every month — not as marketing, as process.", tint: "#2563EB" },
+  { icon: "📈", title: "Structured monitoring", body: "Class observation, tutor feedback, and academic SOPs run every month - not as marketing, as process.", tint: "#2563EB" },
   { icon: "📋", title: "Weekly reporting", body: "Attendance, homework, and topic-by-topic progress shared with parents every week. No black box.", tint: "#8B5CF6" },
   { icon: "📊", title: "Exam analytics", body: "Term and unit exams modelled on board paper structure, scored against subject benchmarks each month.", tint: "#06B6D4" },
   { icon: "🛡️", title: "Disciplined tutor system", body: "Vetted, demo-tested, interviewed, trained. Always on time. Always on syllabus. Always accountable.", tint: "#22C55E" },
@@ -62,7 +62,7 @@ export default function IndiaPage() {
             </h1>
             <p className="text-[#2B3950] text-[17px] mt-6 leading-[1.65] max-w-2xl mx-auto">
               EDUS is not mass coaching. It's premium online tuition with weekly parent reporting,
-              exam analytics, and a disciplined tutor system — built for Chennai families who want
+              exam analytics, and a disciplined tutor system - built for Chennai families who want
               measurable progress between Grade 6 and Grade 10.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3" data-anim="3">

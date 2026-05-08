@@ -2,7 +2,7 @@ import { MarketLanding, type MarketConfig } from "@/components/MarketLanding";
 import { CTA } from "@/components/CTA";
 
 export const metadata = {
-  title: "Maldives — Online Tuition for School Students · EDUS",
+  title: "Maldives - Online Tuition for School Students · EDUS",
   description:
     "Live online tuition for Maldivian school students. English-medium classes, Cambridge & Edexcel international syllabuses, expert tutors, and parent updates.",
 };
@@ -17,7 +17,7 @@ const cfg: MarketConfig = {
     eyebrow: "Maldives · English Medium · Cambridge & Edexcel",
     title: "Premium online tuition,",
     titleEm: "delivered to every island.",
-    sub: "Live online classes for Maldivian school students. Cambridge IGCSE, Edexcel, and core academic subjects taught by qualified tutors — with parent updates and recordings included.",
+    sub: "Live online classes for Maldivian school students. Cambridge IGCSE, Edexcel, and core academic subjects taught by qualified tutors - with parent updates and recordings included.",
   },
   pillars: [
     {
@@ -35,7 +35,7 @@ const cfg: MarketConfig = {
     {
       tag: "PARENT",
       title: "Parent updates",
-      body: "Weekly attendance, progress, and tutor notes — straight to parents through the EDUS app.",
+      body: "Weekly attendance, progress, and tutor notes - straight to parents through the EDUS app.",
       href: "/mv/parents",
     },
   ],

@@ -204,7 +204,7 @@ export function ContactForm() {
             className="glass-strong rounded-[28px] p-6 md:p-10"
           >
             <fieldset className="space-y-6" disabled={submitting}>
-              {/* Row 1 — Parent + WhatsApp */}
+              {/* Row 1 - Parent + WhatsApp */}
               <div className="grid sm:grid-cols-2 gap-5">
                 <Field label="Parent / Guardian Name" required error={errors.parentName}>
                   <Input
@@ -231,7 +231,7 @@ export function ContactForm() {
                 </Field>
               </div>
 
-              {/* Row 2 — Email + Student name */}
+              {/* Row 2 - Email + Student name */}
               <div className="grid sm:grid-cols-2 gap-5">
                 <Field label="Email Address" hint="Optional" error={errors.email}>
                   <Input
@@ -252,7 +252,7 @@ export function ContactForm() {
                 </Field>
               </div>
 
-              {/* Row 3 — Grade + Region */}
+              {/* Row 3 - Grade + Region */}
               <div className="grid sm:grid-cols-2 gap-5">
                 <Field label="Student Grade" required error={errors.grade}>
                   <Select
@@ -272,7 +272,7 @@ export function ContactForm() {
                 </Field>
               </div>
 
-              {/* Row 4 — Class type pills */}
+              {/* Row 4 - Class type pills */}
               <Field label="Class Type" required error={errors.classType}>
                 <PillGroup
                   value={data.classType}
@@ -281,7 +281,7 @@ export function ContactForm() {
                 />
               </Field>
 
-              {/* Row 5 — Subject multi-select */}
+              {/* Row 5 - Subject multi-select */}
               <Field
                 label="Subject(s) Interested In"
                 required
@@ -291,7 +291,7 @@ export function ContactForm() {
                 <SubjectMultiSelect selected={data.subjects} onToggle={toggleSubject} />
               </Field>
 
-              {/* Row 6 — Contact method + time */}
+              {/* Row 6 - Contact method + time */}
               <div className="grid sm:grid-cols-2 gap-5">
                 <Field label="Preferred Contact Method">
                   <PillGroup
@@ -311,7 +311,7 @@ export function ContactForm() {
                 </Field>
               </div>
 
-              {/* Row 7 — Message */}
+              {/* Row 7 - Message */}
               <Field
                 label="Anything else we should know?"
                 hint={`${data.message.length} / ${MESSAGE_MAX}`}

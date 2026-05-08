@@ -99,7 +99,7 @@ export function MarketLanding({ cfg }: { cfg: MarketConfig }) {
               Only valid <em>combinations.</em>
             </h2>
             <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-              The class catalogue filters by syllabus, level, subject, and class type — only what's
+              The class catalogue filters by syllabus, level, subject, and class type - only what's
               offered in {cfg.region}.
             </p>
           </div>

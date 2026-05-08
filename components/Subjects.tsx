@@ -191,7 +191,7 @@ export function Subjects() {
           </p>
         </m.div>
 
-        {/* Pathway tabs — always one row */}
+        {/* Pathway tabs - always one row */}
         <m.div
           className="mt-10 flex justify-center px-4"
           variants={fadeUp}

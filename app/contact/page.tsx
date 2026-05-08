@@ -52,7 +52,7 @@ export default function ContactPage() {
             Talk to the <em>EDUS team.</em>
           </h1>
           <p className="text-[#2B3950] text-[17px] mt-6 leading-[1.65] max-w-2xl mx-auto">
-            Pick a contact channel below or send us an enquiry — we&apos;ll get back to you with the
+            Pick a contact channel below or send us an enquiry - we&apos;ll get back to you with the
             right learning option for your child.
           </p>
         </div>

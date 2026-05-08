@@ -52,7 +52,7 @@ export function Hero() {
   });
 
   // Parallax content as user scrolls past hero. On mobile, scroll-driven
-  // transforms force constant repaints of huge blurred layers — kill them.
+  // transforms force constant repaints of huge blurred layers - kill them.
   const headlineY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, -60]);
   const dashboardY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, -120]);
   const dashboardScale = useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [1, 0.96]);
@@ -155,7 +155,7 @@ export function Hero() {
         </m.p>
       </m.div>
 
-      {/* Dashboard preview — gentle float + scroll parallax */}
+      {/* Dashboard preview - gentle float + scroll parallax */}
       <m.div
         className="container-edge"
         style={{ y: dashboardY, scale: dashboardScale }}
@@ -220,7 +220,7 @@ export function Hero() {
  * user scrolls past the hero, while the glow itself breathes opacity + scale.
  *
  * If `parallax === 0` (mobile config), the scroll listener is skipped
- * entirely — saves a `useScroll` subscription per glow on phones.
+ * entirely - saves a `useScroll` subscription per glow on phones.
  */
 function ParallaxedGlow({
   top, left, right, bottom, size, color, opacity, duration, delay, parallax,

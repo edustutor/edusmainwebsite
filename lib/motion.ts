@@ -14,7 +14,7 @@ import type { Variants, Transition } from "framer-motion";
 const easeOut: Transition["ease"] = [0.2, 0.7, 0.2, 1];
 const easeSoft: Transition["ease"] = [0.25, 0.8, 0.3, 1];
 
-/** Fade up — hero title, section heads, paragraphs. */
+/** Fade up - hero title, section heads, paragraphs. */
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
   show: {
@@ -24,7 +24,7 @@ export const fadeUp: Variants = {
   },
 };
 
-/** Stagger container — wrap a list of fadeUp children. */
+/** Stagger container - wrap a list of fadeUp children. */
 export const staggerContainer: Variants = {
   hidden: {},
   show: {
@@ -35,13 +35,13 @@ export const staggerContainer: Variants = {
   },
 };
 
-/** Glass card hover — used with whileHover. */
+/** Glass card hover - used with whileHover. */
 export const glassHover = {
   rest: { y: 0, transition: { duration: 0.25, ease: easeSoft } },
   hover: { y: -4, transition: { duration: 0.25, ease: easeSoft } },
 };
 
-/** Floating blob — gentle endless idle motion. */
+/** Floating blob - gentle endless idle motion. */
 export const floatingBlob = (delay = 0): Variants => ({
   initial: { x: 0, y: 0, scale: 1 },
   animate: {
@@ -58,7 +58,7 @@ export const floatingBlob = (delay = 0): Variants => ({
   },
 });
 
-/** Button glow — subtle drop-shadow pulse on focus / once on mount. */
+/** Button glow - subtle drop-shadow pulse on focus / once on mount. */
 export const buttonGlow: Variants = {
   hidden: { opacity: 0, y: 8 },
   show: {
@@ -68,7 +68,7 @@ export const buttonGlow: Variants = {
   },
 };
 
-/** Section reveal — when section enters viewport. */
+/** Section reveal - when section enters viewport. */
 export const sectionReveal: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: {
@@ -78,7 +78,7 @@ export const sectionReveal: Variants = {
   },
 };
 
-/** Step reveal — for ordered lists, one-by-one. */
+/** Step reveal - for ordered lists, one-by-one. */
 export const stepReveal: Variants = {
   hidden: { opacity: 0, y: 14 },
   show: (i: number = 0) => ({
@@ -88,7 +88,7 @@ export const stepReveal: Variants = {
   }),
 };
 
-/** Accordion motion — smooth height + opacity. */
+/** Accordion motion - smooth height + opacity. */
 export const accordionMotion: Variants = {
   collapsed: {
     height: 0,
@@ -108,7 +108,7 @@ export const inView = { once: true, amount: 0.2 } as const;
 /** Default viewport options for tighter (later) reveals. */
 export const inViewClose = { once: true, amount: 0.35 } as const;
 
-/** Section reveal with stronger lift — used for big content blocks. */
+/** Section reveal with stronger lift - used for big content blocks. */
 export const sectionRevealStrong: Variants = {
   hidden: { opacity: 0, y: 36 },
   show: {
@@ -118,7 +118,7 @@ export const sectionRevealStrong: Variants = {
   },
 };
 
-/** Slide reveal from the side — for asymmetric layouts. */
+/** Slide reveal from the side - for asymmetric layouts. */
 export const slideInLeft: Variants = {
   hidden: { opacity: 0, x: -28 },
   show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: easeOut } },

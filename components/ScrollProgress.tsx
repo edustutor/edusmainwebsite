@@ -4,7 +4,7 @@ import { m } from "@/components/Motion";
 
 /**
  * Top scroll progress bar.
- * Uses scaleX on a fixed bar — GPU-only, zero layout cost.
+ * Uses scaleX on a fixed bar - GPU-only, zero layout cost.
  */
 export function ScrollProgress() {
   const { scrollYProgress } = useScroll();

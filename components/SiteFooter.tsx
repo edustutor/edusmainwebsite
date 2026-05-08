@@ -34,7 +34,7 @@ export function SiteFooter() {
     <footer className="relative mt-12">
       <div className="container-edge pb-10">
         <div className="glass rounded-[24px] px-6 md:px-10 py-8 md:py-10">
-          {/* Top row — logo + summary + columns */}
+          {/* Top row - logo + summary + columns */}
           <div className="grid lg:grid-cols-12 gap-8">
             {/* Brand block */}
             <div className="lg:col-span-4">
