@@ -22,7 +22,7 @@ export default function Page() {
         </div>
       </section>
       <LearningExperience />
-      <JoinFlow />
+      {/* <JoinFlow /> */}
       <CTA />
     </>
   );

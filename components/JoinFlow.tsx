@@ -8,9 +8,9 @@ import { useIsMobile } from "@/lib/useIsMobile";
 import { sectionRevealStrong, stepReveal, inView, slideInLeft } from "@/lib/motion";
 
 const STEPS = [
-  { n: "01", title: "Choose Market", body: "Select Sri Lanka, India, Maldives, or Global.", tint: "#2563EB" },
-  { n: "02", title: "Choose Class Type", body: "Pick group class, one to one tuition, or consultation support.", tint: "#8B5CF6" },
-  { n: "03", title: "Select Grade and Subject", body: "Choose the grade, subject, syllabus, and preferred learning option.", tint: "#06B6D4" },
+  { n: "01", title: "Choose Country", body: "Select Sri Lanka, India, Maldives, or Global.", tint: "#2563EB" },
+  { n: "02", title: "Choose Class Preference", body: "Pick group class, one to one tuition, or consultation support.", tint: "#8B5CF6" },
+  { n: "03", title: "Select Grade and Subjects", body: "Choose the grade, subjects, medium, syllabus, and preferred learning option.", tint: "#06B6D4" },
   { n: "04", title: "Submit Parent Details", body: "Share the student and guardian details for admission support.", tint: "#22C55E" },
   { n: "05", title: "Confirm and Start", body: "Complete the enrolment process and begin learning with EDUS.", tint: "#FACC15" },
 ];
@@ -52,7 +52,7 @@ export function JoinFlow() {
               Start learning with EDUS in <em>a few simple steps.</em>
             </h2>
             <p className="text-[#2B3950] mt-5 text-[15.5px] leading-[1.7]">
-              The EDUS enrolment process helps parents choose the correct learning path without confusion.
+              The EDUS enrolment process helps students to learn without confusions.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Enrolment</a>

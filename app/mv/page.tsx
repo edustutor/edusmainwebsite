@@ -12,7 +12,7 @@ const cfg: MarketConfig = {
   flag: "🇲🇻",
   region: "Maldives",
   url: "edustutor.com/mv",
-  ctaText: "Book a Free Consultation",
+  ctaText: "Talk to US",
   hero: {
     eyebrow: "Maldives · English Medium · Cambridge & Edexcel",
     title: "Premium online tuition,",

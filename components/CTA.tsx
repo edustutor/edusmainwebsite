@@ -56,8 +56,8 @@ export function CTA() {
 
             <m.div variants={fadeUp} className="mt-9 flex flex-wrap justify-center gap-3">
               <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Enrolment</a>
-              <Link href="/contact" className="btn btn-yellow">Book a Free Consultation</Link>
-              <Link href="/contact" className="btn btn-ghost">Talk to EDUS Team</Link>
+              <Link href="/contact" className="btn btn-yellow">Talk to US</Link>
+              {/* <Link href="/contact" className="btn btn-ghost">Talk to US</Link> */}
             </m.div>
 
             <m.div

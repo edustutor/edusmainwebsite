@@ -121,7 +121,7 @@ export function Hero() {
               <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
-          <Link href="/contact" className="btn btn-yellow">Book a Free Consultation</Link>
+          <Link href="/contact" className="btn btn-yellow"> Talk to US </Link>
         </m.div>
 
         {/* Supporting points */}

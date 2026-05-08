@@ -31,7 +31,7 @@ export default function Home() {
       {/* 7. Success Stories */}
       <Success />
       {/* 8. Enrolment Flow */}
-      <JoinFlow />
+      {/* <JoinFlow /> */}
       {/* 9. Resource & Learning Support */}
       <ResourceSupport />
       {/* 10. FAQ */}
