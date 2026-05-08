@@ -90,17 +90,16 @@ export function Hero() {
         {/* H1 */}
         <m.div className="mt-8 text-center max-w-5xl mx-auto" variants={fadeUp}>
           <h1 className="heading" style={{ fontSize: "var(--fs-hero)" }}>
-            Learn the <em>right syllabus</em>,<br />
-            in the <em>right format</em>,<br />
-            with the <em>right support</em>.
+            Learn from the <em>Best Tutors</em>.<br />
+            Achieve <em>Exceptional Results</em>.
           </h1>
         </m.div>
 
         {/* Subheading */}
         <m.div className="mt-7 max-w-2xl mx-auto text-center" variants={fadeUp}>
           <p className="text-[#2B3950] text-[17px] leading-[1.65]">
-            EDUS helps students learn online through live classes, expert tutors, structured lessons,
-            progress tracking, recordings, exams, and parent updates.
+            World-class online learning with expert tutors, personalized support, structured
+            guidance, and proven academic success for students worldwide.
           </p>
         </m.div>
 
