@@ -9,7 +9,7 @@ import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/mot
 
 type Group = { title: string; subjects: string[] };
 type Pathway = {
-  code: "SL" | "IN" | "GL";
+  code: "SL" | "IN" | "MV" | "GL";
   flag: string;
   label: string;
   region: string;
@@ -72,6 +72,31 @@ const PATHWAYS: Pathway[] = [
     cta: { label: "Explore India Classes", href: "/in" },
     tint: "#8B5CF6",
     tintSoft: "#F4EEFF",
+  },
+  {
+    code: "MV",
+    flag: "🇲🇻",
+    label: "Maldives",
+    region: "English Medium · Cambridge & Edexcel",
+    description:
+      "Live online classes for Maldivian school students. Cambridge IGCSE, Edexcel, and core academic subjects taught by qualified tutors with parent updates and recordings included.",
+    groups: [
+      {
+        title: "Core Subjects",
+        subjects: ["Mathematics", "Science", "English", "ICT", "Physics", "Chemistry", "Biology"],
+      },
+      {
+        title: "Cambridge",
+        subjects: ["Cambridge Mathematics", "Cambridge Science", "Cambridge English", "Cambridge ICT"],
+      },
+      {
+        title: "Edexcel",
+        subjects: ["Edexcel Mathematics", "Edexcel Science", "Edexcel English", "Edexcel ICT"],
+      },
+    ],
+    cta: { label: "Explore Maldives Classes", href: "/mv" },
+    tint: "#22C55E",
+    tintSoft: "#E8FAEC",
   },
   {
     code: "GL",

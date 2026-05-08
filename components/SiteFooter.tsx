@@ -13,6 +13,7 @@ const QUICK = [
 const PATHS = [
   { label: "Sri Lanka Classes", href: "/sl" },
   { label: "India · Grades 6 to 10", href: "/in" },
+  { label: "Maldives Classes", href: "/mv" },
   { label: "Global · One to One", href: "/global" },
   { label: "Resource Vault", href: "/#resources" },
   { label: "Enrol", href: "https://signup.edustutor.com/", external: true },
@@ -64,7 +65,7 @@ export function SiteFooter() {
           {/* Bottom strip */}
           <div className="mt-8 pt-5 border-t border-[rgba(16,32,51,0.08)] flex flex-wrap items-center justify-between gap-3 text-[11.5px] text-[#5A6A82]">
             <p>© {new Date().getFullYear()} EDUS · All rights reserved.</p>
-            <p>Online learning for Sri Lanka, India, and global students.</p>
+            <p>Online learning for Sri Lanka, India, Maldives, and global students.</p>
           </div>
         </div>
       </div>

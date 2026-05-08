@@ -13,7 +13,7 @@ const FAQS = [
   },
   {
     q: "Who can join EDUS classes?",
-    a: "Students can join based on their region, grade, syllabus, subject, and learning need. EDUS currently supports Sri Lanka classes, India Grades 6 to 10, and global one to one learning pathways.",
+    a: "Students can join based on their region, grade, syllabus, subject, and learning need. EDUS currently supports Sri Lanka classes, India Grades 6 to 10, Maldives classes, and global one to one learning pathways.",
   },
   {
     q: "Are classes conducted live?",

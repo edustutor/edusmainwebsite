@@ -30,36 +30,52 @@ const REGIONS: Region[] = [
     suitableFor: "Grade 1 to G.C.E A/L students",
     features: [
       "National syllabus classes",
-      "Group and individual class options",
+      "Group and individual options",
       "Grade based subject support",
       "Recordings, exams, and resources",
-      "Parent communication and progress updates",
+      "Parent updates included",
     ],
-    cta: "Explore Sri Lanka Classes",
+    cta: "Explore Sri Lanka",
     href: "/sl",
     tint: "#2563EB", tintSoft: "#EEF6FF", index: "01",
   },
   {
     flag: "🇮🇳",
-    title: "India Grades 6 to 10",
+    title: "India · Grades 6 to 10",
     description: "Premium structured online tuition for English medium students in Chennai and across India.",
     suitableFor: "Grade 6 to Grade 10 students",
     features: [
       "English medium classes",
-      "Tamil, Hindi, English, Maths, Science, Social Science",
+      "Tamil, Hindi, English, Maths, Science",
       "Weekly academic monitoring",
       "Exam focused learning",
-      "Parent reports and disciplined class tracking",
+      "Parent reports + class tracking",
     ],
-    cta: "Explore India Classes",
+    cta: "Explore India",
     href: "/in",
     tint: "#8B5CF6", tintSoft: "#F4EEFF", index: "02",
   },
   {
+    flag: "🇲🇻",
+    title: "Maldives Classes",
+    description: "Live English-medium online tuition for Maldivian students. Cambridge & Edexcel international syllabuses, expert tutors.",
+    suitableFor: "School students across all islands",
+    features: [
+      "Cambridge IGCSE / A-Level",
+      "Edexcel + core academic subjects",
+      "Personal tutor matching",
+      "Flexible class timings",
+      "Parent updates and recordings",
+    ],
+    cta: "Explore Maldives",
+    href: "/mv",
+    tint: "#22C55E", tintSoft: "#E8FAEC", index: "03",
+  },
+  {
     flag: "🌐",
-    title: "Global One to One Classes",
+    title: "Global One to One",
     description: "Flexible one to one online tuition for students who need personalised academic support from anywhere.",
-    suitableFor: "International students and custom learning needs",
+    suitableFor: "International students and custom needs",
     features: [
       "Personal tutor matching",
       "Flexible class timing",
@@ -67,9 +83,9 @@ const REGIONS: Region[] = [
       "Individual attention",
       "Progress focused learning",
     ],
-    cta: "Book One to One Tuition",
+    cta: "Book One to One",
     href: "/global",
-    tint: "#06B6D4", tintSoft: "#E6FAFD", index: "03",
+    tint: "#06B6D4", tintSoft: "#E6FAFD", index: "04",
   },
 ];
 
@@ -113,6 +129,9 @@ export function RegionSelector() {
           <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
             Choose the learning path that <em>fits your child.</em>
           </h2>
+          <p className="mt-2 text-[12.5px] font-[family-name:var(--font-display)] font-600 uppercase tracking-[0.16em] text-[#2563EB]">
+            🇱🇰 Sri Lanka · 🇮🇳 India · 🇲🇻 Maldives · 🌐 Global
+          </p>
           <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
             EDUS gives every student a clear route based on country, grade, syllabus, and learning need.
             Select the right path and start with a focused learning experience.
@@ -120,7 +139,7 @@ export function RegionSelector() {
         </m.div>
 
         <m.div
-          className="mt-12 grid md:grid-cols-3 gap-5"
+          className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
@@ -151,7 +170,7 @@ export function RegionSelector() {
                         {r.flag}
                       </m.span>
                       <span className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.16em] uppercase text-[#5A6A82]">
-                        {r.index} / 03
+                        {r.index} / 04
                       </span>
                     </div>
 

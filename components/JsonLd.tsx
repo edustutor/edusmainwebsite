@@ -13,7 +13,7 @@ const ORG = {
   description:
     "EDUS is an online learning platform offering live online tuition, group classes, one to one classes, expert tutors, progress tracking, class recordings, exams, parent updates, and learning resources.",
   sameAs: [],
-  areaServed: ["Sri Lanka", "India", "Global"],
+  areaServed: ["Sri Lanka", "India", "Maldives", "Global"],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "EDUS Learning Paths",
@@ -31,6 +31,13 @@ const ORG = {
         url: "https://edustutor.com/in",
         description:
           "Premium structured online tuition for English medium students in Chennai and across India for Grades 6 to 10.",
+      },
+      {
+        "@type": "Offer",
+        name: "Maldives Classes",
+        url: "https://edustutor.com/mv",
+        description:
+          "Live English-medium online tuition for Maldivian school students. Cambridge IGCSE, Edexcel, and core academic subjects taught by qualified tutors.",
       },
       {
         "@type": "Offer",
@@ -72,7 +79,7 @@ const FAQ = {
       name: "Who can join EDUS classes?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Students can join based on their region, grade, syllabus, subject, and learning need. EDUS currently supports Sri Lanka classes, India Grades 6 to 10, and global one to one learning pathways.",
+        text: "Students can join based on their region, grade, syllabus, subject, and learning need. EDUS currently supports Sri Lanka classes, India Grades 6 to 10, Maldives classes, and global one to one learning pathways.",
       },
     },
     {

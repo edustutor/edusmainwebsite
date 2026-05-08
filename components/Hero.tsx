@@ -83,7 +83,7 @@ export function Hero() {
               <span className="absolute inline-flex h-full w-full rounded-full bg-[#22C55E]/60 animate-ping" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22C55E]" />
             </span>
-            Live online tuition · Sri Lanka, India & Global
+            Live online tuition · 🇱🇰 Sri Lanka · 🇮🇳 India · 🇲🇻 Maldives · 🌐 Global
           </div>
         </m.div>
 
@@ -147,7 +147,7 @@ export function Hero() {
           className="mt-10 text-center text-[13px] text-[#5A6A82] max-w-2xl mx-auto"
         >
           Trusted online learning support for students, parents, and tutors across Sri Lanka, India,
-          and global learning pathways.
+          Maldives, and global learning pathways.
         </m.p>
       </m.div>
 

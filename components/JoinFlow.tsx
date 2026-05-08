@@ -8,7 +8,7 @@ import { useIsMobile } from "@/lib/useIsMobile";
 import { sectionRevealStrong, stepReveal, inView, slideInLeft } from "@/lib/motion";
 
 const STEPS = [
-  { n: "01", title: "Choose Market", body: "Select Sri Lanka, India, or Global.", tint: "#2563EB" },
+  { n: "01", title: "Choose Market", body: "Select Sri Lanka, India, Maldives, or Global.", tint: "#2563EB" },
   { n: "02", title: "Choose Class Type", body: "Pick group class, one to one tuition, or consultation support.", tint: "#8B5CF6" },
   { n: "03", title: "Select Grade and Subject", body: "Choose the grade, subject, syllabus, and preferred learning option.", tint: "#06B6D4" },
   { n: "04", title: "Submit Parent Details", body: "Share the student and guardian details for admission support.", tint: "#22C55E" },

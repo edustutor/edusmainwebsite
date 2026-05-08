@@ -7,7 +7,7 @@ import { useIsMobile } from "@/lib/useIsMobile";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 
 type Story = {
-  market: "SL" | "IN" | "GL";
+  market: "SL" | "IN" | "MV" | "GL";
   flag: string;
   country: string;
   label: string;
@@ -63,6 +63,20 @@ const STORIES: Story[] = [
     initials: "PB", tint: "#8B5CF6",
   },
 
+  // Maldives
+  {
+    market: "MV", flag: "🇲🇻", country: "Maldives",
+    label: "Year 11 Student · Malé",
+    quote: "Live online classes meant I didn't lose study time travelling between islands. The recordings helped a lot too.",
+    initials: "AH", tint: "#22C55E",
+  },
+  {
+    market: "MV", flag: "🇲🇻", country: "Maldives",
+    label: "Parent Feedback · Addu City",
+    quote: "Cambridge tutors who understand the Maldivian school calendar made all the difference for my son.",
+    initials: "FN", tint: "#22C55E",
+  },
+
   // Global
   {
     market: "GL", flag: "🌐", country: "Global",
@@ -88,6 +102,7 @@ const FILTERS = [
   { code: "ALL", label: "All", flag: null },
   { code: "SL", label: "Sri Lanka", flag: "🇱🇰" },
   { code: "IN", label: "India", flag: "🇮🇳" },
+  { code: "MV", label: "Maldives", flag: "🇲🇻" },
   { code: "GL", label: "Global", flag: "🌐" },
 ] as const;
 

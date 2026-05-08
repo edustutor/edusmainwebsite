@@ -27,11 +27,11 @@ const sans = Open_Sans({
 export const metadata: Metadata = {
   title: {
     default:
-      "EDUS Online Tuition | Live Online Classes for Sri Lanka, India & Global Students",
+      "EDUS Online Tuition | Live Online Classes for Sri Lanka, India, Maldives & Global Students",
     template: "%s · EDUS",
   },
   description:
-    "Join EDUS for live online tuition, expert tutors, structured classes, parent updates, recordings, exams, and progress tracking. Explore Sri Lanka classes, India Grades 6 to 10, and global one to one tuition.",
+    "Join EDUS for live online tuition, expert tutors, structured classes, parent updates, recordings, exams, and progress tracking. Explore Sri Lanka classes, India Grades 6 to 10, Maldives classes, and global one to one tuition.",
   metadataBase: new URL("https://edustutor.com"),
   applicationName: "EDUS",
   authors: [{ name: "EDUS" }],
@@ -45,6 +45,9 @@ export const metadata: Metadata = {
     "Sri Lanka online tuition",
     "India online tuition",
     "Chennai online tuition",
+    "Maldives online tuition",
+    "Maldives Cambridge tuition",
+    "Maldives Edexcel tuition",
     "one to one online tuition",
     "online tuition for school students",
     "online tuition for Grade 6 to 10",
@@ -59,9 +62,9 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: "website",
-    title: "EDUS Online Tuition | Live Online Classes for Sri Lanka, India & Global Students",
+    title: "EDUS Online Tuition | Live Online Classes for Sri Lanka, India, Maldives & Global Students",
     description:
-      "Live online tuition, expert tutors, structured classes, parent updates, recordings, exams, and progress tracking. Sri Lanka, India, and global learning paths.",
+      "Live online tuition, expert tutors, structured classes, parent updates, recordings, exams, and progress tracking. Sri Lanka, India, Maldives, and global learning paths.",
     url: "https://edustutor.com",
     siteName: "EDUS",
     images: [{ url: "/edus_logo_blue.webp", width: 1200, height: 630, alt: "EDUS online learning platform" }],
@@ -70,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "EDUS Online Tuition",
     description:
-      "Live online classes for school students. Sri Lanka, India, and global learning paths.",
+      "Live online classes for school students. Sri Lanka, India, Maldives, and global learning paths.",
   },
   robots: { index: true, follow: true },
   icons: {

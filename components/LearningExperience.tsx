@@ -7,7 +7,7 @@ import { useIsMobile } from "@/lib/useIsMobile";
 import { sectionRevealStrong, stepReveal, inView } from "@/lib/motion";
 
 const STEPS = [
-  { tag: "Region", title: "Choose Your Region", body: "Select Sri Lanka, India, or Global learning support based on your child's location and academic need." },
+  { tag: "Region", title: "Choose Your Region", body: "Select Sri Lanka, India, Maldives, or Global learning support based on your child's location and academic need." },
   { tag: "Grade", title: "Select Grade and Subject", body: "Choose the right grade, subject, syllabus, and class type." },
   { tag: "Live", title: "Join Live Classes", body: "Attend scheduled online classes with trained tutors through a structured learning plan." },
   { tag: "Practice", title: "Practice and Revise", body: "Use assignments, recordings, resources, and revision support to strengthen understanding." },
