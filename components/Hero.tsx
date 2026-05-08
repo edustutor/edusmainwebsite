@@ -182,7 +182,7 @@ export function Hero() {
             <div className="grid md:grid-cols-3 gap-4">
               {[
                 { icon: "🎓", k: "Live Online Classes", v: "Interactive lessons led by qualified tutors. Recordings included.", tint: "#2563EB" },
-                { icon: "📊", k: "Parent Updates", v: "Attendance, exam reviews, and progress tracking shared with parents.", tint: "#8B5CF6" },
+                { icon: "🖥️", k: "EDUS LMS", v: "One platform for classes, recordings, assignments, exams, and progress.", tint: "#8B5CF6" },
                 { icon: "📚", k: "Resource Vault", v: "Past papers, study materials, and AI study support for revision.", tint: "#06B6D4" },
               ].map((c, i) => (
                 <m.div
