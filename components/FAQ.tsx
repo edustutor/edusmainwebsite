@@ -33,7 +33,7 @@ const FAQS = [
   },
   {
     q: "What subjects are available for India?",
-    a: "The India launch focuses on English medium Grades 6 to 10 with Tamil, Hindi, English, Maths, Science, and Social Science.",
+    a: "The India launch focuses on English medium Grades 6 to 10 with Tamil, English, Maths & Science.",
   },
   {
     q: "How do I enrol?",
