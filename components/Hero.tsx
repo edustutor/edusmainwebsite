@@ -87,8 +87,16 @@ export function Hero() {
           </div>
         </m.div>
 
+        {/* Brand promise — small kicker above H1 */}
+        <m.p
+          variants={fadeUp}
+          className="mt-7 text-center text-[12.5px] font-[family-name:var(--font-display)] font-600 tracking-[0.2em] uppercase text-[#2563EB]"
+        >
+          Quality-Assured Online Live Learning Platform
+        </m.p>
+
         {/* H1 */}
-        <m.div className="mt-8 text-center max-w-5xl mx-auto" variants={fadeUp}>
+        <m.div className="mt-4 text-center max-w-5xl mx-auto" variants={fadeUp}>
           <h1 className="heading" style={{ fontSize: "var(--fs-hero)" }}>
             Learn from the <em>Best Tutors</em>.<br />
             Achieve <em>Exceptional Results</em>.

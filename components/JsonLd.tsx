@@ -10,8 +10,9 @@ const ORG = {
   alternateName: "EDUS Tutor",
   url: "https://edustutor.com",
   logo: "https://edustutor.com/edus_logo_blue.webp",
+  slogan: "Quality-Assured Online Live Learning Platform",
   description:
-    "EDUS is an online learning platform offering live online tuition, group classes, one to one classes, expert tutors, progress tracking, class recordings, exams, parent updates, and learning resources.",
+    "EDUS is the quality-assured online live learning platform. Live tuition, group and one to one classes, expert tutors, progress tracking, class recordings, exams, parent updates, and learning resources for school students.",
   sameAs: [],
   areaServed: ["Sri Lanka", "India", "Maldives", "Global"],
   hasOfferCatalog: {

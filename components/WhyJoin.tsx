@@ -52,6 +52,9 @@ export function WhyJoin() {
           <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
             Why families <em>choose EDUS.</em>
           </h2>
+          <p className="mt-3 text-[12.5px] font-[family-name:var(--font-display)] font-600 tracking-[0.16em] uppercase text-[#2563EB]">
+            Quality-Assured · Online · Live · Learning Platform
+          </p>
           <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
             EDUS is built for parents who want more than a normal online class. We combine live teaching,
             structured monitoring, learning resources, and parent communication so students stay supported

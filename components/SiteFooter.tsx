@@ -45,6 +45,9 @@ export function SiteFooter() {
                 height={56}
                 className="h-10 w-auto"
               />
+              <p className="mt-3 text-[11px] font-[family-name:var(--font-display)] font-600 tracking-[0.18em] uppercase text-[#2563EB]">
+                Quality-Assured Online Live Learning Platform
+              </p>
               <p className="text-[#2B3950] text-[13.5px] mt-4 leading-[1.65] max-w-sm">
                 EDUS is an online learning platform offering live classes, structured tuition, one to
                 one support, parent updates, and learning resources for school students.
