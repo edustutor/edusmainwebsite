@@ -67,7 +67,7 @@ export function CTA() {
               {[
                 { k: "Free", v: "Consultation" },
                 { k: "48 hr", v: "Tutor matching" },
-                { k: "Weekly", v: "Parent reports" },
+                { k: "Monthly", v: "Parent reports" },
                 { k: "24 / 7", v: "Student support" },
               ].map((s) => (
                 <m.div
