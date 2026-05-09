@@ -72,7 +72,7 @@ export function LearningExperience() {
   return (
     <section
       id="how"
-      className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
+      className="relative py-12 md:py-16 scroll-mt-24 overflow-hidden"
     >
       <div aria-hidden className="absolute inset-0 -z-10">
         <AmbientGlow top="18%" right="-4%" size={240} color="#8B5CF6" opacity={[0.08, 0.16]} duration={22} blur={80} />
@@ -99,7 +99,7 @@ export function LearningExperience() {
         </m.div>
 
         {/* ---------- Desktop: orbital diagram ---------- */}
-        <div className="hidden lg:block mt-20">
+        <div className="hidden lg:block mt-10">
           <div className="relative mx-auto w-full max-w-[1100px] aspect-[16/11]">
             {/* Faint dashed orbit ring */}
             <svg
@@ -133,7 +133,7 @@ export function LearningExperience() {
         </div>
 
         {/* ---------- Tablet/mobile: photo + grid ---------- */}
-        <div className="lg:hidden mt-12 max-w-3xl mx-auto">
+        <div className="lg:hidden mt-8 max-w-3xl mx-auto">
           <div className="max-w-md mx-auto">
             <CenterCircle />
           </div>

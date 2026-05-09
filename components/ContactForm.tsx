@@ -160,7 +160,7 @@ export function ContactForm() {
   return (
     <section
       id="contact-form"
-      className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
+      className="relative py-12 md:py-16 scroll-mt-24 overflow-hidden"
     >
       {/* Background glows */}
       <div aria-hidden className="absolute inset-0 -z-10">

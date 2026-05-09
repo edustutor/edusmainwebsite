@@ -30,7 +30,7 @@ export function ParentTrust() {
     <section
       ref={ref}
       id="parent-trust"
-      className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden"
+      className="relative py-12 md:py-16 scroll-mt-24 overflow-hidden"
     >
       <div aria-hidden className="absolute inset-0 -z-10">
         <m.div className="absolute inset-0" style={{ y: blobAY }}>

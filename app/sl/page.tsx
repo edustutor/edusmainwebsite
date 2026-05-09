@@ -34,7 +34,7 @@ export default function SriLankaPage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative pt-32 sm:pt-36 pb-20 overflow-hidden">
+      <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">
           <div className="blob" style={{ top: "-8%", left: "-8%", width: 460, height: 460, background: "#2563EB", opacity: 0.30 }} />
           <div className="blob" style={{ top: "20%", right: "-10%", width: 480, height: 480, background: "#FACC15", opacity: 0.30 }} />
@@ -111,7 +111,7 @@ export default function SriLankaPage() {
       </section>
 
       {/* CURRICULA */}
-      <section className="relative py-20 md:py-24 overflow-hidden">
+      <section className="relative py-12 md:py-16 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">
           <div className="blob" style={{ top: "10%", right: "-8%", width: 420, height: 420, background: "#8B5CF6", opacity: 0.16 }} />
         </div>
@@ -184,7 +184,7 @@ export default function SriLankaPage() {
       </section>
 
       {/* PRICING */}
-      <section className="relative py-20 md:py-24 overflow-hidden">
+      <section className="relative py-12 md:py-16 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">
           <div className="blob" style={{ bottom: "5%", left: "-10%", width: 460, height: 460, background: "#22C55E", opacity: 0.16 }} />
         </div>
@@ -247,7 +247,7 @@ export default function SriLankaPage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="relative py-20 md:py-24 overflow-hidden">
+      <section className="relative py-12 md:py-16 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">
           <div className="blob" style={{ top: "10%", right: "-6%", width: 380, height: 380, background: "#FACC15", opacity: 0.18 }} />
         </div>

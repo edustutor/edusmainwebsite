@@ -36,7 +36,7 @@ export default function IndiaPage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative pt-32 sm:pt-36 pb-20 overflow-hidden">
+      <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">
           <div className="blob" style={{ top: "-8%", left: "-8%", width: 460, height: 460, background: "#FACC15", opacity: 0.30 }} />
           <div className="blob" style={{ top: "20%", right: "-10%", width: 480, height: 480, background: "#8B5CF6", opacity: 0.30 }} />
@@ -90,7 +90,7 @@ export default function IndiaPage() {
       </section>
 
       {/* PILLARS */}
-      <section className="relative py-20 md:py-24 overflow-hidden">
+      <section className="relative py-12 md:py-16 overflow-hidden">
         <div className="container-edge">
           <div className="text-center max-w-2xl mx-auto">
             <p className="eyebrow"><span className="dot" />The EDUS Difference</p>
@@ -124,7 +124,7 @@ export default function IndiaPage() {
       </section>
 
       {/* ACADEMIC STRUCTURE */}
-      <section className="relative py-20 md:py-24 overflow-hidden">
+      <section className="relative py-12 md:py-16 overflow-hidden">
         <div className="container-edge">
           <div className="text-center max-w-2xl mx-auto">
             <p className="eyebrow"><span className="dot" />Academic Structure</p>
@@ -205,7 +205,7 @@ export default function IndiaPage() {
       </section>
 
       {/* PRICING */}
-      <section id="pricing" className="relative py-20 md:py-24 overflow-hidden">
+      <section id="pricing" className="relative py-12 md:py-16 overflow-hidden">
         <div className="container-edge">
           <div className="text-center max-w-2xl mx-auto">
             <p className="eyebrow"><span className="dot" />Fees</p>
