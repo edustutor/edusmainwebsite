@@ -348,7 +348,7 @@ export default function SriLankaPage() {
                   >
                     Book One-to-One Tuition
                   </a>
-                  <Link href="/contact" className="btn btn-ghost">Talk to US</Link>
+                  <Link href="/contact" className="btn btn-yellow">Talk to US</Link>
                 </div>
               </div>
 
