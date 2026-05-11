@@ -228,7 +228,7 @@ export default function SriLankaPage() {
 
         <div className="container-edge">
           <div className="text-center max-w-2xl mx-auto">
-            <p className="eyebrow"><span className="dot" />Group Class Fees</p>
+            <p className="eyebrow"><span className="dot" />Group Classes</p>
             <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
               Affordable group classes. <em>By design.</em>
             </h2>
@@ -287,23 +287,34 @@ export default function SriLankaPage() {
       <section className="relative py-12 md:py-16 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">
           <div className="blob" style={{ top: "10%", right: "-8%", width: 420, height: 420, background: "#8B5CF6", opacity: 0.18 }} />
-          <div className="blob" style={{ bottom: "0%", left: "-6%", width: 360, height: 360, background: "#22C55E", opacity: 0.16 }} />
+          <div className="blob" style={{ bottom: "0%", left: "-6%", width: 360, height: 360, background: "#2563EB", opacity: 0.18 }} />
         </div>
 
         <div className="container-edge">
-          {/* Individual class header card */}
-          <div className="relative glass-strong rounded-[28px] p-8 md:p-12 overflow-hidden">
-            <span aria-hidden className="blob" style={{ top: -80, right: -60, width: 320, height: 320, background: "#22C55E", opacity: 0.20 }} />
+          {/* Section heading */}
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="heading" style={{ fontSize: "var(--fs-display)" }}>
+              One-to-one tuition, <em>at your own pace.</em>
+            </h2>
+          </div>
+
+          {/* Individual class card with holistic features inside */}
+          <div className="relative glass-strong rounded-[28px] p-8 md:p-12 overflow-hidden mt-10">
+            <span aria-hidden className="blob" style={{ top: -80, right: -60, width: 320, height: 320, background: "#2563EB", opacity: 0.20 }} />
             <span aria-hidden className="blob" style={{ bottom: -80, left: -60, width: 320, height: 320, background: "#8B5CF6", opacity: 0.20 }} />
 
-            <div className="relative grid lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-7">
-                <p className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.16em] uppercase text-[#22C55E]">
+            <div className="relative grid lg:grid-cols-12 gap-10 items-center">
+              <div className="lg:col-span-6">
+                <span
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-white font-[family-name:var(--font-display)] font-700 text-[11px] tracking-[0.16em] uppercase shadow-[0_6px_14px_-6px_rgba(37,99,235,0.45)]"
+                  style={{ background: "linear-gradient(90deg, #2563EB 0%, #4F6DDB 60%, #6E5BC8 100%)" }}
+                >
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-white/80" />
                   Individual · 1:1
-                </p>
-                <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-                  One-to-one tuition, <em>at your own pace.</em>
-                </h2>
+                </span>
+                <h3 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
+                  &ldquo;Providing a <em>Holistic</em> Education&rdquo;
+                </h3>
                 <p className="text-[#2B3950] text-[16px] mt-4 leading-[1.65] max-w-xl">
                   Personal tutor matching with no fixed timetable. Pay per hour. Flexible across
                   every grade, syllabus, medium, and subject - built around your child&apos;s
@@ -318,8 +329,8 @@ export default function SriLankaPage() {
                     "All grades · all subjects · all mediums",
                   ].map((b) => (
                     <li key={b} className="flex items-start gap-2.5 text-[#2B3950]">
-                      <span className="inline-flex w-5 h-5 mt-0.5 rounded-full bg-[#22C55E]/15 items-center justify-center shrink-0">
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="3.5" aria-hidden>
+                      <span className="inline-flex w-5 h-5 mt-0.5 rounded-full bg-[#2563EB]/15 items-center justify-center shrink-0">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="3.5" aria-hidden>
                           <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </span>
@@ -341,59 +352,26 @@ export default function SriLankaPage() {
                 </div>
               </div>
 
-              {/* Price card */}
-              <div className="lg:col-span-5">
-                <div className="relative rounded-[24px] bg-white border border-[rgba(16,32,51,0.08)] p-7 shadow-[0_18px_40px_-20px_rgba(16,32,51,0.18)]">
-                  <p className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.12em] uppercase text-[#22C55E]">
-                    Individual · 1:1
-                  </p>
-                  <div className="mt-5">
-                    <p className="font-[family-name:var(--font-display)] font-700 text-[40px] leading-none text-[#102033]">
-                      LKR 2,500
-                    </p>
-                    <span className="text-[13px] text-[#5A6A82]">/ hour</span>
-                  </div>
-                  <p className="text-[13px] font-[family-name:var(--font-display)] font-600 text-[#102033] mt-3">
-                    All grades · all subjects
-                  </p>
-                  <div className="mt-5 pt-5 border-t border-[rgba(16,32,51,0.08)] space-y-2 text-[13px] text-[#2B3950]">
-                    <p>✓ Pay-as-you-go</p>
-                    <p>✓ Tutor matched to student</p>
-                    <p>✓ No fixed timetable</p>
-                  </div>
-                  <a
-                    href="https://signup.edustutor.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 w-full justify-center btn btn-primary"
+              {/* Holistic features — 2×2 grid inside card */}
+              <div className="lg:col-span-6 grid sm:grid-cols-2 gap-4">
+                {HOLISTIC_FEATURES.map((f) => (
+                  <div
+                    key={f.title}
+                    className="rounded-2xl bg-white/85 border border-[rgba(16,32,51,0.08)] p-5 shadow-[0_8px_24px_-12px_rgba(16,32,51,0.12)]"
                   >
-                    Enrol Now
-                  </a>
-                </div>
+                    <div className="inline-flex w-11 h-11 rounded-2xl items-center justify-center text-2xl bg-[#EEF6FF] border border-[#2563EB]/20">
+                      {f.icon}
+                    </div>
+                    <h4 className="heading mt-4" style={{ fontSize: "15px" }}>{f.title}</h4>
+                    <p className="text-[#2B3950] text-[12.5px] mt-2 leading-[1.55]">
+                      {f.body}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Providing Holistic Education feature row */}
-          <div className="mt-14 text-center max-w-2xl mx-auto">
-            <h3 className="heading" style={{ fontSize: "var(--fs-display)" }}>
-              &ldquo;Providing <em>Holistic</em> Education&rdquo;
-            </h3>
-          </div>
-
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {HOLISTIC_FEATURES.map((f) => (
-              <div key={f.title} className="text-center">
-                <div className="inline-flex w-14 h-14 rounded-2xl items-center justify-center text-3xl bg-[#EEF6FF] border border-[#2563EB]/20">
-                  {f.icon}
-                </div>
-                <h4 className="heading mt-5" style={{ fontSize: "17px" }}>{f.title}</h4>
-                <p className="text-[#2B3950] text-[13.5px] mt-3 leading-[1.65] max-w-xs mx-auto">
-                  {f.body}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
