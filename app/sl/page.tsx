@@ -4,7 +4,7 @@ import { CTA } from "@/components/CTA";
 export const metadata = {
   title: "Sri Lanka - National Syllabus, Cambridge & Edexcel · Online Tuition",
   description:
-    "Live online classes for Grade 1 to A/L, Cambridge & Edexcel, in Sinhala, Tamil, and English medium. Group and individual tuition with AI Study Buddy and Resource Vault.",
+    "Live online classes for Grade 1 to A/L, Cambridge & Edexcel, in Sinhala, Tamil, and English medium. Group and individual tuition with expert tutors and parent updates.",
 };
 
 const SUBJECTS_NATIONAL = [
@@ -56,26 +56,24 @@ export default function SriLankaPage() {
           <div className="mt-8 text-center max-w-4xl mx-auto" data-anim="2">
             <p className="eyebrow">🇱🇰 Sri Lanka · Flagship Market</p>
             <h1 className="heading mt-5" style={{ fontSize: "var(--fs-hero)" }}>
-              Quality online learning, <em>built for Sri Lankan families.</em>
+              Quality online learning, <em>built for Sri Lankan Students.</em>
             </h1>
             <p className="text-[#2B3950] text-[17px] mt-6 leading-[1.65] max-w-2xl mx-auto">
-              Top-notch online tutoring from qualified tutors at the comfort of your home. Grade 1
-              to A/L, in Sinhala, Tamil, and English medium. Group classes from <strong>LKR 1,000/month</strong>,
-              one-to-one at <strong>LKR 2,500/hour</strong>.
+              Top-notch online tutoring from qualified tutors at the comfort of your home. 
+              Grade 1 to A/L, in Sinhala, Tamil & English medium.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3" data-anim="3">
               <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Enrolment</a>
-              <Link href="tel:+94707072072" className="btn btn-yellow">Call +94 70 707 2072</Link>
-              <Link href="/contact" className="btn btn-ghost">Book Free Consultation</Link>
+              <Link href="/contact" className="btn btn-yellow">Talk to US</Link>
+             
             </div>
           </div>
 
           {/* Three pillar cards */}
-          <div className="mt-14 grid md:grid-cols-3 gap-4" data-anim="4">
+          <div className="mt-14 grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto" data-anim="4">
             {[
               { icon: "👥", title: "Group Classes", body: "Structured weekly classes by grade and subject - recordings, exams, and parent updates included.", tint: "#2563EB" },
               { icon: "👤", title: "Individual Classes", body: "One-to-one tutor matching with no fixed timetable. Pay per hour. Flexible across mediums and subjects.", tint: "#8B5CF6" },
-              { icon: "🤖", title: "Resource Vault & AI", body: "Past papers, study notes, and the EDUS AI Study Buddy for self-paced revision between classes.", tint: "#06B6D4" },
             ].map((p) => (
               <div key={p.title} className="glass rounded-[24px] p-7 lift relative overflow-hidden">
                 <span aria-hidden className="blob" style={{ top: -50, right: -50, width: 180, height: 180, background: p.tint, opacity: 0.22 }} />
