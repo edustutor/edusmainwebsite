@@ -35,6 +35,10 @@ export function CTA() {
             <AmbientGlow bottom="-12%" right="20%" size={180} color="#FACC15" opacity={[0.12, 0.20]} duration={18} delay={1} blur={70} />
           </div>
 
+          {/* Guaranteed success stamp */}
+          <GuaranteedStamp />
+
+
           <m.div
             variants={staggerContainer}
             initial="hidden"
@@ -85,5 +89,33 @@ export function CTA() {
         </m.div>
       </div>
     </section>
+  );
+}
+
+/* --------------------------------------------------------------- */
+/* "Guaranteed Success" stamp — using the official EDUS image       */
+/* --------------------------------------------------------------- */
+function GuaranteedStamp() {
+  return (
+    <div
+      aria-label="Guaranteed Success"
+      className="absolute z-20 pointer-events-none select-none
+        right-2 sm:right-6 md:right-10
+        bottom-2 sm:bottom-6 md:bottom-10"
+      style={{ transform: "rotate(-14deg)" }}
+    >
+      <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-52 lg:h-52">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/edus%20sucess%20.png"
+          alt="EDUS Guaranteed Success"
+          width={520}
+          height={520}
+          decoding="async"
+          loading="lazy"
+          className="relative w-full h-full object-contain drop-shadow-[0_12px_28px_rgba(220,38,38,0.30)]"
+        />
+      </div>
+    </div>
   );
 }
