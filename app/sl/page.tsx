@@ -306,15 +306,15 @@ export default function SriLankaPage() {
                 </h2>
                 <p className="text-[#2B3950] text-[16px] mt-4 leading-[1.65] max-w-xl">
                   Personal tutor matching with no fixed timetable. Pay per hour. Flexible across
-                  every grade, syllabus, medium, and subject — built around your child&apos;s
+                  every grade, syllabus, medium, and subject - built around your child&apos;s
                   schedule and learning pace.
                 </p>
 
                 <ul className="mt-6 space-y-2.5 text-[14px]">
                   {[
-                    "No fixed timetable — schedule that suits you",
+                    "No fixed timetable - schedule that suits you",
                     "Tutor matched to student",
-                    "Pay-as-you-go · LKR 2,500 / hour",
+                    "Pay-as-you-go · Starting from LKR 2,500 / hour",
                     "All grades · all subjects · all mediums",
                   ].map((b) => (
                     <li key={b} className="flex items-start gap-2.5 text-[#2B3950]">
