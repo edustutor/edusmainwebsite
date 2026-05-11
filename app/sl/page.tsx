@@ -497,7 +497,7 @@ export default function SriLankaPage() {
           <div className="text-center max-w-2xl mx-auto">
             <p className="eyebrow"><span className="dot" />Sri Lankan Families</p>
             <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-              From Kandy to Kalmunai. <em>Real stories.</em>
+              From Jaffna to Anywhere. <em>Real stories.</em>
             </h2>
           </div>
 
