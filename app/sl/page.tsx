@@ -126,7 +126,7 @@ export default function SriLankaPage() {
             </p>
           </div>
 
-          <div className="mt-12 space-y-5">
+          <div className="mt-12 grid md:grid-cols-2 gap-5">
             <div className="glass rounded-[24px] p-7">
               <div className="flex items-center justify-between flex-wrap gap-3">
                 <div className="flex items-center gap-3">
