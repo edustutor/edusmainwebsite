@@ -118,11 +118,11 @@ export default function SriLankaPage() {
           <div className="text-center max-w-2xl mx-auto">
             <p className="eyebrow"><span className="dot" />Classes</p>
             <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-              Two curricula. <em>Every key subject.</em>
+              World - Class Learning with <em>Exceptional Tutors!</em>
             </h2>
             <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-              Sri Lankan National Syllabus, Cambridge, and Edexcel - taught in Sinhala, Tamil, and
-              English medium.
+              Personalized live online learning with expert tutors, proven methods, progress tracking,
+              and caring academic support - built to help students learn confidently and succeed.
             </p>
           </div>
 
