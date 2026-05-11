@@ -94,7 +94,7 @@ export default function SriLankaPage() {
           {/* Trust strip */}
           <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto">
             {[
-              { k: "5+", v: "Years of experience" },
+              { k: "7000+", v: "Happy Students" },
               { k: "530+", v: "Live classes" },
               { k: "Grade 1 – A/L", v: "Coverage" },
               { k: "3 mediums", v: "Sinhala · Tamil · English" },
@@ -116,9 +116,9 @@ export default function SriLankaPage() {
 
         <div className="container-edge">
           <div className="text-center max-w-2xl mx-auto">
-            <p className="eyebrow"><span className="dot" />Subjects</p>
+            <p className="eyebrow"><span className="dot" />Classes</p>
             <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-              Three curricula. <em>Every key subject.</em>
+              Two curricula. <em>Every key subject.</em>
             </h2>
             <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
               Sri Lankan National Syllabus, Cambridge, and Edexcel - taught in Sinhala, Tamil, and
@@ -159,23 +159,6 @@ export default function SriLankaPage() {
                   <span key={s} className="px-3 py-1.5 rounded-full bg-white border border-[rgba(16,32,51,0.08)] text-[13px] text-[#102033]">{s}</span>
                 ))}
               </div>
-            </div>
-
-            <div className="glass-tint-blue rounded-[24px] p-7">
-              <div className="flex items-center gap-3">
-                <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#E6FAFD] text-[#06B6D4]">🌟</span>
-                <div>
-                  <p className="font-[family-name:var(--font-display)] font-600 text-[15px] text-[#06B6D4]">Essential Skill Development</p>
-                  <p className="text-[12px] text-[#5A6A82] mt-0.5">Beyond the syllabus</p>
-                </div>
-              </div>
-              <p className="heading mt-5" style={{ fontSize: "21px" }}>
-                Spoken English · Elocution · IQ Training
-              </p>
-              <p className="text-[#2B3950] text-[14.5px] mt-2 leading-relaxed">
-                Confidence, communication, and reasoning skills that prepare Sri Lankan students
-                for global opportunities.
-              </p>
             </div>
           </div>
         </div>
