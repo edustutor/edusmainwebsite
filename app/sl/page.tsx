@@ -17,10 +17,66 @@ const SUBJECTS_INTL = [
   "Economics", "Business Studies", "Accounting", "ICT", "English Language", "English Literature",
 ];
 const PRICING = [
-  { tag: "Group · Primary", price: "LKR 1,000", unit: "/ month", grades: "Grade 1 – 5", bullets: ["Weekly live class", "Recordings included", "Term assessments"], tint: "#2563EB" },
-  { tag: "Group · Secondary", price: "LKR 2,000", unit: "/ month", grades: "Grade 6 – 11 · O/L", bullets: ["Subject-wise classes", "Recordings · revision", "Parent updates"], tint: "#8B5CF6", featured: true },
-  { tag: "Group · Advanced", price: "LKR 2,500", unit: "/ month", grades: "Grade 12 – 13 · A/L", bullets: ["A/L specialised tutors", "Past paper drills", "Mock exam cycles"], tint: "#06B6D4" },
-  { tag: "Individual · 1:1", price: "LKR 2,500", unit: "/ hour", grades: "All grades · all subjects", bullets: ["No fixed timetable", "Tutor matched to student", "Pay-as-you-go"], tint: "#22C55E" },
+  {
+    tag: "Group · Primary",
+    price: "From LKR 1,000",
+    unit: "/ subject / month",
+    grades: "Primary Classes",
+    bullets: [
+      "Core subjects from LKR 1,000",
+      "English & IQ classes available",
+      "Spoken English option available",
+    ],
+    tint: "#2563EB",
+  },
+  {
+    tag: "Group · Secondary",
+    price: "From LKR 1,000",
+    unit: "/ subject / month",
+    grades: "Grade 6 – 11 · O/L",
+    bullets: [
+      "Grades 6 – 9 from LKR 1,000",
+      "Grades 10 – 11 from LKR 1,200",
+      "Tamil & English medium classes",
+    ],
+    tint: "#8B5CF6",
+    featured: true,
+  },
+  {
+    tag: "Group · Advanced Level",
+    price: "LKR 2,500",
+    unit: "/ subject / month",
+    grades: "G.C.E. A/L",
+    bullets: [
+      "Combined Maths, Physics & ICT",
+      "Chemistry and Biology classes",
+      "2026, 2027 & 2028 batches",
+    ],
+    tint: "#06B6D4",
+  },
+];
+
+const HOLISTIC_FEATURES = [
+  {
+    icon: "🏅",
+    title: "Quality Course Content",
+    body: "Access to quality contents developed in house for students to understand easily and effectively.",
+  },
+  {
+    icon: "🗓️",
+    title: "Flexible Timings",
+    body: "The 1-1 interaction with our tutors makes it easy and you can schedule your lessons at a frequency and time that suits you.",
+  },
+  {
+    icon: "🎯",
+    title: "Individual Attention",
+    body: "Every student is given individual attention to learn at their own pace.",
+  },
+  {
+    icon: "👩‍🏫",
+    title: "Qualified Tutors",
+    body: "Learn from the Qualified Professionals to unlock the true potential of every individual.",
+  },
 ];
 const TESTIMONIALS = [
   { name: "K. Ellakiya", loc: "Kandy", role: "Student", quote: "EDUS's platform is incredibly user-friendly. I can access my courses and materials anytime." },
@@ -172,17 +228,17 @@ export default function SriLankaPage() {
 
         <div className="container-edge">
           <div className="text-center max-w-2xl mx-auto">
-            <p className="eyebrow"><span className="dot" />Fees</p>
+            <p className="eyebrow"><span className="dot" />Group Class Fees</p>
             <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-              Affordable. <em>By design.</em>
+              Affordable group classes. <em>By design.</em>
             </h2>
             <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-              Class fees in Sri Lankan rupees. Pay monthly for group classes; pay-as-you-go for
-              individual sessions.
+              Class fees in Sri Lankan rupees. Pay monthly per subject. Looking for one-to-one
+              tuition? See our individual classes section below.
             </p>
           </div>
 
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
             {PRICING.map((p) => (
               <article
                 key={p.tag}
@@ -193,11 +249,11 @@ export default function SriLankaPage() {
                   <p className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.12em] uppercase" style={{ color: p.tint }}>
                     {p.tag}
                   </p>
-                  <div className="mt-5 flex items-baseline gap-1.5">
-                    <p className="font-[family-name:var(--font-display)] font-700 text-[34px] leading-none text-[#102033]">{p.price}</p>
+                  <div className="mt-5">
+                    <p className="font-[family-name:var(--font-display)] font-700 text-[26px] leading-tight text-[#102033]">{p.price}</p>
                     <span className="text-[12px] text-[#5A6A82]">{p.unit}</span>
                   </div>
-                  <p className="text-[12.5px] text-[#5A6A82] mt-2">{p.grades}</p>
+                  <p className="text-[13px] font-[family-name:var(--font-display)] font-600 text-[#102033] mt-3">{p.grades}</p>
 
                   <ul className="mt-5 space-y-2 text-[13.5px]">
                     {p.bullets.map((b) => (
@@ -222,6 +278,120 @@ export default function SriLankaPage() {
                   </a>
                 </div>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* INDIVIDUAL CLASSES */}
+      <section className="relative py-12 md:py-16 overflow-hidden">
+        <div aria-hidden className="absolute inset-0 -z-10">
+          <div className="blob" style={{ top: "10%", right: "-8%", width: 420, height: 420, background: "#8B5CF6", opacity: 0.18 }} />
+          <div className="blob" style={{ bottom: "0%", left: "-6%", width: 360, height: 360, background: "#22C55E", opacity: 0.16 }} />
+        </div>
+
+        <div className="container-edge">
+          {/* Individual class header card */}
+          <div className="relative glass-strong rounded-[28px] p-8 md:p-12 overflow-hidden">
+            <span aria-hidden className="blob" style={{ top: -80, right: -60, width: 320, height: 320, background: "#22C55E", opacity: 0.20 }} />
+            <span aria-hidden className="blob" style={{ bottom: -80, left: -60, width: 320, height: 320, background: "#8B5CF6", opacity: 0.20 }} />
+
+            <div className="relative grid lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-7">
+                <p className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.16em] uppercase text-[#22C55E]">
+                  Individual · 1:1
+                </p>
+                <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
+                  One-to-one tuition, <em>at your own pace.</em>
+                </h2>
+                <p className="text-[#2B3950] text-[16px] mt-4 leading-[1.65] max-w-xl">
+                  Personal tutor matching with no fixed timetable. Pay per hour. Flexible across
+                  every grade, syllabus, medium, and subject — built around your child&apos;s
+                  schedule and learning pace.
+                </p>
+
+                <ul className="mt-6 space-y-2.5 text-[14px]">
+                  {[
+                    "No fixed timetable — schedule that suits you",
+                    "Tutor matched to student",
+                    "Pay-as-you-go · LKR 2,500 / hour",
+                    "All grades · all subjects · all mediums",
+                  ].map((b) => (
+                    <li key={b} className="flex items-start gap-2.5 text-[#2B3950]">
+                      <span className="inline-flex w-5 h-5 mt-0.5 rounded-full bg-[#22C55E]/15 items-center justify-center shrink-0">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="3.5" aria-hidden>
+                          <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <a
+                    href="https://signup.edustutor.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                  >
+                    Book One-to-One Tuition
+                  </a>
+                  <Link href="/contact" className="btn btn-ghost">Talk to US</Link>
+                </div>
+              </div>
+
+              {/* Price card */}
+              <div className="lg:col-span-5">
+                <div className="relative rounded-[24px] bg-white border border-[rgba(16,32,51,0.08)] p-7 shadow-[0_18px_40px_-20px_rgba(16,32,51,0.18)]">
+                  <p className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.12em] uppercase text-[#22C55E]">
+                    Individual · 1:1
+                  </p>
+                  <div className="mt-5">
+                    <p className="font-[family-name:var(--font-display)] font-700 text-[40px] leading-none text-[#102033]">
+                      LKR 2,500
+                    </p>
+                    <span className="text-[13px] text-[#5A6A82]">/ hour</span>
+                  </div>
+                  <p className="text-[13px] font-[family-name:var(--font-display)] font-600 text-[#102033] mt-3">
+                    All grades · all subjects
+                  </p>
+                  <div className="mt-5 pt-5 border-t border-[rgba(16,32,51,0.08)] space-y-2 text-[13px] text-[#2B3950]">
+                    <p>✓ Pay-as-you-go</p>
+                    <p>✓ Tutor matched to student</p>
+                    <p>✓ No fixed timetable</p>
+                  </div>
+                  <a
+                    href="https://signup.edustutor.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 w-full justify-center btn btn-primary"
+                  >
+                    Enrol Now
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Providing Holistic Education feature row */}
+          <div className="mt-14 text-center max-w-2xl mx-auto">
+            <h3 className="heading" style={{ fontSize: "var(--fs-display)" }}>
+              &ldquo;Providing <em>Holistic</em> Education&rdquo;
+            </h3>
+          </div>
+
+          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {HOLISTIC_FEATURES.map((f) => (
+              <div key={f.title} className="text-center">
+                <div className="inline-flex w-14 h-14 rounded-2xl items-center justify-center text-3xl bg-[#EEF6FF] border border-[#2563EB]/20">
+                  {f.icon}
+                </div>
+                <h4 className="heading mt-5" style={{ fontSize: "17px" }}>{f.title}</h4>
+                <p className="text-[#2B3950] text-[13.5px] mt-3 leading-[1.65] max-w-xs mx-auto">
+                  {f.body}
+                </p>
+              </div>
             ))}
           </div>
         </div>
