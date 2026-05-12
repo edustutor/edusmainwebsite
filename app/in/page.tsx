@@ -4,7 +4,7 @@ import { CTA } from "@/components/CTA";
 export const metadata = {
   title: "India · Tamil Nadu - Premium Online Tuition for CBSE Classes 6–10 · EDUS",
   description:
-    "Premium structured online CBSE tuition with disciplined academic monitoring. CBSE-aligned Classes 6–10, English medium, Mathematics · Science · English. monthly reports, exam analytics, monthly progress to parents.",
+    "Premium structured online CBSE tuition with disciplined academic monitoring. CBSE-aligned quality-assured online tuition for Classes 6–10, English medium, Mathematics · Science · English. monthly reports, exam analytics, monthly progress to parents.",
 };
 
 const SUBJECTS = ["Mathematics", "Science", "English"];
@@ -66,7 +66,7 @@ export default function IndiaPage() {
               families who want measurable progress across CBSE Classes 6 to 10.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3" data-anim="3">
-              <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Reserve a Seat</a>
+              <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Learning with EDUS</a>
               <Link href="/contact" className="btn btn-yellow">Talk to US</Link>
             </div>
           </div>
