@@ -1,7 +1,6 @@
 import { ContactForm } from "@/components/shared/ContactForm";
 import { JsonLdScript, breadcrumbList, contactPage } from "@/components/layout/StructuredData";
 import { ContactHero } from "@/components/contact/ContactHero";
-import { ContactRoutes } from "@/components/contact/ContactRoutes";
 import { ContactCountries } from "@/components/contact/ContactCountries";
 import { ContactMap } from "@/components/contact/ContactMap";
 import { ContactWhy } from "@/components/contact/ContactWhy";
@@ -50,7 +49,6 @@ export default function ContactPage() {
       <JsonLdScript data={contactPage()} />
 
       <ContactHero />
-      <ContactRoutes />
       <ContactCountries />
       <ContactMap />
       <ContactForm />

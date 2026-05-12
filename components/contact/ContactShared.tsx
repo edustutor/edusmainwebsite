@@ -5,7 +5,6 @@
 
 export const PRIMARY_EMAIL = "hello@edustutor.com";
 export const SIGNUP_URL = "https://signup.edustutor.com/";
-export const FORMS_URL = "https://signup.edustutor.com/";
 
 export type Country = {
   code: "sl" | "in" | "mv" | "gl";
@@ -115,52 +114,6 @@ export const COUNTRIES: Country[] = [
     tintSoft: "#E6FAFD",
     buttonLabel: "Apply for Global Classes",
     buttonHref: "/global",
-  },
-];
-
-export type ContactRoute = {
-  icon: string;
-  title: string;
-  body: string;
-  buttonLabel: string;
-  buttonHref: string;
-  external?: boolean;
-  tint: string;
-};
-
-export const ROUTES: ContactRoute[] = [
-  {
-    icon: "🎓",
-    title: "Student Admissions",
-    body: "For new students who want to join group classes, individual classes, or global one-to-one tutoring.",
-    buttonLabel: "Apply for Classes",
-    buttonHref: SIGNUP_URL,
-    external: true,
-    tint: "#2563EB",
-  },
-  {
-    icon: "👨‍👩‍👧",
-    title: "Parent Inquiries",
-    body: "For parents who want to understand class options, fees, timetables, tutors, and student progress support.",
-    buttonLabel: "Speak to Our Team",
-    buttonHref: "#inquiry",
-    tint: "#8B5CF6",
-  },
-  {
-    icon: "🛠️",
-    title: "Existing Student Support",
-    body: "For current students who need help with classes, recordings, payments, app access, attendance, or exams.",
-    buttonLabel: "Get Student Support",
-    buttonHref: "#inquiry",
-    tint: "#06B6D4",
-  },
-  {
-    icon: "🤝",
-    title: "Tutor / Partnership Inquiries",
-    body: "For tutors, academic partners, institutions, or business collaborations.",
-    buttonLabel: "Contact Academic Team",
-    buttonHref: "/teach",
-    tint: "#FACC15",
   },
 ];
 

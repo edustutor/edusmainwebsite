@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { SIGNUP_URL } from "./ContactShared";
+import { APPLY_URL } from "@/components/teach/TeachShared";
 
 export function ContactHero() {
   return (
@@ -21,14 +21,11 @@ export function ContactHero() {
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link href="#inquiry" className="btn btn-primary">
-            Make an Inquiry
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
-              <path d="M7 17L17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
-          <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-yellow">
+          <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
             Register as a Student
+          </a>
+          <a href={APPLY_URL} target="_blank" rel="noopener noreferrer" className="btn btn-yellow">
+            Register as a Tutor
           </a>
         </div>
 
