@@ -112,6 +112,9 @@ export function siteNavigation() {
     { name: "Maldives Cambridge IGCSE", path: "/mv" },
     { name: "Global One-to-One Tuition", path: "/global" },
     { name: "Teach with EDUS",         path: "/teach" },
+    { name: "About EDUS",              path: "/about" },
+    { name: "EDUS Blog",               path: "/blog" },
+    { name: "EDUS Press Kit",          path: "/press" },
     { name: "Contact EDUS",            path: "/contact" },
   ];
   return {
@@ -135,6 +138,9 @@ export function primaryPagesItemList() {
     { name: "Maldives Cambridge IGCSE",  path: "/mv",      desc: "Premium 1-to-1 Cambridge IGCSE and O-Level for Grade 9 and 10 Maldives students" },
     { name: "Global One-to-One Tuition", path: "/global",  desc: "Personalised online tutoring for international students · Cambridge, Edexcel, IGCSE, GCSE, IB" },
     { name: "Teach with EDUS",           path: "/teach",   desc: "Apply to become an EDUS tutor and teach students across Sri Lanka, India, Maldives, and globally" },
+    { name: "About EDUS",                path: "/about",   desc: "EDUS Lanka (Pvt) Ltd · Founded 2020 · 7,000+ students · Backed by Microsoft for Startups, ICTA, SLASSCOM" },
+    { name: "EDUS Blog",                 path: "/blog",    desc: "Exam preparation guides, study tips, and parent advice from the EDUS Academic Team" },
+    { name: "EDUS Press Kit",            path: "/press",   desc: "Brand assets, logos, fact sheet, and media contact for journalists and partners" },
     { name: "Contact EDUS",              path: "/contact", desc: "Talk to the EDUS team to find the right class, subject, or tutor for your child" },
   ];
   return {
@@ -432,6 +438,72 @@ export function enrollmentHowTo() {
         text: "Join live classes from any device. Access recordings, practice tasks, exam prep, and weekly parent updates.",
       },
     ],
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* BlogPosting — emitted per /blog/[slug] route. Eligible for the    */
+/* Google "article" rich result and AI engine ingestion.             */
+/* --------------------------------------------------------------- */
+export type BlogPostSchemaOptions = {
+  title: string;
+  description: string;
+  slug: string;
+  datePublished: string;
+  dateModified?: string;
+  author: { name: string; role?: string };
+  image?: string; // relative path under /public, e.g. "/blog/foo.jpg"
+};
+
+export function blogPosting(opts: BlogPostSchemaOptions) {
+  const url = `${SITE_URL}/blog/${opts.slug}`;
+  const imageUrl = opts.image
+    ? `${SITE_URL}${opts.image}`
+    : `${SITE_URL}/edus-og.jpg`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: opts.title,
+    description: opts.description,
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    image: imageUrl,
+    datePublished: opts.datePublished,
+    dateModified: opts.dateModified ?? opts.datePublished,
+    author: {
+      "@type": "Person",
+      name: opts.author.name,
+      ...(opts.author.role ? { jobTitle: opts.author.role } : {}),
+      worksFor: { "@id": `${SITE_URL}/#organization` },
+    },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    inLanguage: "en",
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* Blog ItemList — for /blog index. Lists all posts as ListItem so   */
+/* Google sees the blog as a structured archive, not random pages.   */
+/* --------------------------------------------------------------- */
+export type BlogIndexEntry = { slug: string; title: string; description: string };
+
+export function blogItemList(posts: BlogIndexEntry[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "EDUS Blog",
+    url: `${SITE_URL}/blog`,
+    description:
+      "Learning guides, exam preparation tips, and parent advice from the EDUS Academic Team covering Sri Lanka, India, Maldives, and global online tutoring.",
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    blogPost: posts.map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.title,
+      description: p.description,
+      url: `${SITE_URL}/blog/${p.slug}`,
+    })),
   };
 }
 

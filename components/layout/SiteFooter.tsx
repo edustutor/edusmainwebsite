@@ -7,6 +7,9 @@ const QUICK = [
   { label: "How It Works", href: "/#how" },
   { label: "Success Stories", href: "/#stories" },
   { label: "Teach with EDUS", href: "/teach" },
+  { label: "About EDUS", href: "/about" },
+  { label: "Blog", href: "/blog" },
+  { label: "Press", href: "/press" },
   { label: "FAQ", href: "/#faq" },
 ];
 
