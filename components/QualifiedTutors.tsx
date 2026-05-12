@@ -30,7 +30,7 @@ export function QualifiedTutors() {
           whileInView="show"
           viewport={inView}
         >
-          {/* Left column — copy + benefits + CTA */}
+          {/* Left column - copy + benefits + CTA */}
           <div className="lg:col-span-6">
             <m.div variants={sectionRevealStrong}>
               <p className="eyebrow"><span className="dot" />Access to Quality Learning</p>
@@ -79,7 +79,7 @@ export function QualifiedTutors() {
             </m.div>
           </div>
 
-          {/* Right column — illustrated card with floating callouts */}
+          {/* Right column - illustrated card with floating callouts */}
           <m.div variants={fadeUp} className="lg:col-span-6">
             <TutorIllustration />
           </m.div>
@@ -171,22 +171,22 @@ function TutorIllustration() {
 
             {/* Tutor-quality stat chips - arranged around medallion */}
             <div className="absolute inset-0 pointer-events-none">
-              {/* top-left — Years of Teaching (bar) */}
+              {/* top-left - Years of Teaching (bar) */}
               <StatChip style={{ top: "-12%", left: "-92%" }}>
                 <BarStat label="Avg. Experience" value="12+ yrs" pct={82} tint="#2563EB" />
               </StatChip>
 
-              {/* bottom-left — Subject Mastery (donut) */}
+              {/* bottom-left - Subject Mastery (donut) */}
               <StatChip style={{ bottom: "-12%", left: "-86%" }}>
                 <DonutStat label="Subject Mastery" value="98%" pct={98} tint="#8B5CF6" />
               </StatChip>
 
-              {/* top-right — Delivery Rating (5-star) */}
+              {/* top-right - Delivery Rating (5-star) */}
               <StatChip style={{ top: "-14%", right: "-92%" }} align="right">
                 <StarStat label="Delivery Rating" value="4.9" />
               </StatChip>
 
-              {/* bottom-right — Exam-pass uplift (sparkline) */}
+              {/* bottom-right - Exam-pass uplift (sparkline) */}
               <StatChip style={{ bottom: "-14%", right: "-86%" }} align="right">
                 <SparkStat label="Result Uplift" value="+38%" tint="#06B6D4" />
               </StatChip>
@@ -194,7 +194,7 @@ function TutorIllustration() {
           </div>
         </div>
 
-        {/* Top-right floating callout — Qualified Educators */}
+        {/* Top-right floating callout - Qualified Educators */}
         <div className="absolute top-5 right-5 sm:top-6 sm:right-6 bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl px-4 py-3 shadow-[0_18px_40px_-16px_rgba(16,32,51,0.18)]">
           <div className="flex items-center gap-3">
             <span
@@ -217,7 +217,7 @@ function TutorIllustration() {
           </div>
         </div>
 
-        {/* Bottom-left floating callout — Live Engagement (animated bars) */}
+        {/* Bottom-left floating callout - Live Engagement (animated bars) */}
         <div className="absolute bottom-5 left-5 sm:bottom-6 sm:left-6 bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl px-4 py-3 shadow-[0_18px_40px_-16px_rgba(16,32,51,0.18)] w-[58%] max-w-[280px]">
           <div className="flex items-center justify-between">
             <p className="text-[11px] text-[#5A6A82] font-[family-name:var(--font-display)] font-600 uppercase tracking-[0.08em]">
@@ -249,7 +249,7 @@ function TutorIllustration() {
 }
 
 /* --------------------------------------------------------------- */
-/* Stat chip — wrapper for the 4 mini visualisations               */
+/* Stat chip - wrapper for the 4 mini visualisations               */
 /* --------------------------------------------------------------- */
 
 function StatChip({
