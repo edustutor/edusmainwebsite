@@ -11,7 +11,15 @@
  * JobPosting) live in `StructuredData.tsx` and are emitted from each route.
  */
 
-import { JsonLdScript, siteNavigation, primaryPagesItemList, successStoriesItemList } from "./StructuredData";
+import {
+  JsonLdScript,
+  siteNavigation,
+  primaryPagesItemList,
+  successStoriesItemList,
+  enrollmentHowTo,
+  studentInteractionCounter,
+  signupWebApplication,
+} from "./StructuredData";
 import { STORIES } from "@/components/shared/SuccessData";
 
 const SITE_URL = "https://edustutor.com";
@@ -21,7 +29,9 @@ const ORG = {
   "@type": "EducationalOrganization",
   "@id": `${SITE_URL}/#organization`,
   name: "EDUS",
-  alternateName: ["EDUS Online Tuition", "EDUS Tutor", "edustutor"],
+  legalName: "EDUS Lanka (Pvt) Ltd",
+  alternateName: ["EDUS Online Tuition", "EDUS Tutor", "edustutor", "EDUS Lanka"],
+  identifier: "PV 00232840",
   url: SITE_URL,
   logo: {
     "@type": "ImageObject",
@@ -33,6 +43,34 @@ const ORG = {
   slogan: "Quality-Assured Online Live Learning Platform",
   description:
     "EDUS is the quality-assured online live learning platform. Live tuition, group and one to one classes, expert tutors, progress tracking, class recordings, exams, parent updates, and learning resources for school students.",
+  knowsAbout: [
+    "Online tuition",
+    "Live online classes",
+    "Sri Lankan National Syllabus",
+    "Cambridge IGCSE",
+    "Cambridge O-Level",
+    "Cambridge A-Level",
+    "Edexcel IGCSE",
+    "Edexcel International A-Level",
+    "CBSE Classes 6 to 10",
+    "International Baccalaureate (IB)",
+    "G.C.E O/L exam preparation",
+    "G.C.E A/L exam preparation",
+    "Grade 5 scholarship exam preparation",
+    "One-to-one online tutoring",
+    "Group online classes",
+    "Online tutor matching",
+    "Parent monitored online learning",
+  ],
+  award: [
+    "Microsoft for Startups Founders Hub",
+    "ICTA Sri Lanka Recognised Startup",
+    "SLASSCOM Member",
+    "Spiralation by ICTA",
+    "Hemas Slingshot x Hatch Cohort",
+    "Yarl IT Hub Recognised Startup",
+    "Innovate Lanka",
+  ],
   sameAs: [
     "https://www.facebook.com/edusonline",
     "https://www.instagram.com/edus_online/",
@@ -270,6 +308,9 @@ export function HomeJsonLd() {
       <JsonLdScript data={WEBSITE} />
       <JsonLdScript data={siteNavigation()} />
       <JsonLdScript data={primaryPagesItemList()} />
+      <JsonLdScript data={enrollmentHowTo()} />
+      <JsonLdScript data={signupWebApplication()} />
+      <JsonLdScript data={studentInteractionCounter()} />
       {stories.length > 0 && <JsonLdScript data={successStoriesItemList(stories)} />}
       <JsonLdScript data={FAQ} />
     </>

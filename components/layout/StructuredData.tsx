@@ -266,18 +266,27 @@ export type SpeakablePageOptions = {
   name: string;
   description: string;
   path: string; // e.g. "/privacy"
+  headline?: string; // optional H1 mirror for richer SERP signals
+  lastUpdated?: string; // ISO date string (YYYY-MM-DD)
 };
 
 export function speakableWebPage(opts: SpeakablePageOptions) {
+  // Default to today if no lastUpdated supplied — keeps Google's freshness
+  // signal current. Pages can override with their actual revision date.
+  const dateModified = opts.lastUpdated ?? new Date().toISOString().split("T")[0];
+
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: opts.name,
+    headline: opts.headline ?? opts.name,
     description: opts.description,
     url: `${SITE_URL}${opts.path}`,
     isPartOf: { "@id": `${SITE_URL}/#website` },
     about: { "@id": `${SITE_URL}/#organization` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
     inLanguage: "en",
+    dateModified,
     speakable: {
       "@type": "SpeakableSpecification",
       cssSelector: ["h1", "h2", "h3", "p"],
@@ -365,5 +374,107 @@ export function tutorJobPosting() {
     ],
     directApply: false,
     url: `${SITE_URL}/teach`,
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* HowTo — how to enrol with EDUS. Eligible for Google's HowTo      */
+/* rich result with step preview cards under the homepage result.    */
+/* --------------------------------------------------------------- */
+export function enrollmentHowTo() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "How to enrol with EDUS Online Tuition",
+    description:
+      "Step-by-step guide to enrol your child in EDUS live online classes across Sri Lanka, India, Maldives, or global one-to-one tutoring.",
+    totalTime: "PT5M",
+    estimatedCost: { "@type": "MonetaryAmount", currency: "LKR", value: "0" },
+    supply: [
+      { "@type": "HowToSupply", name: "Student's grade and syllabus" },
+      { "@type": "HowToSupply", name: "Preferred subject and class type" },
+      { "@type": "HowToSupply", name: "Parent contact details" },
+    ],
+    tool: [
+      { "@type": "HowToTool", name: "Any internet-connected device" },
+    ],
+    step: [
+      {
+        "@type": "HowToStep",
+        position: 1,
+        name: "Choose your learning path",
+        text: "Pick the EDUS path that matches your country and syllabus — Sri Lanka National Syllabus / Cambridge / Edexcel, India CBSE, Maldives Cambridge IGCSE, or Global one-to-one.",
+        url: `${SITE_URL}/#regions`,
+      },
+      {
+        "@type": "HowToStep",
+        position: 2,
+        name: "Open the EDUS sign-up form",
+        text: "Visit https://signup.edustutor.com/ and create your account with the parent or student email.",
+        url: "https://signup.edustutor.com/",
+      },
+      {
+        "@type": "HowToStep",
+        position: 3,
+        name: "Enter student details",
+        text: "Share grade, syllabus, subjects, preferred medium (English / Tamil / Sinhala), and contact details.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 4,
+        name: "Get matched and scheduled",
+        text: "The EDUS academic team reviews your details, suggests a class or tutor, and confirms the schedule within one business day.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 5,
+        name: "Start learning live online",
+        text: "Join live classes from any device. Access recordings, practice tasks, exam prep, and weekly parent updates.",
+      },
+    ],
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* WebApplication — the signup portal as a discoverable app entity.  */
+/* Surfaces "EDUS App" in Google's App Pack when search intent       */
+/* matches "edus app" / "edus signup" / "edus login".                */
+/* --------------------------------------------------------------- */
+export function signupWebApplication() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "EDUS Sign-up Portal",
+    description:
+      "Online enrolment and account portal for EDUS students. Choose your region, syllabus, subject, and class type. Parent and student accounts supported.",
+    url: "https://signup.edustutor.com/",
+    applicationCategory: "EducationApplication",
+    operatingSystem: "Any (web)",
+    browserRequirements: "Requires JavaScript. Modern browser recommended.",
+    provider: { "@id": `${SITE_URL}/#organization` },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/OnlineOnly",
+    },
+    inLanguage: ["en"],
+    audience: { "@type": "EducationalAudience", educationalRole: "student" },
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* InteractionCounter — surfaces the 7,000+ students stat as          */
+/* parseable data alongside the visible homepage stat card.          */
+/* --------------------------------------------------------------- */
+export function studentInteractionCounter() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "InteractionCounter",
+    interactionType: "https://schema.org/EnrollAction",
+    userInteractionCount: 7000,
+    name: "EDUS students enrolled",
+    description:
+      "Total cumulative students enrolled with EDUS Online Tuition across Sri Lanka, India, Maldives, and global markets.",
   };
 }

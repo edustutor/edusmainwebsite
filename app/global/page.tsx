@@ -25,9 +25,9 @@ import {
 } from "@/components/layout/StructuredData";
 
 export const metadata = {
-  title: "EDUS Global Online Tutoring | Cambridge, Edexcel & One-to-One Classes",
+  title: "Global Online Tutoring · Cambridge, Edexcel, IGCSE · EDUS",
   description:
-    "Join EDUS Global for personalized one-to-one online tutoring from expert tutors. Cambridge, Edexcel, IGCSE, GCSE, O-Level, A-Level, and any syllabus support for students worldwide.",
+    "Personalised one-to-one online tutoring for international students. Cambridge, Edexcel, IGCSE, GCSE, O-Level, A-Level & any syllabus, worldwide.",
   alternates: { canonical: "/global" },
   keywords: [
     // Primary

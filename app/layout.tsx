@@ -32,7 +32,20 @@ export const metadata: Metadata = {
   description:
     "Join EDUS for live online tuition with expert tutors, structured classes, exams, and parent updates. Sri Lanka, India CBSE, Maldives Cambridge & global 1-to-1.",
   metadataBase: new URL("https://edustutor.com"),
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    // hreflang signals so SERPs in each market route to the right landing page.
+    // Same content language (English) across all markets — the variation is
+    // syllabus / pathway, not locale, so we point each market region to the
+    // canonical English page but explicitly claim coverage.
+    languages: {
+      "en": "/",
+      "en-LK": "/sl",
+      "en-IN": "/in",
+      "en-MV": "/mv",
+      "x-default": "/",
+    },
+  },
   applicationName: "EDUS",
   authors: [{ name: "EDUS" }],
   keywords: [
