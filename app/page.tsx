@@ -1,6 +1,7 @@
 import { Hero } from "@/components/Hero";
 import { RegionSelector } from "@/components/RegionSelector";
 import { WhyJoin } from "@/components/WhyJoin";
+import { QualifiedTutors } from "@/components/QualifiedTutors";
 import { LearningExperience } from "@/components/LearningExperience";
 import { Subjects } from "@/components/Subjects";
 import { ParentTrust } from "@/components/ParentTrust";
@@ -22,7 +23,9 @@ export default function Home() {
       <RegionSelector />
       {/* 3. Why Choose EDUS */}
       <WhyJoin />
-      {/* 4. How Learning Works */}
+      {/* 4. Highly Qualified Tutors */}
+      <QualifiedTutors />
+      {/* 5. How Learning Works */}
       <LearningExperience />
       {/* 5. Subjects */}
       <Subjects />
