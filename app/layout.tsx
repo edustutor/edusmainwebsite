@@ -26,12 +26,11 @@ const sans = Open_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default:
-      "EDUS · Live Online Tuition for Sri Lanka, India, Maldives & Global",
+    default: "EDUS · Live Online Tuition · Sri Lanka, India, Maldives",
     template: "%s · EDUS",
   },
   description:
-    "Live online tuition with expert tutors, structured classes, recordings, exams, and parent updates. Sri Lanka, India CBSE, Maldives Cambridge, and global 1-to-1 learning.",
+    "Join EDUS for live online tuition with expert tutors, structured classes, exams, and parent updates. Sri Lanka, India CBSE, Maldives Cambridge & global 1-to-1.",
   metadataBase: new URL("https://edustutor.com"),
   alternates: { canonical: "/" },
   applicationName: "EDUS",
@@ -141,9 +140,9 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: "website",
-    title: "EDUS · Live Online Tuition for Sri Lanka, India, Maldives & Global",
+    title: "EDUS · Live Online Tuition · Sri Lanka, India, Maldives",
     description:
-      "Live online tuition with expert tutors, structured classes, recordings, exams, and parent updates.",
+      "Join EDUS for live online tuition with expert tutors, structured classes, exams, and parent updates. Sri Lanka, India CBSE, Maldives Cambridge & global 1-to-1.",
     url: "https://edustutor.com",
     siteName: "EDUS",
     locale: "en_US",

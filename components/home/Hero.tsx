@@ -102,8 +102,8 @@ export function Hero() {
         {/* H1 */}
         <m.div className="mt-4 text-center max-w-5xl mx-auto" variants={fadeUp}>
           <h1 className="heading" style={{ fontSize: "var(--fs-hero)" }}>
-            Learn from the <em>Best Tutors</em>.<br />
-            Achieve <em>Exceptional Results</em>.
+            Best <em>Online Tuition</em> with Expert Tutors.<br />
+            <em>Live Online Classes</em> for Every Student.
           </h1>
         </m.div>
 
