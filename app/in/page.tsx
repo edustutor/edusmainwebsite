@@ -246,8 +246,7 @@ export default function IndiaPage() {
             </h2>
             <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
               Transparent, affordable pricing for every CBSE family - premium-quality education that
-              stays accessible. Pay only for what your child needs, and save more when you take all
-              three subjects together.
+              stays accessible.
             </p>
           </div>
 
