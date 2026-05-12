@@ -141,7 +141,7 @@ export default function EnrolPage() {
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link href="/" className="btn btn-sun">Submit & continue</Link>
-                <Link href="https://wa.me/" className="btn btn-ghost">WhatsApp fallback</Link>
+                <Link href="https://wa.me/94707072072" className="btn btn-ghost">WhatsApp fallback</Link>
               </div>
             </Step>
           )}
