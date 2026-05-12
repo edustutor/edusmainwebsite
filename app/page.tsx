@@ -1,5 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { RegionSelector } from "@/components/RegionSelector";
+import { Accreditations } from "@/components/Accreditations";
 import { WhyJoin } from "@/components/WhyJoin";
 import { QualifiedTutors } from "@/components/QualifiedTutors";
 import { LearningExperience } from "@/components/LearningExperience";
@@ -34,7 +35,9 @@ export default function Home() {
       {/* <JoinFlow /> */}
       {/* 9. Resource & Learning Support */}
       <ResourceSupport />
-      {/* 10. FAQ */}
+      {/* 10. Accreditations & Partners */}
+      <Accreditations />
+      {/* 11. FAQ */}
       <FAQ />
       {/* 11. Help banner - separate from footer */}
       {/* <HelpBanner /> */}
