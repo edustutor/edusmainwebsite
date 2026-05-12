@@ -59,11 +59,24 @@ const MESSAGE_MAX = 500;
 function validate(s: FormState): FieldErrors {
   const errs: FieldErrors = {};
   if (!s.parentName.trim()) errs.parentName = "Required";
-  if (!s.phone.trim()) errs.phone = "Required";
-  else if (!/^[\d\s+()-]{7,20}$/.test(s.phone.trim())) errs.phone = "Enter a valid number";
-  if (s.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email.trim())) {
-    errs.email = "Enter a valid email";
+
+  const phone = s.phone.trim();
+  if (!phone) {
+    errs.phone = "Required";
+  } else if (!/^\+?\d{7,15}$/.test(phone)) {
+    errs.phone = "Enter a valid phone number with country code";
   }
+
+  const email = s.email.trim();
+  if (email) {
+    // RFC-5322-ish: local-part + @ + domain with at least one dot + 2+ char TLD
+    if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
+      errs.email = "Enter a valid email";
+    } else if (email.length > 160) {
+      errs.email = "Email is too long";
+    }
+  }
+
   if (s.message.length > MESSAGE_MAX) errs.message = `Maximum ${MESSAGE_MAX} characters`;
   return errs;
 }
@@ -214,6 +227,7 @@ export function ContactForm() {
                       onChange={(v) => set("parentName", v)}
                       autoComplete="name"
                       placeholder="Enter your full name"
+                      maxLength={120}
                     />
                   </Field>
                   <Field
@@ -224,11 +238,17 @@ export function ContactForm() {
                   >
                     <Input
                       value={data.phone}
-                      onChange={(v) => set("phone", v)}
+                      onChange={(v) => {
+                        // Keep only digits + a single leading +
+                        const digits = v.replace(/[^\d]/g, "");
+                        const leadingPlus = v.trimStart().startsWith("+");
+                        set("phone", (leadingPlus ? "+" : "") + digits);
+                      }}
                       autoComplete="tel"
-                      inputMode="tel"
+                      inputMode="numeric"
                       type="tel"
-                      placeholder="+94 ..."
+                      placeholder="+94 77 1234567"
+                      maxLength={16}
                     />
                   </Field>
                 </div>
@@ -241,7 +261,9 @@ export function ContactForm() {
                       onChange={(v) => set("email", v)}
                       autoComplete="email"
                       type="email"
+                      inputMode="email"
                       placeholder="name@example.com"
+                      maxLength={160}
                     />
                   </Field>
                   <Field label="Market / Pathway">
@@ -266,7 +288,7 @@ export function ContactForm() {
                     rows={4}
                     maxLength={MESSAGE_MAX}
                     placeholder="Tell us about the student, subject, grade, or anything else."
-                    className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] placeholder:text-[#5A6A82] focus:border-[#2563EB] focus:outline-hidden transition"
+                    className="form-field w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] placeholder:text-[#5A6A82] transition"
                   />
                 </Field>
 
@@ -364,7 +386,7 @@ function Field({
 }
 
 function Input({
-  value, onChange, type = "text", placeholder, autoComplete, inputMode,
+  value, onChange, type = "text", placeholder, autoComplete, inputMode, maxLength,
 }: {
   value: string;
   onChange: (v: string) => void;
@@ -372,6 +394,7 @@ function Input({
   placeholder?: string;
   autoComplete?: string;
   inputMode?: "tel" | "email" | "text" | "numeric" | "decimal";
+  maxLength?: number;
 }) {
   return (
     <input
@@ -381,7 +404,8 @@ function Input({
       placeholder={placeholder}
       autoComplete={autoComplete}
       inputMode={inputMode}
-      className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] placeholder:text-[#5A6A82] focus:border-[#2563EB] focus:outline-hidden transition"
+      maxLength={maxLength}
+      className="form-field w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] placeholder:text-[#5A6A82] transition"
     />
   );
 }
@@ -398,7 +422,7 @@ function Select({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] focus:border-[#2563EB] focus:outline-hidden transition appearance-none"
+      className="form-field w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] transition appearance-none"
       style={{
         backgroundImage:
           "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235A6A82' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",

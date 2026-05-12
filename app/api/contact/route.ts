@@ -73,9 +73,15 @@ export async function POST(req: Request) {
 
   if (!parentName || parentName.length > MAX_NAME) return bad("Name is required");
   if (!phone || phone.length > MAX_PHONE) return bad("Phone is required");
-  if (!/^[\d\s+()-]{7,20}$/.test(phone)) return bad("Enter a valid phone number");
+  // Accepts digits with an optional single leading `+`. Client filters on
+  // keystroke so a non-conforming payload here means hand-crafted / bot.
+  if (!/^\+?\d{7,15}$/.test(phone)) {
+    return bad("Enter a valid phone number");
+  }
   if (email.length > MAX_EMAIL) return bad("Email is too long");
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return bad("Enter a valid email");
+  if (email && !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
+    return bad("Enter a valid email");
+  }
   if (region.length > MAX_REGION) return bad("Market field is too long");
   if (message.length > MAX_MESSAGE) return bad("Message is too long");
 
@@ -123,13 +129,21 @@ export async function POST(req: Request) {
   });
 
   try {
-    await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: `"${fromName}" <${fromEmail}>`,
       to: toEmail,
       subject,
       html,
       text,
       ...(email ? { replyTo: email } : {}),
+    });
+    // Log the SES messageId + accepted/rejected lists so dev terminal shows
+    // whether SES accepted the recipient (sandbox lifts will surface here).
+    console.log("[contact] SES accepted:", {
+      messageId: info.messageId,
+      accepted: info.accepted,
+      rejected: info.rejected,
+      response: info.response,
     });
     return NextResponse.json({ ok: true });
   } catch (err) {

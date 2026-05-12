@@ -359,9 +359,16 @@ body {
   word-break: break-word;
 }
 
-/* Focus */
+/* Focus — buttons, links, etc. get the strong outline; form fields opt out
+   via the .form-field class and use a softer border + shadow ring instead. */
 :focus-visible {
   outline: 2px solid #2563EB; outline-offset: 3px; border-radius: 6px;
+}
+.form-field:focus,
+.form-field:focus-visible {
+  outline: none;
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
 }
 
 /* Scrollbar */
