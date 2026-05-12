@@ -3,7 +3,6 @@ import { RegionSelector } from "@/components/RegionSelector";
 import { WhyJoin } from "@/components/WhyJoin";
 import { QualifiedTutors } from "@/components/QualifiedTutors";
 import { LearningExperience } from "@/components/LearningExperience";
-import { Subjects } from "@/components/Subjects";
 import { ParentTrust } from "@/components/ParentTrust";
 import { Success } from "@/components/Success";
 import { JoinFlow } from "@/components/JoinFlow";
@@ -27,8 +26,6 @@ export default function Home() {
       <QualifiedTutors />
       {/* 5. How Learning Works */}
       <LearningExperience />
-      {/* 5. Subjects */}
-      <Subjects />
       {/* 6. Parent Trust */}
       <ParentTrust />
       {/* 7. Success Stories */}

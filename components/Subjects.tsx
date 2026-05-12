@@ -187,11 +187,10 @@ export function Subjects() {
         >
           <p className="eyebrow"><span className="dot" />Subjects</p>
           <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-            Exclusive group & individual classes for <em>extra-ordinary success.</em>
+            Every subject, mapped to the right <em>syllabus and grade.</em>
           </h2>
-          <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-            Each EDUS pathway has its own subject list, mapped to the right syllabus and grade. Pick
-            a pathway below to see the subjects available.
+          <p className="text-[#2B3950] text-[15.5px] mt-4 leading-[1.65]">
+            Pick a pathway to see exactly what your child can learn with EDUS.
           </p>
         </m.div>
 
@@ -240,104 +239,89 @@ export function Subjects() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.35, ease: [0.2, 0.7, 0.2, 1] }}
-            className="mt-8 glass-strong rounded-[28px] p-7 md:p-10 max-w-6xl mx-auto relative overflow-hidden"
+            className="mt-8 glass-strong rounded-[28px] p-6 md:p-8 max-w-5xl mx-auto relative overflow-hidden"
           >
-            <span aria-hidden className="blob" style={{ top: -80, right: -80, width: 320, height: 320, background: current.tint, opacity: 0.18 }} />
+            <span aria-hidden className="blob" style={{ top: -80, right: -80, width: 280, height: 280, background: current.tint, opacity: 0.16 }} />
             <div className="relative">
-              {/* Header */}
-              <div className="flex items-start justify-between flex-wrap gap-4">
-                <div className="flex items-center gap-4">
+              {/* Compact header */}
+              <div className="flex items-center justify-between flex-wrap gap-3">
+                <div className="flex items-center gap-3">
                   <span
-                    className="inline-flex items-center justify-center w-14 h-14 rounded-2xl text-3xl"
+                    className="inline-flex items-center justify-center w-11 h-11 rounded-xl text-2xl shrink-0"
                     style={{ background: current.tintSoft, border: `1px solid ${current.tint}25` }}
                   >
                     {current.flag}
                   </span>
-                  <div>
+                  <div className="min-w-0">
+                    <h3 className="heading leading-tight" style={{ fontSize: "20px" }}>
+                      {current.label}
+                    </h3>
                     <p
-                      className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.14em] uppercase"
+                      className="font-[family-name:var(--font-display)] font-700 text-[10.5px] tracking-[0.12em] uppercase mt-0.5"
                       style={{ color: current.tint }}
                     >
                       {current.region}
                     </p>
-                    <h3 className="heading mt-1" style={{ fontSize: "20px" }}>
-                      {current.label}
-                    </h3>
                   </div>
                 </div>
                 <Link
                   href={current.cta.href}
-                  className="btn"
-                  style={{
-                    background: current.tint,
-                    color: "#fff",
-                    border: `1px solid ${current.tint}`,
-                  }}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[12.5px] font-[family-name:var(--font-display)] font-700 text-white shadow-[0_8px_20px_-10px_rgba(16,32,51,0.30)] hover:-translate-y-0.5 transition"
+                  style={{ background: current.tint }}
                 >
-                  {current.cta.label}
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+                  Explore
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" aria-hidden>
                     <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </Link>
               </div>
 
-              <p className="text-[#2B3950] text-[14.5px] mt-5 leading-[1.65] max-w-3xl">
-                {current.description}
-              </p>
-
-              {/* Groups */}
+              {/* Subject groups - compact pill rows */}
               <m.div
                 variants={staggerContainer}
                 initial="hidden"
                 animate="show"
-                className="mt-8 space-y-6"
+                className="mt-6 space-y-4"
               >
                 {current.groups.map((g) => (
-                  <m.div key={g.title} variants={fadeUp}>
-                    <div className="flex items-center justify-between flex-wrap gap-2 mb-3">
+                  <m.div
+                    key={g.title}
+                    variants={fadeUp}
+                    className="rounded-2xl bg-white/85 border border-[rgba(16,32,51,0.06)] px-4 py-3.5"
+                  >
+                    <div className="flex items-baseline justify-between gap-3 flex-wrap">
                       <p
-                        className="font-[family-name:var(--font-display)] font-600 text-[14px] tracking-[0.10em] uppercase"
+                        className="font-[family-name:var(--font-display)] font-700 text-[12px] tracking-[0.10em] uppercase"
                         style={{ color: current.tint }}
                       >
                         {g.title}
                       </p>
-                      <p className="text-[11.5px] text-[#5A6A82]">
+                      <p
+                        className="text-[10.5px] font-[family-name:var(--font-display)] font-700"
+                        style={{ color: `${current.tint}` }}
+                      >
                         {g.subjects.length} subject{g.subjects.length !== 1 ? "s" : ""}
                       </p>
                     </div>
-                    <m.div
-                      variants={staggerContainer}
-                      initial="hidden"
-                      animate="show"
-                      className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5"
-                    >
+                    <div className="mt-2.5 flex flex-wrap gap-1.5">
                       {g.subjects.map((s) => (
-                        <m.div
+                        <span
                           key={s}
-                          variants={fadeUp}
-                          whileHover={{
-                            y: -3,
-                            boxShadow: `0 14px 32px -10px ${current.tint}55`,
-                            borderColor: `${current.tint}55`,
-                            transition: { duration: 0.25 },
+                          className="inline-flex items-center px-2.5 py-1 rounded-full text-[12px] font-[family-name:var(--font-display)] font-600 leading-tight bg-white border transition hover:-translate-y-0.5"
+                          style={{
+                            borderColor: `${current.tint}30`,
+                            color: "#102033",
                           }}
-                          className="rounded-xl bg-white border border-[rgba(16,32,51,0.06)] px-3.5 py-3 flex items-center gap-2.5 cursor-default"
                         >
                           <span
-                            className="inline-flex w-7 h-7 rounded-lg items-center justify-center shrink-0"
-                            style={{ background: `${current.tint}15`, color: current.tint }}
-                          >
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
-                              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z" />
-                              <path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20" />
-                            </svg>
-                          </span>
-                          <span className="font-[family-name:var(--font-display)] font-500 text-[13.5px] text-[#102033] leading-tight">
-                            {s}
-                          </span>
-                        </m.div>
+                            aria-hidden
+                            className="inline-block w-1 h-1 rounded-full mr-1.5"
+                            style={{ background: current.tint }}
+                          />
+                          {s}
+                        </span>
                       ))}
-                    </m.div>
+                    </div>
                   </m.div>
                 ))}
               </m.div>

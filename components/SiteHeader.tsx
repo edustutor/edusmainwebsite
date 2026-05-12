@@ -10,7 +10,6 @@ const NAV = [
   { label: "Home", href: "/", section: null },
   { label: "Why EDUS", href: "/#why", section: "why" },
   { label: "How It Works", href: "/#how", section: "how" },
-  { label: "Subjects", href: "/#subjects", section: "subjects" },
   { label: "Stories", href: "/#stories", section: "stories" },
   { label: "FAQ", href: "/#faq", section: "faq" },
 ] as const;
