@@ -27,7 +27,7 @@ export default function EnrolPage() {
           </h1>
           <p className="text-[#2B3950] mt-5 max-w-xl mx-auto text-[16px] leading-[1.65]">
             Only the fields that matter - revealed as you make each choice. Five short steps.
-            WhatsApp is available as a fallback if you'd prefer to talk first.
+            Prefer to talk first? Call us on +94 70 707 2072.
           </p>
         </div>
 
@@ -141,7 +141,7 @@ export default function EnrolPage() {
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link href="/" className="btn btn-sun">Submit & continue</Link>
-                <Link href="https://wa.me/94707072072" className="btn btn-ghost">WhatsApp fallback</Link>
+                <Link href="tel:+94707072072" className="btn btn-ghost">Call us instead</Link>
               </div>
             </Step>
           )}

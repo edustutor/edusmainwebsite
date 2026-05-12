@@ -8,18 +8,9 @@ export const metadata = {
 
 const QUICK = [
   {
-    icon: "💬",
-    title: "WhatsApp",
-    body: "Fastest way to reach us. Available 24/7.",
-    cta: "Chat on WhatsApp",
-    href: "https://wa.me/94707072072",
-    external: true,
-    tint: "#22C55E",
-  },
-  {
     icon: "📞",
     title: "Phone",
-    body: "Talk to a parent advisor.",
+    body: "Talk to a parent advisor directly.",
     cta: "+94 70 707 2072",
     href: "tel:+94707072072",
     external: false,
@@ -61,7 +52,7 @@ export default function ContactPage() {
       {/* QUICK CONTACT CARDS */}
       <section className="relative py-10 md:py-14 overflow-hidden">
         <div className="container-edge">
-          <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
             {QUICK.map((q) => {
               const inner = (
                 <>

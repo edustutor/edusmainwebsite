@@ -52,7 +52,7 @@ const SUBJECT_GROUPS: { label: string; subjects: string[] }[] = [
   },
 ];
 
-const CONTACT_METHODS = ["WhatsApp", "Phone Call", "Email"];
+const CONTACT_METHODS = ["Phone Call", "Email"];
 const CONTACT_TIMES = ["Morning", "Afternoon", "Evening", "Anytime"];
 
 /* ---------------------------------------------------------------- */
@@ -61,7 +61,7 @@ const CONTACT_TIMES = ["Morning", "Afternoon", "Evening", "Anytime"];
 
 type FormState = {
   parentName: string;
-  whatsapp: string;
+  phone: string;
   email: string;
   studentName: string;
   grade: string;
@@ -77,7 +77,7 @@ type FieldErrors = Partial<Record<keyof FormState, string>>;
 
 const INITIAL: FormState = {
   parentName: "",
-  whatsapp: "",
+  phone: "",
   email: "",
   studentName: "",
   grade: "",
@@ -94,8 +94,8 @@ const MESSAGE_MAX = 500;
 function validate(s: FormState): FieldErrors {
   const errs: FieldErrors = {};
   if (!s.parentName.trim()) errs.parentName = "Required";
-  if (!s.whatsapp.trim()) errs.whatsapp = "Required";
-  else if (!/^[\d\s+()-]{7,20}$/.test(s.whatsapp.trim())) errs.whatsapp = "Enter a valid number";
+  if (!s.phone.trim()) errs.phone = "Required";
+  else if (!/^[\d\s+()-]{7,20}$/.test(s.phone.trim())) errs.phone = "Enter a valid number";
   if (!s.studentName.trim()) errs.studentName = "Required";
   if (!s.grade) errs.grade = "Required";
   if (!s.region) errs.region = "Required";
@@ -204,7 +204,7 @@ export function ContactForm() {
             className="glass-strong rounded-[28px] p-6 md:p-10"
           >
             <fieldset className="space-y-6" disabled={submitting}>
-              {/* Row 1 - Parent + WhatsApp */}
+              {/* Row 1 - Parent + Phone */}
               <div className="grid sm:grid-cols-2 gap-5">
                 <Field label="Parent / Guardian Name" required error={errors.parentName}>
                   <Input
@@ -215,14 +215,14 @@ export function ContactForm() {
                   />
                 </Field>
                 <Field
-                  label="Mobile / WhatsApp Number"
+                  label="Mobile Number"
                   required
-                  error={errors.whatsapp}
+                  error={errors.phone}
                   hint="Include country code"
                 >
                   <Input
-                    value={data.whatsapp}
-                    onChange={(v) => set("whatsapp", v)}
+                    value={data.phone}
+                    onChange={(v) => set("phone", v)}
                     autoComplete="tel"
                     inputMode="tel"
                     type="tel"

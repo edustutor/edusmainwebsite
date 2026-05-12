@@ -217,17 +217,6 @@ export default function PrivacyPolicyPage() {
                 +94 70 707 2072
               </a>
             </li>
-            <li>
-              <strong>WhatsApp:</strong>{" "}
-              <a
-                href="https://wa.me/94707072072"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#2563EB] hover:underline"
-              >
-                +94 70 707 2072
-              </a>
-            </li>
           </UL>
 
           <hr className="border-[rgba(16,32,51,0.08)] my-8" />
@@ -245,10 +234,7 @@ export default function PrivacyPolicyPage() {
 /* --------------------------------------------------------------- */
 function H2({ children }: { children: React.ReactNode }) {
   return (
-    <h2
-      className="heading text-[#102033] mt-8"
-      style={{ fontSize: "22px", lineHeight: 1.3 }}
-    >
+    <h2 className="font-[family-name:var(--font-display)] font-700 text-[#102033] text-[22px] leading-[1.3] tracking-[-0.01em] mt-8 mb-2">
       {children}
     </h2>
   );
@@ -256,7 +242,7 @@ function H2({ children }: { children: React.ReactNode }) {
 
 function H3({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="font-[family-name:var(--font-display)] font-700 text-[#102033] mt-5" style={{ fontSize: "16px" }}>
+    <h3 className="font-[family-name:var(--font-display)] font-700 text-[#102033] text-[16px] leading-[1.4] mt-5 mb-1">
       {children}
     </h3>
   );
