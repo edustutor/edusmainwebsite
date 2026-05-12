@@ -147,7 +147,7 @@ export const metadata: Metadata = {
     siteName: "EDUS",
     locale: "en_US",
     alternateLocale: ["en_LK", "en_IN", "en_MV", "ta_LK", "ta_IN", "si_LK"],
-    images: [{ url: "/edus-logo-blue.webp", width: 1200, height: 630, alt: "EDUS online learning platform" }],
+    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "EDUS · Live online tuition for Sri Lanka, India, Maldives & global students" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -156,7 +156,7 @@ export const metadata: Metadata = {
     title: "EDUS · Live Online Tuition",
     description:
       "Live online classes for school students. Sri Lanka, India, Maldives, and global learning paths.",
-    images: ["/edus-logo-blue.webp"],
+    images: ["/edus-og.jpg"],
   },
   robots: {
     index: true,
