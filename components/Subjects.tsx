@@ -60,13 +60,17 @@ const PATHWAYS: Pathway[] = [
     code: "IN",
     flag: "🇮🇳",
     label: "India",
-    region: "Grades 6 to 10 · English Medium",
+    region: "CBSE Classes 6 to 10 · English Medium",
     description:
-      "English Medium tuition for Grades 6 to 10 with six core subjects, weekly academic monitoring, and exam focused learning.",
+      "Premium English-medium CBSE tuition for Classes 6 to 10 with three core subjects, weekly academic monitoring, and exam-focused learning.",
     groups: [
       {
-        title: "Grade 6 to 10",
-        subjects: ["Tamil", "Hindi", "English", "Mathematics", "Science", "Social Science"],
+        title: "Middle Stage · CBSE Classes 6 – 8",
+        subjects: ["Mathematics", "Science", "English"],
+      },
+      {
+        title: "Secondary Stage · CBSE Classes 9 – 10",
+        subjects: ["Mathematics", "Science", "English"],
       },
     ],
     cta: { label: "Explore India Classes", href: "/in" },

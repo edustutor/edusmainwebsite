@@ -56,7 +56,7 @@ export default function EnrolPage() {
                 onChange={(v) => set("market", v)}
                 options={[
                   { v: "SL", label: "Sri Lanka", note: "National syllabus + 1:1" },
-                  { v: "IN", label: "India", note: "Grades 6–10 · CBSE/NCERT" },
+                  { v: "IN", label: "India", note: "CBSE Classes 6–10 · Tamil Nadu" },
                   { v: "GL", label: "Anywhere else", note: "Global one-to-one" },
                 ]}
               />

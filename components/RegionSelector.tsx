@@ -41,12 +41,12 @@ const REGIONS: Region[] = [
   },
   {
     flag: "🇮🇳",
-    title: "India · Grades 6 to 10",
-    description: "Premium structured online tuition for English medium students in Chennai and across India.",
-    suitableFor: "Grade 6 to Grade 10 students",
+    title: "India · CBSE Classes 6 to 10",
+    description: "Premium structured online CBSE tuition for English-medium students across Tamil Nadu and India.",
+    suitableFor: "CBSE Class 6 to Class 10 students",
     features: [
       "English medium classes",
-      "Tamil, Hindi, English, Maths, Science",
+      "CBSE Mathematics, Science, English",
       "Weekly academic monitoring",
       "Exam focused learning",
       "Parent reports + class tracking",

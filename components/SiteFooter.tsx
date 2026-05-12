@@ -12,7 +12,7 @@ const QUICK = [
 
 const PATHS = [
   { label: "Sri Lanka Classes", href: "/sl" },
-  { label: "India · Grades 6 to 10", href: "/in" },
+  { label: "India · CBSE Classes 6 to 10", href: "/in" },
   { label: "Maldives Classes", href: "/mv" },
   { label: "Global · One to One", href: "/global" },
   { label: "Resource Vault", href: "/#resources" },

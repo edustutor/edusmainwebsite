@@ -46,19 +46,19 @@ const STORIES: Story[] = [
   // India
   {
     market: "IN", flag: "🇮🇳", country: "India",
-    label: "Parent of Grade 10 Student · Chennai",
+    label: "Parent of CBSE Class 10 Student · Tamil Nadu",
     quote: "Weekly parent updates kept us aligned. The tutor knew exactly where my child needed support.",
     initials: "RM", tint: "#8B5CF6",
   },
   {
     market: "IN", flag: "🇮🇳", country: "India",
-    label: "Grade 8 Student · Chennai",
+    label: "CBSE Class 8 Student · Tamil Nadu",
     quote: "Maths became easier when I started learning with clear explanations and regular practice.",
     initials: "S8", tint: "#8B5CF6",
   },
   {
     market: "IN", flag: "🇮🇳", country: "India",
-    label: "Parent Feedback · Bengaluru",
+    label: "Parent Feedback · Tamil Nadu",
     quote: "The class structure, reminders, and progress updates helped us understand how our child was improving.",
     initials: "PB", tint: "#8B5CF6",
   },

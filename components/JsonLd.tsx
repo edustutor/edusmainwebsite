@@ -28,10 +28,10 @@ const ORG = {
       },
       {
         "@type": "Offer",
-        name: "India Grades 6 to 10",
+        name: "India CBSE Classes 6 to 10",
         url: "https://edustutor.com/in",
         description:
-          "Premium structured online tuition for English medium students in Chennai and across India for Grades 6 to 10.",
+          "Premium structured online CBSE tuition for English-medium students across Tamil Nadu and India for CBSE Classes 6 to 10. Three core subjects: Mathematics, Science, English. Middle Stage 6–8 and Secondary Stage 9–10.",
       },
       {
         "@type": "Offer",
@@ -80,7 +80,7 @@ const FAQ = {
       name: "Who can join EDUS classes?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Students can join based on their region, grade, syllabus, subject, and learning need. EDUS currently supports Sri Lanka classes, India Grades 6 to 10, Maldives classes, and global one to one learning pathways.",
+        text: "Students can join based on their region, grade, syllabus, subject, and learning need. EDUS currently supports Sri Lanka classes, India CBSE Classes 6 to 10, Maldives classes, and global one to one learning pathways.",
       },
     },
     {
@@ -120,7 +120,7 @@ const FAQ = {
       name: "What subjects are available for India?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The India launch focuses on English medium Grades 6 to 10 with Tamil, Hindi, English, Maths, Science, and Social Science.",
+        text: "The India launch focuses on English-medium CBSE Classes 6 to 10 across Tamil Nadu, with three core subjects: Mathematics, Science, and English. Classes 6–8 form the Middle Stage and Classes 9–10 form the Secondary Stage.",
       },
     },
     {

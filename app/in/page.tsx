@@ -2,18 +2,18 @@ import Link from "next/link";
 import { CTA } from "@/components/CTA";
 
 export const metadata = {
-  title: "India · Chennai - Premium Online Tuition for Grades 6–10 · EDUS",
+  title: "India · Tamil Nadu - Premium Online Tuition for CBSE Classes 6–10 · EDUS",
   description:
-    "Premium structured online tuition with disciplined academic monitoring. CBSE & matriculation aligned, Grades 6–10, English medium. Weekly reports, exam analytics, monthly progress to parents.",
+    "Premium structured online CBSE tuition with disciplined academic monitoring. CBSE-aligned Classes 6–10, English medium, Mathematics · Science · English. Weekly reports, exam analytics, monthly progress to parents.",
 };
 
-const SUBJECTS = ["Tamil", "Hindi", "English", "Mathematics", "Science", "Social Science"];
+const SUBJECTS = ["Mathematics", "Science", "English"];
 const GRADES = [
-  { g: "6", tier: "Junior", tint: "#2563EB" },
-  { g: "7", tier: "Junior", tint: "#2563EB" },
-  { g: "8", tier: "Junior", tint: "#2563EB" },
-  { g: "9", tier: "Senior", tint: "#8B5CF6" },
-  { g: "10", tier: "Senior", tint: "#8B5CF6" },
+  { g: "6", tier: "Middle Stage", tint: "#2563EB" },
+  { g: "7", tier: "Middle Stage", tint: "#2563EB" },
+  { g: "8", tier: "Middle Stage", tint: "#2563EB" },
+  { g: "9", tier: "Secondary Stage", tint: "#8B5CF6" },
+  { g: "10", tier: "Secondary Stage", tint: "#8B5CF6" },
 ];
 const SCHEDULE = [
   { slot: "Slot 1", time: "6:30 PM – 7:30 PM", tint: "#2563EB" },
@@ -51,19 +51,19 @@ export default function IndiaPage() {
               </svg>
               All markets
               <span className="text-[#5A6A82]">·</span>
-              <span className="text-[#8B5CF6]">🇮🇳 India · Chennai</span>
+              <span className="text-[#8B5CF6]">🇮🇳 India · Tamil Nadu · CBSE</span>
             </Link>
           </div>
 
           <div className="mt-8 text-center max-w-4xl mx-auto" data-anim="2">
-            <p className="eyebrow">🇮🇳 Premium Online Tuition · Grades 6–10</p>
+            <p className="eyebrow">🇮🇳 Premium CBSE Online Tuition · Classes 6–10</p>
             <h1 className="heading mt-5" style={{ fontSize: "var(--fs-hero)" }}>
               Structured tuition. <em>Disciplined monitoring. Real progress.</em>
             </h1>
             <p className="text-[#2B3950] text-[17px] mt-6 leading-[1.65] max-w-2xl mx-auto">
-              EDUS is not mass coaching. It's premium online tuition with weekly parent reporting,
-              exam analytics, and a disciplined tutor system - built for Chennai families who want
-              measurable progress between Grade 6 and Grade 10.
+              EDUS is not mass coaching. It's premium CBSE-aligned online tuition with weekly parent
+              reporting, exam analytics, and a disciplined tutor system - built for Tamil Nadu
+              families who want measurable progress across CBSE Classes 6 to 10.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3" data-anim="3">
               <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Reserve a Seat</a>
@@ -74,9 +74,9 @@ export default function IndiaPage() {
           {/* Trust strip */}
           <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto" data-anim="4">
             {[
-              { k: "6 – 10", v: "Grades covered" },
-              { k: "6", v: "Subjects per grade" },
-              { k: "12", v: "Vetted tutors" },
+              { k: "CBSE", v: "Syllabus aligned" },
+              { k: "Class 6 – 10", v: "Coverage" },
+              { k: "3", v: "Core subjects" },
               { k: "Weekly", v: "Parent reports" },
             ].map((s, i) => (
               <div key={i} className="glass rounded-2xl px-5 py-4 text-center">
@@ -94,11 +94,11 @@ export default function IndiaPage() {
           <div className="text-center max-w-2xl mx-auto">
             <p className="eyebrow"><span className="dot" />The EDUS Difference</p>
             <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-              Rare in Chennai. <em>Standard at EDUS.</em>
+              Rare in Tamil Nadu. <em>Standard at EDUS.</em>
             </h2>
             <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-              Most Chennai tuition is unstructured. EDUS runs with academic SOPs, monitored tutors,
-              and weekly parent visibility.
+              Most CBSE tuition across Tamil Nadu is unstructured. EDUS runs with academic SOPs,
+              monitored tutors, and weekly parent visibility.
             </p>
           </div>
 
@@ -128,11 +128,12 @@ export default function IndiaPage() {
           <div className="text-center max-w-2xl mx-auto">
             <p className="eyebrow"><span className="dot" />Academic Structure</p>
             <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-              Six subjects. <em>Every grade.</em>
+              Three core subjects. <em>Every CBSE class.</em>
             </h2>
             <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-              English medium tuition for Grades 6–10. Same six subjects across every grade, taught
-              by tutors segmented into Junior (6–8) and Senior (9–10) tiers.
+              English-medium CBSE tuition for Classes 6–10. Mathematics, Science, and English -
+              taught by tutors segmented into Middle Stage (Classes 6–8) and Secondary Stage
+              (Classes 9–10).
             </p>
           </div>
 
@@ -140,9 +141,9 @@ export default function IndiaPage() {
             {/* Subjects */}
             <div className="glass-strong rounded-[24px] p-7">
               <p className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.12em] uppercase text-[#2563EB]">
-                All 6 subjects · per grade
+                CBSE Core Subjects · per class
               </p>
-              <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {SUBJECTS.map((s, i) => (
                   <div key={s} className="rounded-2xl bg-white border border-[rgba(16,32,51,0.06)] p-4 text-center">
                     <p className="text-[10.5px] font-mono text-[#5A6A82]">{String(i + 1).padStart(2, "0")}</p>
@@ -155,7 +156,7 @@ export default function IndiaPage() {
             {/* Grade tiers */}
             <div className="glass rounded-[24px] p-7">
               <p className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.12em] uppercase text-[#8B5CF6]">
-                Grade tiers · Junior 6–8 · Senior 9–10
+                CBSE Class Stages · Middle 6–8 · Secondary 9–10
               </p>
               <div className="mt-5 grid grid-cols-5 gap-3">
                 {GRADES.map((g) => (

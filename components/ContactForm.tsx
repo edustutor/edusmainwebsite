@@ -12,7 +12,7 @@ import { fadeUp, sectionRevealStrong, inView } from "@/lib/motion";
 
 const REGIONS = [
   "Sri Lanka Classes",
-  "India Grades 6 to 10",
+  "India CBSE Classes 6 to 10",
   "Maldives Classes",
   "Global One to One Classes",
 ];

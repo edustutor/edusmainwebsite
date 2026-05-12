@@ -13,7 +13,7 @@ const FAQS = [
   },
   {
     q: "Who can join EDUS classes?",
-    a: "Students can join based on their region, grade, syllabus, subject, and learning need. EDUS currently supports Sri Lanka classes, India Grades 6 to 10, Maldives classes, and global one to one learning pathways.",
+    a: "Students can join based on their region, grade, syllabus, subject, and learning need. EDUS currently supports Sri Lanka classes, India CBSE Classes 6 to 10, Maldives classes, and global one to one learning pathways.",
   },
   {
     q: "Are classes conducted live?",
@@ -33,7 +33,7 @@ const FAQS = [
   },
   {
     q: "What subjects are available for India?",
-    a: "The India launch focuses on English medium Grades 6 to 10 with Tamil, English, Maths & Science.",
+    a: "The India launch focuses on English-medium CBSE Classes 6 to 10 across Tamil Nadu, with three core subjects: Mathematics, Science, and English. Classes 6–8 form the Middle Stage and Classes 9–10 form the Secondary Stage.",
   },
   {
     q: "How do I enrol?",
