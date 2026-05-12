@@ -61,9 +61,9 @@ export default function IndiaPage() {
               Structured tuition. <em>Disciplined monitoring. Real progress.</em>
             </h1>
             <p className="text-[#2B3950] text-[17px] mt-6 leading-[1.65] max-w-2xl mx-auto">
-              EDUS is not mass coaching. It's premium CBSE-aligned online tuition with monthly parent
-              reporting, exam analytics, and a disciplined tutor system - built for Tamil Nadu
-              families who want measurable progress across CBSE Classes 6 to 10.
+              Premium CBSE-aligned, quality-assured live online classes from expert tutors for Tamil Nadu families, delivering measurable progress in
+              <br />
+              Classes 6–10 Maths, Science &amp; English.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3" data-anim="3">
               <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Learning with EDUS</a>
@@ -77,7 +77,7 @@ export default function IndiaPage() {
               { k: "CBSE", v: "Syllabus aligned" },
               { k: "Class 6 – 10", v: "Coverage" },
               { k: "3", v: "Core subjects" },
-              { k: "Monthly", v: "Parent reports" },
+              { k: "Monthly", v: "Parent updates" },
             ].map((s, i) => (
               <div key={i} className="glass rounded-2xl px-5 py-4 text-center">
                 <p className="font-[family-name:var(--font-display)] font-700 text-[22px] tnum text-[#102033]">{s.k}</p>
