@@ -39,7 +39,7 @@ export function SiteFooter() {
             {/* Brand block */}
             <div className="lg:col-span-4">
               <Image
-                src="/edus_logo_blue.webp"
+                src="/edus-logo-blue.webp"
                 alt="EDUS"
                 width={180}
                 height={56}

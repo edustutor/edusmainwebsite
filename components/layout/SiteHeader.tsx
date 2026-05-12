@@ -109,7 +109,7 @@ export function SiteHeader() {
         >
           <Link href="/" aria-label="EDUS" className="flex items-center pl-1.5">
             <Image
-              src="/edus_logo_blue.webp"
+              src="/edus-logo-blue.webp"
               alt="EDUS"
               width={180}
               height={56}

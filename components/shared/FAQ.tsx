@@ -37,7 +37,7 @@ const FAQS = [
   },
   {
     q: "How do I enrol?",
-    a: "Choose your region, select the class type, choose the grade and subject, submit parent details, and the EDUS team will guide you through the next step.",
+    a: "Head to signup.edustutor.com to begin enrolment. Choose your region, grade, and subject, and the EDUS team will follow up to confirm your tutor and class plan.",
   },
 ];
 

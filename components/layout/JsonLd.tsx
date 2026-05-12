@@ -9,7 +9,7 @@ const ORG = {
   name: "EDUS",
   alternateName: "EDUS Tutor",
   url: "https://edustutor.com",
-  logo: "https://edustutor.com/edus_logo_blue.webp",
+  logo: "https://edustutor.com/edus-logo-blue.webp",
   slogan: "Quality-Assured Online Live Learning Platform",
   description:
     "EDUS is the quality-assured online live learning platform. Live tuition, group and one to one classes, expert tutors, progress tracking, class recordings, exams, parent updates, and learning resources for school students.",
@@ -128,7 +128,7 @@ const FAQ = {
       name: "How do I enrol?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Choose your region, select the class type, choose the grade and subject, submit parent details, and the EDUS team will guide you through the next step.",
+        text: "Head to https://signup.edustutor.com/ to begin enrolment. Choose your region, grade, and subject, and the EDUS team will follow up to confirm your tutor and class plan.",
       },
     },
   ],

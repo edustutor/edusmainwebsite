@@ -18,7 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Product / conversion
     { path: "/teach",            changeFrequency: "weekly",  priority: 0.85 },
     { path: "/contact",          changeFrequency: "monthly", priority: 0.80 },
-    { path: "/enrol",            changeFrequency: "monthly", priority: 0.80 },
 
     // Storytelling
     { path: "/how-it-works",     changeFrequency: "monthly", priority: 0.70 },

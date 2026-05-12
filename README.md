@@ -36,7 +36,6 @@ edus-web/
 │   ├── global/                   # Global market page (composed)
 │   ├── teach/                    # Teach with EDUS (tutor recruitment)
 │   ├── contact/                  # Contact form page
-│   ├── enrol/                    # Multi-step enrolment flow
 │   ├── how-it-works/             # The EDUS method
 │   ├── success-stories/          # Student testimonials
 │   └── privacy/ terms/ cookies/  # Legal pages
@@ -68,6 +67,8 @@ edus-web/
 │   │   ├── Atmosphere.tsx        # Site-wide ambient background
 │   │   └── AmbientGlow.tsx       # Reusable glow component
 │   ├── markets/                  # Per-market page builders
+│   │   ├── sl/                   # Sri Lanka (Sl* components)
+│   │   ├── in/                   # India (In* components)
 │   │   ├── mv/                   # Maldives (Mv* components)
 │   │   └── global/               # Global (Gl* components)
 │   └── teach/                    # Teach-with-EDUS page builder (Teach* components)
