@@ -183,6 +183,30 @@ export function tuitionService({
 }
 
 /* --------------------------------------------------------------- */
+/* ContactPage — emitted from /contact for SERP relevance            */
+/* --------------------------------------------------------------- */
+export function contactPage() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Contact EDUS Online Tuition",
+    url: `${SITE_URL}/contact`,
+    description:
+      "Contact EDUS for online classes, admissions, one-to-one tutoring, group classes, student support, and global learning inquiries. Reach EDUS Sri Lanka, India, Maldives, or Global Support.",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "EDUS Online Tuition",
+      url: SITE_URL,
+    },
+    about: { "@id": `${SITE_URL}/#organization` },
+    primaryImageOfPage: `${SITE_URL}/edus-logo-blue.webp`,
+    mainEntity: {
+      "@id": `${SITE_URL}/#organization`,
+    },
+  };
+}
+
+/* --------------------------------------------------------------- */
 /* JobPosting — used on the /teach page                              */
 /* --------------------------------------------------------------- */
 export function tutorJobPosting() {

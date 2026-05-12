@@ -3,57 +3,31 @@
 import { useState } from "react";
 import { m, AnimatePresence } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
-import { useIsMobile } from "@/lib/useIsMobile";
 import { fadeUp, sectionRevealStrong, inView } from "@/lib/motion";
 
 /* ---------------------------------------------------------------- */
-/* Form options                                                     */
+/* Form options - kept short                                         */
 /* ---------------------------------------------------------------- */
 
 const REGIONS = [
-  "Sri Lanka Classes",
-  "India CBSE Classes 6 to 10",
-  "Maldives Classes",
-  "Global One to One Classes",
+  "Sri Lanka",
+  "India · CBSE",
+  "Maldives · Cambridge",
+  "Global · One-to-One",
+  "Not sure yet",
 ];
 
-const CLASS_TYPES = [
-  "Group Class",
-  "One to One Class",
-  "Exam Preparation",
-  "Subject Support",
-  "Not Sure",
-];
+/* ---------------------------------------------------------------- */
+/* Social channels - shown beside the form                           */
+/* ---------------------------------------------------------------- */
 
-const GRADES = [
-  "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5",
-  "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10",
-  "Grade 11 (O/L)", "Grade 12 (A/L)", "Grade 13 (A/L)",
-  "Year 7", "Year 8", "Year 9", "Year 10", "Year 11", "Year 12", "Year 13",
+const SOCIALS = [
+  { label: "Facebook",  href: "https://www.facebook.com/edusonline" },
+  { label: "Instagram", href: "https://www.instagram.com/edus_online/" },
+  { label: "TikTok",    href: "https://www.tiktok.com/@edusonline" },
+  { label: "YouTube",   href: "https://www.youtube.com/@edusonline/" },
+  { label: "LinkedIn",  href: "https://lk.linkedin.com/company/edusonline" },
 ];
-
-const SUBJECT_GROUPS: { label: string; subjects: string[] }[] = [
-  { label: "Languages", subjects: ["Tamil", "Sinhala", "Hindi", "English"] },
-  {
-    label: "Sciences & Maths",
-    subjects: ["Mathematics", "Science", "Combined Mathematics", "Physics", "Chemistry", "Biology"],
-  },
-  {
-    label: "Humanities",
-    subjects: ["Environment / ENV", "ICT", "History", "Geography", "Civics", "Social Science"],
-  },
-  {
-    label: "Cambridge",
-    subjects: ["Cambridge Mathematics", "Cambridge Science", "Cambridge English", "Cambridge ICT"],
-  },
-  {
-    label: "Edexcel",
-    subjects: ["Edexcel Mathematics", "Edexcel Science", "Edexcel English", "Edexcel ICT"],
-  },
-];
-
-const CONTACT_METHODS = ["Phone Call", "Email"];
-const CONTACT_TIMES = ["Morning", "Afternoon", "Evening", "Anytime"];
 
 /* ---------------------------------------------------------------- */
 /* Types & validation                                                */
@@ -63,13 +37,7 @@ type FormState = {
   parentName: string;
   phone: string;
   email: string;
-  studentName: string;
-  grade: string;
   region: string;
-  classType: string;
-  subjects: string[];
-  contactMethod: string;
-  contactTime: string;
   message: string;
 };
 
@@ -79,13 +47,7 @@ const INITIAL: FormState = {
   parentName: "",
   phone: "",
   email: "",
-  studentName: "",
-  grade: "",
   region: "",
-  classType: "",
-  subjects: [],
-  contactMethod: "",
-  contactTime: "",
   message: "",
 };
 
@@ -96,11 +58,6 @@ function validate(s: FormState): FieldErrors {
   if (!s.parentName.trim()) errs.parentName = "Required";
   if (!s.phone.trim()) errs.phone = "Required";
   else if (!/^[\d\s+()-]{7,20}$/.test(s.phone.trim())) errs.phone = "Enter a valid number";
-  if (!s.studentName.trim()) errs.studentName = "Required";
-  if (!s.grade) errs.grade = "Required";
-  if (!s.region) errs.region = "Required";
-  if (!s.classType) errs.classType = "Required";
-  if (s.subjects.length === 0) errs.subjects = "Choose at least one";
   if (s.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email.trim())) {
     errs.email = "Enter a valid email";
   }
@@ -109,301 +66,275 @@ function validate(s: FormState): FieldErrors {
 }
 
 /* ---------------------------------------------------------------- */
-/* Component                                                         */
+/* Main component                                                    */
 /* ---------------------------------------------------------------- */
 
 export function ContactForm() {
   const [data, setData] = useState<FormState>(INITIAL);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
-  const isMobile = useIsMobile();
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  const set = <K extends keyof FormState>(k: K, v: FormState[K]) => {
-    setData((d) => ({ ...d, [k]: v }));
-    if (errors[k]) setErrors((e) => ({ ...e, [k]: undefined }));
+  const set = <K extends keyof FormState>(key: K, value: FormState[K]) => {
+    setData((d) => ({ ...d, [key]: value }));
+    if (errors[key]) setErrors((e) => ({ ...e, [key]: undefined }));
   };
 
-  const toggleSubject = (subject: string) => {
-    setData((d) => {
-      const has = d.subjects.includes(subject);
-      return {
-        ...d,
-        subjects: has ? d.subjects.filter((s) => s !== subject) : [...d.subjects, subject],
-      };
-    });
-    if (errors.subjects) setErrors((e) => ({ ...e, subjects: undefined }));
-  };
-
-  async function onSubmit(e: React.FormEvent) {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError("");
     const errs = validate(data);
-    setErrors(errs);
     if (Object.keys(errs).length > 0) {
-      setStatus("error");
+      setErrors(errs);
       return;
     }
     setSubmitting(true);
-    setStatus("idle");
     try {
-      // TODO: wire to a real endpoint (e.g. POST /api/contact).
-      await new Promise((r) => setTimeout(r, 700));
-      setStatus("success");
+      // Replace with your real endpoint (Formspree, Web3Forms, API route, etc.)
+      await new Promise((r) => setTimeout(r, 800));
+      setSubmitted(true);
       setData(INITIAL);
     } catch {
-      setStatus("error");
+      setSubmitError("Something went wrong. Please try again or email hello@edustutor.com.");
     } finally {
       setSubmitting(false);
     }
-  }
+  };
 
   return (
     <section
-      id="contact-form"
+      id="inquiry"
       className="relative py-12 md:py-16 scroll-mt-24 overflow-hidden"
     >
       {/* Background glows */}
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute inset-0">
-          <AmbientGlow top="10%" left="-4%" size={260} color="#2563EB" opacity={[0.08, 0.16]} duration={22} blur={isMobile ? 50 : 80} />
-        </div>
-        <div className="absolute inset-0">
-          <AmbientGlow bottom="6%" right="-4%" size={240} color="#8B5CF6" opacity={[0.08, 0.14]} duration={26} delay={3} blur={isMobile ? 50 : 80} />
-        </div>
+        <AmbientGlow top="14%" left="-4%" size={220} color="#2563EB" opacity={[0.06, 0.14]} duration={22} blur={80} />
+        <AmbientGlow bottom="10%" right="-4%" size={200} color="#8B5CF6" opacity={[0.06, 0.12]} duration={26} delay={3} blur={80} />
       </div>
 
-      <div className="container-edge">
+      <div className="container-edge max-w-3xl mx-auto">
+        {/* Heading */}
         <m.div
-          className="text-center max-w-2xl mx-auto"
           variants={sectionRevealStrong}
           initial="hidden"
           whileInView="show"
           viewport={inView}
+          className="text-center"
         >
-          <p className="eyebrow"><span className="dot" />Contact EDUS</p>
+          <p className="eyebrow"><span className="dot" />Send Us Your Inquiry</p>
           <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-            Get the right learning support <em>for your child.</em>
+            Tell us what you need, and the right EDUS team will{" "}
+            <em>contact you.</em>
           </h2>
-          <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-            Tell us what your child needs. The EDUS team will guide you to the right class, subject,
-            tutor, or enrolment option.
+          <p className="text-[#2B3950] text-[15px] mt-4 leading-[1.65]">
+            Five short fields. We will follow up within one business day.
           </p>
         </m.div>
 
-        <m.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={inView}
-          className="mt-12 max-w-3xl mx-auto"
-        >
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            aria-label="EDUS contact form"
-            className="glass-strong rounded-[28px] p-6 md:p-10"
-          >
-            <fieldset className="space-y-6" disabled={submitting}>
-              {/* Row 1 - Parent + Phone */}
-              <div className="grid sm:grid-cols-2 gap-5">
-                <Field label="Parent / Guardian Name" required error={errors.parentName}>
-                  <Input
-                    value={data.parentName}
-                    onChange={(v) => set("parentName", v)}
-                    autoComplete="name"
-                    placeholder="Your full name"
-                  />
-                </Field>
-                <Field
-                  label="Mobile Number"
-                  required
-                  error={errors.phone}
-                  hint="Include country code"
-                >
-                  <Input
-                    value={data.phone}
-                    onChange={(v) => set("phone", v)}
-                    autoComplete="tel"
-                    inputMode="tel"
-                    type="tel"
-                    placeholder="+94 ..."
-                  />
-                </Field>
-              </div>
-
-              {/* Row 2 - Email + Student name */}
-              <div className="grid sm:grid-cols-2 gap-5">
-                <Field label="Email Address" hint="Optional" error={errors.email}>
-                  <Input
-                    value={data.email}
-                    onChange={(v) => set("email", v)}
-                    autoComplete="email"
-                    inputMode="email"
-                    type="email"
-                    placeholder="parent@example.com"
-                  />
-                </Field>
-                <Field label="Student Name" required error={errors.studentName}>
-                  <Input
-                    value={data.studentName}
-                    onChange={(v) => set("studentName", v)}
-                    placeholder="Your child's name"
-                  />
-                </Field>
-              </div>
-
-              {/* Row 3 - Grade + Region */}
-              <div className="grid sm:grid-cols-2 gap-5">
-                <Field label="Student Grade" required error={errors.grade}>
-                  <Select
-                    value={data.grade}
-                    onChange={(v) => set("grade", v)}
-                    placeholder="Select grade"
-                    options={GRADES}
-                  />
-                </Field>
-                <Field label="Learning Region" required error={errors.region}>
-                  <Select
-                    value={data.region}
-                    onChange={(v) => set("region", v)}
-                    placeholder="Select region"
-                    options={REGIONS}
-                  />
-                </Field>
-              </div>
-
-              {/* Row 4 - Class type pills */}
-              <Field label="Class Type" required error={errors.classType}>
-                <PillGroup
-                  value={data.classType}
-                  onChange={(v) => set("classType", v)}
-                  options={CLASS_TYPES}
-                />
-              </Field>
-
-              {/* Row 5 - Subject multi-select */}
-              <Field
-                label="Subject(s) Interested In"
-                required
-                error={errors.subjects}
-                hint={data.subjects.length > 0 ? `${data.subjects.length} selected` : "Choose any number"}
-              >
-                <SubjectMultiSelect selected={data.subjects} onToggle={toggleSubject} />
-              </Field>
-
-              {/* Row 6 - Contact method + time */}
-              <div className="grid sm:grid-cols-2 gap-5">
-                <Field label="Preferred Contact Method">
-                  <PillGroup
-                    value={data.contactMethod}
-                    onChange={(v) => set("contactMethod", v)}
-                    options={CONTACT_METHODS}
-                    compact
-                  />
-                </Field>
-                <Field label="Preferred Contact Time">
-                  <PillGroup
-                    value={data.contactTime}
-                    onChange={(v) => set("contactTime", v)}
-                    options={CONTACT_TIMES}
-                    compact
-                  />
-                </Field>
-              </div>
-
-              {/* Row 7 - Message */}
-              <Field
-                label="Anything else we should know?"
-                hint={`${data.message.length} / ${MESSAGE_MAX}`}
-                error={errors.message}
-              >
-                <Textarea
-                  value={data.message}
-                  onChange={(v) => set("message", v.slice(0, MESSAGE_MAX))}
-                  placeholder="Specific subjects, exam timelines, learning needs..."
-                  rows={4}
-                />
-              </Field>
-            </fieldset>
-
-            {/* Status messages */}
-            <AnimatePresence mode="wait">
-              {status === "error" && (
-                <m.p
-                  key="err"
-                  initial={{ opacity: 0, y: -4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                  role="alert"
-                  className="mt-6 px-4 py-3 rounded-2xl bg-[#FEE2E2] border border-[#FCA5A5] text-[#7F1D1D] text-[13.5px]"
-                >
-                  Please check the required fields and submit again.
-                </m.p>
-              )}
-              {status === "success" && (
-                <m.p
-                  key="ok"
-                  initial={{ opacity: 0, y: -4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                  role="status"
-                  className="mt-6 px-4 py-3 rounded-2xl bg-[#DCFCE7] border border-[#86EFAC] text-[#14532D] text-[13.5px]"
-                >
-                  Thank you for contacting EDUS. Our team will contact you soon with the right learning option.
-                </m.p>
-              )}
-            </AnimatePresence>
-
-            {/* Submit + trust line */}
-            <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-              <button
-                type="submit"
-                disabled={submitting}
-                className="btn btn-primary justify-center min-w-[180px] disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {submitting ? "Sending…" : "Submit Enquiry"}
-                {!submitting && (
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
-                    <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                )}
-              </button>
-              <p className="text-[12.5px] text-[#5A6A82] leading-relaxed">
-                Your details are used only to contact you about EDUS classes.
+        {/* Success state */}
+        <AnimatePresence mode="wait">
+          {submitted ? (
+            <m.div
+              key="success"
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              exit="hidden"
+              className="mt-10 rounded-3xl glass-strong p-8 md:p-12 text-center"
+              role="status"
+              aria-live="polite"
+            >
+              <span className="inline-flex w-14 h-14 rounded-2xl items-center justify-center bg-[#22C55E]/15 text-3xl">
+                ✅
+              </span>
+              <h3 className="heading mt-5" style={{ fontSize: "24px" }}>
+                Thank you for contacting <em>EDUS.</em>
+              </h3>
+              <p className="text-[#2B3950] text-[14.5px] mt-3 leading-[1.65] max-w-md mx-auto">
+                Our team will review your inquiry and contact you with the most suitable class,
+                tutor, or support option within one business day.
               </p>
-            </div>
-          </form>
-        </m.div>
+              <button
+                type="button"
+                onClick={() => setSubmitted(false)}
+                className="btn btn-yellow mt-7"
+              >
+                Send another inquiry
+              </button>
+            </m.div>
+          ) : (
+            <m.form
+              key="form"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={inView}
+              onSubmit={onSubmit}
+              noValidate
+              aria-label="EDUS contact form"
+              className="mt-10 glass-strong rounded-[28px] p-6 md:p-10"
+            >
+              <fieldset className="space-y-5" disabled={submitting}>
+                {/* Row 1 — Name + Phone */}
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <Field label="Your Name" required error={errors.parentName}>
+                    <Input
+                      value={data.parentName}
+                      onChange={(v) => set("parentName", v)}
+                      autoComplete="name"
+                      placeholder="Parent or student name"
+                    />
+                  </Field>
+                  <Field
+                    label="Phone Number"
+                    required
+                    error={errors.phone}
+                    hint="Include country code"
+                  >
+                    <Input
+                      value={data.phone}
+                      onChange={(v) => set("phone", v)}
+                      autoComplete="tel"
+                      inputMode="tel"
+                      type="tel"
+                      placeholder="+94 ..."
+                    />
+                  </Field>
+                </div>
+
+                {/* Row 2 — Email + Region */}
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <Field label="Email" hint="Optional" error={errors.email}>
+                    <Input
+                      value={data.email}
+                      onChange={(v) => set("email", v)}
+                      autoComplete="email"
+                      type="email"
+                      placeholder="name@example.com"
+                    />
+                  </Field>
+                  <Field label="Market / Pathway">
+                    <Select
+                      value={data.region}
+                      onChange={(v) => set("region", v)}
+                      options={REGIONS}
+                      placeholder="Choose one"
+                    />
+                  </Field>
+                </div>
+
+                {/* Message */}
+                <Field
+                  label="How can we help?"
+                  hint={`${data.message.length} / ${MESSAGE_MAX}`}
+                  error={errors.message}
+                >
+                  <textarea
+                    value={data.message}
+                    onChange={(e) => set("message", e.target.value)}
+                    rows={4}
+                    maxLength={MESSAGE_MAX}
+                    placeholder="Tell us about the student, subject, grade, or anything else."
+                    className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] placeholder:text-[#5A6A82] focus:border-[#2563EB] focus:outline-none transition"
+                  />
+                </Field>
+
+                {/* Submit */}
+                <div className="pt-2 flex flex-wrap items-center justify-between gap-4">
+                  <p className="text-[11.5px] text-[#5A6A82] max-w-md leading-[1.5]">
+                    By submitting, you agree to be contacted by EDUS regarding your inquiry, class
+                    options, and student support.
+                  </p>
+                  <button
+                    type="submit"
+                    className="btn btn-primary disabled:opacity-60 disabled:cursor-not-allowed"
+                    disabled={submitting}
+                  >
+                    {submitting ? "Sending..." : "Submit Inquiry"}
+                    {!submitting && (
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+                        <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
+
+                {submitError && (
+                  <p role="alert" className="text-[13px] text-[#DC2626]">
+                    {submitError}
+                  </p>
+                )}
+              </fieldset>
+
+              {/* Divider + Socials */}
+              <div className="mt-8 pt-6 border-t border-[rgba(16,32,51,0.08)]">
+                <p className="text-[11px] uppercase tracking-[0.12em] text-[#5A6A82] font-[family-name:var(--font-display)] font-700 text-center">
+                  Or reach us on social
+                </p>
+                <ul className="mt-4 flex items-center justify-center gap-2">
+                  {SOCIALS.map((s) => (
+                    <li key={s.label}>
+                      <a
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`EDUS on ${s.label}`}
+                        title={`EDUS on ${s.label}`}
+                        className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white border border-[rgba(16,32,51,0.08)] text-[#5A6A82] hover:text-[#2563EB] hover:border-[#2563EB]/40 hover:-translate-y-0.5 transition shadow-[0_4px_12px_-8px_rgba(16,32,51,0.18)]"
+                      >
+                        <SocialIcon name={s.label} />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-4 text-center text-[12px] text-[#5A6A82]">
+                  Email{" "}
+                  <a href="mailto:hello@edustutor.com" className="text-[#2563EB] hover:underline">
+                    hello@edustutor.com
+                  </a>{" "}
+                  ·{" "}
+                  <a href="tel:+94707072072" className="text-[#2563EB] hover:underline">
+                    +94 70 707 2072
+                  </a>
+                </p>
+              </div>
+            </m.form>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
 }
 
 /* ---------------------------------------------------------------- */
-/* Field primitives                                                  */
+/* Form primitives                                                   */
 /* ---------------------------------------------------------------- */
 
 function Field({
-  label, required, hint, error, children,
+  label, required, error, hint, children,
 }: {
   label: string;
   required?: boolean;
-  hint?: string;
   error?: string;
+  hint?: string;
   children: React.ReactNode;
 }) {
   return (
     <label className="block">
-      <span className="flex items-center justify-between mb-2">
-        <span className="text-[13px] font-[family-name:var(--font-sans)] font-600 text-[#102033]">
+      <span className="flex items-baseline justify-between gap-3 mb-2">
+        <span className="text-[12px] font-[family-name:var(--font-display)] font-700 uppercase tracking-[0.10em] text-[#102033]">
           {label}
-          {required && <span aria-hidden className="text-[#EF4444] ml-1">*</span>}
+          {required && <span className="text-[#DC2626] ml-0.5">*</span>}
         </span>
-        {(hint || error) && (
-          <span className={`text-[11.5px] ${error ? "text-[#B91C1C] font-medium" : "text-[#5A6A82]"}`}>
-            {error || hint}
+        {hint && !error && (
+          <span className="text-[10.5px] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+            {hint}
+          </span>
+        )}
+        {error && (
+          <span className="text-[10.5px] text-[#DC2626] font-[family-name:var(--font-display)] font-700">
+            {error}
           </span>
         )}
       </span>
@@ -412,28 +343,25 @@ function Field({
   );
 }
 
-const inputBase =
-  "w-full rounded-2xl px-4 py-3 bg-white border border-[rgba(16,32,51,0.10)] " +
-  "text-[15px] text-[#102033] placeholder:text-[#9AA5BD] " +
-  "shadow-[0_1px_2px_rgba(16,32,51,0.04)] " +
-  "transition-colors transition-shadow " +
-  "focus:outline-none focus:border-[#2563EB] " +
-  "focus:shadow-[0_0_0_4px_rgba(37,99,235,0.15)]";
-
 function Input({
-  value, onChange, type = "text", ...rest
+  value, onChange, type = "text", placeholder, autoComplete, inputMode,
 }: {
   value: string;
   onChange: (v: string) => void;
   type?: string;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange" | "type">) {
+  placeholder?: string;
+  autoComplete?: string;
+  inputMode?: "tel" | "email" | "text" | "numeric" | "decimal";
+}) {
   return (
     <input
       type={type}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className={inputBase}
-      {...rest}
+      placeholder={placeholder}
+      autoComplete={autoComplete}
+      inputMode={inputMode}
+      className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] placeholder:text-[#5A6A82] focus:border-[#2563EB] focus:outline-none transition"
     />
   );
 }
@@ -444,121 +372,73 @@ function Select({
   value: string;
   onChange: (v: string) => void;
   options: string[];
-  placeholder: string;
+  placeholder?: string;
 }) {
   return (
-    <div className="relative">
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className={`${inputBase} appearance-none pr-10 cursor-pointer`}
-      >
-        <option value="">{placeholder}</option>
-        {options.map((o) => (
-          <option key={o} value={o}>{o}</option>
-        ))}
-      </select>
-      <svg
-        aria-hidden
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-[#5A6A82]"
-        width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"
-      >
-        <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </div>
-  );
-}
-
-function Textarea({
-  value, onChange, ...rest
-}: {
-  value: string;
-  onChange: (v: string) => void;
-} & Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "value" | "onChange">) {
-  return (
-    <textarea
+    <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className={`${inputBase} resize-y min-h-[112px]`}
-      {...rest}
-    />
-  );
-}
-
-function PillGroup({
-  value, onChange, options, compact = false,
-}: {
-  value: string;
-  onChange: (v: string) => void;
-  options: string[];
-  compact?: boolean;
-}) {
-  return (
-    <div className="flex flex-wrap gap-2">
-      {options.map((o) => {
-        const active = value === o;
-        return (
-          <button
-            type="button"
-            key={o}
-            onClick={() => onChange(active ? "" : o)}
-            aria-pressed={active}
-            className={`px-4 py-2 rounded-full ${compact ? "text-[12.5px]" : "text-[13.5px]"} font-medium font-[family-name:var(--font-sans)] transition border ${
-              active
-                ? "bg-[#2563EB] text-white border-[#2563EB] shadow-[0_8px_18px_-6px_rgba(37,99,235,0.45)]"
-                : "bg-white text-[#2B3950] border-[rgba(16,32,51,0.12)] hover:border-[rgba(37,99,235,0.45)] hover:text-[#102033]"
-            }`}
-          >
-            {o}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
-function SubjectMultiSelect({
-  selected, onToggle,
-}: {
-  selected: string[];
-  onToggle: (subject: string) => void;
-}) {
-  return (
-    <div
-      role="group"
-      aria-label="Subjects"
-      className="rounded-2xl bg-white border border-[rgba(16,32,51,0.10)] p-4 max-h-[280px] overflow-y-auto"
+      className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] focus:border-[#2563EB] focus:outline-none transition appearance-none"
+      style={{
+        backgroundImage:
+          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235A6A82' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "right 1rem center",
+        paddingRight: "2.5rem",
+      }}
     >
-      <div className="space-y-4">
-        {SUBJECT_GROUPS.map((g) => (
-          <div key={g.label}>
-            <p className="text-[10.5px] font-[family-name:var(--font-display)] font-600 tracking-[0.14em] uppercase text-[#5A6A82] mb-2">
-              {g.label}
-            </p>
-            <div className="flex flex-wrap gap-1.5">
-              {g.subjects.map((s) => {
-                const active = selected.includes(s);
-                return (
-                  <button
-                    type="button"
-                    key={s}
-                    onClick={() => onToggle(s)}
-                    aria-pressed={active}
-                    className={`px-3 py-1.5 rounded-full text-[12.5px] font-medium transition border ${
-                      active
-                        ? "bg-[#EEF6FF] text-[#1D4ED8] border-[#2563EB]"
-                        : "bg-white text-[#2B3950] border-[rgba(16,32,51,0.10)] hover:border-[rgba(37,99,235,0.45)]"
-                    }`}
-                  >
-                    {active && <span aria-hidden className="mr-1">✓</span>}
-                    {s}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+      <option value="">{placeholder ?? "Select"}</option>
+      {options.map((o) => (
+        <option key={o} value={o}>{o}</option>
+      ))}
+    </select>
   );
+}
+
+/* ---------------------------------------------------------------- */
+/* Social icons - matches SiteFooter SVG set                         */
+/* ---------------------------------------------------------------- */
+
+function SocialIcon({ name }: { name: string }) {
+  const common = {
+    width: 16,
+    height: 16,
+    viewBox: "0 0 24 24",
+    fill: "currentColor",
+    "aria-hidden": true,
+  };
+  switch (name) {
+    case "Facebook":
+      return (
+        <svg {...common}>
+          <path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.3-1.5 1.5-1.5h1.7V3.7c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.2v2.1H7.5V13h2.8v8h3.2z" />
+        </svg>
+      );
+    case "Instagram":
+      return (
+        <svg {...common}>
+          <path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 2C8.9 4.2 8.5 4.2 7.3 4.3c-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.3.8-.4.4-.6.8-.8 1.3-.2.4-.3 1-.4 2.1C2.6 9.5 2.6 9.9 2.6 12s0 2.5.1 3.1c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.3.4.4.8.6 1.3.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.3-.8.4-.4.6-.8.8-1.3.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.3-.4-.4-.8-.6-1.3-.8-.4-.2-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1zm0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8zm0 7.2a2.8 2.8 0 1 0 0-5.6 2.8 2.8 0 0 0 0 5.6zm5.6-7.4a1 1 0 1 1-2.1 0 1 1 0 0 1 2.1 0z" />
+        </svg>
+      );
+    case "TikTok":
+      return (
+        <svg {...common}>
+          <path d="M20 8.6c-1.7 0-3.3-.6-4.5-1.7v7.6c0 3.2-2.6 5.8-5.8 5.8-3.2 0-5.8-2.6-5.8-5.8 0-3.2 2.6-5.8 5.8-5.8.3 0 .6 0 .9.1v3.1c-.3-.1-.6-.1-.9-.1-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7V2.2h3c.1 1 .4 1.9.9 2.7.5.7 1.2 1.3 2 1.7.8.4 1.6.6 2.5.6v3.4z" />
+        </svg>
+      );
+    case "YouTube":
+      return (
+        <svg {...common}>
+          <path d="M23 7.2s-.2-1.5-.9-2.2c-.9-.9-1.9-.9-2.4-1C16.4 3.8 12 3.8 12 3.8s-4.4 0-7.7.2c-.5.1-1.5.1-2.4 1C1.2 5.7 1 7.2 1 7.2S.8 9 .8 10.8v1.6C.8 14.2 1 16 1 16s.2 1.5.9 2.2c.9.9 2.1.9 2.6 1 1.9.2 7.5.2 7.5.2s4.4 0 7.7-.3c.5-.1 1.5-.1 2.4-1 .7-.7.9-2.2.9-2.2s.2-1.8.2-3.6v-1.6c0-1.8-.2-3.6-.2-3.6zM9.7 14.5V8l5.7 3.3-5.7 3.2z" />
+        </svg>
+      );
+    case "LinkedIn":
+      return (
+        <svg {...common}>
+          <path d="M20.5 2h-17C2.7 2 2 2.7 2 3.5v17c0 .8.7 1.5 1.5 1.5h17c.8 0 1.5-.7 1.5-1.5v-17c0-.8-.7-1.5-1.5-1.5zM8 19H5V9h3v10zM6.5 7.7C5.6 7.7 4.9 7 4.9 6.1S5.6 4.5 6.5 4.5s1.6.7 1.6 1.6S7.4 7.7 6.5 7.7zM19 19h-3v-5.3c0-1.3-.5-2.2-1.6-2.2-.9 0-1.4.6-1.6 1.2-.1.2-.1.5-.1.8V19h-3V9h3v1.4c.4-.6 1.1-1.5 2.7-1.5 2 0 3.6 1.3 3.6 4.1V19z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
 }
