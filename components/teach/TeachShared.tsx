@@ -101,7 +101,7 @@ export function PlainCard({
       >
         {icon}
       </span>
-      <h3 className="mt-3 font-[family-name:var(--font-display)] font-700 text-[15px] text-[#102033] leading-tight">
+      <h3 className="mt-3 font-display font-700 text-[15px] text-[#102033] leading-tight">
         {title}
       </h3>
       <p className="text-[13px] text-[#5A6A82] mt-1.5 leading-[1.6]">{body}</p>

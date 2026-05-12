@@ -73,7 +73,7 @@ export function TeachQA() {
                   className="inline-block w-2 h-2 rounded-full"
                   style={{ background: q.tint }}
                 />
-                <p className="font-[family-name:var(--font-display)] font-700 text-[13.5px] text-[#102033] leading-tight">
+                <p className="font-display font-700 text-[13.5px] text-[#102033] leading-tight">
                   {q.title}
                 </p>
               </div>
@@ -105,7 +105,7 @@ export function TeachQA() {
               {REPORT_SECTIONS.map((s) => (
                 <li
                   key={s}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[rgba(16,32,51,0.08)] text-[12px] text-[#102033] font-[family-name:var(--font-display)] font-600 shadow-[0_4px_12px_-8px_rgba(16,32,51,0.18)]"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[rgba(16,32,51,0.08)] text-[12px] text-[#102033] font-display font-600 shadow-[0_4px_12px_-8px_rgba(16,32,51,0.18)]"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" />
                   {s}
@@ -154,11 +154,11 @@ function ReportMock() {
             <span className="inline-flex w-2 h-2 rounded-full bg-[#FF5F57]" />
             <span className="inline-flex w-2 h-2 rounded-full bg-[#FFBD2E]" />
             <span className="inline-flex w-2 h-2 rounded-full bg-[#28C840]" />
-            <p className="ml-2 text-[11px] uppercase tracking-[0.10em] font-[family-name:var(--font-display)] font-700 text-[#102033]">
+            <p className="ml-2 text-[11px] uppercase tracking-widest font-display font-700 text-[#102033]">
               Tutor Monthly Report
             </p>
           </div>
-          <span className="text-[11px] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+          <span className="text-[11px] text-[#5A6A82] font-display font-600">
             Cycle · Nov 2025
           </span>
         </div>
@@ -170,11 +170,11 @@ function ReportMock() {
               key={k.label}
               className="rounded-xl bg-white border border-[rgba(16,32,51,0.08)] p-3"
             >
-              <p className="text-[10px] uppercase tracking-[0.08em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+              <p className="text-[10px] uppercase tracking-[0.08em] text-[#5A6A82] font-display font-600">
                 {k.label}
               </p>
               <p
-                className="font-[family-name:var(--font-display)] font-800 text-[17px] leading-tight mt-1"
+                className="font-display font-800 text-[17px] leading-tight mt-1"
                 style={{ color: k.tint }}
               >
                 {k.value}
@@ -194,10 +194,10 @@ function ReportMock() {
           {/* Attendance bar chart */}
           <div className="sm:col-span-3 rounded-xl bg-white border border-[rgba(16,32,51,0.08)] p-4">
             <div className="flex items-baseline justify-between">
-              <p className="text-[11px] uppercase tracking-[0.08em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+              <p className="text-[11px] uppercase tracking-[0.08em] text-[#5A6A82] font-display font-600">
                 Weekly Attendance
               </p>
-              <p className="font-[family-name:var(--font-display)] font-800 text-[12.5px] text-[#102033]">
+              <p className="font-display font-800 text-[12.5px] text-[#102033]">
                 94% <span className="text-[10.5px] text-[#22C55E] ml-1 font-700">▲ 4%</span>
               </p>
             </div>
@@ -214,7 +214,7 @@ function ReportMock() {
                           : "rgba(37,99,235,0.22)",
                     }}
                   />
-                  <span className="text-[9.5px] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+                  <span className="text-[9.5px] text-[#5A6A82] font-display font-600">
                     {s.day}
                   </span>
                 </div>
@@ -245,10 +245,10 @@ function ReportMock() {
               </text>
             </svg>
             <div className="leading-tight">
-              <p className="text-[10px] uppercase tracking-[0.08em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+              <p className="text-[10px] uppercase tracking-[0.08em] text-[#5A6A82] font-display font-600">
                 QA Grade
               </p>
-              <p className="font-[family-name:var(--font-display)] font-800 text-[15px] text-[#102033] mt-1">
+              <p className="font-display font-800 text-[15px] text-[#102033] mt-1">
                 Excellent
               </p>
               <p className="text-[11px] text-[#5A6A82] mt-0.5">Top 12% of tutors</p>
@@ -260,7 +260,7 @@ function ReportMock() {
         <div className="px-5 mt-3 pb-5 grid sm:grid-cols-5 gap-3">
           {/* Payment summary */}
           <div className="sm:col-span-3 rounded-xl bg-white border border-[rgba(16,32,51,0.08)] p-4">
-            <p className="text-[11px] uppercase tracking-[0.08em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+            <p className="text-[11px] uppercase tracking-[0.08em] text-[#5A6A82] font-display font-600">
               Payment Summary
             </p>
             <div className="mt-2 grid grid-cols-3 gap-2">
@@ -269,11 +269,11 @@ function ReportMock() {
               <PayItem label="Deductions"  value="-1%"  tint="#FACC15" />
             </div>
             <div className="mt-3 pt-3 border-t border-[rgba(16,32,51,0.06)] flex items-center justify-between">
-              <span className="text-[11px] uppercase tracking-[0.08em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+              <span className="text-[11px] uppercase tracking-[0.08em] text-[#5A6A82] font-display font-600">
                 Final Payable
               </span>
               <span
-                className="font-[family-name:var(--font-display)] font-800 text-[14px]"
+                className="font-display font-800 text-[14px]"
                 style={{
                   background: "linear-gradient(90deg,#2563EB 0%,#6E5BC8 100%)",
                   WebkitBackgroundClip: "text",
@@ -295,14 +295,14 @@ function ReportMock() {
             }}
           >
             <div>
-              <p className="text-[10px] uppercase tracking-[0.08em] text-[#2563EB] font-[family-name:var(--font-display)] font-700">
+              <p className="text-[10px] uppercase tracking-[0.08em] text-[#2563EB] font-display font-700">
                 Academic Remark
               </p>
               <p className="text-[12.5px] text-[#102033] mt-1.5 leading-[1.55]">
                 Strong concept delivery and high student engagement. Continue.
               </p>
             </div>
-            <span className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-[family-name:var(--font-display)] font-700 text-[#22C55E]">
+            <span className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-display font-700 text-[#22C55E]">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="3" aria-hidden>
                 <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -318,11 +318,11 @@ function ReportMock() {
 function PayItem({ label, value, tint }: { label: string; value: string; tint: string }) {
   return (
     <div className="rounded-lg bg-white border border-[rgba(16,32,51,0.06)] p-2">
-      <p className="text-[9.5px] uppercase tracking-[0.06em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+      <p className="text-[9.5px] uppercase tracking-[0.06em] text-[#5A6A82] font-display font-600">
         {label}
       </p>
       <p
-        className="font-[family-name:var(--font-display)] font-800 text-[13px] leading-none mt-1"
+        className="font-display font-800 text-[13px] leading-none mt-1"
         style={{ color: tint }}
       >
         {value}

@@ -193,7 +193,7 @@ export function ContactForm() {
             >
               <fieldset className="space-y-5" disabled={submitting}>
                 {/* Honeypot — hidden from real users, bots will fill it */}
-                <div aria-hidden className="absolute -left-[9999px] w-px h-px overflow-hidden" style={{ visibility: "hidden" }}>
+                <div aria-hidden className="absolute left-[-9999px] w-px h-px overflow-hidden" style={{ visibility: "hidden" }}>
                   <label>
                     Company (leave blank)
                     <input
@@ -266,13 +266,13 @@ export function ContactForm() {
                     rows={4}
                     maxLength={MESSAGE_MAX}
                     placeholder="Tell us about the student, subject, grade, or anything else."
-                    className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] placeholder:text-[#5A6A82] focus:border-[#2563EB] focus:outline-none transition"
+                    className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] placeholder:text-[#5A6A82] focus:border-[#2563EB] focus:outline-hidden transition"
                   />
                 </Field>
 
                 {/* Submit */}
                 <div className="pt-2 flex flex-wrap items-center justify-between gap-4">
-                  <p className="text-[11.5px] text-[#5A6A82] max-w-md leading-[1.5]">
+                  <p className="text-[11.5px] text-[#5A6A82] max-w-md leading-normal">
                     By submitting, you agree to be contacted by EDUS regarding your inquiry, class
                     options, and student support.
                   </p>
@@ -299,7 +299,7 @@ export function ContactForm() {
 
               {/* Divider + Socials */}
               <div className="mt-8 pt-6 border-t border-[rgba(16,32,51,0.08)]">
-                <p className="text-[11px] uppercase tracking-[0.12em] text-[#5A6A82] font-[family-name:var(--font-display)] font-700 text-center">
+                <p className="text-[11px] uppercase tracking-[0.12em] text-[#5A6A82] font-display font-700 text-center">
                   Or reach us on social
                 </p>
                 <ul className="mt-4 flex items-center justify-center gap-2">
@@ -353,17 +353,17 @@ function Field({
   return (
     <label className="block">
       <span className="flex items-baseline justify-between gap-3 mb-2">
-        <span className="text-[12px] font-[family-name:var(--font-display)] font-700 uppercase tracking-[0.10em] text-[#102033]">
+        <span className="text-[12px] font-display font-700 uppercase tracking-widest text-[#102033]">
           {label}
           {required && <span className="text-[#DC2626] ml-0.5">*</span>}
         </span>
         {hint && !error && (
-          <span className="text-[10.5px] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+          <span className="text-[10.5px] text-[#5A6A82] font-display font-600">
             {hint}
           </span>
         )}
         {error && (
-          <span className="text-[10.5px] text-[#DC2626] font-[family-name:var(--font-display)] font-700">
+          <span className="text-[10.5px] text-[#DC2626] font-display font-700">
             {error}
           </span>
         )}
@@ -391,7 +391,7 @@ function Input({
       placeholder={placeholder}
       autoComplete={autoComplete}
       inputMode={inputMode}
-      className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] placeholder:text-[#5A6A82] focus:border-[#2563EB] focus:outline-none transition"
+      className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] placeholder:text-[#5A6A82] focus:border-[#2563EB] focus:outline-hidden transition"
     />
   );
 }
@@ -408,7 +408,7 @@ function Select({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] focus:border-[#2563EB] focus:outline-none transition appearance-none"
+      className="w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] focus:border-[#2563EB] focus:outline-hidden transition appearance-none"
       style={{
         backgroundImage:
           "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235A6A82' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",

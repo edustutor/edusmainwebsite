@@ -83,7 +83,7 @@ function RequirementCol({
         >
           {icon}
         </span>
-        <h3 className="font-[family-name:var(--font-display)] font-700 text-[16px] text-[#102033]">
+        <h3 className="font-display font-700 text-[16px] text-[#102033]">
           {name} Requirements
         </h3>
       </div>
@@ -96,7 +96,7 @@ function RequirementCol({
               </svg>
             </span>
             <div className="min-w-0">
-              <p className="font-[family-name:var(--font-display)] font-700 text-[13.5px] text-[#102033] leading-tight">
+              <p className="font-display font-700 text-[13.5px] text-[#102033] leading-tight">
                 {r.title}
               </p>
               <p className="text-[12.5px] text-[#5A6A82] mt-0.5 leading-[1.55]">{r.body}</p>

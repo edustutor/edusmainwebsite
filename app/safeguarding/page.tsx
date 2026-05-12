@@ -184,7 +184,7 @@ export default function SafeguardingPage() {
 
 function H2({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-[family-name:var(--font-display)] font-700 text-[#102033] text-[22px] leading-[1.3] tracking-[-0.01em] mt-8 mb-2">
+    <h2 className="font-display font-700 text-[#102033] text-[22px] leading-[1.3] tracking-[-0.01em] mt-8 mb-2">
       {children}
     </h2>
   );

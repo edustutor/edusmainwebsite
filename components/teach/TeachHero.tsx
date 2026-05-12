@@ -76,7 +76,7 @@ export function TeachHero() {
               <Link href="#requirements" className="btn btn-yellow">Learn Tutor Requirements</Link>
             </m.div>
 
-            <p className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+            <p className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-display font-600">
               Quality-Assured · Academically Supported · Performance Reviewed
             </p>
           </div>
@@ -106,7 +106,7 @@ function HeroStatBoard() {
           filter: "blur(40px)",
         }}
       />
-      <div className="relative rounded-[28px] bg-gradient-to-br from-[#EEF6FF] via-white to-[#F4EEFF] border border-white/80 shadow-[0_30px_80px_-30px_rgba(16,32,51,0.20)] p-6 md:p-7">
+      <div className="relative rounded-[28px] bg-linear-to-br from-[#EEF6FF] via-white to-[#F4EEFF] border border-white/80 shadow-[0_30px_80px_-30px_rgba(16,32,51,0.20)] p-6 md:p-7">
         <div className="grid grid-cols-2 gap-3">
           <StatTile k="5+ yrs" v="In Online Education" tint="#2563EB" />
           <StatTile k="7,000+" v="Students Supported" tint="#8B5CF6" />
@@ -115,10 +115,10 @@ function HeroStatBoard() {
         </div>
         <div className="mt-4 rounded-2xl bg-white border border-[rgba(16,32,51,0.08)] p-4">
           <div className="flex items-baseline justify-between">
-            <p className="text-[11px] uppercase tracking-[0.10em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+            <p className="text-[11px] uppercase tracking-widest text-[#5A6A82] font-display font-600">
               Tutor Network Growth
             </p>
-            <p className="font-[family-name:var(--font-display)] font-800 text-[14px] text-[#102033]">
+            <p className="font-display font-800 text-[14px] text-[#102033]">
               +42%<span className="text-[10.5px] text-[#5A6A82] ml-1 font-600">YoY</span>
             </p>
           </div>
@@ -143,7 +143,7 @@ function StatTile({ k, v, tint }: { k: string; v: string; tint: string }) {
   return (
     <div className="rounded-2xl bg-white border border-[rgba(16,32,51,0.08)] p-4">
       <p
-        className="font-[family-name:var(--font-display)] font-800 text-[20px] leading-none"
+        className="font-display font-800 text-[20px] leading-none"
         style={{ color: tint }}
       >
         {k}

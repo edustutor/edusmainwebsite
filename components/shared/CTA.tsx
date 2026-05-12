@@ -81,7 +81,7 @@ export function CTA() {
                   whileHover={{ y: -2, transition: { duration: 0.2 } }}
                   className="rounded-2xl bg-white/85 border border-[rgba(16,32,51,0.10)] px-3 py-3.5 text-center shadow-[0_2px_8px_-4px_rgba(16,32,51,0.06)]"
                 >
-                  <p className="font-[family-name:var(--font-display)] font-700 text-[18px] text-[#102033]">{s.k}</p>
+                  <p className="font-display font-700 text-[18px] text-[#102033]">{s.k}</p>
                   <p className="text-[11.5px] text-[#5A6A82] mt-0.5">{s.v}</p>
                 </m.div>
               ))}

@@ -38,7 +38,7 @@ export function TeachPayments() {
               className="bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-5 shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)]"
             >
               <span className="text-2xl" aria-hidden>{c.icon}</span>
-              <p className="mt-3 font-[family-name:var(--font-display)] font-700 text-[14px] text-[#102033] leading-tight">
+              <p className="mt-3 font-display font-700 text-[14px] text-[#102033] leading-tight">
                 {c.title}
               </p>
               <p className="text-[12.5px] text-[#5A6A82] mt-1.5 leading-[1.55]">{c.body}</p>

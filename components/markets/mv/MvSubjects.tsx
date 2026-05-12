@@ -55,25 +55,25 @@ export function MvSubjects() {
                   {s.icon}
                 </span>
                 <span
-                  className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-[family-name:var(--font-display)] font-700"
+                  className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-display font-700"
                   style={{ background: `${s.tint}15`, color: s.tint }}
                 >
                   {s.code}
                 </span>
               </div>
-              <h3 className="mt-3 font-[family-name:var(--font-display)] font-700 text-[15px] text-[#102033] leading-tight">
+              <h3 className="mt-3 font-display font-700 text-[15px] text-[#102033] leading-tight">
                 {s.short}
               </h3>
               <p className="text-[11.5px] text-[#5A6A82] mt-1 leading-tight">{s.name}</p>
               <p className="text-[12px] text-[#2B3950] mt-3 leading-[1.55] flex-1">{s.topics}</p>
               <div className="mt-4 pt-3 border-t border-[rgba(16,32,51,0.06)] flex items-baseline justify-between">
                 <p
-                  className="font-[family-name:var(--font-display)] font-800 text-[20px] leading-none"
+                  className="font-display font-800 text-[20px] leading-none"
                   style={{ color: s.tint }}
                 >
                   ${s.price}
                 </p>
-                <p className="text-[10.5px] text-[#5A6A82] uppercase tracking-[0.08em] font-[family-name:var(--font-display)] font-600">
+                <p className="text-[10.5px] text-[#5A6A82] uppercase tracking-[0.08em] font-display font-600">
                   / hour
                 </p>
               </div>
@@ -90,7 +90,7 @@ export function MvSubjects() {
                 Match the <em>plan</em> to your child&apos;s goal.
               </h3>
             </div>
-            <p className="text-[12px] uppercase tracking-[0.10em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+            <p className="text-[12px] uppercase tracking-widest text-[#5A6A82] font-display font-600">
               Per-hour · USD billing
             </p>
           </div>
@@ -105,11 +105,11 @@ export function MvSubjects() {
                   className="inline-block w-2.5 h-2.5 rounded-full"
                   style={{ background: p.tint }}
                 />
-                <p className="mt-2.5 font-[family-name:var(--font-display)] font-700 text-[13.5px] text-[#102033] leading-tight">
+                <p className="mt-2.5 font-display font-700 text-[13.5px] text-[#102033] leading-tight">
                   {p.need}
                 </p>
                 <p
-                  className="font-[family-name:var(--font-display)] font-800 text-[15px] mt-1.5"
+                  className="font-display font-800 text-[15px] mt-1.5"
                   style={{ color: p.tint }}
                 >
                   {p.hours}
@@ -124,7 +124,7 @@ export function MvSubjects() {
 
           <MvCtaRow />
 
-          <p className="mt-4 text-center text-[11px] uppercase tracking-[0.12em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+          <p className="mt-4 text-center text-[11px] uppercase tracking-[0.12em] text-[#5A6A82] font-display font-600">
             <a href={MV_SIGNUP} target="_blank" rel="noopener noreferrer" className="hover:text-[#2563EB] transition">
               Register for Maldives Online Classes ↗
             </a>

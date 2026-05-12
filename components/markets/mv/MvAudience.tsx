@@ -89,7 +89,7 @@ function AudienceCard({
         >
           {icon}
         </span>
-        <h3 className="font-[family-name:var(--font-display)] font-700 text-[18px] text-[#102033] leading-tight">
+        <h3 className="font-display font-700 text-[18px] text-[#102033] leading-tight">
           {title}
         </h3>
       </div>

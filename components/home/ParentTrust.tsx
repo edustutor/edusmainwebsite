@@ -74,7 +74,7 @@ export function ParentTrust() {
               className="glass rounded-[22px] p-6 relative overflow-hidden"
             >
               <div className="flex items-start gap-4">
-                <span className="inline-flex w-10 h-10 rounded-2xl items-center justify-center bg-[#EEF6FF] text-[#2563EB] font-[family-name:var(--font-display)] font-700 text-[14px] shrink-0">
+                <span className="inline-flex w-10 h-10 rounded-2xl items-center justify-center bg-[#EEF6FF] text-[#2563EB] font-display font-700 text-[14px] shrink-0">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>

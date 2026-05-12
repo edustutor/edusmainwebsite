@@ -46,7 +46,7 @@ export function TeachStats() {
                 style={{ background: s.tint }}
               />
               <p
-                className="font-[family-name:var(--font-display)] font-800 text-[22px] leading-tight"
+                className="font-display font-800 text-[22px] leading-tight"
                 style={{ color: s.tint }}
               >
                 {s.k}

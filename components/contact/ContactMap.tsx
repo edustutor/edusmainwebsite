@@ -17,7 +17,7 @@ export function ContactMap() {
         <div className="mt-10 grid lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
           {/* Sri Lanka map (live embed) */}
           <div className="lg:col-span-2 rounded-2xl overflow-hidden bg-white border border-[rgba(16,32,51,0.08)] shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)]">
-            <div className="relative w-full aspect-[16/10]">
+            <div className="relative w-full aspect-16/10">
               <iframe
                 title="EDUS Sri Lanka head office - Kokkuvil Junction, Jaffna"
                 src="https://www.google.com/maps?q=EDUS+Online+Tuition,+No+95+K.K.S+Road,+Kokkuvil+Junction,+Jaffna&output=embed"
@@ -29,7 +29,7 @@ export function ContactMap() {
             </div>
             <div className="p-4 flex items-center justify-between flex-wrap gap-2">
               <div>
-                <p className="font-[family-name:var(--font-display)] font-700 text-[14px] text-[#102033]">
+                <p className="font-display font-700 text-[14px] text-[#102033]">
                   🇱🇰 EDUS Sri Lanka Head Office
                 </p>
                 <p className="text-[12px] text-[#5A6A82] mt-0.5">
@@ -40,7 +40,7 @@ export function ContactMap() {
                 href="https://www.google.com/maps/place/EDUS+Online+Tuition/@9.6945511,80.0139866,1102m/data=!3m1!1e3!4m6!3m5!1s0x3afe5583ee8b8b25:0xa0dd266c1a635c2!8m2!3d9.6945511!4d80.0139866!16s%2Fg%2F11rxydcz_s"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[12px] font-[family-name:var(--font-display)] font-700 text-[#2563EB] hover:underline"
+                className="inline-flex items-center gap-1.5 text-[12px] font-display font-700 text-[#2563EB] hover:underline"
               >
                 Get directions
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
@@ -89,13 +89,13 @@ function RemoteCard({
     <article className="bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-5 shadow-[0_10px_28px_-20px_rgba(16,32,51,0.18)]">
       <div className="flex items-center gap-2.5">
         <span className="text-2xl shrink-0">{flag}</span>
-        <h3 className="font-[family-name:var(--font-display)] font-700 text-[14px] text-[#102033] leading-tight">
+        <h3 className="font-display font-700 text-[14px] text-[#102033] leading-tight">
           {title}
         </h3>
       </div>
       <p className="text-[12.5px] text-[#5A6A82] mt-3 leading-[1.6]">{body}</p>
       <p
-        className="mt-3 text-[10.5px] uppercase tracking-[0.08em] font-[family-name:var(--font-display)] font-700"
+        className="mt-3 text-[10.5px] uppercase tracking-[0.08em] font-display font-700"
         style={{ color: tint }}
       >
         Online support only

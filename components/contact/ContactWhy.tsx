@@ -24,7 +24,7 @@ export function ContactWhy() {
               >
                 {w.icon}
               </span>
-              <h3 className="mt-4 font-[family-name:var(--font-display)] font-700 text-[14.5px] text-[#102033] leading-tight">
+              <h3 className="mt-4 font-display font-700 text-[14.5px] text-[#102033] leading-tight">
                 {w.title}
               </h3>
               <p className="text-[12.5px] text-[#5A6A82] mt-2 leading-[1.6]">{w.body}</p>

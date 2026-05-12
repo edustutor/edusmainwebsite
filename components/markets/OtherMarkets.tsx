@@ -88,11 +88,11 @@ export function OtherMarkets({ current }: { current: MarketCode }) {
                   {m.flag}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="font-[family-name:var(--font-display)] font-700 text-[15px] text-[#102033] leading-tight">
+                  <p className="font-display font-700 text-[15px] text-[#102033] leading-tight">
                     {m.title}
                   </p>
                   <p
-                    className="text-[10.5px] uppercase tracking-[0.08em] font-[family-name:var(--font-display)] font-700 mt-1 leading-[1.45]"
+                    className="text-[10.5px] uppercase tracking-[0.08em] font-display font-700 mt-1 leading-[1.45]"
                     style={{ color: m.tint }}
                   >
                     {m.tag}
@@ -100,7 +100,7 @@ export function OtherMarkets({ current }: { current: MarketCode }) {
                 </div>
               </div>
               <p
-                className="mt-auto pt-4 inline-flex items-center gap-1.5 text-[12.5px] font-[family-name:var(--font-display)] font-700"
+                className="mt-auto pt-4 inline-flex items-center gap-1.5 text-[12.5px] font-display font-700"
                 style={{ color: m.tint }}
               >
                 Explore {m.title}

@@ -41,12 +41,12 @@ export function GlPromise() {
                 style={{ background: p.tint }}
               />
               <p
-                className="font-[family-name:var(--font-display)] font-800 text-[12px] tracking-[0.16em] uppercase"
+                className="font-display font-800 text-[12px] tracking-[0.16em] uppercase"
                 style={{ color: p.tint }}
               >
                 Step {p.n}
               </p>
-              <h3 className="mt-2 font-[family-name:var(--font-display)] font-700 text-[20px] text-[#102033] leading-tight">
+              <h3 className="mt-2 font-display font-700 text-[20px] text-[#102033] leading-tight">
                 {p.title}
               </h3>
               <p className="text-[13.5px] text-[#5A6A82] mt-2 leading-[1.6]">{p.body}</p>

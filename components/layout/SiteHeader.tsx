@@ -168,7 +168,7 @@ export function SiteHeader() {
               aria-label="Menu"
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
-              className="lg:hidden ml-1 inline-flex items-center justify-center w-9 h-9 rounded-full border border-[rgba(16,32,51,0.10)] bg-white/70 backdrop-blur text-[#102033]"
+              className="lg:hidden ml-1 inline-flex items-center justify-center w-9 h-9 rounded-full border border-[rgba(16,32,51,0.10)] bg-white/70 backdrop-blur-sm text-[#102033]"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                 {open ? (

@@ -52,12 +52,12 @@ export function MvIslands() {
               </span>
               <div className="min-w-0">
                 <h3
-                  className="font-[family-name:var(--font-display)] font-700 text-[15px] text-[#102033] leading-tight"
+                  className="font-display font-700 text-[15px] text-[#102033] leading-tight"
                   aria-label={`Online tuition ${i.name}`}
                 >
                   {i.name}
                 </h3>
-                <p className="text-[12px] uppercase tracking-[0.08em] mt-1 font-[family-name:var(--font-display)] font-600" style={{ color: i.tint }}>
+                <p className="text-[12px] uppercase tracking-[0.08em] mt-1 font-display font-600" style={{ color: i.tint }}>
                   {i.note} · Online Tuition
                 </p>
               </div>

@@ -101,7 +101,7 @@ export function LearningExperience() {
 
         {/* ---------- Desktop: orbital diagram ---------- */}
         <div className="hidden lg:block mt-10">
-          <div className="relative mx-auto w-full max-w-[1100px] aspect-[16/11]">
+          <div className="relative mx-auto w-full max-w-[1100px] aspect-16/11">
             {/* Faint dashed orbit ring */}
             <svg
               aria-hidden
@@ -211,7 +211,7 @@ function OrbitPill({
       <article className="relative bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl px-4 py-3.5 shadow-[0_18px_40px_-20px_rgba(16,32,51,0.20)] flex items-start gap-3">
         {/* Number badge */}
         <span
-          className="absolute -top-2.5 -right-2.5 w-8 h-8 rounded-full text-[11.5px] font-[family-name:var(--font-display)] font-700 text-white inline-flex items-center justify-center shadow-[0_6px_14px_rgba(16,32,51,0.22)]"
+          className="absolute -top-2.5 -right-2.5 w-8 h-8 rounded-full text-[11.5px] font-display font-700 text-white inline-flex items-center justify-center shadow-[0_6px_14px_rgba(16,32,51,0.22)]"
           style={{ background: feature.tint }}
         >
           {feature.n}
@@ -224,10 +224,10 @@ function OrbitPill({
           {feature.icon}
         </span>
         <div className="min-w-0">
-          <p className="font-[family-name:var(--font-display)] font-700 text-[14px] text-[#102033] leading-tight">
+          <p className="font-display font-700 text-[14px] text-[#102033] leading-tight">
             {feature.title}
           </p>
-          <p className="text-[12px] text-[#5A6A82] mt-1 leading-[1.5]">{feature.body}</p>
+          <p className="text-[12px] text-[#5A6A82] mt-1 leading-normal">{feature.body}</p>
         </div>
       </article>
 
@@ -249,7 +249,7 @@ function FeatureCard({ feature }: { feature: (typeof FEATURES)[number] }) {
   return (
     <article className="relative bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-5 shadow-[0_18px_40px_-20px_rgba(16,32,51,0.18)]">
       <span
-        className="absolute -top-2.5 -right-2.5 w-8 h-8 rounded-full text-[11.5px] font-[family-name:var(--font-display)] font-700 text-white inline-flex items-center justify-center shadow-[0_6px_14px_rgba(16,32,51,0.22)]"
+        className="absolute -top-2.5 -right-2.5 w-8 h-8 rounded-full text-[11.5px] font-display font-700 text-white inline-flex items-center justify-center shadow-[0_6px_14px_rgba(16,32,51,0.22)]"
         style={{ background: feature.tint }}
       >
         {feature.n}
@@ -263,7 +263,7 @@ function FeatureCard({ feature }: { feature: (typeof FEATURES)[number] }) {
           {feature.icon}
         </span>
         <div className="min-w-0">
-          <h3 className="font-[family-name:var(--font-display)] font-700 text-[15px] text-[#102033] leading-tight">
+          <h3 className="font-display font-700 text-[15px] text-[#102033] leading-tight">
             {feature.title}
           </h3>
           <p className="text-[12.5px] text-[#5A6A82] mt-1.5 leading-[1.55]">{feature.body}</p>

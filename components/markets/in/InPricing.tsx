@@ -27,24 +27,24 @@ export function InPricing() {
               {PRICING.map((p) => (
                 <div
                   key={p.tag}
-                  className={`relative p-5 lg:px-7 ${p.featured ? "lg:bg-gradient-to-b lg:from-[#8B5CF6]/8 lg:to-transparent rounded-2xl lg:rounded-none" : ""}`}
+                  className={`relative p-5 lg:px-7 ${p.featured ? "lg:bg-linear-to-b lg:from-[#8B5CF6]/8 lg:to-transparent rounded-2xl lg:rounded-none" : ""}`}
                 >
                   {p.featured && (
                     <span
-                      className="absolute -top-2 right-4 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-white font-[family-name:var(--font-display)] font-700 text-[10px] tracking-[0.12em] uppercase shadow-[0_6px_14px_-6px_rgba(139,92,246,0.5)]"
+                      className="absolute -top-2 right-4 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-white font-display font-700 text-[10px] tracking-[0.12em] uppercase shadow-[0_6px_14px_-6px_rgba(139,92,246,0.5)]"
                       style={{ background: "linear-gradient(90deg, #2563EB 0%, #6E5BC8 100%)" }}
                     >
                       ★ Best Value · Save ₹500
                     </span>
                   )}
                   <p
-                    className="font-[family-name:var(--font-display)] font-700 text-[11px] tracking-[0.16em] uppercase"
+                    className="font-display font-700 text-[11px] tracking-[0.16em] uppercase"
                     style={{ color: p.tint }}
                   >
                     {p.tag}
                   </p>
                   <div className="mt-3 flex items-baseline gap-1.5">
-                    <p className="font-[family-name:var(--font-display)] font-700 text-[34px] leading-none text-[#102033]">
+                    <p className="font-display font-700 text-[34px] leading-none text-[#102033]">
                       {p.price}
                     </p>
                     <span className="text-[12px] text-[#5A6A82]">{p.unit}</span>
@@ -59,7 +59,7 @@ export function InPricing() {
 
             {/* Included */}
             <div>
-              <p className="font-[family-name:var(--font-display)] font-700 text-[11px] tracking-[0.16em] uppercase text-[#2563EB]">
+              <p className="font-display font-700 text-[11px] tracking-[0.16em] uppercase text-[#2563EB]">
                 Included in every plan
               </p>
               <p className="heading mt-2" style={{ fontSize: "18px" }}>
@@ -82,7 +82,7 @@ export function InPricing() {
             {/* Footer CTA */}
             <div className="mt-8 pt-6 border-t border-[rgba(16,32,51,0.10)] flex flex-wrap items-center justify-between gap-4">
               <div>
-                <p className="text-[13.5px] text-[#102033] font-[family-name:var(--font-display)] font-600">
+                <p className="text-[13.5px] text-[#102033] font-display font-600">
                   Ready to start with a premium CBSE tutor?
                 </p>
                 <p className="text-[12px] text-[#5A6A82] mt-1">

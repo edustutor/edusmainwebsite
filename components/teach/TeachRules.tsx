@@ -43,7 +43,7 @@ export function TeachRules() {
               className="flex items-start gap-3 bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl px-4 py-3.5 shadow-[0_10px_28px_-20px_rgba(16,32,51,0.18)]"
             >
               <span
-                className="inline-flex w-7 h-7 rounded-full text-[11.5px] font-[family-name:var(--font-display)] font-800 text-white items-center justify-center shrink-0"
+                className="inline-flex w-7 h-7 rounded-full text-[11.5px] font-display font-800 text-white items-center justify-center shrink-0"
                 style={{ background: "linear-gradient(135deg,#2563EB 0%,#6E5BC8 100%)" }}
               >
                 {String(i + 1).padStart(2, "0")}

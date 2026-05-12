@@ -38,12 +38,12 @@ export function MvSubjectDetails() {
                 </span>
                 <div className="min-w-0">
                   <h3
-                    className="font-[family-name:var(--font-display)] font-700 text-[16px] text-[#102033] leading-tight"
+                    className="font-display font-700 text-[16px] text-[#102033] leading-tight"
                     aria-label={`IGCSE ${s.short} ${s.code} online tuition Maldives`}
                   >
                     IGCSE {s.short}
                   </h3>
-                  <p className="text-[11.5px] uppercase tracking-[0.06em] mt-1 font-[family-name:var(--font-display)] font-600" style={{ color: s.tint }}>
+                  <p className="text-[11.5px] uppercase tracking-[0.06em] mt-1 font-display font-600" style={{ color: s.tint }}>
                     Cambridge · {s.code} · Maldives
                   </p>
                 </div>
@@ -54,12 +54,12 @@ export function MvSubjectDetails() {
               </div>
               <div className="md:text-right shrink-0">
                 <p
-                  className="font-[family-name:var(--font-display)] font-800 text-[24px] leading-none"
+                  className="font-display font-800 text-[24px] leading-none"
                   style={{ color: s.tint }}
                 >
                   ${s.price}
                 </p>
-                <p className="text-[11px] uppercase tracking-[0.08em] text-[#5A6A82] mt-1.5 font-[family-name:var(--font-display)] font-600">
+                <p className="text-[11px] uppercase tracking-[0.08em] text-[#5A6A82] mt-1.5 font-display font-600">
                   / hour · USD
                 </p>
               </div>

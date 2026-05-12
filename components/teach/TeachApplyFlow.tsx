@@ -41,7 +41,7 @@ export function TeachApplyFlow() {
               className="bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-5 shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)]"
             >
               <p
-                className="font-[family-name:var(--font-display)] font-800 text-[15px]"
+                className="font-display font-800 text-[15px]"
                 style={{
                   background: "linear-gradient(90deg,#2563EB 0%,#6E5BC8 100%)",
                   WebkitBackgroundClip: "text",

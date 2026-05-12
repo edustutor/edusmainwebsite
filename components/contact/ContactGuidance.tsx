@@ -25,7 +25,7 @@ export function ContactGuidance() {
                 key={r.tag}
                 className="bg-white border border-[rgba(16,32,51,0.06)] rounded-xl px-4 py-3 text-[13px] text-[#2B3950]"
               >
-                <strong className="font-[family-name:var(--font-display)] font-700 text-[#102033]">{r.tag}:</strong>{" "}
+                <strong className="font-display font-700 text-[#102033]">{r.tag}:</strong>{" "}
                 <span className="text-[#5A6A82]">{r.hint}</span>
               </li>
             ))}

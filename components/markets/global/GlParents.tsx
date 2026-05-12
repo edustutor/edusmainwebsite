@@ -51,11 +51,11 @@ export function GlParents() {
                   <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
-              <p className="text-[14px] text-[#102033] font-[family-name:var(--font-display)] font-600 leading-tight flex-1">
+              <p className="text-[14px] text-[#102033] font-display font-600 leading-tight flex-1">
                 {e}
               </p>
               <span
-                className="font-[family-name:var(--font-display)] font-700 text-[11px] tracking-[0.10em] text-[#5A6A82] hidden sm:inline"
+                className="font-display font-700 text-[11px] tracking-widest text-[#5A6A82] hidden sm:inline"
               >
                 {String(i + 1).padStart(2, "0")}
               </span>

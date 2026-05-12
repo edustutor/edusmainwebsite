@@ -52,7 +52,7 @@ export function MvTutors() {
                       <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
-                  <p className="text-[13px] text-[#102033] leading-[1.5]">{s}</p>
+                  <p className="text-[13px] text-[#102033] leading-normal">{s}</p>
                 </m.li>
               ))}
             </m.ul>
@@ -80,15 +80,15 @@ function TutorBoard() {
           filter: "blur(40px)",
         }}
       />
-      <div className="relative rounded-[28px] bg-gradient-to-br from-[#E6FBFF] via-white to-[#EAFBF1] border border-white/80 shadow-[0_30px_80px_-30px_rgba(16,32,51,0.20)] p-6 md:p-7">
+      <div className="relative rounded-[28px] bg-linear-to-br from-[#E6FBFF] via-white to-[#EAFBF1] border border-white/80 shadow-[0_30px_80px_-30px_rgba(16,32,51,0.20)] p-6 md:p-7">
         {/* Headline metric */}
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.10em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+            <p className="text-[11px] uppercase tracking-widest text-[#5A6A82] font-display font-600">
               Tutor Quality Index
             </p>
             <p
-              className="font-[family-name:var(--font-display)] font-800 text-[34px] leading-none mt-2"
+              className="font-display font-800 text-[34px] leading-none mt-2"
               style={{
                 background: "linear-gradient(135deg,#06B6D4 0%,#2563EB 100%)",
                 WebkitBackgroundClip: "text",
@@ -97,7 +97,7 @@ function TutorBoard() {
             >
               9.4 / 10
             </p>
-            <p className="text-[11px] text-[#22C55E] mt-1 font-[family-name:var(--font-display)] font-700">
+            <p className="text-[11px] text-[#22C55E] mt-1 font-display font-700">
               ▲ Top 12% across the network
             </p>
           </div>
@@ -132,10 +132,10 @@ function Bar({ label, pct, tint }: { label: string; pct: number; tint: string })
   return (
     <div>
       <div className="flex items-baseline justify-between">
-        <p className="text-[11.5px] uppercase tracking-[0.06em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+        <p className="text-[11.5px] uppercase tracking-[0.06em] text-[#5A6A82] font-display font-600">
           {label}
         </p>
-        <p className="font-[family-name:var(--font-display)] font-800 text-[12.5px] text-[#102033]">
+        <p className="font-display font-800 text-[12.5px] text-[#102033]">
           {pct}%
         </p>
       </div>

@@ -43,13 +43,13 @@ export function TeachWorkflow() {
             >
               <div className="flex items-start gap-3">
                 <span
-                  className="inline-flex w-10 h-10 rounded-xl items-center justify-center font-[family-name:var(--font-display)] font-800 text-[13px] text-white shrink-0"
+                  className="inline-flex w-10 h-10 rounded-xl items-center justify-center font-display font-800 text-[13px] text-white shrink-0"
                   style={{ background: "linear-gradient(135deg,#2563EB 0%,#6E5BC8 100%)" }}
                 >
                   {s.n}
                 </span>
                 <div className="min-w-0">
-                  <h3 className="font-[family-name:var(--font-display)] font-700 text-[15px] text-[#102033] leading-tight">
+                  <h3 className="font-display font-700 text-[15px] text-[#102033] leading-tight">
                     {s.title}
                   </h3>
                   <p className="text-[12.5px] text-[#5A6A82] mt-1.5 leading-[1.6]">{s.body}</p>

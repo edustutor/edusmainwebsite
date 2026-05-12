@@ -50,7 +50,7 @@ export function GlHero() {
                 <m.li
                   key={t}
                   variants={fadeUp}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[rgba(16,32,51,0.08)] text-[12.5px] text-[#102033] font-[family-name:var(--font-display)] font-600 shadow-[0_4px_12px_-8px_rgba(16,32,51,0.18)]"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[rgba(16,32,51,0.08)] text-[12.5px] text-[#102033] font-display font-600 shadow-[0_4px_12px_-8px_rgba(16,32,51,0.18)]"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" />
                   {t}
@@ -73,7 +73,7 @@ export function GlHero() {
               <Link href="#how" className="btn btn-yellow">How It Works</Link>
             </m.div>
 
-            <p className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+            <p className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-display font-600">
               1-to-1 Live · Cambridge · Edexcel · IGCSE · GCSE · O / A-Level
             </p>
           </div>
@@ -103,17 +103,17 @@ function GlHeroVisual() {
           filter: "blur(40px)",
         }}
       />
-      <div className="relative rounded-[28px] bg-gradient-to-br from-[#EEF6FF] via-white to-[#E6FAFD] border border-white/80 shadow-[0_30px_80px_-30px_rgba(16,32,51,0.20)] p-6 md:p-7">
+      <div className="relative rounded-[28px] bg-linear-to-br from-[#EEF6FF] via-white to-[#E6FAFD] border border-white/80 shadow-[0_30px_80px_-30px_rgba(16,32,51,0.20)] p-6 md:p-7">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="inline-flex items-center gap-2">
             <span className="text-2xl" aria-hidden>🌐</span>
-            <p className="font-[family-name:var(--font-display)] font-800 text-[14px] text-[#102033]">
+            <p className="font-display font-800 text-[14px] text-[#102033]">
               EDUS Global Reach
             </p>
           </div>
           <span
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] font-[family-name:var(--font-display)] font-700"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] font-display font-700"
             style={{ background: "rgba(37,99,235,0.12)", color: "#2563EB" }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" />
@@ -123,11 +123,11 @@ function GlHeroVisual() {
 
         {/* Big stat */}
         <div className="mt-5 rounded-2xl bg-white border border-[rgba(16,32,51,0.08)] p-4">
-          <p className="text-[11px] uppercase tracking-[0.10em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+          <p className="text-[11px] uppercase tracking-widest text-[#5A6A82] font-display font-600">
             Students Across
           </p>
           <p
-            className="font-[family-name:var(--font-display)] font-800 text-[34px] leading-none mt-2"
+            className="font-display font-800 text-[34px] leading-none mt-2"
             style={{
               background: "linear-gradient(90deg,#2563EB 0%,#06B6D4 100%)",
               WebkitBackgroundClip: "text",
@@ -147,7 +147,7 @@ function GlHeroVisual() {
           {["Cambridge", "Edexcel", "IGCSE", "GCSE", "O-Level", "A-Level", "IB", "National"].map((c) => (
             <span
               key={c}
-              className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-[family-name:var(--font-display)] font-700 bg-white border border-[rgba(16,32,51,0.08)] text-[#102033]"
+              className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-display font-700 bg-white border border-[rgba(16,32,51,0.08)] text-[#102033]"
             >
               {c}
             </span>
@@ -166,13 +166,13 @@ function GlHeroVisual() {
               </svg>
             </span>
             <div className="leading-tight">
-              <p className="font-[family-name:var(--font-display)] font-700 text-[12.5px] text-[#102033]">
+              <p className="font-display font-700 text-[12.5px] text-[#102033]">
                 Time-zone friendly
               </p>
               <p className="text-[10.5px] text-[#5A6A82] mt-0.5">Class times built around you</p>
             </div>
           </div>
-          <p className="text-[11px] uppercase tracking-[0.10em] text-[#5A6A82] font-[family-name:var(--font-display)] font-700">
+          <p className="text-[11px] uppercase tracking-widest text-[#5A6A82] font-display font-700">
             Global
           </p>
         </div>

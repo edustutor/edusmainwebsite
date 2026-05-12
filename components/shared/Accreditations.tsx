@@ -161,7 +161,7 @@ export function Accreditations() {
               className="rounded-2xl bg-white border border-[rgba(16,32,51,0.08)] px-4 py-3 text-center shadow-[0_8px_24px_-18px_rgba(16,32,51,0.18)]"
             >
               <dt
-                className="font-[family-name:var(--font-display)] font-800 text-[22px] leading-none"
+                className="font-display font-800 text-[22px] leading-none"
                 style={{
                   background: "linear-gradient(90deg,#2563EB 0%,#6E5BC8 100%)",
                   WebkitBackgroundClip: "text",
@@ -170,7 +170,7 @@ export function Accreditations() {
               >
                 {h.k}
               </dt>
-              <dd className="text-[11px] text-[#5A6A82] uppercase tracking-[0.08em] font-[family-name:var(--font-display)] font-600 mt-1">
+              <dd className="text-[11px] text-[#5A6A82] uppercase tracking-[0.08em] font-display font-600 mt-1">
                 {h.v}
               </dd>
             </div>
@@ -220,7 +220,7 @@ export function Accreditations() {
                     tabIndex={i >= PARTNERS.length ? -1 : 0}
                     className="relative block bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-5 h-full shadow-[0_10px_28px_-20px_rgba(16,32,51,0.18)] hover:shadow-[0_18px_40px_-20px_rgba(37,99,235,0.25)] transition"
                   >
-                    <div className="relative w-full aspect-[16/9] flex items-center justify-center">
+                    <div className="relative w-full aspect-video flex items-center justify-center">
                       <Image
                         src={p.src}
                         alt={p.alt}
@@ -232,10 +232,10 @@ export function Accreditations() {
                       />
                     </div>
                     <div className="mt-3 pt-3 border-t border-[rgba(16,32,51,0.06)]">
-                      <p className="font-[family-name:var(--font-display)] font-700 text-[12.5px] text-[#102033] leading-tight truncate">
+                      <p className="font-display font-700 text-[12.5px] text-[#102033] leading-tight truncate">
                         {p.name}
                       </p>
-                      <p className="text-[10.5px] text-[#5A6A82] mt-0.5 uppercase tracking-[0.08em] font-[family-name:var(--font-display)] font-600">
+                      <p className="text-[10.5px] text-[#5A6A82] mt-0.5 uppercase tracking-[0.08em] font-display font-600">
                         {p.tagline}
                       </p>
                     </div>

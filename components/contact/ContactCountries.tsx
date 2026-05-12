@@ -38,11 +38,11 @@ export function ContactCountries() {
                   {c.flag}
                 </span>
                 <div className="min-w-0">
-                  <h3 className="font-[family-name:var(--font-display)] font-700 text-[17px] text-[#102033] leading-tight">
+                  <h3 className="font-display font-700 text-[17px] text-[#102033] leading-tight">
                     {c.name}
                   </h3>
                   <p
-                    className="text-[10.5px] uppercase tracking-[0.10em] font-[family-name:var(--font-display)] font-700 mt-0.5"
+                    className="text-[10.5px] uppercase tracking-widest font-display font-700 mt-0.5"
                     style={{ color: c.tint }}
                   >
                     EDUS · {c.code === "gl" ? "Worldwide" : c.code === "sl" ? "Sri Lanka" : c.code === "in" ? "India" : "Maldives"}
@@ -93,7 +93,7 @@ export function ContactCountries() {
               {/* Support areas */}
               <div className="mt-5 pt-5 border-t border-[rgba(16,32,51,0.06)]">
                 <p
-                  className="text-[10.5px] uppercase tracking-[0.10em] font-[family-name:var(--font-display)] font-700"
+                  className="text-[10.5px] uppercase tracking-widest font-display font-700"
                   style={{ color: c.tint }}
                 >
                   Main Support Areas
@@ -119,7 +119,7 @@ export function ContactCountries() {
               <div className="mt-6 pt-5 border-t border-[rgba(16,32,51,0.06)] flex items-center justify-between gap-3 mt-auto">
                 <Link
                   href={c.buttonHref}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-white font-[family-name:var(--font-display)] font-700 text-[12.5px] shadow-[0_8px_20px_-10px_rgba(16,32,51,0.30)] hover:-translate-y-0.5 transition"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-white font-display font-700 text-[12.5px] shadow-[0_8px_20px_-10px_rgba(16,32,51,0.30)] hover:-translate-y-0.5 transition"
                   style={{ background: c.tint }}
                 >
                   {c.buttonLabel}
@@ -150,10 +150,10 @@ function ContactRow({
     <div className="flex items-start gap-2.5">
       <span className="text-[14px] shrink-0 mt-0.5">{icon}</span>
       <div className="min-w-0 flex-1">
-        <p className="text-[10px] uppercase tracking-[0.10em] text-[#5A6A82] font-[family-name:var(--font-display)] font-700">
+        <p className="text-[10px] uppercase tracking-widest text-[#5A6A82] font-display font-700">
           {label}
         </p>
-        <p className="text-[#102033] font-[family-name:var(--font-display)] font-600 mt-0.5 leading-[1.45]">
+        <p className="text-[#102033] font-display font-600 mt-0.5 leading-[1.45]">
           {value}
         </p>
       </div>

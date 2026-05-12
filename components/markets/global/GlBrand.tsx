@@ -30,7 +30,7 @@ export function GlBrand() {
               personal, and effective. With live online classes, flexible support, expert tutors,
               and student-centered teaching, EDUS Global helps students learn beyond boundaries.
             </p>
-            <p className="mt-5 text-[14px] text-[#2563EB] font-[family-name:var(--font-display)] font-700">
+            <p className="mt-5 text-[14px] text-[#2563EB] font-display font-700">
               From anywhere in the world, students can learn better with EDUS.
             </p>
           </div>
@@ -42,14 +42,14 @@ export function GlBrand() {
                 className="bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-5 shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)]"
               >
                 <p
-                  className="font-[family-name:var(--font-display)] font-800 text-[12px] tracking-[0.16em] uppercase"
+                  className="font-display font-800 text-[12px] tracking-[0.16em] uppercase"
                   style={{
                     color: ["#2563EB", "#8B5CF6", "#06B6D4", "#22C55E"][i],
                   }}
                 >
                   Pillar {String(i + 1).padStart(2, "0")}
                 </p>
-                <h3 className="mt-2 font-[family-name:var(--font-display)] font-700 text-[18px] text-[#102033] leading-tight">
+                <h3 className="mt-2 font-display font-700 text-[18px] text-[#102033] leading-tight">
                   {p.title}
                 </h3>
                 <p className="text-[13px] text-[#5A6A82] mt-2 leading-[1.6]">{p.body}</p>

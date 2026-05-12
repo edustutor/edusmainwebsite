@@ -24,7 +24,7 @@ export function SlIndividual() {
           <div className="relative grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-6">
               <span
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-white font-[family-name:var(--font-display)] font-700 text-[11px] tracking-[0.16em] uppercase shadow-[0_6px_14px_-6px_rgba(37,99,235,0.45)]"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-white font-display font-700 text-[11px] tracking-[0.16em] uppercase shadow-[0_6px_14px_-6px_rgba(37,99,235,0.45)]"
                 style={{ background: "linear-gradient(90deg, #2563EB 0%, #4F6DDB 60%, #6E5BC8 100%)" }}
               >
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-white/80" />

@@ -49,7 +49,7 @@ export function InHero() {
             { k: "Monthly",      v: "Parent updates" },
           ].map((s, i) => (
             <div key={i} className="glass rounded-2xl px-5 py-4 text-center">
-              <p className="font-[family-name:var(--font-display)] font-700 text-[22px] tnum text-[#102033]">{s.k}</p>
+              <p className="font-display font-700 text-[22px] tnum text-[#102033]">{s.k}</p>
               <p className="text-[11.5px] text-[#5A6A82] mt-1">{s.v}</p>
             </div>
           ))}

@@ -53,7 +53,7 @@ export function SiteFooter() {
                 height={56}
                 className="h-10 w-auto"
               />
-              <p className="mt-3 text-[11px] font-[family-name:var(--font-display)] font-600 tracking-[0.18em] uppercase text-[#2563EB]">
+              <p className="mt-3 text-[11px] font-display font-600 tracking-[0.18em] uppercase text-[#2563EB]">
                 Quality-Assured Online Live Learning Platform
               </p>
               <p className="text-[#2B3950] text-[13.5px] mt-4 leading-[1.65] max-w-sm">
@@ -112,7 +112,7 @@ function FooterCol({
 }) {
   return (
     <div>
-      <p className="font-[family-name:var(--font-display)] font-600 text-[11.5px] tracking-[0.14em] uppercase text-[#102033] mb-3">
+      <p className="font-display font-600 text-[11.5px] tracking-[0.14em] uppercase text-[#102033] mb-3">
         {title}
       </p>
       <ul className="space-y-1.5 text-[13.5px]">

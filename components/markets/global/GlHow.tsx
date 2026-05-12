@@ -39,12 +39,12 @@ export function GlHow() {
             >
               <div className="flex items-center gap-2.5">
                 <span
-                  className="inline-flex w-10 h-10 rounded-xl items-center justify-center font-[family-name:var(--font-display)] font-800 text-[13px] text-white"
+                  className="inline-flex w-10 h-10 rounded-xl items-center justify-center font-display font-800 text-[13px] text-white"
                   style={{ background: s.tint }}
                 >
                   {s.n}
                 </span>
-                <h3 className="font-[family-name:var(--font-display)] font-700 text-[14px] text-[#102033] leading-tight">
+                <h3 className="font-display font-700 text-[14px] text-[#102033] leading-tight">
                   {s.title}
                 </h3>
               </div>

@@ -94,7 +94,7 @@ export function Hero() {
         {/* Brand promise - small kicker above H1 */}
         <m.p
           variants={fadeUp}
-          className="mt-7 text-center text-[12.5px] font-[family-name:var(--font-display)] font-600 tracking-[0.2em] uppercase text-[#2563EB]"
+          className="mt-7 text-center text-[12.5px] font-display font-600 tracking-[0.2em] uppercase text-[#2563EB]"
         >
           Quality-Assured Online Live Learning Platform
         </m.p>
@@ -195,16 +195,16 @@ export function Hero() {
                 <span className="inline-flex w-2 h-2 rounded-full bg-[#FF5F57]" />
                 <span className="inline-flex w-2 h-2 rounded-full bg-[#FFBD2E]" />
                 <span className="inline-flex w-2 h-2 rounded-full bg-[#28C840]" />
-                <p className="ml-2 text-[11px] uppercase tracking-[0.12em] font-[family-name:var(--font-display)] font-700 text-[#102033]">
+                <p className="ml-2 text-[11px] uppercase tracking-[0.12em] font-display font-700 text-[#102033]">
                   EDUS Platform
                 </p>
               </div>
               <div className="flex items-center gap-3">
-                <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10.5px] font-[family-name:var(--font-display)] font-700 bg-[#DC2626]/10 text-[#DC2626]">
+                <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10.5px] font-display font-700 bg-[#DC2626]/10 text-[#DC2626]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626] animate-pulse" />
                   LIVE NOW
                 </span>
-                <p className="text-[10.5px] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+                <p className="text-[10.5px] text-[#5A6A82] font-display font-600">
                   Class · Mathematics · Grade 10
                 </p>
               </div>
@@ -226,11 +226,11 @@ export function Hero() {
                       <div className="flex-1 h-1 rounded-full bg-[#2563EB]/14 overflow-hidden">
                         <span className="block h-full w-[78%] rounded-full" style={{ background: "linear-gradient(90deg,#2563EB,#6E5BC8)" }} />
                       </div>
-                      <span className="text-[10px] font-[family-name:var(--font-display)] font-700 text-[#2563EB]">78%</span>
+                      <span className="text-[10px] font-display font-700 text-[#2563EB]">78%</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Avatar tint="#06B6D4" letter="S" />
-                      <p className="text-[11px] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+                      <p className="text-[11px] text-[#5A6A82] font-display font-600">
                         Topic 03 of 05 · Quadratics
                       </p>
                     </div>
@@ -250,7 +250,7 @@ export function Hero() {
                     {["Classes", "Records", "Tasks", "Exams", "Reports", "Wallet"].map((tag) => (
                       <span
                         key={tag}
-                        className="inline-flex items-center justify-center px-1.5 py-1 rounded-md text-[9.5px] font-[family-name:var(--font-display)] font-700 bg-white border border-[#8B5CF6]/25 text-[#102033]"
+                        className="inline-flex items-center justify-center px-1.5 py-1 rounded-md text-[9.5px] font-display font-700 bg-white border border-[#8B5CF6]/25 text-[#102033]"
                       >
                         {tag}
                       </span>
@@ -281,7 +281,7 @@ export function Hero() {
                           className="inline-block w-1.5 h-1.5 rounded-full"
                           style={{ background: r.c }}
                         />
-                        <span className="text-[11px] font-[family-name:var(--font-display)] font-600 text-[#102033] truncate">
+                        <span className="text-[11px] font-display font-600 text-[#102033] truncate">
                           {r.name}
                         </span>
                       </div>
@@ -390,12 +390,12 @@ function PlatformColumn({
       className="p-5 md:p-6 bg-white/85"
     >
       <p
-        className="text-[10px] uppercase tracking-[0.12em] font-[family-name:var(--font-display)] font-800"
+        className="text-[10px] uppercase tracking-[0.12em] font-display font-800"
         style={{ color: tint }}
       >
         {eyebrow}
       </p>
-      <p className="mt-1 font-[family-name:var(--font-display)] font-700 text-[15.5px] text-[#102033] leading-tight">
+      <p className="mt-1 font-display font-700 text-[15.5px] text-[#102033] leading-tight">
         {title}
       </p>
       <p className="text-[12.5px] text-[#5A6A82] mt-1.5 leading-[1.55]">
@@ -409,7 +409,7 @@ function PlatformColumn({
 function Avatar({ tint, letter }: { tint: string; letter: string }) {
   return (
     <span
-      className="inline-flex w-6 h-6 rounded-full items-center justify-center text-[10px] font-[family-name:var(--font-display)] font-800 text-white shrink-0"
+      className="inline-flex w-6 h-6 rounded-full items-center justify-center text-[10px] font-display font-800 text-white shrink-0"
       style={{ background: tint }}
     >
       {letter}
@@ -421,12 +421,12 @@ function FooterStat({ k, v, tint }: { k: string; v: string; tint: string }) {
   return (
     <div className="flex items-baseline gap-1.5">
       <p
-        className="font-[family-name:var(--font-display)] font-800 text-[14px] leading-none"
+        className="font-display font-800 text-[14px] leading-none"
         style={{ color: tint }}
       >
         {k}
       </p>
-      <p className="text-[10.5px] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+      <p className="text-[10.5px] text-[#5A6A82] font-display font-600">
         {v}
       </p>
     </div>

@@ -173,7 +173,7 @@ export function RegionSelector() {
                     </div>
 
                     <span
-                      className="mt-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-[family-name:var(--font-display)] font-700 tracking-[0.04em] self-start"
+                      className="mt-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-display font-700 tracking-[0.04em] self-start"
                       style={{ background: r.tintSoft, color: r.tint, border: `1px solid ${r.tint}25` }}
                     >
                       <span className="w-1 h-1 rounded-full" style={{ background: r.tint }} />
@@ -188,12 +188,12 @@ export function RegionSelector() {
                       {r.facts.map((f) => (
                         <div key={f.label}>
                           <dt
-                            className="text-[10px] font-[family-name:var(--font-display)] font-700 uppercase tracking-[0.10em]"
+                            className="text-[10px] font-display font-700 uppercase tracking-widest"
                             style={{ color: r.tint }}
                           >
                             {f.label}
                           </dt>
-                          <dd className="mt-0.5 text-[13px] text-[#102033] font-[family-name:var(--font-display)] font-600 leading-[1.4]">
+                          <dd className="mt-0.5 text-[13px] text-[#102033] font-display font-600 leading-[1.4]">
                             {f.value}
                           </dd>
                         </div>
@@ -202,7 +202,7 @@ export function RegionSelector() {
 
                     <div className="mt-6 pt-4 border-t border-[rgba(16,32,51,0.08)]">
                       <span
-                        className="inline-flex items-center gap-2 font-[family-name:var(--font-display)] font-700 text-[14px]"
+                        className="inline-flex items-center gap-2 font-display font-700 text-[14px]"
                         style={{ color: r.tint }}
                       >
                         {r.cta}

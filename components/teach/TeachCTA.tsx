@@ -52,7 +52,7 @@ export function TeachCTA() {
               <a href="#apply" className="btn btn-yellow">Review Declaration</a>
             </m.div>
 
-            <m.p variants={fadeUp} className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+            <m.p variants={fadeUp} className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-display font-600">
               By applying you agree to EDUS academic standards, tutor policies, and QA procedures.
             </m.p>
           </m.div>

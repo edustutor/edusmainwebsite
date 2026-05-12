@@ -53,13 +53,13 @@ export function TeachGrowth() {
                     style={{ background: `${l.tint}18`, border: `2px solid ${l.tint}` }}
                   />
                   <span
-                    className="font-[family-name:var(--font-display)] font-800 text-[18px]"
+                    className="font-display font-800 text-[18px]"
                     style={{ color: l.tint }}
                   >
                     {l.n}
                   </span>
                 </div>
-                <h3 className="mt-4 font-[family-name:var(--font-display)] font-700 text-[14px] text-[#102033] leading-tight">
+                <h3 className="mt-4 font-display font-700 text-[14px] text-[#102033] leading-tight">
                   {l.label}
                 </h3>
                 <p className="text-[12px] text-[#5A6A82] mt-1.5 leading-[1.55]">{l.body}</p>

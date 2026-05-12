@@ -47,7 +47,7 @@ export function GlReach() {
               className="flex items-center gap-2.5 bg-white border border-[rgba(16,32,51,0.08)] rounded-xl px-3 py-2.5 shadow-[0_8px_24px_-18px_rgba(16,32,51,0.18)]"
             >
               <span className="text-xl shrink-0" aria-hidden>{c.flag}</span>
-              <p className="font-[family-name:var(--font-display)] font-700 text-[12px] text-[#102033] leading-tight truncate">
+              <p className="font-display font-700 text-[12px] text-[#102033] leading-tight truncate">
                 {c.name}
               </p>
             </m.div>

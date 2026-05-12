@@ -91,7 +91,7 @@ export function GlIntro() {
               {/* Numbered corner */}
               <span
                 aria-hidden
-                className="absolute top-4 right-5 font-[family-name:var(--font-display)] font-800 text-[42px] leading-none opacity-[0.10]"
+                className="absolute top-4 right-5 font-display font-800 text-[42px] leading-none opacity-[0.10]"
                 style={{ color: p.tint }}
               >
                 {String(i + 1).padStart(2, "0")}
@@ -111,13 +111,13 @@ export function GlIntro() {
                 >
                   {p.icon}
                 </span>
-                <h3 className="mt-4 font-[family-name:var(--font-display)] font-700 text-[17px] text-[#102033] leading-tight">
+                <h3 className="mt-4 font-display font-700 text-[17px] text-[#102033] leading-tight">
                   {p.title}
                 </h3>
                 <p className="text-[13.5px] text-[#5A6A82] mt-2 leading-[1.6]">{p.body}</p>
                 <div className="mt-4 pt-3 border-t border-[rgba(16,32,51,0.06)]">
                   <p
-                    className="text-[10.5px] uppercase tracking-[0.08em] font-[family-name:var(--font-display)] font-700"
+                    className="text-[10.5px] uppercase tracking-[0.08em] font-display font-700"
                     style={{ color: p.tint }}
                   >
                     {p.tag}
@@ -149,7 +149,7 @@ export function GlIntro() {
               <path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" strokeLinejoin="round" />
             </svg>
           </span>
-          <p className="text-[14px] text-[#102033] leading-[1.6] font-[family-name:var(--font-display)] font-600">
+          <p className="text-[14px] text-[#102033] leading-[1.6] font-display font-600">
             If your child needs the right teacher, the right support, and the right learning
             plan, <span className="text-[#2563EB] font-700">EDUS Global is built for you.</span>
           </p>

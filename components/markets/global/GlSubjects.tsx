@@ -57,7 +57,7 @@ export function GlSubjects() {
                 {s.icon}
               </span>
               <h3
-                className="font-[family-name:var(--font-display)] font-700 text-[12px] text-[#102033] leading-tight truncate"
+                className="font-display font-700 text-[12px] text-[#102033] leading-tight truncate"
                 aria-label={`Online ${s.name} tutor`}
               >
                 {s.name}

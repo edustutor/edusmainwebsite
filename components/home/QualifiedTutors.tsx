@@ -51,7 +51,7 @@ export function QualifiedTutors() {
                 <m.li
                   key={b}
                   variants={fadeUp}
-                  className="flex items-center gap-3 text-[#102033] text-[15px] font-[family-name:var(--font-display)] font-600"
+                  className="flex items-center gap-3 text-[#102033] text-[15px] font-display font-600"
                 >
                   <span className="inline-flex w-6 h-6 rounded-full bg-[#2563EB]/12 items-center justify-center shrink-0">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="3" aria-hidden>
@@ -80,7 +80,7 @@ export function QualifiedTutors() {
 
             <m.p variants={fadeUp} className="mt-5 text-[13px] text-[#5A6A82]">
               Are you a tutor?{" "}
-              <Link href="/teach" className="text-[#2563EB] font-[family-name:var(--font-display)] font-700 hover:underline">
+              <Link href="/teach" className="text-[#2563EB] font-display font-700 hover:underline">
                 Become an EDUS tutor →
               </Link>
             </m.p>
@@ -115,7 +115,7 @@ function TutorIllustration() {
       />
 
       {/* Main scene card */}
-      <div className="relative aspect-[5/4] rounded-[28px] bg-gradient-to-br from-[#EEF6FF] via-white to-[#F4EEFF] border border-white/80 shadow-[0_30px_80px_-30px_rgba(16,32,51,0.20)] overflow-hidden">
+      <div className="relative aspect-5/4 rounded-[28px] bg-linear-to-br from-[#EEF6FF] via-white to-[#F4EEFF] border border-white/80 shadow-[0_30px_80px_-30px_rgba(16,32,51,0.20)] overflow-hidden">
         {/* Decorative dots */}
         <span aria-hidden className="absolute top-8 right-10 w-1.5 h-1.5 rounded-full bg-[#2563EB]" />
         <span aria-hidden className="absolute top-14 right-20 w-1 h-1 rounded-full bg-[#8B5CF6]" />
@@ -157,10 +157,10 @@ function TutorIllustration() {
             >
               <div className="w-[88%] h-[88%] rounded-full bg-white grid place-items-center shadow-[inset_0_2px_8px_rgba(16,32,51,0.06)]">
                 <div className="flex flex-col items-center leading-none">
-                  <span className="font-[family-name:var(--font-display)] font-800 text-[34px] sm:text-[40px] bg-clip-text text-transparent bg-gradient-to-br from-[#2563EB] to-[#6E5BC8]">
+                  <span className="font-display font-800 text-[34px] sm:text-[40px] bg-clip-text text-transparent bg-linear-to-br from-[#2563EB] to-[#6E5BC8]">
                     200+
                   </span>
-                  <span className="mt-1.5 text-[10.5px] tracking-[0.14em] uppercase text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+                  <span className="mt-1.5 text-[10.5px] tracking-[0.14em] uppercase text-[#5A6A82] font-display font-600">
                     Expert Tutors
                   </span>
                 </div>
@@ -214,7 +214,7 @@ function TutorIllustration() {
               </svg>
             </span>
             <div className="leading-tight">
-              <p className="font-[family-name:var(--font-display)] font-800 text-[14px] text-[#102033]">
+              <p className="font-display font-800 text-[14px] text-[#102033]">
                 100% <span className="text-[#2563EB] font-700">Qualified</span>
               </p>
               <p className="text-[10.5px] text-[#5A6A82] mt-0.5 uppercase tracking-[0.08em]">
@@ -227,10 +227,10 @@ function TutorIllustration() {
         {/* Bottom-left floating callout - Live Engagement (animated bars) */}
         <div className="absolute bottom-5 left-5 sm:bottom-6 sm:left-6 bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl px-4 py-3 shadow-[0_18px_40px_-16px_rgba(16,32,51,0.18)] w-[58%] max-w-[280px]">
           <div className="flex items-center justify-between">
-            <p className="text-[11px] text-[#5A6A82] font-[family-name:var(--font-display)] font-600 uppercase tracking-[0.08em]">
+            <p className="text-[11px] text-[#5A6A82] font-display font-600 uppercase tracking-[0.08em]">
               Live Engagement
             </p>
-            <span className="font-[family-name:var(--font-display)] font-800 text-[13px] text-[#102033]">
+            <span className="font-display font-800 text-[13px] text-[#102033]">
               96<span className="text-[#5A6A82] text-[10px] font-600 ml-0.5">/100</span>
             </span>
           </div>
@@ -285,7 +285,7 @@ function BarStat({ label, value, pct, tint }: { label: string; value: string; pc
     <>
       <div className="flex items-baseline justify-between gap-2">
         <p className="text-[9.5px] text-[#5A6A82] uppercase tracking-[0.08em] font-600">{label}</p>
-        <p className="font-[family-name:var(--font-display)] font-800 text-[13px] text-[#102033]">{value}</p>
+        <p className="font-display font-800 text-[13px] text-[#102033]">{value}</p>
       </div>
       <div className="mt-1.5 h-1.5 rounded-full bg-[#EEF2F7] overflow-hidden">
         <span className="block h-full rounded-full" style={{ width: `${pct}%`, background: tint }} />
@@ -310,7 +310,7 @@ function DonutStat({ label, value, pct, tint }: { label: string; value: string; 
         />
       </svg>
       <div className="leading-tight">
-        <p className="font-[family-name:var(--font-display)] font-800 text-[13px] text-[#102033]">{value}</p>
+        <p className="font-display font-800 text-[13px] text-[#102033]">{value}</p>
         <p className="text-[9.5px] text-[#5A6A82] uppercase tracking-[0.08em] font-600">{label}</p>
       </div>
     </div>
@@ -328,7 +328,7 @@ function StarStat({ label, value }: { label: string; value: string }) {
         ))}
       </div>
       <div className="mt-1 flex items-baseline justify-end gap-1.5">
-        <span className="font-[family-name:var(--font-display)] font-800 text-[13px] text-[#102033]">{value}</span>
+        <span className="font-display font-800 text-[13px] text-[#102033]">{value}</span>
         <span className="text-[9.5px] text-[#5A6A82] uppercase tracking-[0.08em] font-600">{label}</span>
       </div>
     </>
@@ -339,7 +339,7 @@ function SparkStat({ label, value, tint }: { label: string; value: string; tint:
   return (
     <>
       <div className="flex items-baseline justify-end gap-1.5">
-        <span className="font-[family-name:var(--font-display)] font-800 text-[13px]" style={{ color: tint }}>{value}</span>
+        <span className="font-display font-800 text-[13px]" style={{ color: tint }}>{value}</span>
         <span className="text-[9.5px] text-[#5A6A82] uppercase tracking-[0.08em] font-600">{label}</span>
       </div>
       <svg width="100" height="22" viewBox="0 0 100 22" className="mt-1 ml-auto block" preserveAspectRatio="none">

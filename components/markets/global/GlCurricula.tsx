@@ -82,7 +82,7 @@ export function GlCurricula() {
               >
                 {c.icon}
               </span>
-              <h3 className="mt-3 font-[family-name:var(--font-display)] font-700 text-[15px] text-[#102033] leading-tight">
+              <h3 className="mt-3 font-display font-700 text-[15px] text-[#102033] leading-tight">
                 {c.name}
               </h3>
               <p className="text-[12.5px] text-[#5A6A82] mt-1.5 leading-[1.6] flex-1">{c.body}</p>
@@ -90,7 +90,7 @@ export function GlCurricula() {
                 {c.levels.map((lv) => (
                   <span
                     key={lv}
-                    className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-[family-name:var(--font-display)] font-700"
+                    className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-display font-700"
                     style={{ background: `${c.tint}10`, color: c.tint }}
                   >
                     {lv}

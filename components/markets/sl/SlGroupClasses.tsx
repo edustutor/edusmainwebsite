@@ -32,18 +32,18 @@ export function SlGroupClasses() {
               {PRICING.map((p) => (
                 <div key={p.tag} className="p-5 lg:px-7 lg:py-2 first:pt-2 lg:first:pl-0 last:pb-2 lg:last:pr-0">
                   <p
-                    className="font-[family-name:var(--font-display)] font-700 text-[11px] tracking-[0.16em] uppercase"
+                    className="font-display font-700 text-[11px] tracking-[0.16em] uppercase"
                     style={{ color: p.tint }}
                   >
                     {p.tag}
                   </p>
                   <div className="mt-3 flex items-baseline gap-1.5">
-                    <p className="font-[family-name:var(--font-display)] font-700 text-[24px] leading-tight text-[#102033]">
+                    <p className="font-display font-700 text-[24px] leading-tight text-[#102033]">
                       {p.price}
                     </p>
                     <span className="text-[11.5px] text-[#5A6A82]">{p.unit}</span>
                   </div>
-                  <p className="text-[12.5px] font-[family-name:var(--font-display)] font-600 text-[#102033] mt-1.5">
+                  <p className="text-[12.5px] font-display font-600 text-[#102033] mt-1.5">
                     {p.grades}
                   </p>
                   <ul className="mt-4 space-y-1.5 text-[12.5px]">
@@ -81,7 +81,7 @@ export function SlGroupClasses() {
                     </span>
                     <div className="flex items-center gap-2">
                       <span
-                        className="font-[family-name:var(--font-display)] font-700 text-[11px] tracking-[0.16em] uppercase"
+                        className="font-display font-700 text-[11px] tracking-[0.16em] uppercase"
                         style={{ color: h.tint }}
                       >
                         {String(i + 1).padStart(2, "0")}
@@ -101,7 +101,7 @@ export function SlGroupClasses() {
                             <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         </span>
-                        <span className="leading-[1.5]">{pt}</span>
+                        <span className="leading-normal">{pt}</span>
                       </li>
                     ))}
                   </ul>

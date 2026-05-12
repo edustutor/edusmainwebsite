@@ -26,12 +26,12 @@ export function ContactRoutes() {
                 >
                   {r.icon}
                 </span>
-                <h3 className="mt-4 font-[family-name:var(--font-display)] font-700 text-[15.5px] text-[#102033] leading-tight">
+                <h3 className="mt-4 font-display font-700 text-[15.5px] text-[#102033] leading-tight">
                   {r.title}
                 </h3>
                 <p className="text-[12.5px] text-[#5A6A82] mt-2 leading-[1.6] flex-1">{r.body}</p>
                 <span
-                  className="mt-4 inline-flex items-center gap-1.5 text-[12.5px] font-[family-name:var(--font-display)] font-700"
+                  className="mt-4 inline-flex items-center gap-1.5 text-[12.5px] font-display font-700"
                   style={{ color: r.tint }}
                 >
                   {r.buttonLabel}

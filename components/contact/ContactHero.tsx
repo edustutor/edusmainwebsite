@@ -32,7 +32,7 @@ export function ContactHero() {
           </a>
         </div>
 
-        <p className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+        <p className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-display font-600">
           Sri Lanka · India · Maldives · Global Online Learning Support
         </p>
       </div>

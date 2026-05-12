@@ -50,7 +50,7 @@ export function MvHero() {
                 <m.li
                   key={t}
                   variants={fadeUp}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[rgba(16,32,51,0.08)] text-[12.5px] text-[#102033] font-[family-name:var(--font-display)] font-600 shadow-[0_4px_12px_-8px_rgba(16,32,51,0.18)]"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[rgba(16,32,51,0.08)] text-[12.5px] text-[#102033] font-display font-600 shadow-[0_4px_12px_-8px_rgba(16,32,51,0.18)]"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4]" />
                   {t}
@@ -73,7 +73,7 @@ export function MvHero() {
               <Link href="#subjects" className="btn btn-yellow">View Subjects & Pricing</Link>
             </m.div>
 
-            <p className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+            <p className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-display font-600">
               1-to-1 Only · Cambridge IGCSE / O-Level · Maldives-Wide
             </p>
           </div>
@@ -105,17 +105,17 @@ function MvHeroVisual() {
         }}
       />
 
-      <div className="relative rounded-[28px] bg-gradient-to-br from-[#E6FBFF] via-white to-[#EAFBF1] border border-white/80 shadow-[0_30px_80px_-30px_rgba(16,32,51,0.20)] p-6 md:p-7">
+      <div className="relative rounded-[28px] bg-linear-to-br from-[#E6FBFF] via-white to-[#EAFBF1] border border-white/80 shadow-[0_30px_80px_-30px_rgba(16,32,51,0.20)] p-6 md:p-7">
         {/* Header band */}
         <div className="flex items-center justify-between">
           <div className="inline-flex items-center gap-2">
             <span className="text-2xl" aria-hidden>🇲🇻</span>
-            <p className="font-[family-name:var(--font-display)] font-800 text-[14px] text-[#102033]">
+            <p className="font-display font-800 text-[14px] text-[#102033]">
               Maldives · Grade 9–10
             </p>
           </div>
           <span
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] font-[family-name:var(--font-display)] font-700"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] font-display font-700"
             style={{ background: "rgba(6,182,212,0.12)", color: "#0891B2" }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4]" />
@@ -137,7 +137,7 @@ function MvHeroVisual() {
                 {s.icon}
               </span>
               <div className="min-w-0 leading-tight">
-                <p className="font-[family-name:var(--font-display)] font-700 text-[12px] text-[#102033] truncate">
+                <p className="font-display font-700 text-[12px] text-[#102033] truncate">
                   {s.short}
                 </p>
                 <p className="text-[10px] text-[#5A6A82] mt-0.5">Cambridge · {s.code}</p>
@@ -158,13 +158,13 @@ function MvHeroVisual() {
               </svg>
             </span>
             <div className="leading-tight">
-              <p className="font-[family-name:var(--font-display)] font-700 text-[12.5px] text-[#102033]">
+              <p className="font-display font-700 text-[12.5px] text-[#102033]">
                 100% Individual
               </p>
               <p className="text-[10.5px] text-[#5A6A82] mt-0.5">No group classes · Personal tutor</p>
             </div>
           </div>
-          <p className="text-[11px] uppercase tracking-[0.10em] text-[#5A6A82] font-[family-name:var(--font-display)] font-700">
+          <p className="text-[11px] uppercase tracking-widest text-[#5A6A82] font-display font-700">
             Live · 1-to-1
           </p>
         </div>

@@ -40,7 +40,7 @@ export function GlPricing() {
                 Tailored to your child's <em>exact requirement.</em>
               </h3>
             </div>
-            <p className="text-[12px] uppercase tracking-[0.10em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+            <p className="text-[12px] uppercase tracking-widest text-[#5A6A82] font-display font-600">
               No fixed packages
             </p>
           </div>
@@ -64,7 +64,7 @@ export function GlPricing() {
                 >
                   {f.icon}
                 </span>
-                <p className="mt-3 font-[family-name:var(--font-display)] font-700 text-[13px] text-[#102033] leading-tight">
+                <p className="mt-3 font-display font-700 text-[13px] text-[#102033] leading-tight">
                   {f.title}
                 </p>
               </m.div>
@@ -78,7 +78,7 @@ export function GlPricing() {
 
           <GlCtaRow primary="Request Class Fee Details" />
 
-          <p className="mt-4 text-center text-[11px] uppercase tracking-[0.12em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+          <p className="mt-4 text-center text-[11px] uppercase tracking-[0.12em] text-[#5A6A82] font-display font-600">
             <a
               href={GL_SIGNUP}
               target="_blank"

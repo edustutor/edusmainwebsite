@@ -35,7 +35,7 @@ export function GlCompare() {
           {/* Header */}
           <div className="grid grid-cols-2 border-b border-[rgba(16,32,51,0.08)]">
             <div className="px-5 py-4 bg-[#F6F8FB]">
-              <p className="text-[11px] uppercase tracking-[0.10em] text-[#5A6A82] font-[family-name:var(--font-display)] font-700">
+              <p className="text-[11px] uppercase tracking-widest text-[#5A6A82] font-display font-700">
                 Traditional Group Learning
               </p>
             </div>
@@ -43,7 +43,7 @@ export function GlCompare() {
               className="px-5 py-4 text-white"
               style={{ background: "linear-gradient(90deg,#2563EB 0%,#06B6D4 100%)" }}
             >
-              <p className="text-[11px] uppercase tracking-[0.10em] font-[family-name:var(--font-display)] font-700">
+              <p className="text-[11px] uppercase tracking-widest font-display font-700">
                 EDUS Global · One to One
               </p>
             </div>
@@ -72,7 +72,7 @@ export function GlCompare() {
                     <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
-                <p className="text-[13.5px] text-[#102033] leading-[1.55] font-[family-name:var(--font-display)] font-600">
+                <p className="text-[13.5px] text-[#102033] leading-[1.55] font-display font-600">
                   {r.edus}
                 </p>
               </div>

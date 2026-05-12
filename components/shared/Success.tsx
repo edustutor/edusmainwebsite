@@ -74,7 +74,7 @@ export function Success() {
               <button
                 key={f.code}
                 onClick={() => setFilter(f.code)}
-                className={`relative px-2 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10.5px] sm:text-[13px] font-medium font-[family-name:var(--font-display)] transition-colors whitespace-nowrap shrink-0 ${
+                className={`relative px-2 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10.5px] sm:text-[13px] font-medium font-display transition-colors whitespace-nowrap shrink-0 ${
                   filter === f.code ? "text-white" : "text-[#2B3950] hover:text-[#102033]"
                 }`}
               >
@@ -118,7 +118,7 @@ export function Success() {
                 <div className="relative">
                   <div className="flex items-center justify-between">
                     <span
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11.5px] font-medium font-[family-name:var(--font-display)]"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11.5px] font-medium font-display"
                       style={{ background: `${s.tint}15`, color: s.tint }}
                     >
                       <span>{s.flag}</span>
@@ -133,12 +133,12 @@ export function Success() {
 
                   <div className="mt-6 pt-5 border-t border-[rgba(16,32,51,0.08)] flex items-center gap-3">
                     <span
-                      className="inline-flex w-10 h-10 rounded-full items-center justify-center text-white font-[family-name:var(--font-display)] font-600 text-[12px] shrink-0"
+                      className="inline-flex w-10 h-10 rounded-full items-center justify-center text-white font-display font-600 text-[12px] shrink-0"
                       style={{ background: s.tint }}
                     >
                       {s.initials}
                     </span>
-                    <p className="text-[12.5px] text-[#5A6A82] font-[family-name:var(--font-display)] font-500">
+                    <p className="text-[12.5px] text-[#5A6A82] font-display font-500">
                       {s.label}
                     </p>
                   </div>

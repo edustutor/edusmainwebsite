@@ -67,7 +67,7 @@ function SyllabusBlock({
       />
       <div className="flex items-center gap-2">
         <span className="text-2xl">{flag}</span>
-        <h3 className="font-[family-name:var(--font-display)] font-700 text-[16px] text-[#102033]">
+        <h3 className="font-display font-700 text-[16px] text-[#102033]">
           {name}
         </h3>
       </div>
@@ -75,7 +75,7 @@ function SyllabusBlock({
         {groups.map((g) => (
           <li key={g.level} className="border-t border-[rgba(16,32,51,0.06)] pt-3 first:border-t-0 first:pt-0">
             <p
-              className="font-[family-name:var(--font-display)] font-700 text-[12px] uppercase tracking-[0.08em]"
+              className="font-display font-700 text-[12px] uppercase tracking-[0.08em]"
               style={{ color: tint }}
             >
               {g.level}

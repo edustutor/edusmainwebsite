@@ -77,7 +77,7 @@ export function GlLiveClass() {
                     {f.icon}
                   </span>
                   <div className="min-w-0">
-                    <p className="font-[family-name:var(--font-display)] font-700 text-[13.5px] text-[#102033] leading-tight">
+                    <p className="font-display font-700 text-[13.5px] text-[#102033] leading-tight">
                       {f.title}
                     </p>
                     <p className="text-[12px] text-[#5A6A82] mt-1 leading-[1.55]">{f.body}</p>
@@ -85,7 +85,7 @@ export function GlLiveClass() {
                 </div>
                 <span
                   aria-hidden
-                  className="absolute top-3 right-3 font-[family-name:var(--font-display)] font-800 text-[10.5px] tracking-[0.10em]"
+                  className="absolute top-3 right-3 font-display font-800 text-[10.5px] tracking-widest"
                   style={{ color: `${f.tint}80` }}
                 >
                   {String(i + 1).padStart(2, "0")}
@@ -133,7 +133,7 @@ export function GlLiveClass() {
                 >
                   {g.icon}
                 </span>
-                <h4 className="mt-3 font-[family-name:var(--font-display)] font-700 text-[14.5px] text-[#102033] leading-tight">
+                <h4 className="mt-3 font-display font-700 text-[14.5px] text-[#102033] leading-tight">
                   {g.title}
                 </h4>
                 <p className="text-[12.5px] text-[#5A6A82] mt-1.5 leading-[1.6]">{g.body}</p>
@@ -176,11 +176,11 @@ function LiveClassroomMock() {
             <span className="inline-flex w-2 h-2 rounded-full bg-[#FF5F57]" />
             <span className="inline-flex w-2 h-2 rounded-full bg-[#FFBD2E]" />
             <span className="inline-flex w-2 h-2 rounded-full bg-[#28C840]" />
-            <p className="ml-2 text-[11px] uppercase tracking-[0.10em] font-[family-name:var(--font-display)] font-700 text-[#102033]">
+            <p className="ml-2 text-[11px] uppercase tracking-widest font-display font-700 text-[#102033]">
               EDUS Live Class
             </p>
           </div>
-          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-[family-name:var(--font-display)] font-700 bg-[#DC2626]/10 text-[#DC2626]">
+          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-display font-700 bg-[#DC2626]/10 text-[#DC2626]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626] animate-pulse" />
             LIVE
           </span>
@@ -189,7 +189,7 @@ function LiveClassroomMock() {
         {/* Video tiles */}
         <div className="p-4 grid grid-cols-2 gap-3">
           {/* Tutor tile */}
-          <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+          <div className="relative aspect-4/3 rounded-xl overflow-hidden">
             <div
               className="absolute inset-0"
               style={{
@@ -198,18 +198,18 @@ function LiveClassroomMock() {
               }}
             />
             <div className="absolute inset-0 grid place-items-center">
-              <span className="font-[family-name:var(--font-display)] font-800 text-[28px] text-white/95">
+              <span className="font-display font-800 text-[28px] text-white/95">
                 T
               </span>
             </div>
-            <span className="absolute bottom-1.5 left-1.5 px-1.5 py-0.5 rounded text-[9.5px] font-[family-name:var(--font-display)] font-700 bg-black/40 text-white">
+            <span className="absolute bottom-1.5 left-1.5 px-1.5 py-0.5 rounded-sm text-[9.5px] font-display font-700 bg-black/40 text-white">
               Tutor
             </span>
             <span className="absolute top-1.5 right-1.5 inline-flex w-2 h-2 rounded-full bg-[#22C55E]" />
           </div>
 
           {/* Student tile */}
-          <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+          <div className="relative aspect-4/3 rounded-xl overflow-hidden">
             <div
               className="absolute inset-0"
               style={{
@@ -218,11 +218,11 @@ function LiveClassroomMock() {
               }}
             />
             <div className="absolute inset-0 grid place-items-center">
-              <span className="font-[family-name:var(--font-display)] font-800 text-[28px] text-white/95">
+              <span className="font-display font-800 text-[28px] text-white/95">
                 S
               </span>
             </div>
-            <span className="absolute bottom-1.5 left-1.5 px-1.5 py-0.5 rounded text-[9.5px] font-[family-name:var(--font-display)] font-700 bg-black/40 text-white">
+            <span className="absolute bottom-1.5 left-1.5 px-1.5 py-0.5 rounded-sm text-[9.5px] font-display font-700 bg-black/40 text-white">
               Student
             </span>
             <span className="absolute top-1.5 right-1.5 inline-flex w-2 h-2 rounded-full bg-[#22C55E]" />
@@ -233,14 +233,14 @@ function LiveClassroomMock() {
         <div className="px-4 pb-4">
           <div className="rounded-xl bg-[#F6F8FB] border border-[rgba(16,32,51,0.08)] p-3.5">
             <div className="flex items-center justify-between">
-              <p className="text-[10px] uppercase tracking-[0.10em] text-[#5A6A82] font-[family-name:var(--font-display)] font-700">
+              <p className="text-[10px] uppercase tracking-widest text-[#5A6A82] font-display font-700">
                 Whiteboard · Quadratic Equations
               </p>
-              <span className="text-[10px] font-[family-name:var(--font-display)] font-700 text-[#2563EB]">
+              <span className="text-[10px] font-display font-700 text-[#2563EB]">
                 Topic 03 / 05
               </span>
             </div>
-            <div className="mt-3 space-y-2 font-[family-name:var(--font-display)] font-700 text-[13px] text-[#102033]">
+            <div className="mt-3 space-y-2 font-display font-700 text-[13px] text-[#102033]">
               <div className="flex items-center gap-2">
                 <span className="text-[#2563EB]">x =</span>
                 <span>
@@ -277,7 +277,7 @@ function LiveClassroomMock() {
             <ToolPill label="Cam" tint="#06B6D4" />
             <ToolPill label="Share" tint="#8B5CF6" />
           </div>
-          <p className="text-[10.5px] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+          <p className="text-[10.5px] text-[#5A6A82] font-display font-600">
             Session · 47 min
           </p>
         </div>
@@ -289,7 +289,7 @@ function LiveClassroomMock() {
 function ToolPill({ label, tint }: { label: string; tint: string }) {
   return (
     <span
-      className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-[family-name:var(--font-display)] font-700"
+      className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-display font-700"
       style={{ background: `${tint}14`, color: tint }}
     >
       <span className="w-1.5 h-1.5 rounded-full" style={{ background: tint }} />
