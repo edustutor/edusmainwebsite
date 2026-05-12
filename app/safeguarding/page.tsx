@@ -1,4 +1,4 @@
-import { JsonLdScript, breadcrumbList } from "@/components/layout/StructuredData";
+import { JsonLdScript, breadcrumbList, speakableWebPage } from "@/components/layout/StructuredData";
 
 export const metadata = {
   title: "Safeguarding Policy · EDUS Lanka (PVT) Ltd.",
@@ -19,6 +19,14 @@ export default function SafeguardingPage() {
           { name: "Home", path: "/" },
           { name: "Safeguarding", path: "/safeguarding" },
         ])}
+      />
+      <JsonLdScript
+        data={speakableWebPage({
+          name: "Safeguarding Policy · EDUS Lanka (PVT) Ltd.",
+          description:
+            "EDUS Online Tuition's commitment to safeguarding the welfare of every child and young person across Sri Lanka, India, Maldives, and globally.",
+          path: "/safeguarding",
+        })}
       />
       {/* HERO */}
       <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">

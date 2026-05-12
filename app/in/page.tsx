@@ -8,6 +8,7 @@ import {
   JsonLdScript,
   breadcrumbList,
   educationalProgram,
+  tuitionCourse,
   tuitionService,
   SITE_URL,
 } from "@/components/layout/StructuredData";
@@ -126,6 +127,15 @@ export default function IndiaPage() {
           name: "CBSE Online Tuition Tamil Nadu — EDUS",
           description:
             "Live online CBSE classes for Tamil Nadu students. Mathematics, Science, and English for CBSE Classes 6 to 10 in English medium with monthly parent reports and exam analytics.",
+          url: `${SITE_URL}/in`,
+          area: "India",
+        })}
+      />
+      <JsonLdScript
+        data={tuitionCourse({
+          name: "EDUS India CBSE Classes 6 to 10",
+          description:
+            "Structured live online CBSE course for English-medium students across Tamil Nadu. Mathematics, Science, and English for Classes 6 to 10 with monthly parent reports.",
           url: `${SITE_URL}/in`,
           area: "India",
         })}

@@ -1,4 +1,4 @@
-import { JsonLdScript, breadcrumbList } from "@/components/layout/StructuredData";
+import { JsonLdScript, breadcrumbList, speakableWebPage } from "@/components/layout/StructuredData";
 
 export const metadata = {
   title: "Cookie Policy · EDUS Lanka (PVT) Ltd.",
@@ -19,6 +19,14 @@ export default function CookiePolicyPage() {
           { name: "Home", path: "/" },
           { name: "Cookie Policy", path: "/cookies" },
         ])}
+      />
+      <JsonLdScript
+        data={speakableWebPage({
+          name: "Cookie Policy · EDUS Lanka (PVT) Ltd.",
+          description:
+            "How EDUS Online Tuition uses cookies and similar tracking technologies, including categories used and how to manage them.",
+          path: "/cookies",
+        })}
       />
       {/* HERO */}
       <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">

@@ -16,7 +16,7 @@ type Story = {
   tint: string;
 };
 
-const STORIES: Story[] = [
+export const STORIES: Story[] = [
   // Sri Lanka
   {
     market: "SL", flag: "🇱🇰", country: "Sri Lanka",

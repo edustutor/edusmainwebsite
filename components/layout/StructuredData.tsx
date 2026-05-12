@@ -207,6 +207,139 @@ export function contactPage() {
 }
 
 /* --------------------------------------------------------------- */
+/* Course — adds Google's "Course" rich result eligibility alongside */
+/* the existing EducationalOccupationalProgram per market page.      */
+/* --------------------------------------------------------------- */
+export type CourseOptions = {
+  name: string;
+  description: string;
+  url: string;
+  area: string;
+};
+
+export function tuitionCourse(opts: CourseOptions) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: opts.name,
+    description: opts.description,
+    url: opts.url,
+    provider: {
+      "@type": "EducationalOrganization",
+      name: "EDUS Online Tuition",
+      url: SITE_URL,
+      sameAs: SITE_URL,
+    },
+    educationalCredentialAwarded: "Continued academic progress and exam preparation",
+    inLanguage: ["en", "ta", "si"],
+    availableLanguage: ["English", "Tamil", "Sinhala"],
+    audience: {
+      "@type": "EducationalAudience",
+      educationalRole: "student",
+      audienceType: opts.area,
+    },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+      courseWorkload: "PT2H",
+      inLanguage: ["en", "ta", "si"],
+      eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+      location: {
+        "@type": "VirtualLocation",
+        url: SITE_URL,
+      },
+    },
+    offers: {
+      "@type": "Offer",
+      category: "Online tuition",
+      availability: "https://schema.org/InStock",
+      url: "https://signup.edustutor.com/",
+    },
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* WebPage with speakable — voice-assistant friendly for legal /    */
+/* policy pages. Tells Google Assistant which sections to read aloud. */
+/* --------------------------------------------------------------- */
+export type SpeakablePageOptions = {
+  name: string;
+  description: string;
+  path: string; // e.g. "/privacy"
+};
+
+export function speakableWebPage(opts: SpeakablePageOptions) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: opts.name,
+    description: opts.description,
+    url: `${SITE_URL}${opts.path}`,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": `${SITE_URL}/#organization` },
+    inLanguage: "en",
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "h2", "h3", "p"],
+    },
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* Organization reference — lightweight @id pointer for every page  */
+/* so non-homepage routes still carry the brand entity in their      */
+/* JSON-LD graph.                                                    */
+/* --------------------------------------------------------------- */
+export function organizationReference() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "@id": `${SITE_URL}/#organization`,
+    name: "EDUS Online Tuition",
+    url: SITE_URL,
+    logo: `${SITE_URL}/edus-logo-blue.webp`,
+    sameAs: [
+      "https://www.facebook.com/edusonline",
+      "https://www.instagram.com/edus_online/",
+      "https://www.tiktok.com/@edusonline",
+      "https://www.youtube.com/@edusonline/",
+      "https://lk.linkedin.com/company/edusonline",
+      "https://share.google/ZQO6DJ0yRrFXtOw1x",
+      "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
+    ],
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* ItemList of success stories — homepage social-proof block. Names */
+/* are intentionally anonymised (no Person/Review schema) to comply  */
+/* with Google's 2024 review-author identity guidance.               */
+/* --------------------------------------------------------------- */
+export type StoryEntry = { country: string; label: string; quote: string };
+
+export function successStoriesItemList(stories: StoryEntry[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "EDUS Student & Parent Success Stories",
+    description:
+      "Anonymised testimonials from EDUS students and parents across Sri Lanka, India, Maldives, and global markets.",
+    numberOfItems: stories.length,
+    itemListElement: stories.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "CreativeWork",
+        name: `${s.country} — ${s.label}`,
+        text: s.quote,
+        inLanguage: "en",
+        about: { "@id": `${SITE_URL}/#organization` },
+      },
+    })),
+  };
+}
+
+/* --------------------------------------------------------------- */
 /* JobPosting — used on the /teach page                              */
 /* --------------------------------------------------------------- */
 export function tutorJobPosting() {

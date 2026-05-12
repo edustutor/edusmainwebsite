@@ -14,6 +14,7 @@ import {
   JsonLdScript,
   breadcrumbList,
   educationalProgram,
+  tuitionCourse,
   tuitionService,
   SITE_URL,
 } from "@/components/layout/StructuredData";
@@ -137,6 +138,15 @@ export default function MaldivesPage() {
           name: "Maldives Cambridge IGCSE Online Tuition — EDUS",
           description:
             "Premium 1-to-1 Cambridge IGCSE and O-Level online classes for Maldives Grade 9 and 10 students across every island.",
+          url: `${SITE_URL}/mv`,
+          area: "Maldives",
+        })}
+      />
+      <JsonLdScript
+        data={tuitionCourse({
+          name: "EDUS Maldives Cambridge IGCSE & O-Level Online Course",
+          description:
+            "Live 1-to-1 Cambridge IGCSE and O-Level online classes for Maldives Grade 9 and 10 students. Mathematics, English, Biology, Chemistry, Physics with expert EDUS tutors.",
           url: `${SITE_URL}/mv`,
           area: "Maldives",
         })}

@@ -9,6 +9,7 @@ import {
   JsonLdScript,
   breadcrumbList,
   educationalProgram,
+  tuitionCourse,
   tuitionService,
   SITE_URL,
 } from "@/components/layout/StructuredData";
@@ -142,6 +143,15 @@ export default function SriLankaPage() {
           name: "Online Tuition Sri Lanka — EDUS",
           description:
             "Live online classes and one-to-one tutoring for Sri Lankan school students. National Syllabus, Cambridge IGCSE, and Edexcel in Sinhala, Tamil, and English medium.",
+          url: `${SITE_URL}/sl`,
+          area: "Sri Lanka",
+        })}
+      />
+      <JsonLdScript
+        data={tuitionCourse({
+          name: "EDUS Sri Lanka Live Online Classes",
+          description:
+            "Live online tuition course for Sri Lankan students from Grade 1 to G.C.E A/L. National Syllabus, Cambridge IGCSE, and Edexcel in Sinhala, Tamil, and English medium.",
           url: `${SITE_URL}/sl`,
           area: "Sri Lanka",
         })}

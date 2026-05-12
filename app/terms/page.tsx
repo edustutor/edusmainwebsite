@@ -1,4 +1,4 @@
-import { JsonLdScript, breadcrumbList } from "@/components/layout/StructuredData";
+import { JsonLdScript, breadcrumbList, speakableWebPage } from "@/components/layout/StructuredData";
 
 export const metadata = {
   title: "Terms & Conditions · EDUS Lanka (PVT) Ltd.",
@@ -19,6 +19,14 @@ export default function TermsPage() {
           { name: "Home", path: "/" },
           { name: "Terms & Conditions", path: "/terms" },
         ])}
+      />
+      <JsonLdScript
+        data={speakableWebPage({
+          name: "Terms & Conditions · EDUS Lanka (PVT) Ltd.",
+          description:
+            "Terms and conditions governing the use of EDUS Online services, including registration, fees, refunds, intellectual property, liability, and governing law.",
+          path: "/terms",
+        })}
       />
       {/* HERO - same pattern as other sub-pages */}
       <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">

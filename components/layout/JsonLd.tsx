@@ -11,7 +11,8 @@
  * JobPosting) live in `StructuredData.tsx` and are emitted from each route.
  */
 
-import { JsonLdScript, siteNavigation, primaryPagesItemList } from "./StructuredData";
+import { JsonLdScript, siteNavigation, primaryPagesItemList, successStoriesItemList } from "./StructuredData";
+import { STORIES } from "@/components/shared/Success";
 
 const SITE_URL = "https://edustutor.com";
 
@@ -255,6 +256,12 @@ const FAQ = {
 };
 
 export function HomeJsonLd() {
+  const stories = STORIES.map((s) => ({
+    country: s.country,
+    label: s.label,
+    quote: s.quote,
+  }));
+
   return (
     <>
       <JsonLdScript data={ORG} />
@@ -262,6 +269,7 @@ export function HomeJsonLd() {
       <JsonLdScript data={WEBSITE} />
       <JsonLdScript data={siteNavigation()} />
       <JsonLdScript data={primaryPagesItemList()} />
+      <JsonLdScript data={successStoriesItemList(stories)} />
       <JsonLdScript data={FAQ} />
     </>
   );

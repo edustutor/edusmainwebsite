@@ -19,6 +19,7 @@ import {
   JsonLdScript,
   breadcrumbList,
   educationalProgram,
+  tuitionCourse,
   tuitionService,
   SITE_URL,
 } from "@/components/layout/StructuredData";
@@ -163,6 +164,15 @@ export default function GlobalPage() {
           name: "Global One-to-One Online Tutoring — EDUS",
           description:
             "Worldwide one-to-one online tutoring for international students. Cambridge, Edexcel, IGCSE, GCSE, O-Level, A-Level, IB, and national curricula in English medium.",
+          url: `${SITE_URL}/global`,
+          area: "Worldwide",
+        })}
+      />
+      <JsonLdScript
+        data={tuitionCourse({
+          name: "EDUS Global One-to-One Online Tutoring",
+          description:
+            "Personalised one-to-one online tutoring for international students. Cambridge, Edexcel, IGCSE, GCSE, O-Level, A-Level, IB, and any national curriculum support.",
           url: `${SITE_URL}/global`,
           area: "Worldwide",
         })}

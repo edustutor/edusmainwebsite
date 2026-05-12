@@ -1,4 +1,4 @@
-import { JsonLdScript, breadcrumbList } from "@/components/layout/StructuredData";
+import { JsonLdScript, breadcrumbList, speakableWebPage } from "@/components/layout/StructuredData";
 
 export const metadata = {
   title: "Acceptable Use Policy · EDUS Lanka (PVT) Ltd.",
@@ -19,6 +19,14 @@ export default function AcceptableUsePage() {
           { name: "Home", path: "/" },
           { name: "Acceptable Use", path: "/acceptable-use" },
         ])}
+      />
+      <JsonLdScript
+        data={speakableWebPage({
+          name: "Acceptable Use Policy · EDUS Lanka (PVT) Ltd.",
+          description:
+            "Acceptable Use Policy governing how students, parents, tutors, and visitors may use the EDUS website, mobile applications, and online learning services.",
+          path: "/acceptable-use",
+        })}
       />
       {/* HERO */}
       <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">
