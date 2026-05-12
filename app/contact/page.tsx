@@ -3,9 +3,7 @@ import { JsonLdScript, breadcrumbList, contactPage } from "@/components/layout/S
 import { ContactHero } from "@/components/contact/ContactHero";
 import { ContactCountries } from "@/components/contact/ContactCountries";
 import { ContactMap } from "@/components/contact/ContactMap";
-import { ContactWhy } from "@/components/contact/ContactWhy";
 import { ContactGuidance } from "@/components/contact/ContactGuidance";
-import { ContactFAQ } from "@/components/contact/ContactFAQ";
 import { ContactCTA } from "@/components/contact/ContactCTA";
 
 export const metadata = {
@@ -52,9 +50,7 @@ export default function ContactPage() {
       <ContactCountries />
       <ContactMap />
       <ContactForm />
-      <ContactWhy />
       <ContactGuidance />
-      <ContactFAQ />
       <ContactCTA />
     </>
   );

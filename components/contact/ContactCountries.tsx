@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { COUNTRIES } from "./ContactShared";
 
 export function ContactCountries() {
@@ -21,7 +20,7 @@ export function ContactCountries() {
           {COUNTRIES.map((c) => (
             <article
               key={c.code}
-              className="relative bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-6 md:p-7 shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)] flex flex-col"
+              className="relative bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-6 md:p-7 shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)]"
             >
               <span
                 aria-hidden
@@ -90,44 +89,6 @@ export function ContactCountries() {
                 )}
               </dl>
 
-              {/* Support areas */}
-              <div className="mt-5 pt-5 border-t border-[rgba(16,32,51,0.06)]">
-                <p
-                  className="text-[10.5px] uppercase tracking-widest font-display font-700"
-                  style={{ color: c.tint }}
-                >
-                  Main Support Areas
-                </p>
-                <ul className="mt-3 space-y-1.5 text-[12.5px]">
-                  {c.supportAreas.map((a) => (
-                    <li key={a} className="flex items-start gap-2 text-[#2B3950]">
-                      <span
-                        className="inline-flex w-4 h-4 mt-0.5 rounded-full items-center justify-center shrink-0"
-                        style={{ background: `${c.tint}18` }}
-                      >
-                        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke={c.tint} strokeWidth="3.5" aria-hidden>
-                          <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </span>
-                      {a}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Footer CTA */}
-              <div className="mt-6 pt-5 border-t border-[rgba(16,32,51,0.06)] flex items-center justify-between gap-3 mt-auto">
-                <Link
-                  href={c.buttonHref}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-white font-display font-700 text-[12.5px] shadow-[0_8px_20px_-10px_rgba(16,32,51,0.30)] hover:-translate-y-0.5 transition"
-                  style={{ background: c.tint }}
-                >
-                  {c.buttonLabel}
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" aria-hidden>
-                    <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
-              </div>
             </article>
           ))}
         </div>
