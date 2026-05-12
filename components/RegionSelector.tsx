@@ -47,7 +47,7 @@ const REGIONS: Region[] = [
     features: [
       "English medium classes",
       "CBSE Mathematics, Science, English",
-      "Weekly academic monitoring",
+      "Regular academic monitoring",
       "Exam focused learning",
       "Parent reports + class tracking",
     ],

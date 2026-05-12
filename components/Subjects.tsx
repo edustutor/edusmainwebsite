@@ -62,7 +62,7 @@ const PATHWAYS: Pathway[] = [
     label: "India",
     region: "CBSE Classes 6 to 10 · English Medium",
     description:
-      "Premium English-medium CBSE tuition for Classes 6 to 10 with three core subjects, weekly academic monitoring, and exam-focused learning.",
+      "Premium English-medium CBSE tuition for Classes 6 to 10 with three core subjects, monthly academic monitoring, and exam-focused learning.",
     groups: [
       {
         title: "Middle Stage · CBSE Classes 6 – 8",

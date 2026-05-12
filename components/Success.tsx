@@ -47,7 +47,7 @@ const STORIES: Story[] = [
   {
     market: "IN", flag: "🇮🇳", country: "India",
     label: "Parent of CBSE Class 10 Student · Tamil Nadu",
-    quote: "Weekly parent updates kept us aligned. The tutor knew exactly where my child needed support.",
+    quote: "Monthly parent updates kept us aligned. The tutor knew exactly where my child needed support.",
     initials: "RM", tint: "#8B5CF6",
   },
   {

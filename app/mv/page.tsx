@@ -49,7 +49,7 @@ const cfg: MarketConfig = {
     { k: "Live", v: "Online classes" },
     { k: "Cambridge", v: "+ Edexcel support" },
     { k: "1:1", v: "Tutor matching" },
-    { k: "Parent app", v: "Weekly updates" },
+    { k: "Parent", v: "Weekly updates" },
   ],
 };
 

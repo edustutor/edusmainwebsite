@@ -4,7 +4,7 @@ import { CTA } from "@/components/CTA";
 export const metadata = {
   title: "India · Tamil Nadu - Premium Online Tuition for CBSE Classes 6–10 · EDUS",
   description:
-    "Premium structured online CBSE tuition with disciplined academic monitoring. CBSE-aligned Classes 6–10, English medium, Mathematics · Science · English. Weekly reports, exam analytics, monthly progress to parents.",
+    "Premium structured online CBSE tuition with disciplined academic monitoring. CBSE-aligned Classes 6–10, English medium, Mathematics · Science · English. monthly reports, exam analytics, monthly progress to parents.",
 };
 
 const SUBJECTS = ["Mathematics", "Science", "English"];
@@ -22,12 +22,12 @@ const SCHEDULE = [
 ];
 const PRICING = [
   { tag: "Admission Fee", price: "₹2,000", unit: "one-time", bullets: ["Onboarding & assessment", "Account setup", "Welcome pack"], tint: "#2563EB" },
-  { tag: "Per Subject", price: "₹1,000", unit: "/ month", bullets: ["2 hours / week per subject", "Live + recorded", "Weekly reporting"], tint: "#06B6D4" },
+  { tag: "Per Subject", price: "₹1,000", unit: "/ month", bullets: ["2 hours / week per subject", "Live + recorded", "Monthly reporting"], tint: "#06B6D4" },
   { tag: "All-Subject Package", price: "₹5,000", unit: "/ month", bullets: ["All 6 subjects covered", "Save vs. per-subject", "Priority parent support"], tint: "#8B5CF6", featured: true },
 ];
 const PILLARS = [
   { icon: "📈", title: "Structured monitoring", body: "Class observation, tutor feedback, and academic SOPs run every month - not as marketing, as process.", tint: "#2563EB" },
-  { icon: "📋", title: "Weekly reporting", body: "Attendance, homework, and topic-by-topic progress shared with parents every week. No black box.", tint: "#8B5CF6" },
+  { icon: "📋", title: "Monthly reporting", body: "Attendance, homework, and topic-by-topic progress shared with parents every week. No black box.", tint: "#8B5CF6" },
   { icon: "📊", title: "Exam analytics", body: "Term and unit exams modelled on board paper structure, scored against subject benchmarks each month.", tint: "#06B6D4" },
   { icon: "🛡️", title: "Disciplined tutor system", body: "Vetted, demo-tested, interviewed, trained. Always on time. Always on syllabus. Always accountable.", tint: "#22C55E" },
 ];
@@ -61,7 +61,7 @@ export default function IndiaPage() {
               Structured tuition. <em>Disciplined monitoring. Real progress.</em>
             </h1>
             <p className="text-[#2B3950] text-[17px] mt-6 leading-[1.65] max-w-2xl mx-auto">
-              EDUS is not mass coaching. It's premium CBSE-aligned online tuition with weekly parent
+              EDUS is not mass coaching. It's premium CBSE-aligned online tuition with monthly parent
               reporting, exam analytics, and a disciplined tutor system - built for Tamil Nadu
               families who want measurable progress across CBSE Classes 6 to 10.
             </p>
@@ -77,7 +77,7 @@ export default function IndiaPage() {
               { k: "CBSE", v: "Syllabus aligned" },
               { k: "Class 6 – 10", v: "Coverage" },
               { k: "3", v: "Core subjects" },
-              { k: "Weekly", v: "Parent reports" },
+              { k: "Monthly", v: "Parent reports" },
             ].map((s, i) => (
               <div key={i} className="glass rounded-2xl px-5 py-4 text-center">
                 <p className="font-[family-name:var(--font-display)] font-700 text-[22px] tnum text-[#102033]">{s.k}</p>
@@ -98,7 +98,7 @@ export default function IndiaPage() {
             </h2>
             <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
               Most CBSE tuition across Tamil Nadu is unstructured. EDUS runs with academic SOPs,
-              monitored tutors, and weekly parent visibility.
+              monitored tutors, and monthly parent visibility.
             </p>
           </div>
 
