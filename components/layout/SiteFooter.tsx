@@ -15,6 +15,7 @@ const QUICK = [
 
 const PATHS = [
   { label: "Sri Lanka", href: "/sl" },
+  { label: "SL Timetable 2026", href: "/sl/timetable" },
   { label: "India", href: "/in" },
   { label: "Maldives", href: "/mv" },
   { label: "Global", href: "/global" },

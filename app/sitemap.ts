@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Market landing pages
     { path: "/sl",               changeFrequency: "weekly",  priority: 0.95 },
+    { path: "/sl/timetable",     changeFrequency: "monthly", priority: 0.85 },
     { path: "/in",               changeFrequency: "weekly",  priority: 0.95 },
     { path: "/mv",               changeFrequency: "weekly",  priority: 0.95 },
     { path: "/global",           changeFrequency: "weekly",  priority: 0.95 },

@@ -37,6 +37,7 @@ export function SlHero() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3" data-anim="3">
             <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Enrolment</a>
+            <Link href="/sl/timetable" className="btn btn-cyan">View Timetable 2026</Link>
             <Link href="/contact" className="btn btn-yellow">Talk to US</Link>
           </div>
         </div>

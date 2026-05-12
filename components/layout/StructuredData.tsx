@@ -108,6 +108,7 @@ export function educationalProgram(opts: ProgramOptions) {
 export function siteNavigation() {
   const items = [
     { name: "Sri Lanka Classes",       path: "/sl" },
+    { name: "Sri Lanka Timetable 2026", path: "/sl/timetable" },
     { name: "India CBSE Classes 6-10", path: "/in" },
     { name: "Maldives Cambridge IGCSE", path: "/mv" },
     { name: "Global One-to-One Tuition", path: "/global" },
@@ -134,6 +135,7 @@ export function siteNavigation() {
 export function primaryPagesItemList() {
   const items = [
     { name: "Sri Lanka Online Tuition",  path: "/sl",      desc: "Live online classes for Grade 1 to A/L - National, Cambridge & Edexcel - Sinhala, Tamil, English medium" },
+    { name: "Sri Lanka Timetable 2026",  path: "/sl/timetable", desc: "Full 2026 class schedule for EDUS Sri Lanka - Grade 3 to A/L, Tamil & English medium, with tutors, times, and fees" },
     { name: "India CBSE Online Tuition", path: "/in",      desc: "CBSE Classes 6 to 10 for Tamil Nadu students - Maths, Science, English - monthly parent reports" },
     { name: "Maldives Cambridge IGCSE",  path: "/mv",      desc: "Premium 1-to-1 Cambridge IGCSE and O-Level for Grade 9 and 10 Maldives students" },
     { name: "Global One-to-One Tuition", path: "/global",  desc: "Personalised online tutoring for international students - Cambridge, Edexcel, IGCSE, GCSE, IB" },
@@ -743,5 +745,94 @@ export function edusVideoCarousel(videos: EdusVideo[]) {
       url: `https://www.youtube.com/watch?v=${v.id}`,
       name: v.title,
     })),
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* EventSeries - recurring online class entries for the SL          */
+/* timetable. One EventSeries per (class code + session). Google    */
+/* uses this to surface class days/times directly in SERP for       */
+/* queries like "EDUS Grade 10 Maths timetable".                    */
+/*                                                                    */
+/* All times are local Sri Lanka time (Asia/Colombo, IST +05:30).    */
+/* --------------------------------------------------------------- */
+export type ScheduleSession = {
+  code: string;
+  subject: string;
+  grade: string;
+  medium: string;
+  level: string;
+  tutor: string;
+  monthlyFee: string;
+  day: string; // e.g. "Monday"
+  time: string; // verbatim, e.g. "7.30-8.30 PM"
+};
+
+export function classEventSeries(s: ScheduleSession) {
+  const name = `${s.grade} ${s.subject} (${s.medium} medium) - EDUS Sri Lanka`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "EventSeries",
+    name,
+    description: `Recurring ${s.level} ${s.subject} live online class for ${s.grade} ${s.medium}-medium students. Conducted online by EDUS tutor ${s.tutor}.`,
+    eventSchedule: {
+      "@type": "Schedule",
+      repeatFrequency: "P1W",
+      byDay: `https://schema.org/${s.day}`,
+      scheduleTimezone: "Asia/Colombo",
+    },
+    eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+    eventStatus: "https://schema.org/EventScheduled",
+    location: {
+      "@type": "VirtualLocation",
+      url: `${SITE_URL}/sl/timetable`,
+    },
+    organizer: { "@id": `${SITE_URL}/#organization` },
+    performer: {
+      "@type": "Person",
+      name: s.tutor,
+      worksFor: { "@id": `${SITE_URL}/#organization` },
+    },
+    offers: {
+      "@type": "Offer",
+      price: s.monthlyFee.replace(/[^\d]/g, ""),
+      priceCurrency: "LKR",
+      availability: "https://schema.org/InStock",
+      url: "https://signup.edustutor.com/",
+      validFrom: "2026-01-01",
+      category: "Online tuition - monthly subscription",
+    },
+    audience: {
+      "@type": "EducationalAudience",
+      educationalRole: "student",
+      audienceType: s.grade,
+    },
+    inLanguage: s.medium === "Tamil" ? "ta" : "en",
+    isAccessibleForFree: false,
+    keywords: `${s.subject}, ${s.grade}, ${s.medium} medium, online class, EDUS, Sri Lanka, ${s.day}, ${s.time}`,
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* CollectionPage wrapper for the timetable itself.                  */
+/* --------------------------------------------------------------- */
+export function timetableCollectionPage(totalSessions: number) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${SITE_URL}/sl/timetable#collection`,
+    name: "EDUS Sri Lanka Class Timetable 2026",
+    headline: "EDUS Sri Lanka 2026 Class Timetable - Live Online Classes",
+    description:
+      "Complete 2026 class timetable for EDUS Sri Lanka. Live online classes from Grade 3 to G.C.E A/L, Tamil and English medium, with tutor, day, time, and monthly fee.",
+    url: `${SITE_URL}/sl/timetable`,
+    inLanguage: ["en", "ta"],
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": `${SITE_URL}/#organization` },
+    mainEntity: {
+      "@type": "ItemList",
+      name: "Class sessions",
+      numberOfItems: totalSessions,
+    },
   };
 }
