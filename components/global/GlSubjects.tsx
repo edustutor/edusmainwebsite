@@ -65,7 +65,7 @@ export function GlSubjects() {
 
         <p className="mt-8 max-w-2xl mx-auto text-center text-[14px] text-[#5A6A82] leading-[1.7]">
           Need a subject not listed here? Tell us your requirement and we will help find the
-          right tutor for your child.
+          right tutor.
         </p>
       </div>
     </section>
