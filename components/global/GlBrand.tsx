@@ -23,7 +23,7 @@ export function GlBrand() {
           <div className="lg:col-span-5">
             <p className="eyebrow"><span className="dot" />EDUS Trust</p>
             <h2 className="heading mt-3" style={{ fontSize: "clamp(24px, 2.8vw, 34px)", lineHeight: 1.15 }}>
-              EDUS &mdash; <em>learning made lovable.</em>
+              EDUS - <em>learning made lovable.</em>
             </h2>
             <p className="text-[#2B3950] text-[15px] mt-4 leading-[1.7]">
               EDUS is an online learning institute built to make education simple, structured,
