@@ -9,13 +9,14 @@ import {
   fadeUp, staggerContainer, sectionRevealStrong, glassHover, inView,
 } from "@/lib/motion";
 
+type RegionFact = { label: string; value: string };
+
 type Region = {
   flag: string;
   title: string;
   tag: string;
-  description: string;
-  suitableFor: string;
-  features: string[];
+  hook: string;
+  facts: RegionFact[];
   cta: string;
   href: string;
   tint: string;
@@ -26,15 +27,13 @@ const REGIONS: Region[] = [
   {
     flag: "🇱🇰",
     title: "Sri Lanka",
-    tag: "National Syllabus",
-    description: "Live online group classes and one-to-one support for students following the Sri Lankan school curriculum.",
-    suitableFor: "Grade 1 to G.C.E A/L",
-    features: [
-      "National syllabus classes",
-      "Group and individual options",
-      "Grade based subject support",
-      "Recordings, exams, and resources",
-      "Parent updates included",
+    tag: "National · Cambridge · Edexcel",
+    hook: "Every grade, every syllabus, taught by tutors who actually know the Sri Lankan exam.",
+    facts: [
+      { label: "Syllabus", value: "National · Cambridge · Edexcel" },
+      { label: "Classes",  value: "Primary · Grade 6–11 · O/L · A/L" },
+      { label: "Medium",   value: "Tamil · English · Sinhala" },
+      { label: "Format",   value: "Group & One-to-One" },
     ],
     cta: "Explore Sri Lanka",
     href: "/sl",
@@ -44,14 +43,12 @@ const REGIONS: Region[] = [
     flag: "🇮🇳",
     title: "India",
     tag: "CBSE · Classes 6–10",
-    description: "Premium structured online CBSE tuition for English-medium students across Tamil Nadu and India.",
-    suitableFor: "CBSE Class 6 to Class 10",
-    features: [
-      "English medium classes",
-      "CBSE Mathematics, Science, English",
-      "Regular academic monitoring",
-      "Exam focused learning",
-      "Parent reports + class tracking",
+    hook: "Disciplined, structured CBSE tuition built around the exam, not the calendar.",
+    facts: [
+      { label: "Syllabus", value: "CBSE" },
+      { label: "Classes",  value: "Middle (6–8) & Secondary (9–10)" },
+      { label: "Medium",   value: "English" },
+      { label: "Format",   value: "Group & One-to-One" },
     ],
     cta: "Explore India",
     href: "/in",
@@ -61,14 +58,12 @@ const REGIONS: Region[] = [
     flag: "🇲🇻",
     title: "Maldives",
     tag: "Cambridge IGCSE / O-Level",
-    description: "Premium 1-to-1 Cambridge IGCSE and O-Level online classes for Maldives Grade 9 and Grade 10 students.",
-    suitableFor: "Grade 9 & Grade 10 · All Islands",
-    features: [
-      "Cambridge IGCSE / O-Level",
-      "Maths, Science, English",
-      "Personal tutor matching",
-      "Maldives-friendly timings",
-      "Parent updates and recordings",
+    hook: "One tutor. One student. Cambridge results delivered island-wide.",
+    facts: [
+      { label: "Syllabus", value: "Cambridge IGCSE / O-Level" },
+      { label: "Classes",  value: "Grade 9 & Grade 10" },
+      { label: "Medium",   value: "English" },
+      { label: "Format",   value: "One-to-One only" },
     ],
     cta: "Explore Maldives",
     href: "/mv",
@@ -77,17 +72,15 @@ const REGIONS: Region[] = [
   {
     flag: "🌐",
     title: "Global",
-    tag: "One-to-One Online",
-    description: "Flexible one-to-one online tuition for students who need personalised academic support from anywhere.",
-    suitableFor: "International students · Custom needs",
-    features: [
-      "Personal tutor matching",
-      "Flexible class timing",
-      "Syllabus based support",
-      "Individual attention",
-      "Progress focused learning",
+    tag: "Worldwide One-to-One",
+    hook: "Any syllabus, any country, any subject. Matched to the right tutor in days.",
+    facts: [
+      { label: "Syllabus", value: "Cambridge · Edexcel · IB · National" },
+      { label: "Classes",  value: "IGCSE · GCSE · O/A-Level · School" },
+      { label: "Medium",   value: "English" },
+      { label: "Format",   value: "One-to-One online" },
     ],
-    cta: "Book One-to-One",
+    cta: "Explore Global",
     href: "/global",
     tint: "#06B6D4", tintSoft: "#E6FAFD",
   },
@@ -133,9 +126,6 @@ export function RegionSelector() {
           <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
             Choose the learning path that <em>fits your child.</em>
           </h2>
-          <p className="mt-2 text-[12.5px] font-[family-name:var(--font-display)] font-600 uppercase tracking-[0.16em] text-[#2563EB]">
-            🇱🇰 Sri Lanka · 🇮🇳 India · 🇲🇻 Maldives · 🌐 Global
-          </p>
           <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
             EDUS gives every student a clear route based on country, grade, syllabus, and learning need.
             Select the right path and start with a focused learning experience.
@@ -183,48 +173,36 @@ export function RegionSelector() {
                     </div>
 
                     <span
-                      className="mt-5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-[family-name:var(--font-display)] font-700 tracking-[0.04em] self-start"
+                      className="mt-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-[family-name:var(--font-display)] font-700 tracking-[0.04em] self-start"
                       style={{ background: r.tintSoft, color: r.tint, border: `1px solid ${r.tint}25` }}
                     >
                       <span className="w-1 h-1 rounded-full" style={{ background: r.tint }} />
                       {r.tag}
                     </span>
 
-                    <p className="text-[#2B3950] text-[14px] mt-4 leading-[1.6]">{r.description}</p>
-
-                    <p className="mt-4 text-[11.5px] font-[family-name:var(--font-display)] font-600 uppercase tracking-[0.12em]" style={{ color: r.tint }}>
-                      Suitable for · {r.suitableFor}
+                    <p className="text-[#2B3950] text-[14px] mt-4 leading-[1.55] flex-1">
+                      {r.hook}
                     </p>
 
-                    <ul className="mt-4 space-y-2 text-[13.5px] flex-1">
-                      {r.features.map((f, i) => (
-                        <m.li
-                          key={f}
-                          initial={{ opacity: 0, x: -8 }}
-                          whileInView={{
-                            opacity: 1,
-                            x: 0,
-                            transition: { delay: 0.1 + i * 0.05, duration: 0.4 },
-                          }}
-                          viewport={inView}
-                          className="flex items-start gap-2.5 text-[#2B3950]"
-                        >
-                          <span
-                            className="inline-flex w-4 h-4 mt-0.5 rounded-full items-center justify-center shrink-0"
-                            style={{ background: `${r.tint}1A` }}
+                    <dl className="mt-5 space-y-2.5">
+                      {r.facts.map((f) => (
+                        <div key={f.label}>
+                          <dt
+                            className="text-[10px] font-[family-name:var(--font-display)] font-700 uppercase tracking-[0.10em]"
+                            style={{ color: r.tint }}
                           >
-                            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke={r.tint} strokeWidth="3.5" aria-hidden>
-                              <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                          </span>
-                          {f}
-                        </m.li>
+                            {f.label}
+                          </dt>
+                          <dd className="mt-0.5 text-[13px] text-[#102033] font-[family-name:var(--font-display)] font-600 leading-[1.4]">
+                            {f.value}
+                          </dd>
+                        </div>
                       ))}
-                    </ul>
+                    </dl>
 
-                    <div className="mt-7 pt-5 border-t border-[rgba(16,32,51,0.08)]">
+                    <div className="mt-6 pt-4 border-t border-[rgba(16,32,51,0.08)]">
                       <span
-                        className="inline-flex items-center gap-2 font-[family-name:var(--font-display)] font-600 text-[14px]"
+                        className="inline-flex items-center gap-2 font-[family-name:var(--font-display)] font-700 text-[14px]"
                         style={{ color: r.tint }}
                       >
                         {r.cta}
