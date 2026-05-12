@@ -11,7 +11,6 @@ import { GlPricing } from "@/components/global/GlPricing";
 import { GlReach } from "@/components/global/GlReach";
 import { GlParents } from "@/components/global/GlParents";
 import { GlCompare } from "@/components/global/GlCompare";
-import { GlFindTutor } from "@/components/global/GlFindTutor";
 import { GlBrand } from "@/components/global/GlBrand";
 import { GlFAQ } from "@/components/global/GlFAQ";
 import { GlCTA } from "@/components/global/GlCTA";
@@ -61,7 +60,6 @@ export default function GlobalPage() {
       <GlReach />
       <GlParents />
       <GlCompare />
-      <GlFindTutor />
       <GlBrand />
       <GlFAQ />
       <GlCTA />
