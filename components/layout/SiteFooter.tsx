@@ -81,6 +81,33 @@ export function SiteFooter() {
                   </li>
                 ))}
               </ul>
+
+              {/* Address + map - micro-data via itemProp for extra signal */}
+              <address
+                className="mt-5 not-italic text-[12px] text-[#5A6A82] leading-[1.6]"
+                itemScope
+                itemType="https://schema.org/PostalAddress"
+              >
+                <span className="block font-[family-name:var(--font-display)] font-700 text-[#102033]">
+                  EDUS Lanka (Pvt) Ltd.
+                </span>
+                <span itemProp="streetAddress">No. 95, K.K.S Road, Kokkuvil Junction</span>,{" "}
+                <span itemProp="addressLocality">Jaffna</span>{" "}
+                <span itemProp="postalCode">40000</span>,{" "}
+                <span itemProp="addressCountry">Sri Lanka</span>
+                <a
+                  href="https://www.google.com/maps/place/EDUS+Online+Tuition/@9.6945511,80.0139866,17z"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1.5 inline-flex items-center gap-1 text-[#2563EB] hover:underline font-[family-name:var(--font-display)] font-600"
+                  aria-label="Get directions to EDUS office on Google Maps"
+                >
+                  Get directions
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+                    <path d="M7 17L17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              </address>
             </div>
 
             {/* Columns */}

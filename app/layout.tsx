@@ -177,11 +177,11 @@ export const metadata: Metadata = {
     apple: [{ url: "/edus-favicon.webp" }],
   },
   other: {
-    // Geo signals — helps Google understand business locality
-    "geo.region": "LK-41",          // Northern Province, Sri Lanka
+    // Geo signals — precise EDUS office coordinates (Kokkuvil Junction, Jaffna)
+    "geo.region": "LK-41",                // Northern Province, Sri Lanka (ISO 3166-2)
     "geo.placename": "Jaffna",
-    "geo.position": "9.6615;80.0255",
-    "ICBM": "9.6615, 80.0255",
+    "geo.position": "9.6945511;80.0139866",
+    "ICBM": "9.6945511, 80.0139866",
     // AI engines + answer engines
     "llms.txt": "/llms.txt",
     // Mobile / PWA

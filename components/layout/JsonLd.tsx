@@ -38,13 +38,24 @@ const ORG = {
     "https://www.tiktok.com/@edusonline",
     "https://www.youtube.com/@edusonline/",
     "https://lk.linkedin.com/company/edusonline",
+    // Google Business Profile (Maps listing) — confirms entity to Google
+    "https://share.google/ZQO6DJ0yRrFXtOw1x",
+    "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
   ],
   address: {
     "@type": "PostalAddress",
-    streetAddress: "No. 95, K.K.S Road",
+    streetAddress: "No. 95, K.K.S Road, Kokkuvil Junction",
     addressLocality: "Jaffna",
+    addressRegion: "Northern Province",
+    postalCode: "40000",
     addressCountry: "LK",
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 9.6945511,
+    longitude: 80.0139866,
+  },
+  hasMap: "https://www.google.com/maps/place/EDUS+Online+Tuition/@9.6945511,80.0139866,17z/data=!3m1!1e3!4m6!3m5!1s0x3afe5583ee8b8b25:0xa0dd266c1a635c2",
   contactPoint: [
     {
       "@type": "ContactPoint",
@@ -108,6 +119,68 @@ const WEBSITE = {
   url: SITE_URL,
   publisher: { "@id": `${SITE_URL}/#organization` },
   inLanguage: "en",
+};
+
+// Separate LocalBusiness entity for the Jaffna office — feeds Google's local
+// pack and Maps listing. The `@id` allows the EducationalOrganization above
+// to be linked to this physical location.
+const LOCAL_BUSINESS = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "EducationalOrganization"],
+  "@id": `${SITE_URL}/#localBusiness`,
+  name: "EDUS Online Tuition",
+  alternateName: ["EDUS", "EDUS Tutor"],
+  url: SITE_URL,
+  logo: `${SITE_URL}/edus-logo-blue.webp`,
+  image: `${SITE_URL}/edus-logo-blue.webp`,
+  telephone: "+94-70-707-2072",
+  email: "hello@edustutor.com",
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "No. 95, K.K.S Road, Kokkuvil Junction",
+    addressLocality: "Jaffna",
+    addressRegion: "Northern Province",
+    postalCode: "40000",
+    addressCountry: "LK",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 9.6945511,
+    longitude: 80.0139866,
+  },
+  hasMap:
+    "https://www.google.com/maps/place/EDUS+Online+Tuition/@9.6945511,80.0139866,17z/data=!3m1!1e3!4m6!3m5!1s0x3afe5583ee8b8b25:0xa0dd266c1a635c2",
+  sameAs: [
+    "https://www.facebook.com/edusonline",
+    "https://www.instagram.com/edus_online/",
+    "https://www.tiktok.com/@edusonline",
+    "https://www.youtube.com/@edusonline/",
+    "https://lk.linkedin.com/company/edusonline",
+    "https://share.google/ZQO6DJ0yRrFXtOw1x",
+    "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
+  ],
+  // Operating hours — adjust if your office hours differ
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      opens: "08:00",
+      closes: "22:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Sunday",
+      opens: "09:00",
+      closes: "18:00",
+    },
+  ],
+  areaServed: [
+    { "@type": "Country", name: "Sri Lanka" },
+    { "@type": "Country", name: "India" },
+    { "@type": "Country", name: "Maldives" },
+    { "@type": "Place", name: "Worldwide" },
+  ],
 };
 
 const FAQ = {
@@ -185,6 +258,7 @@ export function HomeJsonLd() {
   return (
     <>
       <JsonLdScript data={ORG} />
+      <JsonLdScript data={LOCAL_BUSINESS} />
       <JsonLdScript data={WEBSITE} />
       <JsonLdScript data={siteNavigation()} />
       <JsonLdScript data={primaryPagesItemList()} />
