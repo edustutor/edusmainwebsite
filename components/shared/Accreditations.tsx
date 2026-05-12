@@ -246,7 +246,7 @@ export function Accreditations() {
           </div>
         </m.div>
 
-        <p className="mt-8 text-center text-[12px] text-[#5A6A82] max-w-3xl mx-auto leading-[1.65]">
+        <p className="mt-6 text-center text-[8px] sm:text-[8.5px] text-[#A8B3C5] max-w-2xl mx-auto leading-[1.45] tracking-wide opacity-80">
           Logos and trademarks belong to their respective owners and are shown only to indicate
           programme participation, ecosystem association, membership, or partnership where
           applicable. They do not imply formal endorsement, certification, or accreditation
