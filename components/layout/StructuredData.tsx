@@ -403,6 +403,11 @@ export type SpeakablePageOptions = {
   path: string; // e.g. "/privacy"
   headline?: string; // optional H1 mirror for richer SERP signals
   lastUpdated?: string; // ISO date string (YYYY-MM-DD)
+  // Optional override for the speakable CSS selectors. Defaults to the
+  // broad page-level selectors. Pass scoped selectors (e.g.
+  // `["#mission h2", "#mission p"]`) to point voice assistants at the
+  // specific section of the page worth reading aloud.
+  speakableSelectors?: string[];
 };
 
 export function speakableWebPage(opts: SpeakablePageOptions) {
@@ -424,7 +429,7 @@ export function speakableWebPage(opts: SpeakablePageOptions) {
     dateModified,
     speakable: {
       "@type": "SpeakableSpecification",
-      cssSelector: ["h1", "h2", "h3", "p"],
+      cssSelector: opts.speakableSelectors ?? ["h1", "h2", "h3", "p"],
     },
   };
 }

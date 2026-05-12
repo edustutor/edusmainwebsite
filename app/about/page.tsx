@@ -103,6 +103,15 @@ export default function AboutPage() {
           description:
             "About EDUS Lanka (Pvt) Ltd - quality-assured online learning platform founded 2020, based in Jaffna, Sri Lanka. 7,000+ students supported across four markets.",
           path: "/about",
+          // Target the mission statement and operating principles - the
+          // most quotable, voice-assistant-friendly sections of the page.
+          speakableSelectors: [
+            "#mission h2",
+            "#mission p",
+            "#principles h2",
+            "#principles h3",
+            "#principles p",
+          ],
         })}
       />
 
@@ -126,7 +135,7 @@ export default function AboutPage() {
       </section>
 
       {/* MISSION */}
-      <section className="relative py-12 md:py-16 overflow-hidden">
+      <section id="mission" className="relative py-12 md:py-16 overflow-hidden">
         <div className="container-edge max-w-4xl mx-auto">
           <div className="glass-strong rounded-[24px] p-8 md:p-10 text-center">
             <p className="eyebrow"><span className="dot" />Our Mission</p>
@@ -143,7 +152,7 @@ export default function AboutPage() {
       </section>
 
       {/* PRINCIPLES */}
-      <section className="relative py-12 md:py-16 overflow-hidden">
+      <section id="principles" className="relative py-12 md:py-16 overflow-hidden">
         <div className="container-edge">
           <div className="max-w-3xl mx-auto text-center">
             <p className="eyebrow"><span className="dot" />How We Run</p>

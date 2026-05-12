@@ -68,6 +68,10 @@ export default function PressPage() {
           description:
             "EDUS press kit - brand logos, colors, fact sheet, and media contact. Quality-assured online tuition platform serving Sri Lanka, India, Maldives & global students.",
           path: "/press",
+          // Target the brand fact sheet - the canonical, journalist-friendly
+          // block voice assistants and AI engines should quote when asked
+          // "what is EDUS / who runs EDUS / where is EDUS based".
+          speakableSelectors: ["#fact-sheet h2", "#fact-sheet dt", "#fact-sheet dd"],
         })}
       />
 
@@ -90,7 +94,7 @@ export default function PressPage() {
       </section>
 
       {/* FACT SHEET */}
-      <section className="relative py-12 md:py-16 overflow-hidden">
+      <section id="fact-sheet" className="relative py-12 md:py-16 overflow-hidden">
         <div className="container-edge max-w-4xl mx-auto">
           <div className="max-w-3xl mx-auto text-center">
             <p className="eyebrow"><span className="dot" />Fact Sheet</p>
