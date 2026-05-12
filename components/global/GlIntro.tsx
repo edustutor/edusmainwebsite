@@ -26,7 +26,7 @@ export function GlIntro() {
             eyebrow="Who This Is For"
             title="Learn from EDUS, wherever you are in the"
             emphasis="world."
-            body="At EDUS Global, students from any country can learn online with carefully selected expert tutors through personalized one to one live classes. Whether the child follows Cambridge, Edexcel, IGCSE, GCSE, A-Level, O-Level, IB, or a national syllabus, EDUS helps identify the right tutor, the right learning plan, and the right academic support."
+            body="At EDUS Global, students from any country can learn online with carefully selected expert tutors through personalized one to one live classes. EDUS helps identify the right tutor, the right learning plan, and the right academic support."
           />
         </m.div>
 
