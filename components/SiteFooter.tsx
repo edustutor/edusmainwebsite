@@ -12,11 +12,11 @@ const QUICK = [
 ];
 
 const PATHS = [
-  { label: "Sri Lanka Classes", href: "/sl" },
-  { label: "India · CBSE Classes 6 to 10", href: "/in" },
-  { label: "Maldives Classes", href: "/mv" },
-  { label: "Global · One to One", href: "/global" },
-  { label: "Resource Vault", href: "/#resources" },
+  { label: "Sri Lanka", href: "/sl" },
+  { label: "India", href: "/in" },
+  { label: "Maldives", href: "/mv" },
+  { label: "Global", href: "/global" },
+  { label: "Resource Vault", href: "https://wiki.edustutor.com/", external: true },
   { label: "Enrol", href: "https://signup.edustutor.com/", external: true },
   { label: "Contact", href: "/contact" },
 ];
@@ -97,12 +97,17 @@ function FooterCol({
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#2B3950] hover:text-[#2563EB] transition"
+                className="group inline-flex items-center gap-1.5 text-[#2B3950] hover:text-[#2563EB] transition"
               >
+                <FooterArrow />
                 {l.label}
               </a>
             ) : (
-              <Link href={l.href} className="text-[#2B3950] hover:text-[#2563EB] transition">
+              <Link
+                href={l.href}
+                className="group inline-flex items-center gap-1.5 text-[#2B3950] hover:text-[#2563EB] transition"
+              >
+                <FooterArrow />
                 {l.label}
               </Link>
             )}
@@ -110,5 +115,22 @@ function FooterCol({
         ))}
       </ul>
     </div>
+  );
+}
+
+function FooterArrow() {
+  return (
+    <svg
+      width="10"
+      height="10"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.6"
+      aria-hidden
+      className="shrink-0 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition"
+    >
+      <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }
