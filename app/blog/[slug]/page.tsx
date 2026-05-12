@@ -121,7 +121,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
             }
             return (
               <p key={i} className="leading-[1.8]">
-                {para}
+                {renderInline(para)}
               </p>
             );
           })}
@@ -162,4 +162,50 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
       </section>
     </>
   );
+}
+
+/**
+ * Render a paragraph with two inline marks:
+ *   - **bold** → <strong>
+ *   - https://... → <a> (opens same tab for internal, new tab for external)
+ *
+ * Kept inline rather than extracted to a helper because it's used only here
+ * and the project style is to inline single-call-site logic.
+ */
+function renderInline(text: string): React.ReactNode[] {
+  // Split on bold first, then process URLs within each non-bold segment.
+  const parts: React.ReactNode[] = [];
+  const boldSplit = text.split(/(\*\*[^*]+\*\*)/g);
+  let key = 0;
+
+  for (const seg of boldSplit) {
+    if (seg.startsWith("**") && seg.endsWith("**")) {
+      parts.push(
+        <strong key={key++} className="font-display font-700 text-[#102033]">
+          {seg.slice(2, -2)}
+        </strong>,
+      );
+      continue;
+    }
+    // Auto-link URLs within plain segments.
+    const urlSplit = seg.split(/(https?:\/\/[^\s)]+)/g);
+    for (const piece of urlSplit) {
+      if (/^https?:\/\//.test(piece)) {
+        const isInternal = piece.startsWith("https://edustutor.com/");
+        parts.push(
+          <a
+            key={key++}
+            href={piece}
+            {...(isInternal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+            className="text-[#2563EB] hover:underline break-words"
+          >
+            {piece.replace(/^https?:\/\//, "")}
+          </a>,
+        );
+      } else if (piece) {
+        parts.push(<span key={key++}>{piece}</span>);
+      }
+    }
+  }
+  return parts;
 }
