@@ -10,9 +10,12 @@ export function InHero() {
       </div>
 
       <div className="container-edge">
-        <div className="flex justify-center" data-anim>
-          <Link href="/#regions" className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-[12.5px] font-medium text-[#2B3950]">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
+        <div className="flex justify-center px-3" data-anim>
+          <Link
+            href="/#regions"
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 rounded-full glass text-[11px] sm:text-[12.5px] font-medium text-[#2B3950] whitespace-nowrap max-w-full"
+          >
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden className="shrink-0">
               <path d="M19 12H5M12 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             All markets

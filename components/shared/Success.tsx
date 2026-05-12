@@ -151,20 +151,20 @@ export function Success() {
           </p>
         </m.div>
 
-        {/* Country filter */}
+        {/* Country filter - always one row, sized down on mobile to fit */}
         <m.div
-          className="mt-8 flex justify-center px-4"
+          className="mt-8 flex justify-center px-3"
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
           viewport={inView}
         >
-          <div className="inline-flex glass rounded-full p-1 sm:p-1.5 gap-0.5 sm:gap-1">
+          <div className="inline-flex glass rounded-full p-0.5 sm:p-1.5 gap-0 sm:gap-1 max-w-full">
             {FILTERS.map((f) => (
               <button
                 key={f.code}
                 onClick={() => setFilter(f.code)}
-                className={`relative px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[12px] sm:text-[13px] font-medium font-[family-name:var(--font-display)] transition-colors whitespace-nowrap shrink-0 ${
+                className={`relative px-2 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10.5px] sm:text-[13px] font-medium font-[family-name:var(--font-display)] transition-colors whitespace-nowrap shrink-0 ${
                   filter === f.code ? "text-white" : "text-[#2B3950] hover:text-[#102033]"
                 }`}
               >
@@ -175,8 +175,8 @@ export function Success() {
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
-                <span className="relative z-10 inline-flex items-center gap-1">
-                  {f.flag && <span aria-hidden>{f.flag}</span>}
+                <span className="relative z-10 inline-flex items-center gap-1 sm:gap-1">
+                  {f.flag && <span aria-hidden className="text-[11px] sm:text-base">{f.flag}</span>}
                   {f.label}
                 </span>
               </button>
