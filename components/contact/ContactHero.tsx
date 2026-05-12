@@ -30,7 +30,7 @@ export function ContactHero() {
         </div>
 
         <p className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-display font-600">
-          Sri Lanka · India · Maldives · Global Online Learning Support
+          Online Learning Support
         </p>
       </div>
     </section>
