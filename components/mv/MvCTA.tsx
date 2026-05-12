@@ -43,12 +43,12 @@ export function MvCTA() {
                 rel="noopener noreferrer"
                 className="btn btn-primary"
               >
-                Register for Maldives Online Classes
+                Start Learning with EDUS
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
                   <path d="M7 17L17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
-              <Link href="/contact" className="btn btn-yellow">Talk to EDUS</Link>
+              <Link href="/contact" className="btn btn-yellow">Talk to US</Link>
             </m.div>
 
             <m.div
