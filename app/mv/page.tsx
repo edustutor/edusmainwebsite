@@ -10,6 +10,12 @@ import { MvSubjectDetails } from "@/components/markets/mv/MvSubjectDetails";
 import { MvFAQ } from "@/components/markets/mv/MvFAQ";
 import { MvCTA } from "@/components/markets/mv/MvCTA";
 import { OtherMarkets } from "@/components/markets/OtherMarkets";
+import {
+  JsonLdScript,
+  breadcrumbList,
+  educationalProgram,
+  SITE_URL,
+} from "@/components/layout/StructuredData";
 
 export const metadata = {
   title:
@@ -109,6 +115,22 @@ export const metadata = {
 export default function MaldivesPage() {
   return (
     <>
+      <JsonLdScript
+        data={breadcrumbList([
+          { name: "Home", path: "/" },
+          { name: "Maldives", path: "/mv" },
+        ])}
+      />
+      <JsonLdScript
+        data={educationalProgram({
+          name: "EDUS Maldives Cambridge IGCSE & O-Level Online Tuition",
+          description:
+            "Premium 1-to-1 Cambridge IGCSE and O-Level online classes for Maldives Grade 9 and Grade 10 students. Mathematics, English, Biology, Chemistry, and Physics with expert tutors.",
+          url: `${SITE_URL}/mv`,
+          area: "Maldives",
+          educationalLevel: "Cambridge IGCSE / O-Level (Grade 9 to 10)",
+        })}
+      />
       <MvHero />
       <MvWhy />
       <MvSubjects />

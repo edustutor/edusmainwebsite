@@ -1,3 +1,5 @@
+import { JsonLdScript, breadcrumbList } from "@/components/layout/StructuredData";
+
 export const metadata = {
   title: "Cookie Policy · EDUS Lanka (PVT) Ltd.",
   description:
@@ -12,6 +14,12 @@ export default function CookiePolicyPage() {
 
   return (
     <>
+      <JsonLdScript
+        data={breadcrumbList([
+          { name: "Home", path: "/" },
+          { name: "Cookie Policy", path: "/cookies" },
+        ])}
+      />
       {/* HERO */}
       <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">

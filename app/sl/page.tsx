@@ -5,6 +5,12 @@ import { SlCurricula } from "@/components/markets/sl/SlCurricula";
 import { SlGroupClasses } from "@/components/markets/sl/SlGroupClasses";
 import { SlIndividual } from "@/components/markets/sl/SlIndividual";
 import { SlTestimonials } from "@/components/markets/sl/SlTestimonials";
+import {
+  JsonLdScript,
+  breadcrumbList,
+  educationalProgram,
+  SITE_URL,
+} from "@/components/layout/StructuredData";
 
 export const metadata = {
   title: "Sri Lanka Online Tuition · National, Cambridge & Edexcel",
@@ -114,6 +120,22 @@ export const metadata = {
 export default function SriLankaPage() {
   return (
     <>
+      <JsonLdScript
+        data={breadcrumbList([
+          { name: "Home", path: "/" },
+          { name: "Sri Lanka", path: "/sl" },
+        ])}
+      />
+      <JsonLdScript
+        data={educationalProgram({
+          name: "EDUS Sri Lanka Online Tuition",
+          description:
+            "Live online tuition for Sri Lankan students from Grade 1 to G.C.E A/L. National Syllabus, Cambridge IGCSE, and Edexcel in Sinhala, Tamil, and English medium.",
+          url: `${SITE_URL}/sl`,
+          area: "Sri Lanka",
+          educationalLevel: "Grade 1 to G.C.E A/L",
+        })}
+      />
       <SlHero />
       <SlCurricula />
       <SlGroupClasses />

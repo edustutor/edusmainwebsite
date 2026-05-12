@@ -1,3 +1,5 @@
+import { JsonLdScript, breadcrumbList } from "@/components/layout/StructuredData";
+
 export const metadata = {
   title: "Privacy Policy · EDUS Lanka (PVT) Ltd.",
   description:
@@ -12,6 +14,12 @@ export default function PrivacyPolicyPage() {
 
   return (
     <>
+      <JsonLdScript
+        data={breadcrumbList([
+          { name: "Home", path: "/" },
+          { name: "Privacy Policy", path: "/privacy" },
+        ])}
+      />
       {/* HERO - same pattern as other sub-pages */}
       <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">

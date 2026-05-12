@@ -3,6 +3,7 @@ import { useState } from "react";
 import { m, AnimatePresence } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, accordionMotion, inView } from "@/lib/motion";
+import { JsonLdScript, faqPage } from "@/components/layout/StructuredData";
 
 const FAQS = [
   {
@@ -40,6 +41,7 @@ export function TeachFAQ() {
 
   return (
     <section className="relative py-12 md:py-16 overflow-hidden scroll-mt-24">
+      <JsonLdScript data={faqPage(FAQS)} />
       <div aria-hidden className="absolute inset-0 -z-10">
         <AmbientGlow top="14%" right="-4%" size={220} color="#8B5CF6" opacity={[0.06, 0.14]} duration={22} blur={80} />
         <AmbientGlow bottom="10%" left="-4%" size={200} color="#2563EB" opacity={[0.06, 0.12]} duration={26} delay={3} blur={80} />

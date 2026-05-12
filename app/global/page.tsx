@@ -15,6 +15,12 @@ import { GlBrand } from "@/components/markets/global/GlBrand";
 import { GlFAQ } from "@/components/markets/global/GlFAQ";
 import { GlCTA } from "@/components/markets/global/GlCTA";
 import { OtherMarkets } from "@/components/markets/OtherMarkets";
+import {
+  JsonLdScript,
+  breadcrumbList,
+  educationalProgram,
+  SITE_URL,
+} from "@/components/layout/StructuredData";
 
 export const metadata = {
   title: "EDUS Global Online Tutoring | Cambridge, Edexcel & One-to-One Classes",
@@ -135,6 +141,22 @@ export const metadata = {
 export default function GlobalPage() {
   return (
     <>
+      <JsonLdScript
+        data={breadcrumbList([
+          { name: "Home", path: "/" },
+          { name: "Global", path: "/global" },
+        ])}
+      />
+      <JsonLdScript
+        data={educationalProgram({
+          name: "EDUS Global One-to-One Online Tutoring",
+          description:
+            "Personalised one-to-one online tutoring for students worldwide. Cambridge, Edexcel, IGCSE, GCSE, O-Level, A-Level, IB, and national syllabuses.",
+          url: `${SITE_URL}/global`,
+          area: "Worldwide",
+          educationalLevel: "Cambridge · Edexcel · IGCSE · GCSE · O-Level · A-Level · IB",
+        })}
+      />
       <GlHero />
       <GlIntro />
       <GlPromise />

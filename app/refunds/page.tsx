@@ -1,3 +1,5 @@
+import { JsonLdScript, breadcrumbList } from "@/components/layout/StructuredData";
+
 export const metadata = {
   title: "Refund Policy · EDUS Lanka (PVT) Ltd.",
   description:
@@ -12,6 +14,12 @@ export default function RefundPolicyPage() {
 
   return (
     <>
+      <JsonLdScript
+        data={breadcrumbList([
+          { name: "Home", path: "/" },
+          { name: "Refund Policy", path: "/refunds" },
+        ])}
+      />
       {/* HERO */}
       <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">

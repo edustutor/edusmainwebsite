@@ -16,6 +16,11 @@ import { TeachApplyFlow } from "@/components/teach/TeachApplyFlow";
 import { TeachDeclaration } from "@/components/teach/TeachDeclaration";
 import { TeachFAQ } from "@/components/teach/TeachFAQ";
 import { TeachCTA } from "@/components/teach/TeachCTA";
+import {
+  JsonLdScript,
+  breadcrumbList,
+  tutorJobPosting,
+} from "@/components/layout/StructuredData";
 
 export const metadata = {
   title: "Teach with EDUS · Online Tutor Opportunities · Sri Lanka, India, Maldives & Global",
@@ -81,6 +86,13 @@ export const metadata = {
 export default function TeachWithEdusPage() {
   return (
     <>
+      <JsonLdScript
+        data={breadcrumbList([
+          { name: "Home", path: "/" },
+          { name: "Teach with EDUS", path: "/teach" },
+        ])}
+      />
+      <JsonLdScript data={tutorJobPosting()} />
       <TeachHero />
       <TeachVision />
       <TeachStats />

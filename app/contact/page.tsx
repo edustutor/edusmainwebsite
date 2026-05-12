@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ContactForm } from "@/components/shared/ContactForm";
+import { JsonLdScript, breadcrumbList } from "@/components/layout/StructuredData";
 
 export const metadata = {
   title: "Contact EDUS · Talk to Our Team",
@@ -32,6 +33,12 @@ const QUICK = [
 export default function ContactPage() {
   return (
     <>
+      <JsonLdScript
+        data={breadcrumbList([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ])}
+      />
       {/* HERO */}
       <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">

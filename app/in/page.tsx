@@ -4,6 +4,12 @@ import { InHero } from "@/components/markets/in/InHero";
 import { InPillars } from "@/components/markets/in/InPillars";
 import { InAcademicStructure } from "@/components/markets/in/InAcademicStructure";
 import { InPricing } from "@/components/markets/in/InPricing";
+import {
+  JsonLdScript,
+  breadcrumbList,
+  educationalProgram,
+  SITE_URL,
+} from "@/components/layout/StructuredData";
 
 export const metadata = {
   title: "India Online Tuition · CBSE Classes 6–10 · Tamil Nadu",
@@ -98,6 +104,22 @@ export const metadata = {
 export default function IndiaPage() {
   return (
     <>
+      <JsonLdScript
+        data={breadcrumbList([
+          { name: "Home", path: "/" },
+          { name: "India", path: "/in" },
+        ])}
+      />
+      <JsonLdScript
+        data={educationalProgram({
+          name: "EDUS India CBSE Online Tuition (Classes 6 to 10)",
+          description:
+            "Premium structured online CBSE tuition for English-medium Tamil Nadu students. Mathematics, Science, and English for CBSE Classes 6 to 10 with monthly parent reports.",
+          url: `${SITE_URL}/in`,
+          area: "India",
+          educationalLevel: "CBSE Classes 6 to 10",
+        })}
+      />
       <InHero />
       <InPillars />
       <InAcademicStructure />
