@@ -333,7 +333,7 @@ export default function SriLankaPage() {
               {/* Divider rule */}
               <div className="my-7 border-t border-[rgba(16,32,51,0.10)]" />
 
-              {/* 4 highlights — compact row inside the same panel */}
+              {/* 4 highlights - compact row inside the same panel */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6">
                 {GROUP_HIGHLIGHTS.map((h, i) => (
                   <div key={h.title}>
@@ -465,7 +465,7 @@ export default function SriLankaPage() {
                 </div>
               </div>
 
-              {/* Holistic features — 2×2 grid inside card */}
+              {/* Holistic features - 2×2 grid inside card */}
               <div className="lg:col-span-6 grid sm:grid-cols-2 gap-4">
                 {HOLISTIC_FEATURES.map((f) => (
                   <div

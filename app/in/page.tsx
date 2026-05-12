@@ -21,9 +21,39 @@ const SCHEDULE = [
   { slot: "Optional", time: "9:00 PM – 10:00 PM", tint: "#06B6D4" },
 ];
 const PRICING = [
-  { tag: "Admission Fee", price: "₹2,000", unit: "one-time", bullets: ["Onboarding & assessment", "Account setup", "Welcome pack"], tint: "#2563EB" },
-  { tag: "Per Subject", price: "₹1,000", unit: "/ month", bullets: ["2 hours / week per subject", "Live + recorded", "Monthly reporting"], tint: "#06B6D4" },
-  { tag: "All-Subject Package", price: "₹2,500", unit: "/ month", bullets: ["All 6 subjects covered", "Save vs. per-subject", "Priority parent support"], tint: "#8B5CF6", featured: true },
+  {
+    tag: "Admission Fee",
+    price: "₹2,000",
+    unit: "one-time",
+    note: "One-time fee for every student who joins EDUS - paid only once at the start.",
+    tint: "#2563EB",
+  },
+  {
+    tag: "Per Subject",
+    price: "₹1,000",
+    unit: "/ subject / month",
+    note: "Standard monthly fee per individual subject. Pick the subjects your child needs.",
+    tint: "#06B6D4",
+  },
+  {
+    tag: "All 3 Subjects",
+    price: "₹2,500",
+    unit: "/ month",
+    note: "Take all three core subjects together and save ₹500 - only ₹2,500 instead of ₹3,000.",
+    tint: "#8B5CF6",
+    featured: true,
+  },
+];
+
+const PRICING_INCLUDES = [
+  "Onboarding & assessment",
+  "Account setup & welcome pack",
+  "2 hours / week per subject",
+  "Live online + recorded sessions",
+  "Individual attention in every class",
+  "Performance monitoring",
+  "Monthly parent reporting & progress reviews",
+  "Anytime parent support",
 ];
 const PILLARS = [
   { icon: "📈", title: "Structured monitoring", body: "Class observation, tutor feedback, and academic SOPs run every month - not as marketing, as process.", tint: "#2563EB" },
@@ -210,56 +240,104 @@ export default function IndiaPage() {
       <section id="pricing" className="relative py-12 md:py-16 overflow-hidden">
         <div className="container-edge">
           <div className="text-center max-w-2xl mx-auto">
-            <p className="eyebrow"><span className="dot" />Fees</p>
+            <p className="eyebrow"><span className="dot" />Fees & Payment Plan</p>
             <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
-              Transparent. <em>Affordable.</em>
+              Premium learning. <em>Reasonable fees.</em>
             </h2>
             <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-              Pay per subject or save with the all-subject package. UPI, Google Pay, PhonePe, and
-              Razorpay accepted.
+              Transparent, affordable pricing for every CBSE family - premium-quality education that
+              stays accessible. Pay only for what your child needs, and save more when you take all
+              three subjects together.
             </p>
           </div>
 
-          <div className="mt-12 grid md:grid-cols-3 gap-4">
-            {PRICING.map((p) => (
-              <article
-                key={p.tag}
-                className={`relative rounded-[28px] p-7 lift overflow-hidden ${p.featured ? "glass-strong" : "glass"}`}
-              >
-                <span aria-hidden className="blob" style={{ top: -50, right: -50, width: 220, height: 220, background: p.tint, opacity: 0.22 }} />
-                <div className="relative">
-                  <p className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.12em] uppercase" style={{ color: p.tint }}>
-                    {p.tag}
-                  </p>
-                  <div className="mt-6 flex items-baseline gap-1.5">
-                    <p className="font-[family-name:var(--font-display)] font-700 text-[42px] leading-none text-[#102033]">{p.price}</p>
-                    <span className="text-[12px] text-[#5A6A82]">{p.unit}</span>
+          {/* Unified pricing panel */}
+          <div className="mt-12 relative glass-strong rounded-[28px] overflow-hidden max-w-6xl mx-auto">
+            <span aria-hidden className="blob" style={{ top: -80, right: -60, width: 320, height: 320, background: "#2563EB", opacity: 0.18 }} />
+            <span aria-hidden className="blob" style={{ bottom: -80, left: -60, width: 320, height: 320, background: "#8B5CF6", opacity: 0.18 }} />
+
+            <div className="relative p-6 md:p-10">
+              {/* 3 pricing tiers */}
+              <div className="grid lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-[rgba(16,32,51,0.08)]">
+                {PRICING.map((p) => (
+                  <div
+                    key={p.tag}
+                    className={`relative p-5 lg:px-7 ${p.featured ? "lg:bg-gradient-to-b lg:from-[#8B5CF6]/8 lg:to-transparent rounded-2xl lg:rounded-none" : ""}`}
+                  >
+                    {p.featured && (
+                      <span
+                        className="absolute -top-2 right-4 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-white font-[family-name:var(--font-display)] font-700 text-[10px] tracking-[0.12em] uppercase shadow-[0_6px_14px_-6px_rgba(139,92,246,0.5)]"
+                        style={{ background: "linear-gradient(90deg, #2563EB 0%, #6E5BC8 100%)" }}
+                      >
+                        ★ Best Value · Save ₹500
+                      </span>
+                    )}
+                    <p
+                      className="font-[family-name:var(--font-display)] font-700 text-[11px] tracking-[0.16em] uppercase"
+                      style={{ color: p.tint }}
+                    >
+                      {p.tag}
+                    </p>
+                    <div className="mt-3 flex items-baseline gap-1.5">
+                      <p className="font-[family-name:var(--font-display)] font-700 text-[34px] leading-none text-[#102033]">
+                        {p.price}
+                      </p>
+                      <span className="text-[12px] text-[#5A6A82]">{p.unit}</span>
+                    </div>
+                    <p className="text-[12.5px] text-[#2B3950] mt-3 leading-[1.6]">{p.note}</p>
                   </div>
+                ))}
+              </div>
 
-                  <ul className="mt-6 space-y-2 text-[13.5px]">
-                    {p.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-2 text-[#2B3950]">
-                        <span className="inline-flex w-4 h-4 mt-0.5 rounded-full items-center justify-center" style={{ background: `${p.tint}1A` }}>
-                          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke={p.tint} strokeWidth="3.5" aria-hidden>
-                            <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </span>
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
+              {/* Divider */}
+              <div className="my-7 border-t border-[rgba(16,32,51,0.10)]" />
 
-                  <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className={`mt-7 w-full justify-center btn ${p.featured ? "btn-primary" : "btn-outline"}`}>
-                    Enrol
-                  </a>
+              {/* What's included in every plan */}
+              <div>
+                <p className="font-[family-name:var(--font-display)] font-700 text-[11px] tracking-[0.16em] uppercase text-[#2563EB]">
+                  Included in every plan
+                </p>
+                <p className="heading mt-2" style={{ fontSize: "18px" }}>
+                  Every enrolment includes the same premium standards.
+                </p>
+                <ul className="mt-5 grid sm:grid-cols-2 gap-x-6 gap-y-2.5 text-[13.5px]">
+                  {PRICING_INCLUDES.map((inc) => (
+                    <li key={inc} className="flex items-start gap-2.5 text-[#2B3950]">
+                      <span className="inline-flex w-5 h-5 mt-0.5 rounded-full bg-[#2563EB]/15 items-center justify-center shrink-0">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="3.5" aria-hidden>
+                          <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                      <span className="leading-[1.55]">{inc}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Footer CTA */}
+              <div className="mt-8 pt-6 border-t border-[rgba(16,32,51,0.10)] flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <p className="text-[13.5px] text-[#102033] font-[family-name:var(--font-display)] font-600">
+                    Ready to start with a premium CBSE tutor?
+                  </p>
+                  <p className="text-[12px] text-[#5A6A82] mt-1">
+                    Referral discount · ₹500 off when an existing student refers a new family.
+                  </p>
                 </div>
-              </article>
-            ))}
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href="https://signup.edustutor.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                  >
+                    Enrol Now
+                  </a>
+                  <Link href="/contact" className="btn btn-yellow">Talk to US</Link>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <p className="mt-8 text-center text-[13px] text-[#5A6A82]">
-            Referral discount · ₹500 off when an existing student refers a new family.
-          </p>
         </div>
       </section>
 

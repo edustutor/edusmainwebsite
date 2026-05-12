@@ -87,7 +87,7 @@ export function Hero() {
           </div>
         </m.div>
 
-        {/* Brand promise — small kicker above H1 */}
+        {/* Brand promise - small kicker above H1 */}
         <m.p
           variants={fadeUp}
           className="mt-7 text-center text-[12.5px] font-[family-name:var(--font-display)] font-600 tracking-[0.2em] uppercase text-[#2563EB]"

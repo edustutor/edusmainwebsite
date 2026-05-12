@@ -93,7 +93,7 @@ export function CTA() {
 }
 
 /* --------------------------------------------------------------- */
-/* "Guaranteed Success" stamp — using the official EDUS image       */
+/* "Guaranteed Success" stamp - using the official EDUS image       */
 /* --------------------------------------------------------------- */
 function GuaranteedStamp() {
   return (

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s · EDUS",
   },
   description:
-    "EDUS — the quality-assured online live learning platform. Join live online tuition, expert tutors, structured classes, parent updates, recordings, exams, and progress tracking. Explore Sri Lanka classes, India CBSE Classes 6 to 10, Maldives classes, and global one to one tuition.",
+    "EDUS - the quality-assured online live learning platform. Join live online tuition, expert tutors, structured classes, parent updates, recordings, exams, and progress tracking. Explore Sri Lanka classes, India CBSE Classes 6 to 10, Maldives classes, and global one to one tuition.",
   metadataBase: new URL("https://edustutor.com"),
   applicationName: "EDUS",
   authors: [{ name: "EDUS" }],

@@ -60,12 +60,12 @@ const ORBIT_RX = 38; // horizontal radius (% of wrapper width)
 const ORBIT_RY = 42; // vertical radius (% of wrapper height)
 
 const ORBIT_POSITIONS = [
-  polar(-105, ORBIT_RX, ORBIT_RY), // 01 — top-left
-  polar(-45,  ORBIT_RX, ORBIT_RY), // 02 — top-right
-  polar(  0,  ORBIT_RX, ORBIT_RY), // 03 — right
-  polar( 60,  ORBIT_RX, ORBIT_RY), // 04 — bottom-right
-  polar(120,  ORBIT_RX, ORBIT_RY), // 05 — bottom-left
-  polar(180,  ORBIT_RX, ORBIT_RY), // 06 — left
+  polar(-105, ORBIT_RX, ORBIT_RY), // 01 - top-left
+  polar(-45,  ORBIT_RX, ORBIT_RY), // 02 - top-right
+  polar(  0,  ORBIT_RX, ORBIT_RY), // 03 - right
+  polar( 60,  ORBIT_RX, ORBIT_RY), // 04 - bottom-right
+  polar(120,  ORBIT_RX, ORBIT_RY), // 05 - bottom-left
+  polar(180,  ORBIT_RX, ORBIT_RY), // 06 - left
 ];
 
 export function LearningExperience() {
@@ -94,7 +94,7 @@ export function LearningExperience() {
           </h2>
           <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
             EDUS keeps the learning journey clear. Six steps from choosing the right class to staying
-            on track — with parents and tutors aligned every step of the way.
+            on track - with parents and tutors aligned every step of the way.
           </p>
         </m.div>
 
@@ -149,7 +149,7 @@ export function LearningExperience() {
 }
 
 /* --------------------------------------------------------------- */
-/* Centre circle — photo masked into a perfect circle              */
+/* Centre circle - photo masked into a perfect circle              */
 /* --------------------------------------------------------------- */
 
 function CenterCircle() {
@@ -167,7 +167,7 @@ function CenterCircle() {
           filter: "blur(40px)",
         }}
       />
-      {/* Photo — plain <img> so the original PNG is served as-is, no Next.js optimisation */}
+      {/* Photo - plain <img> so the original PNG is served as-is, no Next.js optimisation */}
       <div className="relative w-full h-full rounded-full overflow-hidden border-[6px] border-white shadow-[0_40px_90px_-30px_rgba(16,32,51,0.30)]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -194,7 +194,7 @@ function CenterCircle() {
 }
 
 /* --------------------------------------------------------------- */
-/* Orbit pill — sits on the ring on desktop                         */
+/* Orbit pill - sits on the ring on desktop                         */
 /* --------------------------------------------------------------- */
 
 function OrbitPill({
@@ -231,7 +231,7 @@ function OrbitPill({
         </div>
       </article>
 
-      {/* Small dot on the ring at the pill's anchor — visual touchpoint */}
+      {/* Small dot on the ring at the pill's anchor - visual touchpoint */}
       <span
         aria-hidden
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full opacity-0"
@@ -242,7 +242,7 @@ function OrbitPill({
 }
 
 /* --------------------------------------------------------------- */
-/* Feature card — used on tablet/mobile                            */
+/* Feature card - used on tablet/mobile                            */
 /* --------------------------------------------------------------- */
 
 function FeatureCard({ feature }: { feature: (typeof FEATURES)[number] }) {
