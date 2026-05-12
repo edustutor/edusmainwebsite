@@ -23,7 +23,7 @@ const SCHEDULE = [
 const PRICING = [
   { tag: "Admission Fee", price: "₹2,000", unit: "one-time", bullets: ["Onboarding & assessment", "Account setup", "Welcome pack"], tint: "#2563EB" },
   { tag: "Per Subject", price: "₹1,000", unit: "/ month", bullets: ["2 hours / week per subject", "Live + recorded", "Monthly reporting"], tint: "#06B6D4" },
-  { tag: "All-Subject Package", price: "₹5,000", unit: "/ month", bullets: ["All 6 subjects covered", "Save vs. per-subject", "Priority parent support"], tint: "#8B5CF6", featured: true },
+  { tag: "All-Subject Package", price: "₹2,500", unit: "/ month", bullets: ["All 6 subjects covered", "Save vs. per-subject", "Priority parent support"], tint: "#8B5CF6", featured: true },
 ];
 const PILLARS = [
   { icon: "📈", title: "Structured monitoring", body: "Class observation, tutor feedback, and academic SOPs run every month - not as marketing, as process.", tint: "#2563EB" },
@@ -97,8 +97,10 @@ export default function IndiaPage() {
               Rare in Tamil Nadu. <em>Standard at EDUS.</em>
             </h2>
             <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-              Most CBSE tuition across Tamil Nadu is unstructured. EDUS runs with academic SOPs,
-              monitored tutors, and monthly parent visibility.
+              Most CBSE tuition across Tamil Nadu is unstructured; EDUS runs with academic SOPs,
+              monitored tutors, focused individual attention for every student, and
+              <br />
+              monthly parent updates.
             </p>
           </div>
 
