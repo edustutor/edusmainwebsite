@@ -51,6 +51,9 @@ const INITIAL: FormState = {
   message: "",
 };
 
+// Honeypot — hidden field bots will fill, real users won't see.
+const HONEYPOT_FIELD = "_company";
+
 const MESSAGE_MAX = 500;
 
 function validate(s: FormState): FieldErrors {
@@ -71,6 +74,7 @@ function validate(s: FormState): FieldErrors {
 
 export function ContactForm() {
   const [data, setData] = useState<FormState>(INITIAL);
+  const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -91,12 +95,24 @@ export function ContactForm() {
     }
     setSubmitting(true);
     try {
-      // Replace with your real endpoint (Formspree, Web3Forms, API route, etc.)
-      await new Promise((r) => setTimeout(r, 800));
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, [HONEYPOT_FIELD]: honeypot }),
+      });
+      const json = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      if (!res.ok || !json.ok) {
+        throw new Error(json.error ?? "Request failed");
+      }
       setSubmitted(true);
       setData(INITIAL);
-    } catch {
-      setSubmitError("Something went wrong. Please try again or email hello@edustutor.com.");
+      setHoneypot("");
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error && err.message
+          ? err.message
+          : "Something went wrong. Please try again or email hello@edustutor.com.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -176,6 +192,20 @@ export function ContactForm() {
               className="mt-10 glass-strong rounded-[28px] p-6 md:p-10"
             >
               <fieldset className="space-y-5" disabled={submitting}>
+                {/* Honeypot — hidden from real users, bots will fill it */}
+                <div aria-hidden className="absolute -left-[9999px] w-px h-px overflow-hidden" style={{ visibility: "hidden" }}>
+                  <label>
+                    Company (leave blank)
+                    <input
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                    />
+                  </label>
+                </div>
+
                 {/* Row 1 — Name + Phone */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label="Your Name" required error={errors.parentName}>
