@@ -77,13 +77,17 @@ export function Hero() {
         style={{ y: headlineY }}
       >
         {/* Status badge */}
-        <m.div className="flex justify-center" variants={fadeUp}>
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass text-[12.5px] font-medium text-[#2B3950]">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-[#22C55E]/60 animate-ping" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22C55E]" />
+        <m.div className="flex justify-center px-3" variants={fadeUp}>
+          <div className="inline-flex flex-col items-center gap-1 sm:flex-row sm:gap-2.5 px-5 py-2 rounded-3xl sm:rounded-full glass text-[12px] sm:text-[12.5px] font-medium text-[#2B3950] text-center max-w-full">
+            <span className="inline-flex items-center gap-2">
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-[#22C55E]/60 animate-ping" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22C55E]" />
+              </span>
+              Live online tuition
             </span>
-            Live online tuition · 🇱🇰 Sri Lanka · 🇮🇳 India · 🇲🇻 Maldives · 🌐 Global
+            <span className="hidden sm:inline text-[#5A6A82]">·</span>
+            <span>🇱🇰 Sri Lanka · 🇮🇳 India · 🇲🇻 Maldives · 🌐 Global</span>
           </div>
         </m.div>
 

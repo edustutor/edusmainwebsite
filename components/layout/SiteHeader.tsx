@@ -150,7 +150,7 @@ export function SiteHeader() {
               href={SIGN_UP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary text-[13px] py-2 px-4"
+              className="btn btn-primary text-[12.5px] sm:text-[13px] py-1.5 sm:py-2 px-3.5 sm:px-4 h-9 sm:h-auto"
             >
               Sign Up
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
