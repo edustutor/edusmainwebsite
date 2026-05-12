@@ -24,7 +24,7 @@ import {
 } from "@/components/layout/StructuredData";
 
 export const metadata = {
-  title: "Teach with EDUS · Online Tutor Jobs · SL, India, Maldives",
+  title: "Teach with EDUS - Online Tutor Jobs - SL, India, Maldives",
   description:
     "Become an EDUS online tutor and teach students across Sri Lanka, India, Maldives & globally. Apply now to join a quality-focused online learning platform.",
   alternates: { canonical: "/teach" },

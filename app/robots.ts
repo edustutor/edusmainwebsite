@@ -9,9 +9,9 @@ import type { MetadataRoute } from "next";
  *   2. Keeps the policy auditable
  *   3. Lets us tune disallow rules per bot in future if needed
  *
- * Categories covered: AI/LLM crawlers · search engines · answer engines ·
- * SEO/marketing crawlers · social-preview bots · academic/research crawlers ·
- * archival bots · regional engines.
+ * Categories covered: AI/LLM crawlers - search engines - answer engines -
+ * SEO/marketing crawlers - social-preview bots - academic/research crawlers -
+ * archival bots - regional engines.
  */
 export default function robots(): MetadataRoute.Robots {
   const allow = "/";

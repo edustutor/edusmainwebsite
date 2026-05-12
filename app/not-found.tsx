@@ -9,7 +9,7 @@ import Link from "next/link";
  */
 
 export const metadata = {
-  title: "Page not found · EDUS",
+  title: "Page not found - EDUS",
   description:
     "The page you were looking for doesn't exist or has been moved. Head back to the EDUS homepage or pick your learning region.",
   robots: { index: false, follow: false },
@@ -33,13 +33,13 @@ export default function NotFound() {
       </div>
 
       <div className="container-edge max-w-3xl mx-auto text-center">
-        <p className="eyebrow"><span className="dot" />404 · Page Not Found</p>
+        <p className="eyebrow"><span className="dot" />404 - Page Not Found</p>
         <h1 className="heading mt-5" style={{ fontSize: "var(--fs-hero)" }}>
           This page doesn&apos;t exist. <em>Let&apos;s get you back.</em>
         </h1>
         <p className="text-[#2B3950] text-[17px] mt-6 leading-[1.65] max-w-2xl mx-auto">
           The page you tried to open may have been moved, renamed, or never existed. Pick the EDUS
-          path that matches your country and syllabus below — or head straight to the homepage.
+          path that matches your country and syllabus below, or head straight to the homepage.
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">

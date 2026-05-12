@@ -7,14 +7,14 @@ import {
 } from "@/components/layout/StructuredData";
 
 /**
- * Press kit — gives journalists, partners, and AI engines a clean,
+ * Press kit - gives journalists, partners, and AI engines a clean,
  * downloadable, machine-readable view of the brand. Only real facts.
  */
 
 export const metadata = {
-  title: "Press Kit · EDUS Online Tuition · Brand, Logos & Facts",
+  title: "Press Kit - EDUS Online Tuition - Brand, Logos & Facts",
   description:
-    "EDUS press kit — brand logos, colors, fact sheet, and media contact. Quality-assured online tuition platform serving Sri Lanka, India, Maldives & global students.",
+    "EDUS press kit - brand logos, colors, fact sheet, and media contact. Quality-assured online tuition platform serving Sri Lanka, India, Maldives & global students.",
   alternates: { canonical: "/press" },
   keywords: [
     "EDUS press kit",
@@ -41,15 +41,15 @@ const BRAND_COLORS = [
 
 const FACT_SHEET = [
   { label: "Legal name",          value: "EDUS Lanka (Pvt) Ltd" },
-  { label: "Trading as",          value: "EDUS · EDUS Online Tuition" },
+  { label: "Trading as",          value: "EDUS - EDUS Online Tuition" },
   { label: "Company registration", value: "PV 00232840" },
   { label: "Founded",             value: "2020" },
   { label: "Headquarters",        value: "Jaffna, Sri Lanka" },
-  { label: "Markets served",      value: "Sri Lanka · India · Maldives · Global" },
+  { label: "Markets served",      value: "Sri Lanka - India - Maldives - Global" },
   { label: "Students supported",  value: "7,000+" },
-  { label: "Class formats",       value: "Live group classes · 1-to-1 tutoring" },
-  { label: "Mediums",             value: "English · Tamil · Sinhala" },
-  { label: "Syllabuses covered",  value: "National Syllabus (LK) · Cambridge IGCSE · O-Level · A-Level · Edexcel · CBSE Classes 6-10 · IB" },
+  { label: "Class formats",       value: "Live group classes - 1-to-1 tutoring" },
+  { label: "Mediums",             value: "English - Tamil - Sinhala" },
+  { label: "Syllabuses covered",  value: "National Syllabus (LK) - Cambridge IGCSE - O-Level - A-Level - Edexcel - CBSE Classes 6-10 - IB" },
 ];
 
 export default function PressPage() {
@@ -63,10 +63,10 @@ export default function PressPage() {
       />
       <JsonLdScript
         data={speakableWebPage({
-          name: "Press Kit · EDUS Online Tuition",
+          name: "Press Kit - EDUS Online Tuition",
           headline: "EDUS Press Kit",
           description:
-            "EDUS press kit — brand logos, colors, fact sheet, and media contact. Quality-assured online tuition platform serving Sri Lanka, India, Maldives & global students.",
+            "EDUS press kit - brand logos, colors, fact sheet, and media contact. Quality-assured online tuition platform serving Sri Lanka, India, Maldives & global students.",
           path: "/press",
         })}
       />
@@ -137,7 +137,7 @@ export default function PressPage() {
                 <Image src="/edus-logo-blue.webp" alt="EDUS logo on light" width={200} height={64} className="h-12 w-auto" />
               </div>
               <p className="mt-4 text-[12.5px] font-display font-700 uppercase tracking-widest text-[#102033]">
-                Primary · Light Background
+                Primary - Light Background
               </p>
               <a
                 href="/edus-logo-blue.webp"
@@ -156,7 +156,7 @@ export default function PressPage() {
                 <Image src="/edus-logo-blue.webp" alt="EDUS logo on dark" width={200} height={64} className="h-12 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
               </div>
               <p className="mt-4 text-[12.5px] font-display font-700 uppercase tracking-widest text-white/80">
-                Inverted · Dark Background
+                Inverted - Dark Background
               </p>
               <a
                 href="/edus-logo-blue.webp"

@@ -10,9 +10,9 @@ export function InAcademicStructure() {
             Three core subjects. <em>Every CBSE class.</em>
           </h2>
           <p className="text-[#2B3950] text-[16px] mt-4 leading-relaxed">
-            English-medium CBSE tuition for Classes 6–10. Mathematics, Science, and English -
-            taught by tutors segmented into Middle Stage (Classes 6–8) and Secondary Stage
-            (Classes 9–10).
+            English-medium CBSE tuition for Classes 6-10. Mathematics, Science, and English -
+            taught by tutors segmented into Middle Stage (Classes 6-8) and Secondary Stage
+            (Classes 9-10).
           </p>
         </div>
 
@@ -58,7 +58,7 @@ export function InAcademicStructure() {
                   >
                     {g.g}
                   </h4>
-                  <p className="text-[11px] uppercase tracking-wider mt-2 opacity-80">CBSE Class · {g.tier}</p>
+                  <p className="text-[11px] uppercase tracking-wider mt-2 opacity-80">CBSE Class - {g.tier}</p>
                 </div>
               ))}
             </div>
@@ -68,7 +68,7 @@ export function InAcademicStructure() {
           <div className="glass rounded-[24px] p-7">
             <div className="flex items-center justify-between flex-wrap gap-3">
               <p className="font-display font-600 text-[12px] tracking-[0.12em] uppercase text-[#06B6D4]">
-                Class Schedule · Mon – Sat
+                Class Schedule - Mon - Sat
               </p>
               <p className="text-[12.5px] text-[#5A6A82]">2 hours / week / subject</p>
             </div>

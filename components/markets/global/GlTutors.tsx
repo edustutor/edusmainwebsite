@@ -100,7 +100,7 @@ function TutorBoard() {
               9.4 / 10
             </p>
             <p className="text-[11px] text-[#2563EB] mt-1 font-display font-700">
-              Multi-stage evaluation · No assignments by default
+              Multi-stage evaluation - No assignments by default
             </p>
           </div>
           <svg width="76" height="76" viewBox="0 0 36 36" className="shrink-0">

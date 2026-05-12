@@ -32,7 +32,7 @@ export function MvHero() {
           <div className="lg:col-span-7">
             <m.div variants={sectionRevealStrong}>
               <p className="eyebrow">
-                <span className="dot" />Maldives · Cambridge IGCSE & O-Level
+                <span className="dot" />Maldives - Cambridge IGCSE & O-Level
               </p>
               <h1 className="heading mt-4" style={{ fontSize: "var(--fs-hero)" }}>
                 Cambridge IGCSE & O-Level{" "}
@@ -74,7 +74,7 @@ export function MvHero() {
             </m.div>
 
             <p className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-display font-600">
-              1-to-1 Only · Cambridge IGCSE / O-Level · Maldives-Wide
+              1-to-1 Only - Cambridge IGCSE / O-Level - Maldives-Wide
             </p>
           </div>
 
@@ -111,7 +111,7 @@ function MvHeroVisual() {
           <div className="inline-flex items-center gap-2">
             <span className="text-2xl" aria-hidden>🇲🇻</span>
             <p className="font-display font-800 text-[14px] text-[#102033]">
-              Maldives · Grade 9–10
+              Maldives - Grade 9-10
             </p>
           </div>
           <span
@@ -140,7 +140,7 @@ function MvHeroVisual() {
                 <p className="font-display font-700 text-[12px] text-[#102033] truncate">
                   {s.short}
                 </p>
-                <p className="text-[10px] text-[#5A6A82] mt-0.5">Cambridge · {s.code}</p>
+                <p className="text-[10px] text-[#5A6A82] mt-0.5">Cambridge - {s.code}</p>
               </div>
             </div>
           ))}
@@ -161,11 +161,11 @@ function MvHeroVisual() {
               <p className="font-display font-700 text-[12.5px] text-[#102033]">
                 100% Individual
               </p>
-              <p className="text-[10.5px] text-[#5A6A82] mt-0.5">No group classes · Personal tutor</p>
+              <p className="text-[10.5px] text-[#5A6A82] mt-0.5">No group classes - Personal tutor</p>
             </div>
           </div>
           <p className="text-[11px] uppercase tracking-widest text-[#5A6A82] font-display font-700">
-            Live · 1-to-1
+            Live - 1-to-1
           </p>
         </div>
       </div>

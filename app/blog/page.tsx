@@ -8,7 +8,7 @@ import {
 import { PUBLISHED_POSTS } from "@/components/blog/BlogData";
 
 export const metadata = {
-  title: "EDUS Blog · Online Tuition Guides, Exam Prep & Parent Advice",
+  title: "EDUS Blog - Online Tuition Guides, Exam Prep & Parent Advice",
   description:
     "Learning guides, exam prep tips, and parent advice from the EDUS Academic Team. Covering Sri Lanka, India CBSE, Maldives Cambridge, and global online tutoring.",
   alternates: { canonical: "/blog" },
@@ -42,7 +42,7 @@ export default function BlogIndexPage() {
       />
       <JsonLdScript
         data={speakableWebPage({
-          name: "EDUS Blog · Online Tuition Guides, Exam Prep & Parent Advice",
+          name: "EDUS Blog - Online Tuition Guides, Exam Prep & Parent Advice",
           headline: "EDUS Blog",
           description:
             "Learning guides, exam prep tips, and parent advice from the EDUS Academic Team.",
@@ -117,7 +117,7 @@ export default function BlogIndexPage() {
                           year: "numeric",
                         })}
                       </time>
-                      <span aria-hidden>·</span>
+                      <span aria-hidden>-</span>
                       <span>{p.readingMinutes} min read</span>
                     </p>
                   </Link>

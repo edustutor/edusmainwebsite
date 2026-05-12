@@ -86,8 +86,8 @@ export function Hero() {
               </span>
               Live online tuition
             </span>
-            <span className="hidden sm:inline text-[#5A6A82]">·</span>
-            <span>🇱🇰 Sri Lanka · 🇮🇳 India · 🇲🇻 Maldives · 🌐 Global</span>
+            <span className="hidden sm:inline text-[#5A6A82]">-</span>
+            <span>🇱🇰 Sri Lanka - 🇮🇳 India - 🇲🇻 Maldives - 🌐 Global</span>
           </div>
         </m.div>
 
@@ -99,7 +99,7 @@ export function Hero() {
           Quality-Assured Online Live Learning Platform
         </m.p>
 
-        {/* H1 — 2 lines on tablet+, wraps naturally on mobile */}
+        {/* H1 - 2 lines on tablet+, wraps naturally on mobile */}
         <m.div className="mt-4 text-center max-w-6xl mx-auto" variants={fadeUp}>
           <h1 className="heading" style={{ fontSize: "var(--fs-hero)" }}>
             <span className="inline-block sm:whitespace-nowrap">
@@ -209,7 +209,7 @@ export function Hero() {
                   LIVE NOW
                 </span>
                 <p className="text-[10.5px] text-[#5A6A82] font-display font-600">
-                  Class · Mathematics · Grade 10
+                  Class - Mathematics - Grade 10
                 </p>
               </div>
             </div>
@@ -235,7 +235,7 @@ export function Hero() {
                     <div className="flex items-center gap-2">
                       <Avatar tint="#06B6D4" letter="S" />
                       <p className="text-[11px] text-[#5A6A82] font-display font-600">
-                        Topic 03 of 05 · Quadratics
+                        Topic 03 of 05 - Quadratics
                       </p>
                     </div>
                   </div>
@@ -273,7 +273,7 @@ export function Hero() {
                 visual={
                   <div className="space-y-1.5">
                     {[
-                      { name: "Past Paper · 2024", c: "#06B6D4" },
+                      { name: "Past Paper - 2024", c: "#06B6D4" },
                       { name: "Revision Notes",   c: "#22C55E" },
                       { name: "AI Study Buddy",   c: "#FACC15" },
                     ].map((r) => (

@@ -44,7 +44,7 @@ export function GlCompare() {
               style={{ background: "linear-gradient(90deg,#2563EB 0%,#06B6D4 100%)" }}
             >
               <p className="text-[11px] uppercase tracking-widest font-display font-700">
-                EDUS Global · One to One
+                EDUS Global - One to One
               </p>
             </div>
           </div>

@@ -77,7 +77,7 @@ export function TeachHero() {
             </m.div>
 
             <p className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-display font-600">
-              Quality-Assured · Academically Supported · Performance Reviewed
+              Quality-Assured - Academically Supported - Performance Reviewed
             </p>
           </div>
 
@@ -111,7 +111,7 @@ function HeroStatBoard() {
           <StatTile k="5+ yrs" v="In Online Education" tint="#2563EB" />
           <StatTile k="7,000+" v="Students Supported" tint="#8B5CF6" />
           <StatTile k="100%" v="Live Online Model" tint="#06B6D4" />
-          <StatTile k="4 Markets" v="SL · IN · MV · Global" tint="#FACC15" />
+          <StatTile k="4 Markets" v="SL - IN - MV - Global" tint="#FACC15" />
         </div>
         <div className="mt-4 rounded-2xl bg-white border border-[rgba(16,32,51,0.08)] p-4">
           <div className="flex items-baseline justify-between">

@@ -17,10 +17,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
   const { slug } = await params;
   const post = getPost(slug);
   if (!post || post.draft) {
-    return { title: "Post not found · EDUS", robots: { index: false } };
+    return { title: "Post not found - EDUS", robots: { index: false } };
   }
   return {
-    title: `${post.title} · EDUS Blog`,
+    title: `${post.title} - EDUS Blog`,
     description: post.description,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
@@ -71,7 +71,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
             className="font-display font-800 text-[11px] tracking-[0.16em] uppercase text-center"
             style={{ color: post.marketTint }}
           >
-            {post.marketLabel} · EDUS Blog
+            {post.marketLabel} - EDUS Blog
           </p>
           <h1 className="heading mt-3 text-center" style={{ fontSize: "var(--fs-display)" }}>
             {post.title}
@@ -81,7 +81,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
           </p>
           <div className="mt-6 flex items-center justify-center gap-3 text-[12.5px] text-[#5A6A82]">
             <span className="font-display font-700 text-[#102033]">{post.author.name}</span>
-            <span aria-hidden>·</span>
+            <span aria-hidden>-</span>
             <time dateTime={post.datePublished}>
               {new Date(post.datePublished).toLocaleDateString("en-GB", {
                 day: "numeric",
@@ -89,7 +89,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
                 year: "numeric",
               })}
             </time>
-            <span aria-hidden>·</span>
+            <span aria-hidden>-</span>
             <span>{post.readingMinutes} min read</span>
           </div>
         </div>

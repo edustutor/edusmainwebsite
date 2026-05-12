@@ -6,7 +6,7 @@ import { ContactMap } from "@/components/contact/ContactMap";
 import { ContactCTA } from "@/components/contact/ContactCTA";
 
 export const metadata = {
-  title: "Contact EDUS · Online Classes, Admissions & Student Support",
+  title: "Contact EDUS - Online Classes, Admissions & Student Support",
   description:
     "Contact EDUS for online classes, admissions, 1-to-1 tutoring, group classes & student support. Sri Lanka, India, Maldives & global learning inquiries welcome.",
   alternates: { canonical: "/contact" },

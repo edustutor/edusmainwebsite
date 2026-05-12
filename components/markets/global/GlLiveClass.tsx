@@ -234,7 +234,7 @@ function LiveClassroomMock() {
           <div className="rounded-xl bg-[#F6F8FB] border border-[rgba(16,32,51,0.08)] p-3.5">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-widest text-[#5A6A82] font-display font-700">
-                Whiteboard · Quadratic Equations
+                Whiteboard - Quadratic Equations
               </p>
               <span className="text-[10px] font-display font-700 text-[#2563EB]">
                 Topic 03 / 05
@@ -257,7 +257,7 @@ function LiveClassroomMock() {
                 />
               </div>
               <p className="text-[10px] text-[#5A6A82] font-600">
-                Lesson progress · Topic-wise pace
+                Lesson progress - Topic-wise pace
               </p>
             </div>
           </div>
@@ -278,7 +278,7 @@ function LiveClassroomMock() {
             <ToolPill label="Share" tint="#8B5CF6" />
           </div>
           <p className="text-[10.5px] text-[#5A6A82] font-display font-600">
-            Session · 47 min
+            Session - 47 min
           </p>
         </div>
       </div>

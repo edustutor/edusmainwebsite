@@ -53,7 +53,7 @@ export function ContactCTA() {
               variants={fadeUp}
               className="mt-10 text-[12px] uppercase tracking-[0.16em] text-[#5A6A82] font-display font-700"
             >
-              EDUS · Learning made lovable, supportive, accessible from anywhere
+              EDUS - Learning made lovable, supportive, accessible from anywhere
             </m.p>
           </m.div>
         </m.div>

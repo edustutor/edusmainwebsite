@@ -44,7 +44,7 @@ export function MvSubjectDetails() {
                     IGCSE {s.short}
                   </h3>
                   <p className="text-[11.5px] uppercase tracking-[0.06em] mt-1 font-display font-600" style={{ color: s.tint }}>
-                    Cambridge · {s.code} · Maldives
+                    Cambridge - {s.code} - Maldives
                   </p>
                 </div>
               </div>
@@ -60,7 +60,7 @@ export function MvSubjectDetails() {
                   ${s.price}
                 </p>
                 <p className="text-[11px] uppercase tracking-[0.08em] text-[#5A6A82] mt-1.5 font-display font-600">
-                  / hour · USD
+                  / hour - USD
                 </p>
               </div>
             </m.article>

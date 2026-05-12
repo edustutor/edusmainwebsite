@@ -159,7 +159,7 @@ function ReportMock() {
             </p>
           </div>
           <span className="text-[11px] text-[#5A6A82] font-display font-600">
-            Cycle · Nov 2025
+            Cycle - Nov 2025
           </span>
         </div>
 

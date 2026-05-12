@@ -36,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/acceptable-use",   changeFrequency: "yearly",  priority: 0.30 },
   ];
 
-  // Blog posts — each gets its own entry with the post's actual datePublished.
+  // Blog posts - each gets its own entry with the post's actual datePublished.
   const blogRoutes = PUBLISHED_POSTS.map((p) => ({
     path: `/blog/${p.slug}`,
     changeFrequency: "monthly" as const,

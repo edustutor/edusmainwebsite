@@ -6,7 +6,7 @@ import { FEATURED_VIDEOS } from "@/components/shared/VideosData";
 
 /**
  * Featured videos from the EDUS YouTube channel (@edusonline).
- * Visible cards on the homepage — curated subset via the `featured` flag
+ * Visible cards on the homepage - curated subset via the `featured` flag
  * in VideosData.ts. Each card links to YouTube in a new tab.
  *
  * The full VIDEOS list is always emitted in JSON-LD for AI/SERP coverage,
@@ -39,7 +39,7 @@ export function VideoShowcase() {
             </h2>
             <p className="text-[#2B3950] text-[15.5px] mt-4 leading-[1.7]">
               Study tips, A/L exam strategy, and learning guidance from the EDUS Academic Team.
-              Subscribe on YouTube for the full library — Tamil, Sinhala, and English.
+              Subscribe on YouTube for the full library - Tamil, Sinhala, and English.
             </p>
           </div>
         </m.div>

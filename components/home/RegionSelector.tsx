@@ -27,12 +27,12 @@ const REGIONS: Region[] = [
   {
     flag: "🇱🇰",
     title: "Sri Lanka",
-    tag: "National · Cambridge · Edexcel",
+    tag: "National - Cambridge - Edexcel",
     hook: "Every grade, every syllabus, taught by tutors who actually know the Sri Lankan exam.",
     facts: [
-      { label: "Syllabus", value: "National · Cambridge · Edexcel" },
-      { label: "Classes",  value: "Primary · Grade 6–11 · O/L · A/L" },
-      { label: "Medium",   value: "Tamil · English · Sinhala" },
+      { label: "Syllabus", value: "National - Cambridge - Edexcel" },
+      { label: "Classes",  value: "Primary - Grade 6-11 - O/L - A/L" },
+      { label: "Medium",   value: "Tamil - English - Sinhala" },
       { label: "Format",   value: "Group & One-to-One" },
     ],
     cta: "Explore Sri Lanka",
@@ -42,11 +42,11 @@ const REGIONS: Region[] = [
   {
     flag: "🇮🇳",
     title: "India",
-    tag: "CBSE · Classes 6–10",
+    tag: "CBSE - Classes 6-10",
     hook: "Disciplined, structured CBSE tuition built around the exam, not the calendar.",
     facts: [
       { label: "Syllabus", value: "CBSE" },
-      { label: "Classes",  value: "Middle (6–8) & Secondary (9–10)" },
+      { label: "Classes",  value: "Middle (6-8) & Secondary (9-10)" },
       { label: "Medium",   value: "English" },
       { label: "Format",   value: "Group & One-to-One" },
     ],
@@ -75,8 +75,8 @@ const REGIONS: Region[] = [
     tag: "Worldwide One-to-One",
     hook: "Any syllabus, any country, any subject. Matched to the right tutor in days.",
     facts: [
-      { label: "Syllabus", value: "Cambridge · Edexcel · IB · National" },
-      { label: "Classes",  value: "IGCSE · GCSE · O/A-Level · School" },
+      { label: "Syllabus", value: "Cambridge - Edexcel - IB - National" },
+      { label: "Classes",  value: "IGCSE - GCSE - O/A-Level - School" },
       { label: "Medium",   value: "English" },
       { label: "Format",   value: "One-to-One online" },
     ],

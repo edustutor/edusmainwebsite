@@ -33,7 +33,7 @@ const FAQS = [
   },
   {
     q: "What subjects are available for India?",
-    a: "The India launch focuses on English-medium CBSE Classes 6 to 10 across Tamil Nadu, with three core subjects: Mathematics, Science, and English. Classes 6–8 form the Middle Stage and Classes 9–10 form the Secondary Stage.",
+    a: "The India launch focuses on English-medium CBSE Classes 6 to 10 across Tamil Nadu, with three core subjects: Mathematics, Science, and English. Classes 6-8 form the Middle Stage and Classes 9-10 form the Secondary Stage.",
   },
   {
     q: "How do I enrol?",

@@ -34,7 +34,7 @@ export function InPricing() {
                       className="absolute -top-2 right-4 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-white font-display font-700 text-[10px] tracking-[0.12em] uppercase shadow-[0_6px_14px_-6px_rgba(139,92,246,0.5)]"
                       style={{ background: "linear-gradient(90deg, #2563EB 0%, #6E5BC8 100%)" }}
                     >
-                      ★ Best Value · Save ₹500
+                      ★ Best Value - Save ₹500
                     </span>
                   )}
                   <p
@@ -86,7 +86,7 @@ export function InPricing() {
                   Ready to start with a premium CBSE tutor?
                 </p>
                 <p className="text-[12px] text-[#5A6A82] mt-1">
-                  Referral discount · ₹500 off when an existing student refers a new family.
+                  Referral discount - ₹500 off when an existing student refers a new family.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">

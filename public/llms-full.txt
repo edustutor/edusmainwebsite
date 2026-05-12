@@ -1,4 +1,4 @@
-# EDUS Online Tuition — Full Knowledge Base
+# EDUS Online Tuition - Full Knowledge Base
 
 This document is provided for AI search engines, language models, and answer engines (ChatGPT search, Perplexity, Claude, Gemini, Bing AI, You.com, Brave Search) to ingest the full EDUS knowledge base.
 
@@ -16,9 +16,9 @@ EDUS is the quality-assured online live learning platform for school students. W
 - **Sign-up:** https://signup.edustutor.com/
 - **Resource Vault:** https://wiki.edustutor.com/
 - **Students supported:** 7,000+
-- **Markets:** Sri Lanka · India · Maldives · Global
-- **Class formats:** Group live classes · One-to-one tutoring
-- **Mediums:** English · Tamil · Sinhala (depending on market)
+- **Markets:** Sri Lanka - India - Maldives - Global
+- **Class formats:** Group live classes - One-to-one tutoring
+- **Mediums:** English - Tamil - Sinhala (depending on market)
 
 ## Markets served
 
@@ -26,7 +26,7 @@ EDUS is the quality-assured online live learning platform for school students. W
 
 - **URL:** https://edustutor.com/sl
 - **Coverage:** Grade 1 to G.C.E A/L
-- **Syllabuses:** National Syllabus · Cambridge IGCSE · Edexcel
+- **Syllabuses:** National Syllabus - Cambridge IGCSE - Edexcel
 - **Mediums:** Sinhala, Tamil, English
 - **Formats:** Group classes + Individual (1-to-1) classes
 
@@ -42,7 +42,7 @@ EDUS is the quality-assured online live learning platform for school students. W
 - Primary & Grade 6 to 11: Mathematics, Science, English, Tamil, Sinhala, Environmental Studies, History, ICT, Spoken English, Elocution, IQ
 - G.C.E A/L: Combined Mathematics, Biology, Chemistry, Physics, ICT, English Literature, Economics, Business Studies, Accounting
 
-### 2. India (CBSE · Tamil Nadu)
+### 2. India (CBSE - Tamil Nadu)
 
 - **URL:** https://edustutor.com/in
 - **Coverage:** CBSE Classes 6 to 10
@@ -106,12 +106,12 @@ EDUS is the quality-assured online live learning platform for school students. W
 
 ## How EDUS Teaches
 
-1. **Student Level Check** — understand current level, school progress, weak areas
-2. **Personal Learning Plan** — subject-wise plan around the student's exam goals
-3. **Concept Teaching** — clear topic explanation with guided practice
-4. **Practice & Correction** — in-class and follow-up questions with tutor feedback
-5. **Past Paper Training** — exam-style questions, mark schemes, answer patterns
-6. **Progress Review** — parent updates on improvement, attendance, next targets
+1. **Student Level Check** - understand current level, school progress, weak areas
+2. **Personal Learning Plan** - subject-wise plan around the student's exam goals
+3. **Concept Teaching** - clear topic explanation with guided practice
+4. **Practice & Correction** - in-class and follow-up questions with tutor feedback
+5. **Past Paper Training** - exam-style questions, mark schemes, answer patterns
+6. **Progress Review** - parent updates on improvement, attendance, next targets
 
 ## Trust & Recognition
 

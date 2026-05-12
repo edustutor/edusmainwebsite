@@ -5,8 +5,8 @@ import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/mot
 import { SectionHead, SUBJECTS, MV_SIGNUP, MvCtaRow } from "./MvShared";
 
 const PLANS = [
-  { need: "Regular Subject Support",  hours: "4 – 8 hrs / month",  tint: "#06B6D4" },
-  { need: "Exam Preparation",         hours: "8 – 12 hrs / month", tint: "#2563EB" },
+  { need: "Regular Subject Support",  hours: "4 - 8 hrs / month",  tint: "#06B6D4" },
+  { need: "Exam Preparation",         hours: "8 - 12 hrs / month", tint: "#2563EB" },
   { need: "Weak-Area Recovery",       hours: "12+ hrs / month",    tint: "#8B5CF6" },
   { need: "Intensive Revision",       hours: "Customized Plan",    tint: "#FACC15" },
 ];
@@ -91,7 +91,7 @@ export function MvSubjects() {
               </h3>
             </div>
             <p className="text-[12px] uppercase tracking-widest text-[#5A6A82] font-display font-600">
-              Per-hour · USD billing
+              Per-hour - USD billing
             </p>
           </div>
 

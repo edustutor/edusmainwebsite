@@ -25,7 +25,7 @@ import {
 } from "@/components/layout/StructuredData";
 
 export const metadata = {
-  title: "Global Online Tutoring · Cambridge, Edexcel, IGCSE · EDUS",
+  title: "Global Online Tutoring - Cambridge, Edexcel, IGCSE - EDUS",
   description:
     "Personalised one-to-one online tutoring for international students. Cambridge, Edexcel, IGCSE, GCSE, O-Level, A-Level & any syllabus, worldwide.",
   alternates: { canonical: "/global" },
@@ -156,12 +156,12 @@ export default function GlobalPage() {
             "Personalised one-to-one online tutoring for students worldwide. Cambridge, Edexcel, IGCSE, GCSE, O-Level, A-Level, IB, and national syllabuses.",
           url: `${SITE_URL}/global`,
           area: "Worldwide",
-          educationalLevel: "Cambridge · Edexcel · IGCSE · GCSE · O-Level · A-Level · IB",
+          educationalLevel: "Cambridge - Edexcel - IGCSE - GCSE - O-Level - A-Level - IB",
         })}
       />
       <JsonLdScript
         data={tuitionService({
-          name: "Global One-to-One Online Tutoring — EDUS",
+          name: "Global One-to-One Online Tutoring - EDUS",
           description:
             "Worldwide one-to-one online tutoring for international students. Cambridge, Edexcel, IGCSE, GCSE, O-Level, A-Level, IB, and national curricula in English medium.",
           url: `${SITE_URL}/global`,

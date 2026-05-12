@@ -19,13 +19,13 @@ export function SlHero() {
               <path d="M19 12H5M12 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             All markets
-            <span className="text-[#5A6A82]">·</span>
+            <span className="text-[#5A6A82]">-</span>
             <span className="text-[#2563EB]">🇱🇰 Sri Lanka</span>
           </Link>
         </div>
 
         <div className="mt-8 text-center max-w-4xl mx-auto" data-anim="2">
-          <p className="eyebrow">🇱🇰 Sri Lanka · National Syllabus · Cambridge & Edexcel</p>
+          <p className="eyebrow">🇱🇰 Sri Lanka - National Syllabus - Cambridge & Edexcel</p>
           <h1 className="heading mt-5" style={{ fontSize: "var(--fs-hero)" }}>
             Quality Online tuition in Sri Lanka, <em>built for every student.</em>
           </h1>
@@ -68,8 +68,8 @@ export function SlHero() {
           {[
             { k: "7000+", v: "Happy Students" },
             { k: "530+", v: "Live classes" },
-            { k: "Grade 1 – A/L", v: "Coverage" },
-            { k: "3 mediums", v: "Sinhala · Tamil · English" },
+            { k: "Grade 1 - A/L", v: "Coverage" },
+            { k: "3 mediums", v: "Sinhala - Tamil - English" },
           ].map((s, i) => (
             <div key={i} className="glass rounded-2xl px-5 py-4 text-center">
               <p className="font-display font-700 text-[22px] tnum text-[#102033]">{s.k}</p>

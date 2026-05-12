@@ -6,9 +6,9 @@ const STATS = [
   { k: "5+ Years",            v: "In Online Education",           tint: "#2563EB" },
   { k: "7,000+",              v: "Students Supported",            tint: "#8B5CF6" },
   { k: "100% Online",         v: "Live Learning Model",           tint: "#06B6D4" },
-  { k: "4 Markets",           v: "SL · IN · MV · Global",         tint: "#FACC15" },
+  { k: "4 Markets",           v: "SL - IN - MV - Global",         tint: "#FACC15" },
   { k: "Group + 1:1",         v: "Class Formats",                 tint: "#2563EB" },
-  { k: "National · CIE · Edexcel", v: "Multi-Syllabus Coverage",  tint: "#8B5CF6" },
+  { k: "National - CIE - Edexcel", v: "Multi-Syllabus Coverage",  tint: "#8B5CF6" },
 ];
 
 export function TeachStats() {

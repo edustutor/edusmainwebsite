@@ -26,8 +26,8 @@ const sans = Open_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "EDUS · Live Online Tuition · Sri Lanka, India, Maldives",
-    template: "%s · EDUS",
+    default: "EDUS - Live Online Tuition - Sri Lanka, India, Maldives",
+    template: "%s - EDUS",
   },
   description:
     "Join EDUS for live online tuition with expert tutors, structured classes, exams, and parent updates. Sri Lanka, India CBSE, Maldives Cambridge & global 1-to-1.",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
     // hreflang signals so SERPs in each market route to the right landing page.
-    // Same content language (English) across all markets — the variation is
+    // Same content language (English) across all markets - the variation is
     // syllabus / pathway, not locale, so we point each market region to the
     // canonical English page but explicitly claim coverage.
     languages: {
@@ -153,20 +153,20 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: "website",
-    title: "EDUS · Live Online Tuition · Sri Lanka, India, Maldives",
+    title: "EDUS - Live Online Tuition - Sri Lanka, India, Maldives",
     description:
       "Join EDUS for live online tuition with expert tutors, structured classes, exams, and parent updates. Sri Lanka, India CBSE, Maldives Cambridge & global 1-to-1.",
     url: "https://edustutor.com",
     siteName: "EDUS",
     locale: "en_US",
     alternateLocale: ["en_LK", "en_IN", "en_MV", "ta_LK", "ta_IN", "si_LK"],
-    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "EDUS · Live online tuition for Sri Lanka, India, Maldives & global students" }],
+    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "EDUS - Live online tuition for Sri Lanka, India, Maldives & global students" }],
   },
   twitter: {
     card: "summary_large_image",
     site: "@edusonline",
     creator: "@edusonline",
-    title: "EDUS · Live Online Tuition",
+    title: "EDUS - Live Online Tuition",
     description:
       "Live online classes for school students. Sri Lanka, India, Maldives, and global learning paths.",
     images: ["/edus-og.jpg"],
@@ -189,7 +189,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/edus-favicon.webp" }],
   },
   other: {
-    // Geo signals — precise EDUS office coordinates (Kokkuvil Junction, Jaffna)
+    // Geo signals - precise EDUS office coordinates (Kokkuvil Junction, Jaffna)
     "geo.region": "LK-41",                // Northern Province, Sri Lanka (ISO 3166-2)
     "geo.placename": "Jaffna",
     "geo.position": "9.6945511;80.0139866",
@@ -231,7 +231,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
       <head>
-        {/* AI/LLM ingestion signals — emerging standard recognised by ChatGPT,
+        {/* AI/LLM ingestion signals - emerging standard recognised by ChatGPT,
             Perplexity, Claude, and Gemini for discovery and crawling. */}
         <link rel="alternate" type="text/markdown" href="/llms.txt" title="EDUS knowledge base for AI engines" />
         <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="EDUS full knowledge base" />

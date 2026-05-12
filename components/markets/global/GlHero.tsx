@@ -32,7 +32,7 @@ export function GlHero() {
           <div className="lg:col-span-7">
             <m.div variants={sectionRevealStrong}>
               <p className="eyebrow">
-                <span className="dot" />EDUS Global · One to One Online
+                <span className="dot" />EDUS Global - One to One Online
               </p>
               <h1 className="heading mt-4" style={{ fontSize: "var(--fs-hero)" }}>
                 World-class online tutoring for{" "}
@@ -74,7 +74,7 @@ export function GlHero() {
             </m.div>
 
             <p className="mt-6 text-[12px] uppercase tracking-[0.12em] text-[#5A6A82] font-display font-600">
-              1-to-1 Live · Cambridge · Edexcel · IGCSE · GCSE · O / A-Level
+              1-to-1 Live - Cambridge - Edexcel - IGCSE - GCSE - O / A-Level
             </p>
           </div>
 
@@ -117,7 +117,7 @@ function GlHeroVisual() {
             style={{ background: "rgba(37,99,235,0.12)", color: "#2563EB" }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" />
-            Live · 1-to-1
+            Live - 1-to-1
           </span>
         </div>
 

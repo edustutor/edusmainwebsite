@@ -64,7 +64,7 @@ export function SiteFooter() {
                 one support, parent updates, and learning resources for school students.
               </p>
               <p className="mt-4 text-[12px] text-[#5A6A82]">
-                <span className="text-[#22C55E]">●</span>&nbsp; Live online tuition · Parent monitored · 24/7 support
+                <span className="text-[#22C55E]">●</span>&nbsp; Live online tuition - Parent monitored - 24/7 support
               </p>
 
               {/* Social icons */}
@@ -97,7 +97,7 @@ export function SiteFooter() {
 
           {/* Bottom strip */}
           <div className="mt-8 pt-5 border-t border-[rgba(16,32,51,0.08)] flex flex-wrap items-center justify-between gap-3 text-[11.5px] text-[#5A6A82]">
-            <p>© {new Date().getFullYear()} EDUS · All rights reserved.</p>
+            <p>© {new Date().getFullYear()} EDUS - All rights reserved.</p>
             <p>Online learning for Sri Lanka, India, Maldives, and global students.</p>
           </div>
         </div>

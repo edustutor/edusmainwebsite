@@ -7,13 +7,13 @@ type Group = { level: string; subjects: string };
 
 const SL: Group[] = [
   { level: "Primary",     subjects: "Mathematics, English, Environmental Studies, Tamil, Sinhala" },
-  { level: "Grade 6–11",  subjects: "Mathematics, Science, English, History, ICT, Tamil, Sinhala, Commerce" },
+  { level: "Grade 6-11",  subjects: "Mathematics, Science, English, History, ICT, Tamil, Sinhala, Commerce" },
   { level: "G.C.E O/L",   subjects: "Maths, Science, English, History, ICT, Commerce, Business Studies, Accounting" },
   { level: "G.C.E A/L",   subjects: "Combined Maths, Biology, Chemistry, Physics, ICT, Accounting, Economics, Business Studies" },
 ];
 
 const IN: Group[] = [
-  { level: "Grade 6–10",       subjects: "Mathematics, Science, English, Tamil, Hindi, Social Science" },
+  { level: "Grade 6-10",       subjects: "Mathematics, Science, English, Tamil, Hindi, Social Science" },
   { level: "Future Expansion", subjects: "CBSE, ICSE, State Board, and individual classes" },
 ];
 

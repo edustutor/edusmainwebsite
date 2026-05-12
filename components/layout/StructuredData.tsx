@@ -27,7 +27,7 @@ export function JsonLdScript({ data }: { data: object }) {
 }
 
 /* --------------------------------------------------------------- */
-/* BreadcrumbList — used on every non-home route                    */
+/* BreadcrumbList - used on every non-home route                    */
 /* --------------------------------------------------------------- */
 export type Crumb = { name: string; path: string };
 
@@ -45,7 +45,7 @@ export function breadcrumbList(crumbs: Crumb[]) {
 }
 
 /* --------------------------------------------------------------- */
-/* FAQPage — used on every page with a FAQ section                  */
+/* FAQPage - used on every page with a FAQ section                  */
 /* --------------------------------------------------------------- */
 export type FaqEntry = { q: string; a: string };
 
@@ -62,7 +62,7 @@ export function faqPage(faqs: FaqEntry[]) {
 }
 
 /* --------------------------------------------------------------- */
-/* EducationalOccupationalProgram — used per market page            */
+/* EducationalOccupationalProgram - used per market page            */
 /* Eligible for Google's "course" rich result preview.              */
 /* --------------------------------------------------------------- */
 export type ProgramOptions = {
@@ -102,7 +102,7 @@ export function educationalProgram(opts: ProgramOptions) {
 }
 
 /* --------------------------------------------------------------- */
-/* SiteNavigationElement — signals to Google which pages should     */
+/* SiteNavigationElement - signals to Google which pages should     */
 /* appear as sitelinks under the homepage result (like PrimeGlobal). */
 /* --------------------------------------------------------------- */
 export function siteNavigation() {
@@ -129,16 +129,16 @@ export function siteNavigation() {
 }
 
 /* --------------------------------------------------------------- */
-/* ItemList of primary pages — secondary sitelinks signal           */
+/* ItemList of primary pages - secondary sitelinks signal           */
 /* --------------------------------------------------------------- */
 export function primaryPagesItemList() {
   const items = [
-    { name: "Sri Lanka Online Tuition",  path: "/sl",      desc: "Live online classes for Grade 1 to A/L · National, Cambridge & Edexcel · Sinhala, Tamil, English medium" },
-    { name: "India CBSE Online Tuition", path: "/in",      desc: "CBSE Classes 6 to 10 for Tamil Nadu students · Maths, Science, English · monthly parent reports" },
+    { name: "Sri Lanka Online Tuition",  path: "/sl",      desc: "Live online classes for Grade 1 to A/L - National, Cambridge & Edexcel - Sinhala, Tamil, English medium" },
+    { name: "India CBSE Online Tuition", path: "/in",      desc: "CBSE Classes 6 to 10 for Tamil Nadu students - Maths, Science, English - monthly parent reports" },
     { name: "Maldives Cambridge IGCSE",  path: "/mv",      desc: "Premium 1-to-1 Cambridge IGCSE and O-Level for Grade 9 and 10 Maldives students" },
-    { name: "Global One-to-One Tuition", path: "/global",  desc: "Personalised online tutoring for international students · Cambridge, Edexcel, IGCSE, GCSE, IB" },
+    { name: "Global One-to-One Tuition", path: "/global",  desc: "Personalised online tutoring for international students - Cambridge, Edexcel, IGCSE, GCSE, IB" },
     { name: "Teach with EDUS",           path: "/teach",   desc: "Apply to become an EDUS tutor and teach students across Sri Lanka, India, Maldives, and globally" },
-    { name: "About EDUS",                path: "/about",   desc: "EDUS Lanka (Pvt) Ltd · Founded 2020 · 7,000+ students · Backed by Microsoft for Startups, ICTA, SLASSCOM" },
+    { name: "About EDUS",                path: "/about",   desc: "EDUS Lanka (Pvt) Ltd - Founded 2020 - 7,000+ students - Backed by Microsoft for Startups, ICTA, SLASSCOM" },
     { name: "EDUS Blog",                 path: "/blog",    desc: "Exam preparation guides, study tips, and parent advice from the EDUS Academic Team" },
     { name: "EDUS Press Kit",            path: "/press",   desc: "Brand assets, logos, fact sheet, and media contact for journalists and partners" },
     { name: "Contact EDUS",              path: "/contact", desc: "Talk to the EDUS team to find the right class, subject, or tutor for your child" },
@@ -158,7 +158,7 @@ export function primaryPagesItemList() {
 }
 
 /* --------------------------------------------------------------- */
-/* Service — broader rich-result coverage alongside Program          */
+/* Service - broader rich-result coverage alongside Program          */
 /* --------------------------------------------------------------- */
 export function tuitionService({
   name, description, url, area,
@@ -189,7 +189,7 @@ export function tuitionService({
 }
 
 /* --------------------------------------------------------------- */
-/* ContactPage — emitted from /contact for SERP relevance            */
+/* ContactPage - emitted from /contact for SERP relevance            */
 /* --------------------------------------------------------------- */
 export function contactPage() {
   return {
@@ -213,7 +213,7 @@ export function contactPage() {
 }
 
 /* --------------------------------------------------------------- */
-/* Course — adds Google's "Course" rich result eligibility alongside */
+/* Course - adds Google's "Course" rich result eligibility alongside */
 /* the existing EducationalOccupationalProgram per market page.      */
 /* --------------------------------------------------------------- */
 export type CourseOptions = {
@@ -266,7 +266,7 @@ export function tuitionCourse(opts: CourseOptions) {
 }
 
 /* --------------------------------------------------------------- */
-/* CollectionPage — emitted from /teach. Surfaces the subjects EDUS  */
+/* CollectionPage - emitted from /teach. Surfaces the subjects EDUS  */
 /* tutors can apply to teach. Eligible for SERP "Subject chips" under */
 /* the teach result in Google search.                                 */
 /*                                                                    */
@@ -277,8 +277,8 @@ export function tuitionCourse(opts: CourseOptions) {
 /* --------------------------------------------------------------- */
 export function teachCollectionPage() {
   const subjects = [
-    // ============ Sri Lanka — National Syllabus ============
-    // Primary (Grades 1–5)
+    // ============ Sri Lanka - National Syllabus ============
+    // Primary (Grades 1-5)
     "Mathematics (Sri Lanka)",
     "English (Sri Lanka)",
     "Environmental Studies",
@@ -304,25 +304,25 @@ export function teachCollectionPage() {
     "Further Mathematics",
     "Exam Revision",
 
-    // ============ India — CBSE Classes 6 to 10 ============
-    "CBSE Mathematics (Classes 6–10)",
-    "CBSE Science (Classes 6–10)",
-    "CBSE English (Classes 6–10)",
+    // ============ India - CBSE Classes 6 to 10 ============
+    "CBSE Mathematics (Classes 6-10)",
+    "CBSE Science (Classes 6-10)",
+    "CBSE English (Classes 6-10)",
     "CBSE Social Science",
     "Hindi",
     // Future expansion noted in TeachSubjects.tsx
-    "CBSE (other classes — future expansion)",
+    "CBSE (other classes, future expansion)",
     "ICSE (future expansion)",
     "State Board (future expansion)",
 
-    // ============ Maldives — Cambridge IGCSE / O-Level (Grade 9 & 10) ============
+    // ============ Maldives - Cambridge IGCSE / O-Level (Grade 9 & 10) ============
     "Cambridge IGCSE Mathematics (0580)",
     "Cambridge IGCSE English as a Second Language (0510)",
     "Cambridge IGCSE Biology (0610)",
     "Cambridge IGCSE Chemistry (0620)",
     "Cambridge IGCSE Physics (0625)",
 
-    // ============ Global — One-to-One, all syllabuses ============
+    // ============ Global - One-to-One, all syllabuses ============
     "Cambridge Primary",
     "Cambridge Lower Secondary",
     "Cambridge IGCSE",
@@ -337,7 +337,7 @@ export function teachCollectionPage() {
     "Pearson Edexcel International Curriculum",
     "International Baccalaureate (IB) Diploma Programme",
     "Advanced Placement (AP)",
-    "National curricula (any country — based on student requirement)",
+    "National curricula (any country, based on student requirement)",
 
     // ============ Computer Science / ICT (across syllabuses) ============
     "Computer Science",
@@ -351,9 +351,9 @@ export function teachCollectionPage() {
     "@type": "CollectionPage",
     "@id": `${SITE_URL}/teach#subjects`,
     name: "Subjects EDUS Tutors Teach",
-    headline: "Apply to teach with EDUS — full subject catalog across SL, IN, MV & Global",
+    headline: "Apply to teach with EDUS - full subject catalog across SL, IN, MV & Global",
     description:
-      "Full catalog of subjects EDUS tutors are invited to teach: Sri Lankan National Syllabus (Primary, O/L, A/L), CBSE Classes 6–10 (India), Cambridge IGCSE / O-Level / AS / A-Level (Maldives & Global), Edexcel IGCSE / International GCSE / GCSE / AS / A-Level, International Baccalaureate (IB), Advanced Placement (AP), and other national curricula.",
+      "Full catalog of subjects EDUS tutors are invited to teach: Sri Lankan National Syllabus (Primary, O/L, A/L), CBSE Classes 6-10 (India), Cambridge IGCSE / O-Level / AS / A-Level (Maldives & Global), Edexcel IGCSE / International GCSE / GCSE / AS / A-Level, International Baccalaureate (IB), Advanced Placement (AP), and other national curricula.",
     url: `${SITE_URL}/teach`,
     inLanguage: "en",
     isPartOf: { "@id": `${SITE_URL}/#website` },
@@ -392,7 +392,7 @@ export function merchantReturnPolicy() {
 }
 
 /* --------------------------------------------------------------- */
-/* WebPage with speakable — voice-assistant friendly for legal /    */
+/* WebPage with speakable - voice-assistant friendly for legal /    */
 /* policy pages. Tells Google Assistant which sections to read aloud. */
 /* --------------------------------------------------------------- */
 export type SpeakablePageOptions = {
@@ -404,7 +404,7 @@ export type SpeakablePageOptions = {
 };
 
 export function speakableWebPage(opts: SpeakablePageOptions) {
-  // Default to today if no lastUpdated supplied — keeps Google's freshness
+  // Default to today if no lastUpdated supplied - keeps Google's freshness
   // signal current. Pages can override with their actual revision date.
   const dateModified = opts.lastUpdated ?? new Date().toISOString().split("T")[0];
 
@@ -428,7 +428,7 @@ export function speakableWebPage(opts: SpeakablePageOptions) {
 }
 
 /* --------------------------------------------------------------- */
-/* Organization reference — lightweight @id pointer for every page  */
+/* Organization reference - lightweight @id pointer for every page  */
 /* so non-homepage routes still carry the brand entity in their      */
 /* JSON-LD graph.                                                    */
 /* --------------------------------------------------------------- */
@@ -453,7 +453,7 @@ export function organizationReference() {
 }
 
 /* --------------------------------------------------------------- */
-/* ItemList of success stories — homepage social-proof block. Names */
+/* ItemList of success stories - homepage social-proof block. Names */
 /* are intentionally anonymised (no Person/Review schema) to comply  */
 /* with Google's 2024 review-author identity guidance.               */
 /* --------------------------------------------------------------- */
@@ -472,7 +472,7 @@ export function successStoriesItemList(stories: StoryEntry[]) {
       position: i + 1,
       item: {
         "@type": "CreativeWork",
-        name: `${s.country} — ${s.label}`,
+        name: `${s.country} - ${s.label}`,
         text: s.quote,
         inLanguage: "en",
         about: { "@id": `${SITE_URL}/#organization` },
@@ -482,7 +482,7 @@ export function successStoriesItemList(stories: StoryEntry[]) {
 }
 
 /* --------------------------------------------------------------- */
-/* JobPosting — used on the /teach page                              */
+/* JobPosting - used on the /teach page                              */
 /* --------------------------------------------------------------- */
 export function tutorJobPosting() {
   return {
@@ -511,7 +511,7 @@ export function tutorJobPosting() {
 }
 
 /* --------------------------------------------------------------- */
-/* HowTo — how to enrol with EDUS. Eligible for Google's HowTo      */
+/* HowTo - how to enrol with EDUS. Eligible for Google's HowTo      */
 /* rich result with step preview cards under the homepage result.    */
 /* --------------------------------------------------------------- */
 export function enrollmentHowTo() {
@@ -536,7 +536,7 @@ export function enrollmentHowTo() {
         "@type": "HowToStep",
         position: 1,
         name: "Choose your learning path",
-        text: "Pick the EDUS path that matches your country and syllabus — Sri Lanka National Syllabus / Cambridge / Edexcel, India CBSE, Maldives Cambridge IGCSE, or Global one-to-one.",
+        text: "Pick the EDUS path that matches your country and syllabus: Sri Lanka National Syllabus / Cambridge / Edexcel, India CBSE, Maldives Cambridge IGCSE, or Global one-to-one.",
         url: `${SITE_URL}/#regions`,
       },
       {
@@ -569,7 +569,7 @@ export function enrollmentHowTo() {
 }
 
 /* --------------------------------------------------------------- */
-/* BlogPosting — emitted per /blog/[slug] route. Eligible for the    */
+/* BlogPosting - emitted per /blog/[slug] route. Eligible for the    */
 /* Google "article" rich result and AI engine ingestion.             */
 /* --------------------------------------------------------------- */
 export type BlogPostSchemaOptions = {
@@ -611,7 +611,7 @@ export function blogPosting(opts: BlogPostSchemaOptions) {
 }
 
 /* --------------------------------------------------------------- */
-/* Blog ItemList — for /blog index. Lists all posts as ListItem so   */
+/* Blog ItemList - for /blog index. Lists all posts as ListItem so   */
 /* Google sees the blog as a structured archive, not random pages.   */
 /* --------------------------------------------------------------- */
 export type BlogIndexEntry = { slug: string; title: string; description: string };
@@ -635,7 +635,7 @@ export function blogItemList(posts: BlogIndexEntry[]) {
 }
 
 /* --------------------------------------------------------------- */
-/* WebApplication — the signup portal as a discoverable app entity.  */
+/* WebApplication - the signup portal as a discoverable app entity.  */
 /* Surfaces "EDUS App" in Google's App Pack when search intent       */
 /* matches "edus app" / "edus signup" / "edus login".                */
 /* --------------------------------------------------------------- */
@@ -663,7 +663,7 @@ export function signupWebApplication() {
 }
 
 /* --------------------------------------------------------------- */
-/* InteractionCounter — surfaces the 7,000+ students stat as          */
+/* InteractionCounter - surfaces the 7,000+ students stat as          */
 /* parseable data alongside the visible homepage stat card.          */
 /* --------------------------------------------------------------- */
 export function studentInteractionCounter() {
@@ -679,7 +679,7 @@ export function studentInteractionCounter() {
 }
 
 /* --------------------------------------------------------------- */
-/* VideoObject — featured videos from the EDUS Online Institute      */
+/* VideoObject - featured videos from the EDUS Online Institute      */
 /* YouTube channel (@edusonline). Titles + thumbnails are pulled    */
 /* from YouTube's public oEmbed endpoint, so every field below is    */
 /* verifiable against https://www.youtube.com/oembed?url=...         */
@@ -691,7 +691,7 @@ export type EdusVideo = {
   id: string; // YouTube video ID
   title: string;
   description: string;
-  uploadDate: string; // ISO YYYY-MM-DD — best-effort if known
+  uploadDate: string; // ISO YYYY-MM-DD - best-effort if known
 };
 
 const YT_CHANNEL_URL = "https://www.youtube.com/@edusonline";
@@ -725,14 +725,14 @@ export function videoObject(v: EdusVideo) {
 }
 
 /* --------------------------------------------------------------- */
-/* ItemList of all EDUS featured videos — gives Google a single      */
+/* ItemList of all EDUS featured videos - gives Google a single      */
 /* parseable carousel of the channel's hero content.                  */
 /* --------------------------------------------------------------- */
 export function edusVideoCarousel(videos: EdusVideo[]) {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "EDUS Online Institute — Featured Videos",
+    name: "EDUS Online Institute - Featured Videos",
     description:
       "Featured videos from the EDUS Online Institute YouTube channel covering study tips, exam preparation strategy, and Sri Lankan A/L paper guidance.",
     numberOfItems: videos.length,

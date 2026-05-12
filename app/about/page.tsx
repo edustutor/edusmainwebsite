@@ -8,15 +8,15 @@ import {
 } from "@/components/layout/StructuredData";
 
 /**
- * About EDUS — built only from verified facts present in llms-full.txt and
+ * About EDUS - built only from verified facts present in llms-full.txt and
  * the homepage JSON-LD. No fabricated content. Real numbers, real awards,
  * real address. E-E-A-T page for Google's Quality Rater Guidelines.
  */
 
 export const metadata = {
-  title: "About EDUS · Online Tuition Institute · Sri Lanka · Since 2020",
+  title: "About EDUS - Online Tuition Institute - Sri Lanka - Since 2020",
   description:
-    "About EDUS Lanka (Pvt) Ltd — quality-assured online learning platform founded 2020, based in Jaffna. 7,000+ students supported across Sri Lanka, India, Maldives & global.",
+    "About EDUS Lanka (Pvt) Ltd - quality-assured online learning platform founded 2020, based in Jaffna. 7,000+ students supported across Sri Lanka, India, Maldives & global.",
   alternates: { canonical: "/about" },
   keywords: [
     "about EDUS",
@@ -43,16 +43,16 @@ const FACTS = [
   { label: "Founded",           value: "2020" },
   { label: "Registered office", value: "No. 95, K.K.S Road, Kokkuvil Junction, Jaffna 40000, Sri Lanka" },
   { label: "Students supported", value: "7,000+" },
-  { label: "Markets",           value: "Sri Lanka · India · Maldives · Global" },
-  { label: "Class formats",     value: "Group live classes · One-to-one tutoring" },
-  { label: "Mediums",           value: "English · Tamil · Sinhala" },
+  { label: "Markets",           value: "Sri Lanka - India - Maldives - Global" },
+  { label: "Class formats",     value: "Group live classes - One-to-one tutoring" },
+  { label: "Mediums",           value: "English - Tamil - Sinhala" },
   { label: "Email",             value: "hello@edustutor.com" },
   { label: "Phone",             value: "+94 70 707 2072" },
 ];
 
 const ACCREDITATIONS = [
   { name: "Microsoft for Startups Founders Hub", tint: "#2563EB" },
-  { name: "ICTA Sri Lanka — Recognised Startup", tint: "#8B5CF6" },
+  { name: "ICTA Sri Lanka - Recognised Startup", tint: "#8B5CF6" },
   { name: "SLASSCOM Member",                     tint: "#06B6D4" },
   { name: "Spiralation by ICTA",                 tint: "#22C55E" },
   { name: "Hemas Slingshot × Hatch Cohort",      tint: "#FACC15" },
@@ -98,10 +98,10 @@ export default function AboutPage() {
       />
       <JsonLdScript
         data={speakableWebPage({
-          name: "About EDUS · Online Tuition Institute · Sri Lanka · Since 2020",
+          name: "About EDUS - Online Tuition Institute - Sri Lanka - Since 2020",
           headline: "About EDUS Online Tuition",
           description:
-            "About EDUS Lanka (Pvt) Ltd — quality-assured online learning platform founded 2020, based in Jaffna, Sri Lanka. 7,000+ students supported across four markets.",
+            "About EDUS Lanka (Pvt) Ltd - quality-assured online learning platform founded 2020, based in Jaffna, Sri Lanka. 7,000+ students supported across four markets.",
           path: "/about",
         })}
       />
@@ -136,7 +136,7 @@ export default function AboutPage() {
             <p className="text-[#2B3950] text-[15.5px] mt-5 leading-[1.7] max-w-2xl mx-auto">
               Offline tuition is unstructured. Most online platforms are unmonitored. EDUS exists
               to deliver live, quality-assured classes with real tutor oversight, real parent
-              visibility, and real academic outcomes — at a price families can actually pay.
+              visibility, and real academic outcomes - at a price families can actually pay.
             </p>
           </div>
         </div>

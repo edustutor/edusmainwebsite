@@ -28,7 +28,7 @@ export function SlIndividual() {
                 style={{ background: "linear-gradient(90deg, #2563EB 0%, #4F6DDB 60%, #6E5BC8 100%)" }}
               >
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-white/80" />
-                Individual · 1:1
+                Individual - 1:1
               </span>
               <h3 className="heading mt-4" style={{ fontSize: "var(--fs-display)" }}>
                 &ldquo;Providing a <em>Holistic</em> Education&rdquo;
@@ -43,8 +43,8 @@ export function SlIndividual() {
                 {[
                   "No fixed timetable - schedule that suits you",
                   "Tutor matched to student",
-                  "Pay-as-you-go · Starting from LKR 2,500 / hour",
-                  "All grades · all subjects · all mediums",
+                  "Pay-as-you-go - Starting from LKR 2,500 / hour",
+                  "All grades - all subjects - all mediums",
                 ].map((b) => (
                   <li key={b} className="flex items-start gap-2.5 text-[#2B3950]">
                     <span className="inline-flex w-5 h-5 mt-0.5 rounded-full bg-[#2563EB]/15 items-center justify-center shrink-0">

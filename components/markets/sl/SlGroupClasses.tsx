@@ -86,7 +86,7 @@ export function SlGroupClasses() {
                       >
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span className="text-[10px] text-[#5A6A82]">·</span>
+                      <span className="text-[10px] text-[#5A6A82]">-</span>
                       <h3 className="heading text-[13.5px] leading-tight">{h.title}</h3>
                     </div>
                   </div>

@@ -6,7 +6,7 @@ import { fadeUp, staggerContainer, sectionRevealStrong, accordionMotion, inView 
 import { JsonLdScript, faqPage } from "@/components/layout/StructuredData";
 
 /**
- * India FAQ — answers derived only from publicly stated facts in
+ * India FAQ - answers derived only from publicly stated facts in
  * InShared.tsx and llms-full.txt. No fabricated content.
  */
 
@@ -45,7 +45,7 @@ const FAQS = [
   },
   {
     q: "Are EDUS classes available across Tamil Nadu?",
-    a: "Yes. EDUS India online classes are accessible from any city in Tamil Nadu — Chennai, Coimbatore, Madurai, Trichy, Salem, and beyond — as long as the student has an internet-connected device.",
+    a: "Yes. EDUS India online classes are accessible from any city in Tamil Nadu - Chennai, Coimbatore, Madurai, Trichy, Salem, and beyond - as long as the student has an internet-connected device.",
   },
   {
     q: "How do students enrol?",

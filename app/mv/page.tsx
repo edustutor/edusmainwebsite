@@ -20,7 +20,7 @@ import {
 } from "@/components/layout/StructuredData";
 
 export const metadata = {
-  title: "Cambridge IGCSE & O-Level Online Classes · Maldives · EDUS",
+  title: "Cambridge IGCSE & O-Level Online Classes - Maldives - EDUS",
   description:
     "Premium 1-to-1 Cambridge IGCSE & O-Level online classes for Maldives students. Maths, English, Biology, Chemistry, Physics with expert EDUS tutors.",
   alternates: { canonical: "/mv" },
@@ -134,7 +134,7 @@ export default function MaldivesPage() {
       />
       <JsonLdScript
         data={tuitionService({
-          name: "Maldives Cambridge IGCSE Online Tuition — EDUS",
+          name: "Maldives Cambridge IGCSE Online Tuition - EDUS",
           description:
             "Premium 1-to-1 Cambridge IGCSE and O-Level online classes for Maldives Grade 9 and 10 students across every island.",
           url: `${SITE_URL}/mv`,

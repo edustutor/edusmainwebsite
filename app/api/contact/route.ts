@@ -60,7 +60,7 @@ export async function POST(req: Request) {
     return bad("Invalid request body");
   }
 
-  // Honeypot — real users can't fill this hidden field.
+  // Honeypot - real users can't fill this hidden field.
   if (typeof body._company === "string" && body._company.trim().length > 0) {
     return NextResponse.json({ ok: true }); // pretend success, drop silently
   }
@@ -85,7 +85,7 @@ export async function POST(req: Request) {
   if (region.length > MAX_REGION) return bad("Market field is too long");
   if (message.length > MAX_MESSAGE) return bad("Message is too long");
 
-  const subject = `EDUS contact form — ${parentName}${region ? ` (${region})` : ""}`;
+  const subject = `EDUS contact form - ${parentName}${region ? ` (${region})` : ""}`;
 
   const html = `
     <div style="font-family:Helvetica,Arial,sans-serif;color:#102033;line-height:1.6;font-size:14px;">

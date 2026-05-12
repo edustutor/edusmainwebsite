@@ -26,8 +26,8 @@ export function SlCurricula() {
               <div className="flex items-center gap-3">
                 <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#EEF6FF] text-[#2563EB]">📘</span>
                 <div>
-                  <h3 className="font-display font-600 text-[15px] text-[#2563EB]">National Syllabus Online Tuition · Grade 1 to A/L</h3>
-                  <p className="text-[12px] text-[#5A6A82] mt-0.5">Sinhala medium · Tamil medium · English medium</p>
+                  <h3 className="font-display font-600 text-[15px] text-[#2563EB]">National Syllabus Online Tuition - Grade 1 to A/L</h3>
+                  <p className="text-[12px] text-[#5A6A82] mt-0.5">Sinhala medium - Tamil medium - English medium</p>
                 </div>
               </div>
             </div>
@@ -44,7 +44,7 @@ export function SlCurricula() {
               <div className="flex items-center gap-3">
                 <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#F4EEFF] text-[#8B5CF6]">📗</span>
                 <div>
-                  <h3 className="font-display font-600 text-[15px] text-[#8B5CF6]">Cambridge IGCSE & Edexcel Online Tuition · A-Level</h3>
+                  <h3 className="font-display font-600 text-[15px] text-[#8B5CF6]">Cambridge IGCSE & Edexcel Online Tuition - A-Level</h3>
                   <p className="text-[12px] text-[#5A6A82] mt-0.5">English medium</p>
                 </div>
               </div>

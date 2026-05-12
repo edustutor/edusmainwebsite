@@ -6,7 +6,7 @@ import {
 } from "@/components/layout/StructuredData";
 
 export const metadata = {
-  title: "Refund Policy · EDUS Lanka (PVT) Ltd.",
+  title: "Refund Policy - EDUS Lanka (PVT) Ltd.",
   description:
     "EDUS Online Tuition refund policy: eligibility, request process, non-refundable services, EDUS-initiated cancellations, and technical issue handling.",
   alternates: { canonical: "/refunds" },
@@ -27,7 +27,7 @@ export default function RefundPolicyPage() {
       />
       <JsonLdScript
         data={speakableWebPage({
-          name: "Refund Policy · EDUS Lanka (PVT) Ltd.",
+          name: "Refund Policy - EDUS Lanka (PVT) Ltd.",
           description:
             "EDUS Online Tuition refund policy: eligibility, request process, non-refundable services, EDUS-initiated cancellations, and technical issue handling.",
           path: "/refunds",

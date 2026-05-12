@@ -1,6 +1,6 @@
 /**
  * Shared data for the /contact page.
- * Country offices — one place to update.
+ * Country offices - one place to update.
  */
 
 export const PRIMARY_EMAIL = "hello@edustutor.com";
@@ -35,7 +35,7 @@ export const COUNTRIES: Country[] = [
     address: "No. 95, K.K.S Road, Kokkuvil Junction, Jaffna 40000, Sri Lanka",
     mapUrl:
       "https://www.google.com/maps/place/EDUS+Online+Tuition/@9.6945511,80.0139866,1102m/data=!3m1!1e3!4m6!3m5!1s0x3afe5583ee8b8b25:0xa0dd266c1a635c2!8m2!3d9.6945511!4d80.0139866!16s%2Fg%2F11rxydcz_s",
-    hours: "Mon – Sat · 08:00 – 22:00 · Sun · 09:00 – 18:00",
+    hours: "Mon - Sat - 08:00 - 22:00 - Sun - 09:00 - 18:00",
     tint: "#2563EB",
     tintSoft: "#EEF6FF",
   },
@@ -48,7 +48,7 @@ export const COUNTRIES: Country[] = [
     phone: "+91 95000 10260",
     phoneHref: "tel:+919500010260",
     email: PRIMARY_EMAIL,
-    hours: "Mon – Sat · 09:00 – 21:00 IST",
+    hours: "Mon - Sat - 09:00 - 21:00 IST",
     tint: "#8B5CF6",
     tintSoft: "#F4EEFF",
   },
@@ -59,7 +59,7 @@ export const COUNTRIES: Country[] = [
     region:
       "Maldivian students and parents looking for EDUS online learning support, one-to-one tutoring, and international syllabus guidance.",
     email: PRIMARY_EMAIL,
-    hours: "Mon – Sat · 08:00 – 22:00 (Maldives time)",
+    hours: "Mon - Sat - 08:00 - 22:00 (Maldives time)",
     tint: "#22C55E",
     tintSoft: "#E8FAEC",
   },
@@ -70,7 +70,7 @@ export const COUNTRIES: Country[] = [
     region:
       "Students from any country outside Sri Lanka, India, and Maldives who want to join EDUS for one-to-one online tutoring.",
     email: PRIMARY_EMAIL,
-    hours: "Email support · Replies within one business day",
+    hours: "Email support - Replies within one business day",
     tint: "#06B6D4",
     tintSoft: "#E6FAFD",
   },

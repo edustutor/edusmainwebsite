@@ -2,7 +2,7 @@
  * JSON-LD schema markup for EDUS homepage.
  *
  * Emits three schema blocks:
- *   - EducationalOrganization (Knowledge Panel signal — entity, logo, address,
+ *   - EducationalOrganization (Knowledge Panel signal - entity, logo, address,
  *     contact point, area served, offer catalog)
  *   - WebSite (brand site identity)
  *   - FAQPage (homepage Q&A)
@@ -80,7 +80,7 @@ const ORG = {
     "https://www.tiktok.com/@edusonline",
     "https://www.youtube.com/@edusonline/",
     "https://lk.linkedin.com/company/edusonline",
-    // Google Business Profile (Maps listing) — confirms entity to Google
+    // Google Business Profile (Maps listing) - confirms entity to Google
     "https://share.google/ZQO6DJ0yRrFXtOw1x",
     "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
   ],
@@ -163,7 +163,7 @@ const WEBSITE = {
   inLanguage: "en",
 };
 
-// Separate LocalBusiness entity for the Jaffna office — feeds Google's local
+// Separate LocalBusiness entity for the Jaffna office - feeds Google's local
 // pack and Maps listing. The `@id` allows the EducationalOrganization above
 // to be linked to this physical location.
 const LOCAL_BUSINESS = {
@@ -202,7 +202,7 @@ const LOCAL_BUSINESS = {
     "https://share.google/ZQO6DJ0yRrFXtOw1x",
     "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
   ],
-  // Operating hours — adjust if your office hours differ
+  // Operating hours - adjust if your office hours differ
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",

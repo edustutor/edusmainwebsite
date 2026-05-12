@@ -6,7 +6,7 @@ import { fadeUp, staggerContainer, sectionRevealStrong, accordionMotion, inView 
 import { JsonLdScript, faqPage } from "@/components/layout/StructuredData";
 
 /**
- * Sri Lanka FAQ — answers derived only from publicly stated facts in the
+ * Sri Lanka FAQ - answers derived only from publicly stated facts in the
  * llms-full.txt knowledge base. No fabricated content.
  */
 

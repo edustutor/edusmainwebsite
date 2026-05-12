@@ -15,9 +15,9 @@ import {
 } from "@/components/layout/StructuredData";
 
 export const metadata = {
-  title: "India Online Tuition · CBSE Classes 6–10 · Tamil Nadu",
+  title: "India Online Tuition - CBSE Classes 6-10 - Tamil Nadu",
   description:
-    "Premium structured online CBSE tuition for Classes 6–10 in English medium. Mathematics, Science, and English with monthly parent reports and exam analytics.",
+    "Premium structured online CBSE tuition for Classes 6-10 in English medium. Mathematics, Science, and English with monthly parent reports and exam analytics.",
   alternates: { canonical: "/in" },
   keywords: [
     // Primary
@@ -125,7 +125,7 @@ export default function IndiaPage() {
       />
       <JsonLdScript
         data={tuitionService({
-          name: "CBSE Online Tuition Tamil Nadu — EDUS",
+          name: "CBSE Online Tuition Tamil Nadu - EDUS",
           description:
             "Live online CBSE classes for Tamil Nadu students. Mathematics, Science, and English for CBSE Classes 6 to 10 in English medium with monthly parent reports and exam analytics.",
           url: `${SITE_URL}/in`,
