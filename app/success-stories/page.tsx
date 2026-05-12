@@ -1,5 +1,5 @@
-import { Success } from "@/components/Success";
-import { CTA } from "@/components/CTA";
+import { Success } from "@/components/shared/Success";
+import { CTA } from "@/components/shared/CTA";
 
 export const metadata = {
   title: "Success Stories · EDUS Students, Parents & Tutors",

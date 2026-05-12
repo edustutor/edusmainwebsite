@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { m } from "@/components/Motion";
-import { AmbientGlow } from "@/components/AmbientGlow";
+import { m } from "@/components/effects/Motion";
+import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { sectionRevealStrong, inView } from "@/lib/motion";
 import { APPLY_URL } from "./TeachShared";
 

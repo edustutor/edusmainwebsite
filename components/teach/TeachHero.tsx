@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import { m } from "@/components/Motion";
-import { AmbientGlow } from "@/components/AmbientGlow";
+import { m } from "@/components/effects/Motion";
+import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { APPLY_URL } from "./TeachShared";
 

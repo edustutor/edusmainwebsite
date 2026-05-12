@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CTA } from "@/components/CTA";
+import { CTA } from "@/components/shared/CTA";
 
 export const metadata = {
   title: "India Online Tuition · CBSE Classes 6–10 · Tamil Nadu",

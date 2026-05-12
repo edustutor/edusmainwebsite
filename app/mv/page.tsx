@@ -1,14 +1,14 @@
-import { MvHero } from "@/components/mv/MvHero";
-import { MvWhy } from "@/components/mv/MvWhy";
-import { MvSubjects } from "@/components/mv/MvSubjects";
-import { MvLearningFlow } from "@/components/mv/MvLearningFlow";
-import { MvTutors } from "@/components/mv/MvTutors";
-import { MvAudience } from "@/components/mv/MvAudience";
-import { MvIslands } from "@/components/mv/MvIslands";
-import { MvExamPrep } from "@/components/mv/MvExamPrep";
-import { MvSubjectDetails } from "@/components/mv/MvSubjectDetails";
-import { MvFAQ } from "@/components/mv/MvFAQ";
-import { MvCTA } from "@/components/mv/MvCTA";
+import { MvHero } from "@/components/markets/mv/MvHero";
+import { MvWhy } from "@/components/markets/mv/MvWhy";
+import { MvSubjects } from "@/components/markets/mv/MvSubjects";
+import { MvLearningFlow } from "@/components/markets/mv/MvLearningFlow";
+import { MvTutors } from "@/components/markets/mv/MvTutors";
+import { MvAudience } from "@/components/markets/mv/MvAudience";
+import { MvIslands } from "@/components/markets/mv/MvIslands";
+import { MvExamPrep } from "@/components/markets/mv/MvExamPrep";
+import { MvSubjectDetails } from "@/components/markets/mv/MvSubjectDetails";
+import { MvFAQ } from "@/components/markets/mv/MvFAQ";
+import { MvCTA } from "@/components/markets/mv/MvCTA";
 
 export const metadata = {
   title:

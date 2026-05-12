@@ -1,5 +1,5 @@
 "use client";
-import { m } from "@/components/Motion";
+import { m } from "@/components/effects/Motion";
 import { fadeUp, staggerContainer, inView } from "@/lib/motion";
 
 const STATS = [

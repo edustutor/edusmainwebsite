@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Poppins, Open_Sans } from "next/font/google";
 import "./globals.css";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
-import { MotionProvider } from "@/components/Motion";
-import { ScrollProgress } from "@/components/ScrollProgress";
-import { Atmosphere } from "@/components/Atmosphere";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { MotionProvider } from "@/components/effects/Motion";
+import { ScrollProgress } from "@/components/effects/ScrollProgress";
+import { Atmosphere } from "@/components/effects/Atmosphere";
 
 // Headings - Poppins. Friendly geometric sans, high recognition, optimised
 // for education and family-facing platforms.

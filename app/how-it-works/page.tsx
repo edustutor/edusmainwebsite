@@ -1,6 +1,5 @@
-import { LearningExperience } from "@/components/LearningExperience";
-import { JoinFlow } from "@/components/JoinFlow";
-import { CTA } from "@/components/CTA";
+import { LearningExperience } from "@/components/home/LearningExperience";
+import { CTA } from "@/components/shared/CTA";
 
 export const metadata = {
   title: "How EDUS Online Tuition Works · Live Classes & Parent Updates",
@@ -29,7 +28,6 @@ export default function Page() {
         </div>
       </section>
       <LearningExperience />
-      {/* <JoinFlow /> */}
       <CTA />
     </>
   );

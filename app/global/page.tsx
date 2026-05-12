@@ -1,19 +1,19 @@
-import { GlHero } from "@/components/global/GlHero";
-import { GlIntro } from "@/components/global/GlIntro";
-import { GlPromise } from "@/components/global/GlPromise";
-import { GlCurricula } from "@/components/global/GlCurricula";
-import { GlSubjects } from "@/components/global/GlSubjects";
-import { GlWhy } from "@/components/global/GlWhy";
-import { GlHow } from "@/components/global/GlHow";
-import { GlTutors } from "@/components/global/GlTutors";
-import { GlLiveClass } from "@/components/global/GlLiveClass";
-import { GlPricing } from "@/components/global/GlPricing";
-import { GlReach } from "@/components/global/GlReach";
-import { GlParents } from "@/components/global/GlParents";
-import { GlCompare } from "@/components/global/GlCompare";
-import { GlBrand } from "@/components/global/GlBrand";
-import { GlFAQ } from "@/components/global/GlFAQ";
-import { GlCTA } from "@/components/global/GlCTA";
+import { GlHero } from "@/components/markets/global/GlHero";
+import { GlIntro } from "@/components/markets/global/GlIntro";
+import { GlPromise } from "@/components/markets/global/GlPromise";
+import { GlCurricula } from "@/components/markets/global/GlCurricula";
+import { GlSubjects } from "@/components/markets/global/GlSubjects";
+import { GlWhy } from "@/components/markets/global/GlWhy";
+import { GlHow } from "@/components/markets/global/GlHow";
+import { GlTutors } from "@/components/markets/global/GlTutors";
+import { GlLiveClass } from "@/components/markets/global/GlLiveClass";
+import { GlPricing } from "@/components/markets/global/GlPricing";
+import { GlReach } from "@/components/markets/global/GlReach";
+import { GlParents } from "@/components/markets/global/GlParents";
+import { GlCompare } from "@/components/markets/global/GlCompare";
+import { GlBrand } from "@/components/markets/global/GlBrand";
+import { GlFAQ } from "@/components/markets/global/GlFAQ";
+import { GlCTA } from "@/components/markets/global/GlCTA";
 
 export const metadata = {
   title: "EDUS Global Online Tutoring | Cambridge, Edexcel & One-to-One Classes",

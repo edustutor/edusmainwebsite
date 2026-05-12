@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { m, AnimatePresence } from "@/components/Motion";
-import { AmbientGlow } from "@/components/AmbientGlow";
+import { m, AnimatePresence } from "@/components/effects/Motion";
+import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, accordionMotion, inView } from "@/lib/motion";
 
 const FAQS = [

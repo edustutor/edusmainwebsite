@@ -1,49 +1,31 @@
-import { Hero } from "@/components/Hero";
-import { RegionSelector } from "@/components/RegionSelector";
-import { Accreditations } from "@/components/Accreditations";
-import { WhyJoin } from "@/components/WhyJoin";
-import { QualifiedTutors } from "@/components/QualifiedTutors";
-import { LearningExperience } from "@/components/LearningExperience";
-import { ParentTrust } from "@/components/ParentTrust";
-import { Success } from "@/components/Success";
-import { JoinFlow } from "@/components/JoinFlow";
-import { ResourceSupport } from "@/components/ResourceSupport";
-import { FAQ } from "@/components/FAQ";
-import { HelpBanner } from "@/components/HelpBanner";
-import { CTA } from "@/components/CTA";
-import { HomeJsonLd } from "@/components/JsonLd";
+import { Hero } from "@/components/home/Hero";
+import { RegionSelector } from "@/components/home/RegionSelector";
+import { WhyJoin } from "@/components/home/WhyJoin";
+import { QualifiedTutors } from "@/components/home/QualifiedTutors";
+import { LearningExperience } from "@/components/home/LearningExperience";
+import { ParentTrust } from "@/components/home/ParentTrust";
+import { Success } from "@/components/shared/Success";
+import { ResourceSupport } from "@/components/shared/ResourceSupport";
+import { Accreditations } from "@/components/shared/Accreditations";
+import { FAQ } from "@/components/shared/FAQ";
+import { CTA } from "@/components/shared/CTA";
+import { HomeJsonLd } from "@/components/layout/JsonLd";
 
 export default function Home() {
   return (
     <>
       <HomeJsonLd />
-      {/* 1. Hero */}
       <Hero />
-      {/* 2. Region Chooser */}
       <RegionSelector />
-      {/* 3. Why Choose EDUS */}
       <WhyJoin />
-      {/* 4. Highly Qualified Tutors */}
       <QualifiedTutors />
-      {/* 5. How Learning Works */}
       <LearningExperience />
-      {/* 6. Parent Trust */}
       <ParentTrust />
-      {/* 7. Success Stories */}
       <Success />
-      {/* 8. Enrolment Flow */}
-      {/* <JoinFlow /> */}
-      {/* 9. Resource & Learning Support */}
       <ResourceSupport />
-      {/* 10. Accreditations & Partners */}
       <Accreditations />
-      {/* 11. FAQ */}
       <FAQ />
-      {/* 11. Help banner - separate from footer */}
-      {/* <HelpBanner /> */}
-      {/* 12. Final CTA */}
       <CTA />
-      {/* 13. Footer is in layout */}
     </>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import { m } from "@/components/Motion";
+import { m } from "@/components/effects/Motion";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { SectionHead, PlainCard } from "./TeachShared";
 

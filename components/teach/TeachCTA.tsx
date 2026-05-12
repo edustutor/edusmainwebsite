@@ -1,6 +1,6 @@
 "use client";
-import { m } from "@/components/Motion";
-import { AmbientGlow } from "@/components/AmbientGlow";
+import { m } from "@/components/effects/Motion";
+import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { staggerContainer, fadeUp, scaleIn, inViewClose } from "@/lib/motion";
 import { APPLY_URL } from "./TeachShared";
 
