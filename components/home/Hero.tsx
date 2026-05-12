@@ -166,7 +166,11 @@ export function Hero() {
       {/* Platform preview - product-style mock with live header */}
       <m.div
         className="container-edge"
-        style={{ y: dashboardY, scale: dashboardScale }}
+        style={{
+          y: dashboardY,
+          scale: dashboardScale,
+          willChange: "transform",
+        }}
       >
         <m.div
           className="mt-14 max-w-5xl mx-auto"
@@ -174,19 +178,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
         >
-          <m.div
-            className="relative glass-strong rounded-[28px] overflow-hidden"
-            animate={{
-              y: [0, -8, 0],
-              transition: {
-                duration: 6,
-                ease: "easeInOut",
-                repeat: Infinity,
-                repeatType: "loop",
-                delay: 1.0,
-              },
-            }}
-          >
+          <div className="relative glass-strong rounded-[28px] overflow-hidden">
             {/* Header strip - mimics a real product window */}
             <div
               className="flex items-center justify-between px-5 md:px-6 py-3 border-b border-[rgba(16,32,51,0.08)]"
@@ -308,7 +300,7 @@ export function Hero() {
               <FooterStat k="4" v="Markets" tint="#06B6D4" />
               <FooterStat k="98%" v="Pass rate" tint="#22C55E" />
             </div>
-          </m.div>
+          </div>
         </m.div>
       </m.div>
     </section>
