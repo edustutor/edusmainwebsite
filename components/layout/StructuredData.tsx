@@ -102,6 +102,87 @@ export function educationalProgram(opts: ProgramOptions) {
 }
 
 /* --------------------------------------------------------------- */
+/* SiteNavigationElement — signals to Google which pages should     */
+/* appear as sitelinks under the homepage result (like PrimeGlobal). */
+/* --------------------------------------------------------------- */
+export function siteNavigation() {
+  const items = [
+    { name: "Sri Lanka Classes",       path: "/sl" },
+    { name: "India CBSE Classes 6-10", path: "/in" },
+    { name: "Maldives Cambridge IGCSE", path: "/mv" },
+    { name: "Global One-to-One Tuition", path: "/global" },
+    { name: "Teach with EDUS",         path: "/teach" },
+    { name: "Contact EDUS",            path: "/contact" },
+  ];
+  return {
+    "@context": "https://schema.org",
+    "@graph": items.map((it) => ({
+      "@type": "SiteNavigationElement",
+      "@id": `${SITE_URL}${it.path}`,
+      name: it.name,
+      url: `${SITE_URL}${it.path}`,
+    })),
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* ItemList of primary pages — secondary sitelinks signal           */
+/* --------------------------------------------------------------- */
+export function primaryPagesItemList() {
+  const items = [
+    { name: "Sri Lanka Online Tuition",  path: "/sl",      desc: "Live online classes for Grade 1 to A/L · National, Cambridge & Edexcel · Sinhala, Tamil, English medium" },
+    { name: "India CBSE Online Tuition", path: "/in",      desc: "CBSE Classes 6 to 10 for Tamil Nadu students · Maths, Science, English · monthly parent reports" },
+    { name: "Maldives Cambridge IGCSE",  path: "/mv",      desc: "Premium 1-to-1 Cambridge IGCSE and O-Level for Grade 9 and 10 Maldives students" },
+    { name: "Global One-to-One Tuition", path: "/global",  desc: "Personalised online tutoring for international students · Cambridge, Edexcel, IGCSE, GCSE, IB" },
+    { name: "Teach with EDUS",           path: "/teach",   desc: "Apply to become an EDUS tutor and teach students across Sri Lanka, India, Maldives, and globally" },
+    { name: "Contact EDUS",              path: "/contact", desc: "Talk to the EDUS team to find the right class, subject, or tutor for your child" },
+  ];
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "EDUS Learning Paths",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `${SITE_URL}${it.path}`,
+      name: it.name,
+      description: it.desc,
+    })),
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* Service — broader rich-result coverage alongside Program          */
+/* --------------------------------------------------------------- */
+export function tuitionService({
+  name, description, url, area,
+}: {
+  name: string;
+  description: string;
+  url: string;
+  area: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name,
+    description,
+    url,
+    serviceType: "Online Tuition",
+    provider: {
+      "@type": "EducationalOrganization",
+      name: "EDUS Online Tuition",
+      url: SITE_URL,
+    },
+    areaServed: { "@type": "Country", name: area },
+    audience: {
+      "@type": "EducationalAudience",
+      educationalRole: "student",
+    },
+  };
+}
+
+/* --------------------------------------------------------------- */
 /* JobPosting — used on the /teach page                              */
 /* --------------------------------------------------------------- */
 export function tutorJobPosting() {

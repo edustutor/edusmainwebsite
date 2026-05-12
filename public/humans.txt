@@ -1,0 +1,21 @@
+/* TEAM */
+
+Organisation: EDUS Lanka (Pvt) Ltd.
+Site: edustutor.com
+Contact: hello@edustutor.com
+Phone: +94 70 707 2072
+Location: Jaffna, Sri Lanka
+
+/* THANKS */
+
+Students, parents, and tutors across Sri Lanka, India, Maldives, and globally.
+Microsoft for Startups · ICTA Sri Lanka · SLASSCOM · Hemas Slingshot x Hatch ·
+Spiralation by ICTA · Yarl IT Hub · Innovate Lanka.
+
+/* SITE */
+
+Standards: HTML5, CSS3, JavaScript (ES2024)
+Stack: Next.js 16 (App Router) · TypeScript 5 · Tailwind CSS 3 · React 19
+Fonts: Poppins · Open Sans (Google Fonts via next/font)
+Languages: English · Tamil · Sinhala
+Components: Built mobile-first with WCAG 2.1 AA accessibility

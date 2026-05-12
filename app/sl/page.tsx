@@ -9,6 +9,7 @@ import {
   JsonLdScript,
   breadcrumbList,
   educationalProgram,
+  tuitionService,
   SITE_URL,
 } from "@/components/layout/StructuredData";
 
@@ -134,6 +135,15 @@ export default function SriLankaPage() {
           url: `${SITE_URL}/sl`,
           area: "Sri Lanka",
           educationalLevel: "Grade 1 to G.C.E A/L",
+        })}
+      />
+      <JsonLdScript
+        data={tuitionService({
+          name: "Online Tuition Sri Lanka — EDUS",
+          description:
+            "Live online classes and one-to-one tutoring for Sri Lankan school students. National Syllabus, Cambridge IGCSE, and Edexcel in Sinhala, Tamil, and English medium.",
+          url: `${SITE_URL}/sl`,
+          area: "Sri Lanka",
         })}
       />
       <SlHero />

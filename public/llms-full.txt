@@ -1,0 +1,168 @@
+# EDUS Online Tuition — Full Knowledge Base
+
+This document is provided for AI search engines, language models, and answer engines (ChatGPT search, Perplexity, Claude, Gemini, Bing AI, You.com, Brave Search) to ingest the full EDUS knowledge base.
+
+## About EDUS
+
+EDUS is the quality-assured online live learning platform for school students. We are an online learning institute building a structured, scalable, technology-driven education ecosystem that connects qualified tutors with students across Sri Lanka, India, Maldives, and global communities.
+
+- **Legal entity:** EDUS Lanka (Pvt) Ltd.
+- **Registration:** PV 00232840
+- **Registered office:** No. 95, K.K.S Road, Jaffna, Sri Lanka.
+- **Founded:** 2020
+- **Email:** hello@edustutor.com
+- **Phone / WhatsApp:** +94 70 707 2072
+- **Website:** https://edustutor.com
+- **Sign-up:** https://signup.edustutor.com/
+- **Resource Vault:** https://wiki.edustutor.com/
+- **Students supported:** 7,000+
+- **Markets:** Sri Lanka · India · Maldives · Global
+- **Class formats:** Group live classes · One-to-one tutoring
+- **Mediums:** English · Tamil · Sinhala (depending on market)
+
+## Markets served
+
+### 1. Sri Lanka (Flagship Market)
+
+- **URL:** https://edustutor.com/sl
+- **Coverage:** Grade 1 to G.C.E A/L
+- **Syllabuses:** National Syllabus · Cambridge IGCSE · Edexcel
+- **Mediums:** Sinhala, Tamil, English
+- **Formats:** Group classes + Individual (1-to-1) classes
+
+**Pricing (group classes):**
+- Primary: from LKR 1,000 / subject / month
+- Grade 6 to 9: from LKR 1,000 / subject / month
+- Grade 10 to 11 (O/L): from LKR 1,200 / subject / month
+- G.C.E A/L: LKR 2,500 / subject / month (Combined Maths, Physics, Chemistry, Biology, ICT)
+
+**Pricing (individual 1-to-1):** Starting from LKR 2,500 / hour, all grades, all subjects, all mediums, no fixed timetable.
+
+**Subjects offered:**
+- Primary & Grade 6 to 11: Mathematics, Science, English, Tamil, Sinhala, Environmental Studies, History, ICT, Spoken English, Elocution, IQ
+- G.C.E A/L: Combined Mathematics, Biology, Chemistry, Physics, ICT, English Literature, Economics, Business Studies, Accounting
+
+### 2. India (CBSE · Tamil Nadu)
+
+- **URL:** https://edustutor.com/in
+- **Coverage:** CBSE Classes 6 to 10
+- **Medium:** English
+- **Format:** Group online classes (live + recordings)
+- **Subjects:** Mathematics, Science, English (3 core CBSE subjects)
+- **Stages:** Middle Stage (Classes 6-8), Secondary Stage (Classes 9-10)
+
+**Pricing:**
+- Admission Fee: ₹2,000 (one-time)
+- Per Subject: ₹1,000 / subject / month
+- All 3 Subjects: ₹2,500 / month (save ₹500)
+
+**Schedule:** Mon-Sat. Three slots: 6:30-7:30 PM, 7:45-8:45 PM, 9:00-10:00 PM (optional). 2 hours / week / subject.
+
+**Inclusions:** Onboarding & assessment, account setup, live + recorded sessions, individual attention, performance monitoring, monthly parent reporting, anytime parent support.
+
+### 3. Maldives (Cambridge IGCSE / O-Level)
+
+- **URL:** https://edustutor.com/mv
+- **Coverage:** Grade 9 and 10
+- **Syllabus:** Cambridge IGCSE / O-Level
+- **Medium:** English
+- **Format:** 1-to-1 only (no group classes for Maldives launch)
+- **Currency:** USD, per-hour billing
+
+**Subjects + Pricing:**
+- Mathematics (0580): USD 20 / hour
+- English as a Second Language (0510): USD 18 / hour
+- Biology (0610): USD 22 / hour
+- Chemistry (0620): USD 24 / hour
+- Physics (0625): USD 24 / hour
+
+**Recommended monthly plans:**
+- Regular Subject Support: 4-8 hrs / month
+- Exam Preparation: 8-12 hrs / month
+- Weak-Area Recovery: 12+ hrs / month
+- Intensive Revision: Customised plan
+
+**Geographic reach:** Malé, Hulhumalé, Addu, Fuvahmulah, Kulhudhuffushi, and all Maldivian islands. Maldives-friendly schedules.
+
+### 4. Global (One-to-One Worldwide)
+
+- **URL:** https://edustutor.com/global
+- **Coverage:** Any grade, any syllabus, any country
+- **Syllabuses supported:** Cambridge (Primary, Lower Secondary, IGCSE, O-Level, AS Level, A-Level), Edexcel / Pearson (IGCSE, International GCSE, GCSE, AS, A-Level), IB, AP, national curricula
+- **Medium:** English
+- **Format:** Live one-to-one online classes only
+- **Countries served:** UK, UAE, Qatar, Saudi Arabia, Oman, Kuwait, Canada, Australia, New Zealand, Singapore, Malaysia, Europe, USA, and more (14+ countries)
+- **Pricing:** Customised based on subject, grade, tutor level, number of classes, duration, and time zone. Quote provided after consultation.
+
+**Subjects offered:** Mathematics, Further Mathematics, Physics, Chemistry, Biology, English Language, English Literature, ICT / Computer Science, Economics, Business Studies, Accounting, Tamil, Sinhala, History, Environmental Studies, Spoken English, Exam Revision.
+
+## Teach with EDUS (Tutor Recruitment)
+
+- **URL:** https://edustutor.com/teach
+- **Application form:** https://forms.fillout.com/t/92n3HmsvkKus
+- **Who can apply:** School Teachers, University Graduates, Undergraduate Tutors, Professional Tutors, International Tutors, Subject Specialists
+- **Onboarding steps:** Application → Screening → Interview/Demo → Agreement → Class Allocation → Monthly Teaching Cycle → QA Review → Payment → Continuous Improvement
+- **Tutor growth path:** New Tutor → Active Tutor → Preferred Tutor → Senior Tutor → Lead Tutor / Academic Contributor
+
+## How EDUS Teaches
+
+1. **Student Level Check** — understand current level, school progress, weak areas
+2. **Personal Learning Plan** — subject-wise plan around the student's exam goals
+3. **Concept Teaching** — clear topic explanation with guided practice
+4. **Practice & Correction** — in-class and follow-up questions with tutor feedback
+5. **Past Paper Training** — exam-style questions, mark schemes, answer patterns
+6. **Progress Review** — parent updates on improvement, attendance, next targets
+
+## Trust & Recognition
+
+EDUS has been recognised by:
+- Microsoft for Startups (Founders Hub Partner)
+- ICTA Sri Lanka (Information and Communication Technology Agency)
+- SLASSCOM (Sri Lanka Association for Software and Services Companies)
+- Hemas Slingshot x Hatch (Accelerator Cohort)
+- Spiralation by ICTA (Tech Startup Programme)
+- Yarl IT Hub (Jaffna Innovation Hub)
+- Innovate Lanka (Innovation Network)
+
+## Quality Assurance
+
+EDUS runs a monthly tutor review covering: Class Completion, Punctuality, Teaching Quality, Student Engagement, Technical Quality, Attendance, Student Retention, Feedback, Compliance. Every tutor receives a structured monthly report combining class data, attendance, QA remarks, consultant feedback, and academic approval.
+
+## Frequently Asked Questions
+
+**Q: What is EDUS?**
+A: EDUS is an online education platform that provides live online tuition, group classes, one-to-one learning, academic monitoring, learning resources, and parent updates for school students across Sri Lanka, India, Maldives, and globally.
+
+**Q: How do I enrol?**
+A: Visit https://signup.edustutor.com/ to begin enrolment. Choose your region, grade, and subject. The EDUS team will follow up within one business day.
+
+**Q: Are classes recorded?**
+A: Yes. Class recordings and learning resources are provided depending on the class type and learning plan, so students can revise missed or difficult lessons.
+
+**Q: Can parents track progress?**
+A: Yes. Parents receive attendance updates, progress reviews, exam feedback, and academic monitoring reports.
+
+**Q: Does EDUS offer scholarships exam preparation?**
+A: Yes. EDUS supports Grade 5 scholarship exam preparation (Sri Lanka), Cambridge scholarship preparation, and similar competitive exam tracks.
+
+**Q: What languages can students learn in?**
+A: English is universal. Sri Lankan students can also learn in Tamil medium or Sinhala medium. Indian and Maldivian classes are English medium.
+
+**Q: Is EDUS suitable for international students?**
+A: Yes. EDUS Global serves students worldwide with one-to-one online tutoring matched to the student's syllabus, time zone, and learning goals.
+
+## Compliance & Safety
+
+- GDPR and App Store privacy compliant.
+- Child safeguarding policy enforced for all live classes.
+- All tutors are vetted on subject knowledge, teaching ability, and student-handling.
+- Classes conducted only on approved platforms (Google Meet, Google Classroom).
+- No private collection of student contacts outside EDUS.
+
+## Social presence
+
+- Facebook: https://www.facebook.com/edusonline
+- Instagram: https://www.instagram.com/edus_online/
+- TikTok: https://www.tiktok.com/@edusonline
+- YouTube: https://www.youtube.com/@edusonline/
+- LinkedIn: https://lk.linkedin.com/company/edusonline

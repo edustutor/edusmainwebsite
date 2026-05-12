@@ -11,7 +11,7 @@
  * JobPosting) live in `StructuredData.tsx` and are emitted from each route.
  */
 
-import { JsonLdScript } from "./StructuredData";
+import { JsonLdScript, siteNavigation, primaryPagesItemList } from "./StructuredData";
 
 const SITE_URL = "https://edustutor.com";
 
@@ -32,12 +32,12 @@ const ORG = {
   slogan: "Quality-Assured Online Live Learning Platform",
   description:
     "EDUS is the quality-assured online live learning platform. Live tuition, group and one to one classes, expert tutors, progress tracking, class recordings, exams, parent updates, and learning resources for school students.",
-  // Add your social profile URLs here when public:
   sameAs: [
-    // "https://www.facebook.com/edustutor",
-    // "https://www.instagram.com/edustutor",
-    // "https://www.linkedin.com/company/edus-online-tuition",
-    // "https://www.youtube.com/@edustutor",
+    "https://www.facebook.com/edusonline",
+    "https://www.instagram.com/edus_online/",
+    "https://www.tiktok.com/@edusonline",
+    "https://www.youtube.com/@edusonline/",
+    "https://lk.linkedin.com/company/edusonline",
   ],
   address: {
     "@type": "PostalAddress",
@@ -186,6 +186,8 @@ export function HomeJsonLd() {
     <>
       <JsonLdScript data={ORG} />
       <JsonLdScript data={WEBSITE} />
+      <JsonLdScript data={siteNavigation()} />
+      <JsonLdScript data={primaryPagesItemList()} />
       <JsonLdScript data={FAQ} />
     </>
   );

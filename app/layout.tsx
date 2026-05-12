@@ -147,20 +147,66 @@ export const metadata: Metadata = {
     url: "https://edustutor.com",
     siteName: "EDUS",
     locale: "en_US",
+    alternateLocale: ["en_LK", "en_IN", "en_MV", "ta_LK", "ta_IN", "si_LK"],
     images: [{ url: "/edus-logo-blue.webp", width: 1200, height: 630, alt: "EDUS online learning platform" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "EDUS Online Tuition",
+    site: "@edusonline",
+    creator: "@edusonline",
+    title: "EDUS · Live Online Tuition",
     description:
       "Live online classes for school students. Sri Lanka, India, Maldives, and global learning paths.",
+    images: ["/edus-logo-blue.webp"],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: [{ url: "/edus-favicon.webp", type: "image/webp" }],
     shortcut: ["/edus-favicon.webp"],
     apple: [{ url: "/edus-favicon.webp" }],
   },
+  other: {
+    // Geo signals — helps Google understand business locality
+    "geo.region": "LK-41",          // Northern Province, Sri Lanka
+    "geo.placename": "Jaffna",
+    "geo.position": "9.6615;80.0255",
+    "ICBM": "9.6615, 80.0255",
+    // AI engines + answer engines
+    "llms.txt": "/llms.txt",
+    // Mobile / PWA
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "apple-mobile-web-app-title": "EDUS",
+    "mobile-web-app-capable": "yes",
+    "format-detection": "telephone=yes,email=yes,address=yes",
+    // Microsoft tile
+    "msapplication-TileColor": "#2563EB",
+    "msapplication-config": "/browserconfig.xml",
+    // Author / publisher
+    "author": "EDUS Lanka (Pvt) Ltd.",
+    "publisher": "EDUS Lanka (Pvt) Ltd.",
+    // Content classification
+    "rating": "general",
+    "audience": "students, parents, tutors",
+    "distribution": "global",
+    "revisit-after": "7 days",
+    // Coverage signals
+    "coverage": "Worldwide",
+    "language": "English",
+  },
+  manifest: "/manifest.webmanifest",
+  category: "education",
 };
 
 export const viewport = {
@@ -172,6 +218,17 @@ export const viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
+      <head>
+        {/* AI/LLM ingestion signals — emerging standard recognised by ChatGPT,
+            Perplexity, Claude, and Gemini for discovery and crawling. */}
+        <link rel="alternate" type="text/markdown" href="/llms.txt" title="EDUS knowledge base for AI engines" />
+        <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="EDUS full knowledge base" />
+        {/* Preconnects to font + signup origins for faster first paint. */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://signup.edustutor.com" />
+        <link rel="dns-prefetch" href="https://wiki.edustutor.com" />
+      </head>
       <body className="text-[#102033] antialiased">
         <MotionProvider>
           <Atmosphere />
