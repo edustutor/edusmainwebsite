@@ -25,13 +25,15 @@ export function SlHero() {
         </div>
 
         <div className="mt-8 text-center max-w-4xl mx-auto" data-anim="2">
-          <p className="eyebrow">🇱🇰 Sri Lanka · Flagship Market</p>
+          <p className="eyebrow">🇱🇰 Sri Lanka · National Syllabus · Cambridge & Edexcel</p>
           <h1 className="heading mt-5" style={{ fontSize: "var(--fs-hero)" }}>
-            Quality online learning, <em>built for Sri Lankan Students.</em>
+            Quality Online tuition in Sri Lanka, <em>built for every student.</em>
           </h1>
           <p className="text-[#2B3950] text-[17px] mt-6 leading-[1.65] max-w-2xl mx-auto">
             Top-notch online tutoring from qualified tutors at the comfort of your home.
-            Grade 1 to A/L, in Sinhala, Tamil & English medium.
+            Grade 1 to G.C.E A/L. National Syllabus, Cambridge IGCSE and Edexcel,
+            in <strong>Sinhala medium</strong>, <strong>Tamil medium</strong>,
+            and <strong>English medium</strong>.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3" data-anim="3">
             <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Enrolment</a>

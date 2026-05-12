@@ -19,14 +19,19 @@ export function InAcademicStructure() {
         <div className="mt-12 space-y-5">
           {/* Subjects */}
           <div className="glass-strong rounded-[24px] p-7">
-            <p className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.12em] uppercase text-[#2563EB]">
-              CBSE Core Subjects · per class
+            <h3 className="font-[family-name:var(--font-display)] font-700 text-[14px] text-[#2563EB]">
+              CBSE Online Tuition by Subject
+            </h3>
+            <p className="text-[12px] text-[#5A6A82] mt-1">
+              Three core CBSE subjects taught online for every class from 6 to 10.
             </p>
             <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
               {SUBJECTS.map((s, i) => (
                 <div key={s} className="rounded-2xl bg-white border border-[rgba(16,32,51,0.06)] p-4 text-center">
                   <p className="text-[10.5px] font-mono text-[#5A6A82]">{String(i + 1).padStart(2, "0")}</p>
-                  <p className="font-[family-name:var(--font-display)] font-600 text-[15px] mt-1.5 text-[#102033]">{s}</p>
+                  <h4 className="font-[family-name:var(--font-display)] font-700 text-[15px] mt-1.5 text-[#102033]">
+                    CBSE {s}
+                  </h4>
                 </div>
               ))}
             </div>
@@ -34,8 +39,11 @@ export function InAcademicStructure() {
 
           {/* Grade tiers */}
           <div className="glass rounded-[24px] p-7">
-            <p className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.12em] uppercase text-[#8B5CF6]">
-              CBSE Class Stages · Middle 6–8 · Secondary 9–10
+            <h3 className="font-[family-name:var(--font-display)] font-700 text-[14px] text-[#8B5CF6]">
+              CBSE Online Tuition by Class
+            </h3>
+            <p className="text-[12px] text-[#5A6A82] mt-1">
+              CBSE Class 6, 7, 8 (Middle Stage) and CBSE Class 9, 10 (Secondary Stage) online tuition.
             </p>
             <div className="mt-5 grid grid-cols-5 gap-3">
               {GRADES.map((g) => (
@@ -44,8 +52,13 @@ export function InAcademicStructure() {
                   className="rounded-2xl py-6 text-center text-white"
                   style={{ background: `linear-gradient(180deg, ${g.tint}EE, ${g.tint})` }}
                 >
-                  <p className="font-[family-name:var(--font-display)] font-700 text-[36px] leading-none">{g.g}</p>
-                  <p className="text-[11px] uppercase tracking-wider mt-2 opacity-80">{g.tier}</p>
+                  <h4
+                    className="font-[family-name:var(--font-display)] font-700 text-[36px] leading-none"
+                    aria-label={`CBSE Class ${g.g} online tuition`}
+                  >
+                    {g.g}
+                  </h4>
+                  <p className="text-[11px] uppercase tracking-wider mt-2 opacity-80">CBSE Class · {g.tier}</p>
                 </div>
               ))}
             </div>

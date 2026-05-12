@@ -25,14 +25,14 @@ export function InHero() {
         </div>
 
         <div className="mt-8 text-center max-w-4xl mx-auto" data-anim="2">
-          <p className="eyebrow">🇮🇳 Premium CBSE Online Tuition · Classes 6–10</p>
+          <p className="eyebrow">🇮🇳 CBSE Online Tuition · Tamil Nadu · Classes 6–10</p>
           <h1 className="heading mt-5" style={{ fontSize: "var(--fs-hero)" }}>
-            Structured tuition. <em>Disciplined monitoring. Real progress.</em>
+            CBSE online tuition for Classes 6 to 10, <em>built for Tamil Nadu families.</em>
           </h1>
           <p className="text-[#2B3950] text-[17px] mt-6 leading-[1.65] max-w-2xl mx-auto">
             Premium CBSE-aligned, quality-assured live online classes from expert tutors for Tamil Nadu families, delivering measurable progress in
             <br />
-            Classes 6–10 Maths, Science &amp; English.
+            <strong>CBSE Mathematics</strong>, <strong>CBSE Science</strong>, and <strong>CBSE English</strong> for Classes 6, 7, 8, 9 and 10.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3" data-anim="3">
             <a href="https://signup.edustutor.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Start Learning with EDUS</a>

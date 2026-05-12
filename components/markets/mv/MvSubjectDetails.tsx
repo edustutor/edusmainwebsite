@@ -37,11 +37,14 @@ export function MvSubjectDetails() {
                   {s.icon}
                 </span>
                 <div className="min-w-0">
-                  <h3 className="font-[family-name:var(--font-display)] font-700 text-[16px] text-[#102033] leading-tight">
-                    {s.short}
+                  <h3
+                    className="font-[family-name:var(--font-display)] font-700 text-[16px] text-[#102033] leading-tight"
+                    aria-label={`IGCSE ${s.short} ${s.code} online tuition Maldives`}
+                  >
+                    IGCSE {s.short}
                   </h3>
                   <p className="text-[11.5px] uppercase tracking-[0.06em] mt-1 font-[family-name:var(--font-display)] font-600" style={{ color: s.tint }}>
-                    Cambridge · {s.code}
+                    Cambridge · {s.code} · Maldives
                   </p>
                 </div>
               </div>
