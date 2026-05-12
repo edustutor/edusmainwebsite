@@ -261,6 +261,133 @@ export function tuitionCourse(opts: CourseOptions) {
       availability: "https://schema.org/InStock",
       url: "https://signup.edustutor.com/",
     },
+    isAccessibleForFree: false,
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* CollectionPage — emitted from /teach. Surfaces the subjects EDUS  */
+/* tutors can apply to teach. Eligible for SERP "Subject chips" under */
+/* the teach result in Google search.                                 */
+/*                                                                    */
+/* Subject list is the union of:                                      */
+/*   - components/teach/TeachSubjects.tsx (recruitment scope)          */
+/*   - public/llms-full.txt §Markets served + §Global syllabuses      */
+/* All entries are real, deduplicated, alphabetised within sections.  */
+/* --------------------------------------------------------------- */
+export function teachCollectionPage() {
+  const subjects = [
+    // ============ Sri Lanka — National Syllabus ============
+    // Primary (Grades 1–5)
+    "Mathematics (Sri Lanka)",
+    "English (Sri Lanka)",
+    "Environmental Studies",
+    "Tamil",
+    "Sinhala",
+    "IQ",
+    "Spoken English",
+    "Elocution",
+    // Grades 6 to 11 / O/L
+    "Science",
+    "History",
+    "ICT",
+    "Commerce",
+    "Business Studies",
+    "Accounting",
+    // G.C.E A/L
+    "Combined Mathematics",
+    "Biology",
+    "Chemistry",
+    "Physics",
+    "English Literature",
+    "Economics",
+    "Further Mathematics",
+    "Exam Revision",
+
+    // ============ India — CBSE Classes 6 to 10 ============
+    "CBSE Mathematics (Classes 6–10)",
+    "CBSE Science (Classes 6–10)",
+    "CBSE English (Classes 6–10)",
+    "CBSE Social Science",
+    "Hindi",
+    // Future expansion noted in TeachSubjects.tsx
+    "CBSE (other classes — future expansion)",
+    "ICSE (future expansion)",
+    "State Board (future expansion)",
+
+    // ============ Maldives — Cambridge IGCSE / O-Level (Grade 9 & 10) ============
+    "Cambridge IGCSE Mathematics (0580)",
+    "Cambridge IGCSE English as a Second Language (0510)",
+    "Cambridge IGCSE Biology (0610)",
+    "Cambridge IGCSE Chemistry (0620)",
+    "Cambridge IGCSE Physics (0625)",
+
+    // ============ Global — One-to-One, all syllabuses ============
+    "Cambridge Primary",
+    "Cambridge Lower Secondary",
+    "Cambridge IGCSE",
+    "Cambridge O-Level",
+    "Cambridge AS Level",
+    "Cambridge A-Level",
+    "Edexcel IGCSE",
+    "Edexcel International GCSE",
+    "Edexcel GCSE",
+    "Edexcel AS Level",
+    "Edexcel A-Level",
+    "Pearson Edexcel International Curriculum",
+    "International Baccalaureate (IB) Diploma Programme",
+    "Advanced Placement (AP)",
+    "National curricula (any country — based on student requirement)",
+
+    // ============ Computer Science / ICT (across syllabuses) ============
+    "Computer Science",
+
+    // ============ Languages (cross-market) ============
+    "English Language",
+  ];
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${SITE_URL}/teach#subjects`,
+    name: "Subjects EDUS Tutors Teach",
+    headline: "Apply to teach with EDUS — full subject catalog across SL, IN, MV & Global",
+    description:
+      "Full catalog of subjects EDUS tutors are invited to teach: Sri Lankan National Syllabus (Primary, O/L, A/L), CBSE Classes 6–10 (India), Cambridge IGCSE / O-Level / AS / A-Level (Maldives & Global), Edexcel IGCSE / International GCSE / GCSE / AS / A-Level, International Baccalaureate (IB), Advanced Placement (AP), and other national curricula.",
+    url: `${SITE_URL}/teach`,
+    inLanguage: "en",
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": `${SITE_URL}/#organization` },
+    mainEntity: {
+      "@type": "ItemList",
+      name: "Subjects available to teach",
+      numberOfItems: subjects.length,
+      itemListElement: subjects.map((name, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name,
+      })),
+    },
+  };
+}
+
+export function merchantReturnPolicy() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MerchantReturnPolicy",
+    "@id": `${SITE_URL}/refunds#policy`,
+    name: "EDUS Refund Policy",
+    description:
+      "Refunds may be requested within 14 days of enrolment if no course materials or classes have been accessed. Approved refunds are processed within 7 business days to the original payment method.",
+    url: `${SITE_URL}/refunds`,
+    inLanguage: "en",
+    applicableCountry: ["LK", "IN", "MV"],
+    returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+    merchantReturnDays: 14,
+    refundType: "https://schema.org/FullRefund",
+    returnFees: "https://schema.org/FreeReturn",
+    returnMethod: "https://schema.org/ReturnByMail",
+    publisher: { "@id": `${SITE_URL}/#organization` },
   };
 }
 

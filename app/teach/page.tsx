@@ -20,6 +20,7 @@ import {
   JsonLdScript,
   breadcrumbList,
   tutorJobPosting,
+  teachCollectionPage,
 } from "@/components/layout/StructuredData";
 
 export const metadata = {
@@ -93,6 +94,7 @@ export default function TeachWithEdusPage() {
         ])}
       />
       <JsonLdScript data={tutorJobPosting()} />
+      <JsonLdScript data={teachCollectionPage()} />
       <TeachHero />
       <TeachVision />
       <TeachStats />

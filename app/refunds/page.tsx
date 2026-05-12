@@ -1,4 +1,9 @@
-import { JsonLdScript, breadcrumbList, speakableWebPage } from "@/components/layout/StructuredData";
+import {
+  JsonLdScript,
+  breadcrumbList,
+  speakableWebPage,
+  merchantReturnPolicy,
+} from "@/components/layout/StructuredData";
 
 export const metadata = {
   title: "Refund Policy · EDUS Lanka (PVT) Ltd.",
@@ -28,6 +33,7 @@ export default function RefundPolicyPage() {
           path: "/refunds",
         })}
       />
+      <JsonLdScript data={merchantReturnPolicy()} />
       {/* HERO */}
       <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">
