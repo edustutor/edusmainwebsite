@@ -677,3 +677,71 @@ export function studentInteractionCounter() {
       "Total cumulative students enrolled with EDUS Online Tuition across Sri Lanka, India, Maldives, and global markets.",
   };
 }
+
+/* --------------------------------------------------------------- */
+/* VideoObject — featured videos from the EDUS Online Institute      */
+/* YouTube channel (@edusonline). Titles + thumbnails are pulled    */
+/* from YouTube's public oEmbed endpoint, so every field below is    */
+/* verifiable against https://www.youtube.com/oembed?url=...         */
+/*                                                                    */
+/* Eligible for Google's "Videos" carousel and standalone video       */
+/* rich result with thumbnail in SERP.                                */
+/* --------------------------------------------------------------- */
+export type EdusVideo = {
+  id: string; // YouTube video ID
+  title: string;
+  description: string;
+  uploadDate: string; // ISO YYYY-MM-DD — best-effort if known
+};
+
+const YT_CHANNEL_URL = "https://www.youtube.com/@edusonline";
+
+export function videoObject(v: EdusVideo) {
+  const watchUrl = `https://www.youtube.com/watch?v=${v.id}`;
+  const embedUrl = `https://www.youtube.com/embed/${v.id}`;
+  // hqdefault is what oEmbed returns and is guaranteed to exist for every
+  // YouTube video. maxresdefault is higher quality but not always present.
+  const thumb = `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "@id": `${watchUrl}#video`,
+    name: v.title,
+    description: v.description,
+    thumbnailUrl: [thumb, `https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`],
+    uploadDate: v.uploadDate,
+    contentUrl: watchUrl,
+    embedUrl,
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    inLanguage: ["en", "ta", "si"],
+    isFamilyFriendly: true,
+    isAccessibleForFree: true,
+    potentialAction: {
+      "@type": "WatchAction",
+      target: watchUrl,
+    },
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* ItemList of all EDUS featured videos — gives Google a single      */
+/* parseable carousel of the channel's hero content.                  */
+/* --------------------------------------------------------------- */
+export function edusVideoCarousel(videos: EdusVideo[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "EDUS Online Institute — Featured Videos",
+    description:
+      "Featured videos from the EDUS Online Institute YouTube channel covering study tips, exam preparation strategy, and Sri Lankan A/L paper guidance.",
+    numberOfItems: videos.length,
+    url: YT_CHANNEL_URL,
+    itemListElement: videos.map((v, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `https://www.youtube.com/watch?v=${v.id}`,
+      name: v.title,
+    })),
+  };
+}

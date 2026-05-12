@@ -19,8 +19,11 @@ import {
   enrollmentHowTo,
   studentInteractionCounter,
   signupWebApplication,
+  videoObject,
+  edusVideoCarousel,
 } from "./StructuredData";
 import { STORIES } from "@/components/shared/SuccessData";
+import { VIDEOS } from "@/components/shared/VideosData";
 
 const SITE_URL = "https://edustutor.com";
 
@@ -319,6 +322,14 @@ export function HomeJsonLd() {
       <JsonLdScript data={signupWebApplication()} />
       <JsonLdScript data={studentInteractionCounter()} />
       {stories.length > 0 && <JsonLdScript data={successStoriesItemList(stories)} />}
+      {VIDEOS.length > 0 && (
+        <>
+          {VIDEOS.map((v) => (
+            <JsonLdScript key={v.id} data={videoObject(v)} />
+          ))}
+          <JsonLdScript data={edusVideoCarousel(VIDEOS)} />
+        </>
+      )}
       <JsonLdScript data={FAQ} />
     </>
   );
