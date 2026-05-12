@@ -96,7 +96,7 @@ export function SiteFooter() {
                 <span itemProp="postalCode">40000</span>,{" "}
                 <span itemProp="addressCountry">Sri Lanka</span>
                 <a
-                  href="https://www.google.com/maps/place/EDUS+Online+Tuition/@9.6945511,80.0139866,17z"
+                  href="https://www.google.com/maps/place/EDUS+Online+Tuition/@9.6945511,80.0139866,1102m/data=!3m1!1e3!4m6!3m5!1s0x3afe5583ee8b8b25:0xa0dd266c1a635c2!8m2!3d9.6945511!4d80.0139866!16s%2Fg%2F11rxydcz_s"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-1.5 inline-flex items-center gap-1 text-[#2563EB] hover:underline font-[family-name:var(--font-display)] font-600"

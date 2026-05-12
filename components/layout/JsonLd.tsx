@@ -55,7 +55,7 @@ const ORG = {
     latitude: 9.6945511,
     longitude: 80.0139866,
   },
-  hasMap: "https://www.google.com/maps/place/EDUS+Online+Tuition/@9.6945511,80.0139866,17z/data=!3m1!1e3!4m6!3m5!1s0x3afe5583ee8b8b25:0xa0dd266c1a635c2",
+  hasMap: "https://www.google.com/maps/place/EDUS+Online+Tuition/@9.6945511,80.0139866,1102m/data=!3m1!1e3!4m6!3m5!1s0x3afe5583ee8b8b25:0xa0dd266c1a635c2!8m2!3d9.6945511!4d80.0139866!16s%2Fg%2F11rxydcz_s",
   contactPoint: [
     {
       "@type": "ContactPoint",
@@ -150,7 +150,7 @@ const LOCAL_BUSINESS = {
     longitude: 80.0139866,
   },
   hasMap:
-    "https://www.google.com/maps/place/EDUS+Online+Tuition/@9.6945511,80.0139866,17z/data=!3m1!1e3!4m6!3m5!1s0x3afe5583ee8b8b25:0xa0dd266c1a635c2",
+    "https://www.google.com/maps/place/EDUS+Online+Tuition/@9.6945511,80.0139866,1102m/data=!3m1!1e3!4m6!3m5!1s0x3afe5583ee8b8b25:0xa0dd266c1a635c2!8m2!3d9.6945511!4d80.0139866!16s%2Fg%2F11rxydcz_s",
   sameAs: [
     "https://www.facebook.com/edusonline",
     "https://www.instagram.com/edus_online/",
