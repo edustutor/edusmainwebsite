@@ -78,10 +78,10 @@ const PARTNERS: Partner[] = [
 ];
 
 const HIGHLIGHTS = [
-  { k: "7+", v: "Recognitions" },
-  { k: "5+", v: "Years Online" },
-  { k: "11K+", v: "Students Reached" },
-  { k: "4", v: "Markets Served" },
+  { k: "5+",          v: "Years of Online Teaching" },
+  { k: "7,000+",      v: "Students Reached" },
+  { k: "4",           v: "Learning Markets" },
+  { k: "Expert-Led",  v: "Live Online Classes" },
 ];
 
 export function Accreditations() {
@@ -90,8 +90,8 @@ export function Accreditations() {
 
   return (
     <section
-      id="accreditations"
-      aria-labelledby="accreditations-heading"
+      id="recognitions"
+      aria-labelledby="recognitions-heading"
       className="relative py-12 md:py-16 scroll-mt-24 overflow-hidden"
     >
       <div aria-hidden className="absolute inset-0 -z-10">
@@ -99,7 +99,7 @@ export function Accreditations() {
         <AmbientGlow bottom="6%" right="-4%" size={220} color="#8B5CF6" opacity={[0.06, 0.14]} duration={26} delay={3} blur={80} />
       </div>
 
-      {/* Inline JSON-LD for partner / award / member-of entity mentions */}
+      {/* Inline JSON-LD - ecosystem affiliations (no overclaimed accreditation) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -108,17 +108,11 @@ export function Accreditations() {
             "@type": "EducationalOrganization",
             name: "EDUS Online Tuition",
             url: "https://edustutor.com",
-            award: PARTNERS.map((p) => p.name),
-            memberOf: PARTNERS.filter((p) =>
-              /SLASSCOM|ICTA|Yarl|Innovate/i.test(p.name)
-            ).map((p) => ({
-              "@type": "Organization",
-              name: p.name,
-              url: p.href,
-            })),
-            sponsor: PARTNERS.filter((p) =>
-              /Microsoft|Hemas|Spiralation/i.test(p.name)
-            ).map((p) => ({
+            // affiliation = soft "we are part of this ecosystem" relationship.
+            // Used for ecosystem programmes (Microsoft for Startups, Hemas Slingshot,
+            // Spiralation) and industry/innovation networks (SLASSCOM, ICTA, Yarl IT
+            // Hub, Innovate Lanka). Does not imply formal certification.
+            affiliation: PARTNERS.map((p) => ({
               "@type": "Organization",
               name: p.name,
               url: p.href,
@@ -136,19 +130,20 @@ export function Accreditations() {
           whileInView="show"
           viewport={inView}
         >
-          <p className="eyebrow"><span className="dot" />Our Accreditations</p>
+          <p className="eyebrow"><span className="dot" />Our Recognitions</p>
           <h2
-            id="accreditations-heading"
+            id="recognitions-heading"
             className="heading mt-4"
             style={{ fontSize: "var(--fs-display)" }}
           >
-            Award-winning online tuition, recognised by{" "}
-            <em>industry leaders.</em>
+            Trusted online learning, built for{" "}
+            <em>student success.</em>
           </h2>
           <p className="text-[#2B3950] text-[15.5px] mt-4 leading-[1.7]">
-            Hailed by educational leaders and market giants, EDUS delivers exceptional online
-            tuition trusted by Sri Lanka&rsquo;s leading innovation, technology, and startup
-            organisations.
+            With 5+ years of online teaching experience, EDUS has supported thousands of students
+            through expert tutors, structured live classes, progress tracking, and caring
+            academic guidance, while growing through Sri Lanka&rsquo;s education, technology,
+            and innovation ecosystem.
           </p>
         </m.div>
 
@@ -251,9 +246,11 @@ export function Accreditations() {
           </div>
         </m.div>
 
-        <p className="mt-8 text-center text-[12px] text-[#5A6A82] max-w-2xl mx-auto">
-          Logos and trademarks belong to their respective owners and indicate programme
-          participation or partnership, not endorsement.
+        <p className="mt-8 text-center text-[12px] text-[#5A6A82] max-w-3xl mx-auto leading-[1.65]">
+          Logos and trademarks belong to their respective owners and are shown only to indicate
+          programme participation, ecosystem association, membership, or partnership where
+          applicable. They do not imply formal endorsement, certification, or accreditation
+          unless expressly stated.
         </p>
       </div>
 
