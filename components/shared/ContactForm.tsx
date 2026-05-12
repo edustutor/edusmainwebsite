@@ -208,12 +208,12 @@ export function ContactForm() {
 
                 {/* Row 1 — Name + Phone */}
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <Field label="Your Name" required error={errors.parentName}>
+                  <Field label="Full Name" required error={errors.parentName}>
                     <Input
                       value={data.parentName}
                       onChange={(v) => set("parentName", v)}
                       autoComplete="name"
-                      placeholder="Parent or student name"
+                      placeholder="Enter your full name"
                     />
                   </Field>
                   <Field
@@ -318,16 +318,6 @@ export function ContactForm() {
                     </li>
                   ))}
                 </ul>
-                <p className="mt-4 text-center text-[12px] text-[#5A6A82]">
-                  Email{" "}
-                  <a href="mailto:hello@edustutor.com" className="text-[#2563EB] hover:underline">
-                    hello@edustutor.com
-                  </a>{" "}
-                  ·{" "}
-                  <a href="tel:+94707072072" className="text-[#2563EB] hover:underline">
-                    +94 70 707 2072
-                  </a>
-                </p>
               </div>
             </m.form>
           )}
