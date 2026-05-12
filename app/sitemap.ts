@@ -19,10 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/teach",            changeFrequency: "weekly",  priority: 0.85 },
     { path: "/contact",          changeFrequency: "monthly", priority: 0.80 },
 
-    // Storytelling
-    { path: "/how-it-works",     changeFrequency: "monthly", priority: 0.70 },
-    { path: "/success-stories",  changeFrequency: "monthly", priority: 0.70 },
-
     // Legal (low priority but indexable)
     { path: "/privacy",          changeFrequency: "yearly",  priority: 0.30 },
     { path: "/terms",            changeFrequency: "yearly",  priority: 0.30 },

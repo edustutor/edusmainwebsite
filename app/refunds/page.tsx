@@ -35,7 +35,9 @@ export default function RefundPolicyPage() {
           <p>
             Thank you for choosing EDUS Online Tuition. We are committed to providing
             high-quality educational services. If you are not completely satisfied with our
-            services, we are here to assist you.
+            services, we are here to assist you. Refund eligibility is governed by our{" "}
+            <a href="/terms" className="text-[#2563EB] hover:underline">Terms of Service</a>{" "}
+            and the conditions below.
           </p>
 
           <H2>1. Refund Eligibility</H2>

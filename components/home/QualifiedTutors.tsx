@@ -77,6 +77,13 @@ export function QualifiedTutors() {
               </a>
               <Link href="/contact" className="btn btn-yellow">Talk to US</Link>
             </m.div>
+
+            <m.p variants={fadeUp} className="mt-5 text-[13px] text-[#5A6A82]">
+              Are you a tutor?{" "}
+              <Link href="/teach" className="text-[#2563EB] font-[family-name:var(--font-display)] font-700 hover:underline">
+                Become an EDUS tutor →
+              </Link>
+            </m.p>
           </div>
 
           {/* Right column - illustrated card with floating callouts */}

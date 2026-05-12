@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ContactForm } from "@/components/shared/ContactForm";
 
 export const metadata = {
@@ -99,6 +100,63 @@ export default function ContactPage() {
 
       {/* CONTACT FORM */}
       <ContactForm />
+
+      {/* LOOKING FOR SOMETHING SPECIFIC - hub block linking out to markets + teach */}
+      <section className="relative pb-16 md:pb-20 overflow-hidden">
+        <div className="container-edge max-w-4xl mx-auto">
+          <div className="rounded-2xl bg-white border border-[rgba(16,32,51,0.08)] p-6 md:p-8 shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)]">
+            <p className="text-[11px] uppercase tracking-[0.12em] text-[#5A6A82] font-[family-name:var(--font-display)] font-700">
+              Looking for something specific?
+            </p>
+            <h2 className="heading mt-2" style={{ fontSize: "clamp(20px, 2.2vw, 26px)" }}>
+              Jump straight to the <em>right page.</em>
+            </h2>
+            <ul className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+              {[
+                { href: "/sl",     label: "Sri Lanka Classes",   tag: "National · Cambridge · Edexcel", tint: "#2563EB" },
+                { href: "/in",     label: "India CBSE 6–10",      tag: "Tamil Nadu · English Medium",     tint: "#8B5CF6" },
+                { href: "/mv",     label: "Maldives IGCSE",       tag: "Cambridge · O-Level · 1-to-1",    tint: "#22C55E" },
+                { href: "/global", label: "Global One-to-One",    tag: "Worldwide · Any Syllabus",        tint: "#06B6D4" },
+                { href: "/teach",  label: "Teach with EDUS",      tag: "Tutor Recruitment",               tint: "#FACC15" },
+                { href: "/",       label: "Back to Homepage",     tag: "EDUS Overview",                   tint: "#5A6A82" },
+              ].map((l) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className="group flex items-center gap-3 p-3 rounded-xl border border-[rgba(16,32,51,0.06)] hover:border-[rgba(37,99,235,0.30)] hover:bg-[#F6F8FB] transition"
+                  >
+                    <span
+                      aria-hidden
+                      className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
+                      style={{ background: l.tint }}
+                    />
+                    <div className="min-w-0 flex-1">
+                      <p className="font-[family-name:var(--font-display)] font-700 text-[13px] text-[#102033] leading-tight truncate">
+                        {l.label}
+                      </p>
+                      <p className="text-[10.5px] uppercase tracking-[0.06em] text-[#5A6A82] font-[family-name:var(--font-display)] font-600 mt-0.5 truncate">
+                        {l.tag}
+                      </p>
+                    </div>
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.4"
+                      aria-hidden
+                      className="text-[#5A6A82] group-hover:text-[#2563EB] group-hover:translate-x-0.5 transition shrink-0"
+                    >
+                      <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

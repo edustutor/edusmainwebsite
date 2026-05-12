@@ -9,6 +9,7 @@ import { MvExamPrep } from "@/components/markets/mv/MvExamPrep";
 import { MvSubjectDetails } from "@/components/markets/mv/MvSubjectDetails";
 import { MvFAQ } from "@/components/markets/mv/MvFAQ";
 import { MvCTA } from "@/components/markets/mv/MvCTA";
+import { OtherMarkets } from "@/components/markets/OtherMarkets";
 
 export const metadata = {
   title:
@@ -45,6 +46,7 @@ export default function MaldivesPage() {
       <MvExamPrep />
       <MvSubjectDetails />
       <MvFAQ />
+      <OtherMarkets current="mv" />
       <MvCTA />
     </>
   );

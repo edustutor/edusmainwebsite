@@ -14,6 +14,7 @@ import { GlCompare } from "@/components/markets/global/GlCompare";
 import { GlBrand } from "@/components/markets/global/GlBrand";
 import { GlFAQ } from "@/components/markets/global/GlFAQ";
 import { GlCTA } from "@/components/markets/global/GlCTA";
+import { OtherMarkets } from "@/components/markets/OtherMarkets";
 
 export const metadata = {
   title: "EDUS Global Online Tutoring | Cambridge, Edexcel & One-to-One Classes",
@@ -62,6 +63,7 @@ export default function GlobalPage() {
       <GlCompare />
       <GlBrand />
       <GlFAQ />
+      <OtherMarkets current="gl" />
       <GlCTA />
     </>
   );

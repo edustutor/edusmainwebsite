@@ -1,4 +1,5 @@
 import { CTA } from "@/components/shared/CTA";
+import { OtherMarkets } from "@/components/markets/OtherMarkets";
 import { SlHero } from "@/components/markets/sl/SlHero";
 import { SlCurricula } from "@/components/markets/sl/SlCurricula";
 import { SlGroupClasses } from "@/components/markets/sl/SlGroupClasses";
@@ -20,6 +21,7 @@ export default function SriLankaPage() {
       <SlGroupClasses />
       <SlIndividual />
       <SlTestimonials />
+      <OtherMarkets current="sl" />
       <CTA />
     </>
   );

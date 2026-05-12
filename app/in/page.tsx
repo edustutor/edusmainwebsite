@@ -1,4 +1,5 @@
 import { CTA } from "@/components/shared/CTA";
+import { OtherMarkets } from "@/components/markets/OtherMarkets";
 import { InHero } from "@/components/markets/in/InHero";
 import { InPillars } from "@/components/markets/in/InPillars";
 import { InAcademicStructure } from "@/components/markets/in/InAcademicStructure";
@@ -18,6 +19,7 @@ export default function IndiaPage() {
       <InPillars />
       <InAcademicStructure />
       <InPricing />
+      <OtherMarkets current="in" />
       <CTA />
     </>
   );
