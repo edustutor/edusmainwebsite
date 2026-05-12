@@ -12,6 +12,7 @@ const NAV = [
   { label: "How It Works", href: "/#how", section: "how" },
   { label: "Stories", href: "/#stories", section: "stories" },
   { label: "Teach", href: "/teach", section: null },
+  { label: "Contact", href: "/contact", section: null },
   { label: "FAQ", href: "/#faq", section: "faq" },
 ] as const;
 
@@ -81,14 +82,19 @@ export function SiteHeader() {
   const shadowOpacity = useTransform(scrollY, [0, 80], [0.04, 0.16]);
 
   const isActive = (item: (typeof NAV)[number]) => {
+    // 1. Full-route nav items (Teach, Contact) - light up when the URL matches.
+    //    These have a non-"/" href and no `section` reference.
+    if (item.href !== "/" && !item.href.startsWith("/#")) {
+      return pathname === item.href || pathname.startsWith(`${item.href}/`);
+    }
+
+    // 2. Home tab - active on / when at top or no section is in view.
     if (item.href === "/") {
-      // "Home" is active when on / and either at the top or no section is in view
       return pathname === "/" && (active === "home" || active === "");
     }
-    if (pathname !== "/") {
-      // For non-homepage routes, light up Home only.
-      return false;
-    }
+
+    // 3. Homepage section anchors (Why, How, Stories, FAQ) only resolve on /.
+    if (pathname !== "/") return false;
     return active === item.section;
   };
 
