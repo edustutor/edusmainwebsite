@@ -163,7 +163,7 @@ export function Hero() {
         </m.p>
       </m.div>
 
-      {/* Dashboard preview - gentle float + scroll parallax */}
+      {/* Platform preview - product-style mock with live header */}
       <m.div
         className="container-edge"
         style={{ y: dashboardY, scale: dashboardScale }}
@@ -175,7 +175,7 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
         >
           <m.div
-            className="relative glass-strong rounded-[28px] p-6 md:p-8"
+            className="relative glass-strong rounded-[28px] overflow-hidden"
             animate={{
               y: [0, -8, 0],
               transition: {
@@ -187,33 +187,126 @@ export function Hero() {
               },
             }}
           >
-            <div className="grid md:grid-cols-3 gap-4">
-              {[
-                { icon: "🎓", k: "Live Online Classes", v: "Interactive lessons led by qualified tutors. Recordings included.", tint: "#2563EB" },
-                { icon: "🖥️", k: "EDUS LMS & Mobile App", v: "One platform for classes, recordings, assignments, exams, and progress.", tint: "#8B5CF6" },
-                { icon: "📚", k: "Resource Vault", v: "Past papers, study materials, and AI study support for revision.", tint: "#06B6D4" },
-              ].map((c, i) => (
-                <m.div
-                  key={i}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                    transition: { delay: 0.7 + i * 0.1, duration: 0.5 },
-                  }}
-                  whileHover={{ y: -4, transition: { duration: 0.25 } }}
-                  className="rounded-2xl bg-white/85 border border-[rgba(16,32,51,0.10)] p-5 shadow-[0_2px_8px_-4px_rgba(16,32,51,0.06)]"
-                >
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
-                    style={{ background: `${c.tint}1A`, color: c.tint }}
-                  >
-                    {c.icon}
+            {/* Header strip - mimics a real product window */}
+            <div
+              className="flex items-center justify-between px-5 md:px-6 py-3 border-b border-[rgba(16,32,51,0.08)]"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(37,99,235,0.06) 0%, rgba(139,92,198,0.06) 50%, rgba(6,182,212,0.06) 100%)",
+              }}
+            >
+              <div className="flex items-center gap-2">
+                <span className="inline-flex w-2 h-2 rounded-full bg-[#FF5F57]" />
+                <span className="inline-flex w-2 h-2 rounded-full bg-[#FFBD2E]" />
+                <span className="inline-flex w-2 h-2 rounded-full bg-[#28C840]" />
+                <p className="ml-2 text-[11px] uppercase tracking-[0.12em] font-[family-name:var(--font-display)] font-700 text-[#102033]">
+                  EDUS Platform
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10.5px] font-[family-name:var(--font-display)] font-700 bg-[#DC2626]/10 text-[#DC2626]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626] animate-pulse" />
+                  LIVE NOW
+                </span>
+                <p className="text-[10.5px] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+                  Class · Mathematics · Grade 10
+                </p>
+              </div>
+            </div>
+
+            {/* Three feature columns */}
+            <div className="grid md:grid-cols-3 divide-x divide-[rgba(16,32,51,0.08)]">
+              {/* Live Classes column */}
+              <PlatformColumn
+                tint="#2563EB"
+                eyebrow=""
+                title="Live Online Classes"
+                body="Interactive lessons led by qualified tutors. Every session recorded."
+                delay={0.7}
+                visual={
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <Avatar tint="#2563EB" letter="T" />
+                      <div className="flex-1 h-1 rounded-full bg-[#2563EB]/14 overflow-hidden">
+                        <span className="block h-full w-[78%] rounded-full" style={{ background: "linear-gradient(90deg,#2563EB,#6E5BC8)" }} />
+                      </div>
+                      <span className="text-[10px] font-[family-name:var(--font-display)] font-700 text-[#2563EB]">78%</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Avatar tint="#06B6D4" letter="S" />
+                      <p className="text-[11px] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+                        Topic 03 of 05 · Quadratics
+                      </p>
+                    </div>
                   </div>
-                  <p className="mt-4 font-[family-name:var(--font-display)] font-600 text-[17px] text-[#102033]">{c.k}</p>
-                  <p className="text-[13.5px] text-[#5A6A82] mt-1.5 leading-relaxed">{c.v}</p>
-                </m.div>
-              ))}
+                }
+              />
+
+              {/* LMS column */}
+              <PlatformColumn
+                tint="#8B5CF6"
+                eyebrow=""
+                title="EDUS LMS & Mobile App"
+                body="One platform for classes, recordings, assignments, exams, and progress."
+                delay={0.8}
+                visual={
+                  <div className="grid grid-cols-3 gap-1.5">
+                    {["Classes", "Records", "Tasks", "Exams", "Reports", "Wallet"].map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center justify-center px-1.5 py-1 rounded-md text-[9.5px] font-[family-name:var(--font-display)] font-700 bg-white border border-[#8B5CF6]/25 text-[#102033]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                }
+              />
+
+              {/* Resource Vault column */}
+              <PlatformColumn
+                tint="#06B6D4"
+                eyebrow=""
+                title="Resource Vault"
+                body="Past papers, study materials, and AI study support for revision."
+                delay={0.9}
+                visual={
+                  <div className="space-y-1.5">
+                    {[
+                      { name: "Past Paper · 2024", c: "#06B6D4" },
+                      { name: "Revision Notes",   c: "#22C55E" },
+                      { name: "AI Study Buddy",   c: "#FACC15" },
+                    ].map((r) => (
+                      <div
+                        key={r.name}
+                        className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-white border border-[rgba(16,32,51,0.06)]"
+                      >
+                        <span
+                          className="inline-block w-1.5 h-1.5 rounded-full"
+                          style={{ background: r.c }}
+                        />
+                        <span className="text-[11px] font-[family-name:var(--font-display)] font-600 text-[#102033] truncate">
+                          {r.name}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                }
+              />
+            </div>
+
+            {/* Footer stats strip */}
+            <div
+              className="flex items-center justify-between px-5 md:px-6 py-3 border-t border-[rgba(16,32,51,0.08)]"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(37,99,235,0.04) 0%, rgba(6,182,212,0.04) 100%)",
+              }}
+            >
+              <FooterStat k="11K+" v="Students" tint="#2563EB" />
+              <FooterStat k="200+" v="Tutors" tint="#8B5CF6" />
+              <FooterStat k="4" v="Markets" tint="#06B6D4" />
+              <FooterStat k="98%" v="Pass rate" tint="#22C55E" />
             </div>
           </m.div>
         </m.div>
@@ -277,5 +370,69 @@ function ParallaxedGlowActive({
         duration={duration} delay={delay} blur={110}
       />
     </m.div>
+  );
+}
+
+/* --------------------------------------------------------------- */
+/* Platform preview helpers                                         */
+/* --------------------------------------------------------------- */
+
+function PlatformColumn({
+  tint, eyebrow, title, body, visual, delay,
+}: {
+  tint: string;
+  eyebrow: string;
+  title: string;
+  body: string;
+  visual: React.ReactNode;
+  delay: number;
+}) {
+  return (
+    <m.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0, transition: { delay, duration: 0.5 } }}
+      className="p-5 md:p-6 bg-white/85"
+    >
+      <p
+        className="text-[10px] uppercase tracking-[0.12em] font-[family-name:var(--font-display)] font-800"
+        style={{ color: tint }}
+      >
+        {eyebrow}
+      </p>
+      <p className="mt-1 font-[family-name:var(--font-display)] font-700 text-[15.5px] text-[#102033] leading-tight">
+        {title}
+      </p>
+      <p className="text-[12.5px] text-[#5A6A82] mt-1.5 leading-[1.55]">
+        {body}
+      </p>
+      <div className="mt-4">{visual}</div>
+    </m.div>
+  );
+}
+
+function Avatar({ tint, letter }: { tint: string; letter: string }) {
+  return (
+    <span
+      className="inline-flex w-6 h-6 rounded-full items-center justify-center text-[10px] font-[family-name:var(--font-display)] font-800 text-white shrink-0"
+      style={{ background: tint }}
+    >
+      {letter}
+    </span>
+  );
+}
+
+function FooterStat({ k, v, tint }: { k: string; v: string; tint: string }) {
+  return (
+    <div className="flex items-baseline gap-1.5">
+      <p
+        className="font-[family-name:var(--font-display)] font-800 text-[14px] leading-none"
+        style={{ color: tint }}
+      >
+        {k}
+      </p>
+      <p className="text-[10.5px] text-[#5A6A82] font-[family-name:var(--font-display)] font-600">
+        {v}
+      </p>
+    </div>
   );
 }
