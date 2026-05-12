@@ -1,42 +1,72 @@
-import { MarketLanding, MarketConfig } from "@/components/MarketLanding";
-import { CTA } from "@/components/CTA";
+import { GlHero } from "@/components/global/GlHero";
+import { GlIntro } from "@/components/global/GlIntro";
+import { GlPromise } from "@/components/global/GlPromise";
+import { GlCurricula } from "@/components/global/GlCurricula";
+import { GlSubjects } from "@/components/global/GlSubjects";
+import { GlWhy } from "@/components/global/GlWhy";
+import { GlHow } from "@/components/global/GlHow";
+import { GlTutors } from "@/components/global/GlTutors";
+import { GlLiveClass } from "@/components/global/GlLiveClass";
+import { GlPricing } from "@/components/global/GlPricing";
+import { GlReach } from "@/components/global/GlReach";
+import { GlParents } from "@/components/global/GlParents";
+import { GlCompare } from "@/components/global/GlCompare";
+import { GlFindTutor } from "@/components/global/GlFindTutor";
+import { GlJoin } from "@/components/global/GlJoin";
+import { GlBrand } from "@/components/global/GlBrand";
+import { GlFAQ } from "@/components/global/GlFAQ";
+import { GlCTA } from "@/components/global/GlCTA";
 
-const cfg: MarketConfig = {
-  code: "GL",
-  flag: "🌐",
-  region: "Global · One-to-One",
-  url: "edustutor.com/global",
-  ctaText: "Book a free demo",
-  hero: {
-    eyebrow: "Global · One-to-One · 30+ Countries",
-    title: "Personal tutors,",
-    titleEm: "matched to your syllabus and timezone.",
-    sub: "One-to-one tuition for international students - Cambridge, Edexcel, IB, and more. A demo-first journey, with tutor-matching in 48 hours.",
-  },
-  pillars: [
-    { tag: "MATCH", title: "Tutor matching", body: "Vetted tutors selected on syllabus, level, subject expertise, and your preferred timing window.", href: "/global/match" },
-    { tag: "DEMO", title: "Demo before you commit", body: "Book a free demo class first. Decide if the tutor is right for your child before paying.", href: "/global/demo" },
-    { tag: "FLEX", title: "Flexible timings", body: "Schedule across timezones with weekly or intensive packages. Reschedule when life happens.", href: "/global/timings" },
-  ],
-  filters: [
-    { label: "Syllabus", options: ["Cambridge IGCSE", "Cambridge A-Level", "Edexcel", "IB Diploma", "ICSE", "AP", "National"] },
-    { label: "Level", options: ["Year 7", "Year 8", "Year 9", "Year 10", "Year 11", "Year 12", "Year 13"] },
-    { label: "Subjects", options: ["Maths", "Physics", "Chemistry", "Biology", "Economics", "Business", "English Lit", "Computer Science"] },
-    { label: "Class Type", options: ["One-to-One", "Small Group (2–4)"] },
-  ],
-  facts: [
-    { k: "30+", v: "Countries served" },
-    { k: "48 hrs", v: "Tutor matching" },
-    { k: "1:1", v: "Always individual" },
-    { k: "97.6%", v: "Satisfaction" },
+export const metadata = {
+  title: "EDUS Global Online Tutoring | Cambridge, Edexcel & One-to-One Classes",
+  description:
+    "Join EDUS Global for personalized one-to-one online tutoring from expert tutors. Cambridge, Edexcel, IGCSE, GCSE, O-Level, A-Level, and any syllabus support for students worldwide.",
+  alternates: { canonical: "/global" },
+  keywords: [
+    "global online tutoring",
+    "one to one online tutoring",
+    "online tutoring for international students",
+    "Cambridge online tutor",
+    "Edexcel online tutor",
+    "IGCSE online tuition",
+    "GCSE online tutoring",
+    "O Level online classes",
+    "A Level online tutoring",
+    "online maths tutor",
+    "online science tutor",
+    "online physics tutor",
+    "online chemistry tutor",
+    "online biology tutor",
+    "online English tutor",
+    "personalized online learning",
+    "live online classes for students",
+    "expert online tutors",
+    "affordable online tuition",
+    "EDUS Global online tutoring",
   ],
 };
 
-export default function Page() {
+export default function GlobalPage() {
   return (
     <>
-      <MarketLanding cfg={cfg} />
-      <CTA />
+      <GlHero />
+      <GlIntro />
+      <GlPromise />
+      <GlCurricula />
+      <GlSubjects />
+      <GlWhy />
+      <GlHow />
+      <GlTutors />
+      <GlLiveClass />
+      <GlPricing />
+      <GlReach />
+      <GlParents />
+      <GlCompare />
+      <GlFindTutor />
+      <GlJoin />
+      <GlBrand />
+      <GlFAQ />
+      <GlCTA />
     </>
   );
 }

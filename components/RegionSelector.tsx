@@ -12,6 +12,7 @@ import {
 type Region = {
   flag: string;
   title: string;
+  tag: string;
   description: string;
   suitableFor: string;
   features: string[];
@@ -19,15 +20,15 @@ type Region = {
   href: string;
   tint: string;
   tintSoft: string;
-  index: string;
 };
 
 const REGIONS: Region[] = [
   {
     flag: "🇱🇰",
-    title: "Sri Lanka Classes",
-    description: "Live online group classes and one to one support for students following the Sri Lankan school curriculum.",
-    suitableFor: "Grade 1 to G.C.E A/L students",
+    title: "Sri Lanka",
+    tag: "National Syllabus",
+    description: "Live online group classes and one-to-one support for students following the Sri Lankan school curriculum.",
+    suitableFor: "Grade 1 to G.C.E A/L",
     features: [
       "National syllabus classes",
       "Group and individual options",
@@ -37,13 +38,14 @@ const REGIONS: Region[] = [
     ],
     cta: "Explore Sri Lanka",
     href: "/sl",
-    tint: "#2563EB", tintSoft: "#EEF6FF", index: "01",
+    tint: "#2563EB", tintSoft: "#EEF6FF",
   },
   {
     flag: "🇮🇳",
-    title: "India · CBSE Classes 6 to 10",
+    title: "India",
+    tag: "CBSE · Classes 6–10",
     description: "Premium structured online CBSE tuition for English-medium students across Tamil Nadu and India.",
-    suitableFor: "CBSE Class 6 to Class 10 students",
+    suitableFor: "CBSE Class 6 to Class 10",
     features: [
       "English medium classes",
       "CBSE Mathematics, Science, English",
@@ -53,29 +55,31 @@ const REGIONS: Region[] = [
     ],
     cta: "Explore India",
     href: "/in",
-    tint: "#8B5CF6", tintSoft: "#F4EEFF", index: "02",
+    tint: "#8B5CF6", tintSoft: "#F4EEFF",
   },
   {
     flag: "🇲🇻",
-    title: "Maldives Classes",
-    description: "Live English-medium online tuition for Maldivian students. Cambridge & Edexcel international syllabuses, expert tutors.",
-    suitableFor: "School students across all islands",
+    title: "Maldives",
+    tag: "Cambridge IGCSE / O-Level",
+    description: "Premium 1-to-1 Cambridge IGCSE and O-Level online classes for Maldives Grade 9 and Grade 10 students.",
+    suitableFor: "Grade 9 & Grade 10 · All Islands",
     features: [
-      "Cambridge IGCSE / A-Level",
-      "Edexcel + core academic subjects",
+      "Cambridge IGCSE / O-Level",
+      "Maths, Science, English",
       "Personal tutor matching",
-      "Flexible class timings",
+      "Maldives-friendly timings",
       "Parent updates and recordings",
     ],
     cta: "Explore Maldives",
     href: "/mv",
-    tint: "#22C55E", tintSoft: "#E8FAEC", index: "03",
+    tint: "#22C55E", tintSoft: "#E8FAEC",
   },
   {
     flag: "🌐",
-    title: "Global One to One",
-    description: "Flexible one to one online tuition for students who need personalised academic support from anywhere.",
-    suitableFor: "International students and custom needs",
+    title: "Global",
+    tag: "One-to-One Online",
+    description: "Flexible one-to-one online tuition for students who need personalised academic support from anywhere.",
+    suitableFor: "International students · Custom needs",
     features: [
       "Personal tutor matching",
       "Flexible class timing",
@@ -83,9 +87,9 @@ const REGIONS: Region[] = [
       "Individual attention",
       "Progress focused learning",
     ],
-    cta: "Book One to One",
+    cta: "Book One-to-One",
     href: "/global",
-    tint: "#06B6D4", tintSoft: "#E6FAFD", index: "04",
+    tint: "#06B6D4", tintSoft: "#E6FAFD",
   },
 ];
 
@@ -139,7 +143,7 @@ export function RegionSelector() {
         </m.div>
 
         <m.div
-          className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch"
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
@@ -147,43 +151,52 @@ export function RegionSelector() {
         >
           {REGIONS.map((r) => (
             <m.div
-              key={r.index}
+              key={r.href}
               variants={fadeUp}
               whileHover="hover"
               initial="rest"
               animate="rest"
+              className="h-full"
             >
-              <m.div variants={glassHover}>
+              <m.div variants={glassHover} className="h-full">
                 <Link
                   href={r.href}
                   className="group relative glass rounded-[28px] p-7 overflow-hidden block h-full"
                 >
                   <span aria-hidden className="blob" style={{ top: -50, right: -50, width: 200, height: 200, background: r.tint, opacity: 0.30 }} />
 
-                  <div className="relative">
-                    <div className="flex items-center justify-between">
+                  <div className="relative h-full flex flex-col">
+                    <div className="flex items-center gap-3">
                       <m.span
-                        className="inline-flex items-center justify-center w-14 h-14 rounded-2xl text-3xl"
+                        className="inline-flex items-center justify-center w-14 h-14 rounded-2xl text-3xl shrink-0"
                         style={{ background: r.tintSoft, border: `1px solid ${r.tint}20` }}
                         whileHover={{ rotate: [0, -6, 6, 0], transition: { duration: 0.5 } }}
                       >
                         {r.flag}
                       </m.span>
-                      <span className="font-[family-name:var(--font-display)] font-600 text-[12px] tracking-[0.16em] uppercase text-[#5A6A82]">
-                        {r.index} / 04
-                      </span>
+                      <h3
+                        className="heading whitespace-nowrap"
+                        style={{ fontSize: "24px", lineHeight: 1.1, letterSpacing: "-0.01em" }}
+                      >
+                        {r.title}
+                      </h3>
                     </div>
 
-                    <h3 className="heading mt-7" style={{ fontSize: "21px", lineHeight: 1.25 }}>
-                      {r.title}
-                    </h3>
-                    <p className="text-[#2B3950] text-[14px] mt-2.5 leading-[1.6]">{r.description}</p>
+                    <span
+                      className="mt-5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-[family-name:var(--font-display)] font-700 tracking-[0.04em] self-start"
+                      style={{ background: r.tintSoft, color: r.tint, border: `1px solid ${r.tint}25` }}
+                    >
+                      <span className="w-1 h-1 rounded-full" style={{ background: r.tint }} />
+                      {r.tag}
+                    </span>
 
-                    <p className="mt-4 text-[12px] font-[family-name:var(--font-display)] font-600 uppercase tracking-[0.12em]" style={{ color: r.tint }}>
+                    <p className="text-[#2B3950] text-[14px] mt-4 leading-[1.6]">{r.description}</p>
+
+                    <p className="mt-4 text-[11.5px] font-[family-name:var(--font-display)] font-600 uppercase tracking-[0.12em]" style={{ color: r.tint }}>
                       Suitable for · {r.suitableFor}
                     </p>
 
-                    <ul className="mt-4 space-y-2 text-[13.5px]">
+                    <ul className="mt-4 space-y-2 text-[13.5px] flex-1">
                       {r.features.map((f, i) => (
                         <m.li
                           key={f}
