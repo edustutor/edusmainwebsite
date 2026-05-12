@@ -256,11 +256,12 @@ const FAQ = {
 };
 
 export function HomeJsonLd() {
-  const stories = STORIES.map((s) => ({
-    country: s.country,
-    label: s.label,
-    quote: s.quote,
-  }));
+  // Defensive: HMR can transiently surface STORIES as undefined during fast refresh.
+  // A guard here keeps the route render-safe; the schema simply omits the stories
+  // list on those frames instead of throwing.
+  const stories = Array.isArray(STORIES)
+    ? STORIES.map((s) => ({ country: s.country, label: s.label, quote: s.quote }))
+    : [];
 
   return (
     <>
@@ -269,7 +270,7 @@ export function HomeJsonLd() {
       <JsonLdScript data={WEBSITE} />
       <JsonLdScript data={siteNavigation()} />
       <JsonLdScript data={primaryPagesItemList()} />
-      <JsonLdScript data={successStoriesItemList(stories)} />
+      {stories.length > 0 && <JsonLdScript data={successStoriesItemList(stories)} />}
       <JsonLdScript data={FAQ} />
     </>
   );
