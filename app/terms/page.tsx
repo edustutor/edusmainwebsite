@@ -133,9 +133,9 @@ export default function TermsPage() {
           <H2>10. Governing Law</H2>
           <p>
             These terms and conditions are governed by and construed in accordance with the laws
-            of England and Wales. The courts of England and Wales shall have exclusive
-            jurisdiction to settle any dispute or claim that arises out of or in connection with
-            these terms.
+            of the Democratic Socialist Republic of Sri Lanka. The competent courts of Sri Lanka
+            shall have exclusive jurisdiction to settle any dispute or claim that arises out of or
+            in connection with these terms.
           </p>
 
           <H2>11. Contact Us</H2>
