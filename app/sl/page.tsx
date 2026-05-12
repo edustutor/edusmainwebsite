@@ -2,9 +2,10 @@ import Link from "next/link";
 import { CTA } from "@/components/CTA";
 
 export const metadata = {
-  title: "Sri Lanka - National Syllabus, Cambridge & Edexcel · Online Tuition",
+  title: "Sri Lanka Online Tuition · National, Cambridge & Edexcel",
   description:
-    "Live online classes for Grade 1 to A/L, Cambridge & Edexcel, in Sinhala, Tamil, and English medium. Group and individual tuition with expert tutors and parent updates.",
+    "Live online classes for Grade 1 to A/L, Cambridge & Edexcel, in Sinhala, Tamil, and English medium. Group and individual tuition with expert tutors.",
+  alternates: { canonical: "/sl" },
 };
 
 const SUBJECTS_NATIONAL = [

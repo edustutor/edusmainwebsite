@@ -2,9 +2,10 @@ import Link from "next/link";
 import { CTA } from "@/components/CTA";
 
 export const metadata = {
-  title: "India · Tamil Nadu - Premium Online Tuition for CBSE Classes 6–10 · EDUS",
+  title: "India Online Tuition · CBSE Classes 6–10 · Tamil Nadu",
   description:
-    "Premium structured online CBSE tuition with disciplined academic monitoring. CBSE-aligned quality-assured online tuition for Classes 6–10, English medium, Mathematics · Science · English. monthly reports, exam analytics, monthly progress to parents.",
+    "Premium structured online CBSE tuition for Classes 6–10 in English medium. Mathematics, Science, and English with monthly parent reports and exam analytics.",
+  alternates: { canonical: "/in" },
 };
 
 const SUBJECTS = ["Mathematics", "Science", "English"];

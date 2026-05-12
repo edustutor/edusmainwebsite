@@ -2,6 +2,13 @@ import { LearningExperience } from "@/components/LearningExperience";
 import { JoinFlow } from "@/components/JoinFlow";
 import { CTA } from "@/components/CTA";
 
+export const metadata = {
+  title: "How EDUS Online Tuition Works · Live Classes & Parent Updates",
+  description:
+    "See how EDUS delivers structured online tuition: from choosing your region and grade, to live classes, recordings, exams, and progress tracking for parents.",
+  alternates: { canonical: "/how-it-works" },
+};
+
 export default function Page() {
   return (
     <>

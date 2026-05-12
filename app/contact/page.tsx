@@ -4,6 +4,7 @@ export const metadata = {
   title: "Contact EDUS · Talk to Our Team",
   description:
     "Get in touch with EDUS. Tell us what your child needs and our team will guide you to the right class, subject, tutor, or enrolment option.",
+  alternates: { canonical: "/contact" },
 };
 
 const QUICK = [

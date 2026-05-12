@@ -1,6 +1,13 @@
 import { Success } from "@/components/Success";
 import { CTA } from "@/components/CTA";
 
+export const metadata = {
+  title: "Success Stories · EDUS Students, Parents & Tutors",
+  description:
+    "Real stories from EDUS students and parents across Sri Lanka, India, Maldives, and global classes. See how live online tuition builds confidence and results.",
+  alternates: { canonical: "/success-stories" },
+};
+
 export default function Page() {
   return (
     <>

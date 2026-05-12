@@ -27,12 +27,13 @@ const sans = Open_Sans({
 export const metadata: Metadata = {
   title: {
     default:
-      "EDUS Online Tuition | Live Online Classes for Sri Lanka, India, Maldives & Global Students",
+      "EDUS · Live Online Tuition for Sri Lanka, India, Maldives & Global",
     template: "%s · EDUS",
   },
   description:
-    "EDUS - the quality-assured online live learning platform. Join live online tuition, expert tutors, structured classes, parent updates, recordings, exams, and progress tracking. Explore Sri Lanka classes, India CBSE Classes 6 to 10, Maldives classes, and global one to one tuition.",
+    "Live online tuition with expert tutors, structured classes, recordings, exams, and parent updates. Sri Lanka, India CBSE, Maldives Cambridge, and global 1-to-1 learning.",
   metadataBase: new URL("https://edustutor.com"),
+  alternates: { canonical: "/" },
   applicationName: "EDUS",
   authors: [{ name: "EDUS" }],
   keywords: [
@@ -62,11 +63,12 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: "website",
-    title: "EDUS Online Tuition | Live Online Classes for Sri Lanka, India, Maldives & Global Students",
+    title: "EDUS · Live Online Tuition for Sri Lanka, India, Maldives & Global",
     description:
-      "Live online tuition, expert tutors, structured classes, parent updates, recordings, exams, and progress tracking. Sri Lanka, India, Maldives, and global learning paths.",
+      "Live online tuition with expert tutors, structured classes, recordings, exams, and parent updates.",
     url: "https://edustutor.com",
     siteName: "EDUS",
+    locale: "en_US",
     images: [{ url: "/edus_logo_blue.webp", width: 1200, height: 630, alt: "EDUS online learning platform" }],
   },
   twitter: {
