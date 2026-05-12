@@ -5,6 +5,7 @@ import { SlCurricula } from "@/components/markets/sl/SlCurricula";
 import { SlGroupClasses } from "@/components/markets/sl/SlGroupClasses";
 import { SlIndividual } from "@/components/markets/sl/SlIndividual";
 import { SlTestimonials } from "@/components/markets/sl/SlTestimonials";
+import { SlFAQ } from "@/components/markets/sl/SlFAQ";
 import {
   JsonLdScript,
   breadcrumbList,
@@ -161,6 +162,7 @@ export default function SriLankaPage() {
       <SlGroupClasses />
       <SlIndividual />
       <SlTestimonials />
+      <SlFAQ />
       <OtherMarkets current="sl" />
       <CTA />
     </>

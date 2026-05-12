@@ -4,6 +4,7 @@ import { InHero } from "@/components/markets/in/InHero";
 import { InPillars } from "@/components/markets/in/InPillars";
 import { InAcademicStructure } from "@/components/markets/in/InAcademicStructure";
 import { InPricing } from "@/components/markets/in/InPricing";
+import { InFAQ } from "@/components/markets/in/InFAQ";
 import {
   JsonLdScript,
   breadcrumbList,
@@ -144,6 +145,7 @@ export default function IndiaPage() {
       <InPillars />
       <InAcademicStructure />
       <InPricing />
+      <InFAQ />
       <OtherMarkets current="in" />
       <CTA />
     </>

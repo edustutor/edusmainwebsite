@@ -225,6 +225,13 @@ const LOCAL_BUSINESS = {
 const FAQ = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  // Voice-assistant readable. Targets the visible FAQ section on the homepage
+  // (<section id="faq"> in components/shared/FAQ.tsx) so Google Assistant /
+  // Alexa-style readers can quote the Q&A directly.
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["#faq h2", "#faq h3", "#faq p", "#faq li"],
+  },
   mainEntity: [
     {
       "@type": "Question",
