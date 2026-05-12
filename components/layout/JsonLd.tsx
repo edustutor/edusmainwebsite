@@ -12,7 +12,7 @@
  */
 
 import { JsonLdScript, siteNavigation, primaryPagesItemList, successStoriesItemList } from "./StructuredData";
-import { STORIES } from "@/components/shared/Success";
+import { STORIES } from "@/components/shared/SuccessData";
 
 const SITE_URL = "https://edustutor.com";
 
