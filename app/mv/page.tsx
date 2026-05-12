@@ -1,63 +1,51 @@
-import { MarketLanding, type MarketConfig } from "@/components/MarketLanding";
-import { CTA } from "@/components/CTA";
+import { MvHero } from "@/components/mv/MvHero";
+import { MvWhy } from "@/components/mv/MvWhy";
+import { MvSubjects } from "@/components/mv/MvSubjects";
+import { MvLearningFlow } from "@/components/mv/MvLearningFlow";
+import { MvTutors } from "@/components/mv/MvTutors";
+import { MvAudience } from "@/components/mv/MvAudience";
+import { MvIslands } from "@/components/mv/MvIslands";
+import { MvExamPrep } from "@/components/mv/MvExamPrep";
+import { MvSubjectDetails } from "@/components/mv/MvSubjectDetails";
+import { MvFAQ } from "@/components/mv/MvFAQ";
+import { MvCTA } from "@/components/mv/MvCTA";
 
 export const metadata = {
-  title: "Maldives - Online Tuition for School Students · EDUS",
+  title:
+    "Cambridge IGCSE & O-Level Online Classes in Maldives | EDUS",
   description:
-    "Live online tuition for Maldivian school students. English-medium classes, Cambridge & Edexcel international syllabuses, expert tutors, and parent updates.",
-};
-
-const cfg: MarketConfig = {
-  code: "GL", // Maldives is served via the global one-to-one infrastructure
-  flag: "🇲🇻",
-  region: "Maldives",
-  url: "edustutor.com/mv",
-  ctaText: "Talk to US",
-  hero: {
-    eyebrow: "Maldives · English Medium · Cambridge & Edexcel",
-    title: "Premium online tuition,",
-    titleEm: "delivered to every island.",
-    sub: "Live online classes for Maldivian school students. Cambridge IGCSE, Edexcel, and core academic subjects taught by qualified tutors - with parent updates and recordings included.",
-  },
-  pillars: [
-    {
-      tag: "LIVE",
-      title: "Live English-medium classes",
-      body: "Interactive online lessons aligned to Cambridge / Edexcel and core school subjects, with recordings and homework feedback.",
-      href: "/mv/classes",
-    },
-    {
-      tag: "MATCH",
-      title: "Personal tutor matching",
-      body: "Tutors matched to your child's syllabus, level, and timezone. Demo first, commit later.",
-      href: "/mv/tutors",
-    },
-    {
-      tag: "PARENT",
-      title: "Parent updates",
-      body: "Weekly attendance, progress, and tutor notes - straight to parents through the EDUS app.",
-      href: "/mv/parents",
-    },
-  ],
-  filters: [
-    { label: "Grade / Year", options: ["Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Year 11", "Year 12", "Year 13"] },
-    { label: "Syllabus", options: ["Cambridge IGCSE", "Cambridge A-Level", "Edexcel"] },
-    { label: "Subjects", options: ["Mathematics", "Science", "Physics", "Chemistry", "Biology", "English", "ICT"] },
-    { label: "Class Type", options: ["One-to-One", "Small Group"] },
-  ],
-  facts: [
-    { k: "Live", v: "Online classes" },
-    { k: "Cambridge", v: "+ Edexcel support" },
-    { k: "1:1", v: "Tutor matching" },
-    { k: "Parent", v: "Weekly updates" },
+    "Premium 1-to-1 Cambridge IGCSE and O-Level online classes for Maldives students. Learn Mathematics, English, Biology, Chemistry and Physics with expert EDUS tutors from home.",
+  alternates: { canonical: "/mv" },
+  keywords: [
+    "Cambridge IGCSE online classes Maldives",
+    "O Level tuition Maldives",
+    "Online tuition Maldives",
+    "IGCSE Mathematics Maldives",
+    "IGCSE Physics Maldives",
+    "IGCSE Chemistry Maldives",
+    "IGCSE Biology Maldives",
+    "English ESL online classes Maldives",
+    "1 to 1 online tuition Maldives",
+    "Private online tutoring Maldives",
+    "Grade 9 online classes Maldives",
+    "Grade 10 online classes Maldives",
   ],
 };
 
-export default function Page() {
+export default function MaldivesPage() {
   return (
     <>
-      <MarketLanding cfg={cfg} />
-      <CTA />
+      <MvHero />
+      <MvWhy />
+      <MvSubjects />
+      <MvLearningFlow />
+      <MvTutors />
+      <MvAudience />
+      <MvIslands />
+      <MvExamPrep />
+      <MvSubjectDetails />
+      <MvFAQ />
+      <MvCTA />
     </>
   );
 }
