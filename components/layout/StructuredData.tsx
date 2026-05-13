@@ -268,6 +268,112 @@ export function tuitionCourse(opts: CourseOptions) {
 }
 
 /* --------------------------------------------------------------- */
+/* CBSE Course with explicit weekly schedule - richer Course schema  */
+/* for /in, eligible for "class times" SERP enrichment. Each weekly  */
+/* slot becomes its own CourseInstance with a Schedule block.        */
+/* --------------------------------------------------------------- */
+export type CbseSlot = {
+  name: string; // e.g. "Slot 1"
+  startTime: string; // ISO 24h, e.g. "18:30"
+  endTime: string; // ISO 24h, e.g. "19:30"
+  optional?: boolean;
+};
+
+export function cbseScheduledCourse(opts: {
+  name: string;
+  description: string;
+  url: string;
+  slots: CbseSlot[];
+  monthlyPriceINR: number; // e.g. 1000 per subject
+  bundlePriceINR: number; // e.g. 2500 all-3
+  admissionFeeINR: number; // e.g. 2000
+}) {
+  // Weekdays Mon-Sat as per the published India schedule.
+  const byDay = [
+    "https://schema.org/Monday",
+    "https://schema.org/Tuesday",
+    "https://schema.org/Wednesday",
+    "https://schema.org/Thursday",
+    "https://schema.org/Friday",
+    "https://schema.org/Saturday",
+  ];
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: opts.name,
+    description: opts.description,
+    url: opts.url,
+    provider: {
+      "@type": "EducationalOrganization",
+      name: "EDUS Online Tuition",
+      url: SITE_URL,
+      sameAs: SITE_URL,
+    },
+    educationalCredentialAwarded: "Continued academic progress and CBSE board preparation",
+    inLanguage: "en",
+    availableLanguage: ["English"],
+    audience: {
+      "@type": "EducationalAudience",
+      educationalRole: "student",
+      audienceType: "India - CBSE Classes 6 to 10",
+    },
+    // One CourseInstance per weekly slot, each with a Schedule block
+    // describing the Mon-Sat recurrence and the local time in IST.
+    hasCourseInstance: opts.slots.map((s) => ({
+      "@type": "CourseInstance",
+      name: `EDUS CBSE Online ${s.name}${s.optional ? " (Optional)" : ""}`,
+      courseMode: "online",
+      courseWorkload: "PT2H",
+      inLanguage: "en",
+      eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+      eventSchedule: {
+        "@type": "Schedule",
+        repeatFrequency: "P1W",
+        byDay,
+        startTime: s.startTime,
+        endTime: s.endTime,
+        scheduleTimezone: "Asia/Kolkata",
+      },
+      location: {
+        "@type": "VirtualLocation",
+        url: SITE_URL,
+      },
+    })),
+    offers: [
+      {
+        "@type": "Offer",
+        name: "Per subject - monthly",
+        price: String(opts.monthlyPriceINR),
+        priceCurrency: "INR",
+        category: "Monthly tuition (per subject)",
+        availability: "https://schema.org/InStock",
+        url: "https://signup.edustutor.com/",
+      },
+      {
+        "@type": "Offer",
+        name: "All three subjects bundle - monthly",
+        price: String(opts.bundlePriceINR),
+        priceCurrency: "INR",
+        category: "Monthly tuition (Maths + Science + English)",
+        availability: "https://schema.org/InStock",
+        url: "https://signup.edustutor.com/",
+      },
+      {
+        "@type": "Offer",
+        name: "Admission fee - one time",
+        price: String(opts.admissionFeeINR),
+        priceCurrency: "INR",
+        category: "One-time admission fee per student",
+        availability: "https://schema.org/InStock",
+        url: "https://signup.edustutor.com/",
+      },
+    ],
+    isAccessibleForFree: false,
+  };
+}
+
+/* --------------------------------------------------------------- */
 /* CollectionPage - emitted from /teach. Surfaces the subjects EDUS  */
 /* tutors can apply to teach. Eligible for SERP "Subject chips" under */
 /* the teach result in Google search.                                 */

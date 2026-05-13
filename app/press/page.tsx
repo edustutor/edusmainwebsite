@@ -14,7 +14,7 @@ import {
 export const metadata = {
   title: "Press Kit - EDUS Online Tuition - Brand, Logos & Facts",
   description:
-    "EDUS press kit - brand logos, colors, fact sheet, and media contact. Quality-assured online tuition platform serving Sri Lanka, India, Maldives & global students.",
+    "EDUS press kit - brand logos, colors, fact sheet, and media contact. Quality-assured online tuition platform for Sri Lanka, India, Maldives & global.",
   alternates: { canonical: "/press" },
   keywords: [
     "EDUS press kit",
@@ -66,7 +66,7 @@ export default function PressPage() {
           name: "Press Kit - EDUS Online Tuition",
           headline: "EDUS Press Kit",
           description:
-            "EDUS press kit - brand logos, colors, fact sheet, and media contact. Quality-assured online tuition platform serving Sri Lanka, India, Maldives & global students.",
+            "EDUS press kit - brand logos, colors, fact sheet, and media contact. Quality-assured online tuition platform for Sri Lanka, India, Maldives & global.",
           path: "/press",
           // Target the brand fact sheet - the canonical, journalist-friendly
           // block voice assistants and AI engines should quote when asked

@@ -18,7 +18,7 @@ import {
 export const metadata = {
   title: "Sri Lanka Online Tuition - National, Cambridge & Edexcel",
   description:
-    "Live online group classes (fixed timetable) and flexible 1-to-1 tuition for Grade 1 to A/L. National Syllabus, Cambridge, Edexcel. Sinhala, Tamil, English medium.",
+    "Live online group classes (fixed timetable) & flexible 1-to-1 tuition, Grade 1 to A/L. National Syllabus, Cambridge, Edexcel. Sinhala, Tamil, English medium.",
   alternates: { canonical: "/sl" },
   keywords: [
     // Primary

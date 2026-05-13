@@ -16,7 +16,7 @@ import {
 export const metadata = {
   title: "About EDUS - Online Tuition Institute - Sri Lanka - Since 2021",
   description:
-    "About EDUS Lanka (Pvt) Ltd - quality-assured online learning platform founded 2021, based in Jaffna. 7,000+ students supported across Sri Lanka, India, Maldives & global.",
+    "About EDUS Lanka (Pvt) Ltd - quality-assured online learning platform founded 2021 in Jaffna. 7,000+ students across Sri Lanka, India, Maldives & global.",
   alternates: { canonical: "/about" },
   keywords: [
     "about EDUS",

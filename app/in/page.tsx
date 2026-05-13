@@ -11,6 +11,7 @@ import {
   educationalProgram,
   tuitionCourse,
   tuitionService,
+  cbseScheduledCourse,
   SITE_URL,
 } from "@/components/layout/StructuredData";
 
@@ -139,6 +140,22 @@ export default function IndiaPage() {
             "Structured live online CBSE course for English-medium students across Tamil Nadu. Mathematics, Science, and English for Classes 6 to 10 with monthly parent reports.",
           url: `${SITE_URL}/in`,
           area: "India",
+        })}
+      />
+      <JsonLdScript
+        data={cbseScheduledCourse({
+          name: "EDUS India CBSE Online Classes - Weekly Schedule",
+          description:
+            "Live online CBSE classes for Tamil Nadu students - Classes 6 to 10, English medium. Mathematics, Science, and English run Monday through Saturday across three time slots (6:30-7:30 PM, 7:45-8:45 PM, and an optional 9:00-10:00 PM slot, IST). 2 hours per week per subject.",
+          url: `${SITE_URL}/in`,
+          slots: [
+            { name: "Slot 1", startTime: "18:30", endTime: "19:30" },
+            { name: "Slot 2", startTime: "19:45", endTime: "20:45" },
+            { name: "Slot 3", startTime: "21:00", endTime: "22:00", optional: true },
+          ],
+          monthlyPriceINR: 1000,
+          bundlePriceINR: 2500,
+          admissionFeeINR: 2000,
         })}
       />
       <InHero />

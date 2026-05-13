@@ -5,6 +5,9 @@ import {
   speakableWebPage,
   classEventSeries,
   timetableCollectionPage,
+  educationalProgram,
+  tuitionService,
+  SITE_URL,
 } from "@/components/layout/StructuredData";
 import { TIMETABLE, CONDUCT_RULES } from "@/components/markets/sl/TimetableData";
 import { SlTimetableView } from "@/components/markets/sl/SlTimetableView";
@@ -98,6 +101,25 @@ export default function SlTimetablePage() {
         })}
       />
       <JsonLdScript data={timetableCollectionPage(totalSessions)} />
+      <JsonLdScript
+        data={educationalProgram({
+          name: "EDUS Sri Lanka Group Class Programme 2026",
+          description:
+            "Structured 2026 group-class programme for Sri Lankan students from Grade 3 to G.C.E A/L. National Syllabus, Cambridge IGCSE, and Edexcel in Sinhala, Tamil, and English medium. Fixed weekly timetable, monthly per-subject fees, and a single LKR 1,000 one-time admission fee per student regardless of how many classes or subjects.",
+          url: `${SITE_URL}/sl/timetable`,
+          area: "Sri Lanka",
+          educationalLevel: "Grade 3 to G.C.E A/L",
+        })}
+      />
+      <JsonLdScript
+        data={tuitionService({
+          name: "EDUS Sri Lanka Group Class Tuition - Fixed 2026 Timetable",
+          description:
+            "Live online group classes on a fixed weekly timetable for Sri Lankan students. Grade 3 to A/L in Tamil and English medium. Monthly fees from LKR 1,000/subject (Primary/Grade 6-9), LKR 1,200/subject (O/L), LKR 2,500/subject (A/L), plus a single LKR 1,000 one-time admission fee per student. Delivered via the EDUS Student Mobile App, EDUS Web App, and Google Meet.",
+          url: `${SITE_URL}/sl/timetable`,
+          area: "Sri Lanka",
+        })}
+      />
       {eventSchemas.map((s, i) => (
         <JsonLdScript key={i} data={s} />
       ))}
