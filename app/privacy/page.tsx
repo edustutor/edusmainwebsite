@@ -1,7 +1,7 @@
 import { JsonLdScript, breadcrumbList, speakableWebPage } from "@/components/layout/StructuredData";
 
 export const metadata = {
-  title: "Privacy Policy · EDUS Lanka (PVT) Ltd.",
+  title: "Privacy Policy - EDUS Lanka (PVT) Ltd.",
   description:
     "How EDUS Online Tuition collects, uses, retains, and protects information from students, parents, teachers, and administrators across our website, mobile apps, and online learning services.",
   alternates: { canonical: "/privacy" },
@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
       />
       <JsonLdScript
         data={speakableWebPage({
-          name: "Privacy Policy · EDUS Lanka (PVT) Ltd.",
+          name: "Privacy Policy - EDUS Lanka (PVT) Ltd.",
           description:
             "How EDUS Online Tuition collects, uses, retains, and protects information from students, parents, teachers, and administrators.",
           path: "/privacy",

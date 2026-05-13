@@ -19,13 +19,13 @@ export function InHero() {
               <path d="M19 12H5M12 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             All markets
-            <span className="text-[#5A6A82]">·</span>
-            <span className="text-[#8B5CF6]">🇮🇳 India · Tamil Nadu · CBSE</span>
+            <span className="text-[#5A6A82]">-</span>
+            <span className="text-[#8B5CF6]">🇮🇳 India - Tamil Nadu - CBSE</span>
           </Link>
         </div>
 
         <div className="mt-8 text-center max-w-4xl mx-auto" data-anim="2">
-          <p className="eyebrow">🇮🇳 CBSE Online Tuition · Tamil Nadu · Classes 6–10</p>
+          <p className="eyebrow">🇮🇳 CBSE Online Tuition - Tamil Nadu - Classes 6-10</p>
           <h1 className="heading mt-5" style={{ fontSize: "var(--fs-hero)" }}>
             CBSE online tuition for Classes 6 to 10, <em>built for Tamil Nadu families.</em>
           </h1>
@@ -44,7 +44,7 @@ export function InHero() {
         <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto" data-anim="4">
           {[
             { k: "CBSE",         v: "Syllabus aligned" },
-            { k: "Class 6 – 10", v: "Coverage" },
+            { k: "Class 6 - 10", v: "Coverage" },
             { k: "3",            v: "Core subjects" },
             { k: "Monthly",      v: "Parent updates" },
           ].map((s, i) => (

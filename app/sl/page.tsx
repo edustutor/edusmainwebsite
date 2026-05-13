@@ -5,6 +5,7 @@ import { SlCurricula } from "@/components/markets/sl/SlCurricula";
 import { SlGroupClasses } from "@/components/markets/sl/SlGroupClasses";
 import { SlIndividual } from "@/components/markets/sl/SlIndividual";
 import { SlTestimonials } from "@/components/markets/sl/SlTestimonials";
+import { SlFAQ } from "@/components/markets/sl/SlFAQ";
 import {
   JsonLdScript,
   breadcrumbList,
@@ -15,7 +16,7 @@ import {
 } from "@/components/layout/StructuredData";
 
 export const metadata = {
-  title: "Sri Lanka Online Tuition · National, Cambridge & Edexcel",
+  title: "Sri Lanka Online Tuition - National, Cambridge & Edexcel",
   description:
     "Live online classes for Grade 1 to A/L, Cambridge & Edexcel, in Sinhala, Tamil, and English medium. Group and individual tuition with expert tutors.",
   alternates: { canonical: "/sl" },
@@ -140,7 +141,7 @@ export default function SriLankaPage() {
       />
       <JsonLdScript
         data={tuitionService({
-          name: "Online Tuition Sri Lanka — EDUS",
+          name: "Online Tuition Sri Lanka - EDUS",
           description:
             "Live online classes and one-to-one tutoring for Sri Lankan school students. National Syllabus, Cambridge IGCSE, and Edexcel in Sinhala, Tamil, and English medium.",
           url: `${SITE_URL}/sl`,
@@ -161,6 +162,7 @@ export default function SriLankaPage() {
       <SlGroupClasses />
       <SlIndividual />
       <SlTestimonials />
+      <SlFAQ />
       <OtherMarkets current="sl" />
       <CTA />
     </>

@@ -1,7 +1,7 @@
 import { JsonLdScript, breadcrumbList, speakableWebPage } from "@/components/layout/StructuredData";
 
 export const metadata = {
-  title: "Safeguarding Policy · EDUS Lanka (PVT) Ltd.",
+  title: "Safeguarding Policy - EDUS Lanka (PVT) Ltd.",
   description:
     "EDUS Online Tuition is committed to safeguarding the welfare of every child and young person using our online learning services across Sri Lanka, India, Maldives, and globally.",
   alternates: { canonical: "/safeguarding" },
@@ -22,7 +22,7 @@ export default function SafeguardingPage() {
       />
       <JsonLdScript
         data={speakableWebPage({
-          name: "Safeguarding Policy · EDUS Lanka (PVT) Ltd.",
+          name: "Safeguarding Policy - EDUS Lanka (PVT) Ltd.",
           description:
             "EDUS Online Tuition's commitment to safeguarding the welfare of every child and young person across Sri Lanka, India, Maldives, and globally.",
           path: "/safeguarding",

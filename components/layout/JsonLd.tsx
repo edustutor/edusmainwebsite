@@ -2,7 +2,7 @@
  * JSON-LD schema markup for EDUS homepage.
  *
  * Emits three schema blocks:
- *   - EducationalOrganization (Knowledge Panel signal — entity, logo, address,
+ *   - EducationalOrganization (Knowledge Panel signal - entity, logo, address,
  *     contact point, area served, offer catalog)
  *   - WebSite (brand site identity)
  *   - FAQPage (homepage Q&A)
@@ -11,8 +11,19 @@
  * JobPosting) live in `StructuredData.tsx` and are emitted from each route.
  */
 
-import { JsonLdScript, siteNavigation, primaryPagesItemList, successStoriesItemList } from "./StructuredData";
+import {
+  JsonLdScript,
+  siteNavigation,
+  primaryPagesItemList,
+  successStoriesItemList,
+  enrollmentHowTo,
+  studentInteractionCounter,
+  signupWebApplication,
+  videoObject,
+  edusVideoCarousel,
+} from "./StructuredData";
 import { STORIES } from "@/components/shared/SuccessData";
+import { VIDEOS } from "@/components/shared/VideosData";
 
 const SITE_URL = "https://edustutor.com";
 
@@ -21,7 +32,9 @@ const ORG = {
   "@type": "EducationalOrganization",
   "@id": `${SITE_URL}/#organization`,
   name: "EDUS",
-  alternateName: ["EDUS Online Tuition", "EDUS Tutor", "edustutor"],
+  legalName: "EDUS Lanka (Pvt) Ltd",
+  alternateName: ["EDUS Online Tuition", "EDUS Tutor", "edustutor", "EDUS Lanka"],
+  identifier: "PV 00232840",
   url: SITE_URL,
   logo: {
     "@type": "ImageObject",
@@ -33,13 +46,41 @@ const ORG = {
   slogan: "Quality-Assured Online Live Learning Platform",
   description:
     "EDUS is the quality-assured online live learning platform. Live tuition, group and one to one classes, expert tutors, progress tracking, class recordings, exams, parent updates, and learning resources for school students.",
+  knowsAbout: [
+    "Online tuition",
+    "Live online classes",
+    "Sri Lankan National Syllabus",
+    "Cambridge IGCSE",
+    "Cambridge O-Level",
+    "Cambridge A-Level",
+    "Edexcel IGCSE",
+    "Edexcel International A-Level",
+    "CBSE Classes 6 to 10",
+    "International Baccalaureate (IB)",
+    "G.C.E O/L exam preparation",
+    "G.C.E A/L exam preparation",
+    "Grade 5 scholarship exam preparation",
+    "One-to-one online tutoring",
+    "Group online classes",
+    "Online tutor matching",
+    "Parent monitored online learning",
+  ],
+  award: [
+    "Microsoft for Startups Founders Hub",
+    "ICTA Sri Lanka Recognised Startup",
+    "SLASSCOM Member",
+    "Spiralation by ICTA",
+    "Hemas Slingshot x Hatch Cohort",
+    "Yarl IT Hub Recognised Startup",
+    "Innovate Lanka",
+  ],
   sameAs: [
     "https://www.facebook.com/edusonline",
     "https://www.instagram.com/edus_online/",
     "https://www.tiktok.com/@edusonline",
     "https://www.youtube.com/@edusonline/",
     "https://lk.linkedin.com/company/edusonline",
-    // Google Business Profile (Maps listing) — confirms entity to Google
+    // Google Business Profile (Maps listing) - confirms entity to Google
     "https://share.google/ZQO6DJ0yRrFXtOw1x",
     "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
   ],
@@ -122,7 +163,7 @@ const WEBSITE = {
   inLanguage: "en",
 };
 
-// Separate LocalBusiness entity for the Jaffna office — feeds Google's local
+// Separate LocalBusiness entity for the Jaffna office - feeds Google's local
 // pack and Maps listing. The `@id` allows the EducationalOrganization above
 // to be linked to this physical location.
 const LOCAL_BUSINESS = {
@@ -161,7 +202,7 @@ const LOCAL_BUSINESS = {
     "https://share.google/ZQO6DJ0yRrFXtOw1x",
     "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
   ],
-  // Operating hours — adjust if your office hours differ
+  // Operating hours - adjust if your office hours differ
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -187,6 +228,13 @@ const LOCAL_BUSINESS = {
 const FAQ = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  // Voice-assistant readable. Targets the visible FAQ section on the homepage
+  // (<section id="faq"> in components/shared/FAQ.tsx) so Google Assistant /
+  // Alexa-style readers can quote the Q&A directly.
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["#faq h2", "#faq h3", "#faq p", "#faq li"],
+  },
   mainEntity: [
     {
       "@type": "Question",
@@ -270,7 +318,18 @@ export function HomeJsonLd() {
       <JsonLdScript data={WEBSITE} />
       <JsonLdScript data={siteNavigation()} />
       <JsonLdScript data={primaryPagesItemList()} />
+      <JsonLdScript data={enrollmentHowTo()} />
+      <JsonLdScript data={signupWebApplication()} />
+      <JsonLdScript data={studentInteractionCounter()} />
       {stories.length > 0 && <JsonLdScript data={successStoriesItemList(stories)} />}
+      {VIDEOS.length > 0 && (
+        <>
+          {VIDEOS.map((v) => (
+            <JsonLdScript key={v.id} data={videoObject(v)} />
+          ))}
+          <JsonLdScript data={edusVideoCarousel(VIDEOS)} />
+        </>
+      )}
       <JsonLdScript data={FAQ} />
     </>
   );

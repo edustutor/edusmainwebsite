@@ -5,6 +5,7 @@ import { QualifiedTutors } from "@/components/home/QualifiedTutors";
 import { LearningExperience } from "@/components/home/LearningExperience";
 import { ParentTrust } from "@/components/home/ParentTrust";
 import { Success } from "@/components/shared/Success";
+import { VideoShowcase } from "@/components/home/VideoShowcase";
 import { ResourceSupport } from "@/components/shared/ResourceSupport";
 import { Accreditations } from "@/components/shared/Accreditations";
 import { FAQ } from "@/components/shared/FAQ";
@@ -22,9 +23,11 @@ export default function Home() {
       <LearningExperience />
       <ParentTrust />
       <Success />
+      
       <ResourceSupport />
       <Accreditations />
       <FAQ />
+      <VideoShowcase />
       <CTA />
     </>
   );

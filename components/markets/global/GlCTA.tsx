@@ -56,7 +56,7 @@ export function GlCTA() {
               variants={fadeUp}
               className="mt-10 text-[12px] uppercase tracking-[0.16em] text-[#5A6A82] font-display font-700"
             >
-              Expert Tutors · Personalized Learning · Happy Academic Success
+              Expert Tutors - Personalized Learning - Happy Academic Success
             </m.p>
           </m.div>
         </m.div>

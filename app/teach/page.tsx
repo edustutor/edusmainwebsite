@@ -20,12 +20,13 @@ import {
   JsonLdScript,
   breadcrumbList,
   tutorJobPosting,
+  teachCollectionPage,
 } from "@/components/layout/StructuredData";
 
 export const metadata = {
-  title: "Teach with EDUS · Online Tutor Opportunities · Sri Lanka, India, Maldives & Global",
+  title: "Teach with EDUS - Online Tutor Jobs - SL, India, Maldives",
   description:
-    "Join EDUS Online Institute as a tutor and teach students across Sri Lanka, India, Maldives, and global communities. Apply now to become part of a structured, quality-focused online learning platform.",
+    "Become an EDUS online tutor and teach students across Sri Lanka, India, Maldives & globally. Apply now to join a quality-focused online learning platform.",
   alternates: { canonical: "/teach" },
   keywords: [
     // Primary
@@ -93,6 +94,7 @@ export default function TeachWithEdusPage() {
         ])}
       />
       <JsonLdScript data={tutorJobPosting()} />
+      <JsonLdScript data={teachCollectionPage()} />
       <TeachHero />
       <TeachVision />
       <TeachStats />

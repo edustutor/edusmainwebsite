@@ -58,7 +58,7 @@ export function MvIslands() {
                   {i.name}
                 </h3>
                 <p className="text-[12px] uppercase tracking-[0.08em] mt-1 font-display font-600" style={{ color: i.tint }}>
-                  {i.note} · Online Tuition
+                  {i.note} - Online Tuition
                 </p>
               </div>
             </m.article>

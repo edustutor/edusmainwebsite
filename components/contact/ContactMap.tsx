@@ -54,19 +54,19 @@ export function ContactMap() {
           <div className="space-y-4">
             <RemoteCard
               flag="🇮🇳"
-              title="India · Online Support"
+              title="India - Online Support"
               body="Students and parents in Tamil Nadu and across India are served through online support, with admissions and academic help handled remotely."
               tint="#8B5CF6"
             />
             <RemoteCard
               flag="🇲🇻"
-              title="Maldives · Online Support"
+              title="Maldives - Online Support"
               body="Maldivian families across every island connect with EDUS online for one-to-one Cambridge IGCSE and O-Level tuition."
               tint="#22C55E"
             />
             <RemoteCard
               flag="🌐"
-              title="Global · Online Support"
+              title="Global - Online Support"
               body="Students from any other country reach EDUS through email and the online inquiry form. Our team responds within one business day with class options and tutor matching."
               tint="#06B6D4"
             />

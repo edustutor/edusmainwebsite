@@ -11,9 +11,9 @@ import { fadeUp, sectionRevealStrong, inView } from "@/lib/motion";
 
 const REGIONS = [
   "Sri Lanka",
-  "India · CBSE",
-  "Maldives · Cambridge",
-  "Global · One-to-One",
+  "India - CBSE",
+  "Maldives - Cambridge",
+  "Global - One-to-One",
   "Not sure yet",
 ];
 
@@ -51,7 +51,7 @@ const INITIAL: FormState = {
   message: "",
 };
 
-// Honeypot — hidden field bots will fill, real users won't see.
+// Honeypot - hidden field bots will fill, real users won't see.
 const HONEYPOT_FIELD = "_company";
 
 const MESSAGE_MAX = 500;
@@ -205,7 +205,7 @@ export function ContactForm() {
               className="mt-10 glass-strong rounded-[28px] p-6 md:p-10"
             >
               <fieldset className="space-y-5" disabled={submitting}>
-                {/* Honeypot — hidden from real users, bots will fill it */}
+                {/* Honeypot - hidden from real users, bots will fill it */}
                 <div aria-hidden className="absolute left-[-9999px] w-px h-px overflow-hidden" style={{ visibility: "hidden" }}>
                   <label>
                     Company (leave blank)
@@ -219,7 +219,7 @@ export function ContactForm() {
                   </label>
                 </div>
 
-                {/* Row 1 — Name + Phone */}
+                {/* Row 1 - Name + Phone */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label="Full Name" required error={errors.parentName}>
                     <Input
@@ -253,7 +253,7 @@ export function ContactForm() {
                   </Field>
                 </div>
 
-                {/* Row 2 — Email + Region */}
+                {/* Row 2 - Email + Region */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label="Email" hint="Optional" error={errors.email}>
                     <Input

@@ -16,9 +16,9 @@ export const GRADES: Grade[] = [
 
 export type Slot = { slot: string; time: string; tint: string };
 export const SCHEDULE: Slot[] = [
-  { slot: "Slot 1",   time: "6:30 PM – 7:30 PM",  tint: "#2563EB" },
-  { slot: "Slot 2",   time: "7:45 PM – 8:45 PM",  tint: "#8B5CF6" },
-  { slot: "Optional", time: "9:00 PM – 10:00 PM", tint: "#06B6D4" },
+  { slot: "Slot 1",   time: "6:30 PM - 7:30 PM",  tint: "#2563EB" },
+  { slot: "Slot 2",   time: "7:45 PM - 8:45 PM",  tint: "#8B5CF6" },
+  { slot: "Optional", time: "9:00 PM - 10:00 PM", tint: "#06B6D4" },
 ];
 
 export type PricingTier = {

@@ -53,7 +53,7 @@ export function ContactCountries() {
                 style={{ background: c.tint }}
               />
 
-              {/* Header — icon tile + name + region kicker */}
+              {/* Header - icon tile + name + region kicker */}
               <div className="flex items-center gap-3">
                 <span
                   className="inline-flex w-12 h-12 rounded-xl items-center justify-center text-2xl shrink-0"
@@ -67,7 +67,7 @@ export function ContactCountries() {
                     className="font-display font-800 text-[11px] tracking-[0.16em] uppercase"
                     style={{ color: c.tint }}
                   >
-                    EDUS · {REGION_LABEL[c.code]}
+                    EDUS - {REGION_LABEL[c.code]}
                   </p>
                   <h3 className="mt-0.5 font-display font-700 text-[18px] text-[#102033] leading-tight">
                     {c.name}
@@ -175,7 +175,7 @@ function ContactRow({
 }
 
 /* ---------------------------------------------------------------- */
-/* Inline icons — small, consistent stroke                            */
+/* Inline icons - small, consistent stroke                            */
 /* ---------------------------------------------------------------- */
 
 function IconPhone() {

@@ -31,7 +31,7 @@ export function SlTestimonials() {
                 </span>
                 <div>
                   <p className="text-[14px] font-display font-600 text-[#102033]">{t.name}</p>
-                  <p className="text-[12px] text-[#5A6A82]">{t.role} · {t.loc}</p>
+                  <p className="text-[12px] text-[#5A6A82]">{t.role} - {t.loc}</p>
                 </div>
               </div>
             </article>

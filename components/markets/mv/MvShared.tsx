@@ -24,7 +24,7 @@ export const SUBJECTS: Subject[] = [
     icon: "🧮",
     blurb:
       "Build strong problem-solving skills, master formulas, and prepare confidently for Cambridge IGCSE / O-Level Mathematics.",
-    topics: "Algebra · Geometry · Trigonometry · Graphs · Probability · Statistics",
+    topics: "Algebra - Geometry - Trigonometry - Graphs - Probability - Statistics",
   },
   {
     name: "English as a Second Language",
@@ -35,7 +35,7 @@ export const SUBJECTS: Subject[] = [
     icon: "📖",
     blurb:
       "Improve reading, writing, grammar, vocabulary, and exam communication for academic confidence.",
-    topics: "Reading · Writing · Listening · Speaking · Exam strategy",
+    topics: "Reading - Writing - Listening - Speaking - Exam strategy",
   },
   {
     name: "Biology",
@@ -46,7 +46,7 @@ export const SUBJECTS: Subject[] = [
     icon: "🧬",
     blurb:
       "Understand key biological concepts clearly and prepare structured exam answers backed by past-paper practice.",
-    topics: "Cells · Genetics · Ecology · Human biology · Diagrams · Vocabulary",
+    topics: "Cells - Genetics - Ecology - Human biology - Diagrams - Vocabulary",
   },
   {
     name: "Chemistry",
@@ -57,7 +57,7 @@ export const SUBJECTS: Subject[] = [
     icon: "🧪",
     blurb:
       "Master concepts, reactions, calculations, and practical-based questions with patient, step-by-step support.",
-    topics: "Bonding · Acids & bases · Organic · Stoichiometry · Past papers",
+    topics: "Bonding - Acids & bases - Organic - Stoichiometry - Past papers",
   },
   {
     name: "Physics",
@@ -68,7 +68,7 @@ export const SUBJECTS: Subject[] = [
     icon: "⚛️",
     blurb:
       "Build clarity in concepts, formulas, and problem solving - with exam-style training every step of the way.",
-    topics: "Mechanics · Electricity · Waves · Energy · Forces · Calculations",
+    topics: "Mechanics - Electricity - Waves - Energy - Forces - Calculations",
   },
 ];
 

@@ -26,7 +26,7 @@ export type PricingTier = {
 
 export const PRICING: PricingTier[] = [
   {
-    tag: "Group · Primary",
+    tag: "Group - Primary",
     price: "From LKR 1,000",
     unit: "/ subject / month",
     grades: "Primary Classes",
@@ -38,20 +38,20 @@ export const PRICING: PricingTier[] = [
     tint: "#2563EB",
   },
   {
-    tag: "Group · Secondary",
+    tag: "Group - Secondary",
     price: "From LKR 1,000",
     unit: "/ subject / month",
-    grades: "Grade 6 – 11 · O/L",
+    grades: "Grade 6 - 11 - O/L",
     bullets: [
-      "Grades 6 – 9 from LKR 1,000",
-      "Grades 10 – 11 from LKR 1,200",
+      "Grades 6 - 9 from LKR 1,000",
+      "Grades 10 - 11 from LKR 1,200",
       "Tamil & English medium classes",
     ],
     tint: "#8B5CF6",
     featured: true,
   },
   {
-    tag: "Group · Advanced Level",
+    tag: "Group - Advanced Level",
     price: "LKR 2,500",
     unit: "/ subject / month",
     grades: "G.C.E. A/L",
