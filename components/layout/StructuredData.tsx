@@ -108,7 +108,7 @@ export function educationalProgram(opts: ProgramOptions) {
 export function siteNavigation() {
   const items = [
     { name: "Sri Lanka Classes",       path: "/sl" },
-    { name: "Sri Lanka Timetable 2026", path: "/sl/timetable" },
+    { name: "Sri Lanka Group Class Timetable 2026", path: "/sl/timetable" },
     { name: "India CBSE Classes 6-10", path: "/in" },
     { name: "Maldives Cambridge IGCSE", path: "/mv" },
     { name: "Global One-to-One Tuition", path: "/global" },
@@ -134,8 +134,8 @@ export function siteNavigation() {
 /* --------------------------------------------------------------- */
 export function primaryPagesItemList() {
   const items = [
-    { name: "Sri Lanka Online Tuition",  path: "/sl",      desc: "Live online classes for Grade 1 to A/L - National, Cambridge & Edexcel - Sinhala, Tamil, English medium" },
-    { name: "Sri Lanka Timetable 2026",  path: "/sl/timetable", desc: "Full 2026 class schedule for EDUS Sri Lanka - Grade 3 to A/L, Tamil & English medium, with tutors, times, and fees" },
+    { name: "Sri Lanka Online Tuition",  path: "/sl",      desc: "Live online group classes (fixed timetable) and flexible 1-to-1 tuition for Grade 1 to A/L. National, Cambridge & Edexcel. Sinhala, Tamil, English medium. Single LKR 1,000 one-time admission fee per student" },
+    { name: "Sri Lanka Group Class Timetable 2026",  path: "/sl/timetable", desc: "Full 2026 timetable for group classes only. Grade 3 to A/L, Tamil & English, with tutors, days, times, and monthly fees. Individual 1-to-1 classes scheduled flexibly per student" },
     { name: "India CBSE Online Tuition", path: "/in",      desc: "CBSE Classes 6 to 10 for Tamil Nadu students - Maths, Science, English - monthly parent reports" },
     { name: "Maldives Cambridge IGCSE",  path: "/mv",      desc: "Premium 1-to-1 Cambridge IGCSE and O-Level for Grade 9 and 10 Maldives students" },
     { name: "Global One-to-One Tuition", path: "/global",  desc: "Personalised online tutoring for international students - Cambridge, Edexcel, IGCSE, GCSE, IB" },

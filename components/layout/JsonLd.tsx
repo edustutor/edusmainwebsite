@@ -125,7 +125,7 @@ const ORG = {
         name: "Sri Lanka Classes",
         url: `${SITE_URL}/sl`,
         description:
-          "Live online group classes and one to one tuition for Sri Lankan school students from Grade 1 to G.C.E A/L.",
+          "Live online group classes on a fixed 2026 timetable (Grade 3 to A/L, Tamil and English medium, with a single LKR 1,000 one-time admission fee per student regardless of how many classes or subjects taken) and flexible one-to-one tutoring (any grade, any subject, scheduled per student) for Sri Lankan school students. Delivered via the EDUS Student Mobile App, EDUS Web App, and Google Meet.",
       },
       {
         "@type": "Offer",
@@ -298,6 +298,30 @@ const FAQ = {
       acceptedAnswer: {
         "@type": "Answer",
         text: "Head to https://signup.edustutor.com/ to begin enrolment. Choose your region, grade, and subject, and the EDUS team will follow up to confirm your tutor and class plan.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is there an admission fee for EDUS classes?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. For Sri Lanka, a single one-time admission fee of LKR 1,000 per student is applicable when joining EDUS - regardless of how many classes or subjects the student takes. It covers onboarding, account setup, and class allocation. For India, the admission fee is INR 2,000 (one-time, per student). Individual one-to-one classes do not have a separate admission fee.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is the difference between group classes and individual classes?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Group classes follow a fixed weekly timetable published in advance (see https://edustutor.com/sl/timetable for Sri Lanka). Individual one-to-one classes are scheduled flexibly per student, around the student's convenience and tutor availability - any grade, any subject, any medium, no fixed timetable. Group classes are priced per subject per month; individual classes start from LKR 2,500 per hour in Sri Lanka.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How are EDUS classes delivered?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "All EDUS classes are conducted through the EDUS Student Mobile App and the EDUS Web App, with live class sessions delivered on Google Meet. Class recordings, assignments, homework submissions, and parent progress updates all live inside the EDUS app.",
       },
     },
   ],

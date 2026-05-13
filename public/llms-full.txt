@@ -30,13 +30,25 @@ EDUS is the quality-assured online live learning platform for school students. W
 - **Mediums:** Sinhala, Tamil, English
 - **Formats:** Group classes + Individual (1-to-1) classes
 
-**Pricing (group classes):**
+**Pricing (group classes - fixed weekly timetable):**
+- Admission fee: LKR 1,000 per student, one time only (paid once when joining EDUS - regardless of how many classes or subjects the student takes)
 - Primary: from LKR 1,000 / subject / month
 - Grade 6 to 9: from LKR 1,000 / subject / month
 - Grade 10 to 11 (O/L): from LKR 1,200 / subject / month
 - G.C.E A/L: LKR 2,500 / subject / month (Combined Maths, Physics, Chemistry, Biology, ICT)
+- Full 2026 group class timetable: https://edustutor.com/sl/timetable
 
-**Pricing (individual 1-to-1):** Starting from LKR 2,500 / hour, all grades, all subjects, all mediums, no fixed timetable.
+**Pricing (individual 1-to-1 - flexible scheduling):** Starting from LKR 2,500 / hour, all grades, all subjects, all mediums, no fixed timetable. Sessions scheduled around the student's convenience and tutor availability. Not included in the published group class timetable.
+
+**Class delivery:** All Sri Lanka classes are conducted through the EDUS Student Mobile App and the EDUS Web App. Live class sessions are delivered on Google Meet. Recordings, assignments, homework, and parent updates all live inside the EDUS app.
+
+**Student conduct (rules accepted before joining any group class):**
+1. Proper internet and device required.
+2. Video must be on during class (unless culturally impossible).
+3. Sitting for exams and completing all assignments and homework is mandatory.
+4. Students must respond to tutor queries during class - non-respondents are removed.
+5. Regular attendance is required. Continuous absence for 3 classes leads to removal with no rejoin.
+6. Classes are conducted only via the EDUS Tutor Mobile & Web App and Google Meet.
 
 **Subjects offered:**
 - Primary & Grade 6 to 11: Mathematics, Science, English, Tamil, Sinhala, Environmental Studies, History, ICT, Spoken English, Elocution, IQ

@@ -25,11 +25,19 @@ const FAQS = [
   },
   {
     q: "Are these group classes or one-to-one?",
-    a: "Both. EDUS Sri Lanka runs scheduled live group classes and one-to-one online tuition. Group classes follow a fixed timetable; one-to-one tuition is scheduled around the student's availability.",
+    a: "Both. EDUS Sri Lanka runs scheduled live group classes on a fixed weekly timetable (see https://edustutor.com/sl/timetable for the full 2026 schedule) and flexible one-to-one online tuition. Group class times are fixed; one-to-one tuition is scheduled around each student's preferred timing.",
   },
   {
     q: "How much does EDUS Sri Lanka cost?",
-    a: "Group class fees start from LKR 1,000 per subject per month for primary and junior secondary, LKR 1,200 per subject per month for O/L (Grade 10 and 11), and LKR 2,500 per subject per month for A/L. One-to-one tuition starts from LKR 2,500 per hour across all grades.",
+    a: "Group class fees start from LKR 1,000 per subject per month for primary and junior secondary, LKR 1,200 per subject per month for O/L (Grade 10 and 11), and LKR 2,500 per subject per month for A/L. A single one-time admission fee of LKR 1,000 per student applies when joining EDUS - regardless of how many classes or subjects the student takes. One-to-one tuition starts from LKR 2,500 per hour, all grades, all subjects, no fixed timetable.",
+  },
+  {
+    q: "Is there an admission fee?",
+    a: "Yes. A single one-time admission fee of LKR 1,000 per student is applicable when joining EDUS - one fee per student, regardless of how many classes or subjects the student enrols in. It covers onboarding, account setup, and class allocation. There is no separate admission fee for individual one-to-one classes.",
+  },
+  {
+    q: "How are classes delivered?",
+    a: "All EDUS classes are conducted through the EDUS Student Mobile App and the EDUS Web App, with live class sessions delivered on Google Meet. Class recordings, assignments, homework, and parent progress updates all live inside the EDUS app.",
   },
   {
     q: "Which A/L subjects can students take?",

@@ -195,13 +195,16 @@ export default function SlTimetablePage() {
                 Admission Fee
               </p>
               <h3 className="mt-2 font-display font-700 text-[20px] text-[#102033] leading-tight">
-                LKR 1,000 per class
+                LKR 1,000 - one time only
               </h3>
               <p className="mt-2 text-[14px] text-[#5A6A82] leading-[1.65]">
-                A one-time admission fee of{" "}
-                <strong className="font-display font-700 text-[#102033]">LKR 1,000</strong> applies
-                per student, per class joined. Paid once when enrolling in a group class - covers
-                onboarding, account setup, and class allocation.
+                A single one-time admission fee of{" "}
+                <strong className="font-display font-700 text-[#102033]">LKR 1,000 per student</strong>{" "}
+                - paid once when joining EDUS,{" "}
+                <strong className="font-display font-700 text-[#102033]">
+                  regardless of how many classes or subjects
+                </strong>{" "}
+                the student takes. Covers onboarding, account setup, and class allocation.
               </p>
             </article>
 

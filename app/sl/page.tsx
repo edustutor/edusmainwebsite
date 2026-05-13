@@ -18,7 +18,7 @@ import {
 export const metadata = {
   title: "Sri Lanka Online Tuition - National, Cambridge & Edexcel",
   description:
-    "Live online classes for Grade 1 to A/L, Cambridge & Edexcel, in Sinhala, Tamil, and English medium. Group and individual tuition with expert tutors.",
+    "Live online group classes (fixed timetable) and flexible 1-to-1 tuition for Grade 1 to A/L. National Syllabus, Cambridge, Edexcel. Sinhala, Tamil, English medium.",
   alternates: { canonical: "/sl" },
   keywords: [
     // Primary
@@ -117,6 +117,16 @@ export const metadata = {
     "Grade 5 scholarship classes online",
     "scholarship exam tuition Sri Lanka",
     "online tuition for scholarship students",
+    // Timetable + delivery
+    "EDUS group class timetable",
+    "EDUS Sri Lanka timetable 2026",
+    "online class schedule Sri Lanka",
+    "EDUS class fees Sri Lanka",
+    "EDUS admission fee",
+    "EDUS app online classes",
+    "EDUS Google Meet classes",
+    "individual online tuition Sri Lanka flexible timing",
+    "flexible online tutoring schedule Sri Lanka",
   ],
 };
 
@@ -133,7 +143,7 @@ export default function SriLankaPage() {
         data={educationalProgram({
           name: "EDUS Sri Lanka Online Tuition",
           description:
-            "Live online tuition for Sri Lankan students from Grade 1 to G.C.E A/L. National Syllabus, Cambridge IGCSE, and Edexcel in Sinhala, Tamil, and English medium.",
+            "Live online tuition for Sri Lankan students from Grade 1 to G.C.E A/L. National Syllabus, Cambridge IGCSE, and Edexcel in Sinhala, Tamil, and English medium. Group classes follow a fixed weekly timetable (https://edustutor.com/sl/timetable); individual one-to-one classes are scheduled flexibly per student.",
           url: `${SITE_URL}/sl`,
           area: "Sri Lanka",
           educationalLevel: "Grade 1 to G.C.E A/L",
@@ -143,7 +153,7 @@ export default function SriLankaPage() {
         data={tuitionService({
           name: "Online Tuition Sri Lanka - EDUS",
           description:
-            "Live online classes and one-to-one tutoring for Sri Lankan school students. National Syllabus, Cambridge IGCSE, and Edexcel in Sinhala, Tamil, and English medium.",
+            "Live online group classes (fixed timetable, from LKR 1,000/subject/month, plus a single LKR 1,000 one-time admission fee per student regardless of how many classes or subjects they take) and flexible one-to-one tutoring (from LKR 2,500/hour) for Sri Lankan school students. National Syllabus, Cambridge IGCSE, and Edexcel in Sinhala, Tamil, and English medium. Delivered via EDUS Student Mobile App, EDUS Web App, and Google Meet.",
           url: `${SITE_URL}/sl`,
           area: "Sri Lanka",
         })}
@@ -152,7 +162,7 @@ export default function SriLankaPage() {
         data={tuitionCourse({
           name: "EDUS Sri Lanka Live Online Classes",
           description:
-            "Live online tuition course for Sri Lankan students from Grade 1 to G.C.E A/L. National Syllabus, Cambridge IGCSE, and Edexcel in Sinhala, Tamil, and English medium.",
+            "Live online tuition course for Sri Lankan students from Grade 1 to G.C.E A/L. Group classes on a fixed weekly timetable, plus flexible one-to-one tutoring scheduled per student. National Syllabus, Cambridge IGCSE, Edexcel. Sinhala, Tamil, English medium.",
           url: `${SITE_URL}/sl`,
           area: "Sri Lanka",
         })}
