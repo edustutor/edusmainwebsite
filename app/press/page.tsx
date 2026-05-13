@@ -43,7 +43,7 @@ const FACT_SHEET = [
   { label: "Legal name",          value: "EDUS Lanka (Pvt) Ltd" },
   { label: "Trading as",          value: "EDUS - EDUS Online Tuition" },
   { label: "Company registration", value: "PV 00232840" },
-  { label: "Founded",             value: "2020" },
+  { label: "Founded",             value: "2021" },
   { label: "Headquarters",        value: "Jaffna, Sri Lanka" },
   { label: "Markets served",      value: "Sri Lanka - India - Maldives - Global" },
   { label: "Students supported",  value: "7,000+" },

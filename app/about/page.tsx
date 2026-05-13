@@ -14,9 +14,9 @@ import {
  */
 
 export const metadata = {
-  title: "About EDUS - Online Tuition Institute - Sri Lanka - Since 2020",
+  title: "About EDUS - Online Tuition Institute - Sri Lanka - Since 2021",
   description:
-    "About EDUS Lanka (Pvt) Ltd - quality-assured online learning platform founded 2020, based in Jaffna. 7,000+ students supported across Sri Lanka, India, Maldives & global.",
+    "About EDUS Lanka (Pvt) Ltd - quality-assured online learning platform founded 2021, based in Jaffna. 7,000+ students supported across Sri Lanka, India, Maldives & global.",
   alternates: { canonical: "/about" },
   keywords: [
     "about EDUS",
@@ -40,7 +40,7 @@ export const metadata = {
 const FACTS = [
   { label: "Legal name",        value: "EDUS Lanka (Pvt) Ltd" },
   { label: "Registration",      value: "PV 00232840" },
-  { label: "Founded",           value: "2020" },
+  { label: "Founded",           value: "2021" },
   { label: "Registered office", value: "No. 95, K.K.S Road, Kokkuvil Junction, Jaffna 40000, Sri Lanka" },
   { label: "Students supported", value: "7,000+" },
   { label: "Markets",           value: "Sri Lanka - India - Maldives - Global" },
@@ -82,7 +82,7 @@ const PRINCIPLES = [
   {
     n: "04",
     title: "Affordable at scale",
-    body: "Pricing is set so families across Sri Lanka, India, and Maldives can afford structured online learning. Group classes start at LKR 1,000 / subject / month in Sri Lanka.",
+    body: "Pricing is set so families across Sri Lanka, India, and Maldives can afford structured online learning.",
     tint: "#22C55E",
   },
 ];
@@ -98,10 +98,10 @@ export default function AboutPage() {
       />
       <JsonLdScript
         data={speakableWebPage({
-          name: "About EDUS - Online Tuition Institute - Sri Lanka - Since 2020",
+          name: "About EDUS - Online Tuition Institute - Sri Lanka - Since 2021",
           headline: "About EDUS Online Tuition",
           description:
-            "About EDUS Lanka (Pvt) Ltd - quality-assured online learning platform founded 2020, based in Jaffna, Sri Lanka. 7,000+ students supported across four markets.",
+            "About EDUS Lanka (Pvt) Ltd - quality-assured online learning platform founded 2021, based in Jaffna, Sri Lanka. 7,000+ students supported across four markets.",
           path: "/about",
           // Target the mission statement and operating principles - the
           // most quotable, voice-assistant-friendly sections of the page.
@@ -127,7 +127,7 @@ export default function AboutPage() {
             Quality-assured <em>online learning</em><br />for school students.
           </h1>
           <p className="text-[#2B3950] text-[17px] mt-6 leading-[1.65] max-w-2xl mx-auto">
-            EDUS Lanka (Pvt) Ltd is an online learning institute founded in 2020. We build a
+            EDUS Lanka (Pvt) Ltd is an online learning institute founded in 2021. We build a
             structured, scalable, technology-driven education ecosystem connecting qualified
             tutors with students across Sri Lanka, India, Maldives, and global communities.
           </p>

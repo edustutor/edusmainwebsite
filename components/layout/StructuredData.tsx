@@ -140,7 +140,7 @@ export function primaryPagesItemList() {
     { name: "Maldives Cambridge IGCSE",  path: "/mv",      desc: "Premium 1-to-1 Cambridge IGCSE and O-Level for Grade 9 and 10 Maldives students" },
     { name: "Global One-to-One Tuition", path: "/global",  desc: "Personalised online tutoring for international students - Cambridge, Edexcel, IGCSE, GCSE, IB" },
     { name: "Teach with EDUS",           path: "/teach",   desc: "Apply to become an EDUS tutor and teach students across Sri Lanka, India, Maldives, and globally" },
-    { name: "About EDUS",                path: "/about",   desc: "EDUS Lanka (Pvt) Ltd - Founded 2020 - 7,000+ students - Backed by Microsoft for Startups, ICTA, SLASSCOM" },
+    { name: "About EDUS",                path: "/about",   desc: "EDUS Lanka (Pvt) Ltd - Founded 2021 - 7,000+ students - Backed by Microsoft for Startups, ICTA, SLASSCOM" },
     { name: "EDUS Blog",                 path: "/blog",    desc: "Exam preparation guides, study tips, and parent advice from the EDUS Academic Team" },
     { name: "EDUS Press Kit",            path: "/press",   desc: "Brand assets, logos, fact sheet, and media contact for journalists and partners" },
     { name: "Contact EDUS",              path: "/contact", desc: "Talk to the EDUS team to find the right class, subject, or tutor for your child" },

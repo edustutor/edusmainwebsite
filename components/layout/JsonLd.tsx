@@ -108,7 +108,7 @@ const ORG = {
       email: "hello@edustutor.com",
     },
   ],
-  foundingDate: "2020",
+  foundingDate: "2021",
   areaServed: [
     { "@type": "Country", name: "Sri Lanka" },
     { "@type": "Country", name: "India" },

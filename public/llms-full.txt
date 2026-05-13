@@ -9,7 +9,7 @@ EDUS is the quality-assured online live learning platform for school students. W
 - **Legal entity:** EDUS Lanka (Pvt) Ltd.
 - **Registration:** PV 00232840
 - **Registered office:** No. 95, K.K.S Road, Jaffna, Sri Lanka.
-- **Founded:** 2020
+- **Founded:** 2021
 - **Email:** hello@edustutor.com
 - **Phone / WhatsApp:** +94 70 707 2072
 - **Website:** https://edustutor.com

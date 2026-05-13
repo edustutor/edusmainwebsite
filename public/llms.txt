@@ -1,6 +1,6 @@
 # EDUS Online Tuition
 
-> EDUS is the quality-assured online live learning platform for school students across Sri Lanka, India, Maldives, and global markets. Live online classes, group and one-to-one tuition, expert tutors, parent updates, recordings, and learning resources. Founded 2020, based in Jaffna, Sri Lanka, serving 7,000+ students.
+> EDUS is the quality-assured online live learning platform for school students across Sri Lanka, India, Maldives, and global markets. Live online classes, group and one-to-one tuition, expert tutors, parent updates, recordings, and learning resources. Founded 2021, based in Jaffna, Sri Lanka, serving 7,000+ students.
 
 EDUS delivers structured online tuition aligned to the **National Syllabus** (Sri Lanka), **CBSE** (India - Tamil Nadu - Classes 6 to 10), **Cambridge IGCSE / O-Level** (Maldives - Grade 9 to 10), and **Cambridge / Edexcel / IGCSE / GCSE / O-Level / A-Level / IB** (Global one-to-one). Mediums supported: English, Tamil, Sinhala.
 
@@ -53,7 +53,7 @@ Every EDUS student accepts these standards before joining their first class. Str
 
 ## Brand & company
 
-- [About EDUS](https://edustutor.com/about): EDUS Lanka (Pvt) Ltd company information - founded 2020, registered in Sri Lanka (PV 00232840), based in Jaffna, supporting 7,000+ students across four markets.
+- [About EDUS](https://edustutor.com/about): EDUS Lanka (Pvt) Ltd company information - founded 2021, registered in Sri Lanka (PV 00232840), based in Jaffna, supporting 7,000+ students across four markets.
 - [Press Kit](https://edustutor.com/press): Brand logos, color palette, fact sheet, and media contact for journalists and partners.
 
 ## Blog
