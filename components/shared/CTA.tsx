@@ -1,6 +1,5 @@
 "use client";
 import { useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
 import { m } from "@/components/effects/Motion";
@@ -35,10 +34,6 @@ export function CTA() {
             <AmbientGlow bottom="-12%" left="35%" size={220} color="#06B6D4" opacity={[0.10, 0.18]} duration={24} delay={4} blur={80} />
             <AmbientGlow bottom="-12%" right="20%" size={180} color="#FACC15" opacity={[0.12, 0.20]} duration={18} delay={1} blur={70} />
           </div>
-
-          {/* Guaranteed success stamp */}
-          <GuaranteedStamp />
-
 
           <m.div
             variants={staggerContainer}
@@ -93,28 +88,3 @@ export function CTA() {
   );
 }
 
-/* --------------------------------------------------------------- */
-/* "Guaranteed Success" stamp - using the official EDUS image       */
-/* --------------------------------------------------------------- */
-function GuaranteedStamp() {
-  return (
-    <div
-      aria-label="EDUS Guaranteed Success"
-      className="absolute z-20 pointer-events-none select-none
-        right-2 sm:right-6 md:right-10
-        bottom-2 sm:bottom-6 md:bottom-10"
-      style={{ transform: "rotate(-14deg)" }}
-    >
-      <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 drop-shadow-[0_8px_20px_rgba(220,38,38,0.25)]">
-        <Image
-          src="/edus-guaranteed-success.png"
-          alt="EDUS Guaranteed Success"
-          fill
-          sizes="(min-width: 1024px) 128px, (min-width: 768px) 112px, (min-width: 640px) 96px, 80px"
-          quality={95}
-          className="object-contain"
-        />
-      </div>
-    </div>
-  );
-}
