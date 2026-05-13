@@ -2,203 +2,288 @@
 import { useMemo, useState } from "react";
 import { m } from "@/components/effects/Motion";
 import { fadeUp, sectionRevealStrong, inView } from "@/lib/motion";
-import { TIMETABLE, DAYS, type TimetableEntry, type Day } from "./TimetableData";
+import { TIMETABLE, type TimetableEntry } from "./TimetableData";
 
 /**
- * Interactive timetable view. Filters by level (Primary / Secondary / A/L),
- * grade, and medium. Renders the table with one row per class session
- * (a class with two weekly sessions appears as two rows) so the day/time
- * is always cleanly readable on a single line.
+ * Simple grade + medium dropdown timetable view.
+ *
+ * Two dropdowns: Grade and Medium. After both are selected, a single
+ * clean table shows the subjects for that class. No class codes, no
+ * search, no jump chips - just dropdowns and one table.
+ *
+ * Defaults to Grade 3 + Tamil so the first paint already shows real
+ * content for SEO crawlers and AI-engine ingestion.
  */
 
-type Level = "All" | "Primary" | "Secondary" | "A/L";
-type Medium = "All" | "Tamil" | "English";
+type Medium = "Tamil" | "English";
 
-const LEVELS: Level[] = ["All", "Primary", "Secondary", "A/L"];
-const MEDIUMS: Medium[] = ["All", "Tamil", "English"];
+type SubjectRow = {
+  subject: string;
+  effectiveMedium: TimetableEntry["medium"] | "Both";
+  tutor: string;
+  monthlyFee: string;
+  sessions: { day: string; time: string }[];
+};
 
-type Row = TimetableEntry & { day: Day; time: string };
-
-function flatten(entries: TimetableEntry[]): Row[] {
-  const rows: Row[] = [];
+/**
+ * Build the unique grade list in the order they appear in the source data
+ * (Primary -> Secondary -> A/L).
+ */
+function uniqueGrades(entries: TimetableEntry[]): string[] {
+  const seen: string[] = [];
   for (const e of entries) {
-    for (const s of e.sessions) {
-      rows.push({ ...e, day: s.day, time: s.time });
-    }
+    if (!seen.includes(e.grade)) seen.push(e.grade);
   }
-  // Sort by level -> grade number -> medium -> day order
-  const dayIndex = (d: Day) => DAYS.indexOf(d);
-  const gradeNum = (g: string) => {
-    const m = g.match(/\d+/);
-    return m ? parseInt(m[0], 10) : 99;
-  };
-  return rows.sort((a, b) => {
-    if (a.level !== b.level) return ["Primary", "Secondary", "A/L"].indexOf(a.level) - ["Primary", "Secondary", "A/L"].indexOf(b.level);
-    if (a.grade !== b.grade) return gradeNum(a.grade) - gradeNum(b.grade);
-    if (a.medium !== b.medium) return a.medium.localeCompare(b.medium);
-    if (a.subject !== b.subject) return a.subject.localeCompare(b.subject);
-    return dayIndex(a.day) - dayIndex(b.day);
-  });
+  return seen;
 }
 
-const ALL_ROWS = flatten(TIMETABLE);
+const GRADES = uniqueGrades(TIMETABLE);
+const MEDIUMS: Medium[] = ["Tamil", "English"];
+
+/**
+ * Return the subject rows for a given grade + medium. When Tamil and
+ * English share the same tutor and identical sessions for a subject,
+ * they are merged into one row tagged "Both" so the table doesn't
+ * show duplicate rows.
+ */
+function rowsFor(grade: string, medium: Medium): SubjectRow[] {
+  const items = TIMETABLE.filter((e) => e.grade === grade);
+  if (items.length === 0) return [];
+
+  // Bucket by subject preserving original order
+  const subjectOrder: string[] = [];
+  const bySubject = new Map<string, TimetableEntry[]>();
+  for (const it of items) {
+    if (!bySubject.has(it.subject)) {
+      bySubject.set(it.subject, []);
+      subjectOrder.push(it.subject);
+    }
+    bySubject.get(it.subject)!.push(it);
+  }
+
+  const rows: SubjectRow[] = [];
+  for (const subject of subjectOrder) {
+    const subjectEntries = bySubject.get(subject)!;
+
+    // Find Tamil + English variants for this subject (if any)
+    const tamil = subjectEntries.find((e) => e.medium === "Tamil");
+    const english = subjectEntries.find((e) => e.medium === "English");
+
+    // Pure Tamil-only subjects (e.g. Primary classes, A/L) - match on Tamil tab
+    if (tamil && !english) {
+      if (medium === "Tamil") {
+        rows.push({
+          subject: tamil.subject,
+          effectiveMedium: tamil.medium,
+          tutor: tamil.tutor,
+          monthlyFee: tamil.monthlyFee,
+          sessions: tamil.sessions.map((s) => ({ day: s.day, time: s.time })),
+        });
+      }
+      continue;
+    }
+
+    // Pure English-only subject (rare - e.g. Grade 5 Spoken English) - match on English tab
+    if (english && !tamil) {
+      if (medium === "English") {
+        rows.push({
+          subject: english.subject,
+          effectiveMedium: english.medium,
+          tutor: english.tutor,
+          monthlyFee: english.monthlyFee,
+          sessions: english.sessions.map((s) => ({ day: s.day, time: s.time })),
+        });
+      }
+      continue;
+    }
+
+    // Both variants exist - check if they should merge
+    if (tamil && english) {
+      const pick = medium === "Tamil" ? tamil : english;
+      const other = medium === "Tamil" ? english : tamil;
+
+      const sameTutor = pick.tutor === other.tutor;
+      const sameSessions =
+        pick.sessions.length === other.sessions.length &&
+        pick.sessions.every((s, i) => {
+          const o = other.sessions[i];
+          return o && o.day === s.day && o.time === s.time;
+        });
+
+      rows.push({
+        subject: pick.subject,
+        effectiveMedium: sameTutor && sameSessions ? "Both" : pick.medium,
+        tutor: pick.tutor,
+        monthlyFee: pick.monthlyFee,
+        sessions: pick.sessions.map((s) => ({ day: s.day, time: s.time })),
+      });
+    }
+  }
+
+  return rows;
+}
+
+/** Detect the level for a grade (used to label the table header) */
+function levelFor(grade: string): TimetableEntry["level"] {
+  return TIMETABLE.find((e) => e.grade === grade)?.level ?? "Secondary";
+}
 
 export function SlTimetableView() {
-  const [level, setLevel] = useState<Level>("All");
-  const [medium, setMedium] = useState<Medium>("All");
-  const [query, setQuery] = useState("");
+  const [grade, setGrade] = useState<string>(GRADES[0]);
+  const [medium, setMedium] = useState<Medium>("Tamil");
 
-  const rows = useMemo(() => {
-    return ALL_ROWS.filter((r) => {
-      if (level !== "All" && r.level !== level) return false;
-      if (medium !== "All" && !r.medium.includes(medium)) return false;
-      if (query.trim()) {
-        const q = query.trim().toLowerCase();
-        const hay = `${r.code} ${r.subject} ${r.grade} ${r.tutor} ${r.day} ${r.time}`.toLowerCase();
-        if (!hay.includes(q)) return false;
-      }
-      return true;
-    });
-  }, [level, medium, query]);
+  const rows = useMemo(() => rowsFor(grade, medium), [grade, medium]);
+  const level = levelFor(grade);
 
   return (
     <section className="relative py-8 md:py-12 overflow-hidden">
-      <div className="container-edge">
-        {/* Filter bar */}
+      <div className="container-edge max-w-5xl mx-auto">
+        {/* Dropdowns */}
         <m.div
           variants={sectionRevealStrong}
           initial="hidden"
           whileInView="show"
           viewport={inView}
-          className="glass-strong rounded-2xl p-4 md:p-5"
+          className="glass-strong rounded-2xl p-5 md:p-6"
         >
-          <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-[11px] uppercase tracking-widest text-[#5A6A82] font-display font-700 mr-1">
-                Level
-              </span>
-              {LEVELS.map((l) => (
-                <button
-                  key={l}
-                  onClick={() => setLevel(l)}
-                  className={`px-3 py-1.5 rounded-full text-[12.5px] font-display font-600 transition ${
-                    level === l
-                      ? "bg-[#2563EB] text-white"
-                      : "bg-white text-[#2B3950] border border-[rgba(16,32,51,0.10)] hover:border-[#2563EB]/40"
-                  }`}
-                >
-                  {l}
-                </button>
-              ))}
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-[11px] uppercase tracking-widest text-[#5A6A82] font-display font-700 mr-1">
-                Medium
-              </span>
-              {MEDIUMS.map((m) => (
-                <button
-                  key={m}
-                  onClick={() => setMedium(m)}
-                  className={`px-3 py-1.5 rounded-full text-[12.5px] font-display font-600 transition ${
-                    medium === m
-                      ? "bg-[#8B5CF6] text-white"
-                      : "bg-white text-[#2B3950] border border-[rgba(16,32,51,0.10)] hover:border-[#8B5CF6]/40"
-                  }`}
-                >
-                  {m}
-                </button>
-              ))}
-            </div>
-          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <DropdownField label="Grade">
+              <select
+                value={grade}
+                onChange={(e) => setGrade(e.target.value)}
+                className="form-field w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] font-display font-600 transition appearance-none"
+                style={selectChevron}
+              >
+                {GRADES.map((g) => (
+                  <option key={g} value={g}>
+                    {g}
+                  </option>
+                ))}
+              </select>
+            </DropdownField>
 
-          <div className="mt-4">
-            <label className="block">
-              <span className="sr-only">Search timetable</span>
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search by subject, grade, tutor, day, or class code..."
-                className="form-field w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-2.5 text-[14px] text-[#102033] placeholder:text-[#5A6A82] transition"
-              />
-            </label>
+            <DropdownField label="Medium">
+              <select
+                value={medium}
+                onChange={(e) => setMedium(e.target.value as Medium)}
+                className="form-field w-full bg-white border border-[rgba(16,32,51,0.10)] rounded-xl px-4 py-3 text-[14.5px] text-[#102033] font-display font-600 transition appearance-none"
+                style={selectChevron}
+              >
+                {MEDIUMS.map((m) => (
+                  <option key={m} value={m}>
+                    {m} medium
+                  </option>
+                ))}
+              </select>
+            </DropdownField>
           </div>
-
-          <p className="mt-3 text-[12px] text-[#5A6A82]">
-            Showing <span className="font-display font-700 text-[#102033]">{rows.length}</span> of {ALL_ROWS.length} class sessions
-          </p>
         </m.div>
 
-        {/* Table */}
+        {/* Single table for the selected class */}
         <m.div
+          key={`${grade}-${medium}`}
           variants={fadeUp}
           initial="hidden"
-          whileInView="show"
-          viewport={inView}
+          animate="show"
           className="mt-6 bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl overflow-hidden shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)]"
         >
-          <div className="overflow-x-auto">
-            <table className="w-full text-[13.5px]">
-              <thead className="bg-[#F4F8FF] border-b border-[rgba(16,32,51,0.08)]">
-                <tr>
-                  <Th>Class Code</Th>
-                  <Th>Subject</Th>
-                  <Th>Grade</Th>
-                  <Th>Medium</Th>
-                  <Th>Tutor</Th>
-                  <Th>Day</Th>
-                  <Th>Time</Th>
-                  <Th align="right">Monthly Fee</Th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.length === 0 ? (
+          {/* Table header */}
+          <div className="flex items-center justify-between gap-3 px-5 py-4 bg-[#F4F8FF] border-b border-[rgba(16,32,51,0.08)] flex-wrap">
+            <div className="flex items-baseline gap-3 flex-wrap">
+              <h3 className="font-display font-700 text-[18px] text-[#102033]">{grade}</h3>
+              <span
+                className="inline-block px-2 py-0.5 rounded-full text-[11px] font-display font-700"
+                style={{
+                  background: medium === "Tamil" ? "#2563EB15" : "#8B5CF615",
+                  color: medium === "Tamil" ? "#2563EB" : "#8B5CF6",
+                }}
+              >
+                {medium} medium
+              </span>
+              <span className="text-[11px] uppercase tracking-widest text-[#5A6A82] font-display font-700">
+                {level}
+              </span>
+            </div>
+            <span className="text-[11.5px] text-[#5A6A82] font-display font-600">
+              {rows.length} {rows.length === 1 ? "class" : "classes"}
+            </span>
+          </div>
+
+          {/* Body */}
+          {rows.length === 0 ? (
+            <div className="p-10 text-center text-[#5A6A82] text-[14px]">
+              No classes available for {grade} in {medium} medium. Try the other medium, or browse a different grade.
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-[13.5px]">
+                <thead>
                   <tr>
-                    <td colSpan={8} className="px-4 py-12 text-center text-[#5A6A82]">
-                      No classes match these filters. Try clearing the search or changing the level / medium.
-                    </td>
+                    <Th>Subject</Th>
+                    <Th>Tutor</Th>
+                    <Th>Day &amp; Time</Th>
+                    <Th align="right">Monthly Fee</Th>
                   </tr>
-                ) : (
-                  rows.map((r, i) => (
+                </thead>
+                <tbody>
+                  {rows.map((s, i) => (
                     <tr
-                      key={`${r.code}-${r.day}-${r.time}-${i}`}
-                      className="border-b border-[rgba(16,32,51,0.06)] last:border-b-0 hover:bg-[#F8FBFF] transition"
+                      key={`${s.subject}-${i}`}
+                      className="border-t border-[rgba(16,32,51,0.06)] hover:bg-[#F8FBFF] transition"
                     >
                       <Td>
-                        <code className="font-mono text-[12px] text-[#2563EB]">{r.code}</code>
+                        <span className="font-display font-600 text-[#102033]">{s.subject}</span>
                       </Td>
-                      <Td className="font-display font-600 text-[#102033]">{r.subject}</Td>
-                      <Td>{r.grade}</Td>
+                      <Td>{s.tutor}</Td>
                       <Td>
-                        <span
-                          className="inline-block px-2 py-0.5 rounded-full text-[11px] font-display font-700"
-                          style={{
-                            background: r.medium === "Tamil" ? "#2563EB15" : "#8B5CF615",
-                            color: r.medium === "Tamil" ? "#2563EB" : "#8B5CF6",
-                          }}
-                        >
-                          {r.medium}
-                        </span>
+                        <div className="flex flex-wrap gap-x-3 gap-y-1">
+                          {s.sessions.map((sess, j) => (
+                            <span key={j} className="whitespace-nowrap">
+                              <span className="font-display font-600 text-[#102033]">{sess.day}</span>
+                              <span className="text-[#5A6A82]"> · {sess.time}</span>
+                            </span>
+                          ))}
+                        </div>
                       </Td>
-                      <Td>{r.tutor}</Td>
-                      <Td>{r.day}</Td>
-                      <Td>{r.time}</Td>
                       <Td align="right" className="font-display font-700 text-[#102033]">
-                        {r.monthlyFee}
+                        {s.monthlyFee}
                       </Td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </m.div>
 
-        <p className="mt-4 text-[11.5px] text-[#5A6A82] text-center">
+        <p className="mt-6 text-[11.5px] text-[#5A6A82] text-center">
           All times are Sri Lanka local time (IST +05:30). Classes are conducted via EDUS Tutor Mobile &amp; Web App and Google Meet.
         </p>
       </div>
     </section>
+  );
+}
+
+/* ---------------------------------------------------------------- */
+/* Primitives                                                        */
+/* ---------------------------------------------------------------- */
+
+const selectChevron = {
+  backgroundImage:
+    "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235A6A82' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",
+  backgroundRepeat: "no-repeat" as const,
+  backgroundPosition: "right 1rem center" as const,
+  paddingRight: "2.5rem",
+};
+
+function DropdownField({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label className="block">
+      <span className="block text-[11px] uppercase tracking-widest text-[#5A6A82] font-display font-700 mb-2">
+        {label}
+      </span>
+      {children}
+    </label>
   );
 }
 
@@ -224,9 +309,7 @@ function Td({
   className?: string;
 }) {
   return (
-    <td
-      className={`px-4 py-3 ${align === "right" ? "text-right" : "text-left"} text-[#2B3950] whitespace-nowrap ${className}`}
-    >
+    <td className={`px-4 py-3 ${align === "right" ? "text-right" : "text-left"} text-[#2B3950] ${className}`}>
       {children}
     </td>
   );
