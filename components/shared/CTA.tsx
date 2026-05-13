@@ -105,12 +105,12 @@ function GuaranteedStamp() {
         bottom-2 sm:bottom-6 md:bottom-10"
       style={{ transform: "rotate(-14deg)" }}
     >
-      <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-52 lg:h-52 drop-shadow-[0_12px_28px_rgba(220,38,38,0.30)]">
+      <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 drop-shadow-[0_8px_20px_rgba(220,38,38,0.25)]">
         <Image
           src="/edus-guaranteed-success.png"
           alt="EDUS Guaranteed Success"
           fill
-          sizes="(min-width: 1024px) 208px, (min-width: 768px) 192px, (min-width: 640px) 160px, 128px"
+          sizes="(min-width: 1024px) 128px, (min-width: 768px) 112px, (min-width: 640px) 96px, 80px"
           quality={95}
           className="object-contain"
         />
