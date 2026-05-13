@@ -2,13 +2,32 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useScroll, useTransform } from "framer-motion";
-import { m } from "@/components/effects/Motion";
+import { m, AnimatePresence } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import {
   fadeUp,
   staggerContainer,
   buttonGlow,
 } from "@/lib/motion";
+
+/**
+ * Audience phrases that cycle through the H1's second line.
+ * Order: generic first (best for SEO crawlers / no-JS readers) so the
+ * H1 reads naturally even if the rotator never starts. Then the four
+ * markets EDUS actually serves.
+ *
+ * "Every Student" is the canonical fallback - matches the static H1.
+ */
+const ROTATING_AUDIENCES = [
+  "Every Student.",
+  "Sri Lanka.",
+  "India.",
+  "Maldives.",
+  "Worldwide.",
+] as const;
+
+/** Rotation cadence - slow enough to read, fast enough to feel alive */
+const ROTATION_MS = 2800;
 
 const DESKTOP_HERO_GLOWS = [
   { top: "-8%", left: "-8%", size: 480, color: "#2563EB", opacity: [0.22, 0.36] as [number, number], duration: 14, delay: 0, parallax: -60 },
@@ -37,6 +56,8 @@ const SUPPORTING = [
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [audienceIndex, setAudienceIndex] = useState(0);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
@@ -45,6 +66,26 @@ export function Hero() {
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
   }, []);
+
+  // Respect prefers-reduced-motion. When true, the H1 phrase stays static
+  // on the SEO-canonical first option ("Every Student.") and never rotates.
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  // Audience rotator: cycles through ROTATING_AUDIENCES on a fixed cadence.
+  // Skipped entirely under reduced-motion preferences.
+  useEffect(() => {
+    if (reducedMotion) return;
+    const id = window.setInterval(() => {
+      setAudienceIndex((i) => (i + 1) % ROTATING_AUDIENCES.length);
+    }, ROTATION_MS);
+    return () => window.clearInterval(id);
+  }, [reducedMotion]);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -99,14 +140,52 @@ export function Hero() {
           Quality-Assured Online Live Learning Platform
         </m.p>
 
-        {/* H1 - 2 lines on tablet+, wraps naturally on mobile */}
-        <m.div className="mt-4 text-center max-w-6xl mx-auto" variants={fadeUp}>
-          <h1 className="heading" style={{ fontSize: "var(--fs-hero)" }}>
-            <span className="inline-block sm:whitespace-nowrap">
-              Best <em>Online Tuition</em> with Expert Tutors.
-            </span>{" "}
-            <span className="inline-block sm:whitespace-nowrap">
-              <em>Live Online Classes</em> for Every Student.
+        {/* H1 - 4-line stacked layout. Lines 1-3 are SEO-locked. Line 4
+            rotates through audience phrases for visual impact while the
+            keyword stack ("Online Tuition" + "Live Online Classes") stays
+            untouched. Server-rendered HTML carries "Every Student." as the
+            no-JS / reduced-motion fallback. */}
+        <m.div className="mt-4 text-center max-w-5xl mx-auto" variants={fadeUp}>
+          <h1
+            className="heading flex flex-col items-center gap-1 sm:gap-2"
+            style={{ fontSize: "var(--fs-hero-stacked)" }}
+          >
+            <span className="block sm:whitespace-nowrap">
+              Best <em>Online Tuition</em>
+            </span>
+            <span className="block sm:whitespace-nowrap">
+              with Expert Tutors.
+            </span>
+            <span className="block sm:whitespace-nowrap">
+              <em>Live Online Classes</em>
+            </span>
+            <span className="block sm:whitespace-nowrap">
+              <span className="inline-flex items-baseline justify-center">
+                <span>for&nbsp;</span>
+                <span className="relative inline-block align-baseline">
+                  {/* Invisible width-reservation token holds the line at
+                      the widest phrase so layout never shifts on rotate. */}
+                  <span aria-hidden className="invisible whitespace-nowrap">
+                    Every Student.
+                  </span>
+                  <AnimatePresence mode="wait" initial={false}>
+                    <m.span
+                      key={ROTATING_AUDIENCES[audienceIndex]}
+                      initial={{ y: "0.4em", opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: "-0.4em", opacity: 0 }}
+                      transition={{ duration: 0.45, ease: [0.25, 0.8, 0.3, 1] }}
+                      // text-left pins the rotating phrase to the left edge
+                      // of the reservation slot, so shorter phrases sit
+                      // visually adjacent to "for" instead of drifting to
+                      // the middle of the reserved width.
+                      className="absolute inset-0 whitespace-nowrap text-left"
+                    >
+                      <em>{ROTATING_AUDIENCES[audienceIndex]}</em>
+                    </m.span>
+                  </AnimatePresence>
+                </span>
+              </span>
             </span>
           </h1>
         </m.div>
