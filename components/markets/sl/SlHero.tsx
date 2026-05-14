@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FeatureIcon } from "@/components/effects/Icons";
+import { SITE_URL } from "@/components/layout/StructuredData";
 
 export function SlHero() {
   return (
@@ -12,14 +13,22 @@ export function SlHero() {
 
       <div className="container-edge">
         <div className="flex justify-center px-3" data-anim>
-          {/* Same-page anchor (#regions, no leading "/") so this pill scrolls
-              to the on-page RegionSelector instead of triggering a homepage
-              navigation. Critical for .lk domains: a "/" href would be
-              caught by middleware (308 → /sl), bouncing the visitor back
-              to this same page without scrolling. The hash form works on
-              every domain. */}
-          <Link
-            href="#regions"
+          {/* Cross-domain anchor: always sends the visitor to the
+              international primary homepage (edustutor.com/#regions)
+              where the full 4-region RegionSelector lives.
+
+              Why absolute (not "/#regions"):
+                - On .lk domains, "/" is middleware-redirected to "/sl",
+                  so a same-host "/" href would bounce the user back to
+                  this same page.
+                - On .com market pages, sending the user to the international
+                  homepage gives them the canonical region-picker
+                  experience instead of just scrolling to a smaller block.
+              Plain <a> (not next/link) because cross-host navigation
+              cannot use SPA routing - the browser does a full page
+              load regardless. */}
+          <a
+            href={`${SITE_URL}/#regions`}
             className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 rounded-full glass text-[12px] sm:text-[12.5px] font-medium text-[#2B3950] max-w-full flex-wrap justify-center"
           >
             <span className="inline-flex items-center gap-1.5">
@@ -30,7 +39,7 @@ export function SlHero() {
             </span>
             <span aria-hidden className="text-[#5A6A82] hidden sm:inline">-</span>
             <span className="text-[#2563EB] whitespace-nowrap">🇱🇰 Sri Lanka</span>
-          </Link>
+          </a>
         </div>
 
         <div className="mt-8 text-center max-w-4xl mx-auto" data-anim="2">

@@ -14,6 +14,45 @@
 
 export const SITE_URL = "https://edustutor.com";
 
+/**
+ * Canonical `sameAs` array for the EDUS organization across every page.
+ *
+ * Single source of truth for entity-sameness signals. AI engines
+ * (ChatGPT, Claude, Gemini, Perplexity) and search engines (Google
+ * Knowledge Graph, Bing entity search) use these URLs to confirm that
+ * the EDUS named on any given page is the same legal entity as the one
+ * on Trustpilot, Crunchbase, LinkedIn, etc.
+ *
+ * Why duplicate this in provider/hiringOrganization blocks across the
+ * per-market schemas instead of using `{ "@id": ".../#organization" }`?
+ * Because not every page emits the full ORG entity (only the homepage
+ * does). A bare @id reference on /sl or /in would dangle for crawlers
+ * that don't visit the homepage first - so we inline the canonical
+ * sameAs list everywhere EDUS is named.
+ *
+ * Order matters: business directories first (highest trust weight),
+ * then social channels, then Google Maps. Changes here ripple to every
+ * per-market schema in one edit.
+ */
+export const EDUS_SAME_AS = [
+  "https://www.facebook.com/edusonline",
+  "https://www.instagram.com/edus_online/",
+  "https://www.tiktok.com/@edusonline",
+  "https://www.youtube.com/@edusonline/",
+  "https://lk.linkedin.com/company/edusonline",
+  "https://www.crunchbase.com/organization/edus-lanka-pvt-ltd",
+  "https://www.trustpilot.com/review/edustutor.com",
+  // App-store listings - Google Play + Apple App Store. Listed in
+  // sameAs so AI engines and Google Knowledge Graph recognise the
+  // mobile apps as the same entity as the website. Separate full
+  // MobileApplication schemas (edusAndroidApp, edusIosApp) emit
+  // richer markup eligible for Google App Pack rich results.
+  "https://play.google.com/store/apps/details?id=com.edus.edustutor",
+  "https://apps.apple.com/lk/app/edus-tutor/id6742735384",
+  "https://share.google/ZQO6DJ0yRrFXtOw1x",
+  "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
+] as const;
+
 /* --------------------------------------------------------------- */
 /* JSON-LD script wrapper                                            */
 /* --------------------------------------------------------------- */
@@ -97,8 +136,10 @@ export function educationalProgram(opts: ProgramOptions) {
     url: opts.url,
     provider: {
       "@type": "EducationalOrganization",
+      "@id": `${SITE_URL}/#organization`,
       name: "EDUS Online Tuition",
       url: SITE_URL,
+      sameAs: EDUS_SAME_AS,
     },
     educationalProgramMode: "online",
     ...(opts.educationalLevel ? { educationalLevel: opts.educationalLevel } : {}),
@@ -193,8 +234,10 @@ export function tuitionService({
     serviceType: "Online Tuition",
     provider: {
       "@type": "EducationalOrganization",
+      "@id": `${SITE_URL}/#organization`,
       name: "EDUS Online Tuition",
       url: SITE_URL,
+      sameAs: EDUS_SAME_AS,
     },
     areaServed: { "@type": "Country", name: area },
     audience: {
@@ -215,11 +258,11 @@ export function contactPage() {
     url: `${SITE_URL}/contact`,
     description:
       "Contact EDUS for online classes, admissions, one-to-one tutoring, group classes, student support, and global learning inquiries. Reach EDUS Sri Lanka, India, Maldives, or Global Support.",
-    isPartOf: {
-      "@type": "WebSite",
-      name: "EDUS Online Tuition",
-      url: SITE_URL,
-    },
+    // Reference the canonical #website entity (defined in JsonLd.tsx
+    // WEBSITE block on the homepage) rather than redeclaring a naked
+    // WebSite. Pairs the ContactPage with the brand identity entity for
+    // crawler entity resolution.
+    isPartOf: { "@id": `${SITE_URL}/#website` },
     about: { "@id": `${SITE_URL}/#organization` },
     primaryImageOfPage: `${SITE_URL}/edus-logo-blue.webp`,
     mainEntity: {
@@ -248,9 +291,10 @@ export function tuitionCourse(opts: CourseOptions) {
     url: opts.url,
     provider: {
       "@type": "EducationalOrganization",
+      "@id": `${SITE_URL}/#organization`,
       name: "EDUS Online Tuition",
       url: SITE_URL,
-      sameAs: SITE_URL,
+      sameAs: EDUS_SAME_AS,
     },
     educationalCredentialAwarded: "Continued academic progress and exam preparation",
     inLanguage: ["en", "ta", "si"],
@@ -320,9 +364,10 @@ export function cbseScheduledCourse(opts: {
     url: opts.url,
     provider: {
       "@type": "EducationalOrganization",
+      "@id": `${SITE_URL}/#organization`,
       name: "EDUS Online Tuition",
       url: SITE_URL,
-      sameAs: SITE_URL,
+      sameAs: EDUS_SAME_AS,
     },
     educationalCredentialAwarded: "Continued academic progress and CBSE board preparation",
     inLanguage: "en",
@@ -567,16 +612,7 @@ export function organizationReference() {
     name: "EDUS Online Tuition",
     url: SITE_URL,
     logo: `${SITE_URL}/edus-logo-blue.webp`,
-    sameAs: [
-      "https://www.facebook.com/edusonline",
-      "https://www.instagram.com/edus_online/",
-      "https://www.tiktok.com/@edusonline",
-      "https://www.youtube.com/@edusonline/",
-      "https://lk.linkedin.com/company/edusonline",
-      "https://www.crunchbase.com/organization/edus-lanka-pvt-ltd",
-      "https://share.google/ZQO6DJ0yRrFXtOw1x",
-      "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
-    ],
+    sameAs: EDUS_SAME_AS,
   };
 }
 
@@ -846,8 +882,10 @@ export function tutorJobPosting() {
     employmentType: ["PART_TIME", "CONTRACTOR"],
     hiringOrganization: {
       "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
       name: "EDUS Online Tuition",
-      sameAs: SITE_URL,
+      url: SITE_URL,
+      sameAs: EDUS_SAME_AS,
       logo: `${SITE_URL}/edus-logo-blue.webp`,
     },
     jobLocationType: "TELECOMMUTE",
@@ -1145,6 +1183,89 @@ export function signupWebApplication() {
 }
 
 /* --------------------------------------------------------------- */
+/* MobileApplication - EDUS Tutor native apps on Google Play + Apple */
+/* App Store. Two separate entities (one per OS) so each carries the  */
+/* correct downloadUrl, applicationSuite, and operating system meta.  */
+/*                                                                    */
+/* Why this matters:                                                  */
+/*   1. Google's "App" rich result (App Pack) eligibility. When a     */
+/*      user searches "EDUS app" or "EDUS Tutor download", the App    */
+/*      Pack carousel shows the app icon + rating + store CTA.         */
+/*   2. Apple Search / Siri Shortcut surfaces use Schema.org           */
+/*      MobileApplication metadata to render install prompts.           */
+/*   3. AI engines (ChatGPT, Claude, Perplexity) treat App Store      */
+/*      and Play Store entries as high-trust authority signals -      */
+/*      having both wired into Organization.sameAs AND as their own   */
+/*      MobileApplication entities reinforces the entity graph.        */
+/*                                                                    */
+/* Both apps share the same `applicationSuite` ("EDUS Online          */
+/* Tuition") so Google recognises them as the same product across     */
+/* platforms.                                                          */
+/* --------------------------------------------------------------- */
+
+/** Android (Google Play). */
+export function edusAndroidApp() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "@id": `${SITE_URL}/#android-app`,
+    name: "EDUS Tutor",
+    alternateName: ["EDUS Tutor App", "EDUS Online Tuition Android"],
+    description:
+      "Official EDUS Tutor mobile app for Android. Live online classes, class recordings, assignments, homework submissions, exam papers, learning resources, and parent progress updates for school students across Sri Lanka, India, Maldives, and global markets.",
+    applicationCategory: "EducationApplication",
+    applicationSuite: "EDUS Online Tuition",
+    operatingSystem: "Android",
+    downloadUrl:
+      "https://play.google.com/store/apps/details?id=com.edus.edustutor",
+    installUrl:
+      "https://play.google.com/store/apps/details?id=com.edus.edustutor",
+    url: "https://play.google.com/store/apps/details?id=com.edus.edustutor",
+    image: `${SITE_URL}/edus-logo-blue.webp`,
+    inLanguage: ["en", "ta", "si"],
+    audience: { "@type": "EducationalAudience", educationalRole: "student" },
+    provider: { "@id": `${SITE_URL}/#organization` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+    },
+  };
+}
+
+/** iOS (Apple App Store). */
+export function edusIosApp() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "@id": `${SITE_URL}/#ios-app`,
+    name: "EDUS Tutor",
+    alternateName: ["EDUS Tutor App", "EDUS Online Tuition iOS"],
+    description:
+      "Official EDUS Tutor mobile app for iPhone and iPad. Live online classes, recordings, assignments, exam papers, study resources, and parent progress updates for school students across Sri Lanka, India, Maldives, and global markets.",
+    applicationCategory: "EducationApplication",
+    applicationSuite: "EDUS Online Tuition",
+    operatingSystem: "iOS",
+    downloadUrl: "https://apps.apple.com/lk/app/edus-tutor/id6742735384",
+    installUrl: "https://apps.apple.com/lk/app/edus-tutor/id6742735384",
+    url: "https://apps.apple.com/lk/app/edus-tutor/id6742735384",
+    image: `${SITE_URL}/edus-logo-blue.webp`,
+    inLanguage: ["en", "ta", "si"],
+    audience: { "@type": "EducationalAudience", educationalRole: "student" },
+    provider: { "@id": `${SITE_URL}/#organization` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+    },
+  };
+}
+
+/* --------------------------------------------------------------- */
 /* InteractionCounter - surfaces the 7,000+ students stat as          */
 /* parseable data alongside the visible homepage stat card.          */
 /* --------------------------------------------------------------- */
@@ -1373,15 +1494,11 @@ export function googleAggregateRating(opts: {
       latitude: 9.6945511,
       longitude: 80.0139866,
     },
-    sameAs: [
-      opts.mapsUri,
-      "https://www.facebook.com/edusonline",
-      "https://www.instagram.com/edus_online/",
-      "https://www.tiktok.com/@edusonline",
-      "https://www.youtube.com/@edusonline/",
-      "https://lk.linkedin.com/company/edusonline",
-      "https://www.crunchbase.com/organization/edus-lanka-pvt-ltd",
-    ],
+    // Prepend the Google Maps URI (per-call dynamic) to the canonical
+    // EDUS sameAs list. opts.mapsUri ties this LocalBusiness entity to
+    // its live Google Business Profile, which is the strongest possible
+    // local-SEO signal alongside the aggregate rating.
+    sameAs: [opts.mapsUri, ...EDUS_SAME_AS],
     parentOrganization: { "@id": `${SITE_URL}/#organization` },
     aggregateRating: {
       "@type": "AggregateRating",

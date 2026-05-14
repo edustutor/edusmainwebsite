@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SITE_URL } from "@/components/layout/StructuredData";
 
 export function InHero() {
   return (
@@ -11,12 +12,12 @@ export function InHero() {
 
       <div className="container-edge">
         <div className="flex justify-center px-3" data-anim>
-          {/* Same-page anchor (#regions, no leading "/") so this pill scrolls
-              to the on-page OtherMarkets block instead of triggering a
-              homepage navigation. See SlHero.tsx for the .lk middleware
-              rationale - same fix, same reason. */}
-          <Link
-            href="#regions"
+          {/* Cross-domain anchor to edustutor.com/#regions - see SlHero.tsx
+              for the full rationale. .lk middleware + canonical region
+              picker drive this to ALWAYS be an absolute URL pointing at
+              the international primary. */}
+          <a
+            href={`${SITE_URL}/#regions`}
             className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 rounded-full glass text-[12px] sm:text-[12.5px] font-medium text-[#2B3950] max-w-full flex-wrap justify-center"
           >
             <span className="inline-flex items-center gap-1.5">
@@ -27,7 +28,7 @@ export function InHero() {
             </span>
             <span aria-hidden className="text-[#5A6A82] hidden sm:inline">-</span>
             <span className="text-[#8B5CF6] whitespace-nowrap">🇮🇳 India - Tamil Nadu - CBSE</span>
-          </Link>
+          </a>
         </div>
 
         <div className="mt-8 text-center max-w-4xl mx-auto" data-anim="2">

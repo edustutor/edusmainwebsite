@@ -22,6 +22,9 @@ import {
   videoObject,
   edusVideoCarousel,
   orgFounderRefs,
+  EDUS_SAME_AS,
+  edusAndroidApp,
+  edusIosApp,
 } from "./StructuredData";
 import { STORIES } from "@/components/shared/SuccessData";
 import { VIDEOS } from "@/components/shared/VideosData";
@@ -75,20 +78,10 @@ const ORG = {
     "Yarl IT Hub Recognised Startup",
     "Innovate Lanka",
   ],
-  sameAs: [
-    "https://www.facebook.com/edusonline",
-    "https://www.instagram.com/edus_online/",
-    "https://www.tiktok.com/@edusonline",
-    "https://www.youtube.com/@edusonline/",
-    "https://lk.linkedin.com/company/edusonline",
-    // Crunchbase profile - high-trust authority signal for AI engines
-    // (ChatGPT, Claude, Gemini, Perplexity) and downstream data graphs
-    // (Pitchbook, CB Insights, Owler, Tracxn).
-    "https://www.crunchbase.com/organization/edus-lanka-pvt-ltd",
-    // Google Business Profile (Maps listing) - confirms entity to Google
-    "https://share.google/ZQO6DJ0yRrFXtOw1x",
-    "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
-  ],
+  // Single source of truth for entity-sameness URLs lives in
+  // StructuredData.ts (EDUS_SAME_AS). Centralising the list means a
+  // new directory (e.g. G2, Capterra, Wikipedia) is one edit, not 6.
+  sameAs: EDUS_SAME_AS,
   address: {
     "@type": "PostalAddress",
     streetAddress: "No. 95, K.K.S Road, Kokkuvil Junction",
@@ -204,16 +197,7 @@ const LOCAL_BUSINESS = {
   },
   hasMap:
     "https://www.google.com/maps/place/EDUS+Online+Tuition/@9.6945511,80.0139866,1102m/data=!3m1!1e3!4m6!3m5!1s0x3afe5583ee8b8b25:0xa0dd266c1a635c2!8m2!3d9.6945511!4d80.0139866!16s%2Fg%2F11rxydcz_s",
-  sameAs: [
-    "https://www.facebook.com/edusonline",
-    "https://www.instagram.com/edus_online/",
-    "https://www.tiktok.com/@edusonline",
-    "https://www.youtube.com/@edusonline/",
-    "https://lk.linkedin.com/company/edusonline",
-    "https://www.crunchbase.com/organization/edus-lanka-pvt-ltd",
-    "https://share.google/ZQO6DJ0yRrFXtOw1x",
-    "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
-  ],
+  sameAs: EDUS_SAME_AS,
   // Operating hours - adjust if your office hours differ
   openingHoursSpecification: [
     {
@@ -356,6 +340,11 @@ export function HomeJsonLd() {
       <JsonLdScript data={primaryPagesItemList()} />
       <JsonLdScript data={enrollmentHowTo()} />
       <JsonLdScript data={signupWebApplication()} />
+      {/* EDUS Tutor native apps - Android + iOS. Two MobileApplication
+          entities so each carries the right downloadUrl + OS metadata.
+          Eligible for Google App Pack rich results on "EDUS app" queries. */}
+      <JsonLdScript data={edusAndroidApp()} />
+      <JsonLdScript data={edusIosApp()} />
       <JsonLdScript data={studentInteractionCounter()} />
       {stories.length > 0 && <JsonLdScript data={successStoriesItemList(stories)} />}
       {VIDEOS.length > 0 && (

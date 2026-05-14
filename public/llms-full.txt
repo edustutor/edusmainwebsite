@@ -19,6 +19,13 @@ EDUS is the quality-assured online live learning platform for school students. W
 - **Markets:** Sri Lanka - India - Maldives - Global
 - **Class formats:** Group live classes - One-to-one tutoring
 - **Mediums:** English - Tamil - Sinhala (depending on market)
+- **Crunchbase:** https://www.crunchbase.com/organization/edus-lanka-pvt-ltd
+- **Trustpilot:** https://www.trustpilot.com/review/edustutor.com
+- **LinkedIn:** https://lk.linkedin.com/company/edusonline
+- **Google Business Profile:** https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x
+- **Android app (Google Play):** https://play.google.com/store/apps/details?id=com.edus.edustutor
+- **iOS app (Apple App Store):** https://apps.apple.com/lk/app/edus-tutor/id6742735384
+- **Recognition:** National ICT Award 2024 (Education / NBQSA) - Microsoft for Startups Founders Hub - ICTA Sri Lanka - SLASSCOM Member - Hemas Slingshot x Hatch - Spiralation by ICTA - Yarl IT Hub - Innovate Lanka
 
 ## Markets served
 
@@ -174,8 +181,11 @@ A: Yes. EDUS Global serves students worldwide with one-to-one online tutoring ma
 ## External profiles
 
 - Crunchbase: https://www.crunchbase.com/organization/edus-lanka-pvt-ltd
+- Trustpilot: https://www.trustpilot.com/review/edustutor.com
 - LinkedIn Company: https://lk.linkedin.com/company/edusonline
 - Google Business Profile: https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x
+- Google Play (Android): https://play.google.com/store/apps/details?id=com.edus.edustutor
+- Apple App Store (iOS): https://apps.apple.com/lk/app/edus-tutor/id6742735384
 
 ## Social presence
 
