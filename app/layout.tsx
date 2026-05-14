@@ -10,6 +10,7 @@ import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { Atmosphere } from "@/components/effects/Atmosphere";
 import { AnalyticsClickTracker } from "@/components/analytics/AnalyticsClickTracker";
 import { ConsentDefaults } from "@/components/analytics/ConsentDefaults";
+import { ConsentBanner } from "@/components/analytics/ConsentBanner";
 import {
   getCurrentHost,
   getCurrentAnalyticsIds,
@@ -296,6 +297,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             signup CTA, region selector click, blog/gallery navigation,
             and footer social click. One mount point covers ~30+ CTAs. */}
         <AnalyticsClickTracker />
+        {/* Cookie consent banner - reads localStorage on mount, renders
+            the bottom-of-screen toast only for first-time visitors or
+            after the 13-month re-prompt window. Pushes the matching
+            Consent Mode v2 state into gtag so Microsoft Clarity + GA4
+            switch into / out of cookieless mode without page reload. */}
+        <ConsentBanner />
         {/* Vercel Web Analytics - page-view tracking. Lightweight, cookie-
             free, and respects DNT. Only mounts on Vercel deployments
             (process.env.VERCEL is set there) so localhost / self-hosted
