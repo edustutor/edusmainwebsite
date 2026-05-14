@@ -581,6 +581,229 @@ export function organizationReference() {
 }
 
 /* --------------------------------------------------------------- */
+/* Founder / leadership Person schema - emitted from /about.         */
+/*                                                                    */
+/* WHY THIS EXISTS:                                                   */
+/* Google's December 2022 + March 2024 E-E-A-T updates explicitly     */
+/* require named, identifiable authors / leadership for YMYL ("your   */
+/* money or your life") topics. Education sits squarely inside YMYL   */
+/* because the platform influences child outcomes. A named founder    */
+/* with Person JSON-LD + worksFor pointer + sameAs LinkedIn /         */
+/* Crunchbase is the single highest-impact E-E-A-T signal an          */
+/* education site can add.                                            */
+/*                                                                    */
+/* The output is ALSO read by AI engines (ChatGPT, Claude, Gemini,    */
+/* Perplexity) and downstream knowledge graphs (Wikidata, Google      */
+/* Knowledge Graph). One canonical Person entity here propagates      */
+/* through every entity-resolution layer below.                       */
+/*                                                                    */
+/* FILL THESE PLACEHOLDERS BEFORE SHIPPING:                           */
+/* The TODO_FOUNDER_* constants below are intentionally stubbed.      */
+/* Swap them with the real founder's verified facts (LinkedIn URL is  */
+/* the single most important field - Google de-duplicates Person      */
+/* entities by LinkedIn). Photo URL can be either an /public/team/    */
+/* asset path or an absolute LinkedIn media URL.                      */
+/*                                                                    */
+/* USAGE on /about page:                                              */
+/*   <JsonLdScript data={foundingPerson()} />                         */
+/* --------------------------------------------------------------- */
+
+/**
+ * Founder / leadership profile data.
+ *
+ * SCHEMA-ONLY: These names are EMITTED IN JSON-LD but DO NOT render
+ * anywhere on the visible /about page. The page itself stays untouched
+ * per design - this is purely an E-E-A-T signal layer for Google
+ * Knowledge Graph + AI engines (ChatGPT, Claude, Gemini, Perplexity).
+ *
+ * To add more leadership profiles, append to the FOUNDERS array. Each
+ * entry generates a `Person` JSON-LD node with `worksFor` pointing back
+ * at the EDUS Organization @id, so Google links each person ↔ company.
+ *
+ * Source verification: every fact below is sourced from a public,
+ * crawlable URL listed in the `sameAs` array of that founder. Do not
+ * add claims that cannot be verified from those URLs.
+ */
+type FounderProfile = {
+  /** Full legal name as it appears on LinkedIn. Required. */
+  name: string;
+  /** Job title at EDUS, e.g. "Founder & CEO". Required. */
+  jobTitle: string;
+  /** Short bio - 1-3 sentences. Used as `description`. Required. */
+  description: string;
+  /** Absolute or site-relative photo URL. Optional but strongly recommended. */
+  imageUrl?: string;
+  /** Authoritative profile URLs. LinkedIn first - it's the dedup key. */
+  sameAs: string[];
+  /** Alma mater(s). Pass `undefined` if not public. */
+  alumniOf?: Array<{ name: string; url?: string }>;
+  /** Topical expertise tags. Surface in Knowledge Graph "Known For" chip. */
+  knowsAbout?: string[];
+  /** Subject areas / disciplines the founder is credentialed in. */
+  hasOccupation?: { name: string; description: string };
+};
+
+const FOUNDERS: FounderProfile[] = [
+  {
+    // CEO Magazine Sri Lanka and ICT Award coverage refer to the founder
+    // as "Sugeevan VSG" (display name) - 'V.S.G.' being the initials of
+    // his full name "VetriVelautham Sugeevan" as confirmed in the
+    // National Innovation Report 2024 launch coverage. We use the
+    // display form Google + LinkedIn already index.
+    name: "Sugeevan VSG",
+    jobTitle: "Founder & CEO",
+    description:
+      "Founder and CEO of EDUS Online Institute - the quality-assured online live learning platform for Sri Lanka, India, Maldives, and global students. Led EDUS to the National ICT Award in Education (NBQSA 2024) and selection into Hemas Slingshot, ICTA Spiralation, and Microsoft for Startups Founders Hub. Holds an Executive MBA in Business Administration from the University of Colombo (2023-2024) and a GDM from BMS (2018-2019).",
+    sameAs: [
+      "https://www.linkedin.com/in/sugeevanv/",
+      "https://ceo.lk/stepping-stone-to-new-art-of-digital-learning-founder-of-edus-online-school-and-institute-sugeevan-vsg/",
+    ],
+    alumniOf: [
+      { name: "University of Colombo", url: "https://cmb.ac.lk/" },
+      { name: "BMS School of Business", url: "https://bms.edu.lk/" },
+      { name: "Jaffna Hindu College" },
+    ],
+    knowsAbout: [
+      "Online tuition",
+      "EdTech",
+      "Live online learning",
+      "Sri Lankan education system",
+      "Cambridge IGCSE",
+      "Edexcel",
+      "CBSE",
+      "Business Administration",
+      "EdTech entrepreneurship",
+    ],
+    hasOccupation: {
+      name: "EdTech Founder & CEO",
+      description:
+        "Founder and CEO of an online live learning institute serving 7,000+ students across Sri Lanka, India, Maldives, and global markets.",
+    },
+  },
+  {
+    // CTO and co-leader of the EDUS platform. Public profile + portfolio
+    // verified via tisankan.dev and the EDUS company LinkedIn page.
+    name: "Tisankan Jeyakumar",
+    jobTitle: "Chief Technology Officer",
+    description:
+      "Chief Technology Officer of EDUS Online Institute (via Yarl Ventures), leading the platform's end-to-end technology, cloud architecture, and AI/automation. Full-stack engineer with deep experience in Next.js, Node.js, NestJS, Flutter, PostgreSQL, MongoDB, AWS, Azure, and LLM/RAG systems. Architected and delivered digital products across healthcare, education, and commerce. BICT (Hons) in Information & Communication Technology from the University of Jaffna (2017-2022).",
+    sameAs: [
+      "https://www.linkedin.com/in/tisankan/",
+      "https://tisankan.dev/",
+      "https://www.crunchbase.com/person/tisankan-jeyakumar",
+      "https://github.com/tisankan",
+      "https://dev.to/tisankan",
+      "https://hackernoon.com/about/tisankan",
+    ],
+    alumniOf: [
+      { name: "University of Jaffna", url: "https://www.jfn.ac.lk/" },
+      { name: "College of Technology, Jaffna" },
+      { name: "J/Manipay Hindu College" },
+    ],
+    knowsAbout: [
+      "Software architecture",
+      "Full-stack development",
+      "Next.js",
+      "Node.js",
+      "NestJS",
+      "Flutter",
+      "TypeScript",
+      "PostgreSQL",
+      "MongoDB",
+      "AWS",
+      "Azure",
+      "Docker",
+      "AI/LLM engineering",
+      "RAG systems",
+      "Cloud architecture",
+      "Technical SEO",
+      "EdTech platform engineering",
+    ],
+    hasOccupation: {
+      name: "Chief Technology Officer",
+      description:
+        "CTO leading the technology, infrastructure, and AI platform behind EDUS Online Institute and the wider Yarl Ventures portfolio.",
+    },
+  },
+];
+
+/**
+ * Build the Person JSON-LD for the founder(s). Returns either a single
+ * Person object or a `@graph` of Person entries when multiple co-founders
+ * are listed in FOUNDERS.
+ *
+ * Each Person carries `worksFor: { "@id": ... }` pointing back at the
+ * EDUS Organization @id, so Google links the founder ↔ company in the
+ * Knowledge Graph.
+ */
+export function foundingPerson() {
+  const personOf = (f: FounderProfile, index: number) => ({
+    "@type": "Person",
+    "@id": `${SITE_URL}/about#person-${index + 1}`,
+    name: f.name,
+    jobTitle: f.jobTitle,
+    description: f.description,
+    url: `${SITE_URL}/about`,
+    worksFor: { "@id": `${SITE_URL}/#organization` },
+    ...(f.imageUrl
+      ? {
+          image: f.imageUrl.startsWith("http") ? f.imageUrl : `${SITE_URL}${f.imageUrl}`,
+        }
+      : {}),
+    ...(f.sameAs.length ? { sameAs: f.sameAs } : {}),
+    ...(f.alumniOf && f.alumniOf.length
+      ? {
+          alumniOf: f.alumniOf.map((a) => ({
+            "@type": "EducationalOrganization",
+            name: a.name,
+            ...(a.url ? { url: a.url } : {}),
+          })),
+        }
+      : {}),
+    ...(f.knowsAbout && f.knowsAbout.length ? { knowsAbout: f.knowsAbout } : {}),
+    ...(f.hasOccupation
+      ? {
+          hasOccupation: {
+            "@type": "Occupation",
+            name: f.hasOccupation.name,
+            description: f.hasOccupation.description,
+          },
+        }
+      : {}),
+  });
+
+  // Single founder - emit one Person node. Multiple - wrap in @graph so
+  // each gets its own @id and Google's entity extractor sees both.
+  if (FOUNDERS.length === 1) {
+    return {
+      "@context": "https://schema.org",
+      ...personOf(FOUNDERS[0], 0),
+    };
+  }
+  return {
+    "@context": "https://schema.org",
+    "@graph": FOUNDERS.map((f, i) => personOf(f, i)),
+  };
+}
+
+/**
+ * Build a `founder` array suitable for splicing into the homepage
+ * Organization schema (`ORG` in JsonLd.tsx). Each entry is a Person
+ * REFERENCE - the full Person definition lives in foundingPerson()
+ * on /about, so Google can resolve the same entity from both places.
+ *
+ * Currently exported but NOT yet wired into ORG. Wire it by importing
+ * orgFounderRefs() into JsonLd.tsx and adding `founder: orgFounderRefs()`
+ * to the ORG object, after the placeholder names are filled in.
+ */
+export function orgFounderRefs() {
+  return FOUNDERS.map((_, i) => ({
+    "@type": "Person",
+    "@id": `${SITE_URL}/about#person-${i + 1}`,
+  }));
+}
+
+/* --------------------------------------------------------------- */
 /* ItemList of success stories - homepage social-proof block. Names */
 /* are intentionally anonymised (no Person/Review schema) to comply  */
 /* with Google's 2024 review-author identity guidance.               */

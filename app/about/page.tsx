@@ -4,6 +4,7 @@ import {
   JsonLdScript,
   breadcrumbList,
   speakableWebPage,
+  foundingPerson,
   SITE_URL,
 } from "@/components/layout/StructuredData";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
@@ -131,6 +132,12 @@ export default function AboutPage() {
           ],
         })}
       />
+      {/* Founder Person schema - E-E-A-T signal for YMYL education content.
+          Google requires named, identifiable leadership for trust scoring.
+          The Person entity uses worksFor: { @id: ORG } so the founder ↔
+          company link is preserved in Knowledge Graph extraction.
+          TODO: Fill in real founder facts in FOUNDERS in StructuredData.tsx. */}
+      <JsonLdScript data={foundingPerson()} />
 
       <Breadcrumb
         items={[

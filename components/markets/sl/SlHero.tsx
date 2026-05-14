@@ -12,16 +12,24 @@ export function SlHero() {
 
       <div className="container-edge">
         <div className="flex justify-center px-3" data-anim>
+          {/* Same-page anchor (#regions, no leading "/") so this pill scrolls
+              to the on-page RegionSelector instead of triggering a homepage
+              navigation. Critical for .lk domains: a "/" href would be
+              caught by middleware (308 → /sl), bouncing the visitor back
+              to this same page without scrolling. The hash form works on
+              every domain. */}
           <Link
-            href="/#regions"
-            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 rounded-full glass text-[11px] sm:text-[12.5px] font-medium text-[#2B3950] whitespace-nowrap max-w-full"
+            href="#regions"
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 rounded-full glass text-[12px] sm:text-[12.5px] font-medium text-[#2B3950] max-w-full flex-wrap justify-center"
           >
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden className="shrink-0">
-              <path d="M19 12H5M12 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            All markets
-            <span className="text-[#5A6A82]">-</span>
-            <span className="text-[#2563EB]">🇱🇰 Sri Lanka</span>
+            <span className="inline-flex items-center gap-1.5">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden className="shrink-0">
+                <path d="M19 12H5M12 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              All markets
+            </span>
+            <span aria-hidden className="text-[#5A6A82] hidden sm:inline">-</span>
+            <span className="text-[#2563EB] whitespace-nowrap">🇱🇰 Sri Lanka</span>
           </Link>
         </div>
 

@@ -62,8 +62,18 @@ export function OtherMarkets({ current }: { current: MarketCode }) {
 
   return (
     <section
+      // id="regions" lets the per-market hero pill ("All markets - 🇮🇳 India...")
+      // scroll to this block as a same-page anchor on /in, /mv, /global. The
+      // /sl page uses the full RegionSelector (which also carries id="regions")
+      // instead. Keeping the SAME anchor name across both components means
+      // pills can use `href="#regions"` everywhere and never trigger a
+      // cross-page navigation - critical for .lk domains where the root
+      // path is permanently redirected to /sl by middleware (so any
+      // `href="/#regions"` would bounce the visitor right back where they
+      // started instead of scrolling).
+      id="regions"
       data-track-surface="other_markets"
-      className="relative py-12 md:py-16 overflow-hidden"
+      className="relative py-12 md:py-16 overflow-hidden scroll-mt-24"
     >
       <div className="container-edge">
         <div className="text-center max-w-2xl mx-auto">

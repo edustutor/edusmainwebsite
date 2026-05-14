@@ -21,6 +21,7 @@ import {
   signupWebApplication,
   videoObject,
   edusVideoCarousel,
+  orgFounderRefs,
 } from "./StructuredData";
 import { STORIES } from "@/components/shared/SuccessData";
 import { VIDEOS } from "@/components/shared/VideosData";
@@ -113,6 +114,12 @@ const ORG = {
     },
   ],
   foundingDate: "2021",
+  // Founder reference - resolves to the full Person entity defined in
+  // foundingPerson() on /about. Once the FOUNDERS placeholders are
+  // filled, Google reads BOTH sides: homepage says "this org was founded
+  // by Person X", /about defines the full Person X profile. Knowledge
+  // Graph stitches the two into a single founder ↔ company edge.
+  founder: orgFounderRefs(),
   areaServed: [
     { "@type": "Country", name: "Sri Lanka" },
     { "@type": "Country", name: "India" },
