@@ -9,6 +9,7 @@ import { MotionProvider } from "@/components/effects/Motion";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { Atmosphere } from "@/components/effects/Atmosphere";
 import { AnalyticsClickTracker } from "@/components/analytics/AnalyticsClickTracker";
+import { ConsentDefaults } from "@/components/analytics/ConsentDefaults";
 import {
   getCurrentHost,
   getCurrentAnalyticsIds,
@@ -273,6 +274,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
+      {/* Consent Mode v2 default state - MUST load before GTM/GA4 so
+          the trackers respect the denied defaults. Puts GA4 + Clarity
+          into cookieless ping mode by default, which clears the
+          Lighthouse "uses third-party cookies" warning. */}
+      <ConsentDefaults />
       {/* GoogleTagManager renders the <script> in head + the <noscript>
           iframe just inside body. We pass it the host-aware container ID.
           @next/third-parties defers loading until after Next's hydration
@@ -291,8 +297,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             and footer social click. One mount point covers ~30+ CTAs. */}
         <AnalyticsClickTracker />
         {/* Vercel Web Analytics - page-view tracking. Lightweight, cookie-
-            free, and respects DNT. Renders nothing in dev unless ?debug=true. */}
-        <Analytics />
+            free, and respects DNT. Only mounts on Vercel deployments
+            (process.env.VERCEL is set there) so localhost / self-hosted
+            production builds don't 404 on /_vercel/insights/script.js. */}
+        {process.env.VERCEL ? <Analytics /> : null}
         {/* GA4 - direct page-view + event reporting. Loaded after GTM via
             next/script's `afterInteractive` strategy. The two stay
             compatible because they target different properties. */}

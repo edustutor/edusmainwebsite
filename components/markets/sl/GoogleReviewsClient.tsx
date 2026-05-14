@@ -150,25 +150,11 @@ function ReviewCard({ review, fallbackIndex }: { review: GoogleReview; fallbackI
 
       {/* Footer - author + date */}
       <div className="mt-5 pt-4 border-t border-[rgba(16,32,51,0.08)] flex items-center gap-3">
-        {r.authorPhotoUrl ? (
-          <Image
-            src={r.authorPhotoUrl}
-            alt={`${r.authorName} on Google`}
-            width={40}
-            height={40}
-            className="rounded-full shrink-0 w-10 h-10 object-cover"
-          />
-        ) : (
-          <span
-            className="inline-flex w-10 h-10 rounded-full items-center justify-center text-white font-display font-600 text-[13px] shrink-0"
-            style={{
-              background:
-                fallbackIndex % 3 === 0 ? "#2563EB" : fallbackIndex % 3 === 1 ? "#8B5CF6" : "#06B6D4",
-            }}
-          >
-            {initials(r.authorName)}
-          </span>
-        )}
+        <Avatar
+          src={r.authorPhotoUrl}
+          name={r.authorName}
+          fallbackIndex={fallbackIndex}
+        />
         <div className="min-w-0 flex-1">
           <p className="text-[14px] font-display font-600 text-[#102033] truncate">
             {r.authorName}
@@ -199,6 +185,55 @@ function ReviewCard({ review, fallbackIndex }: { review: GoogleReview; fallbackI
         </div>
       </div>
     </article>
+  );
+}
+
+/**
+ * Reviewer avatar with graceful fallback. If the upstream Google
+ * profile photo URL is missing OR errors out at fetch time, we render
+ * a coloured-circle with the author's initials instead. This keeps
+ * the page free of broken-image console errors (caught by Lighthouse
+ * Best Practices) and gives every card a consistent visual identity.
+ */
+function Avatar({
+  src,
+  name,
+  fallbackIndex,
+}: {
+  src: string | null;
+  name: string;
+  fallbackIndex: number;
+}) {
+  const [failed, setFailed] = useState(false);
+  const showImage = src && !failed;
+  if (showImage) {
+    return (
+      <Image
+        src={src}
+        alt={`${name} on Google`}
+        width={40}
+        height={40}
+        className="rounded-full shrink-0 w-10 h-10 object-cover"
+        onError={() => setFailed(true)}
+      />
+    );
+  }
+  return (
+    <span
+      className="inline-flex w-10 h-10 rounded-full items-center justify-center text-white font-display font-600 text-[13px] shrink-0"
+      style={{
+        background:
+          fallbackIndex % 3 === 0
+            ? "#2563EB"
+            : fallbackIndex % 3 === 1
+              ? "#8B5CF6"
+              : "#06B6D4",
+      }}
+      role="img"
+      aria-label={`${name} avatar`}
+    >
+      {initials(name)}
+    </span>
   );
 }
 
