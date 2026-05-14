@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins, Open_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -249,6 +250,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="relative z-10">{children}</main>
           <SiteFooter />
         </MotionProvider>
+        {/* Vercel Web Analytics - page-view tracking. Lightweight, cookie-
+            free, and respects DNT. Renders nothing in dev unless ?debug=true. */}
+        <Analytics />
       </body>
     </html>
   );
