@@ -681,16 +681,19 @@ type FounderProfile = {
 
 const FOUNDERS: FounderProfile[] = [
   {
-    // CEO Magazine Sri Lanka and ICT Award coverage refer to the founder
-    // as "Sugeevan VSG" (display name) - 'V.S.G.' being the initials of
-    // his full name "VetriVelautham Sugeevan" as confirmed in the
-    // National Innovation Report 2024 launch coverage. We use the
-    // display form Google + LinkedIn already index.
+    // Display name as it appears on LinkedIn, sugeevan.com, and Sri Lankan
+    // press coverage (CEO Magazine, National ICT Awards 2024). The 'V.S.G.'
+    // initials expand to "Vettivelautham Sugeevan" - canonical surname
+    // confirmed by sugeevan.com (personal site).
     name: "Sugeevan VSG",
     jobTitle: "Founder & CEO",
     description:
-      "Founder and CEO of EDUS Online Institute - the quality-assured online live learning platform for Sri Lanka, India, Maldives, and global students. Led EDUS to the National ICT Award in Education (NBQSA 2024) and selection into Hemas Slingshot, ICTA Spiralation, and Microsoft for Startups Founders Hub. Holds an Executive MBA in Business Administration from the University of Colombo (2023-2024) and a GDM from BMS (2018-2019).",
+      "Founder and CEO of EDUS Online Institute - the quality-assured online live learning platform for Sri Lanka, India, Maldives, and global students. Led EDUS to the National ICT Award in Education (NBQSA 2024) and selection into Hemas Slingshot, ICTA Spiralation, and Microsoft for Startups Founders Hub. Also builds Yarl Ventures and MediMan. Holds an Executive MBA in Business Administration from the University of Colombo (2023-2024) and a GDM from BMS (2018-2019).",
     sameAs: [
+      // Personal site first - canonical "owned" entity URL for the
+      // person. AI engines weight self-hosted personal sites heavily
+      // when resolving "who is X" queries.
+      "https://sugeevan.com",
       "https://www.linkedin.com/in/sugeevanv/",
       "https://ceo.lk/stepping-stone-to-new-art-of-digital-learning-founder-of-edus-online-school-and-institute-sugeevan-vsg/",
     ],
@@ -724,12 +727,20 @@ const FOUNDERS: FounderProfile[] = [
     description:
       "Chief Technology Officer of EDUS Online Institute (via Yarl Ventures), leading the platform's end-to-end technology, cloud architecture, and AI/automation. Full-stack engineer with deep experience in Next.js, Node.js, NestJS, Flutter, PostgreSQL, MongoDB, AWS, Azure, and LLM/RAG systems. Architected and delivered digital products across healthcare, education, and commerce. BICT (Hons) in Information & Communication Technology from the University of Jaffna (2017-2022).",
     sameAs: [
-      "https://www.linkedin.com/in/tisankan/",
+      // Personal domain first - canonical owner-controlled URL.
       "https://tisankan.dev/",
+      // Professional / authority profiles.
+      "https://www.linkedin.com/in/tisankan/",
       "https://www.crunchbase.com/person/tisankan-jeyakumar",
       "https://github.com/tisankan",
       "https://dev.to/tisankan",
       "https://hackernoon.com/about/tisankan",
+      // Personal social channels - help AI engines deduplicate the
+      // person entity across surface areas where the audience may
+      // mention them by handle (Facebook, X, Instagram).
+      "https://www.facebook.com/Jthisankan",
+      "https://twitter.com/Tisankan",
+      "https://www.instagram.com/tisankan_rascal",
     ],
     alumniOf: [
       { name: "University of Jaffna", url: "https://www.jfn.ac.lk/" },

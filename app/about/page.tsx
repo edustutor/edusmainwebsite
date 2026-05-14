@@ -136,7 +136,8 @@ export default function AboutPage() {
           Google requires named, identifiable leadership for trust scoring.
           The Person entity uses worksFor: { @id: ORG } so the founder ↔
           company link is preserved in Knowledge Graph extraction.
-          TODO: Fill in real founder facts in FOUNDERS in StructuredData.tsx. */}
+          SCHEMA-ONLY: founder names exist in JSON-LD only, never in the
+          visible DOM. To audit, run: grep -rn "Sugeevan\|Tisankan" app/. */}
       <JsonLdScript data={foundingPerson()} />
 
       <Breadcrumb
