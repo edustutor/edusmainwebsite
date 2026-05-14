@@ -1,57 +1,34 @@
-import Script from "next/script";
-
 /**
  * Google Consent Mode v2 default state. Tells GA4, Microsoft Clarity,
  * and any other Google-aware tag in the GTM container how to behave
- * BEFORE the user makes a consent choice (or, in EDUS's current setup,
- * for visitors who never see a consent UI at all).
+ * BEFORE the user makes a consent choice.
  *
- * The result: GA4 + Clarity run in "cookieless ping" mode by default.
- * No 3rd-party cookies are dropped until the visitor explicitly opts in
- * via a banner, which means Lighthouse stops penalising the page for
- * the cookie warning, and we stay compliant with Chrome's 3rd-party
- * cookie deprecation (live 2026).
+ * Rendered as a plain inline <script> via the dangerouslySetInnerHTML
+ * pattern Next.js documents for tracking scripts that MUST run before
+ * everything else. Inline (not external) so there is zero render-blocking
+ * network cost. The script body is ~600 bytes, gzipped to ~250.
  *
  * Granted defaults:
- *   - functionality_storage: granted (essential, e.g. language preference)
- *   - security_storage:      granted (auth, anti-fraud)
+ *   - functionality_storage: granted (language preference, etc.)
+ *   - security_storage:      granted (anti-fraud, auth)
  *
- * Denied defaults (until consent banner is built):
- *   - ad_storage:            denied (no advertising cookies)
- *   - ad_user_data:          denied (no user-level ad data)
- *   - ad_personalization:    denied (no personalised ad targeting)
- *   - analytics_storage:     denied (cookieless GA4 pings only)
- *   - personalization_storage: denied
+ * Denied defaults (until consent banner ships):
+ *   - ad_storage, ad_user_data, ad_personalization
+ *   - analytics_storage (forces GA4 into cookieless-ping mode)
+ *   - personalization_storage
  *
- * Region overrides could be added later (e.g. `region: ['IN']` to relax
- * defaults for non-EU regions), but for now the conservative blanket
- * default is correct.
- *
- * Loaded with strategy="beforeInteractive" so the consent state is set
- * BEFORE GTM / GA4 scripts evaluate.
+ * Once the GTM container has each tag configured to honour Consent Mode
+ * v2, this default state alone is enough to stop Microsoft Clarity +
+ * any other 3rd-party tag from dropping cookies. The Clarity tag inside
+ * GTM still needs to be flagged "Wait for consent" in the GTM UI.
  */
 export function ConsentDefaults() {
   return (
-    <Script
-      id="google-consent-defaults"
-      strategy="beforeInteractive"
+    <script
+      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{
-        __html: `
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('consent', 'default', {
-  ad_storage: 'denied',
-  ad_user_data: 'denied',
-  ad_personalization: 'denied',
-  analytics_storage: 'denied',
-  personalization_storage: 'denied',
-  functionality_storage: 'granted',
-  security_storage: 'granted',
-  wait_for_update: 500
-});
-gtag('set', 'ads_data_redaction', true);
-gtag('set', 'url_passthrough', true);
-        `.trim(),
+        __html:
+          "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',personalization_storage:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});gtag('set','ads_data_redaction',true);gtag('set','url_passthrough',true);",
       }}
     />
   );

@@ -273,12 +273,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             scripts (deferred) connect faster once they fire. */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        {/* Consent Mode v2 default state - inline script inside <head>
+            so dataLayer is primed BEFORE GTM/GA4 fire. ~600 bytes,
+            zero render-blocking network cost. Puts GA4 + Microsoft
+            Clarity into cookieless ping mode until consent is granted. */}
+        <ConsentDefaults />
       </head>
-      {/* Consent Mode v2 default state - MUST load before GTM/GA4 so
-          the trackers respect the denied defaults. Puts GA4 + Clarity
-          into cookieless ping mode by default, which clears the
-          Lighthouse "uses third-party cookies" warning. */}
-      <ConsentDefaults />
       {/* GoogleTagManager renders the <script> in head + the <noscript>
           iframe just inside body. We pass it the host-aware container ID.
           @next/third-parties defers loading until after Next's hydration
