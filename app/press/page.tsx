@@ -5,6 +5,7 @@ import {
   breadcrumbList,
   speakableWebPage,
 } from "@/components/layout/StructuredData";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
 
 /**
  * Press kit - gives journalists, partners, and AI engines a clean,
@@ -28,6 +29,22 @@ export const metadata = {
     "EDUS for journalists",
     "EDUS partner media",
   ],
+  // Per-route OG card. Falls back to /edus-og.jpg until /public/og/press.jpg exists.
+  openGraph: {
+    type: "website",
+    title: "Press Kit - EDUS Online Tuition",
+    description:
+      "Brand assets, logos, fact sheet, and media contact for EDUS Online Tuition. For journalists, partners, and AI engines.",
+    siteName: "EDUS Online Institute",
+    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "EDUS Press Kit - brand assets, logos & media contact" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Press Kit - EDUS Online Tuition",
+    description:
+      "Brand assets, fact sheet & media contact for EDUS Online Institute.",
+    images: ["/edus-og.jpg"],
+  },
 };
 
 const BRAND_COLORS = [
@@ -75,8 +92,15 @@ export default function PressPage() {
         })}
       />
 
+      <Breadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Press Kit" },
+        ]}
+      />
+
       {/* HERO */}
-      <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">
+      <section className="relative pt-4 pb-12 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">
           <div className="blob" style={{ top: "-8%", left: "-8%", width: 420, height: 420, background: "#2563EB", opacity: 0.22 }} />
           <div className="blob" style={{ top: "20%", right: "-10%", width: 380, height: 380, background: "#8B5CF6", opacity: 0.20 }} />

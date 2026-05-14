@@ -5,6 +5,7 @@ import { InPillars } from "@/components/markets/in/InPillars";
 import { InAcademicStructure } from "@/components/markets/in/InAcademicStructure";
 import { InPricing } from "@/components/markets/in/InPricing";
 import { InFAQ } from "@/components/markets/in/InFAQ";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import {
   JsonLdScript,
   breadcrumbList,
@@ -103,6 +104,23 @@ export const metadata = {
     "scholarship exam CBSE online classes",
     "merit scholarship CBSE tuition",
   ],
+  // Per-route OG card. Falls back to the root /edus-og.jpg until a
+  // per-route 1200x630 design is dropped in at /public/og/in.jpg.
+  openGraph: {
+    type: "website",
+    title: "India CBSE Online Tuition - EDUS",
+    description:
+      "Premium structured online CBSE tuition for Classes 6-10 in English medium. Live classes with parent reports and exam analytics.",
+    siteName: "EDUS Online Institute",
+    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "EDUS India CBSE online tuition - Classes 6-10 Tamil Nadu" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "India CBSE Online Tuition - EDUS",
+    description:
+      "Structured online CBSE tuition for Classes 6-10. English medium, parent reports, exam analytics.",
+    images: ["/edus-og.jpg"],
+  },
 };
 
 export default function IndiaPage() {
@@ -157,6 +175,13 @@ export default function IndiaPage() {
           bundlePriceINR: 2500,
           admissionFeeINR: 2000,
         })}
+      />
+      <Breadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "India" },
+        ]}
+        variant="overlay"
       />
       <InHero />
       <InPillars />

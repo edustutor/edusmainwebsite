@@ -58,6 +58,20 @@ export function faqPage(faqs: FaqEntry[]) {
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
+    // Speakable signals tell Google Assistant, Alexa, and Siri which
+    // selectors to read aloud for voice queries. Targets the FAQ Q/A
+    // text - the highest-value content for "Hey Google, is EDUS good"
+    // style voice search.
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: [
+        "[itemtype$='Question'] [itemprop='name']",
+        "[itemtype$='Answer'] [itemprop='text']",
+        "section.faq h2",
+        "section.faq h3",
+        "section.faq p",
+      ],
+    },
   };
 }
 

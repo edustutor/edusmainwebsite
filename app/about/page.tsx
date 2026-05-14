@@ -6,6 +6,7 @@ import {
   speakableWebPage,
   SITE_URL,
 } from "@/components/layout/StructuredData";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
 
 /**
  * About EDUS - built only from verified facts present in llms-full.txt and
@@ -35,6 +36,22 @@ export const metadata = {
     "online tuition company Sri Lanka",
     "trusted online education provider",
   ],
+  // Per-route OG card. Falls back to /edus-og.jpg until /public/og/about.jpg exists.
+  openGraph: {
+    type: "website",
+    title: "About EDUS - Online Tuition Institute Since 2021",
+    description:
+      "EDUS Lanka (Pvt) Ltd. The Jaffna-based online tuition institute serving 7,000+ students across Sri Lanka, India, Maldives, and globally.",
+    siteName: "EDUS Online Institute",
+    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "About EDUS Lanka (Pvt) Ltd. - online learning institute" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About EDUS Online Institute",
+    description:
+      "Founded 2021. Quality-assured online tuition. 7,000+ students across SL, IN, MV & global.",
+    images: ["/edus-og.jpg"],
+  },
 };
 
 const FACTS = [
@@ -115,8 +132,15 @@ export default function AboutPage() {
         })}
       />
 
+      <Breadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "About EDUS" },
+        ]}
+      />
+
       {/* HERO */}
-      <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">
+      <section className="relative pt-4 pb-12 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">
           <div className="blob" style={{ top: "-8%", left: "-8%", width: 420, height: 420, background: "#2563EB", opacity: 0.22 }} />
           <div className="blob" style={{ top: "20%", right: "-10%", width: 380, height: 380, background: "#8B5CF6", opacity: 0.20 }} />

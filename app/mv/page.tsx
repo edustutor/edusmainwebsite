@@ -1,4 +1,5 @@
 import { MvHero } from "@/components/markets/mv/MvHero";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { MvWhy } from "@/components/markets/mv/MvWhy";
 import { MvSubjects } from "@/components/markets/mv/MvSubjects";
 import { MvLearningFlow } from "@/components/markets/mv/MvLearningFlow";
@@ -111,6 +112,23 @@ export const metadata = {
     "IGCSE scholarship tuition Maldives",
     "scholarship exam online tuition Maldives",
   ],
+  // Per-route OG card. Falls back to the root /edus-og.jpg until a
+  // per-route 1200x630 design is dropped in at /public/og/mv.jpg.
+  openGraph: {
+    type: "website",
+    title: "Maldives Cambridge IGCSE Online Classes - EDUS",
+    description:
+      "1-to-1 Cambridge IGCSE & O-Level online classes for Maldives students. Flexible scheduling, expert tutors, parent updates.",
+    siteName: "EDUS Online Institute",
+    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "EDUS Maldives Cambridge IGCSE & O-Level online classes" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Maldives Cambridge IGCSE Online Classes - EDUS",
+    description:
+      "1-to-1 Cambridge IGCSE & O-Level for Maldives students. Flexible scheduling, parent updates.",
+    images: ["/edus-og.jpg"],
+  },
 };
 
 export default function MaldivesPage() {
@@ -149,6 +167,13 @@ export default function MaldivesPage() {
           url: `${SITE_URL}/mv`,
           area: "Maldives",
         })}
+      />
+      <Breadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Maldives" },
+        ]}
+        variant="overlay"
       />
       <MvHero />
       <MvWhy />

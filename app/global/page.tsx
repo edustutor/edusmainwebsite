@@ -1,4 +1,5 @@
 import { GlHero } from "@/components/markets/global/GlHero";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { GlIntro } from "@/components/markets/global/GlIntro";
 import { GlPromise } from "@/components/markets/global/GlPromise";
 import { GlCurricula } from "@/components/markets/global/GlCurricula";
@@ -138,6 +139,23 @@ export const metadata = {
     "Cambridge scholarship preparation online",
     "international scholarship exam tuition",
   ],
+  // Per-route OG card. Falls back to the root /edus-og.jpg until a
+  // per-route 1200x630 design is dropped in at /public/og/global.jpg.
+  openGraph: {
+    type: "website",
+    title: "Global Online Tutoring - Cambridge, Edexcel, IGCSE - EDUS",
+    description:
+      "Personalised one-to-one online tutoring for international students. Cambridge, Edexcel, IB, IGCSE, A-Level. Expert tutors matched to your syllabus.",
+    siteName: "EDUS Online Institute",
+    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "EDUS Global one-to-one online tutoring - Cambridge, Edexcel, IGCSE" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Global Online Tutoring - Cambridge, Edexcel, IGCSE - EDUS",
+    description:
+      "Personalised one-to-one online tutoring for international students. Cambridge, Edexcel, IB, A-Level.",
+    images: ["/edus-og.jpg"],
+  },
 };
 
 export default function GlobalPage() {
@@ -176,6 +194,13 @@ export default function GlobalPage() {
           url: `${SITE_URL}/global`,
           area: "Worldwide",
         })}
+      />
+      <Breadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Global" },
+        ]}
+        variant="overlay"
       />
       <GlHero />
       <GlIntro />

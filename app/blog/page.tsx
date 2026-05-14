@@ -6,6 +6,7 @@ import {
   speakableWebPage,
 } from "@/components/layout/StructuredData";
 import { PUBLISHED_POSTS } from "@/components/blog/BlogData";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
 
 export const metadata = {
   title: "EDUS Blog - Online Tuition Guides, Exam Prep & Parent Advice",
@@ -27,6 +28,22 @@ export const metadata = {
     "India CBSE study tips",
     "Maldives Cambridge IGCSE",
   ],
+  // Per-route OG card. Falls back to /edus-og.jpg until /public/og/blog.jpg exists.
+  openGraph: {
+    type: "website",
+    title: "EDUS Blog - Online Tuition Guides & Exam Prep",
+    description:
+      "Learning guides, exam prep tips, and parent advice from the EDUS Academic Team. Sri Lanka, India CBSE, Maldives Cambridge & global tutoring.",
+    siteName: "EDUS Online Institute",
+    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "EDUS Blog - exam preparation guides & parent advice" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "EDUS Blog - Online Tuition Guides & Exam Prep",
+    description:
+      "Exam prep tips, parent advice, syllabus guides from the EDUS Academic Team.",
+    images: ["/edus-og.jpg"],
+  },
 };
 
 export default function BlogIndexPage() {
@@ -57,8 +74,15 @@ export default function BlogIndexPage() {
         />
       )}
 
+      <Breadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Blog" },
+        ]}
+      />
+
       {/* HERO */}
-      <section className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">
+      <section className="relative pt-4 pb-12 overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10">
           <div className="blob" style={{ top: "-8%", left: "-8%", width: 420, height: 420, background: "#2563EB", opacity: 0.22 }} />
           <div className="blob" style={{ top: "20%", right: "-10%", width: 380, height: 380, background: "#8B5CF6", opacity: 0.20 }} />

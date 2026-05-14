@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { TeachHero } from "@/components/teach/TeachHero";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { TeachVision } from "@/components/teach/TeachVision";
 import { TeachStats } from "@/components/teach/TeachStats";
 import { TeachWhy } from "@/components/teach/TeachWhy";
@@ -82,6 +83,22 @@ export const metadata = {
     "online tutor jobs Chennai",
     "online tutor jobs Tamil Nadu",
   ],
+  // Per-route OG card. Falls back to /edus-og.jpg until /public/og/teach.jpg exists.
+  openGraph: {
+    type: "website",
+    title: "Teach with EDUS - Online Tutor Jobs - SL, India, Maldives",
+    description:
+      "Become an EDUS online tutor and teach students across Sri Lanka, India, Maldives and globally. Flexible hours, structured classes.",
+    siteName: "EDUS Online Institute",
+    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "Teach with EDUS - online tutor opportunities" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Teach with EDUS - Online Tutor Jobs",
+    description:
+      "Become an EDUS online tutor. Sri Lanka, India, Maldives, global. Flexible hours.",
+    images: ["/edus-og.jpg"],
+  },
 };
 
 export default function TeachWithEdusPage() {
@@ -95,6 +112,13 @@ export default function TeachWithEdusPage() {
       />
       <JsonLdScript data={tutorJobPosting()} />
       <JsonLdScript data={teachCollectionPage()} />
+      <Breadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Teach with EDUS" },
+        ]}
+        variant="overlay"
+      />
       <TeachHero />
       <TeachVision />
       <TeachStats />

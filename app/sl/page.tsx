@@ -7,6 +7,7 @@ import { SlIndividual } from "@/components/markets/sl/SlIndividual";
 import { SlTestimonials } from "@/components/markets/sl/SlTestimonials";
 import { SlFAQ } from "@/components/markets/sl/SlFAQ";
 import { GoogleReviews } from "@/components/markets/sl/GoogleReviews";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import {
   JsonLdScript,
   breadcrumbList,
@@ -237,6 +238,13 @@ export default async function SriLankaPage() {
           url: `${SITE_URL}/sl`,
           area: "Sri Lanka",
         })}
+      />
+      <Breadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Sri Lanka" },
+        ]}
+        variant="overlay"
       />
       <SlHero />
       <SlCurricula />
