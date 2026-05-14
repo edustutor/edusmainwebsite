@@ -17,7 +17,11 @@ export function CTA() {
   const cardY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [40, -40]);
 
   return (
-    <section ref={ref} className="relative py-12 md:py-16 overflow-hidden">
+    <section
+      ref={ref}
+      data-track-surface="cta_section"
+      className="relative py-12 md:py-16 overflow-hidden"
+    >
       <div className="container-edge">
         <m.div
           className="relative rounded-[36px] glass-strong p-8 md:p-14 overflow-hidden text-center"

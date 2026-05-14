@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { MotionProvider } from "@/components/effects/Motion";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { Atmosphere } from "@/components/effects/Atmosphere";
+import { AnalyticsClickTracker } from "@/components/analytics/AnalyticsClickTracker";
 import {
   getCurrentHost,
   getCurrentAnalyticsIds,
@@ -285,6 +286,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <main className="relative z-10">{children}</main>
           <SiteFooter />
         </MotionProvider>
+        {/* Global delegated click tracker - fires GA4 events for every
+            signup CTA, region selector click, blog/gallery navigation,
+            and footer social click. One mount point covers ~30+ CTAs. */}
+        <AnalyticsClickTracker />
         {/* Vercel Web Analytics - page-view tracking. Lightweight, cookie-
             free, and respects DNT. Renders nothing in dev unless ?debug=true. */}
         <Analytics />

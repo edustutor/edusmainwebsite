@@ -102,7 +102,11 @@ export function Hero() {
   const heroGlows = isMobile ? MOBILE_HERO_GLOWS : DESKTOP_HERO_GLOWS;
 
   return (
-    <section ref={ref} className="relative pt-32 sm:pt-36 pb-12 overflow-hidden">
+    <section
+      ref={ref}
+      data-track-surface="hero"
+      className="relative pt-32 sm:pt-36 pb-12 overflow-hidden"
+    >
       {/* Breathing glows. Parallax disabled on mobile via parallax: 0. */}
       <m.div aria-hidden className="absolute inset-0 -z-10" style={{ opacity: heroOpacity }}>
         {heroGlows.map((g, i) => (

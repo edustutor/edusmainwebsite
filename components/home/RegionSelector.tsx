@@ -103,6 +103,7 @@ export function RegionSelector() {
     <section
       ref={ref}
       id="regions"
+      data-track-surface="region_selector"
       className="relative py-12 md:py-16 scroll-mt-24 overflow-hidden"
     >
       <div aria-hidden className="absolute inset-0 -z-10">

@@ -5,6 +5,11 @@ import { m, AnimatePresence } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, sectionRevealStrong, inView } from "@/lib/motion";
 import { FeatureIcon } from "@/components/effects/Icons";
+import {
+  trackContactSubmit,
+  trackContactError,
+  type Market,
+} from "@/lib/analytics";
 
 /* ---------------------------------------------------------------- */
 /* Form options - kept short                                         */
@@ -56,6 +61,22 @@ const INITIAL: FormState = {
 const HONEYPOT_FIELD = "_company";
 
 const MESSAGE_MAX = 500;
+
+/**
+ * Read the active path on the client and map it to the analytics
+ * `market` token. Used by the GA4 conversion event so the contact
+ * form submit is attributed to the right market segment.
+ */
+function inferMarketFromPath(): Market {
+  if (typeof window === "undefined") return "unknown";
+  const p = window.location.pathname;
+  if (p === "/") return "homepage";
+  if (p.startsWith("/sl")) return "sl";
+  if (p.startsWith("/in")) return "in";
+  if (p.startsWith("/mv")) return "mv";
+  if (p.startsWith("/global")) return "global";
+  return "unknown";
+}
 
 function validate(s: FormState): FieldErrors {
   const errs: FieldErrors = {};
@@ -121,12 +142,19 @@ export function ContactForm() {
       setSubmitted(true);
       setData(INITIAL);
       setHoneypot("");
+      // Conversion event - fired ONLY after the API confirms 2xx + ok.
+      // GA4 Admin -> Events -> mark `contact_form_submit` as Conversion.
+      trackContactSubmit({ market: inferMarketFromPath() });
     } catch (err) {
-      setSubmitError(
+      const reason =
         err instanceof Error && err.message
           ? err.message
-          : "Something went wrong. Please try again or email hello@edustutor.com.",
-      );
+          : "Something went wrong. Please try again or email hello@edustutor.com.";
+      setSubmitError(reason);
+      trackContactError({
+        market: inferMarketFromPath(),
+        reason: reason.slice(0, 80),
+      });
     } finally {
       setSubmitting(false);
     }

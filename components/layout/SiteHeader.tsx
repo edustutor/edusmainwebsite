@@ -99,7 +99,7 @@ export function SiteHeader() {
   };
 
   return (
-    <m.header className="fixed top-0 inset-x-0 z-50">
+    <m.header data-track-surface="header" className="fixed top-0 inset-x-0 z-50">
       <m.div className="container-edge" style={{ paddingTop }}>
         <m.div
           className="relative flex items-center justify-between rounded-full px-3 sm:px-4 py-2"

@@ -43,7 +43,7 @@ const SOCIALS = [
 
 export function SiteFooter() {
   return (
-    <footer className="relative mt-12">
+    <footer data-track-surface="footer" className="relative mt-12">
       <div className="container-edge pb-10">
         <div className="glass rounded-[24px] px-6 md:px-10 py-8 md:py-10">
           {/* Top row - logo + summary + columns */}

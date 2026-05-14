@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import type { GoogleReview } from "@/lib/googleReviews";
+import { trackGoogleReviewClick, trackViewMoreReviews } from "@/lib/analytics";
 
 /**
  * Client UI for the live Google reviews block on /sl.
@@ -68,6 +69,7 @@ export function GoogleReviewsClient({
               href={mapsUri}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackGoogleReviewClick({ market: "sl", kind: "view_all" })}
               className="text-[#2563EB] hover:underline font-display font-600"
             >
               {placeName}&apos;s public Google listing
@@ -90,7 +92,10 @@ export function GoogleReviewsClient({
           <div className="mt-8 text-center">
             <button
               type="button"
-              onClick={() => setExpanded(true)}
+              onClick={() => {
+                trackViewMoreReviews({ market: "sl", hidden_count: hiddenCount });
+                setExpanded(true);
+              }}
               className="btn btn-ghost inline-flex items-center gap-2"
             >
               View more reviews ({hiddenCount} more)
@@ -105,6 +110,7 @@ export function GoogleReviewsClient({
               href={mapsUri}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackGoogleReviewClick({ market: "sl", kind: "view_all" })}
               className="btn btn-yellow inline-flex items-center gap-2"
             >
               <GoogleGlyph size={14} />
@@ -182,6 +188,7 @@ function ReviewCard({ review, fallbackIndex }: { review: GoogleReview; fallbackI
                   href={r.reviewUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackGoogleReviewClick({ market: "sl", kind: "single_review" })}
                   className="text-[#2563EB] hover:underline"
                 >
                   View on Google

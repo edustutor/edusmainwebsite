@@ -61,7 +61,10 @@ export function OtherMarkets({ current }: { current: MarketCode }) {
   const others = MARKETS.filter((m) => m.code !== current);
 
   return (
-    <section className="relative py-12 md:py-16 overflow-hidden">
+    <section
+      data-track-surface="other_markets"
+      className="relative py-12 md:py-16 overflow-hidden"
+    >
       <div className="container-edge">
         <div className="text-center max-w-2xl mx-auto">
           <p className="eyebrow"><span className="dot" />Other EDUS Markets</p>
