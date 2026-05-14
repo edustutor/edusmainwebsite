@@ -6,14 +6,17 @@ import { SlGroupClasses } from "@/components/markets/sl/SlGroupClasses";
 import { SlIndividual } from "@/components/markets/sl/SlIndividual";
 import { SlTestimonials } from "@/components/markets/sl/SlTestimonials";
 import { SlFAQ } from "@/components/markets/sl/SlFAQ";
+import { GoogleReviews } from "@/components/markets/sl/GoogleReviews";
 import {
   JsonLdScript,
   breadcrumbList,
   educationalProgram,
   tuitionCourse,
   tuitionService,
+  googleAggregateRating,
   SITE_URL,
 } from "@/components/layout/StructuredData";
+import { getGoogleReviews } from "@/lib/googleReviews";
 
 export const metadata = {
   title: "Sri Lanka Online Tuition - National, Cambridge & Edexcel",
@@ -130,7 +133,12 @@ export const metadata = {
   ],
 };
 
-export default function SriLankaPage() {
+export default async function SriLankaPage() {
+  // Fetch Google reviews once at render time. Cached 24h via Next's
+  // Data Cache (see lib/googleReviews.ts). If fetch fails we still
+  // render the page - only the GoogleReviews block + schema disappear.
+  const placeData = await getGoogleReviews();
+
   return (
     <>
       <JsonLdScript
@@ -139,6 +147,24 @@ export default function SriLankaPage() {
           { name: "Sri Lanka", path: "/sl" },
         ])}
       />
+      {/* AggregateRating + Review schema - lets Google show the gold-star
+          rich snippet for /sl in search results. Only emitted when the
+          API actually returned reviews. */}
+      {placeData && placeData.reviews.length > 0 ? (
+        <JsonLdScript
+          data={googleAggregateRating({
+            averageRating: placeData.rating,
+            totalReviews: placeData.totalReviews,
+            mapsUri: placeData.mapsUri,
+            reviews: placeData.reviews.map((r) => ({
+              authorName: r.authorName,
+              rating: r.rating,
+              publishTime: r.publishTime,
+              text: r.text,
+            })),
+          })}
+        />
+      ) : null}
       <JsonLdScript
         data={educationalProgram({
           name: "EDUS Sri Lanka Online Tuition",
@@ -171,6 +197,10 @@ export default function SriLankaPage() {
       <SlCurricula />
       <SlGroupClasses />
       <SlIndividual />
+      {/* Live Google reviews first - verified social proof. The block
+          renders null if the Places API call fails, so the curated
+          SlTestimonials below always carries the page. */}
+      <GoogleReviews />
       <SlTestimonials />
       <SlFAQ />
       {/* Full 4-market RegionSelector instead of OtherMarkets, because

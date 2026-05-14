@@ -1056,6 +1056,65 @@ export function classEventSeries(s: ScheduleSession) {
 }
 
 /* --------------------------------------------------------------- */
+/* Google reviews schema - rendered alongside the <GoogleReviews>    */
+/* component on /sl. Two parts:                                      */
+/*                                                                   */
+/*   1) AggregateRating on the LocalBusiness/Organization so Google  */
+/*      can show gold-star rich snippets in SERPs for /sl.           */
+/*   2) An array of individual Review nodes so each review is        */
+/*      machine-readable and AI engines can quote attributable text. */
+/*                                                                   */
+/* Source of truth is the live Google Places API response. We do not */
+/* edit ratings or text - displaying exactly what Google returns.    */
+/* --------------------------------------------------------------- */
+export type GoogleReviewSchemaInput = {
+  authorName: string;
+  rating: number;
+  publishTime: string;
+  text: string;
+};
+
+export function googleAggregateRating(opts: {
+  /** Average star rating from Google (e.g. 4.5). */
+  averageRating: number;
+  /** Total review count on the Google listing. */
+  totalReviews: number;
+  /** URL of the public Google Maps listing - used as the reviewedBy URL. */
+  mapsUri: string;
+  /** Top 5 reviews to embed inline. */
+  reviews: GoogleReviewSchemaInput[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "@id": `${SITE_URL}/#organization`,
+    name: "EDUS Online Tuition",
+    url: `${SITE_URL}/sl`,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: opts.averageRating.toFixed(1),
+      reviewCount: opts.totalReviews,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    review: opts.reviews.map((r) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: r.authorName },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: r.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      datePublished: r.publishTime || undefined,
+      reviewBody: r.text,
+      publisher: { "@type": "Organization", name: "Google" },
+    })),
+    sameAs: [opts.mapsUri],
+  };
+}
+
+/* --------------------------------------------------------------- */
 /* CollectionPage wrapper for the timetable itself.                  */
 /* --------------------------------------------------------------- */
 export function timetableCollectionPage(totalSessions: number) {
