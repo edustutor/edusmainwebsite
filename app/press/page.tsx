@@ -204,6 +204,43 @@ export default function PressPage() {
         </div>
       </section>
 
+      {/* EVENT PHOTOS - cross-link to /gallery so journalists can grab
+          high-resolution event photography for stories on EDUS. Each
+          link points at a specific album that matches a press-relevant
+          milestone. */}
+      <section className="relative py-12 md:py-16 overflow-hidden">
+        <div className="container-edge max-w-4xl mx-auto">
+          <div className="rounded-2xl border border-[rgba(16,32,51,0.10)] bg-white p-6 md:p-10 shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)] text-center">
+            <p className="eyebrow"><span className="dot" />Photos for press use</p>
+            <h2 className="heading mt-3" style={{ fontSize: "26px" }}>
+              Event &amp; milestone <em>photography</em>.
+            </h2>
+            <p className="text-[#2B3950] text-[15px] mt-4 leading-[1.7] max-w-2xl mx-auto">
+              The{" "}
+              <Link href="/gallery" className="text-[#2563EB] hover:underline">EDUS Gallery</Link>{" "}
+              carries high-resolution photos from the events covered above. For story-specific use, pull from the{" "}
+              <Link href="/gallery/edus-wins-national-ict-award-education" className="text-[#2563EB] hover:underline">National ICT Award 2024 album</Link>
+              , the{" "}
+              <Link href="/gallery/edus-slasscom-xcellerate-2023" className="text-[#2563EB] hover:underline">SLASSCOM Xcellerate showcase</Link>
+              , the{" "}
+              <Link href="/gallery/edus-slingshot-accelerator-demo-day" className="text-[#2563EB] hover:underline">Slingshot Demo Day</Link>
+              , and the{" "}
+              <Link href="/gallery/edus-spiralation-2022-finalist" className="text-[#2563EB] hover:underline">Spiralation 2022 finalist round</Link>
+              .
+            </p>
+            <p className="text-[#5A6A82] text-[13px] mt-4 leading-[1.6] max-w-2xl mx-auto">
+              All photos are credited to EDUS Online Institute. Email{" "}
+              <a href="mailto:hello@edustutor.com" className="text-[#2563EB] hover:underline">hello@edustutor.com</a>{" "}
+              if you need raw original files for print use.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Link href="/gallery" className="btn btn-primary">Browse the Gallery</Link>
+              <Link href="/about" className="btn btn-ghost">About EDUS</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* MEDIA CONTACT */}
       <section className="relative py-12 md:py-16 overflow-hidden">
         <div className="container-edge max-w-3xl mx-auto">

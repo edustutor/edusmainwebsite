@@ -768,6 +768,13 @@ export type GalleryAlbumSchemaOptions = {
   dateModified?: string;
   eventDate?: string;
   location?: string;
+  /** Per-album keywords - mixed into the schema for topical anchoring. */
+  keywords?: string[];
+  /**
+   * Trusted outbound URLs (partner orgs, award bodies, gov sources).
+   * Listed as `mentions` so Google understands the album's topic graph.
+   */
+  mentions?: Array<{ name: string; url: string }>;
   photos: GallerySchemaPhoto[];
 };
 
@@ -785,6 +792,7 @@ export function galleryAlbumSchema(opts: GalleryAlbumSchemaOptions) {
     image: cover,
     datePublished: opts.datePublished,
     dateModified: opts.dateModified ?? opts.datePublished,
+    ...(opts.keywords && opts.keywords.length ? { keywords: opts.keywords.join(", ") } : {}),
     ...(opts.location ? { contentLocation: { "@type": "Place", name: opts.location } } : {}),
     ...(opts.eventDate
       ? {
@@ -794,9 +802,22 @@ export function galleryAlbumSchema(opts: GalleryAlbumSchemaOptions) {
             startDate: opts.eventDate,
             ...(opts.location ? { location: { "@type": "Place", name: opts.location } } : {}),
             organizer: { "@id": `${SITE_URL}/#organization` },
+            image: cover,
           },
         }
       : {}),
+    ...(opts.mentions && opts.mentions.length
+      ? {
+          mentions: opts.mentions.map((m) => ({
+            "@type": "Organization",
+            name: m.name,
+            url: m.url,
+          })),
+        }
+      : {}),
+    creator: { "@id": `${SITE_URL}/#organization` },
+    copyrightHolder: { "@id": `${SITE_URL}/#organization` },
+    copyrightYear: new Date(opts.datePublished).getFullYear(),
     publisher: { "@id": `${SITE_URL}/#organization` },
     inLanguage: "en",
     isPartOf: { "@id": `${SITE_URL}/#website` },
@@ -804,9 +825,14 @@ export function galleryAlbumSchema(opts: GalleryAlbumSchemaOptions) {
       "@type": "ImageObject",
       contentUrl: p.url,
       url: p.url,
-      ...(p.caption ? { caption: p.caption, name: p.caption } : {}),
+      ...(p.caption ? { caption: p.caption, name: p.caption, description: p.caption } : {}),
       ...(p.width ? { width: p.width } : {}),
       ...(p.height ? { height: p.height } : {}),
+      creator: { "@id": `${SITE_URL}/#organization` },
+      copyrightHolder: { "@id": `${SITE_URL}/#organization` },
+      acquireLicensePage: `${SITE_URL}/contact`,
+      creditText: "EDUS Online Institute",
+      license: `${SITE_URL}/terms`,
       position: i + 1,
     })),
   };

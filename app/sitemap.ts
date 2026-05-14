@@ -1,13 +1,23 @@
 import type { MetadataRoute } from "next";
 import { PUBLISHED_POSTS } from "@/components/blog/BlogData";
-import { PUBLISHED_ALBUMS } from "@/components/gallery/GalleryData";
+import { PUBLISHED_ALBUMS, cloudinaryUrl } from "@/components/gallery/GalleryData";
 
 const SITE = "https://edustutor.com";
+
+/** One row in the internal route list. `images` becomes `<image:loc>`
+ *  entries on the URL when present (image sitemap extension). */
+type SitemapRow = {
+  path: string;
+  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
+  priority: number;
+  lastModified?: Date;
+  images?: string[];
+};
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const routes: { path: string; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"]; priority: number; lastModified?: Date }[] = [
+  const routes: SitemapRow[] = [
     // Top-level
     { path: "/",                 changeFrequency: "weekly",  priority: 1.0 },
 
@@ -42,7 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // Blog posts - each gets its own entry with the post's actual datePublished.
-  const blogRoutes = PUBLISHED_POSTS.map((p) => ({
+  const blogRoutes: SitemapRow[] = PUBLISHED_POSTS.map((p) => ({
     path: `/blog/${p.slug}`,
     changeFrequency: "monthly" as const,
     priority: 0.65,
@@ -50,12 +60,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Gallery albums - lastModified uses the album's event date so the
-  // sitemap reflects when the photos were actually captured.
-  const galleryRoutes = PUBLISHED_ALBUMS.map((a) => ({
+  // sitemap reflects when the photos were actually captured. We also
+  // emit every album photo as <image:loc> so Google Images discovers
+  // the full set without re-crawling the HTML.
+  const galleryRoutes: SitemapRow[] = PUBLISHED_ALBUMS.map((a) => ({
     path: `/gallery/${a.slug}`,
     changeFrequency: "yearly" as const,
     priority: 0.60,
     lastModified: new Date(a.dateModified ?? a.datePublished),
+    images: a.photos.map((p) => cloudinaryUrl(p.publicId, { width: 1600 })),
   }));
 
   return [...routes, ...blogRoutes, ...galleryRoutes].map((r) => ({
@@ -63,5 +76,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: r.lastModified ?? now,
     changeFrequency: r.changeFrequency,
     priority: r.priority,
+    ...(r.images && r.images.length ? { images: r.images } : {}),
   }));
 }

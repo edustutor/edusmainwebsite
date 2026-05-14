@@ -113,6 +113,7 @@ export const POSTS: BlogPost[] = [
 
       "## Final thoughts",
       "The Grade 5 Scholarship Exam rewards consistency over intensity. A child who spends 45 minutes a day for 12 months will outperform a child who spends 4 hours a day for the last 2 months, almost without exception. Build the habit early, focus on the three skills that move marks (reading speed, arithmetic fluency, pattern familiarity), and treat exam technique as a separate skill to practise - not something that happens automatically.",
+      "EDUS has a long history of honouring Grade 5 Scholarship achievers in the Northern Province community - you can see photos from one of those small ceremonies at https://edustutor.com/gallery/edus-honors-kokuvil-hindu-primary-grade-5-scholarship and browse other EDUS milestones in the wider https://edustutor.com/gallery archive.",
       "If you'd like to enrol your child in a structured Grade 5 Scholarship class, visit https://signup.edustutor.com/ and choose your preferred medium. The EDUS academic team will follow up to confirm the right class and tutor within one business day.",
       "You can also see all our Sri Lanka classes at https://edustutor.com/sl or contact the team at https://edustutor.com/contact for personalised guidance.",
     ],

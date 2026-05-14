@@ -11,7 +11,6 @@ const NAV = [
   { label: "Why EDUS", href: "/#why", section: "why" },
   { label: "How It Works", href: "/#how", section: "how" },
   { label: "Stories", href: "/#stories", section: "stories" },
-  { label: "Gallery", href: "/gallery", section: null },
   { label: "Teach", href: "/teach", section: null },
   { label: "Contact", href: "/contact", section: null },
   { label: "FAQ", href: "/#faq", section: "faq" },

@@ -249,6 +249,37 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* SEE THE JOURNEY IN PHOTOS - cross-link to /gallery so the EDUS
+          history page passes link equity to the high-content gallery
+          albums (and vice versa, since those albums link back here). */}
+      <section className="relative py-12 md:py-16 overflow-hidden">
+        <div className="container-edge max-w-4xl mx-auto">
+          <div className="rounded-2xl border border-[rgba(16,32,51,0.10)] bg-white p-6 md:p-10 shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)] text-center">
+            <p className="eyebrow"><span className="dot" />EDUS Gallery</p>
+            <h2 className="heading mt-3" style={{ fontSize: "26px" }}>
+              See the journey in <em>photos</em>.
+            </h2>
+            <p className="text-[#2B3950] text-[15px] mt-4 leading-[1.7] max-w-2xl mx-auto">
+              Every milestone in this story has a photo album. Browse the{" "}
+              <Link href="/gallery" className="text-[#2563EB] hover:underline">EDUS Gallery</Link>{" "}
+              for the{" "}
+              <Link href="/gallery/edus-wins-national-ict-award-education" className="text-[#2563EB] hover:underline">National ICT Award 2024 ceremony</Link>
+              , the{" "}
+              <Link href="/gallery/edus-yarl-ventures-jaffna-office-opening" className="text-[#2563EB] hover:underline">Jaffna front office opening with Yarl Ventures</Link>
+              , our{" "}
+              <Link href="/gallery/edus-slingshot-accelerator-demo-day" className="text-[#2563EB] hover:underline">Slingshot Accelerator Demo Day</Link>
+              , and the{" "}
+              <Link href="/gallery/edus-first-office-opening-jaffna-2021" className="text-[#2563EB] hover:underline">first office opening back in 2021</Link>
+              .
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Link href="/gallery" className="btn btn-primary">Browse the Gallery</Link>
+              <Link href="/press" className="btn btn-ghost">Press &amp; Media</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="relative py-12 md:py-16 overflow-hidden">
         <div className="container-edge max-w-4xl mx-auto">

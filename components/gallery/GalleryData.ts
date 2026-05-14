@@ -63,6 +63,24 @@ export type GalleryPhoto = {
   height: number;
 };
 
+export type ExternalLink = {
+  /** Display label, e.g. "SLASSCOM". */
+  label: string;
+  /** Full https URL. Opens in a new tab on the page. */
+  url: string;
+  /** Short reason this link is here - rendered as muted helper text. */
+  context: string;
+};
+
+export type InternalLink = {
+  /** Display label. */
+  label: string;
+  /** Internal href starting with /. */
+  href: string;
+  /** Helper text describing why the page is relevant. */
+  context: string;
+};
+
 export type GalleryAlbum = {
   /** URL slug under /gallery/. Lowercase, kebab-case. */
   slug: string;
@@ -87,12 +105,36 @@ export type GalleryAlbum = {
   /** Hide from /gallery index without deleting the data. */
   draft?: boolean;
   /**
+   * Per-album SEO keywords. Mixed with the brand-level keywords on the
+   * detail page <meta name="keywords">. Be specific (event name, partner
+   * names, location). 6-12 entries.
+   */
+  keywords?: string[];
+  /**
    * Optional Cloudinary public ID to use as the index-card thumbnail
    * and OG image. When unset, the first photo in `photos` is used.
    * Editorial override for albums where the first chronological photo
    * isn't the most visually striking.
    */
   coverPublicId?: string;
+  /**
+   * Trusted outbound authority links - partner orgs, award bodies,
+   * Wikipedia, gov sources. Rendered in a "References" block below
+   * the article body. Builds topical trust for E-E-A-T.
+   */
+  externalLinks?: ExternalLink[];
+  /**
+   * Internal EDUS cross-links to drive link equity into commercial
+   * pages from this content-heavy gallery page. Rendered as a
+   * "More from EDUS" block on the detail page.
+   */
+  internalLinks?: InternalLink[];
+  /**
+   * Optional slug of a related blog post. Rendered as a featured
+   * card under the gallery photos so readers move from event recap
+   * into evergreen content.
+   */
+  relatedBlogSlug?: string;
   /** Body paragraphs - "## " for H2, "### " for H3, plain otherwise. */
   body: string[];
   /**
@@ -124,13 +166,52 @@ export const ALBUMS: GalleryAlbum[] = [
     title:
       "EDUS & Yarl Ventures Open New Front Office in Jaffna",
     description:
-      "Inside the grand opening of the EDUS and Yarl Ventures front office in Jaffna - chief guest moments, team photos, and a tour of the new student-facing space.",
+      "Photos from the EDUS and Yarl Ventures Jaffna front office opening - chief guest moments, the team, and a tour of the new student-facing space.",
     cardSubtitle: "A new student-facing home in the heart of Jaffna",
     category: "Milestones",
     tint: "#2563EB",
     eventDate: "2025-07-17",
     datePublished: "2025-07-17",
     location: "Jaffna, Sri Lanka",
+    keywords: [
+      "EDUS Jaffna office",
+      "EDUS Yarl Ventures",
+      "EDUS front office opening",
+      "online tuition institute Jaffna",
+      "EDUS Sri Lanka office",
+      "Northern Province education",
+      "Jaffna tutoring",
+      "EDUS online institute",
+    ],
+    externalLinks: [
+      {
+        label: "Yarl Ventures",
+        url: "https://www.yarlventures.com/",
+        context: "Joint-opening partner and EDUS's investor in Jaffna.",
+      },
+      {
+        label: "Jaffna - Wikipedia",
+        url: "https://en.wikipedia.org/wiki/Jaffna",
+        context: "Background on Jaffna, the host city of the new front office.",
+      },
+    ],
+    internalLinks: [
+      {
+        label: "EDUS Sri Lanka classes",
+        href: "/sl",
+        context: "Online classes for Sri Lankan students from this Jaffna base.",
+      },
+      {
+        label: "About EDUS",
+        href: "/about",
+        context: "The story behind EDUS Online Institute.",
+      },
+      {
+        label: "Contact EDUS",
+        href: "/contact",
+        context: "Visit the new front office or schedule a call with the team.",
+      },
+    ],
     body: [
       "On 17 July 2025, EDUS Online Institute and Yarl Ventures opened the doors of a new front office in Jaffna - a physical home for students, parents, and tutors who have been part of our online community since 2021. The opening brought together academic staff, tutors, partners, and the families who have studied with EDUS across Sri Lanka, India, and the Maldives.",
       "The day was led by chief guest Dr. Bavanantharaja, former Deputy Director of the Teaching Hospital in Jaffna. His remarks set the tone for what the office represents - a meeting point where digital learning, in-person support, and community service sit side by side.",
@@ -205,15 +286,40 @@ export const ALBUMS: GalleryAlbum[] = [
   {
     slug: "edus-landmark-achievement-online-learning-innovation",
     title:
-      "A Landmark Achievement for EDUS - Pioneering Innovation in Online Learning",
+      "EDUS Landmark Achievement - Innovation in Online Learning",
     description:
-      "Photos from the EDUS team celebration of a major innovation milestone in online learning - what was achieved, who was there, and what comes next for our students.",
+      "Photos from the EDUS team celebration of a major innovation milestone - what was achieved, who was there, and what comes next for students.",
     cardSubtitle: "Celebrating a major innovation milestone with the team",
     category: "Milestones",
     tint: "#06B6D4",
     eventDate: "2025-02-07",
     datePublished: "2025-02-07",
     location: "Jaffna, Sri Lanka",
+    keywords: [
+      "EDUS innovation milestone",
+      "online learning Sri Lanka",
+      "EDUS Online Institute",
+      "edtech Sri Lanka",
+      "structured online tuition",
+      "EDUS Academic Team",
+    ],
+    internalLinks: [
+      {
+        label: "Why EDUS",
+        href: "/#why",
+        context: "What makes EDUS's online learning model different.",
+      },
+      {
+        label: "EDUS Global Tutoring",
+        href: "/global",
+        context: "One-to-one online classes for students worldwide.",
+      },
+      {
+        label: "About EDUS",
+        href: "/about",
+        context: "The full EDUS journey since 2021.",
+      },
+    ],
     body: [
       "On 7 February 2025, the EDUS team gathered to mark a milestone four years in the making - a structured online learning platform that now serves students across Sri Lanka, India, the Maldives, and the global diaspora. This album captures the celebration, the team, and the quiet recognition of work that started as a small Jaffna-based experiment in 2021.",
 
@@ -247,13 +353,52 @@ export const ALBUMS: GalleryAlbum[] = [
     title:
       "EDUS Wins the National ICT Award 2024 in Education",
     description:
-      "EDUS Online Institute receives the National ICT Award 2024 in the Education category - photos of the ceremony, the team, and the moment our work was recognised nationally.",
+      "EDUS Online Institute wins the National ICT Award 2024 in Education - photos of the ceremony, the team, and the moment our work was recognised.",
     cardSubtitle: "Recognised at the National ICT Awards in the Education category",
     category: "Awards",
     tint: "#22C55E",
     eventDate: "2024-10-28",
     datePublished: "2024-10-28",
     location: "Colombo, Sri Lanka",
+    keywords: [
+      "National ICT Award 2024",
+      "NBQSA Sri Lanka",
+      "EDUS award winner",
+      "Sri Lanka edtech award",
+      "FITIS National ICT Awards",
+      "online tuition award winner",
+      "EDUS Online Institute",
+      "best edtech Sri Lanka",
+    ],
+    externalLinks: [
+      {
+        label: "FITIS National ICT Awards",
+        url: "https://fitis.lk/nbqsa/",
+        context: "Awarding body recognising Sri Lankan ICT excellence (NBQSA).",
+      },
+      {
+        label: "FITIS - Federation of Information Technology Industry Sri Lanka",
+        url: "https://fitis.lk/",
+        context: "The national IT industry federation that runs the awards.",
+      },
+    ],
+    internalLinks: [
+      {
+        label: "EDUS in the Press",
+        href: "/press",
+        context: "Press coverage of EDUS milestones and partnerships.",
+      },
+      {
+        label: "About EDUS",
+        href: "/about",
+        context: "What earned EDUS the National ICT Award recognition.",
+      },
+      {
+        label: "Why EDUS works",
+        href: "/#why",
+        context: "The structured online tuition model that the award honours.",
+      },
+    ],
     body: [
       "On 28 October 2024, EDUS Online Institute was awarded the National ICT Award in the Education category - a national-level recognition of the work the team has done to build a structured, technology-driven online learning experience for Sri Lankan and international students.",
 
@@ -289,13 +434,40 @@ export const ALBUMS: GalleryAlbum[] = [
     title:
       "EDUS at Yarl IT Hub Innovation Festival 2024",
     description:
-      "Photos of EDUS participating in the Yarl IT Hub Innovation Festival 2024 - showcasing online learning innovation to the Northern Province technology community.",
+      "EDUS at the Yarl IT Hub Innovation Festival 2024 - showcasing online learning innovation to the Northern Province technology community.",
     cardSubtitle: "Showcasing EDUS at the Northern Province innovation festival",
     category: "Events",
     tint: "#8B5CF6",
     eventDate: "2024-08-05",
     datePublished: "2024-08-05",
     location: "Jaffna, Sri Lanka",
+    keywords: [
+      "Yarl IT Hub Innovation Festival 2024",
+      "Yarl IT Hub",
+      "Jaffna technology festival",
+      "Northern Province innovation",
+      "EDUS events 2024",
+      "Sri Lanka edtech showcase",
+    ],
+    externalLinks: [
+      {
+        label: "Yarl IT Hub",
+        url: "https://yarlithub.org/",
+        context: "Northern Province technology community that hosts the festival.",
+      },
+    ],
+    internalLinks: [
+      {
+        label: "About EDUS",
+        href: "/about",
+        context: "How EDUS is rooted in the Jaffna technology ecosystem.",
+      },
+      {
+        label: "EDUS Sri Lanka",
+        href: "/sl",
+        context: "Online tuition for Sri Lankan students from our Jaffna base.",
+      },
+    ],
     body: [
       "In August 2024 EDUS joined the Yarl IT Hub Innovation Festival - one of the most prominent technology gatherings in Sri Lanka's Northern Province. The festival brings together startups, students, established companies, and the wider tech community to demo what they're building, exchange ideas, and meet the people behind the work.",
 
@@ -325,13 +497,46 @@ export const ALBUMS: GalleryAlbum[] = [
     title:
       "EDUS at Slingshot Accelerator Demo Day 2023",
     description:
-      "EDUS pitches at Slingshot Accelerator Demo Day - photos from our presentation, the mentor meetings, and the cohort of Sri Lankan startups building alongside us.",
+      "EDUS pitches at Slingshot Accelerator Demo Day 2023 - photos from our presentation, mentor meetings, and the cohort of Sri Lankan startups.",
     cardSubtitle: "Pitching our online learning vision at Slingshot Demo Day",
     category: "Events",
     tint: "#FACC15",
     eventDate: "2023-12-15",
     datePublished: "2023-12-15",
     location: "Colombo, Sri Lanka",
+    keywords: [
+      "Slingshot Accelerator",
+      "Slingshot Demo Day 2023",
+      "Hatch Sri Lanka",
+      "Hemas Holdings",
+      "Sri Lankan startup accelerator",
+      "EDUS startup",
+      "Sri Lanka edtech accelerator",
+    ],
+    externalLinks: [
+      {
+        label: "Hatch - Sri Lanka",
+        url: "https://hatch.lk/",
+        context: "Co-organiser of the Slingshot accelerator programme.",
+      },
+      {
+        label: "Hemas Holdings",
+        url: "https://www.hemas.com/",
+        context: "Slingshot's anchor partner and Sri Lankan conglomerate.",
+      },
+    ],
+    internalLinks: [
+      {
+        label: "About EDUS",
+        href: "/about",
+        context: "The EDUS journey and what we pitched to mentors.",
+      },
+      {
+        label: "EDUS Press",
+        href: "/press",
+        context: "Other recognition milestones for EDUS Online Institute.",
+      },
+    ],
     body: [
       "In December 2023, EDUS pitched at Slingshot Accelerator Demo Day - the culmination of a structured programme that put us in a room with mentors, investors, and a cohort of Sri Lankan startups going through the same hard questions about product, growth, and unit economics.",
 
@@ -366,15 +571,34 @@ export const ALBUMS: GalleryAlbum[] = [
   {
     slug: "edus-1st-year-anniversary",
     title:
-      "EDUS Celebrates Its 1st Year Anniversary - Growth & Gratitude",
+      "EDUS 1st Year Anniversary - Growth & Gratitude",
     description:
-      "EDUS marks its first year with a team gathering - photos from the celebration, the cake, the speeches, and the small group that started it all.",
+      "EDUS marks its first year with a team gathering - photos from the celebration, the speeches, and the small group that started it all.",
     cardSubtitle: "Looking back at year one and the students who trusted us early",
     category: "Anniversary",
     tint: "#EF4444",
     eventDate: "2023-11-22",
     datePublished: "2023-11-22",
     location: "Jaffna, Sri Lanka",
+    keywords: [
+      "EDUS first anniversary",
+      "EDUS 1st year",
+      "EDUS Jaffna team",
+      "online tuition Sri Lanka 2023",
+      "EDUS Online Institute history",
+    ],
+    internalLinks: [
+      {
+        label: "About EDUS",
+        href: "/about",
+        context: "How year one became the foundation for everything that followed.",
+      },
+      {
+        label: "Why parents choose EDUS",
+        href: "/#why",
+        context: "The structured tutoring approach that defined year one.",
+      },
+    ],
     body: [
       "On 22 November 2023, EDUS quietly marked its first year as a registered online tuition institute. The celebration was deliberately small - the team, a few mentors, and the kind of food you only get in Jaffna - because year one is about gratitude, not noise.",
 
@@ -432,13 +656,45 @@ export const ALBUMS: GalleryAlbum[] = [
     title:
       "EDUS at Yarl Geek Challenge Innovation Festival 2023",
     description:
-      "Photos of EDUS at the Yarl Geek Challenge Innovation Festival 2023 - mentor sessions, team conversations, and meeting the next generation of Sri Lankan builders.",
+      "EDUS at the Yarl Geek Challenge Innovation Festival 2023 - mentor sessions, team photos, and meeting Sri Lanka's next-generation builders.",
     cardSubtitle: "Meeting the next generation of Northern Province innovators",
     category: "Events",
     tint: "#06B6D4",
     eventDate: "2023-11-09",
     datePublished: "2023-11-09",
     location: "Jaffna, Sri Lanka",
+    keywords: [
+      "Yarl Geek Challenge 2023",
+      "YGC Innovation Festival",
+      "Yarl IT Hub",
+      "Jaffna technology event",
+      "Sri Lanka startup community",
+      "EDUS events Jaffna",
+    ],
+    externalLinks: [
+      {
+        label: "Yarl Geek Challenge - Wikipedia",
+        url: "https://en.wikipedia.org/wiki/Yarl_Geek_Challenge",
+        context: "Background on the Yarl Geek Challenge programme.",
+      },
+      {
+        label: "Yarl IT Hub",
+        url: "https://yarlithub.org/",
+        context: "Organisation behind YGC and the Innovation Festival.",
+      },
+    ],
+    internalLinks: [
+      {
+        label: "About EDUS",
+        href: "/about",
+        context: "EDUS's roots in the Jaffna technology community.",
+      },
+      {
+        label: "EDUS Sri Lanka classes",
+        href: "/sl",
+        context: "Online tuition for Sri Lankan students.",
+      },
+    ],
     body: [
       "In November 2023, EDUS joined the Yarl Geek Challenge (YGC) Innovation Festival - one of the longest-running technology gatherings in Sri Lanka's Northern Province. YGC has been quietly producing builders, founders, and engineers since its first edition over a decade ago, and the festival is where the wider community converges to meet, demo, and learn from each other.",
 
@@ -477,13 +733,46 @@ export const ALBUMS: GalleryAlbum[] = [
     title:
       "Hemas & Hatch Launch Slingshot - EDUS at the Catalyst Event",
     description:
-      "Photos from the Slingshot launch by Hemas and Hatch - the catalyst programme for Sri Lankan startups, and the cohort EDUS was honoured to be selected into.",
+      "Photos from the Slingshot launch by Hemas and Hatch - the catalyst programme for Sri Lankan startups, and the cohort EDUS joined.",
     cardSubtitle: "Joining the first Slingshot cohort for Sri Lankan startups",
     category: "Events",
     tint: "#8B5CF6",
     eventDate: "2023-09-06",
     datePublished: "2023-09-06",
     location: "Colombo, Sri Lanka",
+    keywords: [
+      "Slingshot launch 2023",
+      "Hemas Hatch Slingshot",
+      "Sri Lankan startup accelerator",
+      "Hemas Holdings",
+      "Hatch Sri Lanka",
+      "EDUS Slingshot cohort",
+      "Sri Lanka startup ecosystem",
+    ],
+    externalLinks: [
+      {
+        label: "Hemas Holdings",
+        url: "https://www.hemas.com/",
+        context: "Anchor partner backing the Slingshot programme.",
+      },
+      {
+        label: "Hatch - Sri Lanka",
+        url: "https://hatch.lk/",
+        context: "Co-creator and host of the Slingshot accelerator.",
+      },
+    ],
+    internalLinks: [
+      {
+        label: "About EDUS",
+        href: "/about",
+        context: "What EDUS brought into the first Slingshot cohort.",
+      },
+      {
+        label: "EDUS Press",
+        href: "/press",
+        context: "Other public recognition of EDUS Online Institute.",
+      },
+    ],
     body: [
       "On 6 September 2023, Hemas and Hatch officially launched Slingshot - a catalyst programme designed to accelerate Sri Lankan startups with structured mentorship, operational coaching, and capital introductions. EDUS was honoured to be selected into the first cohort, and this album captures the team alongside the founders, mentors, and partners who attended the launch.",
 
@@ -518,7 +807,7 @@ export const ALBUMS: GalleryAlbum[] = [
     title:
       "EDUS Honors Kokuvil Hindu Primary Grade 5 Scholarship Students",
     description:
-      "EDUS recognises outstanding Grade 5 Scholarship Exam students from Kokuvil Hindu Primary - photos of the certificate handover and a small community celebration.",
+      "EDUS recognises Grade 5 Scholarship Exam students from Kokuvil Hindu Primary - photos of the certificate handover and community celebration.",
     cardSubtitle: "Celebrating Grade 5 Scholarship achievers in our home community",
     category: "Events",
     tint: "#22C55E",
@@ -527,6 +816,40 @@ export const ALBUMS: GalleryAlbum[] = [
     location: "Kokuvil, Jaffna, Sri Lanka",
     coverPublicId:
       "EDUS_Honors_Outstanding_Students_from_Kokuvil_Hindu_Primary_at_Grade_5_Scholarship_Exam_2_mfdbrw",
+    keywords: [
+      "Grade 5 Scholarship Exam Sri Lanka",
+      "Kokuvil Hindu Primary",
+      "Grade 5 scholarship Jaffna",
+      "EDUS community events",
+      "Sri Lanka Grade 5 results",
+      "Department of Examinations Sri Lanka",
+      "primary school scholarship",
+    ],
+    externalLinks: [
+      {
+        label: "Department of Examinations - Sri Lanka",
+        url: "https://www.doenets.lk/",
+        context: "Official body administering the Grade 5 Scholarship Exam.",
+      },
+      {
+        label: "Ministry of Education - Sri Lanka",
+        url: "https://moe.gov.lk/",
+        context: "Sri Lanka's Ministry of Education and exam policy authority.",
+      },
+    ],
+    internalLinks: [
+      {
+        label: "EDUS Sri Lanka Grade 5 tuition",
+        href: "/sl",
+        context: "Online tuition for Sri Lankan primary students.",
+      },
+      {
+        label: "About EDUS",
+        href: "/about",
+        context: "How EDUS supports the Northern Province community.",
+      },
+    ],
+    relatedBlogSlug: "grade-5-scholarship-exam-2026-guide",
     body: [
       "On 16 August 2023, EDUS visited Kokuvil Hindu Primary School to honour students who performed exceptionally well in Sri Lanka's Grade 5 Scholarship Exam. The event was simple and deliberately community-focused - certificates, words of encouragement, photos with families, and a reminder to the next year-group that hard work is recognised here.",
 
@@ -565,13 +888,45 @@ export const ALBUMS: GalleryAlbum[] = [
     title:
       "EDUS at SLASSCOM Xcellerate 2023 - Online Learning Innovation",
     description:
-      "EDUS Online Institute features at the SLASSCOM Xcellerate 2023 programme - photos of the showcase, the mentor sessions, and the team representing Sri Lankan edtech.",
+      "EDUS at SLASSCOM Xcellerate 2023 - photos of the showcase, mentor sessions, and the team representing Sri Lankan edtech.",
     cardSubtitle: "Representing Sri Lankan edtech at SLASSCOM Xcellerate",
     category: "Events",
     tint: "#2563EB",
     eventDate: "2023-05-15",
     datePublished: "2023-05-15",
     location: "Colombo, Sri Lanka",
+    keywords: [
+      "SLASSCOM Xcellerate 2023",
+      "SLASSCOM",
+      "Sri Lanka edtech",
+      "Sri Lanka IT industry",
+      "EDUS Xcellerate cohort",
+      "tech startup mentorship",
+    ],
+    externalLinks: [
+      {
+        label: "SLASSCOM",
+        url: "https://slasscom.lk/",
+        context: "Sri Lanka Association of Software and Services Companies.",
+      },
+      {
+        label: "SLASSCOM Xcellerate",
+        url: "https://slasscom.lk/xcellerate/",
+        context: "The flagship Xcellerate programme that EDUS participated in.",
+      },
+    ],
+    internalLinks: [
+      {
+        label: "About EDUS",
+        href: "/about",
+        context: "How SLASSCOM Xcellerate shaped EDUS's operational growth.",
+      },
+      {
+        label: "EDUS Press",
+        href: "/press",
+        context: "More public recognition for EDUS Online Institute.",
+      },
+    ],
     body: [
       "In May 2023, EDUS participated in SLASSCOM Xcellerate - the flagship programme run by the Sri Lanka Association of Software and Services Companies to support promising local technology and IT-enabled-services companies. This album captures the EDUS team alongside the cohort, mentors, and SLASSCOM organisers.",
 
@@ -604,13 +959,45 @@ export const ALBUMS: GalleryAlbum[] = [
     title:
       "EDUS Selected as Spiralation 2022 Finalist - Photos & Highlights",
     description:
-      "EDUS Online Institute reaches the Spiralation 2022 finalist round - photos of the showcase, the cohort, and a leap towards Sri Lankan edtech recognition.",
+      "EDUS reaches the Spiralation 2022 finalist round - photos of the showcase, the cohort, and a leap towards Sri Lankan edtech recognition.",
     cardSubtitle: "Selected as a Spiralation finalist among Sri Lankan startups",
     category: "Events",
     tint: "#FACC15",
     eventDate: "2023-02-16",
     datePublished: "2023-02-16",
     location: "Colombo, Sri Lanka",
+    keywords: [
+      "Spiralation 2022",
+      "ICTA Sri Lanka",
+      "Spiralation finalist",
+      "Sri Lankan startup programme",
+      "tech incubator Sri Lanka",
+      "EDUS startup recognition",
+    ],
+    externalLinks: [
+      {
+        label: "ICTA - Information and Communication Technology Agency",
+        url: "https://www.icta.lk/",
+        context: "Government agency behind the Spiralation startup programme.",
+      },
+      {
+        label: "Spiralation - ICTA",
+        url: "https://www.icta.lk/projects/spiralation/",
+        context: "Official ICTA Spiralation programme page.",
+      },
+    ],
+    internalLinks: [
+      {
+        label: "About EDUS",
+        href: "/about",
+        context: "How Spiralation accelerated the EDUS operating model.",
+      },
+      {
+        label: "EDUS Press",
+        href: "/press",
+        context: "Other public recognition milestones.",
+      },
+    ],
     body: [
       "In February 2023, EDUS was selected as a finalist in Spiralation 2022 - the flagship startup support programme run by ICTA in collaboration with industry partners. The selection put EDUS alongside a curated group of Sri Lankan early-stage technology companies, and this album captures the showcase, the mentor sessions, and the team energy from the day.",
 
@@ -639,15 +1026,34 @@ export const ALBUMS: GalleryAlbum[] = [
   {
     slug: "edus-2nd-year-anniversary",
     title:
-      "EDUS Celebrates Its 2nd Year Anniversary - Community & Commitment",
+      "EDUS 2nd Year Anniversary - Community & Commitment",
     description:
-      "Photos from the EDUS 2nd year anniversary - a tribute to the community, the tutors, and the families that turned an online tuition idea into a real institute.",
+      "Photos from the EDUS 2nd year anniversary - a tribute to the community, the tutors, and the families that built our online institute.",
     cardSubtitle: "Two years of online tuition, built on community trust",
     category: "Anniversary",
     tint: "#8B5CF6",
     eventDate: "2022-01-16",
     datePublished: "2022-01-16",
     location: "Jaffna, Sri Lanka",
+    keywords: [
+      "EDUS 2nd anniversary",
+      "EDUS Online Institute history",
+      "online tuition Sri Lanka 2022",
+      "EDUS tutor community",
+      "Jaffna online learning",
+    ],
+    internalLinks: [
+      {
+        label: "About EDUS",
+        href: "/about",
+        context: "The full EDUS journey since 2021.",
+      },
+      {
+        label: "EDUS Sri Lanka",
+        href: "/sl",
+        context: "Where it all started - online tuition for Sri Lankan students.",
+      },
+    ],
     body: [
       "On 16 January 2022, EDUS marked its second year as an online tuition institute. By this point, the team had moved past the messy first-year survival mode and into something steadier - a regular rhythm of classes, a growing tutor pool, and a small but loyal community of parents who had become quiet evangelists for the EDUS academic approach.",
 
@@ -680,13 +1086,40 @@ export const ALBUMS: GalleryAlbum[] = [
     title:
       "EDUS Opens Its First Office in Jaffna - A New Beginning",
     description:
-      "Photos from the EDUS first office opening in Jaffna - the small ceremony, the team that started it all, and the room where the online institute began.",
+      "Photos from the EDUS first office opening in Jaffna - the small ceremony, the team that started it all, and where the online institute began.",
     cardSubtitle: "Where it all started - the first EDUS office in Jaffna",
     category: "Milestones",
     tint: "#2563EB",
     eventDate: "2021-10-26",
     datePublished: "2021-10-26",
     location: "Jaffna, Sri Lanka",
+    keywords: [
+      "EDUS first office",
+      "EDUS founded 2021",
+      "EDUS Jaffna",
+      "EDUS Online Institute origin",
+      "online tuition founder story",
+      "Jaffna edtech 2021",
+    ],
+    externalLinks: [
+      {
+        label: "Jaffna - Wikipedia",
+        url: "https://en.wikipedia.org/wiki/Jaffna",
+        context: "Background on Jaffna, the city EDUS was founded in.",
+      },
+    ],
+    internalLinks: [
+      {
+        label: "About EDUS",
+        href: "/about",
+        context: "The complete EDUS story from this first office onwards.",
+      },
+      {
+        label: "EDUS Sri Lanka",
+        href: "/sl",
+        context: "How that first office became a cross-border tuition platform.",
+      },
+    ],
     body: [
       "On 26 October 2021, EDUS opened its first office in Jaffna - a small, deliberately understated space that became the operational home of what would grow into a cross-border online tuition institute. This album captures the people, the room, and the quiet beginning that no one outside the founding team paid much attention to at the time.",
 
