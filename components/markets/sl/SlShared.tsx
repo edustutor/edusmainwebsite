@@ -73,7 +73,7 @@ export type GroupHighlight = {
 
 export const GROUP_HIGHLIGHTS: GroupHighlight[] = [
   {
-    icon: "👩‍🏫",
+    icon: "expert-tutor",
     title: "Expert Tutors for Every Subject",
     points: [
       "Carefully selected, experienced tutors",
@@ -84,7 +84,7 @@ export const GROUP_HIGHLIGHTS: GroupHighlight[] = [
     tint: "#2563EB",
   },
   {
-    icon: "🎯",
+    icon: "target",
     title: "Individual Attention in a Group Class",
     points: [
       "Attendance monitoring every class",
@@ -95,7 +95,7 @@ export const GROUP_HIGHLIGHTS: GroupHighlight[] = [
     tint: "#8B5CF6",
   },
   {
-    icon: "🕡",
+    icon: "clock",
     title: "Fixed Evening Timetable",
     points: [
       "Classes scheduled after 6.00 p.m.",
@@ -106,7 +106,7 @@ export const GROUP_HIGHLIGHTS: GroupHighlight[] = [
     tint: "#06B6D4",
   },
   {
-    icon: "📈",
+    icon: "progress",
     title: "Term Exams & Progress Tracking",
     points: [
       "Regular term exams every term",
@@ -126,22 +126,22 @@ export type HolisticFeature = {
 
 export const HOLISTIC_FEATURES: HolisticFeature[] = [
   {
-    icon: "🏅",
+    icon: "award",
     title: "Quality Course Content",
     body: "Access to quality contents developed in house for students to understand easily and effectively.",
   },
   {
-    icon: "🗓️",
+    icon: "schedule",
     title: "Flexible Timings",
     body: "The 1-1 interaction with our tutors makes it easy and you can schedule your lessons at a frequency and time that suits you.",
   },
   {
-    icon: "🎯",
+    icon: "target",
     title: "Individual Attention",
     body: "Every student is given individual attention to learn at their own pace.",
   },
   {
-    icon: "👩‍🏫",
+    icon: "expert-tutor",
     title: "Qualified Tutors",
     body: "Learn from the Qualified Professionals to unlock the true potential of every individual.",
   },

@@ -5,28 +5,29 @@ import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { useIsMobile } from "@/lib/useIsMobile";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 const CARDS = [
   {
-    icon: "🗄️",
+    icon: "library",
     title: "Resource Vault",
     body: "Access useful academic resources, past papers, and study materials.",
     tint: "#2563EB",
   },
   {
-    icon: "🎬",
+    icon: "class-recording",
     title: "Class Recordings",
     body: "Revise lessons anytime and catch up on missed topics.",
     tint: "#8B5CF6",
   },
   {
-    icon: "🤖",
+    icon: "ai",
     title: "AI Study Support",
     body: "Use guided digital learning tools for extra study support.",
     tint: "#06B6D4",
   },
   {
-    icon: "📝",
+    icon: "exam",
     title: "Exam Preparation",
     body: "Practice with assessments, revision sessions, and progress reviews.",
     tint: "#22C55E",
@@ -90,10 +91,10 @@ export function ResourceSupport() {
               <span aria-hidden className="blob" style={{ top: -50, right: -50, width: 180, height: 180, background: c.tint, opacity: 0.20 }} />
               <div className="relative">
                 <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
+                  className="w-12 h-12 rounded-2xl flex items-center justify-center"
                   style={{ background: `${c.tint}15`, border: `1px solid ${c.tint}25` }}
                 >
-                  {c.icon}
+                  <FeatureIcon name={c.icon} tint={c.tint} size={22} />
                 </div>
                 <h3 className="heading mt-5" style={{ fontSize: "18px" }}>{c.title}</h3>
                 <p className="text-[#2B3950] text-[13.5px] mt-2 leading-[1.65]">{c.body}</p>

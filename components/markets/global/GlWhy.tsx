@@ -3,14 +3,15 @@ import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { SectionHead } from "./GlobalShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 const REASONS = [
-  { icon: "🎯", title: "Expert Tutors Matched to Student",   body: "Grade, syllabus, subject, learning level, and goal reviewed before tutor matching.", tint: "#2563EB" },
-  { icon: "🧑‍🏫", title: "Personalized One to One",           body: "One student per class. Clear explanation, real questions, full attention.",          tint: "#06B6D4" },
-  { icon: "🕒", title: "Flexible Global Timings",            body: "Schedules arranged across countries and time zones around tutor availability.",     tint: "#8B5CF6" },
-  { icon: "📋", title: "Structured Lessons & Progress",      body: "Lesson flow, topic coverage, revision, practice, and continuous improvement.",      tint: "#22C55E" },
-  { icon: "👨‍👩‍👧", title: "Parent-Friendly Updates",         body: "Attendance, learning progress, performance, and areas needing focus shared.",        tint: "#FACC15" },
-  { icon: "💳", title: "Affordable Global Tuition",          body: "High-quality online tutoring at practical pricing vs international alternatives.",  tint: "#2563EB" },
+  { icon: "target",         title: "Expert Tutors Matched to Student",   body: "Grade, syllabus, subject, learning level, and goal reviewed before tutor matching.", tint: "#2563EB" },
+  { icon: "individual",     title: "Personalized One to One",            body: "One student per class. Clear explanation, real questions, full attention.",          tint: "#06B6D4" },
+  { icon: "flexible",       title: "Flexible Global Timings",            body: "Schedules arranged across countries and time zones around tutor availability.",     tint: "#8B5CF6" },
+  { icon: "reporting",      title: "Structured Lessons & Progress",      body: "Lesson flow, topic coverage, revision, practice, and continuous improvement.",      tint: "#22C55E" },
+  { icon: "parent-updates", title: "Parent-Friendly Updates",            body: "Attendance, learning progress, performance, and areas needing focus shared.",        tint: "#FACC15" },
+  { icon: "card",           title: "Affordable Global Tuition",          body: "High-quality online tutoring at practical pricing vs international alternatives.",  tint: "#2563EB" },
 ];
 
 export function GlWhy() {
@@ -43,10 +44,10 @@ export function GlWhy() {
               className="relative bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-5 shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)] h-full"
             >
               <span
-                className="inline-flex w-11 h-11 rounded-xl items-center justify-center text-xl"
+                className="inline-flex w-11 h-11 rounded-xl items-center justify-center"
                 style={{ background: `${r.tint}15`, border: `1px solid ${r.tint}25` }}
               >
-                {r.icon}
+                <FeatureIcon name={r.icon} tint={r.tint} size={20} />
               </span>
               <h3 className="mt-3 font-display font-700 text-[15px] text-[#102033] leading-tight">
                 {r.title}

@@ -3,15 +3,16 @@ import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { SectionHead, GL_SIGNUP, GlCtaRow } from "./GlobalShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 const FACTORS = [
-  { icon: "📚", title: "Curriculum or Syllabus",       tint: "#2563EB" },
-  { icon: "🎓", title: "Subject and Grade Level",      tint: "#8B5CF6" },
-  { icon: "🗓️", title: "Classes per Week",             tint: "#06B6D4" },
-  { icon: "⏱️", title: "Class Duration",               tint: "#22C55E" },
-  { icon: "🌟", title: "Tutor Expertise Level",        tint: "#FACC15" },
-  { icon: "📝", title: "Exam Preparation Requirement", tint: "#2563EB" },
-  { icon: "🌍", title: "Time Zone & Schedule",         tint: "#8B5CF6" },
+  { icon: "library",    title: "Curriculum or Syllabus",       tint: "#2563EB" },
+  { icon: "graduation", title: "Subject and Grade Level",      tint: "#8B5CF6" },
+  { icon: "schedule",   title: "Classes per Week",             tint: "#06B6D4" },
+  { icon: "clock",      title: "Class Duration",               tint: "#22C55E" },
+  { icon: "star",       title: "Tutor Expertise Level",        tint: "#FACC15" },
+  { icon: "exam",       title: "Exam Preparation Requirement", tint: "#2563EB" },
+  { icon: "global",     title: "Time Zone & Schedule",         tint: "#8B5CF6" },
 ];
 
 export function GlPricing() {
@@ -59,10 +60,10 @@ export function GlPricing() {
                 className="bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-4 shadow-[0_10px_28px_-20px_rgba(16,32,51,0.18)]"
               >
                 <span
-                  className="inline-flex w-9 h-9 rounded-lg items-center justify-center text-base"
+                  className="inline-flex w-9 h-9 rounded-lg items-center justify-center"
                   style={{ background: `${f.tint}15`, border: `1px solid ${f.tint}25` }}
                 >
-                  {f.icon}
+                  <FeatureIcon name={f.icon} tint={f.tint} size={18} />
                 </span>
                 <p className="mt-3 font-display font-700 text-[13px] text-[#102033] leading-tight">
                   {f.title}

@@ -3,16 +3,17 @@ import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { SectionHead } from "./MvShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 const FEATURES = [
-  { icon: "🎯", title: "1-to-1 Attention",         body: "Every student learns individually with a dedicated tutor. No crowded online classrooms.", tint: "#06B6D4" },
-  { icon: "📘", title: "Cambridge Exam Focus",     body: "Lessons aligned to Cambridge IGCSE and O-Level subject requirements.",                    tint: "#2563EB" },
-  { icon: "🧑‍🏫", title: "Expert Tutors",           body: "Carefully selected tutors who understand concepts, exam patterns, and student needs.",   tint: "#8B5CF6" },
-  { icon: "🕒", title: "Flexible Online Learning", body: "Sessions arranged around Maldives-friendly timings, school and family routines.",         tint: "#FACC15" },
-  { icon: "📊", title: "Parent Updates",           body: "Attendance, progress, and learning feedback shared with parents regularly.",              tint: "#22C55E" },
-  { icon: "🏝️", title: "Island-Friendly Access",   body: "Students from any island can access high-quality tutoring without travel.",              tint: "#06B6D4" },
-  { icon: "🏠", title: "Safe Learning from Home",  body: "A comfortable, respectful, family-friendly online learning environment.",                 tint: "#2563EB" },
-  { icon: "📝", title: "Exam Preparation",         body: "Syllabus coverage, past papers, weak areas, revision, and confidence building.",          tint: "#8B5CF6" },
+  { icon: "individual",      title: "1-to-1 Attention",         body: "Every student learns individually with a dedicated tutor. No crowded online classrooms.", tint: "#06B6D4" },
+  { icon: "book",            title: "Cambridge Exam Focus",     body: "Lessons aligned to Cambridge IGCSE and O-Level subject requirements.",                    tint: "#2563EB" },
+  { icon: "expert-tutor",    title: "Expert Tutors",            body: "Carefully selected tutors who understand concepts, exam patterns, and student needs.",   tint: "#8B5CF6" },
+  { icon: "flexible",        title: "Flexible Online Learning", body: "Sessions arranged around Maldives-friendly timings, school and family routines.",         tint: "#FACC15" },
+  { icon: "parent-updates",  title: "Parent Updates",           body: "Attendance, progress, and learning feedback shared with parents regularly.",              tint: "#22C55E" },
+  { icon: "islands",         title: "Island-Friendly Access",   body: "Students from any island can access high-quality tutoring without travel.",              tint: "#06B6D4" },
+  { icon: "care",            title: "Safe Learning from Home",  body: "A comfortable, respectful, family-friendly online learning environment.",                 tint: "#2563EB" },
+  { icon: "exam",            title: "Exam Preparation",         body: "Syllabus coverage, past papers, weak areas, revision, and confidence building.",          tint: "#8B5CF6" },
 ];
 
 export function MvWhy() {
@@ -45,10 +46,10 @@ export function MvWhy() {
               className="bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-5 shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)] h-full"
             >
               <span
-                className="inline-flex w-10 h-10 rounded-xl items-center justify-center text-lg"
+                className="inline-flex w-10 h-10 rounded-xl items-center justify-center"
                 style={{ background: `${f.tint}15`, border: `1px solid ${f.tint}25` }}
               >
-                {f.icon}
+                <FeatureIcon name={f.icon} tint={f.tint} size={20} />
               </span>
               <h3 className="mt-3 font-display font-700 text-[15px] text-[#102033] leading-tight">
                 {f.title}

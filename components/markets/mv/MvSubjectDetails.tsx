@@ -2,6 +2,7 @@
 import { m } from "@/components/effects/Motion";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { SectionHead, SUBJECTS } from "./MvShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 export function MvSubjectDetails() {
   return (
@@ -31,10 +32,10 @@ export function MvSubjectDetails() {
             >
               <div className="flex items-center gap-3 md:w-64 shrink-0">
                 <span
-                  className="inline-flex w-12 h-12 rounded-xl items-center justify-center text-2xl"
+                  className="inline-flex w-12 h-12 rounded-xl items-center justify-center"
                   style={{ background: `${s.tint}15`, border: `1px solid ${s.tint}25` }}
                 >
-                  {s.icon}
+                  <FeatureIcon name={s.icon} tint={s.tint} size={22} />
                 </span>
                 <div className="min-w-0">
                   <h3

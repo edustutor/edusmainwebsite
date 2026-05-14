@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PRICING, GROUP_HIGHLIGHTS } from "./SlShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 export function SlGroupClasses() {
   return (
@@ -74,10 +75,10 @@ export function SlGroupClasses() {
                 <div key={h.title}>
                   <div className="flex items-center gap-3">
                     <span
-                      className="inline-flex w-10 h-10 rounded-2xl items-center justify-center text-xl shrink-0"
+                      className="inline-flex w-10 h-10 rounded-2xl items-center justify-center shrink-0"
                       style={{ background: `${h.tint}15`, border: `1px solid ${h.tint}25` }}
                     >
-                      {h.icon}
+                      <FeatureIcon name={h.icon} tint={h.tint} size={20} />
                     </span>
                     <div className="flex items-center gap-2">
                       <span

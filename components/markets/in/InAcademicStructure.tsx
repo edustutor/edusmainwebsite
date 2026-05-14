@@ -1,4 +1,5 @@
 import { SUBJECTS, GRADES, SCHEDULE } from "./InShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 export function InAcademicStructure() {
   return (
@@ -79,10 +80,10 @@ export function InAcademicStructure() {
                   className="rounded-2xl bg-white border border-[rgba(16,32,51,0.06)] p-4 flex items-center justify-between"
                 >
                   <span
-                    className="inline-flex items-center justify-center w-9 h-9 rounded-xl text-white font-display font-600 text-[12px]"
+                    className="inline-flex items-center justify-center w-9 h-9 rounded-xl"
                     style={{ background: s.tint }}
                   >
-                    🕐
+                    <FeatureIcon name="clock" tint="#FFFFFF" size={18} />
                   </span>
                   <div className="text-right">
                     <p className="text-[11px] uppercase tracking-wider text-[#5A6A82]">{s.slot}</p>

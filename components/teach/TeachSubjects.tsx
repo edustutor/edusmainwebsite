@@ -2,6 +2,7 @@
 import { m } from "@/components/effects/Motion";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { SectionHead } from "./TeachShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 type Group = { level: string; subjects: string };
 
@@ -45,7 +46,7 @@ export function TeachSubjects() {
         >
           <SyllabusBlock flag="🇱🇰" name="Sri Lanka" tint="#2563EB" groups={SL} />
           <SyllabusBlock flag="🇮🇳" name="India"     tint="#8B5CF6" groups={IN} />
-          <SyllabusBlock flag="🌍"  name="International / Individual" tint="#06B6D4" groups={INTL} />
+          <SyllabusBlock icon="global" name="International / Individual" tint="#06B6D4" groups={INTL} />
         </m.div>
       </div>
     </section>
@@ -53,8 +54,8 @@ export function TeachSubjects() {
 }
 
 function SyllabusBlock({
-  flag, name, tint, groups,
-}: { flag: string; name: string; tint: string; groups: Group[] }) {
+  flag, icon, name, tint, groups,
+}: { flag?: string; icon?: string; name: string; tint: string; groups: Group[] }) {
   return (
     <m.article
       variants={fadeUp}
@@ -66,7 +67,16 @@ function SyllabusBlock({
         style={{ background: tint }}
       />
       <div className="flex items-center gap-2">
-        <span className="text-2xl">{flag}</span>
+        {flag ? (
+          <span className="text-2xl leading-none" aria-hidden>{flag}</span>
+        ) : icon ? (
+          <span
+            className="inline-flex w-9 h-9 rounded-lg items-center justify-center"
+            style={{ background: `${tint}15`, border: `1px solid ${tint}25` }}
+          >
+            <FeatureIcon name={icon} tint={tint} size={18} />
+          </span>
+        ) : null}
         <h3 className="font-display font-700 text-[16px] text-[#102033]">
           {name}
         </h3>

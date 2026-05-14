@@ -3,38 +3,39 @@ import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { SectionHead } from "./GlobalShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 const CURRICULA = [
   {
-    icon: "📘",
+    icon: "book",
     name: "Cambridge",
     body: "Cambridge Primary, Lower Secondary, IGCSE, O-Level, AS Level, and A-Level.",
     levels: ["Primary", "Lower Sec", "IGCSE", "O-Level", "AS / A-Level"],
     tint: "#2563EB",
   },
   {
-    icon: "📗",
+    icon: "book-marked",
     name: "Edexcel / Pearson",
     body: "Edexcel IGCSE, International GCSE, GCSE, AS Level, and A-Level.",
     levels: ["IGCSE", "Intl GCSE", "GCSE", "AS / A-Level"],
     tint: "#8B5CF6",
   },
   {
-    icon: "🌍",
+    icon: "global",
     name: "International Syllabuses",
     body: "Support arranged for international school syllabuses based on subject, grade, and requirement.",
     levels: ["IB", "AP", "School-based", "Topic-wise"],
     tint: "#06B6D4",
   },
   {
-    icon: "🏛️",
+    icon: "school",
     name: "National Syllabuses",
     body: "Any country's national curriculum, depending on tutor availability and subject match.",
     levels: ["School", "Grade-wise", "Board exams"],
     tint: "#22C55E",
   },
   {
-    icon: "🎯",
+    icon: "target",
     name: "Customized Support",
     body: "Topic-focused help, exam preparation, revision, homework, or concept strengthening.",
     levels: ["Revision", "Past papers", "Topic-fix", "Booster"],
@@ -77,10 +78,10 @@ export function GlCurricula() {
                 style={{ background: c.tint }}
               />
               <span
-                className="inline-flex w-11 h-11 rounded-xl items-center justify-center text-xl"
+                className="inline-flex w-11 h-11 rounded-xl items-center justify-center"
                 style={{ background: `${c.tint}15`, border: `1px solid ${c.tint}25` }}
               >
-                {c.icon}
+                <FeatureIcon name={c.icon} tint={c.tint} size={20} />
               </span>
               <h3 className="mt-3 font-display font-700 text-[15px] text-[#102033] leading-tight">
                 {c.name}

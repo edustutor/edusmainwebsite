@@ -5,14 +5,15 @@ import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { useIsMobile } from "@/lib/useIsMobile";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 const REASONS = [
-  { icon: "🎥", title: "Live Online Classes", body: "Students learn through interactive online classes led by qualified tutors. Lessons are structured, scheduled, and easy to access from home.", tint: "#2563EB" },
-  { icon: "👩‍🏫", title: "Expert Tutors", body: "EDUS works with trained tutors who understand school subjects, exam expectations, and student learning gaps.", tint: "#8B5CF6" },
-  { icon: "📊", title: "Parent Updates", body: "Parents stay informed about attendance, class participation, assessments, and learning progress.", tint: "#06B6D4" },
-  { icon: "🎬", title: "Class Recordings", body: "Students can revise missed or difficult lessons through recordings and learning support materials.", tint: "#22C55E" },
-  { icon: "📝", title: "Exams and Assessments", body: "Regular exams and academic reviews help students understand their progress and improve before school exams.", tint: "#FACC15" },
-  { icon: "📚", title: "Resource Support", body: "Students get access to useful learning resources, past paper support, study materials, and guided academic content.", tint: "#2563EB" },
+  { icon: "live-class", title: "Live Online Classes", body: "Students learn through interactive online classes led by qualified tutors. Lessons are structured, scheduled, and easy to access from home.", tint: "#2563EB" },
+  { icon: "expert-tutor", title: "Expert Tutors", body: "EDUS works with trained tutors who understand school subjects, exam expectations, and student learning gaps.", tint: "#8B5CF6" },
+  { icon: "parent-updates", title: "Parent Updates", body: "Parents stay informed about attendance, class participation, assessments, and learning progress.", tint: "#06B6D4" },
+  { icon: "class-recording", title: "Class Recordings", body: "Students can revise missed or difficult lessons through recordings and learning support materials.", tint: "#22C55E" },
+  { icon: "exam", title: "Exams and Assessments", body: "Regular exams and academic reviews help students understand their progress and improve before school exams.", tint: "#FACC15" },
+  { icon: "library", title: "Resource Support", body: "Students get access to useful learning resources, past paper support, study materials, and guided academic content.", tint: "#2563EB" },
 ];
 
 export function WhyJoin() {
@@ -79,11 +80,11 @@ export function WhyJoin() {
               <span aria-hidden className="blob" style={{ top: -50, right: -50, width: 180, height: 180, background: r.tint, opacity: 0.20 }} />
               <div className="relative">
                 <m.div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
+                  className="w-12 h-12 rounded-2xl flex items-center justify-center"
                   style={{ background: `${r.tint}15`, border: `1px solid ${r.tint}25` }}
                   whileHover={{ scale: 1.08, rotate: -4, transition: { duration: 0.3 } }}
                 >
-                  {r.icon}
+                  <FeatureIcon name={r.icon} tint={r.tint} size={22} />
                 </m.div>
                 <h3 className="heading mt-6" style={{ fontSize: "19px" }}>{r.title}</h3>
                 <p className="text-[#2B3950] text-[14px] mt-2.5 leading-[1.65]">{r.body}</p>

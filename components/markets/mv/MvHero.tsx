@@ -4,6 +4,7 @@ import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { MV_SIGNUP, SUBJECTS } from "./MvShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 const TRUST = [
   "1-to-1 Classes",
@@ -131,10 +132,10 @@ function MvHeroVisual() {
               className="flex items-center gap-2 bg-white border border-[rgba(16,32,51,0.08)] rounded-xl px-3 py-2.5"
             >
               <span
-                className="inline-flex w-8 h-8 rounded-lg items-center justify-center text-base shrink-0"
+                className="inline-flex w-8 h-8 rounded-lg items-center justify-center shrink-0"
                 style={{ background: `${s.tint}15`, border: `1px solid ${s.tint}25` }}
               >
-                {s.icon}
+                <FeatureIcon name={s.icon} tint={s.tint} size={16} />
               </span>
               <div className="min-w-0 leading-tight">
                 <p className="font-display font-700 text-[12px] text-[#102033] truncate">

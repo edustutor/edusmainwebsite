@@ -74,8 +74,8 @@ export type Pillar = {
 };
 
 export const PILLARS: Pillar[] = [
-  { icon: "📈", title: "Structured monitoring",      body: "Class observation, tutor feedback, and academic SOPs run every month - not as marketing, as process.", tint: "#2563EB" },
-  { icon: "📋", title: "Monthly reporting",          body: "Attendance, homework, and topic-by-topic progress shared with parents every week. No black box.",       tint: "#8B5CF6" },
-  { icon: "📊", title: "Exam analytics",             body: "Term and unit exams modelled on board paper structure, scored against subject benchmarks each month.",   tint: "#06B6D4" },
-  { icon: "🛡️", title: "Disciplined tutor system", body: "Vetted, demo-tested, interviewed, trained. Always on time. Always on syllabus. Always accountable.",     tint: "#22C55E" },
+  { icon: "monitoring", title: "Structured monitoring",     body: "Class observation, tutor feedback, and academic SOPs run every month - not as marketing, as process.", tint: "#2563EB" },
+  { icon: "reporting",  title: "Monthly reporting",         body: "Attendance, homework, and topic-by-topic progress shared with parents every week. No black box.",       tint: "#8B5CF6" },
+  { icon: "analytics",  title: "Exam analytics",            body: "Term and unit exams modelled on board paper structure, scored against subject benchmarks each month.",   tint: "#06B6D4" },
+  { icon: "shield",     title: "Disciplined tutor system",  body: "Vetted, demo-tested, interviewed, trained. Always on time. Always on syllabus. Always accountable.",     tint: "#22C55E" },
 ];

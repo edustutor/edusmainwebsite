@@ -3,6 +3,7 @@ import Image from "next/image";
 import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { sectionRevealStrong, inView } from "@/lib/motion";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 /**
  * "How Learning Works"
@@ -27,12 +28,12 @@ import { sectionRevealStrong, inView } from "@/lib/motion";
  */
 
 const FEATURES = [
-  { n: "01", icon: "🎯", title: "Choose Region",         body: "Sri Lanka, India, Maldives, or Global support.",        tint: "#2563EB" },
-  { n: "02", icon: "🎓", title: "Pick Grade & Subject",  body: "Right grade, syllabus, subject, and class type.",       tint: "#8B5CF6" },
-  { n: "03", icon: "🎥", title: "Live Classes",          body: "Interactive lessons with trained online tutors.",       tint: "#06B6D4" },
-  { n: "04", icon: "📝", title: "Practice & Revise",     body: "Assignments, recordings, and revision support.",        tint: "#22C55E" },
-  { n: "05", icon: "📊", title: "Track Progress",        body: "Attendance, exams, improvement, tutor feedback.",       tint: "#FACC15" },
-  { n: "06", icon: "👨‍👩‍👧", title: "Parent Updates",       body: "Clear monthly updates so parents stay aligned.",        tint: "#2563EB" },
+  { n: "01", icon: "choose",        title: "Choose Region",         body: "Sri Lanka, India, Maldives, or Global support.",        tint: "#2563EB" },
+  { n: "02", icon: "graduation",    title: "Pick Grade & Subject",  body: "Right grade, syllabus, subject, and class type.",       tint: "#8B5CF6" },
+  { n: "03", icon: "live-class",    title: "Live Classes",          body: "Interactive lessons with trained online tutors.",       tint: "#06B6D4" },
+  { n: "04", icon: "assignment",    title: "Practice & Revise",     body: "Assignments, recordings, and revision support.",        tint: "#22C55E" },
+  { n: "05", icon: "progress",      title: "Track Progress",        body: "Attendance, exams, improvement, tutor feedback.",       tint: "#FACC15" },
+  { n: "06", icon: "message",       title: "Parent Updates",        body: "Clear monthly updates so parents stay aligned.",        tint: "#2563EB" },
 ];
 
 /**
@@ -221,7 +222,7 @@ function OrbitPill({
           className="inline-flex w-10 h-10 rounded-xl items-center justify-center text-lg shrink-0"
           style={{ background: `${feature.tint}15`, border: `1px solid ${feature.tint}25` }}
         >
-          {feature.icon}
+          <FeatureIcon name={feature.icon} tint={feature.tint} size={20} />
         </span>
         <div className="min-w-0">
           <p className="font-display font-700 text-[14px] text-[#102033] leading-tight">
@@ -260,7 +261,7 @@ function FeatureCard({ feature }: { feature: (typeof FEATURES)[number] }) {
           className="inline-flex w-11 h-11 rounded-2xl items-center justify-center text-xl shrink-0"
           style={{ background: `${feature.tint}15`, border: `1px solid ${feature.tint}25` }}
         >
-          {feature.icon}
+          <FeatureIcon name={feature.icon} tint={feature.tint} size={20} />
         </span>
         <div className="min-w-0">
           <h3 className="font-display font-700 text-[15px] text-[#102033] leading-tight">

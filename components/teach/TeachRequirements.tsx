@@ -3,6 +3,7 @@ import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { SectionHead, ApplyCtaRow } from "./TeachShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 type Req = { title: string; body: string };
 
@@ -57,9 +58,9 @@ export function TeachRequirements() {
           viewport={inView}
           className="mt-10 grid lg:grid-cols-3 gap-5"
         >
-          <RequirementCol icon="🎓" name="Academic"      tint="#2563EB" items={ACADEMIC} />
-          <RequirementCol icon="💻" name="Technical"     tint="#06B6D4" items={TECHNICAL} />
-          <RequirementCol icon="🤝" name="Professional"  tint="#8B5CF6" items={PROFESSIONAL} />
+          <RequirementCol icon="graduation"  name="Academic"      tint="#2563EB" items={ACADEMIC} />
+          <RequirementCol icon="platform"    name="Technical"     tint="#06B6D4" items={TECHNICAL} />
+          <RequirementCol icon="partnership" name="Professional"  tint="#8B5CF6" items={PROFESSIONAL} />
         </m.div>
 
         <ApplyCtaRow />
@@ -78,10 +79,10 @@ function RequirementCol({
     >
       <div className="flex items-center gap-3">
         <span
-          className="inline-flex w-10 h-10 rounded-xl items-center justify-center text-lg"
+          className="inline-flex w-10 h-10 rounded-xl items-center justify-center"
           style={{ background: `${tint}15`, border: `1px solid ${tint}25` }}
         >
-          {icon}
+          <FeatureIcon name={icon} tint={tint} size={18} />
         </span>
         <h3 className="font-display font-700 text-[16px] text-[#102033]">
           {name} Requirements

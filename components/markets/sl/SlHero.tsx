@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 export function SlHero() {
   return (
@@ -45,17 +46,17 @@ export function SlHero() {
         {/* Two pillar cards */}
         <div className="mt-14 grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto" data-anim="4">
           {[
-            { icon: "👥", title: "Group Classes",      body: "Structured weekly classes by grade and subject - recordings, exams, and parent updates included.", tint: "#2563EB" },
-            { icon: "👤", title: "Individual Classes", body: "One-to-one tutor matching with no fixed timetable. Pay per hour. Flexible across mediums and subjects.", tint: "#8B5CF6" },
+            { icon: "group-classes",      title: "Group Classes",      body: "Structured weekly classes by grade and subject - recordings, exams, and parent updates included.", tint: "#2563EB" },
+            { icon: "individual-classes", title: "Individual Classes", body: "One-to-one tutor matching with no fixed timetable. Pay per hour. Flexible across mediums and subjects.", tint: "#8B5CF6" },
           ].map((p) => (
             <div key={p.title} className="glass rounded-[24px] p-7 lift relative overflow-hidden">
               <span aria-hidden className="blob" style={{ top: -50, right: -50, width: 180, height: 180, background: p.tint, opacity: 0.22 }} />
               <div className="relative">
                 <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
+                  className="w-12 h-12 rounded-2xl flex items-center justify-center"
                   style={{ background: `${p.tint}15`, border: `1px solid ${p.tint}25` }}
                 >
-                  {p.icon}
+                  <FeatureIcon name={p.icon} tint={p.tint} size={22} />
                 </div>
                 <h3 className="heading mt-6" style={{ fontSize: "20px" }}>{p.title}</h3>
                 <p className="text-[#2B3950] text-[14px] mt-2.5 leading-[1.65]">{p.body}</p>

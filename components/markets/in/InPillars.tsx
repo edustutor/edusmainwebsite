@@ -1,4 +1,5 @@
 import { PILLARS } from "./InShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 export function InPillars() {
   return (
@@ -23,10 +24,10 @@ export function InPillars() {
               <span aria-hidden className="blob" style={{ top: -50, right: -50, width: 200, height: 200, background: p.tint, opacity: 0.18 }} />
               <div className="relative">
                 <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center"
                   style={{ background: `${p.tint}15`, border: `1px solid ${p.tint}25` }}
                 >
-                  {p.icon}
+                  <FeatureIcon name={p.icon} tint={p.tint} size={24} />
                 </div>
                 <h3 className="heading mt-6" style={{ fontSize: "20px" }}>{p.title}</h3>
                 <p className="text-[#2B3950] text-[14.5px] mt-3 leading-[1.65]">{p.body}</p>

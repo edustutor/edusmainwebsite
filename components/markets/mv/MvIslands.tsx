@@ -3,6 +3,7 @@ import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { SectionHead } from "./MvShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 const ISLANDS = [
   { name: "Malé",         note: "Capital",           tint: "#2563EB" },
@@ -45,10 +46,10 @@ export function MvIslands() {
               className="bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-5 shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)] flex items-center gap-4"
             >
               <span
-                className="inline-flex w-12 h-12 rounded-xl items-center justify-center text-2xl"
+                className="inline-flex w-12 h-12 rounded-xl items-center justify-center"
                 style={{ background: `${i.tint}15`, border: `1px solid ${i.tint}25` }}
               >
-                🏝️
+                <FeatureIcon name="islands" tint={i.tint} size={22} />
               </span>
               <div className="min-w-0">
                 <h3

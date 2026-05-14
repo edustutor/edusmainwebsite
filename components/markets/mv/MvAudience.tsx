@@ -2,6 +2,7 @@
 import { m } from "@/components/effects/Motion";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { SectionHead } from "./MvShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 const PARENT = [
   "Individual attention for your child",
@@ -44,14 +45,14 @@ export function MvAudience() {
           className="mt-10 grid lg:grid-cols-2 gap-5"
         >
           <AudienceCard
-            icon="👨‍👩‍👧"
+            icon="parent-updates"
             title="Peace of Mind for Parents"
             body="You want to know whether your child is learning properly and preparing for exams. EDUS keeps you informed every step of the way."
             tint="#2563EB"
             items={PARENT}
           />
           <AudienceCard
-            icon="🎓"
+            icon="graduation"
             title="Learn Better. Ask Freely. Improve Faster."
             body="In a 1-to-1 EDUS class you can ask questions freely, learn at your own speed, and focus on the exact topics you find difficult."
             tint="#06B6D4"
@@ -84,10 +85,10 @@ function AudienceCard({
       />
       <div className="flex items-center gap-3">
         <span
-          className="inline-flex w-12 h-12 rounded-xl items-center justify-center text-2xl"
+          className="inline-flex w-12 h-12 rounded-xl items-center justify-center"
           style={{ background: `${tint}15`, border: `1px solid ${tint}25` }}
         >
-          {icon}
+          <FeatureIcon name={icon} tint={tint} size={22} />
         </span>
         <h3 className="font-display font-700 text-[18px] text-[#102033] leading-tight">
           {title}

@@ -3,6 +3,7 @@ import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { SectionHead } from "./GlobalShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 type Feature = {
   icon: string;
@@ -12,22 +13,22 @@ type Feature = {
 };
 
 const FEATURES: Feature[] = [
-  { icon: "🎥", title: "Real-Time Teaching",      body: "Live two-way classes, never a recorded playback.",                tint: "#2563EB" },
-  { icon: "❓", title: "Doubt Clearing in Class", body: "Ask questions any moment and get them answered the same session.", tint: "#06B6D4" },
-  { icon: "📖", title: "Topic-Wise Revision",     body: "Structured topic explanation followed by focused revision.",       tint: "#8B5CF6" },
-  { icon: "🖥️", title: "Screen Share & Tools",    body: "Whiteboards, PDFs, presentations, and digital teaching aids.",     tint: "#22C55E" },
-  { icon: "🗓️", title: "Planned Around Student",  body: "Class plans built on the student's pace, goal, and schedule.",     tint: "#FACC15" },
-  { icon: "✍️", title: "Correction & Feedback",   body: "Individual correction, written feedback, and follow-up tasks.",    tint: "#2563EB" },
-  { icon: "🌍", title: "Access From Anywhere",    body: "Join from any country, any device, on a Maldives or Europe clock.", tint: "#06B6D4" },
+  { icon: "live-class",   title: "Real-Time Teaching",      body: "Live two-way classes, never a recorded playback.",                tint: "#2563EB" },
+  { icon: "doubt",        title: "Doubt Clearing in Class", body: "Ask questions any moment and get them answered the same session.", tint: "#06B6D4" },
+  { icon: "book",         title: "Topic-Wise Revision",     body: "Structured topic explanation followed by focused revision.",       tint: "#8B5CF6" },
+  { icon: "screen-share", title: "Screen Share & Tools",    body: "Whiteboards, PDFs, presentations, and digital teaching aids.",     tint: "#22C55E" },
+  { icon: "schedule",     title: "Planned Around Student",  body: "Class plans built on the student's pace, goal, and schedule.",     tint: "#FACC15" },
+  { icon: "writing",      title: "Correction & Feedback",   body: "Individual correction, written feedback, and follow-up tasks.",    tint: "#2563EB" },
+  { icon: "global",       title: "Access From Anywhere",    body: "Join from any country, any device, on a Maldives or Europe clock.", tint: "#06B6D4" },
 ];
 
 const STUDENT_GAINS = [
-  { icon: "💡", title: "Clearer Understanding",       body: "Ask questions freely and receive explanations until the concept lands.", tint: "#2563EB" },
-  { icon: "💪", title: "More Confidence",             body: "One-to-one attention helps students feel comfortable and motivated.",     tint: "#8B5CF6" },
-  { icon: "📈", title: "Better Academic Performance", body: "Structured tutoring and focused guidance improve results over time.",    tint: "#06B6D4" },
-  { icon: "📝", title: "Exam Readiness",              body: "Support for school, term, board, IGCSE, GCSE, O & A-Level prep.",        tint: "#22C55E" },
-  { icon: "🏠", title: "Flexible Learning from Home", body: "No travel, no traffic, no location barriers.",                           tint: "#FACC15" },
-  { icon: "🤝", title: "Supportive Experience",       body: "Patient, caring, and academically responsible guidance.",                tint: "#2563EB" },
+  { icon: "idea",          title: "Clearer Understanding",       body: "Ask questions freely and receive explanations until the concept lands.", tint: "#2563EB" },
+  { icon: "confidence",    title: "More Confidence",             body: "One-to-one attention helps students feel comfortable and motivated.",     tint: "#8B5CF6" },
+  { icon: "growth",        title: "Better Academic Performance", body: "Structured tutoring and focused guidance improve results over time.",    tint: "#06B6D4" },
+  { icon: "exam",          title: "Exam Readiness",              body: "Support for school, term, board, IGCSE, GCSE, O & A-Level prep.",        tint: "#22C55E" },
+  { icon: "home",          title: "Flexible Learning from Home", body: "No travel, no traffic, no location barriers.",                           tint: "#FACC15" },
+  { icon: "partnership",   title: "Supportive Experience",       body: "Patient, caring, and academically responsible guidance.",                tint: "#2563EB" },
 ];
 
 export function GlLiveClass() {
@@ -71,10 +72,10 @@ export function GlLiveClass() {
               >
                 <div className="flex items-start gap-3">
                   <span
-                    className="inline-flex w-10 h-10 rounded-xl items-center justify-center text-lg shrink-0"
+                    className="inline-flex w-10 h-10 rounded-xl items-center justify-center shrink-0"
                     style={{ background: `${f.tint}15`, border: `1px solid ${f.tint}25` }}
                   >
-                    {f.icon}
+                    <FeatureIcon name={f.icon} tint={f.tint} size={18} />
                   </span>
                   <div className="min-w-0">
                     <p className="font-display font-700 text-[13.5px] text-[#102033] leading-tight">
@@ -128,10 +129,10 @@ export function GlLiveClass() {
                   style={{ background: g.tint }}
                 />
                 <span
-                  className="inline-flex w-11 h-11 rounded-xl items-center justify-center text-xl"
+                  className="inline-flex w-11 h-11 rounded-xl items-center justify-center"
                   style={{ background: `${g.tint}15`, border: `1px solid ${g.tint}25` }}
                 >
-                  {g.icon}
+                  <FeatureIcon name={g.icon} tint={g.tint} size={20} />
                 </span>
                 <h4 className="mt-3 font-display font-700 text-[14.5px] text-[#102033] leading-tight">
                   {g.title}

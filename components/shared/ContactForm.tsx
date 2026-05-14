@@ -4,6 +4,7 @@ import { useState } from "react";
 import { m, AnimatePresence } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, sectionRevealStrong, inView } from "@/lib/motion";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 /* ---------------------------------------------------------------- */
 /* Form options - kept short                                         */
@@ -174,8 +175,8 @@ export function ContactForm() {
               role="status"
               aria-live="polite"
             >
-              <span className="inline-flex w-14 h-14 rounded-2xl items-center justify-center bg-[#22C55E]/15 text-3xl">
-                ✅
+              <span className="inline-flex w-14 h-14 rounded-2xl items-center justify-center bg-[#22C55E]/15">
+                <FeatureIcon name="checkmark" tint="#22C55E" size={28} />
               </span>
               <h3 className="heading mt-5" style={{ fontSize: "24px" }}>
                 Thank you for contacting <em>EDUS.</em>

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 export const APPLY_URL = "https://forms.fillout.com/t/92n3HmsvkKus";
 
@@ -96,10 +97,10 @@ export function PlainCard({
   return (
     <article className="relative bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-5 shadow-[0_18px_40px_-24px_rgba(16,32,51,0.18)] h-full">
       <span
-        className="inline-flex w-10 h-10 rounded-xl items-center justify-center text-lg"
+        className="inline-flex w-10 h-10 rounded-xl items-center justify-center"
         style={{ background: `${tint}15`, border: `1px solid ${tint}25` }}
       >
-        {icon}
+        <FeatureIcon name={icon} tint={tint} size={18} />
       </span>
       <h3 className="mt-3 font-display font-700 text-[15px] text-[#102033] leading-tight">
         {title}

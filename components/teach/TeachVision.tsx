@@ -5,12 +5,12 @@ import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/mot
 import { SectionHead, PlainCard } from "./TeachShared";
 
 const VISION = [
-  { icon: "🌍", title: "Global Teaching", body: "Teach students from Sri Lanka, India, Maldives, diaspora communities, and other countries.", tint: "#2563EB" },
-  { icon: "📚", title: "Multi-Syllabus", body: "National, Cambridge, Edexcel, CBSE, ICSE, and other international curricula.",                  tint: "#8B5CF6" },
-  { icon: "💻", title: "Smart Systems", body: "Tutor dashboards, progress tracking, class monitoring, and performance reporting.",            tint: "#06B6D4" },
-  { icon: "✅", title: "Quality Assured", body: "Every class is supported through academic monitoring, QA reviews, and student feedback.",     tint: "#22C55E" },
-  { icon: "📈", title: "Tutor Growth", body: "Tutors are trained, certified, reviewed, and developed continuously.",                          tint: "#FACC15" },
-  { icon: "🎯", title: "Student Success", body: "Focused on understanding, confidence, and exam results - not just completing classes.",      tint: "#2563EB" },
+  { icon: "global",    title: "Global Teaching",  body: "Teach students from Sri Lanka, India, Maldives, diaspora communities, and other countries.", tint: "#2563EB" },
+  { icon: "library",   title: "Multi-Syllabus",   body: "National, Cambridge, Edexcel, CBSE, ICSE, and other international curricula.",                tint: "#8B5CF6" },
+  { icon: "platform",  title: "Smart Systems",    body: "Tutor dashboards, progress tracking, class monitoring, and performance reporting.",          tint: "#06B6D4" },
+  { icon: "verified",  title: "Quality Assured",  body: "Every class is supported through academic monitoring, QA reviews, and student feedback.",    tint: "#22C55E" },
+  { icon: "growth",    title: "Tutor Growth",     body: "Tutors are trained, certified, reviewed, and developed continuously.",                       tint: "#FACC15" },
+  { icon: "target",    title: "Student Success",  body: "Focused on understanding, confidence, and exam results - not just completing classes.",      tint: "#2563EB" },
 ];
 
 export function TeachVision() {

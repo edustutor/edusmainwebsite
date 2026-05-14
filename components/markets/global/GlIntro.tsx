@@ -3,6 +3,7 @@ import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { SectionHead } from "./GlobalShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 type Pillar = {
   icon: string;
@@ -14,42 +15,42 @@ type Pillar = {
 
 const PILLARS: Pillar[] = [
   {
-    icon: "🧑‍🏫",
+    icon: "expert-tutor",
     title: "Personal Tutoring",
     body: "One to one online tutoring with experienced subject tutors who match your child's level.",
     tag: "1-to-1 - Expert Tutors",
     tint: "#2563EB",
   },
   {
-    icon: "📘",
+    icon: "book",
     title: "Any Syllabus",
     body: "Cambridge, Edexcel, IGCSE, GCSE, O-Level, A-Level, IB, and national curricula.",
     tag: "Cambridge - Edexcel - National",
     tint: "#8B5CF6",
   },
   {
-    icon: "🌍",
+    icon: "global",
     title: "Time-Zone Flexible",
     body: "Class timings arranged around your country, school, and family routine.",
     tag: "Global - Flexible Hours",
     tint: "#06B6D4",
   },
   {
-    icon: "📝",
+    icon: "exam",
     title: "Exam-Ready Support",
     body: "Targeted help for school exams, term tests, and board exam preparation.",
     tag: "School - Term - Board",
     tint: "#22C55E",
   },
   {
-    icon: "🎯",
+    icon: "target",
     title: "Individual Attention",
     body: "The focused academic care that crowded online classrooms cannot deliver.",
     tag: "Focused - Patient - Personal",
     tint: "#FACC15",
   },
   {
-    icon: "💳",
+    icon: "card",
     title: "Trusted & Affordable",
     body: "High-quality online tuition with structured academic guidance, at fair pricing.",
     tag: "Quality - Value - Trust",
@@ -106,10 +107,10 @@ export function GlIntro() {
 
               <div className="relative">
                 <span
-                  className="inline-flex w-12 h-12 rounded-xl items-center justify-center text-2xl"
+                  className="inline-flex w-12 h-12 rounded-xl items-center justify-center"
                   style={{ background: `${p.tint}15`, border: `1px solid ${p.tint}25` }}
                 >
-                  {p.icon}
+                  <FeatureIcon name={p.icon} tint={p.tint} size={22} />
                 </span>
                 <h3 className="mt-4 font-display font-700 text-[17px] text-[#102033] leading-tight">
                   {p.title}

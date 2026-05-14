@@ -4,6 +4,7 @@ import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { GL_SIGNUP } from "./GlobalShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 const TRUST = [
   "Expert Tutors",
@@ -107,7 +108,13 @@ function GlHeroVisual() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="inline-flex items-center gap-2">
-            <span className="text-2xl" aria-hidden>🌐</span>
+            <span
+              className="inline-flex w-8 h-8 rounded-lg items-center justify-center"
+              style={{ background: "rgba(37,99,235,0.12)" }}
+              aria-hidden
+            >
+              <FeatureIcon name="global" tint="#2563EB" size={18} />
+            </span>
             <p className="font-display font-800 text-[14px] text-[#102033]">
               EDUS Global Reach
             </p>

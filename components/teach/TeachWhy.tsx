@@ -5,14 +5,14 @@ import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/mot
 import { SectionHead, PlainCard, ApplyCtaRow } from "./TeachShared";
 
 const REASONS = [
-  { icon: "📋", title: "Structured Class Allocation", body: "Classes assigned based on subject expertise, availability, and student demand.", tint: "#2563EB" },
-  { icon: "🌐", title: "Teach From Anywhere",         body: "Online teaching opportunity for tutors with a proper setup.",                  tint: "#06B6D4" },
-  { icon: "🎓", title: "Academic Support",            body: "Class planning, student coordination, and performance improvement.",          tint: "#8B5CF6" },
-  { icon: "🧑‍💼", title: "Student Consultant Support", body: "Coordination on attendance, follow-ups, and communication.",                  tint: "#22C55E" },
-  { icon: "🏆", title: "Performance Recognition",     body: "Top tutors identified through monthly reports and QA reviews.",               tint: "#FACC15" },
-  { icon: "📈", title: "Growth Opportunities",        body: "More classes, leadership roles, and long-term academic partnerships.",        tint: "#2563EB" },
-  { icon: "💳", title: "System-Based Payments",       body: "Calculated by class completion, rate, attendance, QA, and policies.",        tint: "#8B5CF6" },
-  { icon: "🤝", title: "Real Academic Partnership",   body: "Tutors are not random freelancers - they are academic partners.",            tint: "#06B6D4" },
+  { icon: "report",       title: "Structured Class Allocation", body: "Classes assigned based on subject expertise, availability, and student demand.", tint: "#2563EB" },
+  { icon: "global",       title: "Teach From Anywhere",         body: "Online teaching opportunity for tutors with a proper setup.",                    tint: "#06B6D4" },
+  { icon: "graduation",   title: "Academic Support",            body: "Class planning, student coordination, and performance improvement.",            tint: "#8B5CF6" },
+  { icon: "consultant",   title: "Student Consultant Support",  body: "Coordination on attendance, follow-ups, and communication.",                    tint: "#22C55E" },
+  { icon: "trophy",       title: "Performance Recognition",     body: "Top tutors identified through monthly reports and QA reviews.",                 tint: "#FACC15" },
+  { icon: "growth",       title: "Growth Opportunities",        body: "More classes, leadership roles, and long-term academic partnerships.",          tint: "#2563EB" },
+  { icon: "card",         title: "System-Based Payments",       body: "Calculated by class completion, rate, attendance, QA, and policies.",          tint: "#8B5CF6" },
+  { icon: "partnership",  title: "Real Academic Partnership",   body: "Tutors are not random freelancers - they are academic partners.",              tint: "#06B6D4" },
 ];
 
 export function TeachWhy() {

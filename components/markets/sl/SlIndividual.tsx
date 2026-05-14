@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { HOLISTIC_FEATURES } from "./SlShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 export function SlIndividual() {
   return (
@@ -77,8 +78,8 @@ export function SlIndividual() {
                   key={f.title}
                   className="rounded-2xl bg-white/85 border border-[rgba(16,32,51,0.08)] p-5 shadow-[0_8px_24px_-12px_rgba(16,32,51,0.12)]"
                 >
-                  <div className="inline-flex w-11 h-11 rounded-2xl items-center justify-center text-2xl bg-[#EEF6FF] border border-[#2563EB]/20">
-                    {f.icon}
+                  <div className="inline-flex w-11 h-11 rounded-2xl items-center justify-center bg-[#EEF6FF] border border-[#2563EB]/20">
+                    <FeatureIcon name={f.icon} tint="#2563EB" size={22} />
                   </div>
                   <h4 className="heading mt-4" style={{ fontSize: "15px" }}>{f.title}</h4>
                   <p className="text-[#2B3950] text-[12.5px] mt-2 leading-[1.55]">

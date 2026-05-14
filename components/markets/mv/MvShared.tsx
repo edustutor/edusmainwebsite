@@ -21,7 +21,7 @@ export const SUBJECTS: Subject[] = [
     code: "0580",
     price: 20,
     tint: "#2563EB",
-    icon: "🧮",
+    icon: "maths",
     blurb:
       "Build strong problem-solving skills, master formulas, and prepare confidently for Cambridge IGCSE / O-Level Mathematics.",
     topics: "Algebra - Geometry - Trigonometry - Graphs - Probability - Statistics",
@@ -32,7 +32,7 @@ export const SUBJECTS: Subject[] = [
     code: "0510",
     price: 18,
     tint: "#06B6D4",
-    icon: "📖",
+    icon: "english",
     blurb:
       "Improve reading, writing, grammar, vocabulary, and exam communication for academic confidence.",
     topics: "Reading - Writing - Listening - Speaking - Exam strategy",
@@ -43,7 +43,7 @@ export const SUBJECTS: Subject[] = [
     code: "0610",
     price: 22,
     tint: "#22C55E",
-    icon: "🧬",
+    icon: "biology",
     blurb:
       "Understand key biological concepts clearly and prepare structured exam answers backed by past-paper practice.",
     topics: "Cells - Genetics - Ecology - Human biology - Diagrams - Vocabulary",
@@ -54,7 +54,7 @@ export const SUBJECTS: Subject[] = [
     code: "0620",
     price: 24,
     tint: "#8B5CF6",
-    icon: "🧪",
+    icon: "chemistry",
     blurb:
       "Master concepts, reactions, calculations, and practical-based questions with patient, step-by-step support.",
     topics: "Bonding - Acids & bases - Organic - Stoichiometry - Past papers",
@@ -65,7 +65,7 @@ export const SUBJECTS: Subject[] = [
     code: "0625",
     price: 24,
     tint: "#FACC15",
-    icon: "⚛️",
+    icon: "physics",
     blurb:
       "Build clarity in concepts, formulas, and problem solving - with exam-style training every step of the way.",
     topics: "Mechanics - Electricity - Waves - Energy - Forces - Calculations",

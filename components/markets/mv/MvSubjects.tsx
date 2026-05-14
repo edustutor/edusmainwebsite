@@ -3,6 +3,7 @@ import { m } from "@/components/effects/Motion";
 import { AmbientGlow } from "@/components/effects/AmbientGlow";
 import { fadeUp, staggerContainer, sectionRevealStrong, inView } from "@/lib/motion";
 import { SectionHead, SUBJECTS, MV_SIGNUP, MvCtaRow } from "./MvShared";
+import { FeatureIcon } from "@/components/effects/Icons";
 
 const PLANS = [
   { need: "Regular Subject Support",  hours: "4 - 8 hrs / month",  tint: "#06B6D4" },
@@ -49,10 +50,10 @@ export function MvSubjects() {
               />
               <div className="flex items-start justify-between gap-2">
                 <span
-                  className="inline-flex w-11 h-11 rounded-xl items-center justify-center text-xl"
+                  className="inline-flex w-11 h-11 rounded-xl items-center justify-center"
                   style={{ background: `${s.tint}15`, border: `1px solid ${s.tint}25` }}
                 >
-                  {s.icon}
+                  <FeatureIcon name={s.icon} tint={s.tint} size={20} />
                 </span>
                 <span
                   className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-display font-700"
