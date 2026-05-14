@@ -19,11 +19,19 @@ import {
 
 // Headings - Poppins. Friendly geometric sans, high recognition, optimised
 // for education and family-facing platforms.
+//
+// preload: false stops Next.js from auto-preloading every weight at top
+// of <head>. The fonts still load on first use via @font-face, with
+// `display: swap` ensuring text renders immediately in a fallback while
+// Poppins fetches. This fixes Lighthouse's "Don't preload too many fonts"
+// warning (was preloading 6 woff2 files at 82KB total).
 const display = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-display",
   display: "swap",
+  preload: false,
+  adjustFontFallback: true,
 });
 
 // Body - Open Sans. Best-in-class legibility for parents and students.
@@ -32,6 +40,8 @@ const sans = Open_Sans({
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans",
   display: "swap",
+  preload: false,
+  adjustFontFallback: true,
 });
 
 /**
@@ -265,13 +275,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             Perplexity, Claude, and Gemini for discovery and crawling. */}
         <link rel="alternate" type="text/markdown" href="/llms.txt" title="EDUS knowledge base for AI engines" />
         <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="EDUS full knowledge base" />
-        {/* Preconnects to font + signup origins for faster first paint. */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://signup.edustutor.com" />
-        <link rel="dns-prefetch" href="https://wiki.edustutor.com" />
         {/* Pre-warm the analytics origins so the Tag Manager + GA4
-            scripts (deferred) connect faster once they fire. */}
+            scripts (deferred) connect faster once they fire. These ARE
+            used on every page so the dns-prefetch is worthwhile. */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         {/* Consent Mode v2 default state - inline script inside <head>

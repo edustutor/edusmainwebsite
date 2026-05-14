@@ -114,10 +114,15 @@ export function Hero() {
         ))}
       </m.div>
 
+      {/* Above-the-fold Hero - do NOT animate `initial="hidden"` here.
+          Hiding the H1 until JS hydrates blocks LCP (Lighthouse flagged
+          this as "Page H1 content was hidden using CSS until 3.16s").
+          We still keep the stagger so child elements settle in nicely
+          AFTER LCP, but they start visible. */}
       <m.div
         className="container-edge"
         variants={staggerContainer}
-        initial="hidden"
+        initial={false}
         animate="show"
         style={{ y: headlineY }}
       >
