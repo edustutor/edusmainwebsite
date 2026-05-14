@@ -23,6 +23,15 @@ const nextConfig = {
     // smaller tiles get sharper assets when scaled by `sizes`.
     deviceSizes: [640, 750, 828, 1080, 1200, 1500, 1800, 2200, 2800, 3840],
     imageSizes: [16, 32, 64, 96, 128, 192, 256, 384, 512, 640, 768],
+    // Gallery photos are served from Cloudinary so next/image can proxy
+    // and resize them without us re-uploading anything into /public.
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
+      },
+    ],
   },
 };
 

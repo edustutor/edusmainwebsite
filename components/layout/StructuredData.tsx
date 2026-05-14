@@ -748,6 +748,111 @@ export function blogItemList(posts: BlogIndexEntry[]) {
 }
 
 /* --------------------------------------------------------------- */
+/* Gallery / ImageGallery - per-album detail page schema.            */
+/* Emitted on /gallery/[slug] so each album page is discoverable as  */
+/* a structured photo collection. ImageObject children reference     */
+/* the Cloudinary delivery URLs so Google Images can crawl them.     */
+/* --------------------------------------------------------------- */
+export type GallerySchemaPhoto = {
+  url: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+};
+
+export type GalleryAlbumSchemaOptions = {
+  title: string;
+  description: string;
+  slug: string;
+  datePublished: string;
+  dateModified?: string;
+  eventDate?: string;
+  location?: string;
+  photos: GallerySchemaPhoto[];
+};
+
+export function galleryAlbumSchema(opts: GalleryAlbumSchemaOptions) {
+  const url = `${SITE_URL}/gallery/${opts.slug}`;
+  const cover = opts.photos[0]?.url ?? `${SITE_URL}/edus-og.jpg`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    name: opts.title,
+    description: opts.description,
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    image: cover,
+    datePublished: opts.datePublished,
+    dateModified: opts.dateModified ?? opts.datePublished,
+    ...(opts.location ? { contentLocation: { "@type": "Place", name: opts.location } } : {}),
+    ...(opts.eventDate
+      ? {
+          about: {
+            "@type": "Event",
+            name: opts.title,
+            startDate: opts.eventDate,
+            ...(opts.location ? { location: { "@type": "Place", name: opts.location } } : {}),
+            organizer: { "@id": `${SITE_URL}/#organization` },
+          },
+        }
+      : {}),
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    inLanguage: "en",
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    associatedMedia: opts.photos.map((p, i) => ({
+      "@type": "ImageObject",
+      contentUrl: p.url,
+      url: p.url,
+      ...(p.caption ? { caption: p.caption, name: p.caption } : {}),
+      ...(p.width ? { width: p.width } : {}),
+      ...(p.height ? { height: p.height } : {}),
+      position: i + 1,
+    })),
+  };
+}
+
+/* --------------------------------------------------------------- */
+/* Gallery ItemList - for /gallery index. Each album becomes one    */
+/* ListItem pointing at /gallery/<slug>. Mirrors blogItemList.      */
+/* --------------------------------------------------------------- */
+export type GalleryIndexEntry = {
+  slug: string;
+  title: string;
+  description: string;
+  datePublished: string;
+  cover: string;
+};
+
+export function galleryItemList(albums: GalleryIndexEntry[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "EDUS Gallery",
+    url: `${SITE_URL}/gallery`,
+    description:
+      "Event albums, milestones, awards, and community moments from EDUS Online Institute - photos from across our journey since 2021.",
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: albums.map((a, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${SITE_URL}/gallery/${a.slug}`,
+        item: {
+          "@type": "ImageGallery",
+          name: a.title,
+          description: a.description,
+          url: `${SITE_URL}/gallery/${a.slug}`,
+          image: a.cover,
+          datePublished: a.datePublished,
+        },
+      })),
+    },
+  };
+}
+
+/* --------------------------------------------------------------- */
 /* WebApplication - the signup portal as a discoverable app entity.  */
 /* Surfaces "EDUS App" in Google's App Pack when search intent       */
 /* matches "edus app" / "edus signup" / "edus login".                */

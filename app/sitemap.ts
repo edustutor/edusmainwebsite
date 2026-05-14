@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { PUBLISHED_POSTS } from "@/components/blog/BlogData";
+import { PUBLISHED_ALBUMS } from "@/components/gallery/GalleryData";
 
 const SITE = "https://edustutor.com";
 
@@ -28,6 +29,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Blog index
     { path: "/blog",             changeFrequency: "weekly",  priority: 0.75 },
 
+    // Gallery index
+    { path: "/gallery",          changeFrequency: "monthly", priority: 0.70 },
+
     // Legal (low priority but indexable)
     { path: "/privacy",          changeFrequency: "yearly",  priority: 0.30 },
     { path: "/terms",            changeFrequency: "yearly",  priority: 0.30 },
@@ -45,7 +49,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(p.dateModified ?? p.datePublished),
   }));
 
-  return [...routes, ...blogRoutes].map((r) => ({
+  // Gallery albums - lastModified uses the album's event date so the
+  // sitemap reflects when the photos were actually captured.
+  const galleryRoutes = PUBLISHED_ALBUMS.map((a) => ({
+    path: `/gallery/${a.slug}`,
+    changeFrequency: "yearly" as const,
+    priority: 0.60,
+    lastModified: new Date(a.dateModified ?? a.datePublished),
+  }));
+
+  return [...routes, ...blogRoutes, ...galleryRoutes].map((r) => ({
     url: `${SITE}${r.path}`,
     lastModified: r.lastModified ?? now,
     changeFrequency: r.changeFrequency,
