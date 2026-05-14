@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getCurrentHost } from "@/lib/siteUrl";
 
 /**
  * Robots policy: open to ALL reputable crawlers, AI engines, and answer engines.
@@ -12,8 +13,14 @@ import type { MetadataRoute } from "next";
  * Categories covered: AI/LLM crawlers - search engines - answer engines -
  * SEO/marketing crawlers - social-preview bots - academic/research crawlers -
  * archival bots - regional engines.
+ *
+ * Host-aware: each of the 6 EDUS domains gets its own robots.txt where the
+ * `host` directive AND the sitemap URL point at THAT domain. Each domain is
+ * an independent Search Console property and needs its own sitemap declared.
  */
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const host = await getCurrentHost();
+  const origin = `https://${host}`;
   const allow = "/";
   const bot = (userAgent: string) => ({ userAgent, allow });
 
@@ -202,9 +209,7 @@ export default function robots(): MetadataRoute.Robots {
       bot("LinkdexBot"),
       bot("LinkExaminer"),
     ],
-    sitemap: [
-      "https://edustutor.com/sitemap.xml",
-    ],
-    host: "https://edustutor.com",
+    sitemap: [`${origin}/sitemap.xml`],
+    host: origin,
   };
 }

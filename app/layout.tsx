@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { MotionProvider } from "@/components/effects/Motion";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { Atmosphere } from "@/components/effects/Atmosphere";
+import { getCurrentHost, hreflangAlternates } from "@/lib/siteUrl";
 
 // Headings - Poppins. Friendly geometric sans, high recognition, optimised
 // for education and family-facing platforms.
@@ -25,27 +26,38 @@ const sans = Open_Sans({
   display: "swap",
 });
 
-export const metadata: Metadata = {
+/**
+ * Root metadata is built per-request so each of the 6 EDUS domains
+ * (edustutor.com, www.edustutor.com, edus.edu.lk, www.edus.edu.lk,
+ *  edus.lk, www.edus.lk) gets a SELF-canonical and a shared hreflang
+ * block. This is the correct pattern for the same content served on
+ * multiple ccTLDs - Google sees them as regional variants instead of
+ * duplicate content.
+ *
+ * Per-page metadata (e.g. /blog/[slug], /gallery/[slug]) continues to
+ * override individual fields; the host-aware `metadataBase` + `canonical`
+ * + `alternates.languages` flow down from this root.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const host = await getCurrentHost();
+  const origin = `https://${host}`;
+  return {
   title: {
     default: "EDUS - Live Online Tuition - Sri Lanka, India, Maldives",
     template: "%s - EDUS",
   },
   description:
     "Join EDUS for live online tuition with expert tutors, structured classes, exams, and parent updates. Sri Lanka, India CBSE, Maldives Cambridge & global 1-to-1.",
-  metadataBase: new URL("https://edustutor.com"),
+  // Dynamic per active domain - drives every absolute URL Next generates
+  // for OG/canonical/twitter on this page render.
+  metadataBase: new URL(origin),
   alternates: {
     canonical: "/",
-    // hreflang signals so SERPs in each market route to the right landing page.
-    // Same content language (English) across all markets - the variation is
-    // syllabus / pathway, not locale, so we point each market region to the
-    // canonical English page but explicitly claim coverage.
-    languages: {
-      "en": "/",
-      "en-LK": "/sl",
-      "en-IN": "/in",
-      "en-MV": "/mv",
-      "x-default": "/",
-    },
+    // hreflang lists the apex of each language/region target. Same path
+    // ("/") because the homepage exists on every domain. Page-level
+    // metadata blocks may override `alternates.languages` with a path-
+    // specific map (e.g. /blog → hreflangAlternates("/blog")).
+    languages: hreflangAlternates("/"),
   },
   applicationName: "EDUS",
   authors: [{ name: "EDUS" }],
@@ -157,7 +169,10 @@ export const metadata: Metadata = {
     title: "EDUS - Live Online Tuition - Sri Lanka, India, Maldives",
     description:
       "Join EDUS for live online tuition with expert tutors, structured classes, exams, and parent updates. Sri Lanka, India CBSE, Maldives Cambridge & global 1-to-1.",
-    url: "https://edustutor.com",
+    // Self-referencing OG URL - points at the active domain, not the brand
+    // primary. This matches og:url with the canonical and avoids OG-graph
+    // de-duplication across the 6 domains.
+    url: origin,
     siteName: "EDUS",
     locale: "en_US",
     alternateLocale: ["en_LK", "en_IN", "en_MV", "ta_LK", "ta_IN", "si_LK"],
@@ -220,7 +235,8 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.webmanifest",
   category: "education",
-};
+  };
+}
 
 export const viewport = {
   width: "device-width",

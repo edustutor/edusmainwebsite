@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 import { PUBLISHED_POSTS } from "@/components/blog/BlogData";
 import { PUBLISHED_ALBUMS, cloudinaryUrl } from "@/components/gallery/GalleryData";
-
-const SITE = "https://edustutor.com";
+import { getCurrentHost } from "@/lib/siteUrl";
 
 /** One row in the internal route list. `images` becomes `<image:loc>`
  *  entries on the URL when present (image sitemap extension). */
@@ -14,7 +13,15 @@ type SitemapRow = {
   images?: string[];
 };
 
-export default function sitemap(): MetadataRoute.Sitemap {
+/**
+ * Host-aware sitemap. Each of the 6 EDUS domains serves its OWN sitemap
+ * listing its OWN URLs (e.g. edus.lk/sitemap.xml lists edus.lk URLs).
+ * This is the correct pattern for independent multi-domain SEO - each
+ * Search Console property reads only its own sitemap.
+ */
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const host = await getCurrentHost();
+  const SITE = `https://${host}`;
   const now = new Date();
 
   const routes: SitemapRow[] = [

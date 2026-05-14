@@ -6,6 +6,7 @@ import {
   blogPosting,
 } from "@/components/layout/StructuredData";
 import { PUBLISHED_POSTS, getPost } from "@/components/blog/BlogData";
+import { siteUrl, hreflangAlternates } from "@/lib/siteUrl";
 
 type Params = { slug: string };
 
@@ -19,14 +20,21 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
   if (!post || post.draft) {
     return { title: "Post not found - EDUS", robots: { index: false } };
   }
+  // Host-aware so the same post on edus.lk vs edustutor.com gets the
+  // correct self-canonical and og:url.
+  const url = await siteUrl(`/blog/${post.slug}`);
   return {
     title: `${post.title} - EDUS Blog`,
     description: post.description,
-    alternates: { canonical: `/blog/${post.slug}` },
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+      languages: hreflangAlternates(`/blog/${post.slug}`),
+    },
     openGraph: {
       title: post.title,
       description: post.description,
       type: "article",
+      url,
       publishedTime: post.datePublished,
       modifiedTime: post.dateModified ?? post.datePublished,
       authors: [post.author.name],
@@ -172,6 +180,16 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
  * Kept inline rather than extracted to a helper because it's used only here
  * and the project style is to inline single-call-site logic.
  */
+
+/**
+ * EDUS internal hosts - matches any of the 6 production domains plus
+ * the Vercel preview URL. Used to keep body-text links in-tab when
+ * they reference another EDUS page, regardless of which domain the
+ * reader is currently on.
+ */
+const INTERNAL_HOST_RE =
+  /^https:\/\/(?:www\.)?(?:edustutor\.com|edus\.edu\.lk|edus\.lk|edusmainwebsite\.vercel\.app)\//;
+
 function renderInline(text: string): React.ReactNode[] {
   // Split on bold first, then process URLs within each non-bold segment.
   const parts: React.ReactNode[] = [];
@@ -191,7 +209,7 @@ function renderInline(text: string): React.ReactNode[] {
     const urlSplit = seg.split(/(https?:\/\/[^\s)]+)/g);
     for (const piece of urlSplit) {
       if (/^https?:\/\//.test(piece)) {
-        const isInternal = piece.startsWith("https://edustutor.com/");
+        const isInternal = INTERNAL_HOST_RE.test(piece);
         parts.push(
           <a
             key={key++}

@@ -14,6 +14,7 @@ import {
   type GalleryAlbum,
 } from "@/components/gallery/GalleryData";
 import { getPost } from "@/components/blog/BlogData";
+import { siteUrl, hreflangAlternates } from "@/lib/siteUrl";
 
 type Params = { slug: string };
 
@@ -43,17 +44,23 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
   // just the album title (which is already the recognisable phrase).
   const candidate = `${album.title} - EDUS`;
   const absoluteTitle = candidate.length <= 60 ? candidate : album.title;
+  // Host-aware URLs - self-canonical to the served domain, hreflang lists
+  // all 6 EDUS domains as regional variants for the same album.
+  const url = await siteUrl(`/gallery/${album.slug}`);
 
   return {
     title: { absolute: absoluteTitle },
     description: album.description,
-    alternates: { canonical: `/gallery/${album.slug}` },
+    alternates: {
+      canonical: `/gallery/${album.slug}`,
+      languages: hreflangAlternates(`/gallery/${album.slug}`),
+    },
     keywords: album.keywords,
     openGraph: {
       title: album.title,
       description: album.description,
       type: "article",
-      url: `https://edustutor.com/gallery/${album.slug}`,
+      url,
       siteName: "EDUS Online Institute",
       publishedTime: album.datePublished,
       modifiedTime: album.dateModified ?? album.datePublished,
@@ -492,6 +499,14 @@ function buildPhotoAlt(album: GalleryAlbum, i: number, year: number): string {
 }
 
 /**
+ * EDUS internal hosts - any of these triggers an in-tab anchor instead
+ * of opening a new tab. Covers all 6 production domains + the Vercel
+ * preview URL so dev/preview environments behave the same.
+ */
+const INTERNAL_HOST_RE =
+  /^https:\/\/(?:www\.)?(?:edustutor\.com|edus\.edu\.lk|edus\.lk|edusmainwebsite\.vercel\.app)\//;
+
+/**
  * Render a body paragraph with two inline marks:
  *   - **bold** → <strong>
  *   - https://... → <a>
@@ -516,7 +531,9 @@ function renderInline(text: string): React.ReactNode[] {
     const urlSplit = seg.split(/(https?:\/\/[^\s)]+)/g);
     for (const piece of urlSplit) {
       if (/^https?:\/\//.test(piece)) {
-        const isInternal = piece.startsWith("https://edustutor.com/");
+        // Treat any of the 6 EDUS domains as in-site so blog/gallery body
+        // text links don't open a new tab between domain variants.
+        const isInternal = INTERNAL_HOST_RE.test(piece);
         parts.push(
           <a
             key={key++}

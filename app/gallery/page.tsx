@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -7,53 +8,60 @@ import {
   speakableWebPage,
 } from "@/components/layout/StructuredData";
 import { PUBLISHED_ALBUMS, albumCover } from "@/components/gallery/GalleryData";
+import { siteUrl, hreflangAlternates } from "@/lib/siteUrl";
 
 /**
- * Title is set as `absolute` so the root layout's "%s - EDUS" template
- * does not push it past 60 chars. Description is verb-led, under 160
- * chars. OG image is the brand wordmark; per-album OG images live on
- * the individual detail pages.
+ * Host-aware metadata. Each of the 6 EDUS domains gets a self-canonical
+ * pointing at its own /gallery URL, plus shared hreflang alternates so
+ * Google understands the regional variants.
  */
-export const metadata = {
-  title: { absolute: "EDUS Gallery - Events, Awards & Milestone Photos" },
-  description:
-    "Browse EDUS Online Institute event albums - National ICT Award win, Jaffna office openings, Slingshot Demo Day, anniversaries, and community photos.",
-  alternates: { canonical: "/gallery" },
-  keywords: [
-    "EDUS gallery",
-    "EDUS Online Institute photos",
-    "EDUS event albums",
-    "EDUS milestones",
-    "EDUS National ICT Award",
-    "EDUS Jaffna office opening",
-    "EDUS Yarl Ventures office",
-    "Slingshot Sri Lanka accelerator",
-    "Hemas Hatch Slingshot",
-    "SLASSCOM Xcellerate",
-    "Yarl IT Hub Innovation Festival",
-    "Yarl Geek Challenge",
-    "ICTA Spiralation finalist",
-    "Sri Lanka edtech awards",
-    "online tuition institute Sri Lanka",
-    "EDUS community photos Jaffna",
-  ],
-  openGraph: {
-    title: "EDUS Gallery - Events, Awards & Milestone Photos",
+export async function generateMetadata(): Promise<Metadata> {
+  const url = await siteUrl("/gallery");
+  const ogImage = await siteUrl("/edus-og.jpg");
+  return {
+    title: { absolute: "EDUS Gallery - Events, Awards & Milestone Photos" },
     description:
-      "Browse EDUS event albums - awards, office openings, accelerator demos, and community photos from 2021 onwards.",
-    type: "website",
-    url: "https://edustutor.com/gallery",
-    siteName: "EDUS Online Institute",
-    images: [{ url: "https://edustutor.com/edus-og.jpg", width: 1200, height: 630, alt: "EDUS Gallery" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "EDUS Gallery - Events, Awards & Milestone Photos",
-    description:
-      "EDUS event albums - awards, office openings, accelerator demos, and anniversary photos.",
-    images: ["https://edustutor.com/edus-og.jpg"],
-  },
-};
+      "Browse EDUS Online Institute event albums - National ICT Award win, Jaffna office openings, Slingshot Demo Day, anniversaries, and community photos.",
+    alternates: {
+      canonical: "/gallery",
+      languages: hreflangAlternates("/gallery"),
+    },
+    keywords: [
+      "EDUS gallery",
+      "EDUS Online Institute photos",
+      "EDUS event albums",
+      "EDUS milestones",
+      "EDUS National ICT Award",
+      "EDUS Jaffna office opening",
+      "EDUS Yarl Ventures office",
+      "Slingshot Sri Lanka accelerator",
+      "Hemas Hatch Slingshot",
+      "SLASSCOM Xcellerate",
+      "Yarl IT Hub Innovation Festival",
+      "Yarl Geek Challenge",
+      "ICTA Spiralation finalist",
+      "Sri Lanka edtech awards",
+      "online tuition institute Sri Lanka",
+      "EDUS community photos Jaffna",
+    ],
+    openGraph: {
+      title: "EDUS Gallery - Events, Awards & Milestone Photos",
+      description:
+        "Browse EDUS event albums - awards, office openings, accelerator demos, and community photos from 2021 onwards.",
+      type: "website",
+      url,
+      siteName: "EDUS Online Institute",
+      images: [{ url: ogImage, width: 1200, height: 630, alt: "EDUS Gallery" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "EDUS Gallery - Events, Awards & Milestone Photos",
+      description:
+        "EDUS event albums - awards, office openings, accelerator demos, and anniversary photos.",
+      images: [ogImage],
+    },
+  };
+}
 
 export default function GalleryIndexPage() {
   const albums = PUBLISHED_ALBUMS;
