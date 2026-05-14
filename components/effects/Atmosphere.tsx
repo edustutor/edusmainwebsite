@@ -180,17 +180,26 @@ function Sphere({ s, isMobile }: { s: Sphere; isMobile: boolean }) {
 }
 
 export function Atmosphere() {
+  // `mounted` gate: spheres render ONLY after the client has resolved
+  // its viewport size. Avoids a desktop-vs-mobile sphere swap on mount
+  // that Lighthouse counted as a 0.306 CLS hit. Spheres are decorative
+  // - rendering them a few frames late is invisible. Without this gate,
+  // the initial server render (always isMobile=false) ships DESKTOP
+  // spheres, then the useEffect re-paints with MOBILE spheres at
+  // different positions, causing the shift.
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
     const update = () => setIsMobile(mq.matches);
     update();
+    setMounted(true);
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  const spheres = isMobile ? MOBILE_SPHERES : DESKTOP_SPHERES;
+  const spheres = mounted ? (isMobile ? MOBILE_SPHERES : DESKTOP_SPHERES) : [];
 
   return (
     <div
