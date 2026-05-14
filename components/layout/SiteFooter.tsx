@@ -12,6 +12,9 @@ const QUICK = [
   { label: "Gallery", href: "/gallery" },
   { label: "Press", href: "/press" },
   { label: "FAQ", href: "/#faq" },
+  { label: "Resource Vault", href: "https://wiki.edustutor.com/", external: true },
+  { label: "Enrol", href: "https://signup.edustutor.com/", external: true },
+  { label: "Contact", href: "/contact" },
 ];
 
 const PATHS = [
@@ -19,9 +22,6 @@ const PATHS = [
   { label: "India", href: "/in" },
   { label: "Maldives", href: "/mv" },
   { label: "Global", href: "/global" },
-  { label: "Resource Vault", href: "https://wiki.edustutor.com/", external: true },
-  { label: "Enrol", href: "https://signup.edustutor.com/", external: true },
-  { label: "Contact", href: "/contact" },
 ];
 
 const LEGAL = [
@@ -88,9 +88,11 @@ export function SiteFooter() {
 
             </div>
 
-            {/* Columns */}
-            <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-6">
-              <FooterCol title="Quick Links" items={QUICK} />
+            {/* Columns - Quick Links spans 2 grid tracks and renders its
+                items in a 2-column sub-grid so the list height stays
+                in line with the shorter Learning Paths + Legal columns. */}
+            <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+              <FooterCol title="Quick Links" items={QUICK} cols={2} className="col-span-2 sm:col-span-2" />
               <FooterCol title="Learning Paths" items={PATHS} />
               <FooterCol title="Legal" items={LEGAL} />
             </div>
@@ -110,16 +112,25 @@ export function SiteFooter() {
 function FooterCol({
   title,
   items,
+  className = "",
+  cols = 1,
 }: {
   title: string;
   items: { label: string; href: string; external?: boolean }[];
+  className?: string;
+  /** Internal sub-column count. Use 2 for tall lists like Quick Links. */
+  cols?: 1 | 2;
 }) {
   return (
-    <div>
+    <div className={className}>
       <p className="font-display font-600 text-[11.5px] tracking-[0.14em] uppercase text-[#102033] mb-3">
         {title}
       </p>
-      <ul className="space-y-1.5 text-[13.5px]">
+      <ul
+        className={`space-y-1.5 text-[13.5px] ${
+          cols === 2 ? "sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-1.5 sm:space-y-0" : ""
+        }`}
+      >
         {items.map((l) => (
           <li key={l.href}>
             {l.external ? (
