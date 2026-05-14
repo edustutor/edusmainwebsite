@@ -28,9 +28,11 @@ export default function RefundPolicyPage() {
       <JsonLdScript
         data={speakableWebPage({
           name: "Refund Policy - EDUS Lanka (PVT) Ltd.",
+          headline: "EDUS Refund Policy - Cancellations, Eligibility, Process",
           description:
             "EDUS Online Tuition refund policy: eligibility, request process, non-refundable services, EDUS-initiated cancellations, and technical issue handling.",
           path: "/refunds",
+          lastUpdated: "2025-12-01",
         })}
       />
       <JsonLdScript data={merchantReturnPolicy()} />

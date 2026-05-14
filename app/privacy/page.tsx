@@ -23,9 +23,11 @@ export default function PrivacyPolicyPage() {
       <JsonLdScript
         data={speakableWebPage({
           name: "Privacy Policy - EDUS Lanka (PVT) Ltd.",
+          headline: "EDUS Privacy Policy - Student & Parent Data Protection",
           description:
             "How EDUS Online Tuition collects, uses, retains, and protects information from students, parents, teachers, and administrators.",
           path: "/privacy",
+          lastUpdated: "2025-12-01",
         })}
       />
       {/* HERO - same pattern as other sub-pages */}

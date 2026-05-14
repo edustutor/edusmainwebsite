@@ -23,9 +23,11 @@ export default function SafeguardingPage() {
       <JsonLdScript
         data={speakableWebPage({
           name: "Safeguarding Policy - EDUS Lanka (PVT) Ltd.",
+          headline: "EDUS Safeguarding Policy - Child Protection & Safety",
           description:
             "EDUS Online Tuition's commitment to safeguarding the welfare of every child and young person across Sri Lanka, India, Maldives, and globally.",
           path: "/safeguarding",
+          lastUpdated: "2025-12-01",
         })}
       />
       {/* HERO */}

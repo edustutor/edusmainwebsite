@@ -23,9 +23,11 @@ export default function TermsPage() {
       <JsonLdScript
         data={speakableWebPage({
           name: "Terms & Conditions - EDUS Lanka (PVT) Ltd.",
+          headline: "EDUS Terms & Conditions - Registration, Fees, Liability",
           description:
             "Terms and conditions governing the use of EDUS Online services, including registration, fees, refunds, intellectual property, liability, and governing law.",
           path: "/terms",
+          lastUpdated: "2025-12-01",
         })}
       />
       {/* HERO - same pattern as other sub-pages */}

@@ -23,9 +23,11 @@ export default function CookiePolicyPage() {
       <JsonLdScript
         data={speakableWebPage({
           name: "Cookie Policy - EDUS Lanka (PVT) Ltd.",
+          headline: "EDUS Cookie Policy - Tracking & Storage Practices",
           description:
             "How EDUS Online Tuition uses cookies and similar tracking technologies, including categories used and how to manage them.",
           path: "/cookies",
+          lastUpdated: "2025-12-01",
         })}
       />
       {/* HERO */}

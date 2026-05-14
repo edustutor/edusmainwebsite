@@ -23,9 +23,11 @@ export default function AcceptableUsePage() {
       <JsonLdScript
         data={speakableWebPage({
           name: "Acceptable Use Policy - EDUS Lanka (PVT) Ltd.",
+          headline: "EDUS Acceptable Use Policy - Student & Tutor Conduct",
           description:
             "Acceptable Use Policy governing how students, parents, tutors, and visitors may use the EDUS website, mobile applications, and online learning services.",
           path: "/acceptable-use",
+          lastUpdated: "2025-12-01",
         })}
       />
       {/* HERO */}
