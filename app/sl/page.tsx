@@ -1,5 +1,5 @@
 import { CTA } from "@/components/shared/CTA";
-import { OtherMarkets } from "@/components/markets/OtherMarkets";
+import { RegionSelector } from "@/components/home/RegionSelector";
 import { SlHero } from "@/components/markets/sl/SlHero";
 import { SlCurricula } from "@/components/markets/sl/SlCurricula";
 import { SlGroupClasses } from "@/components/markets/sl/SlGroupClasses";
@@ -173,7 +173,11 @@ export default function SriLankaPage() {
       <SlIndividual />
       <SlTestimonials />
       <SlFAQ />
-      <OtherMarkets current="sl" />
+      {/* Full 4-market RegionSelector instead of OtherMarkets, because
+          visitors landing on .lk domains hit /sl directly via middleware
+          308 - they never see the homepage RegionSelector, so we surface
+          the full path picker here. */}
+      <RegionSelector />
       <CTA />
     </>
   );
