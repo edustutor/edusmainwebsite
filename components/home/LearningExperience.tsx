@@ -37,6 +37,33 @@ const FEATURES = [
 ];
 
 /**
+ * The numbered badge circles overlay each feature card. Lighthouse
+ * flagged the original `white text on tint` combination as failing
+ * WCAG AA (4.5:1) for the lighter tints (yellow, green, cyan, mid-
+ * purple). This helper returns a darkened variant + text colour pair
+ * that lifts the contrast ratio above 4.5:1 for every tint we use.
+ *
+ * Yellow keeps its bright background paired with dark navy text so the
+ * brand "warm pop" stays. The rest get a darker shade of their
+ * brand colour with white text - the visual difference is minimal.
+ */
+function badgeColors(tint: string): { background: string; color: string } {
+  switch (tint) {
+    case "#FACC15": // brand yellow - dark text wins
+      return { background: "#FACC15", color: "#102033" };
+    case "#22C55E": // brand green - darken to green-700
+      return { background: "#15803D", color: "#FFFFFF" };
+    case "#06B6D4": // brand cyan - darken to cyan-700
+      return { background: "#0E7490", color: "#FFFFFF" };
+    case "#8B5CF6": // brand purple - darken to violet-600
+      return { background: "#7C3AED", color: "#FFFFFF" };
+    case "#2563EB": // brand blue - already AA-compliant with white
+    default:
+      return { background: tint, color: "#FFFFFF" };
+  }
+}
+
+/**
  * Six positions around a 720px-diameter ring, starting at top (-90°)
  * and stepping 60° clockwise. Coordinates are percentages of the
  * outer wrapper, with the centre at (50%, 50%) and radius 50% in x,
@@ -210,10 +237,10 @@ function OrbitPill({
       style={{ left: pos.left, top: pos.top }}
     >
       <article className="relative bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl px-4 py-3.5 shadow-[0_18px_40px_-20px_rgba(16,32,51,0.20)] flex items-start gap-3">
-        {/* Number badge */}
+        {/* Number badge - WCAG-AA contrast pair (see badgeColors helper) */}
         <span
-          className="absolute -top-2.5 -right-2.5 w-8 h-8 rounded-full text-[11.5px] font-display font-700 text-white inline-flex items-center justify-center shadow-[0_6px_14px_rgba(16,32,51,0.22)]"
-          style={{ background: feature.tint }}
+          className="absolute -top-2.5 -right-2.5 w-8 h-8 rounded-full text-[11.5px] font-display font-700 inline-flex items-center justify-center shadow-[0_6px_14px_rgba(16,32,51,0.22)]"
+          style={badgeColors(feature.tint)}
         >
           {feature.n}
         </span>
@@ -250,8 +277,8 @@ function FeatureCard({ feature }: { feature: (typeof FEATURES)[number] }) {
   return (
     <article className="relative bg-white border border-[rgba(16,32,51,0.08)] rounded-2xl p-5 shadow-[0_18px_40px_-20px_rgba(16,32,51,0.18)]">
       <span
-        className="absolute -top-2.5 -right-2.5 w-8 h-8 rounded-full text-[11.5px] font-display font-700 text-white inline-flex items-center justify-center shadow-[0_6px_14px_rgba(16,32,51,0.22)]"
-        style={{ background: feature.tint }}
+        className="absolute -top-2.5 -right-2.5 w-8 h-8 rounded-full text-[11.5px] font-display font-700 inline-flex items-center justify-center shadow-[0_6px_14px_rgba(16,32,51,0.22)]"
+        style={badgeColors(feature.tint)}
       >
         {feature.n}
       </span>
