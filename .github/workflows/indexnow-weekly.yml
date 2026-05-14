@@ -1,0 +1,34 @@
+name: Ping IndexNow weekly
+
+# Pings IndexNow with all sitemap URLs from each EDUS domain every
+# Monday at 04:00 UTC. Bing + Yandex + DuckDuckGo re-crawl within
+# minutes. Google does not participate in IndexNow.
+#
+# This is the engineering complement to the Sunday google-reviews-cron:
+# Sunday refreshes content, Monday tells search engines about it.
+#
+# Manual trigger:
+#   GitHub UI -> Actions -> "Ping IndexNow weekly" -> Run workflow
+
+on:
+  schedule:
+    - cron: "0 4 * * 1" # every Monday 04:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Submit URLs to IndexNow
+        run: node scripts/indexnow-submit.mjs

@@ -513,6 +513,121 @@ import { trackSignupClick } from "@/lib/analytics";
 
 ---
 
+## Search engine indexing
+
+### How indexing works for EDUS
+
+Each domain (`edustutor.com`, `edus.lk`, `edus.edu.lk`) is a **separate**
+property in Google Search Console + Bing Webmaster Tools. Each domain
+serves its own per-host sitemap.xml listing only its own URLs.
+
+| Search engine | Submission method | Crawl latency |
+|---|---|---|
+| **Google** | Search Console + sitemap.xml | 1 day – 4 weeks |
+| **Bing** | IndexNow API + Webmaster Tools sitemap | Minutes |
+| **Yandex** | IndexNow API | Minutes |
+| **DuckDuckGo** | IndexNow API (uses Bing's index) | Minutes |
+| **Seznam, Naver** | IndexNow API | Hours |
+
+### IndexNow (instant indexing for non-Google engines)
+
+The codebase already ships everything needed:
+
+1. **Verification key**: `/public/518080ca37ebe1a2c00b97095a87a81dab76a8591dff74910579c3797ca839b2.txt`
+   — every domain serves this file at `https://<host>/<key>.txt`, proving
+   ownership for IndexNow.
+2. **Submitter script**: `scripts/indexnow-submit.mjs` — fetches each
+   domain's live `sitemap.xml`, extracts all `<loc>` URLs, posts to
+   `api.indexnow.org`.
+3. **Weekly cron**: `.github/workflows/indexnow-weekly.yml` runs every
+   Monday 04:00 UTC.
+
+#### Run manually
+
+```bash
+npm run indexnow:submit
+```
+
+#### When to run
+
+- After any production deploy that adds or removes routes
+- After publishing a blog post or new gallery album
+- Otherwise the Monday cron handles weekly re-submission automatically
+
+### Google Search Console — one-time setup per domain
+
+For each domain `edustutor.com`, `edus.lk`, `edus.edu.lk`:
+
+1. Open https://search.google.com/search-console
+2. **Add property** → **URL prefix** → enter `https://<domain>`
+3. Verify ownership via HTML tag, DNS TXT, or domain registrar lookup
+4. After verification, click into the property → **Sitemaps** (left sidebar)
+5. **Add new sitemap** → enter `sitemap.xml` → Submit
+6. Wait 24-48 hours for Google to read the sitemap
+
+After this, Google crawls on its own schedule. To prioritise specific URLs,
+use the manual **Request Indexing** flow (see below).
+
+### Manual GSC "Request Indexing" (priority URLs)
+
+GSC lets you manually request indexing for up to ~10 URLs per property per
+day. Use this for high-priority pages immediately after deploy.
+
+**Priority list per domain** (submit in this order, one URL at a time):
+
+```
+https://<domain>/
+https://<domain>/sl
+https://<domain>/in
+https://<domain>/mv
+https://<domain>/global
+https://<domain>/about
+https://<domain>/blog
+https://<domain>/gallery
+https://<domain>/teach
+https://<domain>/contact
+```
+
+Then the next day, submit:
+```
+https://<domain>/sl/timetable
+https://<domain>/press
+https://<domain>/blog/<post-slug>            # for each of 8 blog posts
+https://<domain>/gallery/<album-slug>        # for each of 14 albums
+```
+
+#### How to request indexing
+
+1. GSC → top search bar → paste the URL
+2. Click **Request Indexing** (button appears after URL inspection completes)
+3. Wait ~30 seconds for Google to attempt a live crawl
+4. Repeat for the next URL
+
+Per Google's docs, requested URLs are typically indexed within 24-48 hours.
+
+### Bing Webmaster Tools
+
+1. Open https://www.bing.com/webmasters
+2. Sign in with the same Google account (Bing accepts Google verification)
+3. **Add a site** → enter `https://edustutor.com`
+4. Click **Import from Google Search Console** → auto-imports verification + sitemap
+5. Repeat for `https://edus.lk` and `https://edus.edu.lk`
+
+Bing also reads IndexNow submissions, so once IndexNow is wired (already
+done in this codebase), Bing crawls within minutes of submission.
+
+### Verifying indexing status
+
+| Check | Command |
+|---|---|
+| Google's index | `site:edustutor.com` in google.com search |
+| Bing's index | `site:edustutor.com` in bing.com search |
+| Sitemap reachable | `curl -I https://edustutor.com/sitemap.xml` (expect 200) |
+| IndexNow key reachable | `curl -I https://edustutor.com/<key>.txt` (expect 200) |
+| Latest IndexNow ping status | GitHub Actions tab → "Ping IndexNow weekly" → latest run |
+
+---
+
 ## Deployment
 
 ### Production
