@@ -1,0 +1,51 @@
+name: Refresh Google reviews
+
+# Runs every Sunday at 03:00 UTC (early morning Asia / late Saturday US).
+# Fetches the latest reviews from Google Places API, commits the updated
+# data/google-reviews.json back to main, which triggers a Vercel auto-deploy.
+#
+# Cost: 1 API call per week = ~4 calls/month, well inside Google's
+# $200/month free credit. The website itself never calls Google at runtime.
+#
+# Manual trigger:
+#   GitHub UI -> Actions tab -> "Refresh Google reviews" -> Run workflow
+
+on:
+  schedule:
+    - cron: "0 3 * * 0" # every Sunday 03:00 UTC
+  workflow_dispatch: # also runnable on demand from the GitHub UI
+
+permissions:
+  contents: write # so the workflow can commit the updated JSON
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Run the fetch script
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          GOOGLE_PLACES_PLACE_ID: ${{ secrets.GOOGLE_PLACES_PLACE_ID }}
+        run: node scripts/fetch-google-reviews.mjs
+
+      - name: Commit the refreshed JSON if it changed
+        run: |
+          git config user.name "EDUS Reviews Bot"
+          git config user.email "noreply@edustutor.com"
+          # Only commit if the file actually changed - prevents noise commits
+          # when Google returns identical reviews week-over-week.
+          if [[ -n "$(git status --porcelain data/google-reviews.json)" ]]; then
+            git add data/google-reviews.json
+            git commit -m "chore(reviews): refresh Google reviews snapshot"
+            git push
+          else
+            echo "No changes to data/google-reviews.json - skipping commit."
+          fi
