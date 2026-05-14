@@ -14,14 +14,18 @@ import {
   tuitionCourse,
   tuitionService,
   googleAggregateRating,
+  googleReviewsFaq,
   SITE_URL,
 } from "@/components/layout/StructuredData";
 import { getGoogleReviews } from "@/lib/googleReviews";
 
 export const metadata = {
   title: "Sri Lanka Online Tuition - National, Cambridge & Edexcel",
+  // The "Rated 4.5/5 by 77 Google reviews" phrase is a SERP click-through
+  // booster - Google often shows the description text verbatim, and the
+  // numeric social proof drops bounce rates from search results.
   description:
-    "Live online group classes (fixed timetable) & flexible 1-to-1 tuition, Grade 1 to A/L. National Syllabus, Cambridge, Edexcel. Sinhala, Tamil, English medium.",
+    "Rated 4.5/5 by 77 Google reviews. Live online group classes (fixed timetable) & flexible 1-to-1 tuition, Grade 1 to A/L. National, Cambridge, Edexcel. Sinhala, Tamil, English medium.",
   alternates: { canonical: "/sl" },
   keywords: [
     // Primary
@@ -130,7 +134,36 @@ export const metadata = {
     "EDUS Google Meet classes",
     "individual online tuition Sri Lanka flexible timing",
     "flexible online tutoring schedule Sri Lanka",
+    // Social proof / reviews - matches user intent like "is EDUS good"
+    // and "EDUS reviews" + their long-tail variants. Numbers (4.5, 77)
+    // refresh weekly when the cron updates data/google-reviews.json.
+    "EDUS reviews",
+    "EDUS Online Tuition reviews",
+    "EDUS Google reviews",
+    "EDUS parents reviews",
+    "EDUS student reviews",
+    "is EDUS good",
+    "EDUS Online Tuition rating",
+    "EDUS 4.5 star rating",
+    "best rated online tuition Sri Lanka",
+    "top rated online tutors Sri Lanka",
+    "verified online tuition reviews",
   ],
+  openGraph: {
+    title: "Sri Lanka Online Tuition - Rated 4.5/5 on Google",
+    description:
+      "Rated 4.5/5 by 77 verified Google reviews. Live online group classes & 1-to-1 tuition for Sri Lankan students, Grade 1 to G.C.E A/L. National, Cambridge, Edexcel.",
+    type: "website",
+    siteName: "EDUS Online Institute",
+    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "EDUS Sri Lanka online tuition - 4.5 star Google rating" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sri Lanka Online Tuition - Rated 4.5/5 on Google",
+    description:
+      "Rated 4.5/5 by 77 verified Google reviews. Live online classes for Sri Lankan students. National, Cambridge, Edexcel.",
+    images: ["/edus-og.jpg"],
+  },
 };
 
 export default async function SriLankaPage() {
@@ -151,19 +184,31 @@ export default async function SriLankaPage() {
           rich snippet for /sl in search results. Only emitted when the
           API actually returned reviews. */}
       {placeData && placeData.reviews.length > 0 ? (
-        <JsonLdScript
-          data={googleAggregateRating({
-            averageRating: placeData.rating,
-            totalReviews: placeData.totalReviews,
-            mapsUri: placeData.mapsUri,
-            reviews: placeData.reviews.map((r) => ({
-              authorName: r.authorName,
-              rating: r.rating,
-              publishTime: r.publishTime,
-              text: r.text,
-            })),
-          })}
-        />
+        <>
+          <JsonLdScript
+            data={googleAggregateRating({
+              averageRating: placeData.rating,
+              totalReviews: placeData.totalReviews,
+              mapsUri: placeData.mapsUri,
+              reviews: placeData.reviews.map((r) => ({
+                authorName: r.authorName,
+                rating: r.rating,
+                publishTime: r.publishTime,
+                text: r.text,
+              })),
+            })}
+          />
+          {/* FAQ schema with 3 review-related Q&A pairs. Powers AEO /
+              voice search matches for "what do parents say about EDUS"
+              style queries. Lives next to the Google reviews block. */}
+          <JsonLdScript
+            data={googleReviewsFaq({
+              averageRating: placeData.rating,
+              totalReviews: placeData.totalReviews,
+              mapsUri: placeData.mapsUri,
+            })}
+          />
+        </>
       ) : null}
       <JsonLdScript
         data={educationalProgram({

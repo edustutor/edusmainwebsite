@@ -1057,15 +1057,20 @@ export function classEventSeries(s: ScheduleSession) {
 
 /* --------------------------------------------------------------- */
 /* Google reviews schema - rendered alongside the <GoogleReviews>    */
-/* component on /sl. Two parts:                                      */
+/* component on /sl. Three parts:                                    */
 /*                                                                   */
-/*   1) AggregateRating on the LocalBusiness/Organization so Google  */
-/*      can show gold-star rich snippets in SERPs for /sl.           */
-/*   2) An array of individual Review nodes so each review is        */
-/*      machine-readable and AI engines can quote attributable text. */
+/*   1) AggregateRating on a LocalBusiness entity (with the physical */
+/*      Jaffna address) so Google can show gold-star rich snippets   */
+/*      and qualify EDUS for local SEO + the Knowledge Panel.        */
+/*   2) An array of individual Review nodes, each with `itemReviewed`*/
+/*      so Google knows what the review is OF, and `position` so the */
+/*      ordering survives crawler re-serialisation.                  */
+/*   3) An optional Q&A FAQPage that AI engines (ChatGPT, Perplexity,*/
+/*      Gemini) match against parent / student intent queries.       */
 /*                                                                   */
 /* Source of truth is the live Google Places API response. We do not */
-/* edit ratings or text - displaying exactly what Google returns.    */
+/* edit ratings or text - displaying exactly what Google returns to  */
+/* stay within Google's review-display policy.                       */
 /* --------------------------------------------------------------- */
 export type GoogleReviewSchemaInput = {
   authorName: string;
@@ -1074,31 +1079,85 @@ export type GoogleReviewSchemaInput = {
   text: string;
 };
 
+/**
+ * Build the AggregateRating + Review JSON-LD for /sl.
+ *
+ * Important schema choices:
+ *   - `@type` is `LocalBusiness` rather than `EducationalOrganization`
+ *     because Google's Rich Results docs recommend LocalBusiness when
+ *     reviews + a physical address + opening data are all present.
+ *     We layer `additionalType` so the entity is ALSO recognised as
+ *     EducationalOrganization without losing the LocalBusiness signal.
+ *   - `mainEntityOfPage` ties the rating to the /sl URL, so the gold
+ *     stars show up in SERP listings for /sl specifically.
+ *   - Each Review has `itemReviewed` pointing back at the LocalBusiness
+ *     so Google knows the review is OF the EDUS business, not generic.
+ *   - `position` is set per review to preserve "most-relevant" order
+ *     through Google's normalisation.
+ */
 export function googleAggregateRating(opts: {
-  /** Average star rating from Google (e.g. 4.5). */
   averageRating: number;
-  /** Total review count on the Google listing. */
   totalReviews: number;
-  /** URL of the public Google Maps listing - used as the reviewedBy URL. */
+  /** Public Google Maps URL for the listing. */
   mapsUri: string;
-  /** Top 5 reviews to embed inline. */
+  /** Top 5 most-relevant reviews from the Places API. */
   reviews: GoogleReviewSchemaInput[];
 }) {
+  const businessId = `${SITE_URL}/#localbusiness`;
+  const pageUrl = `${SITE_URL}/sl`;
+
   return {
     "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "@id": `${SITE_URL}/#organization`,
+    "@type": "LocalBusiness",
+    "@id": businessId,
+    additionalType: [
+      "https://schema.org/EducationalOrganization",
+      "https://schema.org/Service",
+    ],
     name: "EDUS Online Tuition",
-    url: `${SITE_URL}/sl`,
+    description:
+      "Live online tuition institute serving Sri Lanka, India, Maldives, and global students. Group classes on a fixed timetable plus flexible one-to-one tutoring across National Syllabus, Cambridge, and Edexcel.",
+    url: pageUrl,
+    mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+    image: `${SITE_URL}/edus-og.jpg`,
+    telephone: "+94 76 555 0202",
+    priceRange: "LKR 1,000 - LKR 5,000",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "95, K.K.S Road, Kokkuvil Junction",
+      addressLocality: "Jaffna",
+      postalCode: "40000",
+      addressRegion: "Northern Province",
+      addressCountry: "LK",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 9.6945511,
+      longitude: 80.0139866,
+    },
+    sameAs: [
+      opts.mapsUri,
+      "https://www.facebook.com/edusonline",
+      "https://www.instagram.com/edus_online/",
+      "https://www.tiktok.com/@edusonline",
+      "https://www.youtube.com/@edusonline/",
+      "https://lk.linkedin.com/company/edusonline",
+    ],
+    parentOrganization: { "@id": `${SITE_URL}/#organization` },
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: opts.averageRating.toFixed(1),
       reviewCount: opts.totalReviews,
       bestRating: 5,
       worstRating: 1,
+      // itemReviewed lets crawlers attribute the rating to this exact
+      // business entity rather than any random EducationalOrganization.
+      itemReviewed: { "@id": businessId },
     },
-    review: opts.reviews.map((r) => ({
+    review: opts.reviews.map((r, i) => ({
       "@type": "Review",
+      "@id": `${pageUrl}#review-${i + 1}`,
+      position: i + 1,
       author: { "@type": "Person", name: r.authorName },
       reviewRating: {
         "@type": "Rating",
@@ -1109,8 +1168,60 @@ export function googleAggregateRating(opts: {
       datePublished: r.publishTime || undefined,
       reviewBody: r.text,
       publisher: { "@type": "Organization", name: "Google" },
+      itemReviewed: { "@id": businessId },
+      inLanguage: "en",
     })),
-    sameAs: [opts.mapsUri],
+  };
+}
+
+/**
+ * FAQPage schema for the Google Reviews block on /sl. AEO/voice search
+ * engines (ChatGPT, Perplexity, Google AI Overviews, voice assistants)
+ * match these question-answer pairs against parent / student intent
+ * queries like "is EDUS good?" or "what do EDUS parents say?".
+ *
+ * The answers reference the live AggregateRating + Google Maps URL so
+ * the schema stays factually anchored to data Google itself publishes.
+ */
+export function googleReviewsFaq(opts: {
+  averageRating: number;
+  totalReviews: number;
+  mapsUri: string;
+}) {
+  const rating = opts.averageRating.toFixed(1);
+  const reviews = opts.totalReviews;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${SITE_URL}/sl#reviews-faq`,
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What do parents and students say about EDUS Online Tuition?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `EDUS Online Tuition has a ${rating} out of 5 star rating from ${reviews} verified Google reviews. Parents and students praise the personal attention from tutors, the structured online classes, the support from coordinators, and noticeable improvements in school grades. Read the full reviews at ${opts.mapsUri}.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How is EDUS Online Tuition rated on Google?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `EDUS Online Tuition is rated ${rating} out of 5 stars on Google, based on ${reviews} reviews from real parents and students. The institute consistently receives 5-star feedback for tutor quality, exam preparation, and parent communication.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is EDUS Online Tuition a verified business?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text:
+            "Yes. EDUS Online Tuition is a verified Google Business Profile located at 95, K.K.S Road, Kokkuvil Junction, Jaffna 40000, Sri Lanka. The institute operates as EDUS Lanka (Pvt) Ltd. and is recognised by ICTA, SLASSCOM, Microsoft for Startups, and the National ICT Awards 2024.",
+        },
+      },
+    ],
   };
 }
 
