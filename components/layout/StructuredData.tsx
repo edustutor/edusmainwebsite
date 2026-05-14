@@ -573,6 +573,7 @@ export function organizationReference() {
       "https://www.tiktok.com/@edusonline",
       "https://www.youtube.com/@edusonline/",
       "https://lk.linkedin.com/company/edusonline",
+      "https://www.crunchbase.com/organization/edus-lanka-pvt-ltd",
       "https://share.google/ZQO6DJ0yRrFXtOw1x",
       "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
     ],
@@ -1156,6 +1157,7 @@ export function googleAggregateRating(opts: {
       "https://www.tiktok.com/@edusonline",
       "https://www.youtube.com/@edusonline/",
       "https://lk.linkedin.com/company/edusonline",
+      "https://www.crunchbase.com/organization/edus-lanka-pvt-ltd",
     ],
     parentOrganization: { "@id": `${SITE_URL}/#organization` },
     aggregateRating: {

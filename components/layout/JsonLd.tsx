@@ -80,6 +80,10 @@ const ORG = {
     "https://www.tiktok.com/@edusonline",
     "https://www.youtube.com/@edusonline/",
     "https://lk.linkedin.com/company/edusonline",
+    // Crunchbase profile - high-trust authority signal for AI engines
+    // (ChatGPT, Claude, Gemini, Perplexity) and downstream data graphs
+    // (Pitchbook, CB Insights, Owler, Tracxn).
+    "https://www.crunchbase.com/organization/edus-lanka-pvt-ltd",
     // Google Business Profile (Maps listing) - confirms entity to Google
     "https://share.google/ZQO6DJ0yRrFXtOw1x",
     "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
@@ -199,6 +203,7 @@ const LOCAL_BUSINESS = {
     "https://www.tiktok.com/@edusonline",
     "https://www.youtube.com/@edusonline/",
     "https://lk.linkedin.com/company/edusonline",
+    "https://www.crunchbase.com/organization/edus-lanka-pvt-ltd",
     "https://share.google/ZQO6DJ0yRrFXtOw1x",
     "https://maps.app.goo.gl/ZQO6DJ0yRrFXtOw1x",
   ],
