@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import { Poppins, Open_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { MotionProvider } from "@/components/effects/Motion";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { Atmosphere } from "@/components/effects/Atmosphere";
-import { getCurrentHost, hreflangAlternates } from "@/lib/siteUrl";
+import {
+  getCurrentHost,
+  getCurrentAnalyticsIds,
+  hreflangAlternates,
+} from "@/lib/siteUrl";
 
 // Headings - Poppins. Friendly geometric sans, high recognition, optimised
 // for education and family-facing platforms.
@@ -244,7 +249,12 @@ export const viewport = {
   themeColor: "#F8FBFF",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Resolve which GA4 + GTM pair to fire for this request. .com group
+  // and .lk group have separate analytics properties so the dashboards
+  // stay segmented per audience.
+  const { ga4: ga4Id, gtm: gtmId } = await getCurrentAnalyticsIds();
+
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
       <head>
@@ -257,7 +267,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://signup.edustutor.com" />
         <link rel="dns-prefetch" href="https://wiki.edustutor.com" />
+        {/* Pre-warm the analytics origins so the Tag Manager + GA4
+            scripts (deferred) connect faster once they fire. */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
+      {/* GoogleTagManager renders the <script> in head + the <noscript>
+          iframe just inside body. We pass it the host-aware container ID.
+          @next/third-parties defers loading until after Next's hydration
+          so it has zero impact on First Contentful Paint. */}
+      <GoogleTagManager gtmId={gtmId} />
       <body className="text-[#102033] antialiased">
         <MotionProvider>
           <Atmosphere />
@@ -269,6 +288,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Vercel Web Analytics - page-view tracking. Lightweight, cookie-
             free, and respects DNT. Renders nothing in dev unless ?debug=true. */}
         <Analytics />
+        {/* GA4 - direct page-view + event reporting. Loaded after GTM via
+            next/script's `afterInteractive` strategy. The two stay
+            compatible because they target different properties. */}
+        <GoogleAnalytics gaId={ga4Id} />
       </body>
     </html>
   );

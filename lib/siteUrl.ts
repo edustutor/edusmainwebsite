@@ -154,3 +154,42 @@ export function allDomainUrls(path: string = "/"): string[] {
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
   return DOMAINS.map((d) => `https://${d.host}${cleanPath}`);
 }
+
+/**
+ * Per-domain Google Analytics 4 + Google Tag Manager IDs.
+ *
+ * Each domain group has its OWN GA4 property + GTM container so
+ * traffic on edustutor.com is reported separately from edus.lk /
+ * edus.edu.lk in the dashboards. The .lk pair groups both Sri Lankan
+ * domains because they serve the same audience.
+ *
+ * Returned from getCurrentAnalyticsIds() at request time so the right
+ * pair fires regardless of which domain the visitor lands on.
+ */
+type AnalyticsIds = {
+  /** GA4 Measurement ID, format G-XXXXXXXXXX. */
+  ga4: string;
+  /** GTM Container ID, format GTM-XXXXXXX. */
+  gtm: string;
+};
+
+const ANALYTICS_INTERNATIONAL: AnalyticsIds = {
+  ga4: "G-TDTGSZ3JKP",
+  gtm: "GTM-PRCZXRWT",
+};
+
+const ANALYTICS_SRI_LANKA: AnalyticsIds = {
+  ga4: "G-CR35WZ2QEY",
+  gtm: "GTM-564N63N7",
+};
+
+/**
+ * Resolve which (GA4, GTM) pair to fire for the inbound request. The
+ * .com group and the two .lk domains have distinct properties so the
+ * dashboards stay segmented.
+ */
+export async function getCurrentAnalyticsIds(): Promise<AnalyticsIds> {
+  const host = await getCurrentHost();
+  if (host.endsWith(".lk")) return ANALYTICS_SRI_LANKA;
+  return ANALYTICS_INTERNATIONAL;
+}
