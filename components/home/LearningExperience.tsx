@@ -199,11 +199,11 @@ function CenterCircle() {
       {/* Centerpiece - student / parent / tutor photo */}
       <div className="relative w-full h-full rounded-full overflow-hidden border-[6px] border-white shadow-[0_40px_90px_-30px_rgba(16,32,51,0.30)]">
         <Image
-          src="/edus-how-learning-works.png"
+          src="/edus-how-learning-works.webp"
           alt="EDUS online learning - student, parent, and tutor connected on a live class"
           fill
           sizes="(min-width: 1024px) 42vw, (min-width: 640px) 60vw, 80vw"
-          quality={95}
+          quality={85}
           priority={false}
           className="object-cover object-center"
         />

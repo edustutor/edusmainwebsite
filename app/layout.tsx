@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, Open_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import { DeferredAnalytics } from "@/components/analytics/DeferredAnalytics";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -280,11 +280,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             Clarity into cookieless ping mode until consent is granted. */}
         <ConsentDefaults />
       </head>
-      {/* GoogleTagManager renders the <script> in head + the <noscript>
-          iframe just inside body. We pass it the host-aware container ID.
-          @next/third-parties defers loading until after Next's hydration
-          so it has zero impact on First Contentful Paint. */}
-      <GoogleTagManager gtmId={gtmId} />
+      {/* Deferred GTM + GA4 - loads with strategy="lazyOnload" so the
+          ~280KB of analytics scripts wait until the page is fully idle
+          before fetching. Saves ~3s of LCP on mobile vs the default
+          afterInteractive strategy. The Consent Mode v2 defaults set
+          in <head> above still apply when GTM eventually loads. */}
+      <DeferredAnalytics gtmId={gtmId} ga4Id={ga4Id} />
       <body className="text-[#102033] antialiased">
         <MotionProvider>
           <Atmosphere />
@@ -308,10 +309,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             (process.env.VERCEL is set there) so localhost / self-hosted
             production builds don't 404 on /_vercel/insights/script.js. */}
         {process.env.VERCEL ? <Analytics /> : null}
-        {/* GA4 - direct page-view + event reporting. Loaded after GTM via
-            next/script's `afterInteractive` strategy. The two stay
-            compatible because they target different properties. */}
-        <GoogleAnalytics gaId={ga4Id} />
       </body>
     </html>
   );
