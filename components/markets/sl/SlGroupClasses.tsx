@@ -69,9 +69,12 @@ export function SlGroupClasses() {
             {/* Divider */}
             <div className="my-7 border-t border-[rgba(16,32,51,0.10)]" />
 
-            {/* 4 highlights row */}
+            {/* 4 highlights row - icon + title only. Numbered "01 / 02 /
+                03 / 04" badges removed per design feedback: the icon
+                already anchors each card, and the numbers were visually
+                noisy without adding hierarchy. */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6">
-              {GROUP_HIGHLIGHTS.map((h, i) => (
+              {GROUP_HIGHLIGHTS.map((h) => (
                 <div key={h.title}>
                   <div className="flex items-center gap-3">
                     <span
@@ -80,16 +83,7 @@ export function SlGroupClasses() {
                     >
                       <FeatureIcon name={h.icon} tint={h.tint} size={20} />
                     </span>
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="font-display font-700 text-[11px] tracking-[0.16em] uppercase"
-                        style={{ color: h.tint }}
-                      >
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="text-[10px] text-[#5A6A82]">-</span>
-                      <h3 className="heading text-[13.5px] leading-tight">{h.title}</h3>
-                    </div>
+                    <h3 className="heading text-[13.5px] leading-tight">{h.title}</h3>
                   </div>
                   <ul className="mt-3 space-y-1.5 text-[12px]">
                     {h.points.map((pt) => (
