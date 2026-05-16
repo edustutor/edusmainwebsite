@@ -1102,9 +1102,26 @@ export function galleryAlbumSchema(opts: GalleryAlbumSchemaOptions) {
           })),
         }
       : {}),
-    creator: { "@id": `${SITE_URL}/#organization` },
-    copyrightHolder: { "@id": `${SITE_URL}/#organization` },
+    // Google's Image Metadata validator requires `creator` to be a
+    // fully-typed entity (Organization or Person), not a bare @id
+    // reference. The general schema resolver accepts @id-only, but the
+    // Image rich result validator does not - it triggers "Invalid object
+    // type for field creator". Inline a typed Organization here and on
+    // every child ImageObject below.
+    creator: {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "EDUS Online Institute",
+      url: SITE_URL,
+    },
+    copyrightHolder: {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "EDUS Online Institute",
+      url: SITE_URL,
+    },
     copyrightYear: new Date(opts.datePublished).getFullYear(),
+    copyrightNotice: `© ${new Date(opts.datePublished).getFullYear()} EDUS Online Institute. All rights reserved.`,
     publisher: { "@id": `${SITE_URL}/#organization` },
     inLanguage: "en",
     isPartOf: { "@id": `${SITE_URL}/#website` },
@@ -1115,8 +1132,24 @@ export function galleryAlbumSchema(opts: GalleryAlbumSchemaOptions) {
       ...(p.caption ? { caption: p.caption, name: p.caption, description: p.caption } : {}),
       ...(p.width ? { width: p.width } : {}),
       ...(p.height ? { height: p.height } : {}),
-      creator: { "@id": `${SITE_URL}/#organization` },
-      copyrightHolder: { "@id": `${SITE_URL}/#organization` },
+      // Same typed-entity rule as the parent ImageGallery - bare @id
+      // pointers fail Google's Image Metadata validator. Inline the
+      // typed Organization here so each photo carries the full credit
+      // graph independently (some crawlers index ImageObjects in
+      // isolation when serving Google Images results).
+      creator: {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: "EDUS Online Institute",
+        url: SITE_URL,
+      },
+      copyrightHolder: {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: "EDUS Online Institute",
+        url: SITE_URL,
+      },
+      copyrightNotice: `© ${new Date(opts.datePublished).getFullYear()} EDUS Online Institute. All rights reserved.`,
       acquireLicensePage: `${SITE_URL}/contact`,
       creditText: "EDUS Online Institute",
       license: `${SITE_URL}/terms`,
