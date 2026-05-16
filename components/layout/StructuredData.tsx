@@ -1470,9 +1470,11 @@ export function classEventSeries(s: ScheduleSession) {
 /*   1) AggregateRating on a LocalBusiness entity (with the physical */
 /*      Jaffna address) so Google can show gold-star rich snippets   */
 /*      and qualify EDUS for local SEO + the Knowledge Panel.        */
-/*   2) An array of individual Review nodes, each with `itemReviewed`*/
-/*      so Google knows what the review is OF, and `position` so the */
-/*      ordering survives crawler re-serialisation.                  */
+/*   2) An array of individual Review nodes nested inside the         */
+/*      LocalBusiness's `review` field. The nesting itself tells       */
+/*      Google what each review is OF - we deliberately omit           */
+/*      `itemReviewed` on the child Reviews to avoid Google's          */
+/*      "directional conflict" warning.                                */
 /*   3) An optional Q&A FAQPage that AI engines (ChatGPT, Perplexity,*/
 /*      Gemini) match against parent / student intent queries.       */
 /*                                                                   */
@@ -1498,8 +1500,11 @@ export type GoogleReviewSchemaInput = {
  *     EducationalOrganization without losing the LocalBusiness signal.
  *   - `mainEntityOfPage` ties the rating to the /sl URL, so the gold
  *     stars show up in SERP listings for /sl specifically.
- *   - Each Review has `itemReviewed` pointing back at the LocalBusiness
- *     so Google knows the review is OF the EDUS business, not generic.
+ *   - `itemReviewed` lives ONLY on the AggregateRating - NOT on each
+ *     child Review. The Reviews are nested inside the LocalBusiness's
+ *     `review` field, so the parent-child relationship already tells
+ *     Google what each review is OF. Emitting `itemReviewed` on the
+ *     children triggers Google's "directional conflict" warning.
  *   - `position` is set per review to preserve "most-relevant" order
  *     through Google's normalisation.
  */
@@ -1559,6 +1564,16 @@ export function googleAggregateRating(opts: {
       // business entity rather than any random EducationalOrganization.
       itemReviewed: { "@id": businessId },
     },
+    // Each Review entity is nested inside this LocalBusiness's `review`
+    // array. Google's Review snippet validator therefore already knows
+    // these reviews are OF this business - it's the parent context that
+    // tells it so. Adding a redundant `itemReviewed: { @id: businessId }`
+    // on each child Review triggers Google's "directional conflict" warning
+    // ("A nested '<parent_node>' object can't contain the 'itemReviewed'
+    // field. Remove 'itemReviewed' to avoid directional conflict.") even
+    // though the @id pointed back at the parent. Only the AggregateRating
+    // above keeps `itemReviewed` - that's the canonical schema-sanctioned
+    // location for it.
     review: opts.reviews.map((r, i) => ({
       "@type": "Review",
       "@id": `${pageUrl}#review-${i + 1}`,
@@ -1573,7 +1588,6 @@ export function googleAggregateRating(opts: {
       datePublished: r.publishTime || undefined,
       reviewBody: r.text,
       publisher: { "@type": "Organization", name: "Google" },
-      itemReviewed: { "@id": businessId },
       inLanguage: "en",
     })),
   };
