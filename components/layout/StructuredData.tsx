@@ -1432,12 +1432,22 @@ export function edusVideoCarousel(videos: EdusVideo[]) {
 }
 
 /* --------------------------------------------------------------- */
-/* EventSeries - recurring online class entries for the SL          */
-/* timetable. One EventSeries per (class code + session). Google    */
+/* EducationEvent - recurring online class entries for the SL       */
+/* timetable. One EducationEvent per (class code + session). Google */
 /* uses this to surface class days/times directly in SERP for       */
 /* queries like "EDUS Grade 10 Maths timetable".                    */
 /*                                                                    */
 /* All times are local Sri Lanka time (Asia/Colombo, IST +05:30).    */
+/*                                                                    */
+/* Why @type is EducationEvent (not EventSeries):                    */
+/* Google's Event rich result validator only fully supports a        */
+/* specific allowlist of @type values - Event, EducationEvent,       */
+/* BusinessEvent, etc. EventSeries is a schema.org parent type that  */
+/* Google's validator does NOT recognise, so it silently drops       */
+/* required fields and reports them as "missing". Using              */
+/* EducationEvent (a Google-supported subtype) is both semantically  */
+/* correct (these ARE educational events) and structurally accepted. */
+/* The recurrence pattern still lives in `eventSchedule` underneath. */
 /* --------------------------------------------------------------- */
 export type ScheduleSession = {
   code: string;
@@ -1451,34 +1461,127 @@ export type ScheduleSession = {
   time: string; // verbatim, e.g. "7.30-8.30 PM"
 };
 
+/**
+ * Promote the verbatim timetable time string ("7.30-8.30 PM") to a
+ * pair of timezone-qualified ISO 8601 datetimes anchored to the next
+ * scheduled occurrence of the configured day. Google's Event validator
+ * requires both `startDate` and `endDate` at the top level, even when
+ * the event is part of a recurring schedule.
+ *
+ * Returns { startDate, endDate } in Asia/Colombo (+05:30).
+ *
+ * Pure best-effort: we anchor to the start of the 2026 academic year
+ * for date stability across crawls (Jan 5, 2026 is a Monday and the
+ * EDUS timetable confirmed launch date in llms-full.txt).
+ */
+function parseClassTime(day: string, time: string): {
+  startDate: string;
+  endDate: string;
+} {
+  // Map weekday names to anchor dates in the first week of 2026.
+  // Jan 5, 2026 is the Monday baseline; +N days for other weekdays.
+  const dayOffsets: Record<string, number> = {
+    Monday: 0, Tuesday: 1, Wednesday: 2, Thursday: 3,
+    Friday: 4, Saturday: 5, Sunday: 6,
+  };
+  const offset = dayOffsets[day] ?? 0;
+  const baseDate = new Date(Date.UTC(2026, 0, 5 + offset));
+  const ymd = baseDate.toISOString().split("T")[0]; // "2026-01-05"
+
+  // Parse "7.30-8.30 PM" or "9.00-10.00 AM" - tolerates dot or colon
+  // separators and case-insensitive AM/PM. Default to 18:00-19:00 if
+  // the string can't be parsed (defensive - keeps schema emission
+  // deterministic instead of throwing).
+  const m = time.match(/(\d{1,2})[.:](\d{2})\s*-\s*(\d{1,2})[.:](\d{2})\s*(AM|PM)?/i);
+  let startH = 18, startM = 0, endH = 19, endM = 0;
+  if (m) {
+    startH = parseInt(m[1], 10);
+    startM = parseInt(m[2], 10);
+    endH = parseInt(m[3], 10);
+    endM = parseInt(m[4], 10);
+    const ampm = (m[5] ?? "").toUpperCase();
+    if (ampm === "PM") {
+      if (startH < 12) startH += 12;
+      if (endH < 12) endH += 12;
+    }
+    // If end hour wraps past midnight (e.g. 11.30-12.30), normalise.
+    if (endH < startH) endH += 12;
+  }
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const startDate = `${ymd}T${pad(startH)}:${pad(startM)}:00${EDUS_TZ_OFFSET}`;
+  const endDate = `${ymd}T${pad(endH)}:${pad(endM)}:00${EDUS_TZ_OFFSET}`;
+  return { startDate, endDate };
+}
+
 export function classEventSeries(s: ScheduleSession) {
   const name = `${s.grade} ${s.subject} (${s.medium} medium) - EDUS Sri Lanka`;
+  const { startDate, endDate } = parseClassTime(s.day, s.time);
+  // Strip every non-digit from the fee string. Defaults to "0" if the
+  // input is malformed - prevents `price: ""` which fails Offer
+  // validation. Real timetable fees are e.g. "LKR 1,200" or "1200".
+  const priceNumeric = s.monthlyFee.replace(/[^\d]/g, "") || "0";
+
   return {
     "@context": "https://schema.org",
-    "@type": "EventSeries",
+    // EducationEvent (not EventSeries) - see comment block above.
+    "@type": "EducationEvent",
     name,
     description: `Recurring ${s.level} ${s.subject} live online class for ${s.grade} ${s.medium}-medium students. Conducted online by EDUS tutor ${s.tutor}.`,
+    // Top-level startDate + endDate required by Google's Event
+    // validator. The recurrence pattern lives in eventSchedule below;
+    // these dates anchor the first scheduled occurrence.
+    startDate,
+    endDate,
     eventSchedule: {
       "@type": "Schedule",
       repeatFrequency: "P1W",
       byDay: `https://schema.org/${s.day}`,
       scheduleTimezone: "Asia/Colombo",
+      startDate,
+      endDate,
     },
     eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
     eventStatus: "https://schema.org/EventScheduled",
+    // VirtualLocation gets a name + url. Google's Event validator
+    // accepts this shape for online-only events; the warning
+    // "Missing field address (in location)" was triggered by the
+    // earlier shape which used bare @type + url with no name. Adding
+    // `name` resolves the warning without bolting on a fake address
+    // for a class that has no physical venue.
     location: {
       "@type": "VirtualLocation",
+      name: "EDUS Online Tuition (Live class on Google Meet via EDUS App)",
       url: `${SITE_URL}/sl/timetable`,
     },
-    organizer: { "@id": `${SITE_URL}/#organization` },
+    // Fully inline organizer entity. Bare { "@id": ... } pointers fail
+    // Google's Event validator with "Missing field url (in organizer)"
+    // because @id resolution is deferred and the validator wants the
+    // organization URL available inline at validation time.
+    organizer: {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "EDUS Online Institute",
+      url: SITE_URL,
+    },
+    // Performer fully typed. Earlier shape used a Person with bare
+    // worksFor @id; Google's validator reported "Missing field
+    // performer" because the un-typed nested reference left the
+    // Person entity unresolvable. Inline the worksFor Organization
+    // here for full self-containment.
     performer: {
       "@type": "Person",
       name: s.tutor,
-      worksFor: { "@id": `${SITE_URL}/#organization` },
+      worksFor: {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: "EDUS Online Institute",
+        url: SITE_URL,
+      },
     },
+    // Offer needs a non-empty price string + a fully resolvable URL.
     offers: {
       "@type": "Offer",
-      price: s.monthlyFee.replace(/[^\d]/g, ""),
+      price: priceNumeric,
       priceCurrency: "LKR",
       availability: "https://schema.org/InStock",
       url: "https://signup.edustutor.com/",
