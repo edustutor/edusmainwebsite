@@ -15,7 +15,10 @@
  *
  * uploadDate is best-effort. Where the exact YouTube upload date isn't
  * scrapeable without the YouTube Data API, we fall back to a conservative
- * date that matches the channel's general publishing cadence.
+ * date that matches the channel's general publishing cadence. Bare
+ * YYYY-MM-DD is fine here - the videoObject() schema builder appends
+ * the EDUS timezone offset (Asia/Colombo, +05:30) before emitting JSON-LD
+ * so Google's VideoObject validator gets a fully ISO 8601 datetime.
  */
 
 import type { EdusVideo } from "@/components/layout/StructuredData";

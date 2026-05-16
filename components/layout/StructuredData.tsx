@@ -1305,10 +1305,45 @@ export type EdusVideo = {
   id: string; // YouTube video ID
   title: string;
   description: string;
-  uploadDate: string; // ISO YYYY-MM-DD - best-effort if known
+  /**
+   * Upload date. Accepts EITHER a date-only string (YYYY-MM-DD) for
+   * convenience, OR a full ISO 8601 datetime with timezone offset.
+   * The normaliser below promotes date-only inputs to full ISO 8601
+   * before they reach the JSON-LD payload (Google's VideoObject
+   * validator requires a timezone-qualified datetime; bare YYYY-MM-DD
+   * triggers "uploadDate is missing a timezone" in Search Console).
+   */
+  uploadDate: string;
 };
 
 const YT_CHANNEL_URL = "https://www.youtube.com/@edusonline";
+
+/**
+ * EDUS operates from Jaffna, Sri Lanka. Sri Lanka Standard Time is
+ * UTC+05:30 year-round (no DST). All uploadDate emissions get this
+ * timezone offset so the JSON-LD payload is fully ISO 8601 compliant.
+ */
+const EDUS_TZ_OFFSET = "+05:30";
+
+/**
+ * Promote a YouTube uploadDate input to an ISO 8601 datetime with
+ * timezone offset, which is what Google's VideoObject schema validator
+ * actually accepts.
+ *
+ *   "2024-06-01"                → "2024-06-01T00:00:00+05:30"
+ *   "2024-06-01T12:34:56Z"      → "2024-06-01T12:34:56Z"           (already valid)
+ *   "2024-06-01T12:34:56+05:30" → "2024-06-01T12:34:56+05:30"      (already valid)
+ *
+ * The "already valid" passthrough is detected by checking whether the
+ * input contains a time component ("T") - if it does, we trust the
+ * caller's tz handling and leave it alone.
+ */
+function normaliseUploadDate(input: string): string {
+  // If it already has a time component, it's full ISO 8601 - trust it.
+  if (input.includes("T")) return input;
+  // Date-only: anchor to start-of-day in Asia/Colombo (Sri Lanka).
+  return `${input}T00:00:00${EDUS_TZ_OFFSET}`;
+}
 
 export function videoObject(v: EdusVideo) {
   const watchUrl = `https://www.youtube.com/watch?v=${v.id}`;
@@ -1324,7 +1359,10 @@ export function videoObject(v: EdusVideo) {
     name: v.title,
     description: v.description,
     thumbnailUrl: [thumb, `https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`],
-    uploadDate: v.uploadDate,
+    // Always emit a timezone-qualified ISO 8601 datetime - bare
+    // YYYY-MM-DD strings fail Google's VideoObject validation with
+    // "Datetime property uploadDate is missing a timezone".
+    uploadDate: normaliseUploadDate(v.uploadDate),
     contentUrl: watchUrl,
     embedUrl,
     publisher: { "@id": `${SITE_URL}/#organization` },
