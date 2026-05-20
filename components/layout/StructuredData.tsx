@@ -883,13 +883,30 @@ export function successStoriesItemList(stories: StoryEntry[]) {
 /* JobPosting - used on the /teach page                              */
 /* --------------------------------------------------------------- */
 export function tutorJobPosting() {
+  // datePosted auto-refreshes on every render so the listing always
+  // looks current to Google. validThrough advances in lockstep -
+  // Google requires both for Job Pack rich result eligibility, and
+  // listings older than ~6 months get downranked. 90 days forward
+  // keeps the listing in the "fresh" window without claiming a fake
+  // expiration; if Tisankan / the academic team aren't actively
+  // hiring, just remove the JsonLdScript call from /teach.
+  const today = new Date();
+  const datePosted = today.toISOString().split("T")[0];
+  const validThrough = new Date(today.getTime() + 90 * 24 * 60 * 60 * 1000)
+    .toISOString()
+    .split("T")[0];
+
   return {
     "@context": "https://schema.org",
     "@type": "JobPosting",
     title: "Online Tutor - Cambridge, Edexcel, CBSE & National Syllabus",
     description:
       "Join EDUS as an online tutor. Teach students across Sri Lanka, India, Maldives, and global learners. Cambridge, Edexcel, IGCSE, O-Level, A-Level, CBSE, and National Syllabus subjects.",
-    datePosted: new Date().toISOString().split("T")[0],
+    datePosted,
+    // Required by Google's Job Pack rich result validator. Without
+    // validThrough, the listing fails coverage AND ages out of search
+    // results after ~30 days. 90-day rolling window keeps it visible.
+    validThrough,
     employmentType: ["PART_TIME", "CONTRACTOR"],
     hiringOrganization: {
       "@type": "Organization",
@@ -905,6 +922,23 @@ export function tutorJobPosting() {
       { "@type": "Country", name: "India" },
       { "@type": "Country", name: "Maldives" },
     ],
+    // baseSalary is required by Google's Job Pack validator. EDUS
+    // tutors earn a monthly take-home that varies with class load,
+    // grade level, and seniority. The published range is LKR 30,000
+    // (entry / part-time) to LKR 100,000 (senior tutors carrying a
+    // full timetable across multiple grades). Modelled as a MONTH
+    // QuantitativeValue so Google shows the realistic monthly figure
+    // in the Job Pack rich result instead of a per-hour estimate.
+    baseSalary: {
+      "@type": "MonetaryAmount",
+      currency: "LKR",
+      value: {
+        "@type": "QuantitativeValue",
+        minValue: 30000,
+        maxValue: 100000,
+        unitText: "MONTH",
+      },
+    },
     directApply: false,
     url: `${SITE_URL}/teach`,
   };

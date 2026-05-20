@@ -193,3 +193,39 @@ export async function getCurrentAnalyticsIds(): Promise<AnalyticsIds> {
   if (host.endsWith(".lk")) return ANALYTICS_SRI_LANKA;
   return ANALYTICS_INTERNATIONAL;
 }
+
+/**
+ * Per-domain Yandex Webmaster verification tokens.
+ *
+ * Each of the three apex domains is registered as a separate Yandex
+ * Webmaster property and gets its own verification token. The www
+ * variants share the apex token because Yandex treats www + apex as
+ * the same property once one is verified.
+ *
+ * Token source: Yandex Webmaster -> Settings -> Site verification
+ * -> Meta tag method. Update only if the property is re-verified.
+ *
+ * Returned from getCurrentYandexVerification() at request time so each
+ * domain serves its own token in the HTML head meta tag. Yandex will
+ * refuse to verify if the token returned doesn't match what's
+ * configured for that host in Webmaster.
+ */
+const YANDEX_VERIFICATION: Record<string, string> = {
+  "edustutor.com": "5b87e12bc0c8cb4c",
+  "www.edustutor.com": "5b87e12bc0c8cb4c",
+  "edus.lk": "b8027a872ecba530",
+  "www.edus.lk": "b8027a872ecba530",
+  "edus.edu.lk": "e136455d89035b5c",
+  "www.edus.edu.lk": "e136455d89035b5c",
+};
+
+/**
+ * Resolve the Yandex verification token for the inbound request's
+ * host. Returns `null` for unknown hosts (preview deployments, etc.)
+ * so callers can conditionally skip emitting the meta tag instead of
+ * serving the wrong domain's token.
+ */
+export async function getCurrentYandexVerification(): Promise<string | null> {
+  const host = await getCurrentHost();
+  return YANDEX_VERIFICATION[host] ?? null;
+}

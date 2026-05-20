@@ -1,5 +1,78 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "//": "Legacy AMP paths inherited from the previous WordPress edustutor.com",
+      "//1": "site (AMP for WP plugin auto-generated /?amp=1 + /amp/ variants of",
+      "//2": "every URL). Google still has these in its index and validates them",
+      "//3": "against the AMP spec - on a non-AMP Next.js site that triggers",
+      "//4": "'Disallowed attribute or attribute value present in HTML tag'. The",
+      "//5": "308 (permanent) redirect to the canonical equivalent tells Google to",
+      "//6": "drop the AMP entries and pass any legacy backlink equity to the new",
+      "//7": "URL. Order matters - more specific patterns first.",
+      "source": "/amp/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*/amp",
+      "destination": "/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*/amp/",
+      "destination": "/:path*",
+      "permanent": true
+    },
+    {
+      "//": "WordPress legacy URL patterns - admin paths, RSS feeds, attachment",
+      "//1": "pages, query-string variants. All redirected to apex so Google",
+      "//2": "drops them. Match the exact paths AMP for WP + WordPress emit.",
+      "source": "/wp-admin/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-login.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-includes/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/feed",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/feed/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/category/:path*",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/tag/:path*",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/author/:path*",
+      "destination": "/about",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

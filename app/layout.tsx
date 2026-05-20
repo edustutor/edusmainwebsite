@@ -11,9 +11,11 @@ import { Atmosphere } from "@/components/effects/Atmosphere";
 import { AnalyticsClickTracker } from "@/components/analytics/AnalyticsClickTracker";
 import { ConsentDefaults } from "@/components/analytics/ConsentDefaults";
 import { ConsentBanner } from "@/components/analytics/ConsentBanner";
+import { ServiceWorkerRegistrar } from "@/components/pwa/ServiceWorkerRegistrar";
 import {
   getCurrentHost,
   getCurrentAnalyticsIds,
+  getCurrentYandexVerification,
   hreflangAlternates,
 } from "@/lib/siteUrl";
 
@@ -59,6 +61,12 @@ const sans = Open_Sans({
 export async function generateMetadata(): Promise<Metadata> {
   const host = await getCurrentHost();
   const origin = `https://${host}`;
+  // Per-host Yandex Webmaster token. Resolves to the right token for
+  // the current apex (edustutor.com / edus.lk / edus.edu.lk) or null
+  // for preview deployments where no token is configured. Emitted via
+  // Metadata.verification.yandex below - Next renders that as a
+  // <meta name="yandex-verification"> tag in the page head.
+  const yandexToken = await getCurrentYandexVerification();
   return {
   title: {
     default: "EDUS - Live Online Tuition - Sri Lanka, India, Maldives",
@@ -217,6 +225,17 @@ export async function generateMetadata(): Promise<Metadata> {
       "max-snippet": -1,
     },
   },
+  // Search engine site verification tokens. Next renders these as
+  // <meta name="..."-verification" content="..." /> tags in <head>.
+  // - Yandex: per-apex token resolved from the inbound host (see
+  //   getCurrentYandexVerification in lib/siteUrl.ts). Each EDUS apex
+  //   is a distinct Yandex Webmaster property and requires its own
+  //   token; serving the wrong token causes verification to fail.
+  // - Google: handled via DNS TXT record (preferred for domain
+  //   properties) instead of the meta tag method, so not emitted here.
+  ...(yandexToken
+    ? { verification: { yandex: yandexToken } }
+    : {}),
   icons: {
     icon: [{ url: "/edus-favicon.webp", type: "image/webp" }],
     shortcut: ["/edus-favicon.webp"],
@@ -315,6 +334,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             (process.env.VERCEL is set there) so localhost / self-hosted
             production builds don't 404 on /_vercel/insights/script.js. */}
         {process.env.VERCEL ? <Analytics /> : null}
+        {/* Service worker registrar - unlocks PWA installability so
+            users see Chrome / Edge's "Install app" prompt and iOS /
+            iPadOS's "Add to Home Screen" badge. The worker itself
+            (public/sw.js) is intentionally minimal: it satisfies the
+            install criteria without intercepting any fetches, so
+            content freshness (Google Reviews, blog posts, prices)
+            is preserved with zero stale-cache risk. */}
+        <ServiceWorkerRegistrar />
       </body>
     </html>
   );
