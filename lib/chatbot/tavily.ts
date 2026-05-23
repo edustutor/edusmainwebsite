@@ -33,13 +33,17 @@ const EDUS_DOMAINS = [
   "edus.edu.lk",
 ];
 
-/** Maximum results to return to the LLM. More than 5 dilutes the
- *  signal; the model picks one or two to cite. */
-const MAX_RESULTS = 5;
+/** Maximum results to return to the LLM. 3 is plenty - the model picks
+ *  one or two to cite, anything more dilutes the signal AND adds tokens
+ *  to the round-2 prompt which slows down first-token latency on the
+ *  resumed stream. (Was 5 - dropped for speed.) */
+const MAX_RESULTS = 3;
 
-/** Tavily timeout. Default fetch has no timeout, so we set one
- *  explicitly to avoid hanging the streaming chat. */
-const TIMEOUT_MS = 8000;
+/** Tavily timeout. Aggressive on purpose: the user is staring at a
+ *  mid-stream pause while we run this fetch. A 4s ceiling means worst
+ *  case we fail fast and let the LLM honestly say "no results" instead
+ *  of holding the chat for 8 seconds. (Was 8000 - halved for speed.) */
+const TIMEOUT_MS = 4000;
 
 export type TavilyResult = {
   /** Page title from the HTML <title> or first H1. */

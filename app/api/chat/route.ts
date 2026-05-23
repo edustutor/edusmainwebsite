@@ -402,7 +402,12 @@ async function runRound(args: RunRoundArgs): Promise<RunRoundResult> {
     messages,
     temperature: 0.3,
     top_p: 0.9,
-    max_tokens: 800,
+    // 500 tokens (~375 words) is enough for the longest realistic reply
+    // (all-classes proforma listing with 6-8 cards + admission line +
+    // enrolment options). Was 800 - dropped to cut tail latency, since
+    // Llama 3.3 70B's streaming throughput is ~30 tok/s so 300 fewer
+    // tokens saves ~10s on the longest replies.
+    max_tokens: 500,
     stream: true,
   };
   if (tools) {
