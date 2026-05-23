@@ -380,12 +380,59 @@ export function ChatPanel({
   };
 
   /**
-   * Intake form submission handler. Stores the intake and immediately
-   * fires the first /api/chat call so the bot opens the conversation
-   * with a personalised greeting. No "Press enter to start" friction.
+   * Intake form submission handler. Stores the intake, fires the FIRST
+   * lead capture to the CRM (so EDUS sees every visitor who completes
+   * the form, even if they bounce before the bot recommends a class),
+   * and kicks off the chat with a personalised greeting.
+   *
+   * The lead is sent TWICE during a successful conversation:
+   *   1. Here on intake submit  -> stage=intake (name + phone + country +
+   *                                syllabus + grade + medium). Lands in
+   *                                CRM as soon as Start chat is clicked.
+   *   2. After bot recommendation -> stage=qualified (same fields PLUS
+   *                                subject + recommendedClassCode +
+   *                                notes from the chat). Lands later in
+   *                                the same /api/lead handler. The CRM
+   *                                team sees it as a follow-up enrichment
+   *                                on the original lead in their
+   *                                dashboard (Perfex de-dupes on phone).
+   *
+   * Why fire on intake instead of waiting for a class recommendation?
+   *   - Parents often complete the form, get distracted, and never
+   *     finish the conversation. Without the early POST those leads
+   *     would be lost to the CRM entirely.
+   *   - The chat flow keeps working exactly the same on top - the
+   *     second POST happens inside the streaming reply handler.
    */
   const handleIntakeSubmit = (next: IntakePayload) => {
     setIntake(next);
+    // Fire-and-forget the intake lead. We do this BEFORE kicking off
+    // the chat so the CRM call goes out even if the chat fails (slow
+    // network, NIM rate limit, etc.). Server-side /api/lead never
+    // returns 5xx so we don't surface errors to the parent.
+    const intakeLead: LeadPayload = {
+      name: next.name,
+      phone: next.phone,
+      country: next.country,
+      syllabus: next.syllabus,
+      grade: next.grade,
+      medium: next.medium,
+    };
+    // eslint-disable-next-line no-console
+    console.log(
+      "%c[EDUS chatbot] intake lead -> POST /api/lead",
+      "color:#2563EB;font-weight:700",
+      intakeLead,
+    );
+    fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(intakeLead),
+    }).catch((err) =>
+      // eslint-disable-next-line no-console
+      console.warn("[EDUS chatbot] /api/lead intake POST failure:", err),
+    );
+
     // Seed an opening user-style message that prompts the LLM to greet.
     // The LLM has the full intake in its system prompt context, so
     // it'll greet the parent by name + acknowledge the grade + ask the

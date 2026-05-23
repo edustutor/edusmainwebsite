@@ -175,15 +175,21 @@ export async function POST(req: Request) {
   // into description is the cleanest way to surface the context.
   const description = formatDescription(lead);
   const form = new URLSearchParams();
-  form.set("source", "EDUS Chatbot");
   // Mandatory defaults agreed with Tisankan / EDUS team:
+  //   source=1    - chatbot leads bucket (Perfex stores source as an
+  //                 integer ID, not a free-text label - sending the
+  //                 string "EDUS Chatbot" silently saved as source=0
+  //                 which got filtered out of most dashboard views).
   //   status=12   - the EDUS team's default "new chatbot lead" status
   //   assigned=1  - default lead owner inside Perfex
+  form.set("source", "14");
   form.set("status", "12");
   form.set("assigned", "1");
   form.set("name", lead.name);
   form.set("phonenumber", lead.phone);
-  form.set("country", lead.country);
+  // country in Perfex is an integer country ID too - sending a string
+  // name like "Sri Lanka" stored as country=0. The country name lives
+  // inside the description blob instead so it's always readable.
   form.set("description", description);
 
   console.log(`[lead] forwarding to CRM ${endpoint} ...`);
@@ -247,6 +253,10 @@ export async function POST(req: Request) {
  */
 function formatDescription(lead: LeadPayload): string {
   const lines: string[] = [];
+  // Country leads the description because Perfex stores it as an
+  // integer country_id - we send "" for that column and put the
+  // readable country name here instead.
+  lines.push(`Country: ${lead.country}`);
   lines.push(`Syllabus: ${lead.syllabus}`);
   lines.push(`Grade: ${lead.grade}`);
   lines.push(`Medium: ${lead.medium}`);
