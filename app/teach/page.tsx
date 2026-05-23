@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { TeachHero } from "@/components/teach/TeachHero";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
+import { hreflangAlternates } from "@/lib/siteUrl";
 import { TeachVision } from "@/components/teach/TeachVision";
 import { TeachStats } from "@/components/teach/TeachStats";
 import { TeachWhy } from "@/components/teach/TeachWhy";
@@ -28,7 +29,10 @@ export const metadata = {
   title: "Teach with EDUS - Online Tutor Jobs - SL, India, Maldives",
   description:
     "Become an EDUS online tutor and teach students across Sri Lanka, India, Maldives & globally. Apply now to join a quality-focused online learning platform.",
-  alternates: { canonical: "/teach" },
+  alternates: {
+    canonical: "/teach",
+    languages: hreflangAlternates("/teach"),
+  },
   keywords: [
     // Primary
     "online tutor jobs",

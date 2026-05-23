@@ -1,10 +1,14 @@
 import { JsonLdScript, breadcrumbList, speakableWebPage } from "@/components/layout/StructuredData";
+import { hreflangAlternates } from "@/lib/siteUrl";
 
 export const metadata = {
   title: "Safeguarding Policy - EDUS Lanka (PVT) Ltd.",
   description:
     "EDUS Online Tuition is committed to safeguarding the welfare of every child and young person using our online learning services across Sri Lanka, India, Maldives, and globally.",
-  alternates: { canonical: "/safeguarding" },
+  alternates: {
+    canonical: "/safeguarding",
+    languages: hreflangAlternates("/safeguarding"),
+  },
 };
 
 const LAST_UPDATED = "March 11, 2025";

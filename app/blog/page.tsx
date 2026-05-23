@@ -6,13 +6,17 @@ import {
   speakableWebPage,
 } from "@/components/layout/StructuredData";
 import { PUBLISHED_POSTS } from "@/components/blog/BlogData";
+import { hreflangAlternates } from "@/lib/siteUrl";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 
 export const metadata = {
   title: "EDUS Blog - Online Tuition Guides, Exam Prep & Parent Advice",
   description:
     "Learning guides, exam prep tips, and parent advice from the EDUS Academic Team. Covering Sri Lanka, India CBSE, Maldives Cambridge, and global online tutoring.",
-  alternates: { canonical: "/blog" },
+  alternates: {
+    canonical: "/blog",
+    languages: hreflangAlternates("/blog"),
+  },
   keywords: [
     "EDUS blog",
     "online tuition blog",

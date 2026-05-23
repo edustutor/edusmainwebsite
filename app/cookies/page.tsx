@@ -1,10 +1,14 @@
 import { JsonLdScript, breadcrumbList, speakableWebPage } from "@/components/layout/StructuredData";
+import { hreflangAlternates } from "@/lib/siteUrl";
 
 export const metadata = {
   title: "Cookie Policy - EDUS Lanka (PVT) Ltd.",
   description:
     "How EDUS Online Tuition uses cookies and similar tracking technologies across our website and applications, including the categories of cookies we use and how to manage them.",
-  alternates: { canonical: "/cookies" },
+  alternates: {
+    canonical: "/cookies",
+    languages: hreflangAlternates("/cookies"),
+  },
 };
 
 const LAST_UPDATED = "March 11, 2025";

@@ -8,6 +8,7 @@ import {
   SITE_URL,
 } from "@/components/layout/StructuredData";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
+import { hreflangAlternates } from "@/lib/siteUrl";
 
 /**
  * About EDUS - built only from verified facts present in llms-full.txt and
@@ -19,7 +20,10 @@ export const metadata = {
   title: "About EDUS - Online Tuition Institute - Sri Lanka - Since 2021",
   description:
     "About EDUS Lanka (Pvt) Ltd - quality-assured online learning platform founded 2021 in Jaffna. 7,000+ students across Sri Lanka, India, Maldives & global.",
-  alternates: { canonical: "/about" },
+  alternates: {
+    canonical: "/about",
+    languages: hreflangAlternates("/about"),
+  },
   keywords: [
     "about EDUS",
     "EDUS Lanka",

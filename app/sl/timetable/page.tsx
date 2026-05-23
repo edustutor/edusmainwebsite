@@ -11,12 +11,16 @@ import {
 } from "@/components/layout/StructuredData";
 import { TIMETABLE, CONDUCT_RULES } from "@/components/markets/sl/TimetableData";
 import { SlTimetableView } from "@/components/markets/sl/SlTimetableView";
+import { hreflangAlternates } from "@/lib/siteUrl";
 
 export const metadata = {
   title: "Time Table for Group Classes in Sri Lanka 2026 - EDUS",
   description:
     "EDUS Sri Lanka 2026 group class timetable. Grade 3 to G.C.E A/L live online classes in Tamil and English medium. Tutors, days, times, fees, admission info.",
-  alternates: { canonical: "/sl/timetable" },
+  alternates: {
+    canonical: "/sl/timetable",
+    languages: hreflangAlternates("/sl/timetable"),
+  },
   keywords: [
     "EDUS timetable",
     "EDUS Sri Lanka timetable",

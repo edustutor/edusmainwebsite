@@ -4,12 +4,16 @@ import {
   speakableWebPage,
   merchantReturnPolicy,
 } from "@/components/layout/StructuredData";
+import { hreflangAlternates } from "@/lib/siteUrl";
 
 export const metadata = {
   title: "Refund Policy - EDUS Lanka (PVT) Ltd.",
   description:
     "EDUS Online Tuition refund policy: eligibility, request process, non-refundable services, EDUS-initiated cancellations, and technical issue handling.",
-  alternates: { canonical: "/refunds" },
+  alternates: {
+    canonical: "/refunds",
+    languages: hreflangAlternates("/refunds"),
+  },
 };
 
 const LAST_UPDATED = "April 3, 2024";

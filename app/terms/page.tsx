@@ -1,10 +1,14 @@
 import { JsonLdScript, breadcrumbList, speakableWebPage } from "@/components/layout/StructuredData";
+import { hreflangAlternates } from "@/lib/siteUrl";
 
 export const metadata = {
   title: "Terms & Conditions - EDUS Lanka (PVT) Ltd.",
   description:
     "The terms and conditions that govern your use of EDUS Online services, including registration, fees, refunds, intellectual property, liability, and governing law.",
-  alternates: { canonical: "/terms" },
+  alternates: {
+    canonical: "/terms",
+    languages: hreflangAlternates("/terms"),
+  },
 };
 
 const LAST_UPDATED = "March 11, 2025";

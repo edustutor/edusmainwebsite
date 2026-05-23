@@ -1,5 +1,6 @@
 import { MvHero } from "@/components/markets/mv/MvHero";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
+import { hreflangAlternates } from "@/lib/siteUrl";
 import { MvWhy } from "@/components/markets/mv/MvWhy";
 import { MvSubjects } from "@/components/markets/mv/MvSubjects";
 import { MvLearningFlow } from "@/components/markets/mv/MvLearningFlow";
@@ -24,7 +25,10 @@ export const metadata = {
   title: "Cambridge IGCSE & O-Level Online Classes - Maldives - EDUS",
   description:
     "Premium 1-to-1 Cambridge IGCSE & O-Level online classes for Maldives students. Maths, English, Biology, Chemistry, Physics with expert EDUS tutors.",
-  alternates: { canonical: "/mv" },
+  alternates: {
+    canonical: "/mv",
+    languages: hreflangAlternates("/mv"),
+  },
   keywords: [
     // Primary
     "Cambridge IGCSE online classes Maldives",

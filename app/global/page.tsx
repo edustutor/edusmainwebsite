@@ -1,5 +1,6 @@
 import { GlHero } from "@/components/markets/global/GlHero";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
+import { hreflangAlternates } from "@/lib/siteUrl";
 import { GlIntro } from "@/components/markets/global/GlIntro";
 import { GlPromise } from "@/components/markets/global/GlPromise";
 import { GlCurricula } from "@/components/markets/global/GlCurricula";
@@ -29,7 +30,10 @@ export const metadata = {
   title: "Global Online Tutoring - Cambridge, Edexcel, IGCSE - EDUS",
   description:
     "Personalised one-to-one online tutoring for international students. Cambridge, Edexcel, IGCSE, GCSE, O-Level, A-Level & any syllabus, worldwide.",
-  alternates: { canonical: "/global" },
+  alternates: {
+    canonical: "/global",
+    languages: hreflangAlternates("/global"),
+  },
   keywords: [
     // Primary
     "global online tutoring",

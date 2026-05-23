@@ -1,10 +1,14 @@
 import { JsonLdScript, breadcrumbList, speakableWebPage } from "@/components/layout/StructuredData";
+import { hreflangAlternates } from "@/lib/siteUrl";
 
 export const metadata = {
   title: "Acceptable Use Policy - EDUS Lanka (PVT) Ltd.",
   description:
     "The Acceptable Use Policy that governs how students, parents, tutors, and visitors may use the EDUS website, mobile applications, and online learning services.",
-  alternates: { canonical: "/acceptable-use" },
+  alternates: {
+    canonical: "/acceptable-use",
+    languages: hreflangAlternates("/acceptable-use"),
+  },
 };
 
 const LAST_UPDATED = "March 11, 2025";

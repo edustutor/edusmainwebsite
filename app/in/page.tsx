@@ -6,6 +6,7 @@ import { InAcademicStructure } from "@/components/markets/in/InAcademicStructure
 import { InPricing } from "@/components/markets/in/InPricing";
 import { InFAQ } from "@/components/markets/in/InFAQ";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
+import { hreflangAlternates } from "@/lib/siteUrl";
 import {
   JsonLdScript,
   breadcrumbList,
@@ -20,7 +21,10 @@ export const metadata = {
   title: "India Online Tuition - CBSE Classes 6-10 - Tamil Nadu",
   description:
     "Premium structured online CBSE tuition for Classes 6-10 in English medium. Mathematics, Science, and English with monthly parent reports and exam analytics.",
-  alternates: { canonical: "/in" },
+  alternates: {
+    canonical: "/in",
+    languages: hreflangAlternates("/in"),
+  },
   keywords: [
     // Primary
     "CBSE online tuition for Classes 6 to 10",

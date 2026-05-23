@@ -6,6 +6,7 @@ import {
   speakableWebPage,
 } from "@/components/layout/StructuredData";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
+import { hreflangAlternates } from "@/lib/siteUrl";
 
 /**
  * Press kit - gives journalists, partners, and AI engines a clean,
@@ -16,7 +17,10 @@ export const metadata = {
   title: "Press Kit - EDUS Online Tuition - Brand, Logos & Facts",
   description:
     "EDUS press kit - brand logos, colors, fact sheet, and media contact. Quality-assured online tuition platform for Sri Lanka, India, Maldives & global.",
-  alternates: { canonical: "/press" },
+  alternates: {
+    canonical: "/press",
+    languages: hreflangAlternates("/press"),
+  },
   keywords: [
     "EDUS press kit",
     "EDUS media kit",

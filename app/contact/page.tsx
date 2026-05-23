@@ -4,12 +4,16 @@ import { ContactHero } from "@/components/contact/ContactHero";
 import { ContactCountries } from "@/components/contact/ContactCountries";
 import { ContactMap } from "@/components/contact/ContactMap";
 import { ContactCTA } from "@/components/contact/ContactCTA";
+import { hreflangAlternates } from "@/lib/siteUrl";
 
 export const metadata = {
   title: "Contact EDUS - Online Classes, Admissions & Student Support",
   description:
     "Contact EDUS for online classes, admissions, 1-to-1 tutoring, group classes & student support. Sri Lanka, India, Maldives & global learning inquiries welcome.",
-  alternates: { canonical: "/contact" },
+  alternates: {
+    canonical: "/contact",
+    languages: hreflangAlternates("/contact"),
+  },
   keywords: [
     "contact EDUS",
     "EDUS contact",

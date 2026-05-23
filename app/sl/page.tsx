@@ -19,6 +19,7 @@ import {
   SITE_URL,
 } from "@/components/layout/StructuredData";
 import { getGoogleReviews } from "@/lib/googleReviews";
+import { hreflangAlternates } from "@/lib/siteUrl";
 
 export const metadata = {
   title: "Sri Lanka Online Tuition - National, Cambridge & Edexcel",
@@ -27,7 +28,10 @@ export const metadata = {
   // numeric social proof drops bounce rates from search results.
   description:
     "Rated 4.5/5 by 77 Google reviews. Live online group classes (fixed timetable) & flexible 1-to-1 tuition, Grade 1 to A/L. National, Cambridge, Edexcel. Sinhala, Tamil, English medium.",
-  alternates: { canonical: "/sl" },
+  alternates: {
+    canonical: "/sl",
+    languages: hreflangAlternates("/sl"),
+  },
   keywords: [
     // Primary
     "online tuition Sri Lanka",

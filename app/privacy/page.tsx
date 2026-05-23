@@ -1,10 +1,14 @@
 import { JsonLdScript, breadcrumbList, speakableWebPage } from "@/components/layout/StructuredData";
+import { hreflangAlternates } from "@/lib/siteUrl";
 
 export const metadata = {
   title: "Privacy Policy - EDUS Lanka (PVT) Ltd.",
   description:
     "How EDUS Online Tuition collects, uses, retains, and protects information from students, parents, teachers, and administrators across our website, mobile apps, and online learning services.",
-  alternates: { canonical: "/privacy" },
+  alternates: {
+    canonical: "/privacy",
+    languages: hreflangAlternates("/privacy"),
+  },
 };
 
 const LAST_UPDATED = "March 11, 2025";
