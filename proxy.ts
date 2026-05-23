@@ -1,7 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 /**
- * Edge middleware - runs before every request reaches the Next route.
+ * Edge proxy - runs before every request reaches the Next route.
+ *
+ * Renamed from `middleware` to `proxy` per Next.js 16 file-convention
+ * migration (https://nextjs.org/docs/messages/middleware-to-proxy).
+ * Same runtime behaviour; the rename is purely cosmetic so the Express
+ * "middleware" overload stops confusing readers.
  *
  * Sole job today: when a visitor lands on the ROOT of a Sri Lanka domain
  * (edus.lk, www.edus.lk, edus.edu.lk, www.edus.edu.lk), redirect them
@@ -18,9 +23,9 @@ import { NextResponse, type NextRequest } from "next/server";
  * 308 (permanent) - so Google transfers any equity that hit the .lk
  * apex over to the /sl page and stops indexing the root entirely.
  *
- * Why a middleware and not vercel.json redirects? vercel.json `redirects`
+ * Why a proxy and not vercel.json redirects? vercel.json `redirects`
  * does match on `has: [{ type: "host", value: "..." }]` but the same-host
- * redirect target must be hardcoded per rule. Middleware reads the inbound
+ * redirect target must be hardcoded per rule. The proxy reads the inbound
  * host once and reuses it - cleaner and easier to extend.
  */
 
@@ -32,7 +37,7 @@ const SRI_LANKA_HOSTS = new Set([
   "www.edus.edu.lk",
 ]);
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   // We only ever act on the root path. The matcher below already filters
   // for "/" but checking explicitly here keeps the function defensive in
   // case the matcher gets relaxed in future.
@@ -50,7 +55,7 @@ export function middleware(req: NextRequest) {
 }
 
 /**
- * Matcher = which routes the middleware runs for. We only need it on the
+ * Matcher = which routes the proxy runs for. We only need it on the
  * homepage. Everything else (assets, /sl, /blog, etc.) bypasses the edge
  * entirely so there's zero overhead for the rest of the site.
  */

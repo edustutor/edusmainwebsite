@@ -12,6 +12,7 @@ import { AnalyticsClickTracker } from "@/components/analytics/AnalyticsClickTrac
 import { ConsentDefaults } from "@/components/analytics/ConsentDefaults";
 import { ConsentBanner } from "@/components/analytics/ConsentBanner";
 import { ServiceWorkerRegistrar } from "@/components/pwa/ServiceWorkerRegistrar";
+import { ChatBotMount } from "@/components/chatbot/ChatBotMount";
 import {
   getCurrentHost,
   getCurrentAnalyticsIds,
@@ -305,13 +306,20 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             Clarity into cookieless ping mode until consent is granted. */}
         <ConsentDefaults />
       </head>
-      {/* Deferred GTM + GA4 - loads with strategy="lazyOnload" so the
-          ~280KB of analytics scripts wait until the page is fully idle
-          before fetching. Saves ~3s of LCP on mobile vs the default
-          afterInteractive strategy. The Consent Mode v2 defaults set
-          in <head> above still apply when GTM eventually loads. */}
-      <DeferredAnalytics gtmId={gtmId} ga4Id={ga4Id} />
       <body className="text-[#102033] antialiased">
+        {/* Deferred GTM + GA4 - loads with strategy="lazyOnload" so the
+            ~280KB of analytics scripts wait until the page is fully idle
+            before fetching. Saves ~3s of LCP on mobile vs the default
+            afterInteractive strategy. The Consent Mode v2 defaults set
+            in <head> above still apply when GTM eventually loads.
+
+            Mounted INSIDE <body> (not directly under <html>) because the
+            component renders a <noscript> fallback, and React 19's
+            hydrator rejects <noscript> as a direct child of <html> with
+            a hydration error. Next.js's <Script> components route
+            themselves to <head> regardless of where they're rendered in
+            JSX, so the lazyOnload behaviour is unaffected. */}
+        <DeferredAnalytics gtmId={gtmId} ga4Id={ga4Id} />
         <MotionProvider>
           <Atmosphere />
           <ScrollProgress />
@@ -342,6 +350,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             content freshness (Google Reviews, blog posts, prices)
             is preserved with zero stale-cache risk. */}
         <ServiceWorkerRegistrar />
+        {/* EDUS admissions chatbot - floating button + panel on every
+            page. ChatBotMount is a thin client wrapper that
+            dynamically imports the actual ChatBot with ssr: false -
+            keeping the chat bundle off the initial HTML/LCP path.
+            (Next 16 forbids ssr: false in Server Components, hence the
+            wrapper.) Conversation history lives in component state only
+            (never localStorage) so we don't risk leaking parent PII to
+            anyone who shares the device. */}
+        <ChatBotMount />
       </body>
     </html>
   );
