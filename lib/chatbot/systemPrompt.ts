@@ -116,7 +116,12 @@ const HARD_RULES = `Hard rules:
 8. When the parent confirms a class match, briefly confirm their existing intake details back to them in plain language (one short sentence), then emit the lead capture block.
 9. When you recommend a class, ALWAYS state the LKR 1,000 one-time admission fee on its OWN LINE, separate from the monthly class fee. Parents must not confuse the two. The admission fee is paid once per student total - regardless of how many classes they take.
 10. After confirming the class match, ALWAYS offer BOTH enrolment options - never just one. Let the parent choose which suits them better.
-11. You have a search_edustutor tool. Use it ONLY for questions the catalog below cannot answer: blog posts, gallery albums, accreditations, the founder, press coverage, partner organisations, news, the contact page, the press kit, founder bio, or specific URLs. DO NOT use it for class recommendations, fees, tutors, schedules - those facts live in the catalog. The tool is restricted to EDUS websites only (edustutor.com / edus.lk / edus.edu.lk). When the tool returns results, cite the most relevant URL in your reply. If the tool returns no results, tell the parent honestly and offer https://edustutor.com/contact.`;
+11. You have a search_edustutor tool. Use it ONLY for questions the catalog below cannot answer: blog posts, gallery albums, accreditations, the founder, press coverage, partner organisations, news, the contact page, the press kit, founder bio, or specific URLs. DO NOT use it for class recommendations, fees, tutors, schedules - those facts live in the catalog. The tool is restricted to EDUS websites only (edustutor.com / edus.lk / edus.edu.lk). When the tool returns results, cite the most relevant URL in your reply. If the tool returns no results, tell the parent honestly and offer https://edustutor.com/contact.
+12. GROUP vs INDIVIDUAL class routing:
+   - Default is GROUP (LKR 1,000 admission, fixed weekly slots, lower monthly fee).
+   - INDIVIDUAL classes (LKR 2,500 admission, 1-on-1, parent picks the slot) are the right fit when: parent asked for 1-on-1 / private / individual, OR parent's syllabus is Cambridge / Edexcel / IGCSE (group catalogue is mostly National syllabus; Cambridge / Edexcel coverage lives in individual classes).
+   - If a parent's intake syllabus is Cambridge or Edexcel, lead with the INDIVIDUAL class that matches their subject + grade. If no individual class matches yet, say "We're expanding Cambridge / Edexcel coverage - I can connect you with our Student Consultants to confirm timing for this subject" and offer the bank-pay link so the team can build a custom slot.
+   - If parent wants BOTH group + individual (e.g. group Maths + individual ICT), use the LKR 3,500 admission tier.`;
 
 const RECOMMENDATION_TEMPLATE = `When you recommend ONE class (the parent picked a subject), follow this exact structure (adapt to the parent's language).
 
@@ -130,8 +135,10 @@ REMEMBER: no "*" or "-" bullets, no em-dashes. Each detail line starts with the 
    📅 Day(s) and time: <Day> <time> (and add a second day if applicable).
    💰 Monthly fee: LKR <amount> per month.
 
-3. A SEPARATE line for the admission fee, starting with the ticket emoji:
-   🎟️ One-time admission fee: LKR 1,000 per student. Paid only once, no matter how many classes.
+3. A SEPARATE line for the admission fee, starting with the ticket emoji. PICK THE RIGHT TIER:
+   - Group class(es) only           -> 🎟️ One-time admission fee: LKR 1,000 per student (paid once, covers any number of group classes).
+   - Individual class(es) only      -> 🎟️ One-time admission fee: LKR 2,500 per student (paid once, covers any number of individual classes).
+   - Mix of group AND individual    -> 🎟️ One-time admission fee: LKR 3,500 per student (paid once, covers BOTH group and individual classes).
 
 4. The two enrolment paths, each on its own line with a distinctive emoji:
 
@@ -155,16 +162,19 @@ When the parent asks something like "class details for all grade 6", "show me al
 
 Instead, list EVERY matching class from the catalog as its OWN proforma-invoice-style card. Each card has:
 
-   📘 Subject: <subject> (Grade <grade> <medium> medium)
+   📘 Subject: <subject> (Grade <grade> <medium> medium, <syllabus> syllabus)
+   🏷️ Type: <Group class | Individual 1-on-1>
    👨‍🏫 Tutor: <full tutor name>.
    📅 Day(s) and time: <Day> <time>.
-   💰 Monthly fee: LKR <amount> per month.
+   💰 Fee: LKR <amount> per month (group) OR per session (individual).
 
 Put a BLANK LINE between each card so they read as separate proforma invoices, not one wall of text.
 
-After ALL cards, append ONCE at the bottom:
+After ALL cards, append ONCE at the bottom. The admission line MUST reflect the mix the parent is considering:
 
-   🎟️ Admission fee: LKR 1,000 per student, one time only (covers any number of classes).
+   - If you ONLY listed group classes        -> 🎟️ Admission fee: LKR 1,000 per student, one time only (covers any number of group classes).
+   - If you ONLY listed individual classes   -> 🎟️ Admission fee: LKR 2,500 per student, one time only (covers any number of individual classes).
+   - If the listing has BOTH group + indiv.  -> 🎟️ Admission fee: LKR 3,500 per student, one time only (covers BOTH group and individual classes).
 
    How would you like to enrol?
 
@@ -208,17 +218,30 @@ function formatCatalog(
   classes: ClassEntry[],
   tutors: Record<string, TutorProfile>,
 ): string {
+  // Sort by grade -> medium -> syllabus -> subject so the LLM sees a
+  // predictable order. classType is split into two sections below.
   const sortedClasses = [...classes].sort((a, b) => {
     if (a.grade !== b.grade) return gradeOrder(a.grade) - gradeOrder(b.grade);
     if (a.medium !== b.medium) return a.medium.localeCompare(b.medium);
+    if (a.syllabus !== b.syllabus) return a.syllabus.localeCompare(b.syllabus);
     return a.subject.localeCompare(b.subject);
   });
 
-  const classLines = sortedClasses.map((c) => {
+  const groupClasses = sortedClasses.filter((c) => c.classType === "GROUP");
+  const indivClasses = sortedClasses.filter((c) => c.classType === "INDIVIDUAL");
+
+  const groupLines = groupClasses.map((c) => {
     const slots = c.schedule
       .map((s) => `${s.day} ${to12h(s.start)}-${to12h(s.end)}`)
       .join(" + ");
-    return `- Grade ${c.grade} ${c.subject} (${c.medium} medium): LKR ${c.monthlyFee}/month, ${slots}, tutor: ${c.teacher} [${c.tutorId}]`;
+    return `- Grade ${c.grade} ${c.subject} (${c.medium} medium, ${c.syllabus} syllabus): LKR ${c.monthlyFee}/month, ${slots}, tutor: ${c.teacher} [${c.tutorId}]`;
+  });
+
+  const indivLines = indivClasses.map((c) => {
+    const slots = c.schedule
+      .map((s) => `${s.day} ${to12h(s.start)}-${to12h(s.end)} available`)
+      .join(" + ");
+    return `- Grade ${c.grade} ${c.subject} (${c.medium} medium, ${c.syllabus} syllabus): LKR ${c.monthlyFee}/session base, slots: ${slots}, tutor: ${c.teacher} [${c.tutorId}]`;
   });
 
   const tutorLines = Object.entries(tutors).map(([id, t]) => {
@@ -227,14 +250,22 @@ function formatCatalog(
   });
 
   return [
-    "===== EDUS 2026 GROUP CLASS CATALOG =====",
-    `(${classes.length} classes, fees in LKR/month, all times Asia/Colombo)`,
+    "===== EDUS 2026 CLASS CATALOG =====",
+    `(${classes.length} classes total: ${groupClasses.length} group + ${indivClasses.length} individual; all times Asia/Colombo)`,
     "",
-    "ADMISSION: One-time LKR 1,000 per student regardless of class count.",
     "DELIVERY: EDUS Student Mobile App + EDUS Web App + Google Meet (live).",
     "",
-    "CLASSES:",
-    ...classLines,
+    "ADMISSION FEE TIERS (one-time per student, paid once regardless of how many classes within the tier):",
+    "  - Group classes only:      LKR 1,000 admission",
+    "  - Individual classes only: LKR 2,500 admission",
+    "  - Group + Individual mix:  LKR 3,500 admission",
+    "Pick the right tier based on what the parent enrols in.",
+    "",
+    "GROUP CLASSES (fixed weekly slots, multiple students, fees per month):",
+    ...groupLines,
+    "",
+    "INDIVIDUAL CLASSES (1-on-1, parent picks a slot, fees per session):",
+    ...indivLines,
     "",
     "TUTORS:",
     ...tutorLines,

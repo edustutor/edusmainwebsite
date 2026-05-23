@@ -1,140 +1,1713 @@
 {
-  "_meta": {
-    "source": "EDUS Online Institute - Timetable - 2026 (PDF, 2026-05)",
-    "lastUpdatedISO": "2026-05-23",
-    "currency": "LKR",
-    "deliveryPlatform": "EDUS Student Mobile App + EDUS Web App + Google Meet",
-    "admissionFee": {
-      "amount": 1000,
-      "currency": "LKR",
-      "oneTime": true,
-      "note": "One-time per student regardless of class count"
-    },
-    "studentCode": [
-      "Proper Internet and Device to study",
-      "Must turn on video unless culturally impossible",
-      "Sitting for exams + completing assignments and homework is mandatory",
-      "Should respond to tutor queries during class",
-      "Regular attendance required; 3+ continuous absences = removal",
-      "Classes conducted only via EDUS Tutor Mobile/Web App and Google Meet"
-    ]
-  },
   "classes": [
-    { "classCode": "GT3Tamil",      "grade": "3",   "subject": "Tamil",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Rajamanohary",       "tutorId": "EDT159", "schedule": [{ "day": "TUE", "start": "19:30", "end": "20:30" }] },
-    { "classCode": "GT3Env",        "grade": "3",   "subject": "Environment",   "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Rajamanohary",       "tutorId": "EDT159", "schedule": [{ "day": "WED", "start": "19:30", "end": "20:30" }] },
-    { "classCode": "GT3Maths",      "grade": "3",   "subject": "Maths",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Rajamanohary",       "tutorId": "EDT159", "schedule": [{ "day": "FRI", "start": "19:30", "end": "20:30" }] },
-    { "classCode": "GT3English",    "grade": "3",   "subject": "English",       "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Fathima Nihadha",    "tutorId": "EDT241", "schedule": [{ "day": "TUE", "start": "17:00", "end": "18:00" }, { "day": "SAT", "start": "19:30", "end": "20:30" }] },
-    { "classCode": "GT3IQ",         "grade": "3",   "subject": "IQ",            "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Mathiruban",         "tutorId": "EDT204", "schedule": [{ "day": "WED", "start": "18:15", "end": "19:15" }, { "day": "FRI", "start": "18:15", "end": "19:15" }] },
-
-    { "classCode": "GT4Tamil",      "grade": "4",   "subject": "Tamil",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Kajani Puvanraj",    "tutorId": "EDT239", "schedule": [{ "day": "TUE", "start": "19:30", "end": "20:30" }] },
-    { "classCode": "GT4Env",        "grade": "4",   "subject": "Environment",   "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Kajani Puvanraj",    "tutorId": "EDT239", "schedule": [{ "day": "THU", "start": "19:30", "end": "20:30" }] },
-    { "classCode": "GT4Maths",      "grade": "4",   "subject": "Maths",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Kajani Puvanraj",    "tutorId": "EDT239", "schedule": [{ "day": "FRI", "start": "19:30", "end": "20:30" }] },
-    { "classCode": "GT4English",    "grade": "4",   "subject": "English",       "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Fathima Nihadha",    "tutorId": "EDT241", "schedule": [{ "day": "WED", "start": "19:30", "end": "20:30" }, { "day": "FRI", "start": "19:30", "end": "20:30" }] },
-    { "classCode": "GT4IQ",         "grade": "4",   "subject": "IQ",            "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Mathiruban",         "tutorId": "EDT204", "schedule": [{ "day": "MON", "start": "18:30", "end": "19:30" }, { "day": "SAT", "start": "18:30", "end": "19:30" }] },
-
-    { "classCode": "GT5Tamil",      "grade": "5",   "subject": "Tamil",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Rajamanohary",       "tutorId": "EDT159", "schedule": [{ "day": "MON", "start": "19:30", "end": "20:30" }] },
-    { "classCode": "GT5Env",        "grade": "5",   "subject": "Environment",   "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Rajamanohary",       "tutorId": "EDT159", "schedule": [{ "day": "THU", "start": "19:30", "end": "20:30" }] },
-    { "classCode": "GT5Maths",      "grade": "5",   "subject": "Maths",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Rajamanohary",       "tutorId": "EDT159", "schedule": [{ "day": "SAT", "start": "19:30", "end": "20:30" }] },
-    { "classCode": "GT5English",    "grade": "5",   "subject": "English",       "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Fathima Nihadha",    "tutorId": "EDT241", "schedule": [{ "day": "WED", "start": "18:15", "end": "19:15" }, { "day": "THU", "start": "18:15", "end": "19:15" }] },
-    { "classCode": "GT5IQ",         "grade": "5",   "subject": "IQ",            "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Mathiruban",         "tutorId": "EDT204", "schedule": [{ "day": "MON", "start": "18:30", "end": "19:30" }, { "day": "SAT", "start": "18:30", "end": "19:30" }] },
-    { "classCode": "GE5SpokenEnglish", "grade": "5", "subject": "Spoken English","medium": "English", "monthlyFee": 1500, "teacher": "Farhana Hanifa",     "tutorId": "EDT234", "schedule": [{ "day": "TUE", "start": "18:00", "end": "19:00" }, { "day": "FRI", "start": "18:00", "end": "19:00" }] },
-
-    { "classCode": "GT6Tamil",      "grade": "6",   "subject": "Tamil",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Shabna",             "tutorId": "EDT059", "schedule": [{ "day": "TUE", "start": "20:00", "end": "21:00" }, { "day": "WED", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GT6English",    "grade": "6",   "subject": "English",       "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Afnaa",              "tutorId": "EDT220", "schedule": [{ "day": "WED", "start": "20:00", "end": "21:00" }, { "day": "THU", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GT6History",    "grade": "6",   "subject": "History",       "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Lukshana",           "tutorId": "EDT189", "schedule": [{ "day": "MON", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GT6Maths",      "grade": "6",   "subject": "Maths",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Sarmily",            "tutorId": "EDT173", "schedule": [{ "day": "THU", "start": "18:45", "end": "19:45" }, { "day": "SAT", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GT6Science",    "grade": "6",   "subject": "Science",       "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Sarmily",            "tutorId": "EDT173", "schedule": [{ "day": "TUE", "start": "18:45", "end": "19:45" }, { "day": "FRI", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GT6ICT",        "grade": "6",   "subject": "ICT",           "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Sarmily",            "tutorId": "EDT173", "schedule": [{ "day": "MON", "start": "18:45", "end": "19:45" }] },
-
-    { "classCode": "GE6Tamil",      "grade": "6",   "subject": "Tamil",         "medium": "English", "monthlyFee": 1000, "teacher": "Shabna",             "tutorId": "EDT059", "schedule": [{ "day": "TUE", "start": "20:00", "end": "21:00" }, { "day": "WED", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE6English",    "grade": "6",   "subject": "English",       "medium": "English", "monthlyFee": 1000, "teacher": "Afnaa",              "tutorId": "EDT220", "schedule": [{ "day": "WED", "start": "20:00", "end": "21:00" }, { "day": "THU", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GE6History",    "grade": "6",   "subject": "History",       "medium": "English", "monthlyFee": 1000, "teacher": "Lukshana",           "tutorId": "EDT189", "schedule": [{ "day": "MON", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GE6Maths",      "grade": "6",   "subject": "Maths",         "medium": "English", "monthlyFee": 1000, "teacher": "Shovenja",           "tutorId": "EDT240", "schedule": [{ "day": "MON", "start": "18:45", "end": "19:45" }, { "day": "FRI", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GE6Science",    "grade": "6",   "subject": "Science",       "medium": "English", "monthlyFee": 1000, "teacher": "Vithursika",         "tutorId": "EDT211", "schedule": [{ "day": "TUE", "start": "19:00", "end": "20:00" }, { "day": "SAT", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GE6ICT",        "grade": "6",   "subject": "ICT",           "medium": "English", "monthlyFee": 1000, "teacher": "Vithurshan",         "tutorId": "EDT157", "schedule": [{ "day": "SAT", "start": "18:45", "end": "19:45" }] },
-
-    { "classCode": "GT7Tamil",      "grade": "7",   "subject": "Tamil",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Yathurshini",        "tutorId": "EDT219", "schedule": [{ "day": "WED", "start": "20:00", "end": "21:00" }, { "day": "THU", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GT7English",    "grade": "7",   "subject": "English",       "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Nazath Amaniya",     "tutorId": "EDT171", "schedule": [{ "day": "THU", "start": "18:45", "end": "19:45" }, { "day": "FRI", "start": "18:30", "end": "19:30" }] },
-    { "classCode": "GT7History",    "grade": "7",   "subject": "History",       "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Lukshana",           "tutorId": "EDT189", "schedule": [{ "day": "FRI", "start": "20:00", "end": "21:00" }, { "day": "SAT", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GT7Maths",      "grade": "7",   "subject": "Maths",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Suventhiran",        "tutorId": "EDT237", "schedule": [{ "day": "MON", "start": "20:00", "end": "21:00" }, { "day": "TUE", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GT7Science",    "grade": "7",   "subject": "Science",       "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Suthakaran",         "tutorId": "EDT107", "schedule": [{ "day": "TUE", "start": "20:00", "end": "21:00" }, { "day": "SAT", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GT7ICT",        "grade": "7",   "subject": "ICT",           "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Sarmily",            "tutorId": "EDT173", "schedule": [{ "day": "WED", "start": "18:45", "end": "19:45" }] },
-
-    { "classCode": "GE7Tamil",      "grade": "7",   "subject": "Tamil",         "medium": "English", "monthlyFee": 1000, "teacher": "Yathurshini",        "tutorId": "EDT219", "schedule": [{ "day": "WED", "start": "20:00", "end": "21:00" }, { "day": "THU", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GE7English",    "grade": "7",   "subject": "English",       "medium": "English", "monthlyFee": 1000, "teacher": "Nazath Amaniya",     "tutorId": "EDT171", "schedule": [{ "day": "THU", "start": "18:45", "end": "19:45" }, { "day": "FRI", "start": "18:30", "end": "19:30" }] },
-    { "classCode": "GE7History",    "grade": "7",   "subject": "History",       "medium": "English", "monthlyFee": 1000, "teacher": "Lukshana",           "tutorId": "EDT189", "schedule": [{ "day": "FRI", "start": "20:00", "end": "21:00" }, { "day": "SAT", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GE7Maths",      "grade": "7",   "subject": "Maths",         "medium": "English", "monthlyFee": 1000, "teacher": "Uthayatharshini",    "tutorId": "EDT212", "schedule": [{ "day": "MON", "start": "20:00", "end": "21:00" }, { "day": "TUE", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE7Science",    "grade": "7",   "subject": "Science",       "medium": "English", "monthlyFee": 1000, "teacher": "Vithursika",         "tutorId": "EDT211", "schedule": [{ "day": "TUE", "start": "20:00", "end": "21:00" }, { "day": "WED", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE7ICT",        "grade": "7",   "subject": "ICT",           "medium": "English", "monthlyFee": 1000, "teacher": "Abdul Razzak",       "tutorId": "EDT170", "schedule": [{ "day": "SAT", "start": "19:00", "end": "20:00" }] },
-
-    { "classCode": "GT8Tamil",      "grade": "8",   "subject": "Tamil",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Kajananthini",       "tutorId": "EDT102", "schedule": [{ "day": "THU", "start": "20:00", "end": "21:00" }, { "day": "FRI", "start": "18:30", "end": "19:30" }] },
-    { "classCode": "GT8English",    "grade": "8",   "subject": "English",       "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Afnaan",             "tutorId": "EDT220", "schedule": [{ "day": "TUE", "start": "18:45", "end": "19:45" }, { "day": "FRI", "start": "19:30", "end": "20:30" }] },
-    { "classCode": "GT8History",    "grade": "8",   "subject": "History",       "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Jenil Jeyanthan",    "tutorId": "EDT125", "schedule": [{ "day": "MON", "start": "18:45", "end": "19:45" }, { "day": "SAT", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GT8Maths",      "grade": "8",   "subject": "Maths",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Suganjan Senthilkumaran", "tutorId": "EDT254", "schedule": [{ "day": "TUE", "start": "20:00", "end": "21:00" }, { "day": "WED", "start": "19:00", "end": "20:00" }] },
-    { "classCode": "GT8Science",    "grade": "8",   "subject": "Science",       "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Suthakaran",         "tutorId": "EDT107", "schedule": [{ "day": "WED", "start": "20:00", "end": "21:00" }, { "day": "THU", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GT8ICT",        "grade": "8",   "subject": "ICT",           "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Vithurshan",         "tutorId": "EDT157", "schedule": [{ "day": "MON", "start": "20:00", "end": "21:00" }] },
-
-    { "classCode": "GE8Tamil",      "grade": "8",   "subject": "Tamil",         "medium": "English", "monthlyFee": 1000, "teacher": "Kajananthini",       "tutorId": "EDT102", "schedule": [{ "day": "THU", "start": "20:00", "end": "21:00" }, { "day": "FRI", "start": "18:30", "end": "19:30" }] },
-    { "classCode": "GE8English",    "grade": "8",   "subject": "English",       "medium": "English", "monthlyFee": 1000, "teacher": "Afnaan",             "tutorId": "EDT220", "schedule": [{ "day": "TUE", "start": "18:45", "end": "19:45" }, { "day": "FRI", "start": "19:30", "end": "20:30" }] },
-    { "classCode": "GE8History",    "grade": "8",   "subject": "History",       "medium": "English", "monthlyFee": 1000, "teacher": "Jenil Jeyanthan",    "tutorId": "EDT125", "schedule": [{ "day": "MON", "start": "18:45", "end": "19:45" }, { "day": "SAT", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GE8Maths",      "grade": "8",   "subject": "Maths",         "medium": "English", "monthlyFee": 1000, "teacher": "Abinaya",            "tutorId": "EDT244", "schedule": [{ "day": "TUE", "start": "20:00", "end": "21:00" }, { "day": "WED", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE8Science",    "grade": "8",   "subject": "Science",       "medium": "English", "monthlyFee": 1000, "teacher": "Vithursika",         "tutorId": "EDT211", "schedule": [{ "day": "WED", "start": "20:00", "end": "21:00" }, { "day": "THU", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE8ICT",        "grade": "8",   "subject": "ICT",           "medium": "English", "monthlyFee": 1000, "teacher": "Fathima Farha",      "tutorId": "EDT168", "schedule": [{ "day": "MON", "start": "20:00", "end": "21:00" }] },
-
-    { "classCode": "GT9Tamil",      "grade": "9",   "subject": "Tamil",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Kajananthiny",       "tutorId": "EDT102", "schedule": [{ "day": "FRI", "start": "20:00", "end": "21:00" }, { "day": "SAT", "start": "19:00", "end": "20:00" }] },
-    { "classCode": "GT9English",    "grade": "9",   "subject": "English",       "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Afnaan",             "tutorId": "EDT220", "schedule": [{ "day": "MON", "start": "19:00", "end": "20:00" }, { "day": "WED", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GT9History",    "grade": "9",   "subject": "History",       "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Jenil Jeyanthan",    "tutorId": "EDT125", "schedule": [{ "day": "MON", "start": "20:00", "end": "21:00" }, { "day": "TUE", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GT9Maths",      "grade": "9",   "subject": "Maths",         "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Shovenjab",          "tutorId": "EDT240", "schedule": [{ "day": "WED", "start": "20:00", "end": "21:00" }, { "day": "THU", "start": "19:00", "end": "20:00" }] },
-    { "classCode": "GT9Science",    "grade": "9",   "subject": "Science",       "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Suthakaran",         "tutorId": "EDT107", "schedule": [{ "day": "THU", "start": "20:15", "end": "21:15" }, { "day": "FRI", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GT9ICT",        "grade": "9",   "subject": "ICT",           "medium": "Tamil",   "monthlyFee": 1000, "teacher": "Vithurshan",         "tutorId": "EDT157", "schedule": [{ "day": "TUE", "start": "20:00", "end": "21:00" }] },
-
-    { "classCode": "GE9Tamil",      "grade": "9",   "subject": "Tamil",         "medium": "English", "monthlyFee": 1000, "teacher": "Kajananthiny",       "tutorId": "EDT102", "schedule": [{ "day": "FRI", "start": "20:00", "end": "21:00" }, { "day": "SAT", "start": "19:00", "end": "20:00" }] },
-    { "classCode": "GE9English",    "grade": "9",   "subject": "English",       "medium": "English", "monthlyFee": 1000, "teacher": "Afnaan",             "tutorId": "EDT220", "schedule": [{ "day": "MON", "start": "19:00", "end": "20:00" }, { "day": "WED", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE9History",    "grade": "9",   "subject": "History",       "medium": "English", "monthlyFee": 1000, "teacher": "Jenil Jeyanthan",    "tutorId": "EDT125", "schedule": [{ "day": "MON", "start": "20:00", "end": "21:00" }, { "day": "TUE", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE9Maths",      "grade": "9",   "subject": "Maths",         "medium": "English", "monthlyFee": 1000, "teacher": "Uthayatharshini",    "tutorId": "EDT212", "schedule": [{ "day": "WED", "start": "20:00", "end": "21:00" }, { "day": "THU", "start": "19:00", "end": "20:00" }] },
-    { "classCode": "GE9Science",    "grade": "9",   "subject": "Science",       "medium": "English", "monthlyFee": 1000, "teacher": "Mayoory",            "tutorId": "EDT169", "schedule": [{ "day": "THU", "start": "20:15", "end": "21:15" }, { "day": "FRI", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE9ICT",        "grade": "9",   "subject": "ICT",           "medium": "English", "monthlyFee": 1000, "teacher": "Uthayatharshini",    "tutorId": "EDT212", "schedule": [{ "day": "TUE", "start": "20:00", "end": "21:00" }] },
-
-    { "classCode": "GT10Tamil",     "grade": "10",  "subject": "Tamil",         "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Niththi",            "tutorId": "EDT148", "schedule": [{ "day": "TUE", "start": "21:00", "end": "22:00" }, { "day": "SUN", "start": "19:00", "end": "20:00" }] },
-    { "classCode": "GT10English",   "grade": "10",  "subject": "English",       "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Sumeerjitha",        "tutorId": "EDT113", "schedule": [{ "day": "MON", "start": "20:15", "end": "21:15" }, { "day": "TUE", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GT10History",   "grade": "10",  "subject": "History",       "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Jenil Jeyanthan",    "tutorId": "EDT125", "schedule": [{ "day": "TUE", "start": "20:00", "end": "21:00" }, { "day": "WED", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GT10Maths",     "grade": "10",  "subject": "Maths",         "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Suganjan Senthilkumaran", "tutorId": "EDT254", "schedule": [{ "day": "MON", "start": "19:00", "end": "20:00" }, { "day": "THU", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GT10Science",   "grade": "10",  "subject": "Science",       "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Suthakaran",         "tutorId": "EDT107", "schedule": [{ "day": "WED", "start": "21:00", "end": "22:00" }, { "day": "FRI", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GT10ICT",       "grade": "10",  "subject": "ICT",           "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Suganjan Senthilkumaran", "tutorId": "EDT254", "schedule": [{ "day": "WED", "start": "20:00", "end": "21:00" }, { "day": "SAT", "start": "21:00", "end": "22:00" }] },
-
-    { "classCode": "GE10Tamil",     "grade": "10",  "subject": "Tamil",         "medium": "English", "monthlyFee": 1200, "teacher": "Niththi",            "tutorId": "EDT148", "schedule": [{ "day": "TUE", "start": "21:00", "end": "22:00" }, { "day": "SUN", "start": "19:00", "end": "20:00" }] },
-    { "classCode": "GE10English",   "grade": "10",  "subject": "English",       "medium": "English", "monthlyFee": 1200, "teacher": "Sumeerjitha",        "tutorId": "EDT113", "schedule": [{ "day": "MON", "start": "20:15", "end": "21:15" }, { "day": "TUE", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE10History",   "grade": "10",  "subject": "History",       "medium": "English", "monthlyFee": 1200, "teacher": "Jenil Jeyanthan",    "tutorId": "EDT125", "schedule": [{ "day": "TUE", "start": "20:00", "end": "21:00" }, { "day": "WED", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE10Maths",     "grade": "10",  "subject": "Maths",         "medium": "English", "monthlyFee": 1200, "teacher": "Uthayatharshini",    "tutorId": "EDT212", "schedule": [{ "day": "FRI", "start": "19:00", "end": "20:00" }, { "day": "SAT", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE10Science",   "grade": "10",  "subject": "Science",       "medium": "English", "monthlyFee": 1200, "teacher": "Mayoory",            "tutorId": "EDT169", "schedule": [{ "day": "WED", "start": "21:00", "end": "22:00" }, { "day": "THU", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE10ICT",       "grade": "10",  "subject": "ICT",           "medium": "English", "monthlyFee": 1200, "teacher": "Abdul Razzak",       "tutorId": "EDT170", "schedule": [{ "day": "WED", "start": "20:00", "end": "21:00" }, { "day": "SAT", "start": "20:00", "end": "21:00" }] },
-
-    { "classCode": "GT11Tamil",     "grade": "11",  "subject": "Tamil",         "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Niththi",            "tutorId": "EDT148", "schedule": [{ "day": "THU", "start": "20:30", "end": "21:30" }, { "day": "FRI", "start": "21:00", "end": "22:00" }] },
-    { "classCode": "GT11English",   "grade": "11",  "subject": "English",       "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Sumeerjitha",        "tutorId": "EDT113", "schedule": [{ "day": "TUE", "start": "20:00", "end": "21:00" }, { "day": "WED", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GT11History",   "grade": "11",  "subject": "History",       "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Jenil Jeyanthan",    "tutorId": "EDT125", "schedule": [{ "day": "WED", "start": "20:00", "end": "21:00" }, { "day": "THU", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GT11Maths",     "grade": "11",  "subject": "Maths",         "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Ainkaran",           "tutorId": "EDT198", "schedule": [{ "day": "MON", "start": "20:00", "end": "21:00" }, { "day": "SAT", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GT11Science",   "grade": "11",  "subject": "Science",       "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Suthakaran",         "tutorId": "EDT107", "schedule": [{ "day": "MON", "start": "18:45", "end": "19:45" }, { "day": "SAT", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GT11ICT",       "grade": "11",  "subject": "ICT",           "medium": "Tamil",   "monthlyFee": 1200, "teacher": "Suganjan Senthilkumaran", "tutorId": "EDT254", "schedule": [{ "day": "TUE", "start": "21:00", "end": "22:00" }, { "day": "WED", "start": "21:00", "end": "22:00" }] },
-
-    { "classCode": "GE11Tamil",     "grade": "11",  "subject": "Tamil",         "medium": "English", "monthlyFee": 1200, "teacher": "Niththi",            "tutorId": "EDT148", "schedule": [{ "day": "THU", "start": "20:30", "end": "21:30" }, { "day": "FRI", "start": "21:00", "end": "22:00" }] },
-    { "classCode": "GE11English",   "grade": "11",  "subject": "English",       "medium": "English", "monthlyFee": 1200, "teacher": "Sumeerjitha",        "tutorId": "EDT113", "schedule": [{ "day": "TUE", "start": "20:00", "end": "21:00" }, { "day": "WED", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE11History",   "grade": "11",  "subject": "History",       "medium": "English", "monthlyFee": 1200, "teacher": "Jenil Jeyanthan",    "tutorId": "EDT125", "schedule": [{ "day": "WED", "start": "20:00", "end": "21:00" }, { "day": "THU", "start": "18:45", "end": "19:45" }] },
-    { "classCode": "GE11Maths",     "grade": "11",  "subject": "Maths",         "medium": "English", "monthlyFee": 1200, "teacher": "Uthayatharshini",    "tutorId": "EDT212", "schedule": [{ "day": "MON", "start": "21:00", "end": "22:00" }, { "day": "WED", "start": "21:00", "end": "22:00" }] },
-    { "classCode": "GE11Science",   "grade": "11",  "subject": "Science",       "medium": "English", "monthlyFee": 1200, "teacher": "Mayoory",            "tutorId": "EDT169", "schedule": [{ "day": "TUE", "start": "18:45", "end": "19:45" }, { "day": "FRI", "start": "20:00", "end": "21:00" }] },
-    { "classCode": "GE11ICT",       "grade": "11",  "subject": "ICT",           "medium": "English", "monthlyFee": 1200, "teacher": "Sajeth",             "tutorId": "EDT243", "schedule": [{ "day": "MON", "start": "20:00", "end": "21:00" }, { "day": "SAT", "start": "20:00", "end": "21:00" }] },
-
-    { "classCode": "GT26Physics(R)","grade": "A/L 2026","subject": "Physics",     "medium": "Tamil",   "monthlyFee": 2500, "teacher": "A. Kabilthas",       "tutorId": "EDT250", "schedule": [{ "day": "MON", "start": "19:30", "end": "21:00" }, { "day": "WED", "start": "19:30", "end": "21:00" }] },
-
-    { "classCode": "GT27Maths",     "grade": "A/L 2027","subject": "Combined Maths","medium": "Tamil",  "monthlyFee": 2500, "teacher": "Muhthaseem",         "tutorId": "EDT206", "schedule": [{ "day": "TUE", "start": "19:00", "end": "21:00" }, { "day": "THU", "start": "19:00", "end": "21:00" }] },
-    { "classCode": "GT27Physics",   "grade": "A/L 2027","subject": "Physics",      "medium": "Tamil",  "monthlyFee": 2500, "teacher": "Jeyasuthan",         "tutorId": "EDT096", "schedule": [{ "day": "MON", "start": "19:00", "end": "20:30" }, { "day": "FRI", "start": "19:00", "end": "20:30" }] },
-    { "classCode": "GT27ICT",       "grade": "A/L 2027","subject": "ICT",          "medium": "Tamil",  "monthlyFee": 2500, "teacher": "Sajeth",             "tutorId": "EDT243", "schedule": [{ "day": "WED", "start": "20:30", "end": "22:00" }, { "day": "FRI", "start": "20:30", "end": "22:00" }] },
-
-    { "classCode": "GT28CMaths235", "grade": "A/L 2028","subject": "Combined Maths","medium": "Tamil",  "monthlyFee": 2500, "teacher": "V. Ranjithkumara",   "tutorId": "EDT235", "schedule": [{ "day": "MON", "start": "19:00", "end": "20:30" }, { "day": "WED", "start": "20:30", "end": "22:00" }] },
-    { "classCode": "GT28ICT243",    "grade": "A/L 2028","subject": "ICT",          "medium": "Tamil",  "monthlyFee": 2500, "teacher": "Sajeth",             "tutorId": "EDT243", "schedule": [{ "day": "THU", "start": "20:30", "end": "21:30" }, { "day": "SAT", "start": "19:00", "end": "20:00" }] },
-    { "classCode": "GT28CPhysics096","grade":"A/L 2028","subject": "Physics",      "medium": "Tamil",  "monthlyFee": 2500, "teacher": "A. Jeyasuthan",      "tutorId": "EDT096", "schedule": [{ "day": "TUE", "start": "19:00", "end": "20:30" }, { "day": "THU", "start": "19:00", "end": "20:30" }] },
-    { "classCode": "GT28CPhysics250","grade":"A/L 2028","subject": "Physics",      "medium": "Tamil",  "monthlyFee": 2500, "teacher": "A. Kabilthas",       "tutorId": "EDT250", "schedule": [{ "day": "THU", "start": "19:00", "end": "20:30" }, { "day": "FRI", "start": "19:00", "end": "20:30" }] },
-    { "classCode": "GT28Chemistry256","grade":"A/L 2028","subject": "Chemistry",   "medium": "Tamil",  "monthlyFee": 2500, "teacher": "S. Sharujan",        "tutorId": "EDT256", "schedule": [{ "day": "FRI", "start": "21:00", "end": "22:30" }, { "day": "SAT", "start": "19:00", "end": "20:30" }] },
-    { "classCode": "GT28Biology251","grade": "A/L 2028","subject": "Biology",      "medium": "Tamil",  "monthlyFee": 2500, "teacher": "A. Tharsan",         "tutorId": "EDT251", "schedule": [{ "day": "MON", "start": "19:00", "end": "20:30" }, { "day": "WED", "start": "19:00", "end": "20:30" }] },
-    { "classCode": "GT28CMaths255", "grade": "A/L 2028","subject": "Combined Maths","medium": "Tamil",  "monthlyFee": 2500, "teacher": "Mayooran",           "tutorId": "EDT255", "schedule": [{ "day": "MON", "start": "21:00", "end": "22:30" }, { "day": "WED", "start": "21:00", "end": "22:30" }] }
+    {
+      "classCode": "GT3ENV",
+      "classType": "GROUP",
+      "grade": "3",
+      "subject": "ENV",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mrs.Rajamanohary Jeyakanthan",
+      "tutorId": "EDT159",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "19:30",
+          "end": "20:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT8Tamil",
+      "classType": "GROUP",
+      "grade": "8",
+      "subject": "Tamil",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mrs. Kajananthini Varathalojan",
+      "tutorId": "EDT102",
+      "schedule": [
+        {
+          "day": "THU",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "FRI",
+          "start": "18:30",
+          "end": "19:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT9Tamil",
+      "classType": "GROUP",
+      "grade": "8",
+      "subject": "Tamil",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mrs. Kajananthini Varathalojan",
+      "tutorId": "EDT102",
+      "schedule": [
+        {
+          "day": "FRI",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "SAT",
+          "start": "19:00",
+          "end": "20:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT4ENV",
+      "classType": "GROUP",
+      "grade": "4",
+      "subject": "ENV",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms. Kajani Puvanraj",
+      "tutorId": "EDT239",
+      "schedule": [
+        {
+          "day": "THU",
+          "start": "19:30",
+          "end": "20:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT4Maths",
+      "classType": "GROUP",
+      "grade": "4",
+      "subject": "Maths",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms. Kajani Puvanraj",
+      "tutorId": "EDT239",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "19:30",
+          "end": "20:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT4Tamil",
+      "classType": "GROUP",
+      "grade": "3",
+      "subject": "Tamil",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms. Kajani Puvanraj",
+      "tutorId": "EDT239",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "19:30",
+          "end": "20:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT3IQ",
+      "classType": "GROUP",
+      "grade": "3",
+      "subject": "IQ",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mr. Ananthavel Mathiruban",
+      "tutorId": "EDT204",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "18:15",
+          "end": "19:15"
+        },
+        {
+          "day": "FRI",
+          "start": "18:15",
+          "end": "19:15"
+        }
+      ]
+    },
+    {
+      "classCode": "GT4IQ",
+      "classType": "GROUP",
+      "grade": "4",
+      "subject": "Maths",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mr. Ananthavel Mathiruban",
+      "tutorId": "EDT204",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "18:30",
+          "end": "20:30"
+        },
+        {
+          "day": "SAT",
+          "start": "18:30",
+          "end": "19:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT5IQ",
+      "classType": "GROUP",
+      "grade": "3",
+      "subject": "Tamil",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mr. Ananthavel Mathiruban",
+      "tutorId": "EDT204",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "18:30",
+          "end": "19:30"
+        },
+        {
+          "day": "SAT",
+          "start": "18:30",
+          "end": "19:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT3English",
+      "classType": "GROUP",
+      "grade": "3",
+      "subject": "English",
+      "medium": "English",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mrs. Fathima Nihadha",
+      "tutorId": "EDT241",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "17:00",
+          "end": "18:00"
+        },
+        {
+          "day": "SAT",
+          "start": "19:30",
+          "end": "20:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT4English",
+      "classType": "GROUP",
+      "grade": "3",
+      "subject": "English",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mrs. Fathima Nihadha",
+      "tutorId": "EDT241",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "19:30",
+          "end": "20:30"
+        },
+        {
+          "day": "FRI",
+          "start": "19:30",
+          "end": "20:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT5English",
+      "classType": "GROUP",
+      "grade": "3",
+      "subject": "Tamil",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mrs. Fathima Nihadha",
+      "tutorId": "EDT241",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "18:15",
+          "end": "19:15"
+        },
+        {
+          "day": "THU",
+          "start": "18:15",
+          "end": "19:15"
+        }
+      ]
+    },
+    {
+      "classCode": "GT3ENV",
+      "classType": "GROUP",
+      "grade": "3",
+      "subject": "ENV",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mrs. Farhana Mohamed Haniffa",
+      "tutorId": "EDT234",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "19:30",
+          "end": "20:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT3Maths",
+      "classType": "GROUP",
+      "grade": "3",
+      "subject": "Maths",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mrs. Farhana Mohamed Haniffa",
+      "tutorId": "EDT234",
+      "schedule": [
+        {
+          "day": "FRI",
+          "start": "19:30",
+          "end": "20:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT3Tamil",
+      "classType": "GROUP",
+      "grade": "3",
+      "subject": "Tamil",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mrs. Farhana Mohamed Haniffa",
+      "tutorId": "EDT234",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "19:30",
+          "end": "20:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT6Maths",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Maths",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms. Sarmily Puvanendran",
+      "tutorId": "EDT173",
+      "schedule": [
+        {
+          "day": "THU",
+          "start": "18:45",
+          "end": "19:45"
+        },
+        {
+          "day": "SAT",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT6Science",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Science",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms. Sarmily Puvanendran",
+      "tutorId": "EDT173",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "18:45",
+          "end": "19:45"
+        },
+        {
+          "day": "FRI",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT6ICT",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "ICT",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms. Sarmily Puvanendran",
+      "tutorId": "EDT173",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GE9Science",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Science",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mrs. Mayoory Nishanth",
+      "tutorId": "EDT169",
+      "schedule": [
+        {
+          "day": "THU",
+          "start": "20:15",
+          "end": "21:15"
+        },
+        {
+          "day": "FRI",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GE10Science",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Science",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mrs. Mayoory Nishanth",
+      "tutorId": "EDT169",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "21:00",
+          "end": "22:00"
+        },
+        {
+          "day": "THU",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GE11Science",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Tamil",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mrs. Mayoory Nishanth",
+      "tutorId": "EDT169",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "18:45",
+          "end": "19:45"
+        },
+        {
+          "day": "FRI",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT8Maths",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Maths",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms. Suganjan Senthilkumaran",
+      "tutorId": "EDT254",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "WED",
+          "start": "19:00",
+          "end": "20:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT10Maths",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Science",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms. Suganjan Senthilkumaran",
+      "tutorId": "EDT254",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "19:00",
+          "end": "20:00"
+        },
+        {
+          "day": "THU",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT11ICT",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Science",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Ms. Suganjan Senthilkumaran",
+      "tutorId": "EDT254",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "21:00",
+          "end": "22:00"
+        },
+        {
+          "day": "WED",
+          "start": "21:00",
+          "end": "22:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT6History",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "History",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mrs. Luxana Sujan",
+      "tutorId": "EDT189",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT7History",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "History",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mrs. Luxana Sujan",
+      "tutorId": "EDT189",
+      "schedule": [
+        {
+          "day": "FRI",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "SAT",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT6Tamil",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Tamil",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms. Shabna Kaleelur Rahman",
+      "tutorId": "EDT059",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "WED",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GE6Maths",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Maths",
+      "medium": "English",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms. Hajara Samoon",
+      "tutorId": "EDT257",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "18:45",
+          "end": "19:45"
+        },
+        {
+          "day": "FRI",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GE7Maths",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Maths",
+      "medium": "English",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms.  Uthayadharshini Sasikumar",
+      "tutorId": "EDT212",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "18:45",
+          "end": "19:45"
+        },
+        {
+          "day": "FRI",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GE7ICT",
+      "classType": "GROUP",
+      "grade": "7",
+      "subject": "ICT",
+      "medium": "English",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms. Fathima Abdul Razzak",
+      "tutorId": "EDT170",
+      "schedule": [
+        {
+          "day": "SAT",
+          "start": "19:00",
+          "end": "20:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GE10ICT",
+      "classType": "GROUP",
+      "grade": "10",
+      "subject": "ICT",
+      "medium": "ICT",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Ms. Fathima Abdul Razzak",
+      "tutorId": "EDT170",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "SAT",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT6Tamil",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Tamil",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms. Manikkam Yathurshini",
+      "tutorId": "EDT219",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "WED",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT7English",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "English",
+      "medium": "Tamil, English",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms. Nazhath Amaniya",
+      "tutorId": "EDT171",
+      "schedule": [
+        {
+          "day": "THU",
+          "start": "18:45",
+          "end": "19:45"
+        },
+        {
+          "day": "FRI",
+          "start": "18:30",
+          "end": "19:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT10 Tamil",
+      "classType": "GROUP",
+      "grade": "10",
+      "subject": "Tamil",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Muthulingam Nithyanantha",
+      "tutorId": "EDT148",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "21:00",
+          "end": "22:00"
+        },
+        {
+          "day": "SUN",
+          "start": "19:00",
+          "end": "20:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT11 Tamil",
+      "classType": "GROUP",
+      "grade": "11",
+      "subject": "Tamil",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Muthulingam Nithyanantha",
+      "tutorId": "EDT148",
+      "schedule": [
+        {
+          "day": "THU",
+          "start": "20:30",
+          "end": "21:30"
+        },
+        {
+          "day": "FRI",
+          "start": "21:00",
+          "end": "22:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT27A/LMaths",
+      "classType": "GROUP",
+      "grade": "A/L",
+      "subject": "Maths",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mr. Muzoufil Mohamed Muhthaseem",
+      "tutorId": "EDT206",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "19:00",
+          "end": "21:00"
+        },
+        {
+          "day": "THU",
+          "start": "19:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT6English",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "English",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mrs.Fathima Afnaan",
+      "tutorId": "EDT220",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "THU",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT8English",
+      "classType": "GROUP",
+      "grade": "8",
+      "subject": "English",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mrs.Fathima Afnaan",
+      "tutorId": "EDT220",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "18:45",
+          "end": "19:45"
+        },
+        {
+          "day": "FRI",
+          "start": "19:30",
+          "end": "20:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT9English",
+      "classType": "GROUP",
+      "grade": "8",
+      "subject": "English",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mrs.Fathima Afnaan",
+      "tutorId": "EDT220",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "19:00",
+          "end": "20:00"
+        },
+        {
+          "day": "WED",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT10 Tamil",
+      "classType": "GROUP",
+      "grade": "10",
+      "subject": "Tamil",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "",
+      "tutorId": "EDT206",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "21:00",
+          "end": "22:00"
+        },
+        {
+          "day": "SUN",
+          "start": "19:00",
+          "end": "20:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT11 Tamil",
+      "classType": "GROUP",
+      "grade": "11",
+      "subject": "Tamil",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "",
+      "tutorId": "EDT206",
+      "schedule": [
+        {
+          "day": "THU",
+          "start": "20:30",
+          "end": "21:30"
+        },
+        {
+          "day": "FRI",
+          "start": "21:00",
+          "end": "22:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GE8Maths",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Maths",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Abinaya Vettivelautham",
+      "tutorId": "EDT244",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "WED",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GE6ICT",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "ICT",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Srikanthan Vithurshan",
+      "tutorId": "EDT157",
+      "schedule": [
+        {
+          "day": "SAT",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT8ICT",
+      "classType": "GROUP",
+      "grade": "8",
+      "subject": "ICT",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Srikanthan Vithurshan",
+      "tutorId": "EDT157",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT9ICT",
+      "classType": "GROUP",
+      "grade": "9",
+      "subject": "ICT",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Srikanthan Vithurshan",
+      "tutorId": "EDT157",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GE8ICT",
+      "classType": "GROUP",
+      "grade": "8",
+      "subject": "ICT",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mrs.Fathima Farha Kaleel",
+      "tutorId": "EDT168",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT28A/LBiology",
+      "classType": "GROUP",
+      "grade": "A/L",
+      "subject": "Biology",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 2500,
+      "teacher": "Annathurai Tharsan",
+      "tutorId": "EDT251",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "07:00",
+          "end": "08:30"
+        },
+        {
+          "day": "WED",
+          "start": "07:00",
+          "end": "08:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT28A/LPhysics",
+      "classType": "GROUP",
+      "grade": "A/L",
+      "subject": "Physics",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 2500,
+      "teacher": "Mr. Arunasalam Kabilthas",
+      "tutorId": "EDT250",
+      "schedule": [
+        {
+          "day": "THU",
+          "start": "07:00",
+          "end": "08:30"
+        },
+        {
+          "day": "FRI",
+          "start": "07:00",
+          "end": "08:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT28A/LChemistry",
+      "classType": "GROUP",
+      "grade": "A/L",
+      "subject": "Chemistry",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 2500,
+      "teacher": "Mr. Sivakadadcham Sharujan",
+      "tutorId": "EDT256",
+      "schedule": [
+        {
+          "day": "FRI",
+          "start": "09:00",
+          "end": "10:30"
+        },
+        {
+          "day": "SAT",
+          "start": "07:00",
+          "end": "08:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT28A/LPoliticalScience",
+      "classType": "GROUP",
+      "grade": "A/L",
+      "subject": "Chemistry",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 2500,
+      "teacher": "Mr. Fathima Rimasha",
+      "tutorId": "EDT258",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "20:00",
+          "end": "21:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT7Science",
+      "classType": "GROUP",
+      "grade": "7",
+      "subject": "Physics",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mr. Rajendran Suthakaran",
+      "tutorId": "EDT107",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "08:00",
+          "end": "09:00"
+        },
+        {
+          "day": "SAT",
+          "start": "06:45",
+          "end": "07:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT8Science",
+      "classType": "GROUP",
+      "grade": "8",
+      "subject": "Science",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mr. Rajendran Suthakaran",
+      "tutorId": "EDT107",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "08:00",
+          "end": "09:00"
+        },
+        {
+          "day": "THU",
+          "start": "06:45",
+          "end": "07:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT9Science",
+      "classType": "GROUP",
+      "grade": "9",
+      "subject": "Science",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mr. Rajendran Suthakaran",
+      "tutorId": "EDT107",
+      "schedule": [
+        {
+          "day": "THU",
+          "start": "08:15",
+          "end": "09:15"
+        },
+        {
+          "day": "FRI",
+          "start": "06:45",
+          "end": "07:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT9Science",
+      "classType": "GROUP",
+      "grade": "10",
+      "subject": "Science",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mr. Rajendran Suthakaran",
+      "tutorId": "EDT107",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "09:00",
+          "end": "10:00"
+        },
+        {
+          "day": "FRI",
+          "start": "08:00",
+          "end": "09:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT10Science",
+      "classType": "GROUP",
+      "grade": "10",
+      "subject": "Science",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mr. Rajendran Suthakaran",
+      "tutorId": "EDT107",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "08:00",
+          "end": "09:00"
+        },
+        {
+          "day": "SAT",
+          "start": "06:45",
+          "end": "07:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT11Science",
+      "classType": "GROUP",
+      "grade": "11",
+      "subject": "Science",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mr. Rajendran Suthakaran",
+      "tutorId": "EDT107",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "06:45",
+          "end": "07:45"
+        },
+        {
+          "day": "SAT",
+          "start": "08:00",
+          "end": "09:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT28A/LCombinedMaths235",
+      "classType": "GROUP",
+      "grade": "A/L",
+      "subject": "Combined Mathematics",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 2500,
+      "teacher": "Vijayasiri Ranjithkumara",
+      "tutorId": "EDT235",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "07:00",
+          "end": "08:30"
+        },
+        {
+          "day": "WED",
+          "start": "08:30",
+          "end": "10:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT28A/LCombinedMaths255",
+      "classType": "GROUP",
+      "grade": "A/L",
+      "subject": "Combined Mathematics",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 2500,
+      "teacher": "Ravichandran Mayooran",
+      "tutorId": "EDT255",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "21:00",
+          "end": "22:30"
+        },
+        {
+          "day": "WED",
+          "start": "21:00",
+          "end": "22:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GE11ICT",
+      "classType": "GROUP",
+      "grade": "11",
+      "subject": "ICT",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Thuraisingam Sajeth",
+      "tutorId": "EDT243",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "SAT",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT27A/LICT",
+      "classType": "GROUP",
+      "grade": "11",
+      "subject": "ICT",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 2500,
+      "teacher": "Thuraisingam Sajeth",
+      "tutorId": "EDT243",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "20:30",
+          "end": "22:00"
+        },
+        {
+          "day": "FRI",
+          "start": "20:30",
+          "end": "22:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT28A/LICT",
+      "classType": "GROUP",
+      "grade": "11",
+      "subject": "ICT",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1500,
+      "teacher": "Thuraisingam Sajeth",
+      "tutorId": "EDT243",
+      "schedule": [
+        {
+          "day": "THU",
+          "start": "20:30",
+          "end": "21:30"
+        },
+        {
+          "day": "SAT",
+          "start": "19:00",
+          "end": "20:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GE6Science",
+      "classType": "GROUP",
+      "grade": "6",
+      "subject": "Science",
+      "medium": "English",
+      "syllabus": "National, Cambridge, Edexcel",
+      "monthlyFee": 1000,
+      "teacher": "Balakrishnan Vidhurshika",
+      "tutorId": "EDT211",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "19:00",
+          "end": "20:00"
+        },
+        {
+          "day": "SAT",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GE7Science",
+      "classType": "GROUP",
+      "grade": "7",
+      "subject": "Science",
+      "medium": "English",
+      "syllabus": "National, Cambridge, Edexcel",
+      "monthlyFee": 1000,
+      "teacher": "Balakrishnan Vidhurshika",
+      "tutorId": "EDT211",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "WED",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GE8Science",
+      "classType": "GROUP",
+      "grade": "8",
+      "subject": "Science",
+      "medium": "English",
+      "syllabus": "National, Cambridge, Edexcel",
+      "monthlyFee": 1000,
+      "teacher": "Balakrishnan Vidhurshika",
+      "tutorId": "EDT211",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "THU",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT11Maths",
+      "classType": "GROUP",
+      "grade": "11",
+      "subject": "Maths",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mr. Vallipuram Ainkaran",
+      "tutorId": "EDT198",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "SAT",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT27A/LPhysics",
+      "classType": "GROUP",
+      "grade": "A/L",
+      "subject": "Physics",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 2500,
+      "teacher": "Mr. Arunakirinathan Jeyasuthan",
+      "tutorId": "EDT096",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "07:00",
+          "end": "08:30"
+        },
+        {
+          "day": "FRI",
+          "start": "07:00",
+          "end": "08:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT10 English",
+      "classType": "GROUP",
+      "grade": "10",
+      "subject": "English",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Ms. Sumeerjitha Thangarajah",
+      "tutorId": "EDT113",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "08:15",
+          "end": "09:15"
+        },
+        {
+          "day": "TUE",
+          "start": "06:45",
+          "end": "07:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GE10 English",
+      "classType": "GROUP",
+      "grade": "10",
+      "subject": "English",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Ms. Sumeerjitha Thangarajah",
+      "tutorId": "EDT113",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "08:15",
+          "end": "09:15"
+        },
+        {
+          "day": "TUE",
+          "start": "06:45",
+          "end": "07:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT11 English",
+      "classType": "GROUP",
+      "grade": "11",
+      "subject": "English",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Ms. Sumeerjitha Thangarajah",
+      "tutorId": "EDT113",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "08:00",
+          "end": "09:00"
+        },
+        {
+          "day": "WED",
+          "start": "06:45",
+          "end": "07:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GE11 English",
+      "classType": "GROUP",
+      "grade": "11",
+      "subject": "English",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Ms. Sumeerjitha Thangarajah",
+      "tutorId": "EDT113",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "08:00",
+          "end": "09:00"
+        },
+        {
+          "day": "WED",
+          "start": "06:45",
+          "end": "07:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT11Maths",
+      "classType": "GROUP",
+      "grade": "11",
+      "subject": "Maths",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mr. Vallipuram Ainkaran",
+      "tutorId": "EDT198",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "SAT",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT8history",
+      "classType": "GROUP",
+      "grade": "8",
+      "subject": "History",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mr. Jenil Jeyanthan",
+      "tutorId": "EDT125",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "18:45",
+          "end": "19:45"
+        },
+        {
+          "day": "SAT",
+          "start": "20:00",
+          "end": "21:00"
+        }
+      ]
+    },
+    {
+      "classCode": "GT9history",
+      "classType": "GROUP",
+      "grade": "9",
+      "subject": "History",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Mr. Jenil Jeyanthan",
+      "tutorId": "EDT125",
+      "schedule": [
+        {
+          "day": "MON",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "TUE",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT10history",
+      "classType": "GROUP",
+      "grade": "10",
+      "subject": "History",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mr. Jenil Jeyanthan",
+      "tutorId": "EDT125",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "WED",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT11history",
+      "classType": "GROUP",
+      "grade": "11",
+      "subject": "History",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1200,
+      "teacher": "Mr. Jenil Jeyanthan",
+      "tutorId": "EDT125",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "20:00",
+          "end": "21:00"
+        },
+        {
+          "day": "THU",
+          "start": "18:45",
+          "end": "19:45"
+        }
+      ]
+    },
+    {
+      "classCode": "GT7Maths",
+      "classType": "GROUP",
+      "grade": "7",
+      "subject": "",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms.Piriyanka Periyathamby",
+      "tutorId": "EDT140",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "19:30",
+          "end": "20:30"
+        }
+      ]
+    },
+    {
+      "classCode": "GT9Maths",
+      "classType": "GROUP",
+      "grade": "9",
+      "subject": "",
+      "medium": "Tamil",
+      "syllabus": "National",
+      "monthlyFee": 1000,
+      "teacher": "Ms.Piriyanka Periyathamby",
+      "tutorId": "EDT140",
+      "schedule": [
+        {
+          "day": "WED",
+          "start": "19:30",
+          "end": "20:30"
+        }
+      ]
+    },
+    {
+      "classCode": "IE6CambridgeICTMs.FathimaAsma",
+      "classType": "INDIVIDUAL",
+      "grade": "6",
+      "subject": "ICT",
+      "medium": "English",
+      "syllabus": "Cambridge",
+      "monthlyFee": 2500,
+      "teacher": "Mrs. Fathima Asma",
+      "tutorId": "EDT116",
+      "schedule": [
+        {
+          "day": "TUE",
+          "start": "14:00",
+          "end": "15:00"
+        },
+        {
+          "day": "SAT",
+          "start": "09:00",
+          "end": "11:00"
+        }
+      ]
+    }
   ]
 }

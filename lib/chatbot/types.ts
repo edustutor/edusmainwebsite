@@ -6,12 +6,34 @@
  * stays in lockstep without import gymnastics.
  */
 
-/** A single class entry sourced from /public/data/classes.json. */
+/** A single class entry sourced from /public/data/classes.json.
+ *
+ * Two flavours of class share this shape:
+ *   - GROUP: fixed weekly slots, multiple students, lower fee.
+ *   - INDIVIDUAL: 1-on-1, parent picks a slot, higher fee, optional
+ *     Cambridge / Edexcel syllabus support.
+ *
+ * The admission-fee tier the parent owes depends on which flavour(s)
+ * they pick. Locked tiers (Sri Lanka offering):
+ *   - GROUP only       -> LKR 1,000 one-time
+ *   - INDIVIDUAL only  -> LKR 2,500 one-time
+ *   - BOTH             -> LKR 3,500 one-time (saves LKR 0 vs sum but
+ *                        signals a packaged path)
+ *
+ * `monthlyFee` semantics:
+ *   - GROUP: per month, all sessions included.
+ *   - INDIVIDUAL: per session base price (90-min default). EDUS team
+ *     confirms the per-week cadence with the parent on follow-up.
+ */
 export type ClassEntry = {
   classCode: string;
+  /** "GROUP" = open weekly class. "INDIVIDUAL" = 1-on-1 booking. */
+  classType: "GROUP" | "INDIVIDUAL";
   grade: string;
   subject: string;
   medium: string;
+  /** "National" | "Cambridge" | "Edexcel" | comma-joined for multi-syllabus. */
+  syllabus: string;
   monthlyFee: number;
   teacher: string;
   tutorId: string;
