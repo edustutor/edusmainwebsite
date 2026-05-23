@@ -12,6 +12,7 @@ import { AnalyticsClickTracker } from "@/components/analytics/AnalyticsClickTrac
 import { ConsentDefaults } from "@/components/analytics/ConsentDefaults";
 import { ConsentBanner } from "@/components/analytics/ConsentBanner";
 import { ServiceWorkerRegistrar } from "@/components/pwa/ServiceWorkerRegistrar";
+import { ChatBotMount } from "@/components/chatbot/ChatBotMount";
 import {
   getCurrentHost,
   getCurrentAnalyticsIds,
@@ -342,6 +343,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             content freshness (Google Reviews, blog posts, prices)
             is preserved with zero stale-cache risk. */}
         <ServiceWorkerRegistrar />
+        {/* EDUS admissions chatbot - floating button + panel on every
+            page. ChatBotMount is a thin client wrapper that
+            dynamically imports the actual ChatBot with ssr: false -
+            keeping the chat bundle off the initial HTML/LCP path.
+            (Next 16 forbids ssr: false in Server Components, hence the
+            wrapper.) Conversation history lives in component state only
+            (never localStorage) so we don't risk leaking parent PII to
+            anyone who shares the device. */}
+        <ChatBotMount />
       </body>
     </html>
   );
