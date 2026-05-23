@@ -38,6 +38,16 @@ type Props = {
   intake: IntakePayload | null;
   setIntake: React.Dispatch<React.SetStateAction<IntakePayload | null>>;
   onClose: () => void;
+  /**
+   * Why the panel opened.
+   *   - "manual": user clicked the launcher. Show the intake form directly.
+   *   - "auto":   the 30s timer fired. Show a "Would you like to join
+   *               EDUS Online classes?" Yes/No prompt FIRST, only reveal
+   *               the intake form once the parent clicks Yes. This makes
+   *               the unprompted popup feel like a polite ask rather than
+   *               a demanded form.
+   */
+  openMode: "auto" | "manual";
 };
 
 /** Maximum chars per user message. Mirrors the server-side validation. */
@@ -73,6 +83,7 @@ export function ChatPanel({
   intake,
   setIntake,
   onClose,
+  openMode,
 }: Props) {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -401,7 +412,29 @@ export function ChatPanel({
     <div
       role="dialog"
       aria-label="EDUS AI Assistant chat"
-      className="fixed bottom-5 right-5 z-[60] w-[calc(100vw-2.5rem)] max-w-[400px] h-[min(620px,calc(100vh-2.5rem))] flex flex-col rounded-2xl bg-white shadow-[0_30px_60px_-20px_rgba(16,32,51,0.4)] border border-[rgba(16,32,51,0.08)] overflow-hidden"
+      className={[
+        "fixed z-[60] flex flex-col bg-white overflow-hidden",
+        // Position + size strategy:
+        //   - <sm (mobile): bottom-4 right-4 left-4 with a small top
+        //     gap so the panel feels like a real sheet, not a fullscreen
+        //     takeover. The width auto-fills between the two side gutters.
+        //   - sm+ (tablet, desktop): bottom-5 right-5 anchored to the
+        //     bottom-right with a fixed max width (the prior layout).
+        "right-4 bottom-4 left-4 sm:left-auto sm:right-5 sm:bottom-5",
+        // Height respects iOS safe-area + viewport vs. the design max.
+        // 88vh on phones leaves a small breathing area at the top so
+        // the user can dismiss by tapping outside.
+        "h-[min(88vh,640px)] sm:h-[min(620px,calc(100vh-2.5rem))]",
+        // Width: auto-fill on mobile, capped on tablet+.
+        "sm:w-[calc(100vw-2.5rem)] sm:max-w-[400px]",
+        "rounded-2xl border border-[rgba(16,32,51,0.08)]",
+        "shadow-[0_30px_60px_-20px_rgba(16,32,51,0.4)]",
+      ].join(" ")}
+      style={{
+        // Push the panel up by the iOS home-indicator height so the
+        // input area isn't covered by the system gesture bar.
+        marginBottom: "env(safe-area-inset-bottom, 0px)",
+      }}
     >
       {/* Header.
           Layout mirrors WhatsApp / Messenger conventions parents already
@@ -429,8 +462,10 @@ export function ChatPanel({
             <p className="font-display font-700 text-[14px] leading-tight">
               EDUS AI Assistant
             </p>
-            {/* Status row: live pulse dot + Online + reply-time hint. */}
-            <p className="text-[11px] text-white/85 leading-tight flex items-center gap-1.5 mt-0.5">
+            {/* Status row: live pulse dot + Online + reply-time hint.
+                flex-wrap keeps "Online · Replies in ~1 min" intact on
+                small phones where the header could otherwise overflow. */}
+            <p className="text-[11px] text-white/85 leading-tight flex flex-wrap items-center gap-x-1.5 gap-y-0.5 mt-0.5">
               {/* Online pulse - inner solid dot + outer ping. Pure CSS
                   ping animation keyframes are scoped via a local <style>
                   block (see end of this header section). */}
@@ -537,7 +572,11 @@ export function ChatPanel({
           </div>
         </>
       ) : (
-        <IntakeForm onSubmit={handleIntakeSubmit} />
+        <IntakeForm
+          onSubmit={handleIntakeSubmit}
+          openMode={openMode}
+          onDecline={onClose}
+        />
       )}
     </div>
   );
