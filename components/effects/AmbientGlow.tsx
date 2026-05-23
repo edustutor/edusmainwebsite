@@ -23,7 +23,7 @@ type Props = {
  * Mobile-tuned: filter blur is the heaviest paint cost on phones, so
  * we trim it ~45% on viewports ≤768px, drop the orb size, and skip
  * `mix-blend-mode` (also expensive). Result is buttery smooth scrolling
- * on iPhone Safari and mid-range Android.
+ * on iPhone Safari and mid-range Android. ok
  */
 export function AmbientGlow({
   color,
