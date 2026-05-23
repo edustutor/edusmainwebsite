@@ -33,7 +33,7 @@ export function buildSystemPrompt(
     "",
     RECOMMENDATION_TEMPLATE,
     "",
-    formatCatalog(classes, tutors),
+    formatCatalog(classes, tutors, intake),
     "",
     LEAD_CAPTURE_FLOW,
   ].join("\n");
@@ -100,7 +100,19 @@ function formatIntake(intake: IntakePayload | null): string {
     `Medium: ${intake.medium}`,
     `Phone: ${intake.phone}`,
     "",
-    "Greet the parent by name. Acknowledge their grade + medium choice in the opening sentence. Then ask ONE focused question to identify the subject they want.",
+    "OPENING TURN PLAYBOOK (follow these in order):",
+    "1. Greet the parent by name in ONE short line. Acknowledge their grade + medium choice (e.g. 'Great, for your Grade 6 Tamil-medium child...').",
+    "2. ALWAYS ask the GROUP vs INDIVIDUAL preference BEFORE recommending any class. Format the question like this exact example:",
+    "",
+    "     Which class type would suit you best?",
+    "",
+    "     👥 Group class (most popular): LKR 1,000 one-time admission, fixed weekly slot, multiple students, LKR 1,000-1,200/month per subject.",
+    "     🧑‍🎓 Individual 1-on-1: LKR 2,500 one-time admission, you pick the slot with the tutor, LKR 2,500/session base, fully personalised pace.",
+    "",
+    "     Which one feels right - or would you like both? (Both: LKR 3,500 admission.)",
+    "",
+    "3. WAIT for their answer. DO NOT recommend a specific class yet. Their answer scopes whether you list group classes, individual classes, or both on the next turn.",
+    "4. ONLY AFTER they pick a type, ask which subject they want. Then recommend a class from the catalog matching their type + subject + grade + medium.",
     "===== END INTAKE =====",
   ].join("\n");
 }
@@ -221,10 +233,25 @@ After listing classes or answering a question, ALWAYS:
 function formatCatalog(
   classes: ClassEntry[],
   tutors: Record<string, TutorProfile>,
+  intake: IntakePayload | null,
 ): string {
+  // SPEED OPTIMISATION (locked 2026-05-23):
+  // Filter the catalog block to ONLY what the parent likely cares about
+  // given their intake. NIM's first-token latency scales linearly with
+  // input tokens, and the full catalog (78 classes + 37 tutors) was
+  // adding ~5500 tokens to every system prompt. Filtering to grade ± 1
+  // and medium cuts the catalog block from ~10000 chars to ~1500 chars
+  // typically - that's the biggest single lever for chat reply speed.
+  //
+  // Fallback: when intake is null OR no classes match the filter, ship
+  // the FULL catalog. Better to be slow + correct than fast + wrong.
+  const filteredClasses = filterCatalogForIntake(classes, intake);
+  const useFiltered = filteredClasses.length > 0;
+  const activeClasses = useFiltered ? filteredClasses : classes;
+
   // Sort by grade -> medium -> syllabus -> subject so the LLM sees a
   // predictable order. classType is split into two sections below.
-  const sortedClasses = [...classes].sort((a, b) => {
+  const sortedClasses = [...activeClasses].sort((a, b) => {
     if (a.grade !== b.grade) return gradeOrder(a.grade) - gradeOrder(b.grade);
     if (a.medium !== b.medium) return a.medium.localeCompare(b.medium);
     if (a.syllabus !== b.syllabus) return a.syllabus.localeCompare(b.syllabus);
@@ -248,14 +275,28 @@ function formatCatalog(
     return `- Grade ${c.grade} ${c.subject} (${c.medium} medium, ${c.syllabus} syllabus): LKR ${c.monthlyFee}/session base, slots: ${slots}, tutor: ${c.teacher} [${c.tutorId}]`;
   });
 
-  const tutorLines = Object.entries(tutors).map(([id, t]) => {
-    const exp = t.experienceYears > 0 ? `, ${t.experienceYears}yrs` : "";
-    return `- ${id}: ${t.fullName}${exp}, teaches ${t.subjects.join("/")} (${t.mediums.join("/")}) - ${t.headline}`;
-  });
+  // Tutors filter to only those who teach a class still in the active
+  // set. Saves another ~3000 chars when the catalog was filtered. When
+  // we fall back to the full catalog above, we ship every tutor too.
+  const activeTutorIds = new Set(activeClasses.map((c) => c.tutorId));
+  const tutorLines = Object.entries(tutors)
+    .filter(([id]) => useFiltered ? activeTutorIds.has(id) : true)
+    .map(([id, t]) => {
+      const exp = t.experienceYears > 0 ? `, ${t.experienceYears}yrs` : "";
+      return `- ${id}: ${t.fullName}${exp}, teaches ${t.subjects.join("/")} (${t.mediums.join("/")}) - ${t.headline}`;
+    });
+
+  // Header summary tells the LLM how the catalog was scoped. When
+  // filtered, we explicitly say so + remind the bot to refer parents
+  // to /contact for anything outside the scope. When unfiltered, we
+  // print the full counts so the LLM knows it has everything.
+  const scopeHeader = useFiltered
+    ? `(SCOPED to your intake: ${activeClasses.length} classes for Grade ${intake?.grade} ${intake?.medium}-medium. Anything outside this scope - tell the parent you'll connect them with the team via /contact.)`
+    : `(${classes.length} classes total: ${groupClasses.length} group + ${indivClasses.length} individual; all times Asia/Colombo)`;
 
   return [
     "===== EDUS 2026 CLASS CATALOG =====",
-    `(${classes.length} classes total: ${groupClasses.length} group + ${indivClasses.length} individual; all times Asia/Colombo)`,
+    scopeHeader,
     "",
     "DELIVERY: EDUS Student Mobile App + EDUS Web App + Google Meet (live).",
     "",
@@ -275,6 +316,57 @@ function formatCatalog(
     ...tutorLines,
     "===== END CATALOG =====",
   ].join("\n");
+}
+
+/**
+ * Reduce the catalog to only classes the parent is plausibly here for.
+ *
+ * Rules:
+ *   - Grade: ± 1 of the intake grade (so a Grade 6 parent also sees
+ *     Grade 5 and Grade 7 in case they're shopping for a sibling or
+ *     advanced/remedial track). A/L cohorts are treated as their own
+ *     bucket - intake "A/L 2027" matches "A/L" + "A/L 2026"/"A/L 2027"
+ *     /"A/L 2028" classes.
+ *   - Medium: exact match (Tamil/English/Sinhala). EDUS classes for
+ *     different mediums are entirely different products.
+ *
+ * Returns [] when no classes match (signals "fall back to full catalog"
+ * to the caller). Returns [] when intake is null too.
+ */
+function filterCatalogForIntake(
+  classes: ClassEntry[],
+  intake: IntakePayload | null,
+): ClassEntry[] {
+  if (!intake) return [];
+
+  const wantedGrade = intake.grade.trim();
+  const wantedMedium = intake.medium.trim().toLowerCase();
+  if (!wantedGrade || !wantedMedium) return [];
+
+  const isAL = wantedGrade.startsWith("A/L");
+  const wantedGradeNum = isAL ? null : parseInt(wantedGrade, 10);
+
+  return classes.filter((c) => {
+    // Medium gate: case-insensitive direct match. A class with medium
+    // "Tamil, English" (multi-medium catalogue entry) matches when the
+    // intake medium is either of those.
+    const classMediums = c.medium.toLowerCase();
+    if (!classMediums.includes(wantedMedium)) return false;
+
+    // Grade gate.
+    if (isAL) {
+      // Any A/L class matches any A/L intake (3 cohort years are close
+      // enough that we'd rather show all than miss one).
+      return c.grade.startsWith("A/L");
+    }
+    if (Number.isFinite(wantedGradeNum) && c.grade.startsWith("A/L")) {
+      // Don't surface A/L classes to a primary/secondary parent.
+      return false;
+    }
+    const classGradeNum = parseInt(c.grade, 10);
+    if (!Number.isFinite(classGradeNum) || wantedGradeNum === null) return false;
+    return Math.abs(classGradeNum - wantedGradeNum) <= 1;
+  });
 }
 
 const LEAD_CAPTURE_FLOW = `Lead capture flow:

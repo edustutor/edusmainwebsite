@@ -433,11 +433,32 @@ export function ChatPanel({
       console.warn("[EDUS chatbot] /api/lead intake POST failure:", err),
     );
 
-    // Seed an opening user-style message that prompts the LLM to greet.
-    // The LLM has the full intake in its system prompt context, so
-    // it'll greet the parent by name + acknowledge the grade + ask the
-    // single best clarifying question.
-    void callChat("Hi! I've shared my details above. Can you help?", next);
+    // Render a clean system "intake summary" card at the top of the
+    // chat so the parent immediately sees what they shared. This
+    // replaces the previous "Hi! I've shared my details above" user
+    // bubble that was confusing - it looked like the parent typed it.
+    const summaryLines = [
+      `📋 Details shared with EDUS:`,
+      `• Name: ${next.name}`,
+      `• Country: ${next.country}`,
+      `• Phone: +${next.phone}`,
+      `• Grade: ${next.grade}`,
+      `• Medium: ${next.medium}`,
+      `• Syllabus: ${next.syllabus}`,
+    ].join("\n");
+    setMessages([{ role: "system", content: summaryLines }]);
+
+    // Seed an opening signal to the LLM so it greets the parent. The
+    // LLM has the full intake in its system prompt context, so it'll
+    // greet by name + acknowledge the grade + ask the single best
+    // clarifying question. hideUserBubble:true keeps the synthetic
+    // signal OUT of the visible chat - the parent never sees the
+    // placeholder text.
+    void callChat(
+      "Hi! I've shared my details above. Can you help?",
+      next,
+      { hideUserBubble: true },
+    );
   };
 
   const send = () => {

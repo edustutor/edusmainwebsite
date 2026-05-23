@@ -30,6 +30,30 @@ type Props = {
 
 export function ChatMessage({ message }: Props) {
   if (message.role === "system") {
+    // Intake summary cards (sent by ChatPanel right after the form is
+    // submitted) start with the "📋 Details shared" prefix. Render
+    // those as a proper read-only card so the parent can see at a
+    // glance what they shared with the EDUS team. Other system
+    // messages (rate-limit, error fallbacks) keep the small centered
+    // italic rendering they always had.
+    if (message.content.startsWith("📋 ")) {
+      const lines = message.content.split("\n");
+      const [header, ...rest] = lines;
+      return (
+        <div className="flex justify-start">
+          <div className="max-w-[92%] rounded-xl px-4 py-3 bg-[#EFF4FF] border border-[#2563EB]/15 text-[12.5px] text-[#2B3950] leading-[1.6]">
+            <p className="font-display font-700 text-[13px] text-[#102033] mb-1.5">
+              {header}
+            </p>
+            <ul className="space-y-0.5">
+              {rest.map((line, i) => (
+                <li key={i}>{line}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      );
+    }
     return (
       <p className="text-center text-[12px] text-[#5A6A82] italic px-4">
         {message.content}

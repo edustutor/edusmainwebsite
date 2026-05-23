@@ -255,11 +255,24 @@ export async function POST(req: Request) {
     })),
   ];
 
+  // SPEED OPTIMISATION (locked 2026-05-23):
+  // Most user turns are catalog questions ("class details for grade 6",
+  // "show me maths tutors", "fees for grade 8 science"). For those we
+  // KNOW the answer is in the system prompt and the search tool is
+  // irrelevant. Skip the tool wiring on those turns to save NIM's
+  // "should I call a tool?" deliberation latency (~300-500ms of
+  // first-token delay per round). The bot still has tools available on
+  // off-catalog turns (founder bio, blog posts, gallery, etc).
+  const latestUser = [...(clientMessages ?? [])]
+    .reverse()
+    .find((m) => m.role === "user");
+  const needsTools = userTurnNeedsSearchTool(latestUser?.content ?? "");
+
   const round1 = await runRound({
     apiKey,
     model,
     messages: conversation,
-    tools: TOOLS,
+    tools: needsTools ? TOOLS : undefined,
   });
 
   // 5a. If round 1 returned a content stream (no tool call), pipe it
@@ -753,4 +766,51 @@ function sanitiseIntake(input: unknown): IntakePayload | null {
   const medium = typeof i.medium === "string" ? i.medium.trim().slice(0, 30) : "";
   if (!name || !phone || !country || !syllabus || !grade || !medium) return null;
   return { name, phone, country, syllabus, grade, medium };
+}
+
+/**
+ * Decide whether the latest user turn likely needs the search tool.
+ *
+ * Speed optimisation: when the user is clearly asking about catalog
+ * content (classes / fees / tutors / schedules) we skip wiring tools
+ * into round 1, saving NIM's "should I call a tool?" deliberation
+ * latency. Tools stay enabled for anything that LOOKS like an
+ * off-catalog topic - founder, blog, gallery, press, accreditation,
+ * specific URLs etc.
+ *
+ * False positives (turning tools off when they were needed) just mean
+ * the bot answers from the catalog or honestly says "I'm not sure,
+ * try /contact" - no crash, no wrong answer.
+ * False negatives (turning tools on when they weren't needed) cost
+ * ~300-500ms of latency - the current bug we're trying to remove.
+ *
+ * Rule: tools ON only when the message contains an off-catalog signal
+ * keyword. Otherwise tools OFF.
+ */
+function userTurnNeedsSearchTool(text: string): boolean {
+  const lower = (text ?? "").toLowerCase().trim();
+  if (!lower) return false;
+
+  // Keywords that signal "this is NOT a catalog question".
+  // Curated from the chatbot's actual off-catalog use cases.
+  const OFF_CATALOG_HINTS = [
+    "founder", "ceo", "cto", "sugeevan", "tisankan",
+    "blog", "article", "news", "press", "media",
+    "gallery", "photo", "video", "youtube",
+    "review", "testimonial",
+    "accreditation", "certified", "certificate", "license",
+    "partner", "scholarship", "edus aid",
+    "contact", "address", "office", "location", "map",
+    "career", "job", "vacancy", "hiring", "apply",
+    "about us", "story", "history", "vision", "mission",
+    "company", "corporate",
+    "crunchbase", "linkedin", "facebook", "instagram", "twitter",
+    "url", "link",
+  ];
+  for (const hint of OFF_CATALOG_HINTS) {
+    if (lower.includes(hint)) return true;
+  }
+
+  // Default: catalog turn - skip tools for speed.
+  return false;
 }
