@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { loadCatalog } from "@/lib/chatbot/catalog";
 import { buildSystemPrompt } from "@/lib/chatbot/systemPrompt";
-import type { ChatMessage, ChatRequest } from "@/lib/chatbot/types";
+import type {
+  ChatMessage,
+  ChatRequest,
+  IntakePayload,
+} from "@/lib/chatbot/types";
 
 /**
  * /api/chat - server-side NVIDIA NIM proxy for the EDUS chatbot.
@@ -182,9 +186,18 @@ export async function POST(req: Request) {
   const { error, messages: clientMessages } = validateMessages(body.messages);
   if (error) return error;
 
-  // 3. Build the system prompt with the live catalog injected.
+  // 3. Build the system prompt with the live catalog + intake injected.
+  // intake is optional - if absent or malformed, the prompt falls back
+  // to its "no intake captured yet" branch. We deliberately don't reject
+  // the request for missing intake because future flows (e.g. a passive
+  // FAQ bot) may legitimately skip the form.
   const catalog = await loadCatalog();
-  const systemPrompt = buildSystemPrompt(catalog.classes, catalog.tutors);
+  const intake = sanitiseIntake(body.intake);
+  const systemPrompt = buildSystemPrompt(
+    catalog.classes,
+    catalog.tutors,
+    intake,
+  );
 
   // 4. Call NVIDIA NIM (OpenAI-compatible chat completions API).
   const upstreamPayload = {
@@ -260,4 +273,29 @@ export async function POST(req: Request) {
   }
 
   return NextResponse.json({ message: assistantContent });
+}
+
+/**
+ * Defensive sanitisation of the intake payload from the client. We
+ * accept the object only when EVERY required string field is present
+ * and within length bounds. Anything else: drop to null so the prompt
+ * falls back gracefully.
+ *
+ * This is intentionally separate from the lead-capture validation in
+ * /api/lead/route.ts because the threat model differs:
+ *   - /api/chat: bad intake = bot can't personalise. Low harm. We drop.
+ *   - /api/lead: bad intake = wrong contact data leaks to EDUS team.
+ *     High harm. We reject with 400.
+ */
+function sanitiseIntake(input: unknown): IntakePayload | null {
+  if (typeof input !== "object" || input === null) return null;
+  const i = input as Record<string, unknown>;
+  const name = typeof i.name === "string" ? i.name.trim().slice(0, 120) : "";
+  const phone = typeof i.phone === "string" ? i.phone.trim().slice(0, 30) : "";
+  const country = typeof i.country === "string" ? i.country.trim().slice(0, 60) : "";
+  const syllabus = typeof i.syllabus === "string" ? i.syllabus.trim().slice(0, 60) : "";
+  const grade = typeof i.grade === "string" ? i.grade.trim().slice(0, 30) : "";
+  const medium = typeof i.medium === "string" ? i.medium.trim().slice(0, 30) : "";
+  if (!name || !phone || !country || !syllabus || !grade || !medium) return null;
+  return { name, phone, country, syllabus, grade, medium };
 }

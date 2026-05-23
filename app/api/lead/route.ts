@@ -29,6 +29,7 @@ export const dynamic = "force-dynamic";
 const MAX_NAME = 120;
 const MAX_PHONE = 30;
 const MAX_COUNTRY = 60;
+const MAX_SYLLABUS = 60;
 const MAX_GRADE = 30;
 const MAX_MEDIUM = 30;
 const MAX_SUBJECT = 60;
@@ -53,6 +54,7 @@ function validate(body: unknown): LeadPayload | { error: string } {
   const name = typeof b.name === "string" ? b.name.trim() : "";
   const phone = typeof b.phone === "string" ? b.phone.trim() : "";
   const country = typeof b.country === "string" ? b.country.trim() : "";
+  const syllabus = typeof b.syllabus === "string" ? b.syllabus.trim() : "";
   const grade = typeof b.grade === "string" ? b.grade.trim() : "";
   const medium = typeof b.medium === "string" ? b.medium.trim() : "";
   const subject = typeof b.subject === "string" ? b.subject.trim() : "";
@@ -70,12 +72,16 @@ function validate(body: unknown): LeadPayload | { error: string } {
   if (!country || country.length > MAX_COUNTRY) {
     return { error: "Country is required" };
   }
+  if (!syllabus || syllabus.length > MAX_SYLLABUS) {
+    return { error: "Syllabus is required" };
+  }
   if (!grade || grade.length > MAX_GRADE) return { error: "Grade is required" };
   if (!medium || medium.length > MAX_MEDIUM) {
     return { error: "Medium is required" };
   }
-  if (!subject || subject.length > MAX_SUBJECT) {
-    return { error: "Subject is required" };
+  // Subject is optional: leads can land before a class is recommended.
+  if (subject.length > MAX_SUBJECT) {
+    return { error: "Subject is too long" };
   }
   if (notes.length > MAX_NOTES) return { error: "Notes is too long" };
   if (recommendedClassCode.length > MAX_CLASS_CODE) {
@@ -86,9 +92,10 @@ function validate(body: unknown): LeadPayload | { error: string } {
     name,
     phone,
     country,
+    syllabus,
     grade,
     medium,
-    subject,
+    ...(subject ? { subject } : {}),
     ...(notes ? { notes } : {}),
     ...(recommendedClassCode ? { recommendedClassCode } : {}),
   };
@@ -110,7 +117,11 @@ export async function POST(req: Request) {
   // Always log to server stdout so the lead is never lost. Vercel
   // captures these in the Functions dashboard - the academic team
   // (or Tisankan) can grep them when the backend forward fails.
-  console.log("[lead] captured:", JSON.stringify(lead));
+  // Use a banner + pretty-printed JSON so the lead is impossible to
+  // miss in a busy dev terminal.
+  console.log("\n========== [EDUS LEAD CAPTURED] ==========");
+  console.log(JSON.stringify(lead, null, 2));
+  console.log("==========================================\n");
 
   // Forward to the EDUS backend. NEXT_PUBLIC_LEAD_ENDPOINT is the
   // configured URL (placeholder for now per Tisankan; will be a real
@@ -120,12 +131,13 @@ export async function POST(req: Request) {
   const endpoint = process.env.NEXT_PUBLIC_LEAD_ENDPOINT;
 
   if (!endpoint) {
-    // No endpoint configured - log and acknowledge. The team picks
-    // these up from Vercel logs until the URL is provisioned.
-    console.warn("[lead] NEXT_PUBLIC_LEAD_ENDPOINT not set - logged only");
-    return NextResponse.json({ ok: true });
+    console.warn(
+      "[lead] NEXT_PUBLIC_LEAD_ENDPOINT not set - logged only, no forward attempted",
+    );
+    return NextResponse.json({ ok: true, forwarded: false });
   }
 
+  console.log(`[lead] forwarding to ${endpoint} ...`);
   try {
     const forwardRes = await fetch(endpoint, {
       method: "POST",
@@ -140,19 +152,16 @@ export async function POST(req: Request) {
     if (!forwardRes.ok) {
       const text = await forwardRes.text().catch(() => "");
       console.error(
-        "[lead] forward failed:",
-        forwardRes.status,
+        `[lead] forward FAILED -> HTTP ${forwardRes.status}`,
         text.slice(0, 500),
       );
-      // Still return ok to the browser - the lead is safe in our logs
-      // and the parent doesn't need to know about backend issues.
-      return NextResponse.json({ ok: true });
+      return NextResponse.json({ ok: true, forwarded: false });
     }
+    console.log(`[lead] forward OK -> HTTP ${forwardRes.status}`);
   } catch (err) {
     console.error("[lead] forward fetch error:", err);
-    // Same logic - parent should not see a backend failure.
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, forwarded: false });
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, forwarded: true });
 }

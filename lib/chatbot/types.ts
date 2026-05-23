@@ -45,6 +45,14 @@ export type ChatMessage = {
 /** POST body shape the browser sends to /api/chat. */
 export type ChatRequest = {
   messages: ChatMessage[];
+  /**
+   * Optional intake context. When present, the server injects it into
+   * the system prompt so the bot doesn't re-ask facts the user already
+   * shared via the pre-chat IntakeForm. Absent on the very first
+   * exchange (if the form has not been completed yet) - in which case
+   * the bot falls back to asking clarifying questions.
+   */
+  intake?: IntakePayload | null;
 };
 
 /**
@@ -55,16 +63,39 @@ export type ChatRequest = {
  * Strictly minimal - only fields a parent should comfortably share
  * before the EDUS team contacts them. No DOB, no email if phone is
  * present, no payment data, no address.
+ *
+ * `subject` is optional because the intake form collects only the
+ * facts needed to start a useful conversation (name, country, syllabus,
+ * grade, medium, phone). The specific subject often emerges from the
+ * chat itself (e.g. "I want Maths for Grade 8" -> subject: "Maths").
  */
 export type LeadPayload = {
   name: string;
   phone: string;
   country: string;
+  syllabus: string;
   grade: string;
   medium: string;
-  subject: string;
+  subject?: string;
   /** Optional context from the conversation - what the parent told the bot. */
   notes?: string;
   /** Optional - the class the bot recommended, if any. */
   recommendedClassCode?: string;
+};
+
+/**
+ * Pre-chat intake captured by IntakeForm BEFORE the conversation begins.
+ *
+ * Functionally a subset of LeadPayload - same shape, no subject yet,
+ * no notes / class code yet (those land when the chat completes a
+ * useful match). We model it as its own type so the form component
+ * doesn't have to know about lead-payload extras.
+ */
+export type IntakePayload = {
+  name: string;
+  phone: string;
+  country: string;
+  syllabus: string;
+  grade: string;
+  medium: string;
 };

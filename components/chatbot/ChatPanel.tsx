@@ -1,80 +1,60 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { ChatMessage } from "./ChatMessage";
+import { IntakeForm } from "./IntakeForm";
 import type {
   ChatMessage as ChatMessageType,
+  IntakePayload,
   LeadPayload,
 } from "@/lib/chatbot/types";
 
 /**
- * The chat panel itself - opens above the floating launcher.
+ * The chat panel - opens above the floating launcher.
  *
- * Layout:
- *   +-----------------------------+
- *   | header (brand + close)      |
- *   +-----------------------------+
- *   |                             |
- *   | scrollable message list     |
- *   |                             |
- *   +-----------------------------+
- *   | input + send                |
- *   +-----------------------------+
+ * Two phases:
+ *   1. INTAKE phase (intake == null):
+ *      Render <IntakeForm/>. Once submitted, store the intake in state.
+ *      The first chat message fires automatically with a personalised
+ *      bot greeting that already knows name + grade + medium.
+ *   2. CONVERSATION phase (intake != null):
+ *      Render header + scrollable message list + input. Every
+ *      /api/chat call carries the intake payload so the system prompt
+ *      can suppress the "what's your name / what grade" loop.
  *
- * Conversation lifecycle:
- *   1. Mount: show a single assistant intro message - cheap, no API call.
- *   2. User submits: append user message, set loading, POST history
- *      (excluding the intro since the server adds the system prompt) to
- *      /api/chat. Show typing indicator while waiting.
- *   3. Server responds with assistant content. Scan for the
- *      [[LEAD_CAPTURE]]{...}[[/LEAD_CAPTURE]] marker; if present:
- *        - Strip the marker block from the visible bubble.
- *        - POST the JSON to /api/lead in the background.
- *        - Disable input briefly so the parent doesn't keep typing
- *          while we confirm capture.
- *   4. Errors fall back to a system message + the input stays enabled
- *      so the parent can try again.
- *
- * Why no SSE streaming for v1:
- *   - NIM supports it, but the answer is usually 1-3 short paragraphs,
- *     not a long essay. Full-buffer-then-render is simpler + lighter.
- *   - Streaming adds ~80 LOC of EventSource plumbing for marginal UX
- *     gain on responses that average ~1.5s.
- *   - Can swap to streaming later by changing the API route's
- *     `stream: false` flag + adding a ReadableStream handler here.
+ * Lead capture:
+ *   - The system prompt now asks the LLM to emit ONLY the conversation
+ *     extras (subject, recommendedClassCode, notes) in the
+ *     [[LEAD_CAPTURE]] block.
+ *   - The frontend MERGES that with the intake we already have to
+ *     build the full LeadPayload, then POSTs to /api/lead.
+ *   - That means the LLM cannot fabricate phone numbers or names -
+ *     the client controls those fields, the LLM only contributes the
+ *     subject + class match + free-text notes.
  */
 
 type Props = {
   messages: ChatMessageType[];
   setMessages: React.Dispatch<React.SetStateAction<ChatMessageType[]>>;
+  intake: IntakePayload | null;
+  setIntake: React.Dispatch<React.SetStateAction<IntakePayload | null>>;
   onClose: () => void;
-};
-
-const INTRO_MESSAGE: ChatMessageType = {
-  role: "assistant",
-  content:
-    "Hi! I'm the EDUS admissions assistant. Tell me your child's grade, preferred subject, and medium (Tamil or English), and I'll find a matching live online class from our 2026 timetable. You can write in English or Tamil.",
 };
 
 /** Maximum chars per user message. Mirrors the server-side validation. */
 const MAX_USER_LEN = 2000;
 
-export function ChatPanel({ messages, setMessages, onClose }: Props) {
+export function ChatPanel({
+  messages,
+  setMessages,
+  intake,
+  setIntake,
+  onClose,
+}: Props) {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
-
-  // Seed the intro message on first mount. Use a ref guard so React's
-  // dev-mode double-invocation doesn't add it twice.
-  const seededRef = useRef(false);
-  useEffect(() => {
-    if (seededRef.current) return;
-    seededRef.current = true;
-    if (messages.length === 0) {
-      setMessages([INTRO_MESSAGE]);
-    }
-  }, [messages.length, setMessages]);
 
   // Auto-scroll to bottom on every message addition.
   useEffect(() => {
@@ -83,12 +63,12 @@ export function ChatPanel({ messages, setMessages, onClose }: Props) {
     el.scrollTop = el.scrollHeight;
   }, [messages, loading]);
 
-  // Focus the input when the panel opens.
+  // Focus the input when conversation phase begins.
   useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+    if (intake) inputRef.current?.focus();
+  }, [intake]);
 
-  // Escape key closes the panel - matches modal-pattern UX users expect.
+  // Escape closes the panel - matches modal-pattern UX users expect.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -97,34 +77,47 @@ export function ChatPanel({ messages, setMessages, onClose }: Props) {
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  const send = async () => {
-    const trimmed = input.trim();
-    if (!trimmed || trimmed.length > MAX_USER_LEN || loading) return;
+  /**
+   * Generic POST to /api/chat. Used both for the initial greeting (when
+   * intake is submitted) and for every subsequent user message.
+   *
+   * `userText` is the latest user message to append. Pass null to send
+   * just the existing history (e.g. when bootstrapping the greeting
+   * after intake submission - no user turn yet, the server's system
+   * prompt opens the conversation).
+   */
+  const callChat = async (
+    userText: string | null,
+    currentIntake: IntakePayload,
+  ) => {
     setError(null);
 
-    const userMsg: ChatMessageType = { role: "user", content: trimmed };
-    const nextHistory = [...messages, userMsg];
-    setMessages(nextHistory);
-    setInput("");
+    let nextHistory: ChatMessageType[];
+    if (userText) {
+      const userMsg: ChatMessageType = { role: "user", content: userText };
+      nextHistory = [...messages, userMsg];
+      setMessages(nextHistory);
+    } else {
+      nextHistory = messages;
+    }
     setLoading(true);
 
     try {
-      // We exclude the intro message from the wire payload - it's
-      // a UI affordance, not part of the conversation the model needs
-      // to see. The server's system prompt covers the same context.
-      const apiPayload = nextHistory.filter(
-        (m) => m !== INTRO_MESSAGE && m.role !== "system",
-      );
+      const apiPayload = nextHistory.filter((m) => m.role !== "system");
 
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: apiPayload }),
+        body: JSON.stringify({
+          messages: apiPayload,
+          intake: currentIntake,
+        }),
       });
 
       if (res.status === 429) {
         const json = await res.json().catch(() => ({}));
-        const seconds = json?.retryAfterSeconds ?? 60;
+        const seconds = (json as { retryAfterSeconds?: number })
+          ?.retryAfterSeconds ?? 60;
         setMessages((prev) => [
           ...prev,
           {
@@ -138,13 +131,10 @@ export function ChatPanel({ messages, setMessages, onClose }: Props) {
       if (!res.ok) {
         const json = await res.json().catch(() => ({}));
         const reason =
-          typeof json?.error === "string"
-            ? json.error
+          typeof (json as { error?: unknown })?.error === "string"
+            ? ((json as { error: string }).error)
             : "Something went wrong. Please try again.";
-        setMessages((prev) => [
-          ...prev,
-          { role: "system", content: reason },
-        ]);
+        setMessages((prev) => [...prev, { role: "system", content: reason }]);
         return;
       }
 
@@ -162,8 +152,8 @@ export function ChatPanel({ messages, setMessages, onClose }: Props) {
         return;
       }
 
-      // Scan for a lead-capture block. If found, strip it from the
-      // visible bubble and POST the JSON to /api/lead.
+      // Scan for the LEAD_CAPTURE block. Strip it from the visible
+      // bubble and (if valid) merge with intake + POST to /api/lead.
       const leadResult = extractLeadCapture(raw);
       const visible = leadResult.cleaned.trim() || raw;
 
@@ -172,29 +162,81 @@ export function ChatPanel({ messages, setMessages, onClose }: Props) {
         { role: "assistant", content: visible },
       ]);
 
-      if (leadResult.lead) {
-        // Fire-and-forget. The /api/lead route never returns 5xx to
-        // the parent - it logs failures and acknowledges. So we don't
-        // need error handling here that would surface to the UI.
+      if (leadResult.extras) {
+        const fullLead: LeadPayload = {
+          name: currentIntake.name,
+          phone: currentIntake.phone,
+          country: currentIntake.country,
+          syllabus: currentIntake.syllabus,
+          grade: currentIntake.grade,
+          medium: currentIntake.medium,
+          ...(leadResult.extras.subject
+            ? { subject: leadResult.extras.subject }
+            : {}),
+          ...(leadResult.extras.recommendedClassCode
+            ? { recommendedClassCode: leadResult.extras.recommendedClassCode }
+            : {}),
+          ...(leadResult.extras.notes
+            ? { notes: leadResult.extras.notes }
+            : {}),
+        };
+
+        // Verbose client-side logging so dev tools clearly show the
+        // captured lead before it leaves the browser. The server route
+        // does the same on the receiving end.
+        // eslint-disable-next-line no-console
+        console.log(
+          "%c[EDUS chatbot] lead captured -> POST /api/lead",
+          "color:#2563EB;font-weight:700",
+          fullLead,
+        );
+
+        // Fire-and-forget. /api/lead never returns 5xx, so we don't
+        // need error handling that would surface to the parent.
         fetch("/api/lead", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(leadResult.lead),
-        }).catch((err) => console.warn("[chatbot] /api/lead failed:", err));
+          body: JSON.stringify(fullLead),
+        }).catch((err) =>
+          // eslint-disable-next-line no-console
+          console.warn("[EDUS chatbot] /api/lead network failure:", err),
+        );
       }
     } catch (err) {
-      console.error("[chatbot] /api/chat error:", err);
+      // eslint-disable-next-line no-console
+      console.error("[EDUS chatbot] /api/chat error:", err);
       setError("Network hiccup. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
+  /**
+   * Intake form submission handler. Stores the intake and immediately
+   * fires the first /api/chat call so the bot opens the conversation
+   * with a personalised greeting. No "Press enter to start" friction.
+   */
+  const handleIntakeSubmit = (next: IntakePayload) => {
+    setIntake(next);
+    // Seed an opening user-style message that prompts the LLM to greet.
+    // The LLM has the full intake in its system prompt context, so
+    // it'll greet the parent by name + acknowledge the grade + ask the
+    // single best clarifying question.
+    void callChat("Hi! I've shared my details above. Can you help?", next);
+  };
+
+  const send = () => {
+    if (!intake) return; // form should be showing instead
+    const trimmed = input.trim();
+    if (!trimmed || trimmed.length > MAX_USER_LEN || loading) return;
+    setInput("");
+    void callChat(trimmed, intake);
+  };
+
   const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    // Enter sends, Shift+Enter inserts a newline.
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      void send();
+      send();
     }
   };
 
@@ -241,59 +283,71 @@ export function ChatPanel({ messages, setMessages, onClose }: Props) {
         </button>
       </header>
 
-      {/* Message list */}
-      <div
-        ref={scrollRef}
-        className="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-[#F8FBFF]"
-      >
-        {messages.map((m, i) => (
-          <ChatMessage key={i} message={m} />
-        ))}
-        {loading ? (
-          <div className="flex justify-start">
-            <div className="bg-white rounded-2xl rounded-bl-sm border border-[rgba(16,32,51,0.08)] px-4 py-2.5 shadow-[0_6px_18px_-10px_rgba(16,32,51,0.18)] flex items-center gap-1.5">
-              <Dot delay="0s" />
-              <Dot delay="0.15s" />
-              <Dot delay="0.3s" />
-            </div>
-          </div>
-        ) : null}
-      </div>
-
-      {/* Input */}
-      <div className="border-t border-[rgba(16,32,51,0.08)] bg-white px-3 py-3">
-        {error ? (
-          <p className="text-[11.5px] text-[#DC2626] px-1 pb-1.5">{error}</p>
-        ) : null}
-        <div className="flex items-end gap-2">
-          <textarea
-            ref={inputRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value.slice(0, MAX_USER_LEN))}
-            onKeyDown={onKeyDown}
-            disabled={loading}
-            placeholder="Ask about a class, tutor, or schedule..."
-            rows={1}
-            aria-label="Type your message"
-            className="flex-1 resize-none rounded-xl border border-[rgba(16,32,51,0.12)] bg-[#F4F8FF] px-3 py-2 text-[14px] leading-[1.55] focus:outline-none focus:border-[#2563EB] focus:bg-white transition placeholder:text-[#5A6A82] disabled:opacity-60 max-h-32"
-          />
-          <button
-            type="button"
-            onClick={() => void send()}
-            disabled={loading || !input.trim()}
-            aria-label="Send message"
-            className="inline-flex items-center justify-center w-10 h-10 rounded-xl text-white shadow-[0_4px_12px_-4px_rgba(37,99,235,0.5)] transition hover:-translate-y-0.5 disabled:opacity-40 disabled:hover:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/45"
-            style={{ background: "linear-gradient(135deg, #2563EB 0%, #6E5BC8 100%)" }}
+      {/* Phase 1: intake form. Phase 2: message list + input. */}
+      {intake ? (
+        <>
+          <div
+            ref={scrollRef}
+            className="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-[#F8FBFF]"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-            </svg>
-          </button>
-        </div>
-        <p className="text-[10.5px] text-[#5A6A82] mt-2 px-1">
-          AI assistant. Confirms details with the EDUS team before enrolment.
-        </p>
-      </div>
+            {messages.map((m, i) => (
+              <ChatMessage key={i} message={m} />
+            ))}
+            {loading ? (
+              <div className="flex justify-start">
+                <div className="bg-white rounded-2xl rounded-bl-sm border border-[rgba(16,32,51,0.08)] px-4 py-2.5 shadow-[0_6px_18px_-10px_rgba(16,32,51,0.18)] flex items-center gap-1.5">
+                  <Dot delay="0s" />
+                  <Dot delay="0.15s" />
+                  <Dot delay="0.3s" />
+                </div>
+              </div>
+            ) : null}
+          </div>
+
+          <div className="border-t border-[rgba(16,32,51,0.08)] bg-white px-3 py-3">
+            {error ? (
+              <p className="text-[11.5px] text-[#DC2626] px-1 pb-1.5">
+                {error}
+              </p>
+            ) : null}
+            <div className="flex items-end gap-2">
+              <textarea
+                ref={inputRef}
+                value={input}
+                onChange={(e) =>
+                  setInput(e.target.value.slice(0, MAX_USER_LEN))
+                }
+                onKeyDown={onKeyDown}
+                disabled={loading}
+                placeholder="Ask about a class, tutor, or schedule..."
+                rows={1}
+                aria-label="Type your message"
+                className="flex-1 resize-none rounded-xl border border-[rgba(16,32,51,0.12)] bg-[#F4F8FF] px-3 py-2 text-[14px] leading-[1.55] focus:outline-none focus:border-[#2563EB] focus:bg-white transition placeholder:text-[#5A6A82] disabled:opacity-60 max-h-32"
+              />
+              <button
+                type="button"
+                onClick={() => send()}
+                disabled={loading || !input.trim()}
+                aria-label="Send message"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-xl text-white shadow-[0_4px_12px_-4px_rgba(37,99,235,0.5)] transition hover:-translate-y-0.5 disabled:opacity-40 disabled:hover:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/45"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #2563EB 0%, #6E5BC8 100%)",
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                </svg>
+              </button>
+            </div>
+            <p className="text-[10.5px] text-[#5A6A82] mt-2 px-1">
+              AI assistant. Confirms details with the EDUS team before enrolment.
+            </p>
+          </div>
+        </>
+      ) : (
+        <IntakeForm onSubmit={handleIntakeSubmit} />
+      )}
     </div>
   );
 }
@@ -326,28 +380,30 @@ function Dot({ delay }: { delay: string }) {
 /* --------------------------------------------------------------- */
 
 /**
- * Parse the LLM reply for a lead-capture block. The system prompt
- * instructs the model to emit:
+ * Parse the LLM reply for the conversation-level lead extras:
  *
  *   [[LEAD_CAPTURE]]
- *   { ...json... }
+ *   {"subject":"...","recommendedClassCode":"...","notes":"..."}
  *   [[/LEAD_CAPTURE]]
  *
- * Returns the validated lead object (or null if parsing failed) and
- * the cleaned reply with the block stripped out for display.
+ * The intake fields (name, phone, country, syllabus, grade, medium) are
+ * NOT in this block - they live in component state from the IntakeForm.
+ * The frontend merges them with these extras before POSTing the lead.
  *
- * Strict-ish parsing: we only accept the exact marker shape, and we
- * silently drop the block if the JSON inside is malformed. Better to
- * surface the reply without the lead than to forward garbage to the
- * EDUS team.
+ * Returns the cleaned reply (block stripped) + the extras (or null if
+ * the block was absent / malformed).
  */
 function extractLeadCapture(raw: string): {
   cleaned: string;
-  lead: LeadPayload | null;
+  extras: {
+    subject?: string;
+    recommendedClassCode?: string;
+    notes?: string;
+  } | null;
 } {
   const marker = /\[\[LEAD_CAPTURE\]\]\s*([\s\S]*?)\s*\[\[\/LEAD_CAPTURE\]\]/;
   const match = raw.match(marker);
-  if (!match) return { cleaned: raw, lead: null };
+  if (!match) return { cleaned: raw, extras: null };
 
   const cleaned = raw.replace(marker, "").trim();
 
@@ -355,37 +411,33 @@ function extractLeadCapture(raw: string): {
   try {
     parsed = JSON.parse(match[1]);
   } catch {
-    return { cleaned, lead: null };
+    return { cleaned, extras: null };
   }
 
   if (typeof parsed !== "object" || parsed === null) {
-    return { cleaned, lead: null };
+    return { cleaned, extras: null };
   }
   const p = parsed as Record<string, unknown>;
 
-  // Minimum required fields. Anything less is junk - drop silently.
-  if (
-    typeof p.name !== "string" ||
-    typeof p.phone !== "string" ||
-    typeof p.country !== "string" ||
-    typeof p.grade !== "string" ||
-    typeof p.medium !== "string" ||
-    typeof p.subject !== "string"
-  ) {
-    return { cleaned, lead: null };
+  const extras: {
+    subject?: string;
+    recommendedClassCode?: string;
+    notes?: string;
+  } = {};
+  if (typeof p.subject === "string" && p.subject.trim()) {
+    extras.subject = p.subject.trim().slice(0, 60);
   }
-
-  const lead: LeadPayload = {
-    name: p.name,
-    phone: p.phone,
-    country: p.country,
-    grade: p.grade,
-    medium: p.medium,
-    subject: p.subject,
-    ...(typeof p.notes === "string" && p.notes ? { notes: p.notes } : {}),
-    ...(typeof p.recommendedClassCode === "string" && p.recommendedClassCode
-      ? { recommendedClassCode: p.recommendedClassCode }
-      : {}),
-  };
-  return { cleaned, lead };
+  if (
+    typeof p.recommendedClassCode === "string" &&
+    p.recommendedClassCode.trim()
+  ) {
+    extras.recommendedClassCode = p.recommendedClassCode.trim().slice(0, 40);
+  }
+  if (typeof p.notes === "string" && p.notes.trim()) {
+    extras.notes = p.notes.trim().slice(0, 2000);
+  }
+  // Even an empty extras object is meaningful - it signals "the bot
+  // thinks we have a match, please capture the lead even if no extra
+  // detail was attached."
+  return { cleaned, extras };
 }

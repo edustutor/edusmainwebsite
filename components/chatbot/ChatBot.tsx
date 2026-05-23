@@ -2,7 +2,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { ChatLauncher } from "./ChatLauncher";
 import { ChatPanel } from "./ChatPanel";
-import type { ChatMessage } from "@/lib/chatbot/types";
+import type { ChatMessage, IntakePayload } from "@/lib/chatbot/types";
 
 /**
  * Top-level EDUS chatbot. Mounts once in the root layout.
@@ -34,6 +34,11 @@ export function ChatBot() {
   const [open, setOpen] = useState(false);
   const [interacted, setInteracted] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  // Pre-chat intake captured by the IntakeForm. null = form still showing.
+  // Held at the ChatBot (not ChatPanel) level so closing + reopening the
+  // panel mid-session preserves the form submission. Parents shouldn't
+  // need to re-fill if they accidentally close the panel.
+  const [intake, setIntake] = useState<IntakePayload | null>(null);
 
   // Auto-suggest opening after AUTO_OPEN_DELAY_MS, but only on first
   // visit per session AND only if the user hasn't already opened the
@@ -75,6 +80,8 @@ export function ChatBot() {
         <ChatPanel
           messages={messages}
           setMessages={setMessages}
+          intake={intake}
+          setIntake={setIntake}
           onClose={handleClose}
         />
       ) : null}
