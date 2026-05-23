@@ -43,6 +43,30 @@ type Props = {
 /** Maximum chars per user message. Mirrors the server-side validation. */
 const MAX_USER_LEN = 2000;
 
+/**
+ * Idle-nudge timing. When the bot finishes a reply and the parent goes
+ * silent for this long, fire ONE follow-up nudge so we keep the
+ * conversation alive (sales-driven follow-up behaviour).
+ *
+ * 45 seconds is the sweet spot: short enough that parents who got
+ * distracted come back to a fresh prompt, long enough that we don't
+ * interrupt a parent who is still typing a long question. We cap total
+ * nudges per session at MAX_NUDGES so the bot never feels spammy.
+ */
+const IDLE_NUDGE_MS = 45_000;
+const MAX_NUDGES = 2;
+
+/**
+ * Synthetic user message that triggers the nudge round. The bot sees
+ * this content in the chat history; the system prompt tells it how to
+ * respond (warm gentle follow-up, vary the angle, never repeat).
+ *
+ * IMPORTANT: this string is stripped from the visible UI so the parent
+ * never sees the placeholder. The LLM uses it purely as a signal.
+ */
+const IDLE_NUDGE_PROMPT =
+  "[user went idle - send one short gentle follow-up nudge to re-engage them]";
+
 export function ChatPanel({
   messages,
   setMessages,
@@ -55,6 +79,12 @@ export function ChatPanel({
   const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
+
+  // Idle-nudge bookkeeping. Both refs (not state) because they don't
+  // need to trigger re-renders - the timer is a fire-and-forget side
+  // effect, the counter only gates whether we schedule another one.
+  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const nudgeCountRef = useRef(0);
 
   // Auto-scroll to bottom on every message addition.
   useEffect(() => {
@@ -77,6 +107,45 @@ export function ChatPanel({
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
+  // Clear any pending idle-nudge timer on unmount so we don't fire
+  // after the parent has navigated away or closed the panel.
+  useEffect(() => {
+    return () => {
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+    };
+  }, []);
+
+  /**
+   * Cancel any pending idle-nudge timer. Called whenever the parent
+   * shows activity (typing, sending, opening/closing the panel) so we
+   * never fire a nudge while they're actively engaged.
+   */
+  const cancelIdleNudge = () => {
+    if (idleTimerRef.current) {
+      clearTimeout(idleTimerRef.current);
+      idleTimerRef.current = null;
+    }
+  };
+
+  /**
+   * Schedule the next idle-nudge round.
+   *
+   * Called after a bot reply finishes. If the parent doesn't type or
+   * send anything within IDLE_NUDGE_MS, fire ONE synthetic nudge round
+   * to the LLM so the bot says something warm and re-engaging.
+   *
+   * Capped at MAX_NUDGES per conversation - after that we go silent and
+   * let the parent restart the conversation on their own terms.
+   */
+  const scheduleIdleNudge = (currentIntake: IntakePayload) => {
+    cancelIdleNudge();
+    if (nudgeCountRef.current >= MAX_NUDGES) return;
+    idleTimerRef.current = setTimeout(() => {
+      nudgeCountRef.current += 1;
+      void callChat(IDLE_NUDGE_PROMPT, currentIntake, { hideUserBubble: true });
+    }, IDLE_NUDGE_MS);
+  };
+
   /**
    * Generic POST to /api/chat. Used both for the initial greeting (when
    * intake is submitted) and for every subsequent user message.
@@ -89,14 +158,28 @@ export function ChatPanel({
   const callChat = async (
     userText: string | null,
     currentIntake: IntakePayload,
+    opts: { hideUserBubble?: boolean } = {},
   ) => {
+    // Any chat call cancels the previous idle timer - whether the call
+    // is parent-initiated (they're back, no nudge needed) or system-
+    // initiated (the nudge itself fired, don't stack a second one).
+    cancelIdleNudge();
     setError(null);
 
     let nextHistory: ChatMessageType[];
     if (userText) {
+      // hideUserBubble=true means this is a synthetic system message
+      // (e.g. the idle nudge prompt). We still send it to the LLM so the
+      // model knows what to respond to, but we don't render it as a
+      // user bubble in the visible chat thread.
       const userMsg: ChatMessageType = { role: "user", content: userText };
       nextHistory = [...messages, userMsg];
-      setMessages(nextHistory);
+      if (opts.hideUserBubble) {
+        // Send to API but keep the visible UI state unchanged.
+        // (We pass nextHistory to fetch but skip the setMessages call.)
+      } else {
+        setMessages(nextHistory);
+      }
     } else {
       nextHistory = messages;
     }
@@ -129,6 +212,7 @@ export function ChatPanel({
       }
 
       if (!res.ok) {
+        // Error path: server returns application/json with { error }.
         const json = await res.json().catch(() => ({}));
         const reason =
           typeof (json as { error?: unknown })?.error === "string"
@@ -138,9 +222,11 @@ export function ChatPanel({
         return;
       }
 
-      const json = (await res.json()) as { message?: string };
-      const raw = (json.message ?? "").trim();
-      if (!raw) {
+      // Streaming path. The server returns text/plain (chunked) -
+      // each chunk is raw token text from NIM. We append each chunk
+      // to a single assistant message bubble so the user sees the
+      // reply materialise instead of staring at a typing indicator.
+      if (!res.body) {
         setMessages((prev) => [
           ...prev,
           {
@@ -152,15 +238,82 @@ export function ChatPanel({
         return;
       }
 
-      // Scan for the LEAD_CAPTURE block. Strip it from the visible
-      // bubble and (if valid) merge with intake + POST to /api/lead.
+      // Insert an empty assistant message that we'll mutate in place
+      // as chunks arrive. Capture its index so subsequent updates
+      // target this exact bubble (history may grow if the user
+      // somehow triggers another action mid-stream).
+      let assistantIndex = -1;
+      setMessages((prev) => {
+        assistantIndex = prev.length;
+        return [...prev, { role: "assistant", content: "" }];
+      });
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let accumulated = "";
+
+      // First-token latency is what determines "fast feels". Once we
+      // get the first chunk, drop the typing indicator immediately -
+      // the text itself is the indicator now.
+      let gotFirstToken = false;
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        if (!chunk) continue;
+        accumulated += chunk;
+        if (!gotFirstToken) {
+          gotFirstToken = true;
+          setLoading(false); // hide typing indicator the moment text starts
+        }
+        // While streaming, hide any partial [[LEAD_CAPTURE]] marker
+        // from the visible bubble. If the marker is mid-emission we'd
+        // see ugly raw JSON for half a second. The maskLeadMarker
+        // helper trims everything from "[[" onwards if it might be
+        // the start of a marker.
+        const visibleSoFar = maskLeadMarker(accumulated);
+        setMessages((prev) => {
+          const next = [...prev];
+          if (assistantIndex >= 0 && next[assistantIndex]) {
+            next[assistantIndex] = {
+              role: "assistant",
+              content: visibleSoFar,
+            };
+          }
+          return next;
+        });
+      }
+
+      // Stream finished. accumulated holds the full raw reply.
+      const raw = accumulated.trim();
+      if (!raw) {
+        setMessages((prev) => {
+          const next = [...prev];
+          if (assistantIndex >= 0 && next[assistantIndex]) {
+            // Replace the empty assistant bubble with a fallback.
+            next[assistantIndex] = {
+              role: "system",
+              content:
+                "I didn't catch that. Could you rephrase what you're looking for?",
+            };
+          }
+          return next;
+        });
+        return;
+      }
+
+      // Run the final lead-capture extraction on the complete reply.
+      // Update the assistant bubble to its cleaned form.
       const leadResult = extractLeadCapture(raw);
       const visible = leadResult.cleaned.trim() || raw;
-
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: visible },
-      ]);
+      setMessages((prev) => {
+        const next = [...prev];
+        if (assistantIndex >= 0 && next[assistantIndex]) {
+          next[assistantIndex] = { role: "assistant", content: visible };
+        }
+        return next;
+      });
 
       if (leadResult.extras) {
         const fullLead: LeadPayload = {
@@ -208,6 +361,10 @@ export function ChatPanel({
       setError("Network hiccup. Please try again.");
     } finally {
       setLoading(false);
+      // After the reply lands, arm the next idle-nudge window. If the
+      // parent types or sends, cancelIdleNudge() fires from those
+      // handlers and the timer never gets to ring.
+      scheduleIdleNudge(currentIntake);
     }
   };
 
@@ -243,10 +400,15 @@ export function ChatPanel({
   return (
     <div
       role="dialog"
-      aria-label="EDUS admissions chat"
+      aria-label="EDUS AI Assistant chat"
       className="fixed bottom-5 right-5 z-[60] w-[calc(100vw-2.5rem)] max-w-[400px] h-[min(620px,calc(100vh-2.5rem))] flex flex-col rounded-2xl bg-white shadow-[0_30px_60px_-20px_rgba(16,32,51,0.4)] border border-[rgba(16,32,51,0.08)] overflow-hidden"
     >
-      {/* Header */}
+      {/* Header.
+          Layout mirrors WhatsApp / Messenger conventions parents already
+          recognise: avatar + name + status line. The status line carries
+          a live "Online" pulse dot and a typical-response-time hint, which
+          softens the parent's expectations (they understand it's not an
+          instant reply, but they can see the assistant is awake). */}
       <header
         className="flex items-center justify-between px-4 py-3 text-white"
         style={{
@@ -254,6 +416,7 @@ export function ChatPanel({
         }}
       >
         <div className="flex items-center gap-2.5 min-w-0">
+          {/* Avatar circle with the chat icon - kept from the prior design. */}
           <span
             className="inline-flex w-8 h-8 rounded-full items-center justify-center bg-white/15 backdrop-blur shrink-0"
             aria-hidden
@@ -264,10 +427,35 @@ export function ChatPanel({
           </span>
           <div className="min-w-0">
             <p className="font-display font-700 text-[14px] leading-tight">
-              EDUS admissions
+              EDUS AI Assistant
             </p>
-            <p className="text-[11px] text-white/85 leading-tight">
-              Live online classes - Sri Lanka
+            {/* Status row: live pulse dot + Online + reply-time hint. */}
+            <p className="text-[11px] text-white/85 leading-tight flex items-center gap-1.5 mt-0.5">
+              {/* Online pulse - inner solid dot + outer ping. Pure CSS
+                  ping animation keyframes are scoped via a local <style>
+                  block (see end of this header section). */}
+              <span
+                aria-hidden
+                className="relative inline-flex w-2 h-2 shrink-0"
+              >
+                <span
+                  className="absolute inline-flex w-full h-full rounded-full bg-[#22C55E] opacity-75"
+                  style={{
+                    animation: "edus-online-ping 1.6s cubic-bezier(0,0,0.2,1) infinite",
+                  }}
+                />
+                <span className="relative inline-flex w-2 h-2 rounded-full bg-[#22C55E]" />
+              </span>
+              <span>Online</span>
+              <span aria-hidden className="opacity-50">·</span>
+              <span>Replies in ~1 min</span>
+              <style>{`
+                @keyframes edus-online-ping {
+                  0%   { transform: scale(1);   opacity: 0.75; }
+                  80%  { transform: scale(2.4); opacity: 0;    }
+                  100% { transform: scale(2.4); opacity: 0;    }
+                }
+              `}</style>
             </p>
           </div>
         </div>
@@ -314,9 +502,12 @@ export function ChatPanel({
               <textarea
                 ref={inputRef}
                 value={input}
-                onChange={(e) =>
-                  setInput(e.target.value.slice(0, MAX_USER_LEN))
-                }
+                onChange={(e) => {
+                  // Parent is typing - cancel any pending nudge so the
+                  // bot doesn't interrupt them mid-sentence.
+                  cancelIdleNudge();
+                  setInput(e.target.value.slice(0, MAX_USER_LEN));
+                }}
                 onKeyDown={onKeyDown}
                 disabled={loading}
                 placeholder="Ask about a class, tutor, or schedule..."
@@ -373,6 +564,32 @@ function Dot({ delay }: { delay: string }) {
       `}</style>
     </span>
   );
+}
+
+/* --------------------------------------------------------------- */
+/* Streaming display helpers                                         */
+/* --------------------------------------------------------------- */
+
+/**
+ * Hide partial [[LEAD_CAPTURE]] markers while the stream is still
+ * arriving. Once the model starts emitting the marker block, we don't
+ * want the parent to briefly see "[[LEAD_C" then "[[LEAD_CAP" then the
+ * raw JSON flickering across the bubble.
+ *
+ * Heuristic: if the text contains a complete opening marker
+ * "[[LEAD_CAPTURE]]" we truncate at that position. We do NOT try to
+ * partial-match prefixes like "[[LE" because (a) the marker is the
+ * ONLY known double-bracket sequence the LLM emits, (b) trimming a
+ * legitimate "[[" elsewhere (rare in normal text) would be more
+ * jarring than briefly showing the opening marker once.
+ *
+ * The final extractLeadCapture call runs on the COMPLETE accumulated
+ * text after the stream finishes, so this is purely a presentational
+ * hide-during-streaming optimisation.
+ */
+function maskLeadMarker(text: string): string {
+  const idx = text.indexOf("[[LEAD_CAPTURE]]");
+  return idx === -1 ? text : text.slice(0, idx).trimEnd();
 }
 
 /* --------------------------------------------------------------- */

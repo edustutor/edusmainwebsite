@@ -32,6 +32,15 @@ import type { IntakePayload } from "@/lib/chatbot/types";
  *   - Every input has a label, every required field has aria-required.
  *   - Submit button is disabled until validation passes (visible state).
  *   - Errors are announced via aria-describedby on the failing field.
+ *
+ * NO DEFAULTS POLICY:
+ *   Per product decision, ZERO fields are pre-filled. Every dropdown
+ *   starts on a "Select ..." placeholder; the medium row starts with
+ *   nothing selected. The parent must actively choose every option.
+ *   This prevents accidentally inheriting wrong defaults (e.g. a Tamil
+ *   medium family clicking through with the English-medium default
+ *   left selected). The "Start chat" button stays disabled until all
+ *   six fields are filled.
  */
 
 type Props = {
@@ -83,19 +92,33 @@ const GRADES = [
 const MEDIUMS = ["Tamil", "English", "Sinhala"];
 
 export function IntakeForm({ onSubmit }: Props) {
+  // All six fields start empty - no defaults. The Start chat button
+  // stays disabled until the parent has actively chosen every value.
+  // Empty-string sentinel works for both inputs and selects (selects
+  // render the disabled placeholder <option> when value="").
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [country, setCountry] = useState("Sri Lanka");
-  const [syllabus, setSyllabus] = useState("National Syllabus (Sri Lanka)");
-  const [grade, setGrade] = useState("Grade 6");
-  const [medium, setMedium] = useState("Tamil");
+  const [country, setCountry] = useState("");
+  const [syllabus, setSyllabus] = useState("");
+  const [grade, setGrade] = useState("");
+  const [medium, setMedium] = useState("");
   const [phoneError, setPhoneError] = useState<string | null>(null);
 
   // Phone validation: permissive international shape. Same regex as the
   // /api/lead server-side validator so client + server agree.
   const isPhoneValid = /^\+?[\d\s\-()]{7,30}$/.test(phone.trim());
   const isNameValid = name.trim().length > 1;
-  const canSubmit = isNameValid && isPhoneValid;
+  // canSubmit requires ALL six fields to be non-empty. Server-side
+  // sanitiseIntake in /api/chat enforces the same rule defensively;
+  // the client check is purely so the disabled-button state is
+  // visible feedback for the parent.
+  const canSubmit =
+    isNameValid &&
+    isPhoneValid &&
+    country !== "" &&
+    syllabus !== "" &&
+    grade !== "" &&
+    medium !== "";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -172,10 +195,19 @@ export function IntakeForm({ onSubmit }: Props) {
                 id="intake-country"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
-                className={selectClass}
+                required
+                aria-required
+                className={selectClassFor(country)}
               >
+                {/* Disabled placeholder option - shown when value="".
+                    The parent MUST choose a real value before submit. */}
+                <option value="" disabled>
+                  Select country
+                </option>
                 {COUNTRIES.map((c) => (
-                  <option key={c}>{c}</option>
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
                 ))}
               </select>
             </Field>
@@ -184,10 +216,17 @@ export function IntakeForm({ onSubmit }: Props) {
                 id="intake-grade"
                 value={grade}
                 onChange={(e) => setGrade(e.target.value)}
-                className={selectClass}
+                required
+                aria-required
+                className={selectClassFor(grade)}
               >
+                <option value="" disabled>
+                  Select grade
+                </option>
                 {GRADES.map((g) => (
-                  <option key={g}>{g}</option>
+                  <option key={g} value={g}>
+                    {g}
+                  </option>
                 ))}
               </select>
             </Field>
@@ -198,10 +237,17 @@ export function IntakeForm({ onSubmit }: Props) {
               id="intake-syllabus"
               value={syllabus}
               onChange={(e) => setSyllabus(e.target.value)}
-              className={selectClass}
+              required
+              aria-required
+              className={selectClassFor(syllabus)}
             >
+              <option value="" disabled>
+                Select syllabus
+              </option>
               {SYLLABUSES.map((s) => (
-                <option key={s}>{s}</option>
+                <option key={s} value={s}>
+                  {s}
+                </option>
               ))}
             </select>
           </Field>
@@ -209,7 +255,9 @@ export function IntakeForm({ onSubmit }: Props) {
           <Field id="intake-medium" label="Medium">
             <div className="flex gap-2" role="radiogroup" aria-label="Medium">
               {MEDIUMS.map((m) => {
-                const selected = medium === m;
+                // medium starts as "" so NO button is selected initially.
+                // The parent must click one before submit becomes enabled.
+                const selected = medium !== "" && medium === m;
                 return (
                   <button
                     key={m}
@@ -244,7 +292,7 @@ export function IntakeForm({ onSubmit }: Props) {
         </button>
 
         <p className="mt-3 text-[10.5px] text-[#5A6A82] leading-[1.5] text-center">
-          By starting, you agree to share these details with the EDUS academic team.
+          By starting, you agree to share these details with the EDUS Student Consultants.
         </p>
       </div>
     </form>
@@ -259,11 +307,16 @@ function Field({
   label,
   children,
   error,
+  required = true,
 }: {
   id: string;
   label: string;
   children: React.ReactNode;
   error?: string;
+  /** Show a red asterisk after the label. Defaults to true because
+   *  every field on this intake form is required - if a future field
+   *  becomes optional, pass required={false} to suppress the marker. */
+  required?: boolean;
 }) {
   return (
     <div>
@@ -272,6 +325,14 @@ function Field({
         className="block text-[11px] uppercase tracking-[0.1em] font-display font-700 text-[#5A6A82] mb-1"
       >
         {label}
+        {required ? (
+          // aria-hidden so screen readers don't say "asterisk" - the
+          // accessible signal that the field is required already comes
+          // from the aria-required attribute on the input/select itself.
+          <span aria-hidden className="text-[#DC2626] ml-0.5">
+            *
+          </span>
+        ) : null}
       </label>
       {children}
       {error ? (
@@ -290,5 +351,17 @@ function Field({
 const inputClass =
   "w-full rounded-lg border border-[rgba(16,32,51,0.12)] bg-[#F4F8FF] px-3 py-2 text-[14px] focus:outline-none focus:border-[#2563EB] focus:bg-white transition placeholder:text-[#5A6A82]/60";
 
-const selectClass =
+const selectBase =
   "w-full rounded-lg border border-[rgba(16,32,51,0.12)] bg-[#F4F8FF] px-3 py-2 text-[14px] focus:outline-none focus:border-[#2563EB] focus:bg-white transition";
+
+/**
+ * Apply muted placeholder colour when the select has no value chosen.
+ * Browsers don't expose a CSS pseudo-class for "the disabled option is
+ * showing", so we drive it from React state instead. Once the parent
+ * picks a value, the text becomes the normal ink colour.
+ */
+function selectClassFor(value: string): string {
+  return value === ""
+    ? `${selectBase} text-[#5A6A82]/70`
+    : `${selectBase} text-[#102033]`;
+}

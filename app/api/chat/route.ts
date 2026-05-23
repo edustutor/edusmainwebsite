@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { loadCatalog } from "@/lib/chatbot/catalog";
 import { buildSystemPrompt } from "@/lib/chatbot/systemPrompt";
+import { searchEdus, type TavilyResult } from "@/lib/chatbot/tavily";
 import type {
   ChatMessage,
   ChatRequest,
@@ -16,22 +17,48 @@ import type {
  *   2. We inject the EDUS system prompt + catalog data server-side so
  *      the client only sends the conversation history. Catalog stays
  *      authoritative; client can't manipulate what classes get shown.
- *   3. Per-IP rate limiting (10 messages/min) lives here. Without it,
- *      a misbehaving page on edustutor.com could rack up unbounded
- *      NVIDIA bills.
+ *   3. Per-IP rate limiting (10 messages/min) lives here.
+ *   4. The Tavily search tool runs HERE so the parent never sees raw
+ *      search payloads and TAVILY_API_KEY stays off the browser.
  *
  * Wire format:
  *   POST /api/chat
- *   { "messages": [{ "role": "user", "content": "..." }, ...] }
+ *   { "messages": [{ "role": "user", "content": "..." }, ...],
+ *     "intake": { ... } }
  *
- *   200 { "message": "...assistant reply..." }
- *   400 { "error": "..." }
- *   429 { "error": "rate limit", "retryAfterSeconds": 60 }
- *   500 { "error": "..." }
- *   502 { "error": "upstream failure" }
+ *   200 text/plain (chunked) - streams the assistant reply token-by-token
+ *   400 application/json { "error": "..." }
+ *   429 application/json { "error": "rate limit", "retryAfterSeconds": 60 }
+ *   500 application/json { "error": "..." }
+ *   502 application/json { "error": "upstream failure" }
  *
- * NVIDIA NIM uses an OpenAI-compatible chat completions API, so the
- * request body shape mirrors OpenAI's exactly.
+ * STREAMING + TOOL USE:
+ *   The model has access to a `search_edustutor` tool implemented by
+ *   lib/chatbot/tavily.ts. Tavily restricts hits to EDUS apex domains.
+ *
+ *   Per-round flow:
+ *     1. Open SSE stream to NIM with tools=[search_edustutor].
+ *     2. Read SSE deltas as they arrive.
+ *     3. If the first deltas describe a TOOL CALL, accumulate the
+ *        tool_calls.function.arguments JSON across deltas, close the
+ *        stream once we have a complete call, run Tavily, append the
+ *        tool result to the conversation, then call NIM AGAIN with
+ *        tools omitted - this second call streams plain content to
+ *        the browser.
+ *     4. If the deltas describe CONTENT instead, pipe them straight
+ *        to the browser as plain text - same path as the no-tool case.
+ *
+ *   We cap tool calls at 1 per chat turn. Two reasons: (a) prevents
+ *   runaway recursion, (b) Tavily free-tier quota is finite. If the
+ *   model wants to search again, it must wait for the next user turn.
+ *
+ *   Why not interleave content + tool calls? Llama 3.3 emits one or
+ *   the other per response, not both. Streaming-mid-tool-call is
+ *   possible in theory but adds 100+ LOC of partial-content buffering
+ *   for marginal UX gain - we'd save maybe 200ms on the rare
+ *   acknowledgement token before the tool call.
+ *
+ * NVIDIA NIM uses an OpenAI-compatible chat completions API.
  */
 
 export const runtime = "nodejs";
@@ -53,17 +80,45 @@ const RATE_LIMIT_WINDOW_MS = 60_000;
 /**
  * In-memory rate limit store. Keyed by IP, value is array of timestamps
  * (ms) of recent requests within the rolling window.
- *
- * In-memory is intentional: this is per-Vercel-instance scope, which
- * means a determined attacker could amortise their load across instances.
- * That's fine for v1 - the NVIDIA per-request cost is low and the
- * 10/min cap protects against accidental loops, not motivated abuse.
- * If abuse becomes real, upgrade to Vercel KV or Upstash Redis.
  */
 const rateLimitStore = new Map<string, number[]>();
 
+/* --------------------------------------------------------------- */
+/* Tool definition for NIM. OpenAI-style function-calling schema.   */
+/* --------------------------------------------------------------- */
+
+/**
+ * The single tool we expose to the model. Tavily-backed, scoped to
+ * EDUS apex domains via the server-side helper. Description copy is
+ * tuned to make the model use it ONLY when the catalog can't answer.
+ */
+const TOOLS = [
+  {
+    type: "function",
+    function: {
+      name: "search_edustutor",
+      description:
+        "Search the EDUS websites (edustutor.com, edus.lk, edus.edu.lk) for live content beyond the class catalog already in the system prompt. Use this ONLY when the parent asks about something not in the catalog: blog posts, gallery albums, accreditations, the founder, press coverage, partner organisations, recent news, the contact page, the press kit, or any specific URL on the EDUS sites. Do NOT use this for class recommendations, fees, tutors, or timetables - those facts live in the catalog already.",
+      parameters: {
+        type: "object",
+        properties: {
+          query: {
+            type: "string",
+            description:
+              "Short focused search query in English. 3-10 words. Examples: 'Grade 5 scholarship blog post', 'National ICT Award 2024 EDUS', 'EDUS founder Sugeevan'.",
+          },
+        },
+        required: ["query"],
+      },
+    },
+  },
+];
+
+/* --------------------------------------------------------------- */
+/* Rate limiting + helpers                                          */
+/* --------------------------------------------------------------- */
+
 function getClientIp(req: Request): string {
-  // Vercel sets x-forwarded-for; first IP in the list is the client.
   const fwd = req.headers.get("x-forwarded-for");
   if (fwd) return fwd.split(",")[0].trim();
   const realIp = req.headers.get("x-real-ip");
@@ -71,10 +126,6 @@ function getClientIp(req: Request): string {
   return "unknown";
 }
 
-/**
- * Returns null if within limit, or a Response if rate-limited.
- * Side effect: trims old entries + records this request's timestamp.
- */
 function rateLimit(ip: string): Response | null {
   const now = Date.now();
   const cutoff = now - RATE_LIMIT_WINDOW_MS;
@@ -89,7 +140,6 @@ function rateLimit(ip: string): Response | null {
   }
   recent.push(now);
   rateLimitStore.set(ip, recent);
-  // Opportunistic cleanup - drop entries we'll never need again.
   if (rateLimitStore.size > 5000) {
     for (const [key, ts] of rateLimitStore) {
       const filtered = ts.filter((t) => t > cutoff);
@@ -100,10 +150,6 @@ function rateLimit(ip: string): Response | null {
   return null;
 }
 
-/**
- * Validate the incoming messages array. Returns null on success or a
- * 400 Response with a parent-friendly error message.
- */
 function validateMessages(messages: unknown): {
   error?: Response;
   messages?: ChatMessage[];
@@ -130,7 +176,6 @@ function validateMessages(messages: unknown): {
     }
     const msg = m as Record<string, unknown>;
     if (msg.role !== "user" && msg.role !== "assistant") {
-      // We reject any client-supplied "system" role - the server adds it.
       return { error: NextResponse.json({ error: "invalid message role" }, { status: 400 }) };
     }
     if (typeof msg.content !== "string") {
@@ -158,6 +203,10 @@ function validateMessages(messages: unknown): {
   }
   return { messages: cleaned };
 }
+
+/* --------------------------------------------------------------- */
+/* POST handler                                                      */
+/* --------------------------------------------------------------- */
 
 export async function POST(req: Request) {
   const apiKey = process.env.NVIDIA_API_KEY;
@@ -187,10 +236,6 @@ export async function POST(req: Request) {
   if (error) return error;
 
   // 3. Build the system prompt with the live catalog + intake injected.
-  // intake is optional - if absent or malformed, the prompt falls back
-  // to its "no intake captured yet" branch. We deliberately don't reject
-  // the request for missing intake because future flows (e.g. a passive
-  // FAQ bot) may legitimately skip the form.
   const catalog = await loadCatalog();
   const intake = sanitiseIntake(body.intake);
   const systemPrompt = buildSystemPrompt(
@@ -199,18 +244,171 @@ export async function POST(req: Request) {
     intake,
   );
 
-  // 4. Call NVIDIA NIM (OpenAI-compatible chat completions API).
-  const upstreamPayload = {
+  // 4. Open the first NIM round WITH tools enabled. NimMessage is the
+  // OpenAI-compatible message shape - it supports the tool roles we
+  // need beyond the user/assistant pair the client speaks.
+  const conversation: NimMessage[] = [
+    { role: "system", content: systemPrompt },
+    ...(clientMessages ?? []).map((m) => ({
+      role: m.role,
+      content: m.content,
+    })),
+  ];
+
+  const round1 = await runRound({
+    apiKey,
     model,
-    messages: [
-      { role: "system", content: systemPrompt },
-      ...(clientMessages ?? []),
+    messages: conversation,
+    tools: TOOLS,
+  });
+
+  // 5a. If round 1 returned a content stream (no tool call), pipe it
+  // straight to the browser. This is the common path.
+  if (round1.kind === "content") {
+    return contentResponse(round1.body);
+  }
+
+  // 5b. If round 1 returned an error, surface it.
+  if (round1.kind === "error") {
+    return round1.response;
+  }
+
+  // 5c. The model called the search tool. Execute it, append the
+  // result + the model's tool call to the conversation, then run a
+  // second NIM round WITHOUT tools so the model produces a normal
+  // streamed reply incorporating the search results.
+  const toolCall = round1.toolCall;
+  console.log(
+    "[chat] tool call:",
+    toolCall.name,
+    "args:",
+    JSON.stringify(toolCall.args).slice(0, 200),
+  );
+
+  let toolResult: TavilyResult[] = [];
+  if (toolCall.name === "search_edustutor") {
+    const q = typeof toolCall.args.query === "string" ? toolCall.args.query : "";
+    toolResult = await searchEdus(q);
+    console.log(
+      `[chat] tavily returned ${toolResult.length} result(s) for query: ${q}`,
+    );
+  } else {
+    console.warn("[chat] unknown tool requested:", toolCall.name);
+  }
+
+  // Append the assistant's tool-call turn + the tool result to the
+  // conversation. The OpenAI spec requires the assistant turn to carry
+  // the tool_calls array and the tool turn to reference the same id.
+  const toolCallId = toolCall.id || `call_${Date.now()}`;
+  conversation.push({
+    role: "assistant",
+    content: "",
+    tool_calls: [
+      {
+        id: toolCallId,
+        type: "function",
+        function: {
+          name: toolCall.name,
+          arguments: JSON.stringify(toolCall.args),
+        },
+      },
     ],
-    temperature: 0.3,        // low temp - we want catalog-accurate replies, not creative ones
+  });
+  conversation.push({
+    role: "tool",
+    tool_call_id: toolCallId,
+    content: formatSearchResults(toolResult),
+  });
+
+  // Round 2: NO tools (so the model can't loop) + streaming so the
+  // parent gets the same fast feel as a non-tool answer.
+  const round2 = await runRound({
+    apiKey,
+    model,
+    messages: conversation,
+    tools: undefined, // disable tools - prevents recursion + saves quota
+  });
+
+  if (round2.kind === "content") {
+    return contentResponse(round2.body);
+  }
+  if (round2.kind === "error") {
+    return round2.response;
+  }
+  // Round 2 should never return a tool call (tools disabled). Treat
+  // as upstream confusion if it does.
+  console.error("[chat] unexpected tool call on round 2");
+  return NextResponse.json(
+    { error: "The assistant is temporarily unavailable. Please try again." },
+    { status: 502 },
+  );
+}
+
+/* --------------------------------------------------------------- */
+/* NIM round - one chat completion call, streaming                  */
+/* --------------------------------------------------------------- */
+
+/**
+ * OpenAI-compatible chat message - includes the tool variants the
+ * client doesn't speak (we add them server-side during tool flow).
+ */
+type NimMessage =
+  | { role: "system" | "user"; content: string }
+  | {
+      role: "assistant";
+      content: string;
+      tool_calls?: Array<{
+        id: string;
+        type: "function";
+        function: { name: string; arguments: string };
+      }>;
+    }
+  | { role: "tool"; tool_call_id: string; content: string };
+
+type RunRoundArgs = {
+  apiKey: string;
+  model: string;
+  messages: NimMessage[];
+  tools: typeof TOOLS | undefined;
+};
+
+type RunRoundResult =
+  | { kind: "content"; body: ReadableStream<Uint8Array> }
+  | {
+      kind: "tool";
+      toolCall: { id: string; name: string; args: Record<string, unknown> };
+    }
+  | { kind: "error"; response: Response };
+
+/**
+ * Open a NIM streaming chat completion. Reads the SSE stream just long
+ * enough to determine whether the first delta is content or a tool
+ * call, then either:
+ *   - "content": returns the FULL stream wrapped to emit plain text
+ *     (the remaining content tokens flow through to the browser).
+ *   - "tool": cancels the SSE stream and returns the parsed tool call.
+ *   - "error": returns a 502 Response to surface to the caller.
+ *
+ * We CANNOT split the stream into "what we already read" + "rest" with
+ * a single pipe. Instead, on content we re-emit the buffered first
+ * content token then continue from the reader. The transform stream
+ * below handles that initial-token replay.
+ */
+async function runRound(args: RunRoundArgs): Promise<RunRoundResult> {
+  const { apiKey, model, messages, tools } = args;
+
+  const payload: Record<string, unknown> = {
+    model,
+    messages,
+    temperature: 0.3,
     top_p: 0.9,
-    max_tokens: 800,         // generous enough for class recommendations + capture flow
-    stream: false,           // v1 returns full reply; streaming can be added later
+    max_tokens: 800,
+    stream: true,
   };
+  if (tools) {
+    payload.tools = tools;
+    payload.tool_choice = "auto";
+  }
 
   let upstreamRes: Response;
   try {
@@ -219,74 +417,326 @@ export async function POST(req: Request) {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
-        Accept: "application/json",
+        Accept: "text/event-stream",
       },
-      body: JSON.stringify(upstreamPayload),
+      body: JSON.stringify(payload),
     });
   } catch (err) {
     console.error("[chat] NIM fetch error:", err);
-    return NextResponse.json(
-      { error: "Could not reach the assistant. Please try again in a moment." },
-      { status: 502 },
-    );
+    return {
+      kind: "error",
+      response: NextResponse.json(
+        { error: "Could not reach the assistant. Please try again in a moment." },
+        { status: 502 },
+      ),
+    };
   }
 
-  if (!upstreamRes.ok) {
-    const text = await upstreamRes.text().catch(() => "");
-    // Log the upstream error verbatim - dev terminal shows the real reason
-    // (invalid model name, auth failure, quota exceeded, etc).
+  if (!upstreamRes.ok || !upstreamRes.body) {
+    const text = upstreamRes.body
+      ? await upstreamRes.text().catch(() => "")
+      : "";
     console.error(
       "[chat] NIM upstream error:",
       upstreamRes.status,
       text.slice(0, 500),
     );
-    // Return a generic message to the browser. We never echo upstream
-    // error bodies because they may contain internal endpoint paths or
-    // error codes that don't help the parent.
-    return NextResponse.json(
-      { error: "The assistant is temporarily unavailable. Please try again." },
-      { status: 502 },
-    );
+    return {
+      kind: "error",
+      response: NextResponse.json(
+        { error: "The assistant is temporarily unavailable. Please try again." },
+        { status: 502 },
+      ),
+    };
   }
 
-  // 5. Extract the assistant's reply from the OpenAI-compatible response.
-  type NimResponse = {
-    choices?: Array<{ message?: { content?: string } }>;
-  };
-  let json: NimResponse;
-  try {
-    json = (await upstreamRes.json()) as NimResponse;
-  } catch (err) {
-    console.error("[chat] NIM JSON parse error:", err);
-    return NextResponse.json(
-      { error: "Unexpected response from the assistant." },
-      { status: 502 },
-    );
-  }
-
-  const assistantContent = json.choices?.[0]?.message?.content?.trim() ?? "";
-  if (!assistantContent) {
-    return NextResponse.json(
-      { error: "The assistant returned an empty reply. Please try again." },
-      { status: 502 },
-    );
-  }
-
-  return NextResponse.json({ message: assistantContent });
+  return classifyAndStream(upstreamRes.body);
 }
 
 /**
- * Defensive sanitisation of the intake payload from the client. We
- * accept the object only when EVERY required string field is present
- * and within length bounds. Anything else: drop to null so the prompt
- * falls back gracefully.
+ * Peek at the upstream stream until we see either:
+ *   - The first content delta -> stream the rest as plain text.
+ *   - A complete tool call (one or more deltas assembling function.name
+ *     and function.arguments JSON) -> cancel the stream, return the
+ *     parsed tool call.
+ *   - [DONE] with no content + no tool call -> error.
  *
- * This is intentionally separate from the lead-capture validation in
- * /api/lead/route.ts because the threat model differs:
- *   - /api/chat: bad intake = bot can't personalise. Low harm. We drop.
- *   - /api/lead: bad intake = wrong contact data leaks to EDUS team.
- *     High harm. We reject with 400.
+ * This is the trickiest bit. NIM emits tool calls as multiple deltas
+ * because the function arguments JSON streams in chunks. We assemble
+ * them across deltas and complete the call when finish_reason is
+ * "tool_calls" or "stop".
  */
+async function classifyAndStream(
+  upstream: ReadableStream<Uint8Array>,
+): Promise<RunRoundResult> {
+  const decoder = new TextDecoder("utf-8");
+  const reader = upstream.getReader();
+
+  let buffer = "";
+  // Tool call accumulators (per OpenAI streaming spec).
+  let toolId = "";
+  let toolName = "";
+  let toolArgs = "";
+  let firstContent: string | null = null;
+  let pendingBytes: Uint8Array | null = null; // bytes after first content delta - we'll replay them
+
+  // Process bytes until we've classified.
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    if (value) pendingBytes = pendingBytes ? concat(pendingBytes, value) : value;
+    buffer += decoder.decode(value, { stream: true });
+
+    // Process every complete SSE frame in the buffer. A frame ends
+    // with the SSE-standard blank line "\n\n".
+    let sep: number;
+    let classified = false;
+    while ((sep = buffer.indexOf("\n\n")) !== -1) {
+      const frame = buffer.slice(0, sep);
+      buffer = buffer.slice(sep + 2);
+
+      for (const line of frame.split("\n")) {
+        if (!line.startsWith("data: ")) continue;
+        const payload = line.slice(6).trim();
+        if (!payload || payload === "[DONE]") {
+          // Stream ended without content - if we have an accumulated
+          // tool call, complete it. Otherwise error.
+          if (toolName) {
+            return finishToolCall(toolId, toolName, toolArgs);
+          }
+          return {
+            kind: "error",
+            response: NextResponse.json(
+              { error: "The assistant returned an empty reply. Please try again." },
+              { status: 502 },
+            ),
+          };
+        }
+        try {
+          const json = JSON.parse(payload) as {
+            choices?: Array<{
+              delta?: {
+                content?: string;
+                tool_calls?: Array<{
+                  index?: number;
+                  id?: string;
+                  type?: string;
+                  function?: { name?: string; arguments?: string };
+                }>;
+              };
+              finish_reason?: string | null;
+            }>;
+          };
+          const delta = json.choices?.[0]?.delta;
+          const finish = json.choices?.[0]?.finish_reason;
+
+          // Accumulate any tool_call deltas.
+          if (delta?.tool_calls) {
+            for (const tc of delta.tool_calls) {
+              if (tc.id) toolId = tc.id;
+              if (tc.function?.name) toolName = tc.function.name;
+              if (tc.function?.arguments) toolArgs += tc.function.arguments;
+            }
+          }
+
+          // First content delta = we know it's a content reply.
+          if (delta?.content && firstContent === null) {
+            firstContent = delta.content;
+            classified = true;
+            break;
+          }
+
+          // finish_reason "tool_calls" with name = call complete.
+          if (finish === "tool_calls" && toolName) {
+            return finishToolCall(toolId, toolName, toolArgs);
+          }
+        } catch {
+          // Malformed frame - skip.
+        }
+      }
+      if (classified) break;
+    }
+
+    if (firstContent !== null) {
+      // Content path. Build a NEW stream that emits the captured first
+      // content, then processes the remaining bytes from the reader.
+      const stream = buildContentStream({
+        reader,
+        decoder,
+        buffer,
+        prefix: firstContent,
+      });
+      return { kind: "content", body: stream };
+    }
+  }
+
+  // Reader closed without classification - treat as error.
+  if (toolName) {
+    return finishToolCall(toolId, toolName, toolArgs);
+  }
+  return {
+    kind: "error",
+    response: NextResponse.json(
+      { error: "The assistant returned an empty reply. Please try again." },
+      { status: 502 },
+    ),
+  };
+}
+
+/**
+ * Build the result for a completed tool call. Parses the accumulated
+ * arguments JSON; if parsing fails we treat it as an empty object so
+ * the tool can still run (Tavily will get an empty query and return []).
+ */
+function finishToolCall(
+  id: string,
+  name: string,
+  argsRaw: string,
+): RunRoundResult {
+  let args: Record<string, unknown> = {};
+  try {
+    args = JSON.parse(argsRaw || "{}") as Record<string, unknown>;
+  } catch {
+    console.warn(
+      "[chat] tool args JSON parse failed:",
+      argsRaw.slice(0, 200),
+    );
+  }
+  return { kind: "tool", toolCall: { id, name, args } };
+}
+
+/**
+ * Build a ReadableStream that emits:
+ *   1. The prefix string (the first content delta we already consumed).
+ *   2. The remaining content deltas read from `reader`.
+ *
+ * Reuses the same SSE-frame parser as the original transform.
+ */
+function buildContentStream(args: {
+  reader: ReadableStreamDefaultReader<Uint8Array>;
+  decoder: TextDecoder;
+  buffer: string;
+  prefix: string;
+}): ReadableStream<Uint8Array> {
+  const encoder = new TextEncoder();
+  let buffer = args.buffer;
+  let emittedPrefix = false;
+
+  return new ReadableStream({
+    async start(controller) {
+      try {
+        if (!emittedPrefix && args.prefix) {
+          controller.enqueue(encoder.encode(args.prefix));
+          emittedPrefix = true;
+        }
+        // Drain the buffer we already have.
+        const drained = drainContentFrames(buffer);
+        for (const t of drained.texts) {
+          controller.enqueue(encoder.encode(t));
+        }
+        if (drained.done) {
+          return;
+        }
+        buffer = drained.remainder;
+
+        // Continue reading.
+        while (true) {
+          const { value, done } = await args.reader.read();
+          if (done) break;
+          buffer += args.decoder.decode(value, { stream: true });
+          const next = drainContentFrames(buffer);
+          for (const t of next.texts) {
+            controller.enqueue(encoder.encode(t));
+          }
+          if (next.done) return;
+          buffer = next.remainder;
+        }
+      } catch (err) {
+        console.error("[chat] stream read error:", err);
+        controller.error(err);
+        return;
+      } finally {
+        controller.close();
+      }
+    },
+  });
+}
+
+/** Returns the text deltas in `buffer`, the remaining unconsumed
+ *  buffer text, and whether [DONE] was hit. */
+function drainContentFrames(buffer: string): {
+  texts: string[];
+  remainder: string;
+  done: boolean;
+} {
+  const texts: string[] = [];
+  let rest = buffer;
+  let sep: number;
+  while ((sep = rest.indexOf("\n\n")) !== -1) {
+    const frame = rest.slice(0, sep);
+    rest = rest.slice(sep + 2);
+    for (const line of frame.split("\n")) {
+      if (!line.startsWith("data: ")) continue;
+      const payload = line.slice(6).trim();
+      if (payload === "[DONE]") return { texts, remainder: rest, done: true };
+      if (!payload) continue;
+      try {
+        const json = JSON.parse(payload) as {
+          choices?: Array<{ delta?: { content?: string } }>;
+        };
+        const text = json.choices?.[0]?.delta?.content;
+        if (text) texts.push(text);
+      } catch {
+        // skip malformed frame
+      }
+    }
+  }
+  return { texts, remainder: rest, done: false };
+}
+
+/** Concatenate two Uint8Arrays. */
+function concat(a: Uint8Array, b: Uint8Array): Uint8Array {
+  const out = new Uint8Array(a.length + b.length);
+  out.set(a, 0);
+  out.set(b, a.length);
+  return out;
+}
+
+/** Format Tavily results into a compact text block the LLM can read. */
+function formatSearchResults(results: TavilyResult[]): string {
+  if (results.length === 0) {
+    return "No matching pages found on the EDUS websites. Tell the parent we couldn't find a matching page and offer to connect them with the EDUS team via https://edustutor.com/contact.";
+  }
+  const lines = results.map(
+    (r, i) =>
+      `${i + 1}. ${r.title}\n   URL: ${r.url}\n   Excerpt: ${r.content.slice(0, 400)}`,
+  );
+  return [
+    `Search results from EDUS websites (${results.length} hit${results.length === 1 ? "" : "s"}):`,
+    "",
+    ...lines,
+    "",
+    "Use these results to answer the parent's question. Cite the most relevant URL in your reply. If none of these answer the question, tell the parent honestly and offer to connect them with the EDUS team.",
+  ].join("\n");
+}
+
+/** Wrap a ReadableStream<Uint8Array> in a Response with the streaming
+ *  headers the browser fetch+ReadableStream loop expects. */
+function contentResponse(stream: ReadableStream<Uint8Array>): Response {
+  return new Response(stream, {
+    status: 200,
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      "X-Accel-Buffering": "no",
+    },
+  });
+}
+
+/* --------------------------------------------------------------- */
+/* Intake sanitiser - unchanged from prior version                   */
+/* --------------------------------------------------------------- */
+
 function sanitiseIntake(input: unknown): IntakePayload | null {
   if (typeof input !== "object" || input === null) return null;
   const i = input as Record<string, unknown>;
