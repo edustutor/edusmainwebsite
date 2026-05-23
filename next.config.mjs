@@ -15,9 +15,11 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     // Next 16 requires every `quality={...}` value used in <Image /> to be
-    // explicitly listed here. 75 is the framework default; 95 is used for
-    // the centerpiece photo + guaranteed-success stamp where crispness matters.
-    qualities: [75, 95],
+    // explicitly listed here. 75 is the framework default; 85 is used for
+    // mid-density illustrations (e.g. LearningExperience hero); 95 is used
+    // for the centerpiece photo + guaranteed-success stamp where crispness
+    // matters most.
+    qualities: [75, 85, 95],
     // Allow our high-quality device sizes - defaults stop at 3840 which
     // is fine, but we narrow the upstream variants Next generates so
     // smaller tiles get sharper assets when scaled by `sizes`.

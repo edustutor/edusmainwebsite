@@ -306,13 +306,20 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             Clarity into cookieless ping mode until consent is granted. */}
         <ConsentDefaults />
       </head>
-      {/* Deferred GTM + GA4 - loads with strategy="lazyOnload" so the
-          ~280KB of analytics scripts wait until the page is fully idle
-          before fetching. Saves ~3s of LCP on mobile vs the default
-          afterInteractive strategy. The Consent Mode v2 defaults set
-          in <head> above still apply when GTM eventually loads. */}
-      <DeferredAnalytics gtmId={gtmId} ga4Id={ga4Id} />
       <body className="text-[#102033] antialiased">
+        {/* Deferred GTM + GA4 - loads with strategy="lazyOnload" so the
+            ~280KB of analytics scripts wait until the page is fully idle
+            before fetching. Saves ~3s of LCP on mobile vs the default
+            afterInteractive strategy. The Consent Mode v2 defaults set
+            in <head> above still apply when GTM eventually loads.
+
+            Mounted INSIDE <body> (not directly under <html>) because the
+            component renders a <noscript> fallback, and React 19's
+            hydrator rejects <noscript> as a direct child of <html> with
+            a hydration error. Next.js's <Script> components route
+            themselves to <head> regardless of where they're rendered in
+            JSX, so the lazyOnload behaviour is unaffected. */}
+        <DeferredAnalytics gtmId={gtmId} ga4Id={ga4Id} />
         <MotionProvider>
           <Atmosphere />
           <ScrollProgress />
