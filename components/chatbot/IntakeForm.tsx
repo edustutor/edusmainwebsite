@@ -99,6 +99,29 @@ const GRADES = [
 
 const MEDIUMS = ["Tamil", "English", "Sinhala"];
 
+/**
+ * Per-country phone placeholders. Shown after the parent picks a
+ * country in the picker - the example numbers are realistic-but-fake
+ * mobile-prefix shapes so the parent can pattern-match what to type
+ * without us ever showing a real person's number. Digits only, no
+ * leading 0, no country code (those are handled by the chip + the
+ * normaliser). Add an entry per dial code you want a tailored example
+ * for; everything else falls back to the generic "771234567" hint.
+ */
+const PHONE_PLACEHOLDERS: Record<string, string> = {
+  "94": "771234567",      // Sri Lanka (Dialog/Mobitel/Hutch/Airtel)
+  "91": "9876543210",     // India
+  "960": "7771234",       // Maldives
+  "44": "7911123456",     // UK mobile
+  "1": "2025550123",      // US/Canada
+  "49": "1701234567",     // Germany
+  "974": "33123456",      // Qatar
+  "971": "501234567",     // UAE / Dubai
+  "65": "91234567",       // Singapore
+  "60": "123456789",      // Malaysia
+  "61": "412345678",      // Australia
+};
+
 export function IntakeForm({ onSubmit, openMode, onDecline }: Props) {
   // All seven fields start empty - no defaults. The Start chat button
   // stays disabled until the parent has actively chosen every value.
@@ -264,7 +287,7 @@ export function IntakeForm({ onSubmit, openMode, onDecline }: Props) {
               onChange={(e) => setName(e.target.value.slice(0, 120))}
               required
               aria-required
-              placeholder="e.g. Suresh Kumar"
+              placeholder="e.g. Kumar Selvarajan"
               className={inputClass}
             />
           </Field>
@@ -340,7 +363,15 @@ export function IntakeForm({ onSubmit, openMode, onDecline }: Props) {
                 aria-required
                 aria-invalid={phoneError ? "true" : "false"}
                 aria-describedby={phoneError ? "intake-phone-error" : undefined}
-                placeholder={dialCode === "94" ? "771178292" : "Digits only"}
+                placeholder={
+                  // Country-aware placeholders show a real example of
+                  // the digits-only national number (no leading 0, no
+                  // country code - those are handled by the chip + the
+                  // normaliser). Falls back to a generic hint for any
+                  // country not in the lookup so the field never sits
+                  // empty-looking.
+                  PHONE_PLACEHOLDERS[dialCode] ?? "771234567"
+                }
                 disabled={!dialCode}
                 className={[
                   inputClass,

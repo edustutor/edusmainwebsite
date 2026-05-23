@@ -16,10 +16,10 @@
  *     based on state so screen readers narrate the right action.
  *   - 48x48 touch target meets WCAG 2.1 AA (2.5.5).
  *
- * Z-index 60 puts it above the consent banner (z-50 in ConsentBanner)
- * so a parent can still open the chat while the cookie toast is up -
- * but BELOW any future critical-action modal that would need to fully
- * block interaction.
+ * Z-index 80 puts it above the consent banner (banner z-[70], modal
+ * backdrop z-[60] in ConsentBanner) so a parent can still open the
+ * chat while the cookie toast is up - but BELOW any future critical-
+ * action modal that would need to fully block interaction.
  */
 
 import { useEffect, useState } from "react";
@@ -50,7 +50,7 @@ export function ChatLauncher({ open, pulse, onOpen, onClose }: Props) {
     //   - Mobile (<sm):  bottom-4 right-4 (16px gutter, conserves real estate)
     //   - Tablet+ (sm:): bottom-5 right-5 (20px gutter)
     <div
-      className="fixed right-4 bottom-4 sm:right-5 sm:bottom-5 z-[60]"
+      className="fixed right-4 bottom-4 sm:right-5 sm:bottom-5 z-[80]"
       style={{
         paddingBottom: "env(safe-area-inset-bottom, 0px)",
         paddingRight: "env(safe-area-inset-right, 0px)",

@@ -460,7 +460,11 @@ export function ChatPanel({
       role="dialog"
       aria-label="EDUS AI Assistant chat"
       className={[
-        "fixed z-[60] flex flex-col bg-white overflow-hidden",
+        // z-[80] keeps the panel above the cookie consent banner
+        // (banner z-[70], modal backdrop z-[60] in ConsentBanner).
+        // Otherwise the cookie toast covers the panel header on first
+        // visit and the parent can't interact with chat.
+        "fixed z-[80] flex flex-col bg-white overflow-hidden",
         // Position + size strategy:
         //   - <sm (mobile): bottom-4 right-4 left-4 with a small top
         //     gap so the panel feels like a real sheet, not a fullscreen
