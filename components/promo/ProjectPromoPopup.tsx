@@ -43,7 +43,15 @@ import { useCallback, useEffect, useState } from "react";
  *     defined in the inline <style> block.
  */
 
+/** Time-based trigger: fire after this many ms even if the parent
+ *  doesn't scroll. Safety net for engaged readers who stop on the hero. */
 const PROMO_DELAY_MS = 10_000;
+
+/** Scroll-based trigger: fire when the parent has scrolled past this
+ *  fraction of the page. Whichever fires first wins. 0.15 = 15%.
+ *  Catches fast scrollers who skim before the 10s timer expires. */
+const PROMO_SCROLL_THRESHOLD = 0.15;
+
 const SESSION_KEY = "edus.promo.9aProjectShown";
 
 /** Routes where the popup SHOULDN'T fire. /sl/9a-project itself + any
@@ -69,23 +77,62 @@ export function ProjectPromoPopup() {
     }
   }, []);
 
-  // 10-second arming timer. Bails if the route is on the skip list
-  // OR if the popup has already been shown this session.
+  // Dual trigger: fires on whichever happens first -
+  //   (a) PROMO_DELAY_MS elapsed since the page settled, OR
+  //   (b) parent scrolled past PROMO_SCROLL_THRESHOLD of the page.
+  // Both register independently; the first to fire wins and the other
+  // tears itself down via the shared `fire` helper.
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (SKIP_PATHS.some((p) => pathname?.startsWith(p))) return;
     if (sessionStorage.getItem(SESSION_KEY)) return;
 
-    const id = window.setTimeout(() => {
-      // Re-check the flag at firing time too - guards against a race
-      // where another tab in the same session set the flag during the
-      // 10s wait.
-      if (!sessionStorage.getItem(SESSION_KEY)) {
-        setOpen(true);
-      }
-    }, PROMO_DELAY_MS);
+    let alreadyFired = false;
+    // window.setTimeout returns `number` in the DOM lib while the global
+    // setTimeout's return is `Timeout` under @types/node. Use the
+    // explicit window form throughout so both ends agree.
+    let timerId: number | null = null;
 
-    return () => window.clearTimeout(id);
+    // Shared fire helper. Idempotent: if either trigger already won,
+    // subsequent calls (e.g. from the OTHER trigger) are no-ops.
+    const fire = () => {
+      if (alreadyFired) return;
+      if (sessionStorage.getItem(SESSION_KEY)) return;
+      alreadyFired = true;
+      setOpen(true);
+      // Detach both triggers immediately so neither tries to fire again.
+      if (timerId !== null) window.clearTimeout(timerId);
+      window.removeEventListener("scroll", onScroll, { capture: false } as EventListenerOptions);
+    };
+
+    // Trigger A - the 10-second timer. Safety net for parents who sit
+    // on the hero without scrolling.
+    timerId = window.setTimeout(fire, PROMO_DELAY_MS);
+
+    // Trigger B - the 15% scroll-depth threshold. Catches fast scrollers
+    // who skim through the page before the 10s timer fires.
+    //
+    // scrollY / (docHeight - viewportHeight) gives the percentage of the
+    // total scrollable distance the parent has traversed. We clamp to
+    // [0,1] so a bounce-up doesn't read as negative.
+    function getScrollPct(): number {
+      const doc = document.documentElement;
+      const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+      return Math.min(1, Math.max(0, window.scrollY / max));
+    }
+
+    // Named function so removeEventListener can detach it cleanly inside
+    // `fire` above. passive:true lets the browser skip preventDefault
+    // checks for better scroll-thread performance.
+    function onScroll() {
+      if (getScrollPct() >= PROMO_SCROLL_THRESHOLD) fire();
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      if (timerId !== null) window.clearTimeout(timerId);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, [pathname]);
 
   // Escape closes.
