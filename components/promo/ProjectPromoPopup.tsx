@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -149,16 +148,26 @@ export function ProjectPromoPopup() {
           </svg>
         </button>
 
-        {/* Promo image. next/image gives us WebP / AVIF responsive
-            variants automatically. Priority is NOT set because this
-            renders only after the 10s timer - well past LCP. */}
+        {/* Promo image. Intentionally a plain <img> instead of
+            next/image because Vercel's free-tier image-optimisation
+            quota is finite (1000 transformations / month) and this
+            image is already a hand-optimised WebP at the perfect size
+            (1672x941, 191 KB). Running it through /_next/image would
+            burn quota for zero quality gain - and on a quota-exhausted
+            project the optimiser returns HTTP 402 Payment Required,
+            which is what caused the popup to render blank on
+            production before this change. Browsers handle plain
+            <img loading="lazy"> well enough that nothing is lost. */}
         <div className="relative aspect-[16/9] bg-[#0B1A36]">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/edus-9a-challenge-popup.webp"
             alt="EDUS 9A Challenge - G.C.E O/L 2026 - 6 Months Project Class"
-            fill
-            sizes="(min-width: 640px) 480px, 100vw"
-            className="object-cover"
+            loading="lazy"
+            decoding="async"
+            width={1672}
+            height={941}
+            className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
 
