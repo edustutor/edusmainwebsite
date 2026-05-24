@@ -13,6 +13,27 @@ const nextConfig = {
   // Higher-quality next/image output: try AVIF first (best compression),
   // fall back to WebP for browsers without AVIF.
   images: {
+    // EMERGENCY OVERRIDE (locked 2026-05-24): the Vercel free-tier image
+    // optimisation quota (1000 transformations / month) was exhausted, so
+    // every /_next/image request was returning HTTP 402
+    // OPTIMIZED_IMAGE_REQUEST_PAYMENT_REQUIRED and the entire site
+    // rendered with blank image placeholders. Setting unoptimized=true
+    // makes next/image emit a plain <img> pointing straight at /public,
+    // bypassing the metered optimiser entirely.
+    //
+    // Trade-offs we accept:
+    //   - No automatic AVIF/WebP fallback chain - but ~95% of our images
+    //     in /public are already hand-encoded WebPs.
+    //   - No automatic responsive srcset - acceptable because most images
+    //     are either small icons or fixed-aspect hero shots already sized
+    //     reasonably (largest is 191 KB).
+    //   - quality= prop becomes a no-op - fine because the source files
+    //     are already at the quality we want.
+    //
+    // Remove this line + redeploy AFTER upgrading the Vercel plan to Pro
+    // (5000 transformations / month included) or when the monthly quota
+    // resets on the 1st of next month - whichever comes first.
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
     // Next 16 requires every `quality={...}` value used in <Image /> to be
     // explicitly listed here. 75 is the framework default; 85 is used for
