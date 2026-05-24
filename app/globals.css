@@ -73,6 +73,15 @@
 html {
   background: var(--bg);
   -webkit-text-size-adjust: 100%;
+  /* Smooth in-page jumps for any anchor link site-wide (e.g. /sl/9a-project
+     hero CTA -> #timetable). scroll-padding-top compensates for the
+     fixed SiteHeader so the section title isn't hidden behind the header
+     after the jump. */
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
 html, body {
   color: var(--ink);

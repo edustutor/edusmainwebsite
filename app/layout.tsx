@@ -13,6 +13,7 @@ import { ConsentDefaults } from "@/components/analytics/ConsentDefaults";
 import { ConsentBanner } from "@/components/analytics/ConsentBanner";
 import { ServiceWorkerRegistrar } from "@/components/pwa/ServiceWorkerRegistrar";
 import { ChatBotMount } from "@/components/chatbot/ChatBotMount";
+import { ProjectPromoPopup } from "@/components/promo/ProjectPromoPopup";
 import {
   getCurrentHost,
   getCurrentAnalyticsIds,
@@ -359,6 +360,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             (never localStorage) so we don't risk leaking parent PII to
             anyone who shares the device. */}
         <ChatBotMount />
+        {/* Global 9A Challenge promo - fires once per session after
+            10 seconds on every page except /sl/9a-project + /contact.
+            Mounts here so it's available site-wide. The component
+            itself self-skips when the visitor is on the project page
+            or has dismissed it once already this session. */}
+        <ProjectPromoPopup />
       </body>
     </html>
   );
