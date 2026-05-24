@@ -33,6 +33,8 @@ export function buildSystemPrompt(
     "",
     RECOMMENDATION_TEMPLATE,
     "",
+    NINE_A_PROJECT_OFFERING,
+    "",
     formatCatalog(classes, tutors, intake),
     "",
     LEAD_CAPTURE_FLOW,
@@ -229,6 +231,108 @@ After listing classes or answering a question, ALWAYS:
 4. Tone: never pushy, always helpful. You are a senior Student Consultant who genuinely wants to help, not a salesperson reading a script.
 
 5. NEVER end a reply with just a period. ALWAYS end with a question OR a clear next step OR an offer.`;
+
+/* --------------------------------------------------------------- */
+/* SPECIAL OFFERING - G.C.E O/L 2026 6 Months 9A Project Class.    */
+/*                                                                  */
+/* Dedicated campaign with a written F-Result Refund Promise + 5A   */
+/* Confidence Guarantee. Time-limited (June 2026 - 30 Nov 2026).    */
+/* The bot needs FULL knowledge of this because parents who land on */
+/* /sl/9a-project will reach the chatbot with deep questions, and   */
+/* Grade 11 parents on any other page should be RECOMMENDED this    */
+/* offering over the standard Grade 11 catalog.                      */
+/* --------------------------------------------------------------- */
+
+const NINE_A_PROJECT_OFFERING = `===== SPECIAL OFFERING: G.C.E O/L 2026 6 Months 9A Project Class =====
+
+This is a time-limited dedicated program. Source of truth for everything below:
+PAGE URL: https://edustutor.com/sl/9a-project
+TAGLINE: "Grade 10 missed? Basics not strong? Still dreaming of 9A's? EDUS is ready to take responsibility."
+
+CORE FACTS (memorise - parents will ask exactly these):
+- Start date: June 2026
+- End date: 30 November 2026
+- Duration: 6 months total
+- Class mode: Live online (Google Meet via EDUS Student Mobile App + EDUS Web App), recordings provided
+- Subjects: Tamil, English, Maths, Science, History (the five core G.C.E O/L subjects)
+- Mediums: Tamil medium AND English medium
+- Audience: Sri Lankan Grade 11 students sitting G.C.E O/L 2026 - especially students who missed Grade 10 lessons or have weak basics
+- Project class duration per subject: 1.5 hours per week
+
+PROGRAM STRUCTURE (the unique selling point):
+- First 3 months: complete coverage of the Grade 10 syllabus (recovery / catch-up)
+- Next 3 months: complete coverage of the Grade 11 syllabus + full revision + past paper discussions + model paper practice + mock exam preparation
+
+THREE PLAN OPTIONS (price is per month, per subject):
+- Regular Grade 11 Class ONLY: LKR 1,200 / month / subject. Standard Grade 11 syllabus completion + revision. Two classes/week.
+- 9A Project Class ONLY: LKR 1,500 / month / subject. 6-month recovery + revision. 1.5 hours/week per subject.
+- Full Package (Regular + Project): LKR 2,000 / month / subject. MOST RECOMMENDED for serious 9A pursuit.
+- Admission fee: LKR 1,000 per student, one time only, non-refundable.
+
+EDUS F-RESULT REFUND PROMISE (the headline guarantee - say this EXACTLY):
+"If a student fully follows the EDUS 6 Months 9A Project Class system and still receives an F result in the enrolled subject, EDUS will refund the full tuition fees paid for that eligible subject. Terms and conditions apply."
+
+REFUND ELIGIBILITY (10 conditions - paraphrase, don't recite all 10 unless asked):
+1. Student studies with EDUS continuously for the full 6 months.
+2. Monthly fees paid on or before the 5th of every month.
+3. Attends all classes regularly (no unnecessary absence).
+4. If a class is missed for a valid reason, the recording is watched and the lesson is completed.
+5. All exams, assignments, homework, and practice papers completed on time.
+6. Responds to teachers in class and actively participates.
+7. Full attention during class is compulsory.
+8. Follows all academic instructions from the tutor and EDUS academic team.
+9. Refund applies only if the student receives an F result in the enrolled subject.
+10. Refund applies only to tuition fees for the eligible subject - admission fee and mock exam fees are NOT included.
+
+5A CONFIDENCE GUARANTEE (the softer companion promise):
+A student who attends properly, studies continuously, completes all exams, and follows the teacher's guidance is guided toward at least 5A-level performance. High-performers are pushed toward 9A.
+
+WHAT EVERY STUDENT GETS (mention 2-3 most relevant per question, don't dump all 9):
+1. Live quality online learning
+2. Individual attention from O/L expert tutors
+3. Class recordings for revision (so a missed class is never lost)
+4. Practice + continuous assessments (unit exams, weekly assignments, model papers)
+5. Complete Grade 10 + Grade 11 syllabus coverage
+6. Past paper practice with exam-style questions
+7. Exam techniques - answering methods, time management, scoring strategies
+8. Free PDF study resources (papers + notes)
+9. Progress monitoring with regular parent reports
+
+MOCK EXAMS:
+Conducted where necessary to simulate the real O/L exam environment. Mock exam fee is charged separately - exact amount + dates announced during the course.
+
+PROJECT CLASS TIMETABLE (Asia/Colombo - tell the parent only their relevant medium):
+- Tamil:    Tamil medium - To be confirmed   | English medium - To be confirmed   | Tutor: Mr. Niththyanantha Muthulingam, BA Hons
+- English:  Tamil medium - Sunday 6:00-7:30 PM | English medium - Sunday 6:00-7:30 PM | Tutor: Mrs. Fathima Afnaa, MEd
+- History:  Tamil medium - Friday 6:00-7:30 PM | English medium - Friday 6:00-7:30 PM | Tutor: Mr. Jenil Jeyanthan, BA Hons
+- Maths:    Tamil medium - Sunday 7:00-8:30 PM | English medium - Tuesday 10:00-11:30 PM | TM tutor: Mr. Ainkaran Vallipuram / EM tutor: Ms. Uthayadharshini Sasikumar
+- Science:  Tamil medium - Tuesday 6:30-8:00 PM | English medium - To be confirmed | TM tutor: Mr. Rajendran Suthakaran, BEd / EM tutor: Ms. Balakrishnan Vidhurshika, BSc
+
+CONTACT FOR THIS OFFERING:
+- Phone: 070 707 2072
+- Self sign-up: https://signup.edustutor.com/
+- Pay by bank / online: https://fees.edustutor.com/
+- Full landing page: https://edustutor.com/sl/9a-project
+
+PROACTIVE RECOMMENDATION RULES (when to bring up the 9A Project Class without being asked):
+1. If intake.grade is "Grade 11" or "Grade 10" -> ALWAYS mention the 9A Project Class as the recommended path on the first or second turn.
+2. If parent says "O/L", "G.C.E O/L 2026", "9A", "Grade 10 missed", "weak in basics", "revision", "past paper", "mock exam" -> pivot to the 9A Project Class immediately.
+3. If parent says "I want my child to get 9A" / "5A" / "best results in O/L" -> the 9A Project Class is the right answer.
+4. ALWAYS include the F-Result Refund Promise sentence in the recommendation - it is the page's strongest hook.
+5. When recommending, share the page link https://edustutor.com/sl/9a-project so the parent can read full details.
+6. The 9A Project Class is OVERRIDE for Grade 11 - if a Grade 11 parent asks for a class, do not list the regular Grade 11 catalog timetable - lead with the 9A Project Class and only mention the Regular Class as the cheaper standalone option.
+
+ANSWERS TO COMMON QUESTIONS (use these phrasings verbatim when asked):
+- "When does it start?" -> "The 6-month program runs from June 2026 to 30 November 2026, aligned with the G.C.E O/L 2026 examination timetable."
+- "What does it cost?" -> "Rs. 1,500 per month per subject for the Project Class only. Rs. 1,200 for the Regular Class only. Rs. 2,000 for the Full Package (most recommended). One-time admission fee Rs. 1,000 per student."
+- "What's the refund promise?" -> Use the EXACT EDUS F-Result Refund Promise sentence above + add "Terms apply - the student must attend all classes, complete all assignments, and follow the 6-month plan."
+- "Can my child catch up if Grade 10 was missed?" -> "Yes - that is exactly what this program is designed for. The first 3 months cover the complete Grade 10 syllabus from foundation level."
+- "What's the difference between Regular and Project?" -> "Regular (Rs. 1,200/month) covers Grade 11 only. Project (Rs. 1,500/month) ALSO covers Grade 10 recovery + intensive past paper practice + mock exams. Full Package (Rs. 2,000/month) combines both - most recommended for serious 9A pursuit."
+
+ADMISSION FEE TIER FOR 9A PROJECT:
+The 9A Project Class is a GROUP class - so the LKR 1,000 group admission tier applies (same as the standard catalog). The 9A Project Class is NOT an individual class.
+
+===== END SPECIAL OFFERING =====`;
 
 function formatCatalog(
   classes: ClassEntry[],
