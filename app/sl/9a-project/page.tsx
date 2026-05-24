@@ -801,52 +801,87 @@ function Hero() {
 /* --------------------------------------------------------------- */
 
 function WhyThisProgram() {
+  // Three "we understand" beats - each beat is a small visual card
+  // with an icon tile, problem name, and one tight sentence. Replaces
+  // the two long prose paragraphs that read as a wall of text.
+  const beats = [
+    {
+      icon: "alert",
+      tint: "#DC2626",
+      title: "Missed Grade 10",
+      body: "Lessons skipped, basics shaky, formulas + grammar gaps - we cover Grade 10 again from scratch in the first 3 months.",
+    },
+    {
+      icon: "syllabus",
+      tint: "#2563EB",
+      title: "Foundation to Final",
+      body: "Grade 10 recovery, Grade 11 syllabus, full revision, past papers, mock exams - one structured plan, 6 months.",
+    },
+    {
+      icon: "expert-tutor",
+      tint: "#8B5CF6",
+      title: "Step-by-step Guidance",
+      body: "Live online teaching, weekly assessments, paper practice, and individual attention from O/L expert tutors.",
+    },
+  ];
+
   return (
     <Section eyebrow="Why EDUS 9A Project Class">
-      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-display)" }}>
-        We <em>understand the fear</em> of entering Grade 11 unprepared.
+      <h2
+        className="heading text-center max-w-3xl mx-auto"
+        style={{ fontSize: "var(--fs-display)" }}
+      >
+        Built for students who <em>missed Grade 10.</em>
       </h2>
-      <p className="text-center text-[#2B3950] text-[15.5px] leading-[1.7] max-w-3xl mx-auto mt-5">
-        Many Grade 11 students step into the O/L year with missed Grade 10
-        lessons, weak basics, gaps in formulas, theories, grammar, writing, and
-        exam techniques. At EDUS, we built this program to fix that completely -
-        from foundation level to final exam readiness - inside 6 months.
-      </p>
-      <p className="text-center text-[#2B3950] text-[15.5px] leading-[1.7] max-w-3xl mx-auto mt-3">
-        Students do not need to worry if Grade 10 was not properly studied.
-        Through this project, EDUS guides them step by step with proper
-        teaching, revision, assessments, paper practice, and individual
-        attention.
+      <p className="text-center text-[#2B3950] text-[15.5px] leading-[1.7] max-w-2xl mx-auto mt-5">
+        Many Grade 11 students step into the O/L year unprepared. EDUS built
+        this 6-month program to fix that - from foundation level to final exam
+        readiness.
       </p>
 
-      {/* Trust block - why EDUS believes its own promise. Lifted from
-          the brief verbatim because this is what makes the F-refund
-          promise credible to a parent reading for the first time. */}
-      <div className="mt-10 max-w-3xl mx-auto glass rounded-[24px] p-6 sm:p-7 text-center relative overflow-hidden">
-        <span
-          aria-hidden
-          className="blob"
-          style={{ top: -60, right: -60, width: 220, height: 220, background: "#2563EB", opacity: 0.22 }}
-        />
-        <div className="relative">
-          <p className="font-display font-700 text-[#102033] text-[16px] sm:text-[18px] leading-snug">
-            This is not just another online class.
-          </p>
-          <p className="text-[14.5px] text-[#2B3950] mt-3 leading-[1.7]">
-            This is a{" "}
-            <strong className="text-[#102033]">
-              complete result-focused O/L recovery and achievement program
-            </strong>{" "}
-            specially designed for students who want to improve fast, complete
-            missed lessons, revise properly, and confidently face the G.C.E O/L
-            examination.
-          </p>
-          <p className="text-[14px] text-[#5A6A82] mt-4 italic leading-[1.7]">
-            At EDUS, we strongly believe in our teaching system, our structured
-            academic plan, and our exceptional O/L expert tutors - that is why
-            we are introducing this powerful academic promise.
-          </p>
+      {/* Three-beat card row - visual hooks instead of prose. Same idiom
+          as the Receives + Two Options cards so the page reads as one
+          design system. items-stretch keeps card heights equal. */}
+      <div className="mt-10 grid sm:grid-cols-3 gap-4 items-stretch max-w-4xl mx-auto">
+        {beats.map((b) => (
+          <div
+            key={b.title}
+            className="glass rounded-2xl p-5 lift h-full flex flex-col"
+          >
+            <div
+              className="w-11 h-11 rounded-2xl flex items-center justify-center"
+              style={{ background: `${b.tint}15`, border: `1px solid ${b.tint}25` }}
+            >
+              <FeatureIcon name={b.icon} tint={b.tint} size={20} />
+            </div>
+            <h3 className="font-display font-700 text-[15px] text-[#102033] mt-3.5 leading-snug">
+              {b.title}
+            </h3>
+            <p className="text-[13px] text-[#2B3950] mt-2 leading-[1.6]">
+              {b.body}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Compact trust strip - one tight sentence + brand-blue icon tile.
+          Sits flush at the bottom of the section as a tagline. Replaces
+          the heavy 3-line trust card that broke the page rhythm. */}
+      <div className="mt-8 max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-4 px-5 py-4 rounded-[20px] bg-[#EFF4FF] border border-[#2563EB]/15">
+        <div
+          className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0"
+          style={{ background: "rgba(37,99,235,0.12)", border: "1px solid rgba(37,99,235,0.25)" }}
+        >
+          <FeatureIcon name="shield" tint="#2563EB" size={20} />
         </div>
+        <p className="text-[14px] text-[#2B3950] leading-[1.6] text-center sm:text-left">
+          <strong className="text-[#102033]">
+            Not just another online class.
+          </strong>{" "}
+          A complete <strong className="text-[#102033]">result-focused O/L
+          recovery and achievement program</strong> - backed by the EDUS
+          F-Result Refund Promise.
+        </p>
       </div>
     </Section>
   );
