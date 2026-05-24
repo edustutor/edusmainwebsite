@@ -60,36 +60,104 @@ const QUICK_FACTS = [
 ];
 
 export const metadata = {
-  title: "G.C.E O/L 2026 - 6 Months 9A Project Class | EDUS Sri Lanka",
+  // Title formula: primary exact-match keyword first (G.C.E O/L 2026 9A),
+  // then differentiator (6 Months Project), then brand (EDUS). Under 60
+  // chars to avoid SERP truncation. The "2026" year token + "9A" digit
+  // pair both stand out in SERP snippets and align with how parents
+  // search ("o/l 2026 classes", "9A project class").
+  title: "G.C.E O/L 2026 9A Project Class - 6 Months Online | EDUS",
   description:
-    "Grade 10 missed? Basics not strong? Aim for 9A in G.C.E O/L 2026. 6-month live online project class covering Grade 10 + Grade 11 syllabus, full revision, past papers, and exam techniques. F-result refund promise. Rs.1,500/month per subject.",
+    "Aim for 9A in G.C.E O/L 2026. EDUS 6-month live online project class covers Grade 10 + Grade 11 syllabus, full revision, past papers, mock exams. Tamil + English medium. F-result refund promise. From Rs. 1,500/month. Call 070 707 2072.",
   alternates: {
     canonical: "/sl/9a-project",
     languages: hreflangAlternates("/sl/9a-project"),
   },
+  // Keyword set ordered by search volume + intent:
+  // exact-match brand-aligned terms first, then the modifier variations
+  // parents actually type, then the long-tail recovery / refund angles.
   keywords: [
-    "O/L 2026 online classes Sri Lanka",
-    "Grade 11 online tuition Sri Lanka",
-    "9A O/L Sri Lanka",
-    "O/L revision class Sri Lanka",
+    // Exact-match high-intent (rank-1 targets)
     "G.C.E O/L 2026",
+    "GCE OL 2026",
+    "O/L 2026",
+    "O Level 2026 Sri Lanka",
+    "9A class O/L",
+    "9A class Sri Lanka",
+    "9A project class",
+    "9A challenge",
+    "Grade 11 9A class",
+    // Online + Sri Lanka modifiers
+    "G.C.E O/L 2026 online classes",
+    "O/L 2026 online classes Sri Lanka",
+    "O Level online classes Sri Lanka",
+    "Grade 11 online tuition Sri Lanka",
+    "Grade 11 online classes Sri Lanka",
+    "O/L online tuition Sri Lanka",
+    // Recovery + revision intent
     "O/L recovery class",
+    "O/L revision class Sri Lanka",
     "Grade 10 catch up classes",
-    "O/L Tamil medium online classes",
-    "O/L English medium online classes",
-    "Sri Lanka O/L revision program",
-    "O/L 9A project class",
-    "best O/L tuition Sri Lanka",
+    "Grade 10 syllabus revision online",
+    "Grade 11 revision online",
     "O/L past paper class online",
     "O/L mock exam class",
-    "EDUS 9A class",
+    "O/L paper class Sri Lanka",
+    // Medium + subject variants
+    "O/L Tamil medium online classes",
+    "O/L English medium online classes",
+    "O/L Maths online class",
+    "O/L Science online class",
+    "O/L English online class",
+    "O/L History online class",
+    "O/L Tamil online class",
+    // Result / outcome intent
+    "how to get 9A in O/L",
+    "best O/L tuition Sri Lanka",
+    "best O/L class for 9A",
+    "best 9A class online",
+    // Refund / guarantee angle (unique to EDUS)
+    "O/L class with money back guarantee",
+    "O/L refund promise",
+    "EDUS 9A Project Class",
+    "EDUS O/L 2026",
   ],
   openGraph: {
-    title: "EDUS 9A Project Class - G.C.E O/L 2026",
+    title: "G.C.E O/L 2026 9A Project Class - EDUS Sri Lanka",
     description:
-      "6-month live online recovery + revision program for Grade 11 students. Cover Grade 10 + Grade 11, past papers, mock exams. F-refund promise.",
+      "6-month live online program for Grade 11. Grade 10 + Grade 11 coverage, past papers, mock exams, F-result refund promise. From Rs. 1,500/month. Tamil + English medium.",
     type: "website",
     url: `${SITE_URL}/sl/9a-project`,
+    siteName: "EDUS Online Tuition",
+    locale: "en_LK",
+    // Pull the 9A Challenge banner so the SERP share preview shows the
+    // students-with-trophy image instead of the generic site OG fallback.
+    images: [
+      {
+        url: `${SITE_URL}/edus-9a-challenge-popup.webp`,
+        width: 1200,
+        height: 675,
+        alt: "EDUS 9A Challenge - G.C.E O/L 2026 - 6 Months Online Project Class",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "G.C.E O/L 2026 9A Project Class - EDUS",
+    description:
+      "6-month live online Grade 11 program. Tamil + English medium. F-result refund promise. From Rs. 1,500/month/subject.",
+    images: [`${SITE_URL}/edus-9a-challenge-popup.webp`],
+  },
+  // Make sure search engines + AI crawlers know this is fresh, indexable,
+  // and a primary marketing landing page.
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -331,22 +399,214 @@ const BREADCRUMBS = [
 ];
 
 /* --------------------------------------------------------------- */
+/* Page-specific richer schemas - inline because they're unique to  */
+/* this campaign and not reused elsewhere. Bundle:                  */
+/*   1. EducationalOccupationalProgram - dates + duration eligibility*/
+/*      for Google's "course" rich result.                          */
+/*   2. AggregateOffer - the three price tiers grouped so Google    */
+/*      can show "from LKR 1,200 - 2,000" in the SERP.              */
+/*   3. ItemList of subjects - eligible for SERP carousel.          */
+/*   4. HowTo - the enrolment flow, AEO-friendly for ChatGPT et al. */
+/* --------------------------------------------------------------- */
+
+const PROGRAM_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOccupationalProgram",
+  "@id": `${COURSE_URL}#program`,
+  name: "EDUS G.C.E O/L 2026 - 6 Months 9A Project Class",
+  description:
+    "Six-month live online recovery and revision program for Sri Lankan Grade 11 students sitting the G.C.E O/L 2026 examination. Covers Grade 10 syllabus (first 3 months), Grade 11 syllabus + full revision + past papers + mock exams (next 3 months). Tamil medium and English medium. Includes EDUS F-Result Refund Promise.",
+  url: COURSE_URL,
+  programType: "ExamPreparationProgram",
+  educationalProgramMode: "online",
+  timeToComplete: "P6M",
+  startDate: "2026-06-01",
+  endDate: "2026-11-30",
+  applicationStartDate: "2026-04-01",
+  applicationDeadline: "2026-06-30",
+  numberOfCredits: 0,
+  occupationalCategory: "Secondary education",
+  educationalCredentialAwarded: "G.C.E Ordinary Level (Sri Lanka) preparation",
+  inLanguage: ["en", "ta"],
+  availableLanguage: ["English", "Tamil"],
+  provider: {
+    "@type": "EducationalOrganization",
+    "@id": `${SITE_URL}/#organization`,
+    name: "EDUS Online Tuition",
+    url: SITE_URL,
+  },
+  hasCourse: { "@id": `${COURSE_URL}#course` },
+  offers: { "@id": `${COURSE_URL}#aggregateOffer` },
+};
+
+const AGGREGATE_OFFER_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "AggregateOffer",
+  "@id": `${COURSE_URL}#aggregateOffer`,
+  priceCurrency: "LKR",
+  lowPrice: "1200",
+  highPrice: "2000",
+  offerCount: "3",
+  availability: "https://schema.org/InStock",
+  url: COURSE_URL,
+  validFrom: "2026-04-01",
+  priceValidUntil: "2026-11-30",
+  offeredBy: { "@id": `${SITE_URL}/#organization` },
+  offers: [
+    {
+      "@type": "Offer",
+      name: "Regular Grade 11 Class only",
+      price: "1200",
+      priceCurrency: "LKR",
+      description: "Standard Grade 11 class - syllabus completion + revision. Per month, per subject.",
+      category: "Subscription",
+      availability: "https://schema.org/InStock",
+      url: COURSE_URL,
+    },
+    {
+      "@type": "Offer",
+      name: "9A Project Class only",
+      price: "1500",
+      priceCurrency: "LKR",
+      description: "6-month recovery + revision project class. Per month, per subject.",
+      category: "Subscription",
+      availability: "https://schema.org/InStock",
+      url: COURSE_URL,
+    },
+    {
+      "@type": "Offer",
+      name: "Full 9A Package (Regular + Project)",
+      price: "2000",
+      priceCurrency: "LKR",
+      description: "Most recommended - both classes for maximum support. Per month, per subject.",
+      category: "Subscription",
+      availability: "https://schema.org/InStock",
+      url: COURSE_URL,
+    },
+  ],
+};
+
+const SUBJECTS_ITEMLIST_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": `${COURSE_URL}#subjects`,
+  name: "Subjects covered in the EDUS G.C.E O/L 2026 9A Project Class",
+  numberOfItems: 5,
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Tamil (Tamil medium + English medium)" },
+    { "@type": "ListItem", position: 2, name: "English (Tamil medium + English medium)" },
+    { "@type": "ListItem", position: 3, name: "Mathematics (Tamil medium + English medium)" },
+    { "@type": "ListItem", position: 4, name: "Science (Tamil medium + English medium)" },
+    { "@type": "ListItem", position: 5, name: "History (Tamil medium + English medium)" },
+  ],
+};
+
+const HOWTO_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "@id": `${COURSE_URL}#howto`,
+  name: "How to enrol in the EDUS G.C.E O/L 2026 9A Project Class",
+  description:
+    "Enrol in the EDUS 6 Months 9A Project Class for Sri Lankan Grade 11 students sitting the G.C.E O/L 2026 examination.",
+  totalTime: "PT3M",
+  estimatedCost: {
+    "@type": "MonetaryAmount",
+    currency: "LKR",
+    value: "1000",
+  },
+  step: [
+    {
+      "@type": "HowToStep",
+      position: 1,
+      name: "Pick your plan",
+      text: "Choose Regular Grade 11 Class only (LKR 1,200/month), 9A Project Class only (LKR 1,500/month), or the Full Package combining both (LKR 2,000/month). All prices are per subject per month.",
+      url: `${COURSE_URL}#fees`,
+    },
+    {
+      "@type": "HowToStep",
+      position: 2,
+      name: "Choose your subjects",
+      text: "Pick from Tamil, English, Maths, Science, and History. Available in Tamil medium and English medium.",
+      url: `${COURSE_URL}#timetable`,
+    },
+    {
+      "@type": "HowToStep",
+      position: 3,
+      name: "Sign up online or pay by bank",
+      text: "Self sign-up at https://signup.edustutor.com/ (takes about 3 minutes) OR pay by bank / online at https://fees.edustutor.com/ - EDUS Student Consultants will guide the next steps. You can also call 070 707 2072.",
+      url: "https://signup.edustutor.com/",
+    },
+    {
+      "@type": "HowToStep",
+      position: 4,
+      name: "Pay the one-time admission fee",
+      text: "LKR 1,000 per student, paid only once when joining EDUS. Covers any number of group classes within the program.",
+      url: `${COURSE_URL}#fees`,
+    },
+  ],
+};
+
+const REFUND_OFFER_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${COURSE_URL}#refund-promise`,
+  name: "EDUS F-Result Refund Promise",
+  serviceType: "Tuition refund guarantee",
+  description:
+    "If a student fully follows the EDUS 6 Months 9A Project Class system and still receives an F result in the enrolled subject, EDUS refunds the full tuition fees paid for that eligible subject. Terms apply.",
+  provider: { "@id": `${SITE_URL}/#organization` },
+  areaServed: { "@type": "Country", name: "Sri Lanka" },
+  audience: {
+    "@type": "EducationalAudience",
+    educationalRole: "student",
+    audienceType: "Sri Lankan Grade 11 students sitting G.C.E O/L 2026",
+  },
+};
+
+/* --------------------------------------------------------------- */
 /* Page                                                              */
 /* --------------------------------------------------------------- */
 
 export default function NinePerformanceProjectPage() {
   return (
     <>
+      {/* Schema bundle (order matters for Google's parsing):
+            1. BreadcrumbList - tells Google the page's place in the
+               site hierarchy + powers the SERP breadcrumb display.
+            2. Course - the canonical educational offering. The @id
+               is referenced by the program schema below.
+            3. EducationalOccupationalProgram - augments Course with
+               dates, application window, duration, language. Eligible
+               for Google's course rich result with dates shown.
+            4. AggregateOffer - the three price tiers grouped so Google
+               can show "from LKR 1,200" pricing in SERP.
+            5. ItemList of subjects - eligible for SERP carousel.
+            6. HowTo - the enrolment flow. AEO-friendly: ChatGPT /
+               Perplexity / Gemini cite HowTo schemas verbatim when
+               users ask "how do I enrol in EDUS 9A class".
+            7. Service - the F-Result Refund Promise as a discrete
+               schema so AI engines can answer the refund question.
+            8. FAQPage - all FAQ Q+As, eligible for SERP FAQ accordion. */}
       <JsonLdScript data={breadcrumbList(BREADCRUMBS)} />
       <JsonLdScript
-        data={tuitionCourse({
-          name: "EDUS G.C.E O/L 2026 - 6 Months 9A Project Class",
-          description:
-            "A 6-month live online recovery and achievement program for Sri Lankan Grade 11 students preparing for the G.C.E O/L 2026 examination. Covers Grade 10 + Grade 11 syllabus, full revision, past papers, mock exams, and individual attention. Includes an F-result refund promise.",
-          url: COURSE_URL,
-          area: "Sri Lankan Grade 11 students preparing for G.C.E O/L 2026",
-        })}
+        data={{
+          ...tuitionCourse({
+            name: "EDUS G.C.E O/L 2026 - 6 Months 9A Project Class",
+            description:
+              "A 6-month live online recovery and achievement program for Sri Lankan Grade 11 students preparing for the G.C.E O/L 2026 examination. Covers Grade 10 + Grade 11 syllabus, full revision, past papers, mock exams, and individual attention. Includes an F-result refund promise.",
+            url: COURSE_URL,
+            area: "Sri Lankan Grade 11 students preparing for G.C.E O/L 2026",
+          }),
+          // Stable @id so the program schema below can reference this
+          // Course node without duplicating data (graph-style linking).
+          "@id": `${COURSE_URL}#course`,
+        }}
       />
+      <JsonLdScript data={PROGRAM_SCHEMA} />
+      <JsonLdScript data={AGGREGATE_OFFER_SCHEMA} />
+      <JsonLdScript data={SUBJECTS_ITEMLIST_SCHEMA} />
+      <JsonLdScript data={HOWTO_SCHEMA} />
+      <JsonLdScript data={REFUND_OFFER_SCHEMA} />
       <JsonLdScript data={faqPage(FAQ_ENTRIES.map((f) => ({ q: f.q, a: f.a })))} />
 
       {/* Breadcrumb uses the "overlay" variant so it sits inside the
@@ -364,6 +624,7 @@ export default function NinePerformanceProjectPage() {
       </div>
 
       <QuickFacts />
+      <QuickAnswers />
       <PowerfulHook />
       <WhyThisProgram />
       <ProgramObjectives />
@@ -377,6 +638,7 @@ export default function NinePerformanceProjectPage() {
       <FeeSummary />
       <WhoShouldJoin />
       <FAQ />
+      <RelatedLinks />
       <FinalCTA />
     </>
   );
@@ -424,7 +686,7 @@ function Hero() {
         <div className="mt-8 text-center max-w-4xl mx-auto" data-anim="2">
           <p className="eyebrow">
             <span className="dot" />
-            Starts June 2026 - Limited Seats - 6 Month Project
+            G.C.E O/L 2026 - 6 Months Online - Limited Seats
           </p>
           <h1 className="heading mt-5" style={{ fontSize: "var(--fs-hero)" }}>
             Grade 10 missed? Basics not strong?{" "}
@@ -624,6 +886,81 @@ function QuickFacts() {
         </dl>
       </div>
     </section>
+  );
+}
+
+/* --------------------------------------------------------------- */
+/* QuickAnswers - AEO / GEO fact block (rank-1 secret weapon).      */
+/*                                                                  */
+/* AI engines (ChatGPT, Claude, Perplexity, Gemini) cite explicit    */
+/* Q+A pairs verbatim when users ask direct questions like "what is */
+/* the EDUS 9A class fee" or "when does the G.C.E O/L 2026 class    */
+/* start". This block has the FAQ schema's questions written as     */
+/* short, factual, citation-friendly sentences.                      */
+/*                                                                  */
+/* Why it ranks: search engines AND AI engines both reward content  */
+/* that answers the exact question users type. The information is   */
+/* duplicated in the FAQ schema below, but having it visible AND    */
+/* readable above the fold means BOTH human visitors and AI         */
+/* crawlers see it without diving into the JSON-LD blob.            */
+/* --------------------------------------------------------------- */
+
+function QuickAnswers() {
+  const qa = [
+    {
+      q: "What is the EDUS 9A Project Class?",
+      a: "A 6-month live online recovery and revision program for Sri Lankan Grade 11 students sitting the G.C.E O/L 2026 examination. The first 3 months cover the Grade 10 syllabus; the next 3 months cover the Grade 11 syllabus, full revision, past papers, and mock exams.",
+    },
+    {
+      q: "When does the G.C.E O/L 2026 9A Project Class start?",
+      a: "The 6-month program runs from June 2026 to 30 November 2026, aligned to the G.C.E O/L 2026 examination timetable.",
+    },
+    {
+      q: "How much does the 9A Project Class cost?",
+      a: "Rs. 1,500 per month per subject for the 9A Project Class only. Rs. 1,200 per month per subject for the Regular Grade 11 class only. Rs. 2,000 per month per subject for the Full Package (Regular + Project). One-time admission fee: Rs. 1,000 per student.",
+    },
+    {
+      q: "What subjects are covered?",
+      a: "Tamil, English, Maths, Science, and History - available in Tamil medium and English medium. Five core G.C.E O/L subjects.",
+    },
+    {
+      q: "Is there a refund if my child doesn't pass?",
+      a: "Yes. The EDUS F-Result Refund Promise: if a student fully follows the 6-month system and still receives an F result in the enrolled subject, EDUS refunds the full tuition fees paid for that eligible subject (terms apply).",
+    },
+    {
+      q: "How are the classes delivered?",
+      a: "Live online via Google Meet on the EDUS Student Mobile App and EDUS Web App. Each project class runs 1.5 hours per week per subject. Recordings are provided after every class.",
+    },
+  ];
+
+  return (
+    <Section eyebrow="Quick Answers">
+      <h2
+        className="heading text-center max-w-3xl mx-auto"
+        style={{ fontSize: "var(--fs-section)" }}
+      >
+        Common questions, <em>direct answers.</em>
+      </h2>
+      <p className="text-center text-[#5A6A82] text-[13.5px] mt-4 max-w-2xl mx-auto leading-[1.65]">
+        Short, factual answers about the EDUS G.C.E O/L 2026 6 Months 9A
+        Project Class. Read the full FAQ below for more.
+      </p>
+      <dl className="mt-10 grid sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        {qa.map((item) => (
+          <div
+            key={item.q}
+            className="glass rounded-2xl p-5 h-full flex flex-col"
+          >
+            <dt className="font-display font-700 text-[14px] text-[#102033] leading-snug">
+              {item.q}
+            </dt>
+            <dd className="text-[13px] text-[#2B3950] mt-2 leading-[1.65]">
+              {item.a}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </Section>
   );
 }
 
@@ -1286,6 +1623,63 @@ function WhoShouldJoin() {
             </span>
             <p className="text-[14px] text-[#2B3950] leading-[1.55]">{p}</p>
           </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+/* --------------------------------------------------------------- */
+/* RelatedLinks - internal link equity flow + AEO context.          */
+/* Tells search engines AND AI engines what other EDUS pages are    */
+/* contextually related to the 9A Project page, helping the whole   */
+/* /sl cluster rank as a coherent topic.                             */
+/* --------------------------------------------------------------- */
+
+function RelatedLinks() {
+  const links = [
+    {
+      href: "/sl",
+      title: "Sri Lanka Online Tuition",
+      desc: "Full EDUS Sri Lanka programme - Grade 1 to A/L, all subjects, group + individual.",
+    },
+    {
+      href: "/sl/timetable",
+      title: "2026 Group Class Timetable",
+      desc: "Browse the full 2026 group class schedule for every grade and subject.",
+    },
+    {
+      href: "/contact",
+      title: "Talk to an EDUS Consultant",
+      desc: "Get personal guidance on which plan + subjects suit your child best.",
+    },
+  ];
+  return (
+    <Section eyebrow="Related on EDUS">
+      <h2
+        className="heading text-center max-w-3xl mx-auto"
+        style={{ fontSize: "var(--fs-section)" }}
+      >
+        Explore <em>more EDUS resources.</em>
+      </h2>
+      <div className="mt-10 grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto items-stretch">
+        {links.map((l) => (
+          <Link
+            key={l.href}
+            href={l.href}
+            className="glass rounded-2xl p-5 lift h-full flex flex-col group"
+          >
+            <p className="font-display font-700 text-[15px] text-[#102033] leading-snug group-hover:text-[#2563EB] transition-colors">
+              {l.title}
+            </p>
+            <p className="text-[13px] text-[#2B3950] mt-2 leading-[1.6]">
+              {l.desc}
+            </p>
+            <span className="mt-auto pt-3 inline-flex items-center gap-1.5 text-[12.5px] text-[#2563EB] font-display font-700">
+              Open
+              <FeatureIcon name="map" tint="#2563EB" size={12} />
+            </span>
+          </Link>
         ))}
       </div>
     </Section>

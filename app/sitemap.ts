@@ -31,6 +31,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Market landing pages
     { path: "/sl",               changeFrequency: "weekly",  priority: 0.95 },
     { path: "/sl/timetable",     changeFrequency: "monthly", priority: 0.85 },
+    // Time-sensitive campaign page - high priority + weekly until
+    // O/L 2026 exam window (Nov 2026). Refresh frequency matters more
+    // than priority here so Googlebot revisits during the enrolment
+    // window.
+    { path: "/sl/9a-project",    changeFrequency: "weekly",  priority: 0.90 },
     { path: "/in",               changeFrequency: "weekly",  priority: 0.95 },
     { path: "/mv",               changeFrequency: "weekly",  priority: 0.95 },
     { path: "/global",           changeFrequency: "weekly",  priority: 0.95 },
