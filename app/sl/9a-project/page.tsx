@@ -353,39 +353,55 @@ const REFUND_TERMS = [
 const FAQ_ENTRIES = [
   {
     q: "What is the EDUS 6 Months 9A Project Class?",
-    a: "It is a special 6-month live online recovery + revision program for Sri Lankan Grade 11 students preparing for the G.C.E O/L 2026 examination. The first 3 months cover the Grade 10 syllabus; the next 3 months cover the Grade 11 syllabus, full revision, past papers, and mock exam preparation.",
+    a: "A 6-month live online recovery and revision program for Sri Lankan Grade 11 students sitting the G.C.E O/L 2026 examination. The first 3 months cover the Grade 10 syllabus (foundation recovery); the next 3 months cover the Grade 11 syllabus, full revision, past paper discussions, and mock exam preparation.",
+  },
+  {
+    q: "When does the G.C.E O/L 2026 9A Project Class start?",
+    a: "The 6-month program runs from June 2026 to 30 November 2026, aligned with the G.C.E O/L 2026 examination timetable.",
   },
   {
     q: "Who should join this class?",
-    a: "Grade 11 students preparing for G.C.E O/L 2026, especially those who missed Grade 10 lessons, are weak in basics, or want to push from average marks to 5A / 7A / 9A. Parents looking for a structured, result-focused online institute will find this ideal.",
+    a: "Grade 11 students preparing for G.C.E O/L 2026 - especially those who missed Grade 10 lessons, are weak in basics, or want to push from average marks to 5A / 7A / 9A results. Parents looking for a structured, result-focused online institute will find this ideal.",
   },
   {
-    q: "What is the fee for the 9A Project Class?",
-    a: "Rs. 1,500 per month per subject for the project class only. Rs. 1,200 per month per subject for the regular Grade 11 class only. Rs. 2,000 per month per subject for the full package (regular + project). A one-time non-refundable admission fee of Rs. 1,000 per student applies.",
+    q: "How much does the 9A Project Class cost?",
+    a: "Rs. 1,500 per month per subject for the 9A Project Class only. Rs. 1,200 per month per subject for the Regular Grade 11 class only. Rs. 2,000 per month per subject for the Full Package (Regular + Project - most recommended). A one-time non-refundable admission fee of Rs. 1,000 per student applies.",
   },
   {
-    q: "What is the F-result refund promise?",
-    a: "If a student fully follows the EDUS 6 Months 9A Project Class system and still receives an F result in the enrolled subject, EDUS will refund the full tuition fees paid for that eligible subject. Terms and conditions apply - the student must attend all classes, complete all assignments, and follow the academic plan.",
+    q: "Is there a refund if my child doesn't pass?",
+    a: "Yes. The EDUS F-Result Refund Promise: if a student fully follows the 6-month system (full attendance, completed assignments, monthly fees on time, continuous enrolment) and still receives an F result in the enrolled subject, EDUS refunds the full tuition fees paid for that eligible subject. The admission fee and mock exam fees are excluded. See full Terms in the Refund Eligibility section above.",
   },
   {
-    q: "What subjects are covered?",
-    a: "Tamil, English, Maths, Science, and History. Available in both Tamil medium and English medium.",
+    q: "What subjects are covered in the 9A Project Class?",
+    a: "Tamil, English, Maths, Science, and History - the five core G.C.E O/L subjects. Available in both Tamil medium and English medium.",
   },
   {
     q: "How are the classes delivered?",
-    a: "Live online via Google Meet on the EDUS Student Mobile App and EDUS Web App. Each project class runs 1.5 hours per week per subject. Recordings are provided after every class for revision.",
+    a: "Live online via Google Meet on the EDUS Student Mobile App and EDUS Web App. Each project class runs 1.5 hours per week per subject. Recordings are provided after every class for revision so a missed class is never a lost class.",
   },
   {
-    q: "When does the program start?",
-    a: "The 6-month program runs from June 2026 to 30 November 2026 - aligned with the G.C.E O/L 2026 timetable.",
+    q: "What is the difference between the Regular Class and the 9A Project Class?",
+    a: "The Regular Grade 11 class (Rs. 1,200/month/subject) covers the Grade 11 syllabus only with revision. The 9A Project Class (Rs. 1,500/month/subject) is a special 6-month program that ALSO covers Grade 10 recovery in the first 3 months + Grade 11 + intensive past paper practice + mock exams. The Full Package (Rs. 2,000/month/subject) combines both - most recommended for serious 9A students.",
   },
   {
     q: "Are mock exams included in the fee?",
-    a: "Mock exams will be conducted where necessary. The mock exam fee is charged separately and the exact amount + dates will be informed during the course.",
+    a: "Mock examinations will be conducted where necessary to prepare students for the real O/L examination environment. The mock exam fee is charged separately and the exact amount plus dates will be informed during the course.",
   },
   {
-    q: "How do I enrol?",
-    a: "Self sign-up takes about 3 minutes at https://signup.edustutor.com/ or pay by bank / online at https://fees.edustutor.com/ and our Student Consultants will guide the next steps. You can also call us on 070 707 2072.",
+    q: "Will my child get individual attention in the online class?",
+    a: "Yes. Every student receives personal attention from our O/L expert tutors during and outside class. Progress is monitored through assessments, homework, assignments, and class participation - with regular reports back to parents.",
+  },
+  {
+    q: "Can my child catch up if Grade 10 was missed?",
+    a: "Yes - that is exactly what this program is designed for. The first 3 months of the 9A Project Class cover the complete Grade 10 syllabus from foundation level. Students who missed Grade 10 lessons, basics, formulas, or grammar can recover everything before moving into the Grade 11 deep dive.",
+  },
+  {
+    q: "What medium are the classes taught in?",
+    a: "Tamil medium and English medium. The Project Class is delivered in both mediums for all five subjects (Tamil, English, Maths, Science, History). The Regular Grade 11 class is also available in both Tamil medium and English medium.",
+  },
+  {
+    q: "How do I enrol in the 9A Project Class?",
+    a: "Three ways: 1) Self sign-up online at https://signup.edustutor.com/ (takes about 3 minutes). 2) Pay by bank / online at https://fees.edustutor.com/ - our Student Consultants will guide the next steps. 3) Call us directly on 070 707 2072.",
   },
 ];
 
@@ -624,8 +640,6 @@ export default function NinePerformanceProjectPage() {
       </div>
 
       <QuickFacts />
-      <QuickAnswers />
-      <PowerfulHook />
       <WhyThisProgram />
       <ProgramObjectives />
       <TwoOptions />
@@ -789,7 +803,7 @@ function Hero() {
 function WhyThisProgram() {
   return (
     <Section eyebrow="Why EDUS 9A Project Class">
-      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-section)" }}>
+      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-display)" }}>
         We <em>understand the fear</em> of entering Grade 11 unprepared.
       </h2>
       <p className="text-center text-[#2B3950] text-[15.5px] leading-[1.7] max-w-3xl mx-auto mt-5">
@@ -890,110 +904,6 @@ function QuickFacts() {
 }
 
 /* --------------------------------------------------------------- */
-/* QuickAnswers - AEO / GEO fact block (rank-1 secret weapon).      */
-/*                                                                  */
-/* AI engines (ChatGPT, Claude, Perplexity, Gemini) cite explicit    */
-/* Q+A pairs verbatim when users ask direct questions like "what is */
-/* the EDUS 9A class fee" or "when does the G.C.E O/L 2026 class    */
-/* start". This block has the FAQ schema's questions written as     */
-/* short, factual, citation-friendly sentences.                      */
-/*                                                                  */
-/* Why it ranks: search engines AND AI engines both reward content  */
-/* that answers the exact question users type. The information is   */
-/* duplicated in the FAQ schema below, but having it visible AND    */
-/* readable above the fold means BOTH human visitors and AI         */
-/* crawlers see it without diving into the JSON-LD blob.            */
-/* --------------------------------------------------------------- */
-
-function QuickAnswers() {
-  const qa = [
-    {
-      q: "What is the EDUS 9A Project Class?",
-      a: "A 6-month live online recovery and revision program for Sri Lankan Grade 11 students sitting the G.C.E O/L 2026 examination. The first 3 months cover the Grade 10 syllabus; the next 3 months cover the Grade 11 syllabus, full revision, past papers, and mock exams.",
-    },
-    {
-      q: "When does the G.C.E O/L 2026 9A Project Class start?",
-      a: "The 6-month program runs from June 2026 to 30 November 2026, aligned to the G.C.E O/L 2026 examination timetable.",
-    },
-    {
-      q: "How much does the 9A Project Class cost?",
-      a: "Rs. 1,500 per month per subject for the 9A Project Class only. Rs. 1,200 per month per subject for the Regular Grade 11 class only. Rs. 2,000 per month per subject for the Full Package (Regular + Project). One-time admission fee: Rs. 1,000 per student.",
-    },
-    {
-      q: "What subjects are covered?",
-      a: "Tamil, English, Maths, Science, and History - available in Tamil medium and English medium. Five core G.C.E O/L subjects.",
-    },
-    {
-      q: "Is there a refund if my child doesn't pass?",
-      a: "Yes. The EDUS F-Result Refund Promise: if a student fully follows the 6-month system and still receives an F result in the enrolled subject, EDUS refunds the full tuition fees paid for that eligible subject (terms apply).",
-    },
-    {
-      q: "How are the classes delivered?",
-      a: "Live online via Google Meet on the EDUS Student Mobile App and EDUS Web App. Each project class runs 1.5 hours per week per subject. Recordings are provided after every class.",
-    },
-  ];
-
-  return (
-    <Section eyebrow="Quick Answers">
-      <h2
-        className="heading text-center max-w-3xl mx-auto"
-        style={{ fontSize: "var(--fs-section)" }}
-      >
-        Common questions, <em>direct answers.</em>
-      </h2>
-      <p className="text-center text-[#5A6A82] text-[13.5px] mt-4 max-w-2xl mx-auto leading-[1.65]">
-        Short, factual answers about the EDUS G.C.E O/L 2026 6 Months 9A
-        Project Class. Read the full FAQ below for more.
-      </p>
-      <dl className="mt-10 grid sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
-        {qa.map((item) => (
-          <div
-            key={item.q}
-            className="glass rounded-2xl p-5 h-full flex flex-col"
-          >
-            <dt className="font-display font-700 text-[14px] text-[#102033] leading-snug">
-              {item.q}
-            </dt>
-            <dd className="text-[13px] text-[#2B3950] mt-2 leading-[1.65]">
-              {item.a}
-            </dd>
-          </div>
-        ))}
-      </dl>
-    </Section>
-  );
-}
-
-/* --------------------------------------------------------------- */
-/* Powerful Main Advertisement Hook - matches the brief's named     */
-/* section header. Anchors the page's central promise high above    */
-/* the fold-2 area where most engaged scrollers land.                */
-/* --------------------------------------------------------------- */
-
-function PowerfulHook() {
-  return (
-    <section className="container-edge mt-12">
-      <div className="max-w-4xl mx-auto text-center">
-        <p className="eyebrow">
-          <span className="dot" />
-          Powerful Main Advertisement Hook
-        </p>
-        <h2
-          className="heading mt-4"
-          style={{ fontSize: "var(--fs-section)" }}
-        >
-          EDUS 6 Months 9A Project Class <em>- 2026.</em>
-        </h2>
-        <p className="font-display font-700 text-[#2563EB] text-[16px] sm:text-[18px] mt-4 leading-snug">
-          We guarantee strong results if the student follows our complete
-          learning system properly.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-/* --------------------------------------------------------------- */
 /* Program objectives                                                */
 /* --------------------------------------------------------------- */
 
@@ -1010,7 +920,7 @@ function ProgramObjectives() {
   ];
   return (
     <Section eyebrow="Program Objectives">
-      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-section)" }}>
+      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-display)" }}>
         Eight outcomes, <em>one disciplined plan.</em>
       </h2>
       <div className="mt-10 grid sm:grid-cols-2 gap-3 max-w-3xl mx-auto">
@@ -1041,7 +951,7 @@ function ProgramObjectives() {
 function TwoOptions() {
   return (
     <Section eyebrow="Two Class Options Available">
-      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-section)" }}>
+      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-display)" }}>
         Pick the path that <em>fits your child.</em>
       </h2>
       {/* items-stretch on the grid + h-full on each card + mt-auto on
@@ -1245,7 +1155,7 @@ function FullPackageBanner() {
 function Receives() {
   return (
     <Section eyebrow="What Students Will Receive">
-      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-section)" }}>
+      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-display)" }}>
         Nine things every <em>9A Project student gets</em>.
       </h2>
       {/* 3-column grid at lg+ so the 9 cards lay out as a clean 3x3.
@@ -1279,7 +1189,7 @@ function Receives() {
 function DoublePromise() {
   return (
     <Section eyebrow="Special EDUS Result Promise">
-      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-section)" }}>
+      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-display)" }}>
         Two promises. <em>Both backed in writing.</em>
       </h2>
       <div className="mt-10 grid lg:grid-cols-2 gap-5 max-w-4xl mx-auto">
@@ -1352,7 +1262,7 @@ function DoublePromise() {
 function RefundTerms() {
   return (
     <Section eyebrow="Refund Eligibility - Terms" id="refund-terms">
-      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-section)" }}>
+      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-display)" }}>
         Transparent rules. <em>No fine print.</em>
       </h2>
       <p className="text-center text-[#2B3950] text-[14.5px] mt-4 max-w-3xl mx-auto leading-[1.65]">
@@ -1393,7 +1303,7 @@ function RefundTerms() {
             Mock examinations will be conducted where necessary to prepare
             students for the real O/L examination environment. The mock exam
             fee is charged separately - exact fee and dates will be informed
-            during the course.
+            during the classes.
           </p>
         </div>
       </div>
@@ -1408,7 +1318,7 @@ function RefundTerms() {
 function ProjectTimetable() {
   return (
     <Section eyebrow="Project Class Timetable" id="timetable">
-      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-section)" }}>
+      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-display)" }}>
         9A Project Class - <em>weekly slots.</em>
       </h2>
       <p className="text-center text-[12.5px] text-[#5A6A82] mt-3">
@@ -1456,7 +1366,7 @@ function ProjectTimetable() {
 function RegularTimetables() {
   return (
     <Section eyebrow="Regular Grade 11 Timetables">
-      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-section)" }}>
+      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-display)" }}>
         Regular Grade 11 - <em>weekly schedule.</em>
       </h2>
       <p className="text-center text-[12.5px] text-[#5A6A82] mt-3">
@@ -1525,7 +1435,7 @@ function RegularTimetableTable({
 function FeeSummary() {
   return (
     <Section eyebrow="Fee Summary" id="fees">
-      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-section)" }}>
+      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-display)" }}>
         Pick the plan that <em>fits your goal.</em>
       </h2>
       <div className="mt-10 max-w-4xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
@@ -1609,7 +1519,7 @@ function WhoShouldJoin() {
   ];
   return (
     <Section eyebrow="Who Should Join">
-      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-section)" }}>
+      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-display)" }}>
         Built for <em>students who mean it.</em>
       </h2>
       <div className="mt-10 grid sm:grid-cols-2 gap-3 max-w-3xl mx-auto">
@@ -1658,7 +1568,7 @@ function RelatedLinks() {
     <Section eyebrow="Related on EDUS">
       <h2
         className="heading text-center max-w-3xl mx-auto"
-        style={{ fontSize: "var(--fs-section)" }}
+        style={{ fontSize: "var(--fs-display)" }}
       >
         Explore <em>more EDUS resources.</em>
       </h2>
@@ -1693,7 +1603,7 @@ function RelatedLinks() {
 function FAQ() {
   return (
     <Section eyebrow="Frequently Asked Questions" id="faq">
-      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-section)" }}>
+      <h2 className="heading text-center max-w-3xl mx-auto" style={{ fontSize: "var(--fs-display)" }}>
         Common questions, <em>clear answers.</em>
       </h2>
       <div className="mt-10 max-w-3xl mx-auto space-y-3">

@@ -2,7 +2,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { CookiePreferencesLink } from "@/components/analytics/CookiePreferencesLink";
 
-const QUICK = [
+type QuickItem = {
+  label: string;
+  href: string;
+  external?: boolean;
+  /** Optional emphasis: render with a soft red blink to drive attention
+   *  toward a time-sensitive campaign link (e.g. 9A Project Class). */
+  blink?: boolean;
+};
+
+const QUICK: QuickItem[] = [
   { label: "Home", href: "/" },
   { label: "Choose Region", href: "/#regions" },
   { label: "How It Works", href: "/#how" },
@@ -16,6 +25,9 @@ const QUICK = [
   { label: "Resource Vault", href: "https://wiki.edustutor.com/", external: true },
   { label: "Enrol", href: "https://signup.edustutor.com/", external: true },
   { label: "Contact", href: "/contact" },
+  // Time-sensitive campaign - blink draws attention through the long
+  // Quick Links list. Removed when O/L 2026 enrolment window closes.
+  { label: "9A Project Class - O/L 2026", href: "/sl/9a-project", blink: true },
 ];
 
 const PATHS = [
@@ -121,7 +133,7 @@ function FooterCol({
   cols = 1,
 }: {
   title: string;
-  items: { label: string; href: string; external?: boolean }[];
+  items: { label: string; href: string; external?: boolean; blink?: boolean }[];
   className?: string;
   /** Internal sub-column count. Use 2 for tall lists like Quick Links. */
   cols?: 1 | 2;
@@ -136,30 +148,50 @@ function FooterCol({
           cols === 2 ? "sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-1.5 sm:space-y-0" : ""
         }`}
       >
-        {items.map((l) => (
-          <li key={l.href}>
-            {l.external ? (
-              <a
-                href={l.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-1.5 text-[#2B3950] hover:text-[#2563EB] transition"
-              >
-                <FooterArrow />
-                {l.label}
-              </a>
-            ) : (
-              <Link
-                href={l.href}
-                className="group inline-flex items-center gap-1.5 text-[#2B3950] hover:text-[#2563EB] transition"
-              >
-                <FooterArrow />
-                {l.label}
-              </Link>
-            )}
-          </li>
-        ))}
+        {items.map((l) => {
+          // Blink-styled links get brand red ink + the blink animation
+          // (defined in the <style> block at the bottom of this column).
+          // Regular links keep the default ink + brand-blue hover.
+          const linkClass = l.blink
+            ? "group inline-flex items-center gap-1.5 text-[#DC2626] hover:text-[#B91C1C] transition font-display font-700 edus-footer-blink"
+            : "group inline-flex items-center gap-1.5 text-[#2B3950] hover:text-[#2563EB] transition";
+          return (
+            <li key={l.href}>
+              {l.external ? (
+                <a
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkClass}
+                >
+                  <FooterArrow />
+                  {l.label}
+                </a>
+              ) : (
+                <Link href={l.href} className={linkClass}>
+                  <FooterArrow />
+                  {l.label}
+                </Link>
+              )}
+            </li>
+          );
+        })}
       </ul>
+      {/* Blink keyframe scoped to footer. Soft 0.45 -> 1 fade (not a
+          hard visibility flicker) to stay accessible. Suppressed under
+          prefers-reduced-motion. */}
+      <style>{`
+        @keyframes edus-footer-blink {
+          0%, 100% { opacity: 1;    }
+          50%      { opacity: 0.45; }
+        }
+        .edus-footer-blink {
+          animation: edus-footer-blink 1.4s ease-in-out infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .edus-footer-blink { animation: none; }
+        }
+      `}</style>
     </div>
   );
 }
