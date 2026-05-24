@@ -152,33 +152,61 @@ export function ProjectPromoPopup() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="promo-9a-title"
-      className="fixed inset-0 z-[90] flex items-end sm:items-center justify-center px-4 sm:px-6 pb-4 sm:pb-0"
+      // CENTERING STRATEGY (verified mobile + desktop):
+      //   1. `fixed inset-0` covers the layout viewport (the legacy
+      //      iOS-Safari trap where 100vh > visible height when the
+      //      address bar is showing).
+      //   2. `height: 100dvh` overrides height to use the DYNAMIC
+      //      viewport - tracks the visible area in real time as the
+      //      address bar / keyboard collapses or expands.
+      //   3. `flex items-center justify-center` centers the card in
+      //      both axes.
+      //   4. The card also has `m-auto` as a defence-in-depth backstop
+      //      so even if a parent flex context fails, auto margins keep
+      //      it visually centered.
+      //   5. Safe-area padding keeps the card clear of the iOS notch +
+      //      Android status bar at top and the home indicator at bottom.
+      className="fixed inset-0 z-[90] flex items-center justify-center px-4 sm:px-6"
       onClick={dismiss}
       style={{
+        // 100dvh = dynamic viewport height. Always matches what the
+        // user can actually see, even on iOS Safari where the address
+        // bar shrinks/grows.
+        height: "100dvh",
         // Translucent backdrop. The blur softens the underlying page
         // so the popup pops, but doesn't fully obscure the content -
         // the visitor still sees they're on the EDUS site.
         background: "rgba(16,32,51,0.55)",
         backdropFilter: "blur(6px)",
+        // Safe-area padding so the card never sits under the iOS
+        // notch / Android status bar at top or the home indicator at
+        // the bottom on mobile.
+        paddingTop: "max(1.5rem, env(safe-area-inset-top, 0px))",
+        paddingBottom: "max(1.5rem, env(safe-area-inset-bottom, 0px))",
       }}
     >
       {/* Stop propagation so clicks INSIDE the card don't trigger the
-          backdrop dismiss handler. */}
+          backdrop dismiss handler.
+          max-h + overflow-y-auto guarantee the card never escapes the
+          viewport on short phone screens (the image alone is ~52vw tall
+          + content + button rows could push past 700px tall otherwise).
+          m-auto is the centering backstop (see strategy comment above). */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-[480px] rounded-[24px] bg-white overflow-hidden border border-[rgba(16,32,51,0.10)] shadow-[0_30px_80px_-20px_rgba(16,32,51,0.55)]"
+        className="relative w-full max-w-[480px] max-h-full m-auto overflow-y-auto rounded-[24px] bg-white border border-[rgba(16,32,51,0.10)] shadow-[0_30px_80px_-20px_rgba(16,32,51,0.55)]"
         style={{
           animation: "edus-promo-pop 0.35s cubic-bezier(0.2, 0.7, 0.2, 1)",
         }}
       >
-        {/* Close button - top-right of the card, sits OVER the image
-            so it stays visible on mobile where the image is the focal
-            point. White circle for contrast against any image. */}
+        {/* Close button - floats above the card in the top-right
+            corner, slightly OUTSIDE the image area so it doesn't
+            collide with the trophy/student artwork on mobile. White
+            background + shadow + ring keep it readable on any image. */}
         <button
           type="button"
           onClick={dismiss}
           aria-label="Close 9A Challenge promo"
-          className="absolute top-3 right-3 z-10 inline-flex w-9 h-9 rounded-full items-center justify-center bg-white/90 text-[#102033] shadow-[0_4px_12px_-4px_rgba(16,32,51,0.4)] hover:bg-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/60"
+          className="absolute top-2 right-2 z-20 inline-flex w-9 h-9 rounded-full items-center justify-center bg-white text-[#102033] shadow-[0_6px_16px_-4px_rgba(16,32,51,0.55)] ring-1 ring-[rgba(16,32,51,0.08)] hover:bg-white hover:scale-105 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/60"
         >
           <svg
             width="16"
@@ -205,7 +233,12 @@ export function ProjectPromoPopup() {
             which is what caused the popup to render blank on
             production before this change. Browsers handle plain
             <img loading="lazy"> well enough that nothing is lost. */}
-        <div className="relative aspect-[16/9] bg-[#0B1A36]">
+        {/* Image wrapper. overflow-hidden + the rounded-t corners
+            inherited via the parent ensure the image clips cleanly to
+            the rounded card edges. Aspect ratio kept at 16:9 so the
+            container reserves space and avoids layout shift before
+            the image loads. */}
+        <div className="relative aspect-[16/9] bg-[#0B1A36] overflow-hidden rounded-t-[24px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/edus-9a-challenge-popup.webp"
