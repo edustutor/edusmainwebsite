@@ -185,44 +185,52 @@ export function ProjectPromoPopup() {
         paddingBottom: "max(1.5rem, env(safe-area-inset-bottom, 0px))",
       }}
     >
-      {/* Stop propagation so clicks INSIDE the card don't trigger the
-          backdrop dismiss handler.
-          max-h + overflow-y-auto guarantee the card never escapes the
-          viewport on short phone screens (the image alone is ~52vw tall
-          + content + button rows could push past 700px tall otherwise).
-          m-auto is the centering backstop (see strategy comment above). */}
+      {/* Column wrapper: holds the popup card. The close (X) button
+          floats OUTSIDE the card in the top-right corner of this
+          wrapper, sitting on the backdrop so it never overlaps the
+          card artwork. relative on the wrapper anchors the absolute
+          close button to this column's bounding box. */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-[480px] max-h-full m-auto overflow-y-auto rounded-[24px] bg-white border border-[rgba(16,32,51,0.10)] shadow-[0_30px_80px_-20px_rgba(16,32,51,0.55)]"
+        className="relative w-full max-w-[480px] m-auto flex flex-col items-center gap-4 max-h-full"
+      >
+      {/* Close button - top-right of the column wrapper, sits OUTSIDE
+          the white card on the dark backdrop. Translucent white pill
+          (matches the brand consent / control patterns elsewhere) so
+          it reads clearly against the dark blur without competing
+          visually with the card. -top-3 / -right-3 pulls it slightly
+          above + right of the card edge for clean separation. */}
+      <button
+        type="button"
+        onClick={dismiss}
+        aria-label="Close 9A Challenge promo"
+        className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 z-30 inline-flex w-10 h-10 rounded-full items-center justify-center text-white bg-white/15 hover:bg-white/25 ring-1 ring-white/40 backdrop-blur-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden
+        >
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+      {/* The popup card itself. max-h-full + overflow-y-auto guarantee
+          the card never escapes the viewport on short phone screens
+          (the image alone is ~52vw tall + content + button rows could
+          push past 700px tall otherwise). w-full so it stretches the
+          full column width inside the max-w cap above. */}
+      <div
+        className="relative w-full max-h-full overflow-y-auto rounded-[24px] bg-white border border-[rgba(16,32,51,0.10)] shadow-[0_30px_80px_-20px_rgba(16,32,51,0.55)]"
         style={{
           animation: "edus-promo-pop 0.35s cubic-bezier(0.2, 0.7, 0.2, 1)",
         }}
       >
-        {/* Close button - floats above the card in the top-right
-            corner, slightly OUTSIDE the image area so it doesn't
-            collide with the trophy/student artwork on mobile. White
-            background + shadow + ring keep it readable on any image. */}
-        <button
-          type="button"
-          onClick={dismiss}
-          aria-label="Close 9A Challenge promo"
-          className="absolute top-2 right-2 z-20 inline-flex w-9 h-9 rounded-full items-center justify-center bg-white text-[#102033] shadow-[0_6px_16px_-4px_rgba(16,32,51,0.55)] ring-1 ring-[rgba(16,32,51,0.08)] hover:bg-white hover:scale-105 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/60"
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden
-          >
-            <path d="M18 6L6 18M6 6l12 12" />
-          </svg>
-        </button>
-
         {/* Promo image. Intentionally a plain <img> instead of
             next/image because Vercel's free-tier image-optimisation
             quota is finite (1000 transformations / month) and this
@@ -300,30 +308,32 @@ export function ProjectPromoPopup() {
             </Link>
           </div>
         </div>
-
-        <style>{`
-          @keyframes edus-promo-pop {
-            from { opacity: 0; transform: translateY(20px) scale(0.96); }
-            to   { opacity: 1; transform: translateY(0)    scale(1);    }
-          }
-          /* Urgency blink for the "Limited Students Only" line. Soft
-             0.45 -> 1.0 fade (not a hard 0/1 visibility flicker) so the
-             text stays readable mid-cycle and the eye can't get fatigued.
-             1.2s cycle ~ fast enough to feel urgent but slow enough to
-             not trigger photosensitivity issues. */
-          @keyframes edus-promo-blink {
-            0%, 100% { opacity: 1;    }
-            50%      { opacity: 0.45; }
-          }
-          .edus-promo-blink {
-            animation: edus-promo-blink 1.2s ease-in-out infinite;
-          }
-          @media (prefers-reduced-motion: reduce) {
-            [role="dialog"] > div { animation: none; }
-            .edus-promo-blink     { animation: none; }
-          }
-        `}</style>
       </div>
+
+      </div>
+
+      <style>{`
+        @keyframes edus-promo-pop {
+          from { opacity: 0; transform: translateY(20px) scale(0.96); }
+          to   { opacity: 1; transform: translateY(0)    scale(1);    }
+        }
+        /* Urgency blink for the "Limited Students Only" line. Soft
+           0.45 -> 1.0 fade (not a hard 0/1 visibility flicker) so the
+           text stays readable mid-cycle and the eye can't get fatigued.
+           1.2s cycle ~ fast enough to feel urgent but slow enough to
+           not trigger photosensitivity issues. */
+        @keyframes edus-promo-blink {
+          0%, 100% { opacity: 1;    }
+          50%      { opacity: 0.45; }
+        }
+        .edus-promo-blink {
+          animation: edus-promo-blink 1.2s ease-in-out infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          [role="dialog"] > div { animation: none; }
+          .edus-promo-blink     { animation: none; }
+        }
+      `}</style>
     </div>
   );
 }
