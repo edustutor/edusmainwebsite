@@ -3,6 +3,23 @@ import { PUBLISHED_POSTS } from "@/components/blog/BlogData";
 import { PUBLISHED_ALBUMS, cloudinaryUrl } from "@/components/gallery/GalleryData";
 import { getCurrentHost } from "@/lib/siteUrl";
 
+/**
+ * Sri Lanka domains whose apex "/" is permanently redirected to "/sl" by
+ * proxy.ts. If the sitemap lists "/" for these hosts, Google Search
+ * Console flags it as "Page with redirect" and refuses to index. The
+ * canonical landing page on these hosts is "/sl", so we swap "/" with
+ * "/sl" + drop the duplicate when building the .lk variant.
+ *
+ * Source of truth: lib/siteUrl.ts (DOMAINS where hreflang === "en-LK").
+ * Listed inline here to avoid a runtime dependency from sitemap build.
+ */
+const SL_REDIRECT_HOSTS = new Set([
+  "edus.lk",
+  "www.edus.lk",
+  "edus.edu.lk",
+  "www.edus.edu.lk",
+]);
+
 /** One row in the internal route list. `images` becomes `<image:loc>`
  *  entries on the URL when present (image sitemap extension). */
 type SitemapRow = {
@@ -24,12 +41,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const SITE = `https://${host}`;
   const now = new Date();
 
-  const routes: SitemapRow[] = [
-    // Top-level
-    { path: "/",                 changeFrequency: "weekly",  priority: 1.0 },
+  // On Sri Lanka hosts the apex "/" is permanently redirected to "/sl"
+  // by proxy.ts, so emitting "/" in the sitemap causes Google to flag
+  // it as "Page with redirect" and refuse to index. For those hosts we
+  // drop the apex row entirely - "/sl" remains as the canonical home
+  // entry (with priority 0.95 below, which is the highest non-redirecting
+  // page so it picks up the "homepage" weight in the sitemap regardless).
+  const isSlRedirectHost = SL_REDIRECT_HOSTS.has(host);
 
-    // Market landing pages
-    { path: "/sl",               changeFrequency: "weekly",  priority: 0.95 },
+  const routes: SitemapRow[] = [
+    // Top-level - skipped on .lk hosts because "/" 308s to "/sl" there.
+    ...(isSlRedirectHost
+      ? []
+      : [{ path: "/", changeFrequency: "weekly" as const, priority: 1.0 }]),
+
+    // Market landing pages.
+    // On .lk hosts "/sl" IS the homepage (since "/" 308s here) so it
+    // gets priority 1.0 to match what "/" would have been on .com.
+    { path: "/sl",               changeFrequency: "weekly",  priority: isSlRedirectHost ? 1.0 : 0.95 },
     { path: "/sl/timetable",     changeFrequency: "monthly", priority: 0.85 },
     // Time-sensitive campaign page - high priority + weekly until
     // O/L 2026 exam window (Nov 2026). Refresh frequency matters more
