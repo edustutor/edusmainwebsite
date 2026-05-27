@@ -175,21 +175,15 @@ const PROJECT_TIMETABLE: Array<{
 }> = [
   {
     subject: "Tamil",
-    tamilMedium: "To be confirmed",
-    englishMedium: "To be confirmed",
-    tutor: "Mr. Niththyanantha Muthulingam, BA Hons",
+    tamilMedium: "Thursday 4.30 - 6.00 AM",
+    englishMedium: "Thursday 4.30 - 6.00 AM",
+    tutor: "Mr. Niththyanantha Muthulingam, BA Hons (Niththi)",
   },
   {
     subject: "English",
-    tamilMedium: "Sunday 6.00 - 7.30 PM",
-    englishMedium: "Sunday 6.00 - 7.30 PM",
+    tamilMedium: "Sunday 4.30 - 6.00 PM",
+    englishMedium: "Sunday 4.30 - 6.00 PM",
     tutor: "Mrs. Fathima Afnaa, MEd in English Language Teaching",
-  },
-  {
-    subject: "History",
-    tamilMedium: "Friday 6.00 - 7.30 PM",
-    englishMedium: "Friday 6.00 - 7.30 PM",
-    tutor: "Mr. Jenil Jeyanthan, BA Hons",
   },
   {
     subject: "Maths",
@@ -201,9 +195,14 @@ const PROJECT_TIMETABLE: Array<{
   {
     subject: "Science",
     tamilMedium: "Tuesday 6.30 - 8.00 PM",
-    englishMedium: "To be confirmed",
-    tutor:
-      "TM: Mr. Rajendran Suthakaran, BEd Hons / EM: Ms. Balakrishnan Vidhurshika, BSc",
+    englishMedium: "Saturday 6.30 - 8.00 PM",
+    tutor: "TM: Mr. Rajendran Suthakaran, BEd Hons / EM: Ms. Kobitha",
+  },
+  {
+    subject: "History",
+    tamilMedium: "Friday 6.00 - 7.30 PM",
+    englishMedium: "Friday 6.00 - 7.30 PM",
+    tutor: "Mr. Jenil Jeyanthan, BA Hons",
   },
 ];
 

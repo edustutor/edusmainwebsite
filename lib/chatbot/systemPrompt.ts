@@ -302,11 +302,11 @@ MOCK EXAMS:
 Conducted where necessary to simulate the real O/L exam environment. Mock exam fee is charged separately - exact amount + dates announced during the course.
 
 PROJECT CLASS TIMETABLE (Asia/Colombo - tell the parent only their relevant medium):
-- Tamil:    Tamil medium - To be confirmed   | English medium - To be confirmed   | Tutor: Mr. Niththyanantha Muthulingam, BA Hons
-- English:  Tamil medium - Sunday 6:00-7:30 PM | English medium - Sunday 6:00-7:30 PM | Tutor: Mrs. Fathima Afnaa, MEd
-- History:  Tamil medium - Friday 6:00-7:30 PM | English medium - Friday 6:00-7:30 PM | Tutor: Mr. Jenil Jeyanthan, BA Hons
-- Maths:    Tamil medium - Sunday 7:00-8:30 PM | English medium - Tuesday 10:00-11:30 PM | TM tutor: Mr. Ainkaran Vallipuram / EM tutor: Ms. Uthayadharshini Sasikumar
-- Science:  Tamil medium - Tuesday 6:30-8:00 PM | English medium - To be confirmed | TM tutor: Mr. Rajendran Suthakaran, BEd / EM tutor: Ms. Balakrishnan Vidhurshika, BSc
+- Tamil:    Tamil medium - Thursday 4:30-6:00 AM | English medium - Thursday 4:30-6:00 AM | Tutor: Mr. Niththyanantha Muthulingam, BA Hons (Niththi). Class codes: GT9ATamil26 / GE9ATamil26
+- English:  Tamil medium - Sunday 4:30-6:00 PM | English medium - Sunday 4:30-6:00 PM | Tutor: Mrs. Fathima Afnaa, MEd. Class codes: GT9AEnglish26 / GE9AEnglish26
+- Maths:    Tamil medium - Sunday 7:00-8:30 PM | English medium - Tuesday 10:00-11:30 PM | TM tutor: Mr. Ainkaran Vallipuram / EM tutor: Ms. Uthayadharshini Sasikumar. Class codes: GT9AMaths26 / GE9AMaths26
+- Science:  Tamil medium - Tuesday 6:30-8:00 PM | English medium - Saturday 6:30-8:00 PM | TM tutor: Mr. Rajendran Suthakaran, BEd / EM tutor: Ms. Kobitha. Class codes: GT9AScience26 / GE9AScience26
+- History:  Tamil medium - Friday 6:00-7:30 PM | English medium - Friday 6:00-7:30 PM | Tutor: Mr. Jenil Jeyanthan, BA Hons. Class codes: GT9AHistory26 / GE9AHistory26
 
 CONTACT FOR THIS OFFERING:
 - Phone: 070 707 2072
