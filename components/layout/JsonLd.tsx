@@ -165,6 +165,21 @@ const WEBSITE = {
   url: SITE_URL,
   publisher: { "@id": `${SITE_URL}/#organization` },
   inLanguage: "en",
+  // Sitelinks Search Box - unlocks the search input that Google shows
+  // BELOW the main result in SERPs when EDUS is searched directly.
+  // Requires the search target URL to actually work (Google verifies);
+  // we wire /blog?q={query} below since blog is our most search-friendly
+  // surface. If we add a global search later, point this to /search.
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      // Use the search_term_string token literally - Google substitutes
+      // the user's query at runtime.
+      urlTemplate: `${SITE_URL}/blog?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 
 // Separate LocalBusiness entity for the Jaffna office - feeds Google's local
@@ -323,7 +338,19 @@ const FAQ = {
   ],
 };
 
-export function HomeJsonLd() {
+/**
+ * Optional review data passed down from app/page.tsx after fetching
+ * Google Places at render time. Wiring it through HomeJsonLd (rather
+ * than fetching here) keeps this file pure-rendering and side-effect-
+ * free, and lets the page decide whether to pay the Places API cost.
+ */
+type ReviewData = {
+  averageRating: number;
+  totalReviews: number;
+  mapsUri: string;
+};
+
+export function HomeJsonLd({ reviews }: { reviews?: ReviewData | null } = {}) {
   // Defensive: HMR can transiently surface STORIES as undefined during fast refresh.
   // A guard here keeps the route render-safe; the schema simply omits the stories
   // list on those frames instead of throwing.
@@ -331,10 +358,32 @@ export function HomeJsonLd() {
     ? STORIES.map((s) => ({ country: s.country, label: s.label, quote: s.quote }))
     : [];
 
+  // Augment the LOCAL_BUSINESS block with aggregateRating + sameAs[mapsUri]
+  // when Google Places data is available. This unlocks the gold-star
+  // rich snippet on the HOMEPAGE in addition to /sl, which is the most
+  // visible SERP win for EDUS brand queries ("edus tutor", "edus online").
+  const localBusinessWithRating =
+    reviews && reviews.totalReviews > 0
+      ? {
+          ...LOCAL_BUSINESS,
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: reviews.averageRating.toFixed(1),
+            reviewCount: reviews.totalReviews,
+            bestRating: "5",
+            worstRating: "1",
+          },
+          // Prepend the Google Maps URL to the canonical sameAs list -
+          // strongest possible "this LocalBusiness entity equals that
+          // Google Business Profile" signal.
+          sameAs: [reviews.mapsUri, ...EDUS_SAME_AS],
+        }
+      : LOCAL_BUSINESS;
+
   return (
     <>
       <JsonLdScript data={ORG} />
-      <JsonLdScript data={LOCAL_BUSINESS} />
+      <JsonLdScript data={localBusinessWithRating} />
       <JsonLdScript data={WEBSITE} />
       <JsonLdScript data={siteNavigation()} />
       <JsonLdScript data={primaryPagesItemList()} />

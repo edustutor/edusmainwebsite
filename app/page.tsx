@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/home/Hero";
 import { HomeJsonLd } from "@/components/layout/JsonLd";
+import { getGoogleReviews } from "@/lib/googleReviews";
 
 // Above-the-fold components (Hero, JsonLd) load eagerly so the LCP
 // element renders without a chunk-fetch round-trip.
@@ -39,10 +40,26 @@ const Accreditations = dynamic(() =>
 const FAQ = dynamic(() => import("@/components/shared/FAQ").then((m) => m.FAQ));
 const CTA = dynamic(() => import("@/components/shared/CTA").then((m) => m.CTA));
 
-export default function Home() {
+export default async function Home() {
+  // Fetch Google reviews server-side so the homepage schema can carry
+  // the aggregateRating + sameAs(mapsUri) signal. This unlocks the
+  // gold-star rich snippet on SERP results for BRAND queries (EDUS,
+  // EDUS Online Tuition) that point at the .com homepage - previously
+  // only /sl had this. The result is cached 24h via Next's Data Cache
+  // (see lib/googleReviews.ts).
+  const placeData = await getGoogleReviews();
+  const reviews =
+    placeData && placeData.reviews.length > 0
+      ? {
+          averageRating: placeData.rating,
+          totalReviews: placeData.totalReviews,
+          mapsUri: placeData.mapsUri,
+        }
+      : null;
+
   return (
     <>
-      <HomeJsonLd />
+      <HomeJsonLd reviews={reviews} />
       <Hero />
       <RegionSelector />
       <WhyJoin />
