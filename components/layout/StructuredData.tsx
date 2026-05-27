@@ -161,17 +161,23 @@ export function educationalProgram(opts: ProgramOptions) {
 /* appear as sitelinks under the homepage result (like PrimeGlobal). */
 /* --------------------------------------------------------------- */
 export function siteNavigation() {
+  // Site navigation entities for Google's Sitelinks Sub-listings.
+  // Names here MUST match the visible anchor text in SiteFooter.tsx
+  // (footer Quick Links + Learning Paths columns). When the schema
+  // name + the HTML link text + the page <title> all agree, Google's
+  // sitelinks algorithm has high confidence and is more likely to
+  // award the indented sub-result block under the main SERP entry.
   const items = [
-    { name: "Sri Lanka Classes",       path: "/sl" },
-    { name: "Sri Lanka Group Class Timetable 2026", path: "/sl/timetable" },
-    { name: "India CBSE Classes 6-10", path: "/in" },
-    { name: "Maldives Cambridge IGCSE", path: "/mv" },
-    { name: "Global One-to-One Tuition", path: "/global" },
+    { name: "Sri Lanka",               path: "/sl" },
+    { name: "India",                   path: "/in" },
+    { name: "Maldives",                path: "/mv" },
+    { name: "Global",                  path: "/global" },
     { name: "Teach with EDUS",         path: "/teach" },
     { name: "About EDUS",              path: "/about" },
-    { name: "EDUS Blog",               path: "/blog" },
-    { name: "EDUS Press Kit",          path: "/press" },
-    { name: "Contact EDUS",            path: "/contact" },
+    { name: "Blog",                    path: "/blog" },
+    { name: "Gallery",                 path: "/gallery" },
+    { name: "Press",                   path: "/press" },
+    { name: "Contact",                 path: "/contact" },
   ];
   return {
     "@context": "https://schema.org",
@@ -188,17 +194,21 @@ export function siteNavigation() {
 /* ItemList of primary pages - secondary sitelinks signal           */
 /* --------------------------------------------------------------- */
 export function primaryPagesItemList() {
+  // Names here also mirror the footer Quick Links + Learning Paths
+  // anchors so Google's sitelinks ranker sees one unambiguous label
+  // per page across HTML + JSON-LD. The desc field is what Google
+  // shows as the 1-line description under each indented sitelink.
   const items = [
-    { name: "Sri Lanka Online Tuition",  path: "/sl",      desc: "Live online group classes (fixed timetable) and flexible 1-to-1 tuition for Grade 1 to A/L. National, Cambridge & Edexcel. Sinhala, Tamil, English medium. Single LKR 1,000 one-time admission fee per student" },
-    { name: "Sri Lanka Group Class Timetable 2026",  path: "/sl/timetable", desc: "Full 2026 timetable for group classes only. Grade 3 to A/L, Tamil & English, with tutors, days, times, and monthly fees. Individual 1-to-1 classes scheduled flexibly per student" },
-    { name: "India CBSE Online Tuition", path: "/in",      desc: "CBSE Classes 6 to 10 for Tamil Nadu students - Maths, Science, English - monthly parent reports" },
-    { name: "Maldives Cambridge IGCSE",  path: "/mv",      desc: "Premium 1-to-1 Cambridge IGCSE and O-Level for Grade 9 and 10 Maldives students" },
-    { name: "Global One-to-One Tuition", path: "/global",  desc: "Personalised online tutoring for international students - Cambridge, Edexcel, IGCSE, GCSE, IB" },
-    { name: "Teach with EDUS",           path: "/teach",   desc: "Apply to become an EDUS tutor and teach students across Sri Lanka, India, Maldives, and globally" },
-    { name: "About EDUS",                path: "/about",   desc: "EDUS Lanka (Pvt) Ltd - Founded 2021 - 7,000+ students - Backed by Microsoft for Startups, ICTA, SLASSCOM" },
-    { name: "EDUS Blog",                 path: "/blog",    desc: "Exam preparation guides, study tips, and parent advice from the EDUS Academic Team" },
-    { name: "EDUS Press Kit",            path: "/press",   desc: "Brand assets, logos, fact sheet, and media contact for journalists and partners" },
-    { name: "Contact EDUS",              path: "/contact", desc: "Talk to the EDUS team to find the right class, subject, or tutor for your child" },
+    { name: "Sri Lanka",  path: "/sl",      desc: "Live online group classes and flexible 1-to-1 tuition for Grade 1 to A/L. National, Cambridge & Edexcel. Sinhala, Tamil, English medium." },
+    { name: "India",      path: "/in",      desc: "CBSE Classes 6 to 10 for Tamil Nadu students - Maths, Science, English - monthly parent reports." },
+    { name: "Maldives",   path: "/mv",      desc: "Premium 1-to-1 Cambridge IGCSE and O-Level for Grade 9 and 10 Maldives students." },
+    { name: "Global",     path: "/global",  desc: "Personalised online tutoring for international students - Cambridge, Edexcel, IGCSE, GCSE, IB." },
+    { name: "Teach with EDUS", path: "/teach",   desc: "Apply to become an EDUS tutor and teach students across Sri Lanka, India, Maldives, and globally." },
+    { name: "About EDUS",      path: "/about",   desc: "EDUS Lanka (Pvt) Ltd - Founded 2021 - 7,000+ students - Backed by Microsoft for Startups, ICTA, SLASSCOM." },
+    { name: "Blog",            path: "/blog",    desc: "Exam preparation guides, study tips, and parent advice from the EDUS Academic Team." },
+    { name: "Gallery",         path: "/gallery", desc: "Photos from EDUS events, classes, and student community activities." },
+    { name: "Press",           path: "/press",   desc: "Brand assets, logos, fact sheet, and media contact for journalists and partners." },
+    { name: "Contact",         path: "/contact", desc: "Talk to the EDUS team to find the right class, subject, or tutor for your child." },
   ];
   return {
     "@context": "https://schema.org",
