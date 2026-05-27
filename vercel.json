@@ -2,17 +2,17 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/amp",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/amp/:path*",
       "destination": "/:path*",
       "permanent": true
     },
     {
       "source": "/:path*/amp",
-      "destination": "/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*/amp/",
       "destination": "/:path*",
       "permanent": true
     },
