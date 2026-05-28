@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ChatMessage } from "./ChatMessage";
 import { IntakeForm } from "./IntakeForm";
+import { trackTikTok } from "@/lib/tiktok";
 import type {
   ChatMessage as ChatMessageType,
   IntakePayload,
@@ -365,6 +366,22 @@ export function ChatPanel({
           // eslint-disable-next-line no-console
           console.warn("[EDUS chatbot] /api/lead network failure:", err),
         );
+
+        // TikTok conversions for a QUALIFIED lead (the bot matched a
+        // class + the parent shared a subject). Fire both Contact
+        // (sales conversation reached) and Lead (qualified lead) so
+        // either optimisation goal in TikTok Ads Manager has data.
+        // No-ops unless advertising consent is granted + pixel loaded.
+        trackTikTok("Contact", {
+          content_name: leadResult.extras.subject
+            ? `EDUS lead - ${leadResult.extras.subject}`
+            : "EDUS chatbot lead",
+        });
+        trackTikTok("Lead", {
+          content_name: leadResult.extras.recommendedClassCode
+            ? `EDUS class - ${leadResult.extras.recommendedClassCode}`
+            : "EDUS chatbot lead",
+        });
       }
     } catch (err) {
       // eslint-disable-next-line no-console
@@ -432,6 +449,13 @@ export function ChatPanel({
       // eslint-disable-next-line no-console
       console.warn("[EDUS chatbot] /api/lead intake POST failure:", err),
     );
+
+    // TikTok conversion: completing the intake form = a registration
+    // event (the parent handed over name + phone + grade + medium).
+    // No-ops unless advertising consent is granted + pixel loaded.
+    trackTikTok("CompleteRegistration", {
+      content_name: "EDUS chatbot intake form",
+    });
 
     // Render a clean system "intake summary" card at the top of the
     // chat so the parent immediately sees what they shared. This

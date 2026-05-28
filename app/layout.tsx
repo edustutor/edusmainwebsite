@@ -14,6 +14,7 @@ import { ConsentBanner } from "@/components/analytics/ConsentBanner";
 import { ServiceWorkerRegistrar } from "@/components/pwa/ServiceWorkerRegistrar";
 import { ChatBotMount } from "@/components/chatbot/ChatBotMount";
 import { ProjectPromoPopup } from "@/components/promo/ProjectPromoPopup";
+import { TikTokPixel } from "@/components/analytics/TikTokPixel";
 import {
   getCurrentHost,
   getCurrentAnalyticsIds,
@@ -308,6 +309,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ConsentDefaults />
       </head>
       <body className="text-[#102033] antialiased">
+        {/* TikTok Pixel - consent-gated (advertising), lazyOnload. Self-
+            renders nothing until the visitor opts into advertising
+            cookies, so no pixel script ships for users who decline. */}
+        <TikTokPixel pixelId={process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID ?? ""} />
         {/* Deferred GTM + GA4 - loads with strategy="lazyOnload" so the
             ~280KB of analytics scripts wait until the page is fully idle
             before fetching. Saves ~3s of LCP on mobile vs the default
