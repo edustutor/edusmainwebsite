@@ -299,9 +299,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="EDUS full knowledge base" />
         {/* Pre-warm the analytics origins so the Tag Manager + GA4
             scripts (deferred) connect faster once they fire. These ARE
-            used on every page so the dns-prefetch is worthwhile. */}
+            used on every page so the dns-prefetch is worthwhile.
+            dns-prefetch only (NOT preconnect) - it warms the DNS lookup
+            without opening a TCP/TLS connection, so it costs nothing for
+            visitors who never trigger these scripts (e.g. those who
+            decline cookies). The TikTok origin is included so the
+            consent-gated pixel connects faster ONCE a user opts in -
+            but no connection is opened eagerly for users who don't. */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://analytics.tiktok.com" />
         {/* Consent Mode v2 default state - inline script inside <head>
             so dataLayer is primed BEFORE GTM/GA4 fire. ~600 bytes,
             zero render-blocking network cost. Puts GA4 + Microsoft
