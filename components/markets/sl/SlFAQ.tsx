@@ -59,6 +59,22 @@ const FAQS = [
     q: "How do students enrol?",
     a: "Parents can register at https://signup.edustutor.com/ or contact the EDUS team. After reviewing the student's grade, subject, and syllabus, the academic team confirms the most suitable class plan within one business day.",
   },
+  // Review / reputation Q&As - merged here from the former separate
+  // googleReviewsFaq FAQPage to fix Google's "Duplicate field FAQPage"
+  // error (one FAQPage per page). Worded statically with the current
+  // public rating so this stays a single source of truth.
+  {
+    q: "What do parents and students say about EDUS Online Tuition?",
+    a: "EDUS Online Tuition is rated 4.5 out of 5 stars from verified Google reviews. Parents and students consistently praise the personal attention from tutors, the structured live online classes, the support from coordinators, and noticeable improvements in school grades.",
+  },
+  {
+    q: "How is EDUS Online Tuition rated on Google?",
+    a: "EDUS Online Tuition holds a 4.5 out of 5 star rating on Google, based on reviews from real parents and students. The institute consistently receives 5-star feedback for tutor quality, exam preparation, and parent communication.",
+  },
+  {
+    q: "Is EDUS Online Tuition a verified business?",
+    a: "Yes. EDUS Online Tuition is a verified Google Business Profile located at No. 95, K.K.S Road, Kokkuvil Junction, Jaffna 40000, Sri Lanka. The institute operates as EDUS Lanka (Pvt) Ltd. and is recognised by ICTA, SLASSCOM, Microsoft for Startups, and the National ICT Awards 2024.",
+  },
 ];
 
 export function SlFAQ() {

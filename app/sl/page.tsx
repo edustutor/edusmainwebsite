@@ -15,7 +15,6 @@ import {
   tuitionCourse,
   tuitionService,
   googleAggregateRating,
-  googleReviewsFaq,
   SITE_URL,
 } from "@/components/layout/StructuredData";
 import { getGoogleReviews } from "@/lib/googleReviews";
@@ -203,16 +202,13 @@ export default async function SriLankaPage() {
               })),
             })}
           />
-          {/* FAQ schema with 3 review-related Q&A pairs. Powers AEO /
-              voice search matches for "what do parents say about EDUS"
-              style queries. Lives next to the Google reviews block. */}
-          <JsonLdScript
-            data={googleReviewsFaq({
-              averageRating: placeData.rating,
-              totalReviews: placeData.totalReviews,
-              mapsUri: placeData.mapsUri,
-            })}
-          />
+          {/* NOTE: the review Q&A pairs that used to live here as a
+              SEPARATE FAQPage were REMOVED to fix Google's "Duplicate
+              field FAQPage" error - a page may only have one FAQPage.
+              The canonical FAQPage on this route is emitted by <SlFAQ>
+              below; the review-related questions are merged into its
+              FAQS list so the AEO / voice-search content is preserved
+              without a duplicate schema block. */}
         </>
       ) : null}
       <JsonLdScript
