@@ -22,6 +22,7 @@ const QUICK: QuickItem[] = [
   { label: "Gallery", href: "/gallery" },
   { label: "Press", href: "/press" },
   { label: "FAQ", href: "/#faq" },
+  { label: "O/L Grading Scale", href: "/sl/ol-grading-scale" },
   { label: "Resource Vault", href: "https://wiki.edustutor.com/", external: true },
   { label: "Enrol", href: "https://signup.edustutor.com/", external: true },
   { label: "Contact", href: "/contact" },

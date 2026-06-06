@@ -1588,14 +1588,14 @@ function RelatedLinks() {
       desc: "Full EDUS Sri Lanka programme - Grade 1 to A/L, all subjects, group + individual.",
     },
     {
+      href: "/sl/ol-grading-scale",
+      title: "O/L Grading Scale and 9A Explained",
+      desc: "Free reference: every O/L grade with marks, the 6 + 3 subject structure, and what 9A really means.",
+    },
+    {
       href: "/sl/timetable",
       title: "2026 Group Class Timetable",
       desc: "Browse the full 2026 group class schedule for every grade and subject.",
-    },
-    {
-      href: "/contact",
-      title: "Talk to an EDUS Consultant",
-      desc: "Get personal guidance on which plan + subjects suit your child best.",
     },
   ];
   return (

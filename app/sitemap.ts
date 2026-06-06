@@ -65,6 +65,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // than priority here so Googlebot revisits during the enrolment
     // window.
     { path: "/sl/9a-project",    changeFrequency: "weekly",  priority: 0.90 },
+    // Evergreen reference asset (O/L grading scale + what 9A means).
+    // Built to earn backlinks: teachers / parent blogs / forums cite it
+    // instead of re-typing the grade scale. Monthly + 0.75 so it accrues
+    // topical authority like a hub page, above the blog posts.
+    { path: "/sl/ol-grading-scale", changeFrequency: "monthly", priority: 0.75 },
     { path: "/in",               changeFrequency: "weekly",  priority: 0.95 },
     { path: "/mv",               changeFrequency: "weekly",  priority: 0.95 },
     { path: "/global",           changeFrequency: "weekly",  priority: 0.95 },
