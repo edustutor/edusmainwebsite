@@ -625,13 +625,13 @@ function SoftCta() {
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Link href="/sl/9a-project" className="btn-primary">
+          <Link href="/sl/9a-project" className="btn btn-primary">
             See the 9A Project Class
           </Link>
-          <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-cyan">
+          <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-cyan">
             Enrol Online
           </a>
-          <a href={`tel:${PHONE_TEL}`} className="btn-yellow">
+          <a href={`tel:${PHONE_TEL}`} className="btn btn-yellow">
             Call {PHONE_DISPLAY}
           </a>
         </div>
