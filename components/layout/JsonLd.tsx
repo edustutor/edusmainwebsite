@@ -43,8 +43,22 @@ const ORG = {
   logo: {
     "@type": "ImageObject",
     url: `${SITE_URL}/edus-logo-blue.webp`,
+    contentUrl: `${SITE_URL}/edus-logo-blue.webp`,
     width: 180,
     height: 56,
+    // Image-license metadata so Google's Image Metadata enhancement
+    // never flags the logo for "Missing field copyrightNotice" or
+    // "Invalid object type for field creator". creator is a typed
+    // Organization (NOT a string), copyrightNotice is a string.
+    creator: {
+      "@type": "Organization",
+      name: "EDUS Online Institute",
+      url: SITE_URL,
+    },
+    copyrightNotice: "© EDUS Online Institute. All rights reserved.",
+    creditText: "EDUS Online Institute",
+    license: `${SITE_URL}/terms`,
+    acquireLicensePage: `${SITE_URL}/contact`,
   },
   image: `${SITE_URL}/edus-logo-blue.webp`,
   slogan: "Quality-Assured Online Live Learning Platform",

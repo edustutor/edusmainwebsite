@@ -1234,7 +1234,25 @@ export function galleryItemList(albums: GalleryIndexEntry[]) {
           name: a.title,
           description: a.description,
           url: `${SITE_URL}/gallery/${a.slug}`,
-          image: a.cover,
+          // Cover image as a typed ImageObject (not a bare URL) carrying
+          // the same image-license metadata as the album-page photos, so
+          // Google's Image Metadata enhancement never flags the gallery
+          // index covers for "Missing field copyrightNotice" /
+          // "Invalid object type for field creator".
+          image: {
+            "@type": "ImageObject",
+            url: a.cover,
+            contentUrl: a.cover,
+            creator: {
+              "@type": "Organization",
+              name: "EDUS Online Institute",
+              url: SITE_URL,
+            },
+            copyrightNotice: `© ${new Date(a.datePublished).getFullYear()} EDUS Online Institute. All rights reserved.`,
+            creditText: "EDUS Online Institute",
+            license: `${SITE_URL}/terms`,
+            acquireLicensePage: `${SITE_URL}/contact`,
+          },
           datePublished: a.datePublished,
         },
       })),
@@ -1586,17 +1604,31 @@ export function classEventSeries(s: ScheduleSession) {
     },
     eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
     eventStatus: "https://schema.org/EventScheduled",
-    // VirtualLocation gets a name + url. Google's Event validator
-    // accepts this shape for online-only events; the warning
-    // "Missing field address (in location)" was triggered by the
-    // earlier shape which used bare @type + url with no name. Adding
-    // `name` resolves the warning without bolting on a fake address
-    // for a class that has no physical venue.
-    location: {
-      "@type": "VirtualLocation",
-      name: "EDUS Online Tuition (Live class on Google Meet via EDUS App)",
-      url: `${SITE_URL}/sl/timetable`,
-    },
+    // location is an ARRAY of [VirtualLocation, Place]. Google's Event
+    // rich-result validator recommends a Place with a PostalAddress
+    // even for online events ("Missing field address (in location)").
+    // For an online class there's no class venue, so we supply EDUS's
+    // registered office as the organising Place. The VirtualLocation
+    // stays first so attendance-mode = online is still unambiguous.
+    location: [
+      {
+        "@type": "VirtualLocation",
+        name: "EDUS Online Tuition (Live class on Google Meet via EDUS App)",
+        url: `${SITE_URL}/sl/timetable`,
+      },
+      {
+        "@type": "Place",
+        name: "EDUS Online Institute (Organising office)",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "No. 95, K.K.S Road, Kokkuvil Junction",
+          addressLocality: "Jaffna",
+          addressRegion: "Northern Province",
+          postalCode: "40000",
+          addressCountry: "LK",
+        },
+      },
+    ],
     // Fully inline organizer entity. Bare { "@id": ... } pointers fail
     // Google's Event validator with "Missing field url (in organizer)"
     // because @id resolution is deferred and the validator wants the
