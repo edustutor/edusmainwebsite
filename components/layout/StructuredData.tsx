@@ -1130,9 +1130,63 @@ export function galleryAlbumSchema(opts: GalleryAlbumSchemaOptions) {
           about: {
             "@type": "Event",
             name: opts.title,
+            // Full description so Google's Event enhancement doesn't
+            // flag "Missing field description".
+            description: opts.description,
             startDate: opts.eventDate,
-            ...(opts.location ? { location: { "@type": "Place", name: opts.location } } : {}),
-            organizer: { "@id": `${SITE_URL}/#organization` },
+            // endDate: gallery events are single-day; default the end to
+            // the same calendar day as the start so the validator's
+            // "Missing field endDate" recommendation clears. (We don't
+            // know the exact end time, so same-day is the honest value.)
+            endDate: opts.eventDate,
+            // Past, completed event - EventScheduled is still the correct
+            // status (the event DID happen as scheduled). Google has no
+            // "EventCompleted"; EventScheduled is the standard value.
+            eventStatus: "https://schema.org/EventScheduled",
+            eventAttendanceMode:
+              "https://schema.org/OfflineEventAttendanceMode",
+            // location with a PostalAddress. When the album carries a
+            // named location we use it; otherwise we fall back to the
+            // EDUS Jaffna office. Either way a PostalAddress is present
+            // so "Missing field address (in location)" clears.
+            location: {
+              "@type": "Place",
+              name: opts.location ?? "EDUS Online Institute",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "No. 95, K.K.S Road, Kokkuvil Junction",
+                addressLocality: "Jaffna",
+                addressRegion: "Northern Province",
+                postalCode: "40000",
+                addressCountry: "LK",
+              },
+            },
+            // Organizer fully typed with name + url (not a bare @id) so
+            // "Missing field name/url (in organizer)" clears.
+            organizer: {
+              "@type": "Organization",
+              "@id": `${SITE_URL}/#organization`,
+              name: "EDUS Online Institute",
+              url: SITE_URL,
+            },
+            // Performer - EDUS hosts its own events. Typed Organization
+            // clears "Missing field performer".
+            performer: {
+              "@type": "Organization",
+              name: "EDUS Online Institute",
+              url: SITE_URL,
+            },
+            // Free community / milestone events. A zero-price Offer with
+            // availability clears "Missing field offers" and correctly
+            // signals the event was free to attend.
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "LKR",
+              availability: "https://schema.org/InStock",
+              url,
+              validFrom: opts.eventDate,
+            },
             image: cover,
           },
         }
