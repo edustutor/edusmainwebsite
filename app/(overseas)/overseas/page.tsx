@@ -195,10 +195,11 @@ function Hero() {
             stable whether or not the user-supplied image is present.
             Floating cards anchor to the frame corners. */}
         <div className="relative mt-2 lg:mt-0">
-          {/* USER-GENERATED IMAGE: /public/overseas/hero.webp */}
+          {/* USER-GENERATED IMAGE: /public/overseas/hero.webp (3:2 landscape) */}
           <HeroFrame
             src="/overseas/hero.webp"
             alt="Sri Lankan student ready to study abroad, surrounded by flags of the UK, Australia, Canada, Dubai, Ireland and New Zealand"
+            ratio="3 / 2"
             label="From Dreams to Destinations"
             eager
           />

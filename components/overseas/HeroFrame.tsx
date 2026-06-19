@@ -60,17 +60,22 @@ export function HeroFrame({
           </p>
         </div>
 
-        {/* Real image - only mounted if it has not errored. Fades in. */}
+        {/* Real image - only mounted if it has not errored.
+            Eager (above-the-fold hero) images render fully opaque right
+            away so there is no flash of the placeholder; lazy ones fade
+            in once decoded. Either way the placeholder sits behind as the
+            fallback if the image errors. */}
         {!failed && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={src}
             alt={alt}
             loading={eager ? "eager" : "lazy"}
+            decoding="async"
             onLoad={() => setLoaded(true)}
             onError={() => setFailed(true)}
             className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-            style={{ opacity: loaded ? 1 : 0 }}
+            style={{ opacity: eager || loaded ? 1 : 0 }}
           />
         )}
       </div>
