@@ -23,6 +23,34 @@ const SAME_AS = [
   "https://lk.linkedin.com/company/edusonline",
 ];
 
+/**
+ * Sri Lankan cities EDUS Overseas serves. Listed as `areaServed` Cities
+ * so the consultancy is eligible to rank for city-level intent queries
+ * ("study abroad consultants in Colombo / Jaffna / Kandy"). EDUS is
+ * online-first, so it genuinely serves students island-wide - this is
+ * an accurate signal, not keyword stuffing. Jaffna first (the office
+ * location), then the highest-population student hubs.
+ */
+const SERVED_CITIES = [
+  "Jaffna",
+  "Colombo",
+  "Kandy",
+  "Galle",
+  "Negombo",
+  "Batticaloa",
+  "Vavuniya",
+  "Trincomalee",
+  "Kilinochchi",
+  "Mannar",
+];
+
+function servedAreas() {
+  return [
+    { "@type": "Country", name: "Sri Lanka" },
+    ...SERVED_CITIES.map((name) => ({ "@type": "City", name })),
+  ];
+}
+
 /** JSON-LD script tag (same pattern as the tuition site). */
 export function ovJsonLd(data: object) {
   return JSON.stringify(data);
@@ -45,7 +73,7 @@ export function overseasOrganization() {
     telephone: OV.phoneTel,
     email: OV.email,
     priceRange: "Free consultation",
-    areaServed: { "@type": "Country", name: "Sri Lanka" },
+    areaServed: servedAreas(),
     address: {
       "@type": "PostalAddress",
       streetAddress: OV.street,
@@ -129,7 +157,7 @@ export function overseasService() {
     description:
       "End-to-end overseas education guidance for Sri Lankan students: career counselling, course selection, university applications, scholarship guidance, visa assistance, accommodation support, IELTS/PTE guidance, and pre-departure briefing.",
     provider: { "@id": ORG_ID },
-    areaServed: { "@type": "Country", name: "Sri Lanka" },
+    areaServed: servedAreas(),
     audience: {
       "@type": "Audience",
       audienceType: "School leavers, undergraduates, postgraduates, working professionals",

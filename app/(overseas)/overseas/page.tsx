@@ -63,20 +63,44 @@ const PAGE_FAQ = [
     q: "How do I get started?",
     a: `Call us on ${OV.phoneDisplay}, message us on WhatsApp, or fill in the free consultation form on this page. A counsellor will review your profile and recommend the best path within one working day.`,
   },
+  // High-intent comparison + decision queries - these capture searches
+  // like "best study abroad consultant Sri Lanka", "how to choose an
+  // agent", and "are study abroad agents free", and feed the FAQ rich
+  // result + AI answer engines.
+  {
+    q: "How do I choose the best study abroad consultant in Sri Lanka?",
+    a: "Choose a consultant who gives honest, personalised advice (not a fixed list of universities), is transparent about fees, has a strong visa track record, and stays with you from application through to arrival. EDUS Overseas offers a free first consultation so you can judge the guidance before you commit, with counsellors who know the UK, Australian, Canadian, Dubai, Irish, and New Zealand systems.",
+  },
+  {
+    q: "Are study abroad consultants free in Sri Lanka?",
+    a: "EDUS Overseas gives free counselling and guidance to students. Your first consultation, course and country shortlist, and application guidance carry no charge and no obligation. We are paid by partner universities when you enrol, so our advice stays focused on the right fit for you.",
+  },
+  {
+    q: "Why choose EDUS Overseas over other study abroad agencies?",
+    a: "EDUS Overseas combines personalised, student-first counselling with a 95% visa success rate, direct university partnerships, and end-to-end support from your first question to landing abroad. We serve students across Sri Lanka, Jaffna, Colombo, Kandy, and beyond, online and in person, and we never push a course that does not match your goals or budget.",
+  },
 ];
 
 export const metadata: Metadata = {
   metadataBase: new URL(OV.siteBase),
-  title: "Study Abroad Consultants in Sri Lanka | EDUS Overseas Consultancy",
+  // `absolute` opts out of the root layout's "%s - EDUS" template, which
+  // would otherwise push the title past Google's ~60-char SERP cap. This
+  // exact-match-first title sits at ~52 chars and shows in full.
+  title: { absolute: "Study Abroad Consultants in Sri Lanka | EDUS" },
   description:
     "EDUS Overseas Consultancy - Sri Lanka's trusted study abroad consultants. Free guidance for university admissions, scholarships, and student visas to the UK, Australia, Canada, Dubai, Ireland & New Zealand. Book a free consultation.",
   alternates: { canonical: "/overseas" },
   keywords: [
     "study abroad consultants Sri Lanka",
+    "best study abroad consultants Sri Lanka",
     "overseas education consultants Sri Lanka",
     "study abroad agency Sri Lanka",
     "education consultants Colombo",
+    "study abroad consultants Colombo",
     "education consultants Jaffna",
+    "study abroad consultants Jaffna",
+    "education consultants Kandy",
+    "education agents Sri Lanka",
     "foreign education consultants Sri Lanka",
     "student visa consultants Sri Lanka",
     "study in UK from Sri Lanka",
@@ -393,11 +417,11 @@ function Testimonials() {
             <p className="mt-4 text-[14px] text-[var(--ov-ink-soft)] leading-[1.75]">“{t.quote}”</p>
             <div className="mt-5 flex items-center gap-3 pt-4 border-t border-[var(--ov-rule)]">
               <span className="inline-flex w-10 h-10 rounded-full items-center justify-center font-display font-800 text-white" style={{ background: "linear-gradient(135deg,#FF5A5F,#F59E0B)" }}>
-                {t.destination.charAt(0)}
+                {t.name.charAt(0)}
               </span>
               <div className="leading-tight">
-                <p className="font-display font-700 text-[13.5px] text-[var(--ov-ink)]">{t.label}</p>
-                <p className="text-[12px] text-[var(--ov-ink-mute)]">{t.destination}</p>
+                <p className="font-display font-700 text-[13.5px] text-[var(--ov-ink)]">{t.name}</p>
+                <p className="text-[12px] text-[var(--ov-ink-mute)]">{t.city} · {t.destination}</p>
               </div>
             </div>
           </div>

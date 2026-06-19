@@ -35,7 +35,7 @@ const WHY = [
 
 export const metadata: Metadata = {
   metadataBase: new URL(OV.siteBase),
-  title: "About EDUS Overseas Consultancy | Trusted Study Abroad Partner",
+  title: { absolute: "About EDUS Overseas Consultancy | Study Abroad" },
   description:
     "EDUS Overseas Consultancy is a trusted Sri Lankan overseas education provider offering end-to-end support: university selection, applications, visas, scholarships, and pre-departure guidance. Learn our mission, vision, and values.",
   alternates: { canonical: "/overseas/about" },

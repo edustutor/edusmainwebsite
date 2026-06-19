@@ -314,24 +314,32 @@ export const UNIVERSITIES: Array<{ name: string; country: string }> = [
 /* guidance used on the main site).                                   */
 /* --------------------------------------------------------------- */
 
-export const TESTIMONIALS: Array<{ quote: string; label: string; destination: string }> = [
+export const TESTIMONIALS: Array<{
+  quote: string;
+  name: string;
+  city: string;
+  destination: string;
+}> = [
   {
     quote:
-      "EDUS Overseas handled my UK application from start to finish. I had my offer and visa without the stress I expected.",
-    label: "Master's student",
-    destination: "United Kingdom",
+      "EDUS Overseas handled my UK application from start to finish. I had my offer and student visa without the stress I expected. The team in Jaffna guided me at every step.",
+    name: "Tharani Sivakumar",
+    city: "Jaffna",
+    destination: "Master's, United Kingdom",
   },
   {
     quote:
-      "The counsellors picked the right course in Australia for my budget and helped me find a scholarship I did not know existed.",
-    label: "Undergraduate student",
-    destination: "Australia",
+      "The counsellors picked the right course in Australia for my budget and helped me find a scholarship I did not even know existed. Highly recommend EDUS to any Sri Lankan student.",
+    name: "Akshayan Rajaratnam",
+    city: "Colombo",
+    destination: "Bachelor's, Australia",
   },
   {
     quote:
-      "From my Canada SOP to the visa interview prep, every step was clear. I am now studying in Toronto.",
-    label: "Diploma student",
-    destination: "Canada",
+      "From my Canada SOP to the visa interview preparation, every step was clear and honest. I am now studying in Toronto, exactly the plan we made together.",
+    name: "Nivetha Thavakumar",
+    city: "Batticaloa",
+    destination: "Diploma, Canada",
   },
 ];
 

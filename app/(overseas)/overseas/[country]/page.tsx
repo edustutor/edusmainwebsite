@@ -35,12 +35,15 @@ export async function generateMetadata({
   const d = getDestination(country);
   if (!d) return {};
 
-  const title = `Study in ${d.name} from Sri Lanka | EDUS Overseas`;
+  const title = `Study in ${d.name} from Sri Lanka | EDUS`;
   const description = `${d.overview} Free guidance on universities, scholarships, and the ${d.name} student visa with EDUS Overseas Consultancy.`;
 
   return {
     metadataBase: new URL(OV.siteBase),
-    title,
+    // `absolute` keeps the title out of the "%s - EDUS" template so it
+    // does not truncate in SERPs ("Study in New Zealand from Sri Lanka
+    // | EDUS" is ~46 chars).
+    title: { absolute: title },
     description,
     alternates: { canonical: `/overseas/${d.slug}` },
     keywords: [

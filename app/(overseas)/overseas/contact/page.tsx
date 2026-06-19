@@ -17,7 +17,7 @@ import {
 
 export const metadata: Metadata = {
   metadataBase: new URL(OV.siteBase),
-  title: "Contact EDUS Overseas Consultancy | Study Abroad Help in Sri Lanka",
+  title: { absolute: "Contact EDUS Overseas Consultancy | Sri Lanka" },
   description:
     "Contact EDUS Overseas Consultancy for free study abroad guidance. Call or WhatsApp +94 70 701 2333, email us, or visit our office in Jaffna. We reply within one working day.",
   alternates: { canonical: "/overseas/contact" },
