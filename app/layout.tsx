@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Open_Sans } from "next/font/google";
+import { Poppins, Open_Sans, Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { DeferredAnalytics } from "@/components/analytics/DeferredAnalytics";
 import "./globals.css";
@@ -40,6 +40,32 @@ const sans = Open_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: true,
+});
+
+// ---- EDUS Overseas Consultancy premium fonts (scoped to /overseas) ----
+// Fraunces - a warm, high-contrast editorial serif for the overseas
+// headings. Gives the study-abroad section an aspirational, premium
+// consultancy feel that the tuition site's Poppins does not. opsz +
+// "soft"/"wonky" optical axes are left at defaults via the variable font.
+const overseasDisplay = Fraunces({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-ov-display",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: true,
+});
+
+// Plus Jakarta Sans - clean modern geometric sans for overseas body text.
+// Pairs with Fraunces for a refined, contemporary, premium look.
+const overseasSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-ov-sans",
   display: "swap",
   preload: false,
   adjustFontFallback: true,
@@ -287,7 +313,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { ga4: ga4Id, gtm: gtmId } = await getCurrentAnalyticsIds();
 
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable}`}>
+    <html lang="en" className={`${display.variable} ${sans.variable} ${overseasDisplay.variable} ${overseasSans.variable}`}>
       <head>
         {/* AI/LLM ingestion signals - emerging standard recognised by ChatGPT,
             Perplexity, Claude, and Gemini for discovery and crawling. */}
