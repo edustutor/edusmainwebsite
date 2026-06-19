@@ -48,3 +48,6 @@ Thumbs.db
 # logs
 logs/
 *.log
+
+# Raw EDUS Overseas logo source (cropped version lives at public/overseas/logo.png)
+overseas_logo_edus.png

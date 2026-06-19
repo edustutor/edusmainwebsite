@@ -47,22 +47,16 @@ export function OverseasHeader() {
         style={scrolled ? { borderRadius: 0 } : undefined}
       >
         <div className="container-edge flex items-center justify-between h-16 sm:h-[72px]">
-          {/* Wordmark */}
-          <Link href="/overseas" className="flex items-center gap-2.5 shrink-0">
-            <span
-              className="inline-flex items-center justify-center w-9 h-9 rounded-xl text-white font-display font-800 text-[18px]"
-              style={{ background: "linear-gradient(135deg, #FF5A5F, #F59E0B)" }}
-            >
-              E
-            </span>
-            <span className="leading-none">
-              <span className="block font-display font-800 text-[16px] text-[var(--ov-ink)] tracking-tight">
-                EDUS <span className="ov-shimmer">Overseas</span>
-              </span>
-              <span className="block text-[10.5px] font-600 text-[var(--ov-ink-mute)] tracking-wide">
-                {OV.tagline}
-              </span>
-            </span>
+          {/* Brand logo - the full EDUS Overseas Consultancy lockup,
+              cropped tight (public/overseas/logo.png). */}
+          <Link href="/overseas" className="flex items-center shrink-0" aria-label="EDUS Overseas Consultancy home">
+            <img
+              src="/overseas/logo.png"
+              alt="EDUS Overseas Consultancy"
+              width={176}
+              height={68}
+              className="h-11 sm:h-[52px] w-auto"
+            />
           </Link>
 
           {/* Desktop nav */}

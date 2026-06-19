@@ -17,17 +17,15 @@ export function OverseasFooter() {
         <div className="grid gap-10 md:grid-cols-12">
           {/* Brand + contact */}
           <div className="md:col-span-4">
-            <div className="flex items-center gap-2.5">
-              <span
-                className="inline-flex items-center justify-center w-9 h-9 rounded-xl text-white font-display font-800 text-[18px]"
-                style={{ background: "linear-gradient(135deg, #FF5A5F, #F59E0B)" }}
-              >
-                E
-              </span>
-              <span className="font-display font-800 text-[16px] text-[var(--ov-ink)]">
-                EDUS Overseas
-              </span>
-            </div>
+            <Link href="/overseas" className="inline-flex items-center" aria-label="EDUS Overseas Consultancy home">
+              <img
+                src="/overseas/logo.png"
+                alt="EDUS Overseas Consultancy"
+                width={170}
+                height={66}
+                className="h-11 w-auto"
+              />
+            </Link>
             <p className="mt-4 text-[13.5px] text-[var(--ov-ink-soft)] leading-relaxed max-w-xs">
               {OV.brand}. {OV.tagline}. Expert guidance for admissions,
               scholarships, and student visas to the UK, Australia, Canada,
