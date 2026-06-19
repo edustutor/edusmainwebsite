@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { JsonLdScript } from "@/components/layout/StructuredData";
 import { OvIcon } from "@/components/overseas/OvIcon";
+import { HeroFrame } from "@/components/overseas/HeroFrame";
 import { StatCounter } from "@/components/overseas/StatCounter";
 import { ConsultationForm } from "@/components/overseas/ConsultationForm";
 import {
@@ -190,35 +191,33 @@ function Hero() {
           </div>
         </div>
 
-        {/* Hero image */}
-        <div className="relative">
-          <div className="ov-glass-strong rounded-[32px] p-3 ov-zoom overflow-hidden">
-            {/* USER-GENERATED IMAGE: /public/overseas/hero.webp */}
-            <img
-              src="/overseas/hero.webp"
-              alt="Sri Lankan student ready to study abroad, surrounded by flags of the UK, Australia, Canada, Dubai, Ireland and New Zealand"
-              width={720}
-              height={680}
-              className="w-full h-auto rounded-[24px] object-cover"
-              loading="eager"
-            />
-          </div>
-          {/* Floating stat card */}
-          <div className="absolute -bottom-5 -left-3 sm:left-4 ov-glass rounded-2xl px-4 py-3 flex items-center gap-3">
-            <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center" style={{ background: "linear-gradient(135deg,#14B8A6,#0E9488)" }}>
+        {/* Hero image - fixed aspect-ratio frame so the layout stays
+            stable whether or not the user-supplied image is present.
+            Floating cards anchor to the frame corners. */}
+        <div className="relative mt-2 lg:mt-0">
+          {/* USER-GENERATED IMAGE: /public/overseas/hero.webp */}
+          <HeroFrame
+            src="/overseas/hero.webp"
+            alt="Sri Lankan student ready to study abroad, surrounded by flags of the UK, Australia, Canada, Dubai, Ireland and New Zealand"
+            label="From Dreams to Destinations"
+            eager
+          />
+          {/* Floating stat card - bottom-left, overlapping the frame edge */}
+          <div className="absolute bottom-4 -left-2 sm:-left-4 ov-glass rounded-2xl px-4 py-3 flex items-center gap-3 max-w-[80%]">
+            <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center shrink-0" style={{ background: "linear-gradient(135deg,#14B8A6,#0E9488)" }}>
               <OvIcon name="check" size={20} tint="#fff" />
             </span>
             <div className="leading-tight">
-              <p className="font-display font-800 text-[16px] text-[var(--ov-ink)]">Free counselling</p>
+              <p className="font-display font-800 text-[15px] text-[var(--ov-ink)]">Free counselling</p>
               <p className="text-[12px] text-[var(--ov-ink-mute)]">No obligation, expert advice</p>
             </div>
           </div>
-          {/* WhatsApp quick chip */}
+          {/* WhatsApp quick chip - top-right, overlapping the frame edge */}
           <a
             href={whatsappUrl(waMessage)}
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute -top-3 right-2 sm:right-6 ov-glass rounded-full pl-2 pr-3.5 py-1.5 inline-flex items-center gap-2 text-[12.5px] font-700 text-[var(--ov-ink)]"
+            className="absolute top-3 -right-2 sm:-right-3 ov-glass rounded-full pl-2 pr-3.5 py-1.5 inline-flex items-center gap-2 text-[12.5px] font-700 text-[var(--ov-ink)] shadow-sm"
           >
             <span className="inline-flex w-7 h-7 rounded-full items-center justify-center" style={{ background: "linear-gradient(135deg,#25D366,#128C7E)" }}>
               <OvIcon name="whatsapp" size={15} tint="#fff" />
@@ -294,9 +293,16 @@ function Destinations() {
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {DESTINATIONS.map((d) => (
           <Link key={d.slug} href={`/overseas/${d.slug}`} className="ov-glass ov-lift ov-zoom rounded-[24px] overflow-hidden group">
-            <div className="relative h-44 overflow-hidden">
+            <div
+              className="relative h-44 overflow-hidden flex items-center justify-center"
+              style={{ background: `linear-gradient(135deg, ${d.tint}33, ${d.tint}14)` }}
+            >
+              {/* Placeholder glyph behind the image - a missing
+                  /public/overseas/destinations/<slug>.webp then shows a
+                  tinted gradient with the flag instead of a broken icon. */}
+              <span aria-hidden className="absolute text-[44px] opacity-30 select-none">{d.flag}</span>
               {/* USER-GENERATED IMAGE: /public/overseas/destinations/<slug>.webp */}
-              <img src={d.image} alt={d.imageAlt} width={520} height={300} className="w-full h-full object-cover" loading="lazy" />
+              <img src={d.image} alt={d.imageAlt} width={520} height={300} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
               <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 40%, rgba(26,19,64,0.55))" }} />
               <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[12px] font-700 text-[var(--ov-ink)]">
                 <span className="text-[15px] leading-none">{d.flag}</span> {d.short}

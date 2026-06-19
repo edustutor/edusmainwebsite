@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { JsonLdScript } from "@/components/layout/StructuredData";
 import { OvIcon } from "@/components/overseas/OvIcon";
+import { HeroFrame } from "@/components/overseas/HeroFrame";
 import { OV, DESTINATIONS, SERVICES, getDestination, whatsappUrl } from "@/lib/overseas/data";
 import {
   overseasOrganization,
@@ -136,10 +137,10 @@ export default async function DestinationPage({
               </a>
             </div>
           </div>
-          <div className="ov-glass-strong rounded-[28px] p-3 ov-zoom overflow-hidden">
-            {/* USER-GENERATED IMAGE: /public/overseas/destinations/<slug>.webp */}
-            <img src={d.image} alt={d.imageAlt} width={640} height={460} className="w-full h-auto rounded-[22px] object-cover" loading="eager" />
-          </div>
+          {/* USER-GENERATED IMAGE: /public/overseas/destinations/<slug>.webp.
+              HeroFrame keeps a fixed aspect ratio + styled placeholder so
+              the layout never collapses before the image is added. */}
+          <HeroFrame src={d.image} alt={d.imageAlt} ratio="4 / 3" label={`Study in ${d.name}`} eager />
         </div>
       </section>
 
