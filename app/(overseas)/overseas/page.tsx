@@ -166,13 +166,14 @@ function Hero() {
             studying abroad into a clear, step-by-step plan.
           </p>
 
-          <div className="mt-7 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link href="#consultation" className="ov-btn ov-btn-primary text-[15px]">
+              <OvIcon name="counsellor" size={18} tint="#fff" />
               Book Free Consultation
             </Link>
-            <Link href="#destinations" className="ov-btn ov-btn-ghost text-[15px]">
+            <Link href="#destinations" className="ov-btn ov-btn-ghost text-[15px] group">
               Explore Destinations
-              <OvIcon name="arrow" size={17} tint="var(--ov-ink)" />
+              <OvIcon name="arrow" size={17} tint="var(--ov-coral-deep)" />
             </Link>
           </div>
 
@@ -191,10 +192,12 @@ function Hero() {
           </div>
         </div>
 
-        {/* Hero image - fixed aspect-ratio frame so the layout stays
-            stable whether or not the user-supplied image is present.
-            Floating cards anchor to the frame corners. */}
-        <div className="relative mt-2 lg:mt-0">
+        {/* Hero image - fixed aspect-ratio frame. The relative wrapper is
+            exactly the image height (HeroFrame is aspect-locked), so the
+            floating cards overlap the image edges. Extra bottom margin
+            gives the hanging card room so it never collides with the next
+            section. */}
+        <div className="relative mt-4 lg:mt-0 mb-10 sm:mb-6">
           {/* USER-GENERATED IMAGE: /public/overseas/hero.webp (3:2 landscape) */}
           <HeroFrame
             src="/overseas/hero.webp"
@@ -203,22 +206,24 @@ function Hero() {
             label="From Dreams to Destinations"
             eager
           />
-          {/* Floating stat card - bottom-left, overlapping the frame edge */}
-          <div className="absolute bottom-4 -left-2 sm:-left-4 ov-glass rounded-2xl px-4 py-3 flex items-center gap-3 max-w-[80%]">
+          {/* Free-counselling card - hangs off the bottom-left corner,
+              overlapping the image edge. z-20 keeps it above the photo. */}
+          <div className="absolute -bottom-5 left-3 sm:-left-3 z-20 ov-glass-strong rounded-2xl px-4 py-3 flex items-center gap-3 shadow-lg">
             <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center shrink-0" style={{ background: "linear-gradient(135deg,#14B8A6,#0E9488)" }}>
               <OvIcon name="check" size={20} tint="#fff" />
             </span>
             <div className="leading-tight">
-              <p className="font-display font-800 text-[15px] text-[var(--ov-ink)]">Free counselling</p>
-              <p className="text-[12px] text-[var(--ov-ink-mute)]">No obligation, expert advice</p>
+              <p className="font-display font-800 text-[14.5px] text-[var(--ov-ink)]">Free counselling</p>
+              <p className="text-[11.5px] text-[var(--ov-ink-mute)]">No obligation, expert advice</p>
             </div>
           </div>
-          {/* WhatsApp quick chip - top-right, overlapping the frame edge */}
+          {/* Chat-now WhatsApp pill - hangs off the top-right corner,
+              overlapping the image edge. */}
           <a
             href={whatsappUrl(waMessage)}
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute top-3 -right-2 sm:-right-3 ov-glass rounded-full pl-2 pr-3.5 py-1.5 inline-flex items-center gap-2 text-[12.5px] font-700 text-[var(--ov-ink)] shadow-sm"
+            className="absolute -top-3.5 right-3 sm:-right-3 z-20 ov-glass-strong rounded-full pl-1.5 pr-4 py-1.5 inline-flex items-center gap-2 text-[12.5px] font-700 text-[var(--ov-ink)] shadow-lg hover:-translate-y-0.5 transition-transform"
           >
             <span className="inline-flex w-7 h-7 rounded-full items-center justify-center" style={{ background: "linear-gradient(135deg,#25D366,#128C7E)" }}>
               <OvIcon name="whatsapp" size={15} tint="#fff" />
