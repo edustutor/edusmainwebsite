@@ -51,3 +51,6 @@ logs/
 
 # Raw EDUS Overseas logo source (cropped version lives at public/overseas/logo.png)
 overseas_logo_edus.png
+
+# Raw EDUS Overseas OG source (optimized version lives at public/overseas/og-overseas.*)
+ChatGPT Image*.webp

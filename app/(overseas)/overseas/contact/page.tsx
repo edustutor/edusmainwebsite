@@ -35,7 +35,14 @@ export const metadata: Metadata = {
     type: "website",
     url: `${OV.siteBase}/overseas/contact`,
     siteName: OV.brand,
-    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "Contact EDUS Overseas Consultancy" }],
+    images: [{ url: `${OV.siteBase}/overseas/og-overseas.jpg`, width: 1200, height: 675, type: "image/jpeg", alt: "Contact EDUS Overseas Consultancy - study abroad from Sri Lanka" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact EDUS Overseas Consultancy",
+    description:
+      "Call or WhatsApp +94 70 701 2333 for free study abroad guidance. From Dreams to Destinations.",
+    images: [`${OV.siteBase}/overseas/og-overseas.jpg`],
   },
 };
 

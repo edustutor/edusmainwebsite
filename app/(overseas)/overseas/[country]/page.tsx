@@ -63,7 +63,15 @@ export async function generateMetadata({
       type: "website",
       url: `${OV.siteBase}/overseas/${d.slug}`,
       siteName: OV.brand,
-      images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: d.imageAlt }],
+      // Branded EDUS Overseas share card (JPG + absolute URL for
+      // WhatsApp / Facebook / LinkedIn reliability).
+      images: [{ url: `${OV.siteBase}/overseas/og-overseas.jpg`, width: 1200, height: 675, type: "image/jpeg", alt: `Study in ${d.name} from Sri Lanka with EDUS Overseas Consultancy` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${OV.siteBase}/overseas/og-overseas.jpg`],
     },
   };
 }

@@ -53,7 +53,14 @@ export const metadata: Metadata = {
     type: "website",
     url: `${OV.siteBase}/overseas/about`,
     siteName: OV.brand,
-    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "About EDUS Overseas Consultancy" }],
+    images: [{ url: `${OV.siteBase}/overseas/og-overseas.jpg`, width: 1200, height: 675, type: "image/jpeg", alt: "About EDUS Overseas Consultancy - study abroad from Sri Lanka" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About EDUS Overseas Consultancy",
+    description:
+      "A trusted Sri Lankan overseas education consultancy. End-to-end support for studying abroad.",
+    images: [`${OV.siteBase}/overseas/og-overseas.jpg`],
   },
 };
 

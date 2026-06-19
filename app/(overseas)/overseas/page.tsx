@@ -123,14 +123,17 @@ export const metadata: Metadata = {
     type: "website",
     url: `${OV.siteBase}/overseas`,
     siteName: OV.brand,
-    images: [{ url: "/edus-og.jpg", width: 1200, height: 630, alt: "EDUS Overseas Consultancy - study abroad from Sri Lanka" }],
+    // Absolute URL (not relative) so WhatsApp / Facebook / LinkedIn
+    // scrapers reliably fetch it. JPG (not webp) because WhatsApp does
+    // not consistently render webp link previews. 1200x675 = 16:9.
+    images: [{ url: `${OV.siteBase}/overseas/og-overseas.jpg`, width: 1200, height: 675, type: "image/jpeg", alt: "EDUS Overseas Consultancy - study abroad from Sri Lanka to the UK, Australia, Canada, Dubai, Ireland and New Zealand" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "EDUS Overseas Consultancy - Study Abroad from Sri Lanka",
     description:
       "Free guidance for admissions, scholarships, and visas to the UK, Australia, Canada, Dubai, Ireland & New Zealand.",
-    images: ["/edus-og.jpg"],
+    images: [`${OV.siteBase}/overseas/og-overseas.jpg`],
   },
 };
 
