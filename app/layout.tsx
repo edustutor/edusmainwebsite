@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Open_Sans, Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import { Poppins, Open_Sans, Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { DeferredAnalytics } from "@/components/analytics/DeferredAnalytics";
 import "./globals.css";
@@ -46,11 +46,11 @@ const sans = Open_Sans({
 });
 
 // ---- EDUS Overseas Consultancy premium fonts (scoped to /overseas) ----
-// Fraunces - a warm, high-contrast editorial serif for the overseas
-// headings. Gives the study-abroad section an aspirational, premium
-// consultancy feel that the tuition site's Poppins does not. opsz +
-// "soft"/"wonky" optical axes are left at defaults via the variable font.
-const overseasDisplay = Fraunces({
+// Playfair Display - a classic high-contrast editorial serif for the
+// overseas headings. Aspirational, premium consultancy feel, with a
+// clean conventional lowercase "j" (no quirky curl). Kept on the same
+// --font-ov-display variable so only this import changes.
+const overseasDisplay = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
   style: ["normal", "italic"],

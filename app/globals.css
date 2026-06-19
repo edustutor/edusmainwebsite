@@ -586,9 +586,9 @@ body {
    aspirational, distinctly different from the tuition site's Poppins.
    Tighter tracking + optical sizing read as luxury at display sizes. */
 .overseas .ov-heading {
-  font-family: var(--font-ov-display), "Fraunces", Georgia, serif;
+  font-family: var(--font-ov-display), "Playfair Display", Georgia, serif;
   color: var(--ov-ink);
-  letter-spacing: -0.02em; line-height: 1.06; font-weight: 600;
+  letter-spacing: -0.01em; line-height: 1.08; font-weight: 700;
   font-optical-sizing: auto;
 }
 .overseas .ov-heading em {
