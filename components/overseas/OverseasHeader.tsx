@@ -42,9 +42,12 @@ export function OverseasHeader() {
     <header className="fixed top-0 inset-x-0 z-50">
       <div
         className={`transition-all duration-300 ${
-          scrolled ? "ov-glass-strong" : "bg-transparent"
+          // Solid white when the mobile menu is open (so the logo row
+          // matches the opaque drawer), glass when scrolled, otherwise
+          // transparent over the hero.
+          open ? "bg-white" : scrolled ? "ov-glass-strong" : "bg-transparent"
         }`}
-        style={scrolled ? { borderRadius: 0 } : undefined}
+        style={scrolled || open ? { borderRadius: 0 } : undefined}
       >
         <div className="container-edge flex items-center justify-between h-16 sm:h-[72px]">
           {/* Brand logo - the full EDUS Overseas Consultancy lockup,
@@ -103,15 +106,19 @@ export function OverseasHeader() {
           </button>
         </div>
 
-        {/* Mobile drawer */}
+        {/* Mobile drawer - SOLID opaque panel (not glass) so page content
+            never bleeds through behind the nav links. */}
         {open && (
-          <div className="lg:hidden ov-glass-strong border-t border-[var(--ov-rule)]">
+          <div
+            className="lg:hidden border-t border-[var(--ov-rule)]"
+            style={{ background: "#FFFFFF", boxShadow: "0 24px 40px -18px rgba(26,19,64,0.25)" }}
+          >
             <nav className="container-edge py-4 flex flex-col gap-1">
               {NAV.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="font-display font-600 text-[15px] text-[var(--ov-ink)] py-2.5 border-b border-[var(--ov-rule)] last:border-0"
+                  className="font-display font-600 text-[15.5px] text-[var(--ov-ink)] py-3 border-b border-[var(--ov-rule)] last:border-0"
                 >
                   {item.label}
                 </Link>
