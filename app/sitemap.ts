@@ -74,6 +74,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/mv",               changeFrequency: "weekly",  priority: 0.95 },
     { path: "/global",           changeFrequency: "weekly",  priority: 0.95 },
 
+    // EDUS Overseas Consultancy - separately branded study-abroad section
+    // at /overseas. High priority + weekly: it is a new revenue line
+    // targeting Sri Lankan rank-1 for "study abroad consultants Sri Lanka".
+    { path: "/overseas",                changeFrequency: "weekly",  priority: 0.90 },
+    { path: "/overseas/about",          changeFrequency: "monthly", priority: 0.70 },
+    { path: "/overseas/contact",        changeFrequency: "monthly", priority: 0.70 },
+    // Per-destination landing pages (UK, Australia, Canada, Dubai,
+    // Ireland, New Zealand) - deep SEO for "study in <X> from Sri Lanka".
+    { path: "/overseas/uk",             changeFrequency: "monthly", priority: 0.80 },
+    { path: "/overseas/australia",      changeFrequency: "monthly", priority: 0.80 },
+    { path: "/overseas/canada",         changeFrequency: "monthly", priority: 0.80 },
+    { path: "/overseas/dubai",          changeFrequency: "monthly", priority: 0.80 },
+    { path: "/overseas/ireland",        changeFrequency: "monthly", priority: 0.80 },
+    { path: "/overseas/new-zealand",    changeFrequency: "monthly", priority: 0.80 },
+
     // Product / conversion
     { path: "/teach",            changeFrequency: "weekly",  priority: 0.85 },
     { path: "/contact",          changeFrequency: "monthly", priority: 0.80 },

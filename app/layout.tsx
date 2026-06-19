@@ -3,17 +3,13 @@ import { Poppins, Open_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { DeferredAnalytics } from "@/components/analytics/DeferredAnalytics";
 import "./globals.css";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { SiteFooter } from "@/components/layout/SiteFooter";
 import { MotionProvider } from "@/components/effects/Motion";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
-import { Atmosphere } from "@/components/effects/Atmosphere";
+import { MainSiteChrome } from "@/components/layout/MainSiteChrome";
 import { AnalyticsClickTracker } from "@/components/analytics/AnalyticsClickTracker";
 import { ConsentDefaults } from "@/components/analytics/ConsentDefaults";
 import { ConsentBanner } from "@/components/analytics/ConsentBanner";
 import { ServiceWorkerRegistrar } from "@/components/pwa/ServiceWorkerRegistrar";
-import { ChatBotMount } from "@/components/chatbot/ChatBotMount";
-import { ProjectPromoPopup } from "@/components/promo/ProjectPromoPopup";
 import { TikTokPixel } from "@/components/analytics/TikTokPixel";
 import {
   getCurrentHost,
@@ -334,11 +330,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             JSX, so the lazyOnload behaviour is unaffected. */}
         <DeferredAnalytics gtmId={gtmId} ga4Id={ga4Id} />
         <MotionProvider>
-          <Atmosphere />
           <ScrollProgress />
-          <SiteHeader />
-          <main className="relative z-10">{children}</main>
-          <SiteFooter />
+          {/* MainSiteChrome gates the tuition-site header / footer /
+              atmosphere / chatbot / 9A promo on the pathname. On the
+              EDUS Overseas section (/overseas) it renders nothing so the
+              overseas route group supplies its own distinct chrome. */}
+          <MainSiteChrome position="frame">
+            <main className="relative z-10">{children}</main>
+          </MainSiteChrome>
+          <MainSiteChrome position="footer" />
         </MotionProvider>
         {/* Global delegated click tracker - fires GA4 events for every
             signup CTA, region selector click, blog/gallery navigation,
@@ -363,21 +363,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             content freshness (Google Reviews, blog posts, prices)
             is preserved with zero stale-cache risk. */}
         <ServiceWorkerRegistrar />
-        {/* EDUS admissions chatbot - floating button + panel on every
-            page. ChatBotMount is a thin client wrapper that
-            dynamically imports the actual ChatBot with ssr: false -
-            keeping the chat bundle off the initial HTML/LCP path.
-            (Next 16 forbids ssr: false in Server Components, hence the
-            wrapper.) Conversation history lives in component state only
-            (never localStorage) so we don't risk leaking parent PII to
-            anyone who shares the device. */}
-        <ChatBotMount />
-        {/* Global 9A Challenge promo - fires once per session after
-            10 seconds on every page except /sl/9a-project + /contact.
-            Mounts here so it's available site-wide. The component
-            itself self-skips when the visitor is on the project page
-            or has dismissed it once already this session. */}
-        <ProjectPromoPopup />
+        {/* NOTE: the EDUS admissions chatbot (ChatBotMount) and the 9A
+            Challenge promo popup (ProjectPromoPopup) are now rendered
+            inside <MainSiteChrome position="footer"> above, so they are
+            automatically suppressed on the EDUS Overseas section
+            (/overseas) which carries its own separate branding. */}
       </body>
     </html>
   );

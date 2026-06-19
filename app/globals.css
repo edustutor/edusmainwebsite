@@ -393,3 +393,272 @@ body {
 /* Hide scrollbar utility - used on horizontal scroll strips (filter pills) */
 .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
 .scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* ================================================================ */
+/* EDUS OVERSEAS CONSULTANCY - scoped vibrant theme (/overseas)      */
+/* ================================================================ */
+/*
+ * A deliberately DIFFERENT look from the main EDUS tuition site.
+ * Where the tuition site is cool blue/violet glass, EDUS Overseas is a
+ * warm, vibrant "dream destinations" palette: sunset coral -> amber ->
+ * tropical teal over a deep indigo ink. Every rule here is scoped under
+ * `.overseas` (the wrapper class set on the overseas <body> region in
+ * app/(overseas)/layout.tsx) so NONE of it leaks into the tuition site.
+ *
+ * Reuses the shared engine where it is theme-neutral (container-edge,
+ * fadeUp keyframes, tnum). Overrides only what carries the brand look:
+ * tokens, atmosphere, glass, buttons, headings, eyebrow.
+ */
+.overseas {
+  /* Warm vibrant palette - the EDUS Overseas brand */
+  --ov-ink: #1A1340;          /* deep indigo - primary text */
+  --ov-ink-soft: #3D3470;     /* muted indigo - body text */
+  --ov-ink-mute: #6F6A93;     /* low-emphasis text */
+  --ov-coral: #FF5A5F;        /* hero accent / primary CTA */
+  --ov-coral-deep: #E8484D;
+  --ov-amber: #FFB23E;        /* energy / highlights */
+  --ov-amber-deep: #F59E0B;
+  --ov-teal: #14B8A6;         /* trust / success / stats */
+  --ov-teal-deep: #0E9488;
+  --ov-violet: #7C3AED;       /* depth accent */
+  --ov-pink: #F472B6;         /* soft accent */
+  --ov-bg: #FFF9F5;           /* warm paper background */
+  --ov-bg-2: #FFF1E8;
+  --ov-rule: rgba(26,19,64,0.10);
+  --ov-rule-strong: rgba(26,19,64,0.16);
+  --ov-glass-blur: 20px;
+
+  color: var(--ov-ink);
+  background: var(--ov-bg);
+  font-family: var(--font-sans), "Open Sans", system-ui, sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+@media (max-width: 768px) {
+  .overseas { --ov-glass-blur: 11px; }
+}
+
+/* Warm atmosphere - sunset wash with two drifting blurred suns */
+.overseas .ov-atmosphere {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 600px at 100% 0%, rgba(255,90,95,0.16) 0%, transparent 60%),
+    radial-gradient(900px 700px at 0% 25%, rgba(255,178,62,0.18) 0%, transparent 60%),
+    radial-gradient(760px 520px at 85% 85%, rgba(20,184,166,0.15) 0%, transparent 60%),
+    radial-gradient(600px 420px at 8% 100%, rgba(124,58,237,0.10) 0%, transparent 60%),
+    var(--ov-bg);
+}
+.overseas .ov-atmosphere::before,
+.overseas .ov-atmosphere::after {
+  content: ""; position: absolute; border-radius: 9999px;
+  filter: blur(110px); opacity: .5;
+}
+.overseas .ov-atmosphere::before {
+  width: 54vmax; height: 54vmax; left: -16vmax; top: -12vmax;
+  background: radial-gradient(circle, #FF5A5F 0%, transparent 65%);
+}
+.overseas .ov-atmosphere::after {
+  width: 46vmax; height: 46vmax; right: -12vmax; top: 22vh;
+  background: radial-gradient(circle, #14B8A6 0%, transparent 65%);
+}
+
+/* Warm glass - slightly creamy so it reads against the warm bg */
+.overseas .ov-glass {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.6));
+  backdrop-filter: blur(var(--ov-glass-blur)) saturate(165%);
+  -webkit-backdrop-filter: blur(var(--ov-glass-blur)) saturate(165%);
+  border: 1px solid rgba(255,255,255,0.75);
+  border-radius: 22px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    0 1px 1px rgba(26,19,64,0.04),
+    0 14px 40px -18px rgba(232,72,77,0.18);
+}
+.overseas .ov-glass-strong {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,250,245,0.8));
+  backdrop-filter: blur(26px) saturate(175%);
+  -webkit-backdrop-filter: blur(26px) saturate(175%);
+  border: 1px solid rgba(255,255,255,0.88);
+  border-radius: 28px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    0 1px 2px rgba(26,19,64,0.05),
+    0 34px 90px -30px rgba(255,90,95,0.22);
+}
+@media (max-width: 768px) {
+  .overseas .ov-glass-strong {
+    backdrop-filter: blur(13px) saturate(160%);
+    -webkit-backdrop-filter: blur(13px) saturate(160%);
+  }
+}
+.overseas .ov-glass::after,
+.overseas .ov-glass-strong::after {
+  content: ""; position: absolute; inset: 0;
+  border-radius: inherit; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), transparent 36%);
+  mix-blend-mode: overlay; opacity: .5;
+}
+
+/* Blurred floating blob - warm variant */
+.overseas .ov-blob {
+  position: absolute; border-radius: 9999px;
+  filter: blur(80px); opacity: .5; pointer-events: none;
+}
+
+/* Buttons - bold pill, warm gradients */
+.overseas .ov-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+  padding: 0.95rem 1.6rem; border-radius: 999px;
+  font-family: var(--font-display), "Poppins", sans-serif;
+  font-weight: 600; font-size: 15px; letter-spacing: -0.005em;
+  white-space: nowrap; cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+.overseas .ov-btn-primary {
+  background: linear-gradient(135deg, #FF6B6F 0%, #FF5A5F 50%, #F59E0B 130%);
+  color: #fff; border: 1px solid rgba(255,255,255,0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.45),
+    0 1px 2px rgba(232,72,77,0.30),
+    0 16px 34px -10px rgba(232,72,77,0.55);
+}
+.overseas .ov-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.55),
+    0 20px 44px -12px rgba(232,72,77,0.62);
+}
+.overseas .ov-btn-teal {
+  background: linear-gradient(135deg, #22D3C5 0%, #14B8A6 100%);
+  color: #fff; border: 1px solid rgba(255,255,255,0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.4),
+    0 16px 34px -10px rgba(14,148,136,0.5);
+}
+.overseas .ov-btn-teal:hover { transform: translateY(-2px); }
+.overseas .ov-btn-amber {
+  background: linear-gradient(135deg, #FFC368 0%, #FFB23E 60%, #F59E0B 100%);
+  color: #2A1A05; border: 1px solid rgba(26,19,64,0.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.65),
+    0 16px 34px -10px rgba(245,158,11,0.5);
+}
+.overseas .ov-btn-amber:hover { transform: translateY(-2px); }
+.overseas .ov-btn-ghost {
+  color: var(--ov-ink); background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(26,19,64,0.12);
+  backdrop-filter: blur(12px);
+}
+.overseas .ov-btn-ghost:hover {
+  background: #fff; border-color: rgba(26,19,64,0.22);
+  transform: translateY(-2px);
+}
+.overseas .ov-btn-white {
+  color: var(--ov-coral-deep); background: #fff;
+  border: 1px solid rgba(255,255,255,0.9);
+  box-shadow: 0 16px 34px -12px rgba(26,19,64,0.28);
+}
+.overseas .ov-btn-white:hover { transform: translateY(-2px); }
+
+/* Headings - Poppins, warm gradient emphasis */
+.overseas .ov-heading {
+  font-family: var(--font-display), "Poppins", sans-serif;
+  color: var(--ov-ink);
+  letter-spacing: -0.025em; line-height: 1.08; font-weight: 800;
+}
+.overseas .ov-heading em {
+  font-style: normal;
+  background: linear-gradient(100deg, #FF5A5F 0%, #F59E0B 55%, #14B8A6 110%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+.overseas .ov-eyebrow {
+  font-family: var(--font-display), "Poppins", sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ov-coral-deep);
+  display: inline-flex; align-items: center;
+}
+.overseas .ov-eyebrow .ov-dot {
+  display: inline-block; width: 6px; height: 6px; border-radius: 999px;
+  background: var(--ov-coral); margin-right: 8px;
+  box-shadow: 0 0 0 4px rgba(255,90,95,0.18);
+}
+
+/* Card lift - warm shadow */
+.overseas .ov-lift { transition: transform .25s ease, border-color .2s ease, box-shadow .25s ease; }
+.overseas .ov-lift:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,90,95,0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    0 34px 80px -30px rgba(255,90,95,0.3);
+}
+
+/* Destination card image zoom on hover */
+.overseas .ov-zoom img { transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.overseas .ov-zoom:hover img { transform: scale(1.07); }
+
+/* Animated gradient text shimmer for the hero word */
+@keyframes ovShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.overseas .ov-shimmer {
+  background: linear-gradient(100deg, #FF5A5F 0%, #F59E0B 25%, #14B8A6 50%, #F59E0B 75%, #FF5A5F 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: ovShimmer 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .overseas .ov-shimmer { animation: none; }
+}
+
+/* Blinking attention CTA (limited-seats style) */
+@keyframes ovPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.overseas .ov-pulse { animation: ovPulse 1.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .overseas .ov-pulse { animation: none; }
+}
+
+/* Marquee strip for university logos / trust row */
+@keyframes ovMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.overseas .ov-marquee {
+  display: flex; width: max-content; gap: 3rem;
+  animation: ovMarquee 28s linear infinite;
+}
+.overseas .ov-marquee:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .overseas .ov-marquee { animation: none; flex-wrap: wrap; justify-content: center; }
+}
+
+/* Section helper spacing inside overseas */
+.overseas .ov-section { padding-top: clamp(3.5rem, 6vw, 6rem); }
+
+/* Form fields - warm focus ring */
+.overseas .ov-field {
+  width: 100%;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(26,19,64,0.14);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  font-size: 15px; color: var(--ov-ink);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.overseas .ov-field::placeholder { color: var(--ov-ink-mute); }
+.overseas .ov-field:focus {
+  outline: none;
+  border-color: var(--ov-coral);
+  box-shadow: 0 0 0 3px rgba(255,90,95,0.16);
+}
