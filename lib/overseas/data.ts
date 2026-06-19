@@ -31,8 +31,8 @@ export const OV = {
 
   // Shared EDUS office (Jaffna). Confirmed existing EDUS address.
   email: "overseas@edus.lk",
-  addressLine: "No. 95, K.K.S Road, Kokkuvil Junction, Jaffna 40000, Sri Lanka",
-  street: "No. 95, K.K.S Road, Kokkuvil Junction",
+  addressLine: "No. 95, K.K.S Road, Jaffna 40000, Sri Lanka",
+  street: "No. 95, K.K.S Road",
   city: "Jaffna",
   region: "Northern Province",
   postalCode: "40000",
@@ -87,7 +87,7 @@ export const WHY_CHOOSE: Array<{ title: string; body: string; icon: string }> = 
 /* --------------------------------------------------------------- */
 
 export const STATS: Array<{ value: number; suffix: string; label: string }> = [
-  { value: 1000, suffix: "+", label: "Students Guided" },
+  { value: 100, suffix: "+", label: "Students Guided" },
   { value: 500, suffix: "+", label: "University Programs" },
   { value: 95, suffix: "%", label: "Visa Success Rate" },
   { value: 6, suffix: "+", label: "Study Destinations" },

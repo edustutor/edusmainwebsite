@@ -76,7 +76,7 @@ export function OverseasFooter() {
               <li><Link href="/overseas#services" className="text-[13.5px] text-[var(--ov-ink-soft)] hover:text-[var(--ov-coral-deep)]">Services</Link></li>
               <li><Link href="/overseas/about" className="text-[13.5px] text-[var(--ov-ink-soft)] hover:text-[var(--ov-coral-deep)]">About Us</Link></li>
               <li><Link href="/overseas/contact" className="text-[13.5px] text-[var(--ov-ink-soft)] hover:text-[var(--ov-coral-deep)]">Contact</Link></li>
-              <li><a href="https://edus.lk" className="text-[13.5px] text-[var(--ov-ink-soft)] hover:text-[var(--ov-coral-deep)]">EDUS Tuition</a></li>
+              <li><a href="https://edus.lk" className="text-[13.5px] text-[var(--ov-ink-soft)] hover:text-[var(--ov-coral-deep)]">EDUS Online Institute</a></li>
             </ul>
           </div>
 
@@ -86,7 +86,7 @@ export function OverseasFooter() {
               Start your journey
             </p>
             <p className="mt-4 text-[13.5px] text-[var(--ov-ink-soft)] leading-relaxed">
-              Free consultation. No obligation. Talk to a counsellor today.
+              Free consultation. Talk to an expert counsellor today.
             </p>
             <div className="mt-4 flex flex-col gap-2.5">
               <a
@@ -111,7 +111,7 @@ export function OverseasFooter() {
             © {year} {OV.brand}. All rights reserved.
           </p>
           <p className="text-[12.5px] text-[var(--ov-ink-mute)]">
-            A part of EDUS. Powered by EDUS Lanka (Pvt) Ltd.
+            A subsidiary of EDUS Lanka (Pvt) Ltd.
           </p>
         </div>
       </div>

@@ -207,7 +207,7 @@ function Hero() {
           <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2.5">
             {[
               { icon: "shield", text: "95% visa success rate" },
-              { icon: "trophy", text: "1000+ students guided" },
+              { icon: "trophy", text: "100+ students guided" },
               { icon: "globe", text: "6+ study destinations" },
             ].map((t) => (
               <span key={t.text} className="inline-flex items-center gap-2 text-[13.5px] font-600 text-[var(--ov-ink-soft)]">
