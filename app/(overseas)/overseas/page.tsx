@@ -144,7 +144,6 @@ export default function OverseasHome() {
 /* --------------------------------------------------------------- */
 
 function Hero() {
-  const waMessage = "Hi EDUS Overseas, I would like a free study abroad consultation.";
   return (
     <section className="relative overflow-hidden pt-10 sm:pt-16 pb-6">
       <div aria-hidden className="absolute inset-0 -z-10">
@@ -217,19 +216,6 @@ function Hero() {
               <p className="text-[11.5px] text-[var(--ov-ink-mute)]">No obligation, expert advice</p>
             </div>
           </div>
-          {/* Chat-now WhatsApp pill - hangs off the top-right corner,
-              overlapping the image edge. */}
-          <a
-            href={whatsappUrl(waMessage)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute -top-3.5 right-3 sm:-right-3 z-20 ov-glass-strong rounded-full pl-1.5 pr-4 py-1.5 inline-flex items-center gap-2 text-[12.5px] font-700 text-[var(--ov-ink)] shadow-lg hover:-translate-y-0.5 transition-transform"
-          >
-            <span className="inline-flex w-7 h-7 rounded-full items-center justify-center" style={{ background: "linear-gradient(135deg,#25D366,#128C7E)" }}>
-              <OvIcon name="whatsapp" size={15} tint="#fff" />
-            </span>
-            Chat now
-          </a>
         </div>
       </div>
     </section>
