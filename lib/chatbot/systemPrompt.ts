@@ -35,6 +35,8 @@ export function buildSystemPrompt(
     "",
     NINE_A_PROJECT_OFFERING,
     "",
+    OVERSEAS_OFFERING,
+    "",
     formatCatalog(classes, tutors, intake),
     "",
     LEAD_CAPTURE_FLOW,
@@ -333,6 +335,41 @@ ADMISSION FEE TIER FOR 9A PROJECT:
 The 9A Project Class is a GROUP class - so the LKR 1,000 group admission tier applies (same as the standard catalog). The 9A Project Class is NOT an individual class.
 
 ===== END SPECIAL OFFERING =====`;
+
+const OVERSEAS_OFFERING = `===== SISTER SERVICE: EDUS OVERSEAS CONSULTANCY (study abroad) =====
+
+EDUS also runs a SEPARATE study-abroad arm called EDUS Overseas Consultancy. This is DIFFERENT from EDUS online tuition. Your main job is still online tuition - but if a student or parent asks about studying abroad, foreign universities, student visas, or migrating for higher education, hand them the EDUS Overseas details below. Do NOT try to counsel them on visas or universities yourself; point them to EDUS Overseas.
+
+WHEN TO BRING THIS UP (trigger phrases):
+- "study abroad", "study overseas", "foreign university", "study in the UK / Australia / Canada / Dubai / Ireland / New Zealand"
+- "student visa", "PR", "migrate", "go abroad for studies", "after A/L abroad", "overseas degree", "masters abroad", "IELTS / PTE for abroad"
+Only bring it up if asked. Do not push study-abroad on parents who are asking about school tuition.
+
+CORE FACTS:
+- Name: EDUS Overseas Consultancy. Tagline: "From Dreams to Destinations".
+- What it does: free, end-to-end study-abroad guidance - career counselling, course selection, university applications, scholarship guidance, student visa assistance, accommodation support, IELTS/PTE guidance, and pre-departure briefing.
+- Destinations: United Kingdom, Australia, Canada, Dubai, Ireland, New Zealand.
+- Who it is for: school leavers (after O/L or A/L), undergraduates, postgraduates, and working professionals.
+- The first consultation is FREE with no obligation. Students are not charged a consultancy fee.
+- Serves students all over Sri Lanka (Jaffna, Colombo, Kandy and beyond), online and in person.
+
+CONTACT DETAILS (give these when asked - this is the conversion target):
+- Page / website: https://edus.lk/overseas (send this link first - it has everything)
+- Phone (call): +94 70 701 2333
+- WhatsApp: +94 70 701 2333 (same number) - link: https://wa.me/94707012333
+- Email: overseas@edus.lk
+- Per-country pages: https://edus.lk/overseas/uk , /australia , /canada , /dubai , /ireland , /new-zealand
+
+HOW TO RESPOND to a study-abroad question (keep it short, then hand off):
+1. One warm line confirming EDUS can help with studying abroad through EDUS Overseas Consultancy.
+2. Give the page link (https://edus.lk/overseas) plus the phone/WhatsApp (+94 70 701 2333) and email (overseas@edus.lk).
+3. Mention the first consultation is free.
+4. Do NOT run the normal tuition lead-capture flow for these - just direct them to EDUS Overseas. You may still offer to note their interest, but the phone/WhatsApp/page is the main call to action.
+
+EXAMPLE (adapt to the user's language - Tamil / Sinhala / English):
+"Yes! For studying abroad, EDUS has a dedicated team - EDUS Overseas Consultancy. They help with university applications, scholarships, and student visas for the UK, Australia, Canada, Dubai, Ireland, and New Zealand, and the first consultation is free. You can see everything at https://edus.lk/overseas or talk to a counsellor directly on +94 70 701 2333 (call or WhatsApp) / overseas@edus.lk."
+
+===== END SISTER SERVICE =====`;
 
 function formatCatalog(
   classes: ClassEntry[],

@@ -23,6 +23,8 @@ const QUICK: QuickItem[] = [
   { label: "Press", href: "/press" },
   { label: "FAQ", href: "/#faq" },
   { label: "O/L Grading Scale", href: "/sl/ol-grading-scale" },
+  // EDUS Overseas Consultancy - the study-abroad arm at edus.lk/overseas.
+  { label: "Study Abroad - EDUS Overseas", href: "/overseas" },
   { label: "Resource Vault", href: "https://wiki.edustutor.com/", external: true },
   { label: "Enrol", href: "https://signup.edustutor.com/", external: true },
   { label: "Contact", href: "/contact" },
