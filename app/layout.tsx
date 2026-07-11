@@ -346,8 +346,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <TikTokPixel pixelId={process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID ?? ""} />
         {/* Meta (Facebook) Pixel - consent-gated (advertising), lazyOnload.
             Self-renders nothing until the visitor opts into advertising
-            cookies, so no pixel ships for users who decline. */}
-        <MetaPixel pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID ?? ""} />
+            cookies, so no pixel ships for users who decline.
+            The pixel ID is hardcoded (it's public by design - visible in
+            every browser) so it works without a Vercel env var; the env
+            var still overrides it if set for a different environment. */}
+        <MetaPixel pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID || "1550823579839628"} />
         {/* Deferred GTM + GA4 - loads with strategy="lazyOnload" so the
             ~280KB of analytics scripts wait until the page is fully idle
             before fetching. Saves ~3s of LCP on mobile vs the default
