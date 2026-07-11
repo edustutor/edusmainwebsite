@@ -11,6 +11,7 @@ import { ConsentDefaults } from "@/components/analytics/ConsentDefaults";
 import { ConsentBanner } from "@/components/analytics/ConsentBanner";
 import { ServiceWorkerRegistrar } from "@/components/pwa/ServiceWorkerRegistrar";
 import { TikTokPixel } from "@/components/analytics/TikTokPixel";
+import { MetaPixel } from "@/components/analytics/MetaPixel";
 import {
   getCurrentHost,
   getCurrentAnalyticsIds,
@@ -331,6 +332,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://analytics.tiktok.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
         {/* Consent Mode v2 default state - inline script inside <head>
             so dataLayer is primed BEFORE GTM/GA4 fire. ~600 bytes,
             zero render-blocking network cost. Puts GA4 + Microsoft
@@ -342,6 +344,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             renders nothing until the visitor opts into advertising
             cookies, so no pixel script ships for users who decline. */}
         <TikTokPixel pixelId={process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID ?? ""} />
+        {/* Meta (Facebook) Pixel - consent-gated (advertising), lazyOnload.
+            Self-renders nothing until the visitor opts into advertising
+            cookies, so no pixel ships for users who decline. */}
+        <MetaPixel pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID ?? ""} />
         {/* Deferred GTM + GA4 - loads with strategy="lazyOnload" so the
             ~280KB of analytics scripts wait until the page is fully idle
             before fetching. Saves ~3s of LCP on mobile vs the default
