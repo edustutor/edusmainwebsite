@@ -96,11 +96,12 @@ export default function PrivacyPolicyPage() {
             of our online tuition services. This includes:
           </p>
 
-          <H3>a) Contact Information</H3>
+          <H3>a) Contact &amp; Identity Information</H3>
           <UL>
             <li>Name (required for enrollment and account creation)</li>
             <li>Email Address (used for login, authentication, and communication)</li>
             <li>Phone Number (used for login, security, and communication)</li>
+            <li>Date of Birth (used to confirm the student&rsquo;s grade level and age-appropriate access)</li>
             <li>Physical Address (optional, used for personalised services)</li>
             <li>Other Contact Information (for verification between students, parents, and teachers)</li>
           </UL>
@@ -108,16 +109,25 @@ export default function PrivacyPolicyPage() {
           <H3>b) User Content</H3>
           <UL>
             <li>Photos &amp; Videos (used for submitting assignments, homework, and projects)</li>
+            <li>Files &amp; Documents (assignments, homework, and study materials you upload)</li>
+            <li>Chat Messages (messages sent within class groups and to tutors or coordinators for academic support)</li>
+            <li>Voice Recordings (audio you submit for spoken assignments, or captured within a recorded live class)</li>
           </UL>
 
-          <H3>c) Technical Data</H3>
+          <H3>c) Payment Information</H3>
+          <UL>
+            <li>Payment &amp; Transaction Records (invoices, amounts, dates, and payment status). Card details are entered directly with our payment provider PayHere and are never stored by EDUS.</li>
+          </UL>
+
+          <H3>d) Technical Data</H3>
           <UL>
             <li>IP Address (for security, fraud detection, and analytics)</li>
             <li>Device Information (for performance optimisation)</li>
+            <li>Crash &amp; Diagnostic Data (to detect and fix app errors)</li>
             <li>Cookies &amp; Tracking Technologies (for improving user experience and analytics)</li>
           </UL>
 
-          <H3>d) Educational Data</H3>
+          <H3>e) Educational Data</H3>
           <UL>
             <li>Course enrolments, assignments, and assessments (to track student progress)</li>
           </UL>
@@ -267,13 +277,50 @@ export default function PrivacyPolicyPage() {
 
           <H2>8. Children&rsquo;s Privacy &amp; Parental Controls</H2>
           <p>
-            Our platform is designed for educational purposes and is accessible to students under
-            parental or educator supervision.
+            EDUS is an education service used by school students, including children under the
+            age of 13. Protecting them is a core responsibility, and we design the platform to be
+            safe for young learners.
           </p>
+
+          <H3>Parental consent and supervision</H3>
           <UL>
-            <li>We do not collect unnecessary data from minors.</li>
-            <li>Parents and guardians can request data deletion.</li>
+            <li>Accounts for students under 18 are created and managed under the consent and supervision of a parent or guardian.</li>
+            <li>Parents and guardians can review their child&rsquo;s information, request corrections, and request deletion of the account at any time.</li>
+            <li>We collect only the information needed to deliver classes and track academic progress. We do not ask children for information we do not need.</li>
           </UL>
+
+          <H3>How we keep the experience safe for children</H3>
+          <UL>
+            <li>
+              <strong>No open messaging between students.</strong> Students cannot send private,
+              one-to-one messages to other students. Communication happens within supervised class
+              groups and with tutors and coordinators for academic support only. Because there is
+              no private student-to-student messaging, there is no unmoderated channel a child
+              could be contacted through.
+            </li>
+            <li>Live classes are conducted on approved platforms (Google Meet, Google Classroom) and may be recorded for quality assurance and safeguarding.</li>
+            <li>All tutors accept EDUS child-safety standards and are expected to keep communication professional and age-appropriate at all times.</li>
+            <li>
+              Anyone can report a concern about a child&rsquo;s safety or about inappropriate
+              behaviour or content through our{" "}
+              <a href="/safeguarding" className="text-[#2563EB] hover:underline">Safeguarding Policy</a>,
+              and we act on reports promptly.
+            </li>
+          </UL>
+
+          <H3>No advertising or profiling of children</H3>
+          <UL>
+            <li>We do not show third-party advertising to children.</li>
+            <li>We do not use children&rsquo;s data to build advertising or marketing profiles, and we do not sell it.</li>
+          </UL>
+          <p>
+            If you believe a child has provided us information without the appropriate parental
+            consent, contact us at{" "}
+            <a href="mailto:hello@edustutor.com" className="text-[#2563EB] hover:underline">
+              hello@edustutor.com
+            </a>{" "}
+            and we will remove it.
+          </p>
 
           <H2>9. App Store &amp; Play Store Privacy Compliance</H2>
           <p>
@@ -289,8 +336,13 @@ export default function PrivacyPolicyPage() {
 
           <H3>Data Not Linked to You</H3>
           <UL>
-            <li>Certain anonymous analytics data may be collected, but is not personally identifiable.</li>
+            <li>Diagnostics: crash and error reports are collected to keep the app stable. This data is used only to detect and fix technical problems and is not used to track you.</li>
           </UL>
+          <p>
+            The EDUS mobile app does not include a third-party advertising or
+            behavioural-analytics SDK. We do not use your data to build advertising
+            profiles or to track you across other apps or websites.
+          </p>
 
           <H2>10. Updates to This Policy</H2>
           <p>

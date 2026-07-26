@@ -11,7 +11,7 @@ export const metadata = {
   },
 };
 
-const LAST_UPDATED = "March 11, 2025";
+const LAST_UPDATED = "July 26, 2026";
 
 export default function SafeguardingPage() {
   const year = new Date().getFullYear();
@@ -31,7 +31,7 @@ export default function SafeguardingPage() {
           description:
             "EDUS Online Tuition's commitment to safeguarding the welfare of every child and young person across Sri Lanka, India, Maldives, and globally.",
           path: "/safeguarding",
-          lastUpdated: "2025-12-01",
+          lastUpdated: "2026-07-26",
         })}
       />
       {/* HERO */}
@@ -137,13 +137,16 @@ export default function SafeguardingPage() {
             <li>Raise any concern relating to a tutor, class, or interaction directly with the EDUS team.</li>
           </UL>
 
-          <H2>7. Reporting a Concern</H2>
+          <H2>7. Reporting a Concern or Objectionable Content</H2>
           <p>
-            If you have a concern about the safety or welfare of a student, or about the conduct
-            of a tutor, please contact us as soon as possible. Concerns are treated seriously,
-            confidentially, and without prejudice to the person raising them.
+            Anyone can report a concern about the safety or welfare of a student, about the
+            conduct of a tutor or another user, or about any abusive, inappropriate, or otherwise
+            objectionable content or behaviour they encounter on EDUS, including in class groups,
+            messages, shared files, or live classes. You do not need an account to report, and
+            concerns are treated seriously, confidentially, and without prejudice to the person
+            raising them.
           </p>
-          <p>You can report a concern through:</p>
+          <p>You can report through any of these channels:</p>
           <UL>
             <li>
               <strong>Email:</strong>{" "}
@@ -152,15 +155,42 @@ export default function SafeguardingPage() {
               </a>
             </li>
             <li>
-              <strong>Phone:</strong>{" "}
+              <strong>Phone or WhatsApp:</strong>{" "}
               <a href="tel:+94707072072" className="text-[#2563EB] hover:underline">
                 +94 70 707 2072
               </a>
             </li>
+            <li>
+              <strong>Inside the app:</strong> contact your class coordinator or the EDUS support
+              team through the in-app support option.
+            </li>
+          </UL>
+          <p>When you report objectionable content or behaviour, please include, where you can:</p>
+          <UL>
+            <li>What happened and where (the class, group, message, or file).</li>
+            <li>Who was involved, if known.</li>
+            <li>The date and time, and any screenshot or detail that helps us find it.</li>
+          </UL>
+
+          <H3>How we respond</H3>
+          <p>
+            We aim to acknowledge every report within 24 hours and to complete our review as
+            quickly as the situation allows. Where a report is upheld, we act on it. Depending on
+            the seriousness of the case we may:
+          </p>
+          <UL>
+            <li>Remove the objectionable content or message.</li>
+            <li>Warn, suspend, or permanently remove the tutor, student, or user responsible.</li>
+            <li>Restrict access to a class or group while we investigate.</li>
+            <li>Refer the matter to parents or guardians, and to the relevant authorities where required.</li>
           </UL>
           <p>
+            We do not tolerate abusive or objectionable content or behaviour on EDUS, and users
+            who engage in it may be ejected from the platform.
+          </p>
+          <p>
             In the case of an immediate risk of harm, please also contact your local emergency
-            services or appropriate national child protection authority.
+            services or the appropriate national child protection authority.
           </p>
 
           <H2>8. Confidentiality &amp; Data Protection</H2>
@@ -193,6 +223,14 @@ function H2({ children }: { children: React.ReactNode }) {
     <h2 className="font-display font-700 text-[#102033] text-[22px] leading-[1.3] tracking-[-0.01em] mt-8 mb-2">
       {children}
     </h2>
+  );
+}
+
+function H3({ children }: { children: React.ReactNode }) {
+  return (
+    <h3 className="font-display font-700 text-[#102033] text-[16px] leading-[1.4] mt-5 mb-1">
+      {children}
+    </h3>
   );
 }
 
