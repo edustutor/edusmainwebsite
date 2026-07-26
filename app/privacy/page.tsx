@@ -11,7 +11,7 @@ export const metadata = {
   },
 };
 
-const LAST_UPDATED = "March 11, 2025";
+const LAST_UPDATED = "July 26, 2026";
 
 export default function PrivacyPolicyPage() {
   const year = new Date().getFullYear();
@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
           description:
             "How EDUS Online Tuition collects, uses, retains, and protects information from students, parents, teachers, and administrators.",
           path: "/privacy",
-          lastUpdated: "2025-12-01",
+          lastUpdated: "2026-07-26",
         })}
       />
       {/* HERO - same pattern as other sub-pages */}
@@ -133,13 +133,58 @@ export default function PrivacyPolicyPage() {
           <p>We do not sell or use personal data for advertising purposes.</p>
 
           <H2>4. Data Sharing &amp; Third Parties</H2>
-          <p>We share data only with trusted third-party service providers, including:</p>
-          <UL>
-            <li>Educational Platforms (Google Classroom, Google Meet, etc.)</li>
-            <li>Cloud Hosting &amp; Security Services (to optimise performance and protect user data)</li>
-            <li>Legal Compliance (when required by law enforcement or government authorities)</li>
-          </UL>
-          <p>All third parties comply with strict data protection measures.</p>
+          <p>
+            We do not sell your personal data. We share data only with the service
+            providers we need to run the platform:
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-[14px] border-collapse my-2">
+              <thead>
+                <tr className="border-b border-[rgba(16,32,51,0.14)] text-left">
+                  <th className="py-2 pr-4 font-display font-700 text-[#102033]">Provider</th>
+                  <th className="py-2 pr-4 font-display font-700 text-[#102033]">Purpose</th>
+                  <th className="py-2 font-display font-700 text-[#102033]">Data shared</th>
+                </tr>
+              </thead>
+              <tbody className="align-top">
+                <tr className="border-b border-[rgba(16,32,51,0.07)]">
+                  <td className="py-3 pr-4">Google (Classroom, Meet)</td>
+                  <td className="py-3 pr-4">Delivering live classes</td>
+                  <td className="py-3">Name, email, class participation</td>
+                </tr>
+                <tr className="border-b border-[rgba(16,32,51,0.07)]">
+                  <td className="py-3 pr-4">PayHere (Sri Lanka)</td>
+                  <td className="py-3 pr-4">Processing tuition payments</td>
+                  <td className="py-3">Payment and transaction details. Card details are entered directly with PayHere and are never stored by EDUS.</td>
+                </tr>
+                <tr className="border-b border-[rgba(16,32,51,0.07)]">
+                  <td className="py-3 pr-4">Amazon Web Services</td>
+                  <td className="py-3 pr-4">Cloud hosting and file storage</td>
+                  <td className="py-3">All service data, stored in the United States</td>
+                </tr>
+                <tr className="border-b border-[rgba(16,32,51,0.07)]">
+                  <td className="py-3 pr-4">Firebase Cloud Messaging (Google)</td>
+                  <td className="py-3 pr-4">Push notifications</td>
+                  <td className="py-3">Device notification token</td>
+                </tr>
+                <tr className="border-b border-[rgba(16,32,51,0.07)]">
+                  <td className="py-3 pr-4">Amazon SES</td>
+                  <td className="py-3 pr-4">Sending service emails</td>
+                  <td className="py-3">Email address and delivery status</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            These providers act as our processors. They may only use the data to
+            provide their service to us, and are bound by contract to protect it to
+            the same standard we do. We also disclose data where required by law.
+          </p>
+          <p>
+            <strong>International transfer.</strong> Our cloud infrastructure is
+            located in the United States. Using the service involves transferring your
+            data outside Sri Lanka.
+          </p>
 
           <H2>5. Data Security &amp; Retention</H2>
           <p>
@@ -154,16 +199,38 @@ export default function PrivacyPolicyPage() {
             <li>Regular security audits</li>
           </UL>
 
-          <H3>Data Retention</H3>
-          <UL>
-            <li>We retain personal data only as long as necessary for educational purposes.</li>
-            <li>
-              Users can request account deletion by contacting{" "}
-              <a href="mailto:hello@edustutor.com" className="text-[#2563EB] hover:underline">
-                hello@edustutor.com
-              </a>.
-            </li>
-          </UL>
+          <H3>Data Retention and Deletion</H3>
+          <p>
+            When an account is deleted, access ends immediately and personal profile
+            data is removed from view within the platform. You can request account
+            deletion at any time by submitting our online form at{" "}
+            <a
+              href="https://lms.edustutor.com/delete-request"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#2563EB] hover:underline"
+            >
+              lms.edustutor.com/delete-request
+            </a>
+            , by emailing{" "}
+            <a href="mailto:hello@edustutor.com" className="text-[#2563EB] hover:underline">
+              hello@edustutor.com
+            </a>
+            , or, in the app, through your account settings.
+          </p>
+          <p>
+            Some records are retained after deletion where the law requires it. In
+            particular, financial records such as invoices, payments, and receipts are
+            kept for the period required by Sri Lankan tax and accounting law, and a
+            minimal record of academic history may be retained to meet our record
+            keeping obligations. These records are held securely, are no longer shown
+            in your active account, and are used only for legal, tax, and audit
+            purposes.
+          </p>
+          <p>
+            You can ask us at any time what data we still hold about you, and we will
+            delete anything we are not legally required to keep.
+          </p>
 
           <H2>6. User Rights (GDPR &amp; Privacy Compliance)</H2>
           <p>
@@ -172,7 +239,18 @@ export default function PrivacyPolicyPage() {
           <UL>
             <li><strong>Right to Access:</strong> request a copy of your personal data.</li>
             <li><strong>Right to Rectification:</strong> correct inaccurate or outdated data.</li>
-            <li><strong>Right to Deletion:</strong> request data or account removal.</li>
+            <li>
+              <strong>Right to Deletion:</strong> request data or account removal,
+              including through our deletion form at{" "}
+              <a
+                href="https://lms.edustutor.com/delete-request"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#2563EB] hover:underline"
+              >
+                lms.edustutor.com/delete-request
+              </a>.
+            </li>
             <li><strong>Right to Restrict Processing:</strong> limit how we use your data.</li>
             <li><strong>Right to Data Portability:</strong> transfer your data to another service.</li>
           </UL>
