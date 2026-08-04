@@ -90,6 +90,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/overseas/new-zealand",    changeFrequency: "monthly", priority: 0.80 },
 
     // Product / conversion
+    // LMS platform showcase - key product + SEO page targeting "learning
+    // management system Sri Lanka" / "online tuition app".
+    { path: "/lms-platform",     changeFrequency: "monthly", priority: 0.90 },
     { path: "/teach",            changeFrequency: "weekly",  priority: 0.85 },
     { path: "/contact",          changeFrequency: "monthly", priority: 0.80 },
 

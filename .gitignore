@@ -54,3 +54,7 @@ overseas_logo_edus.png
 
 # Raw EDUS Overseas OG source (optimized version lives at public/overseas/og-overseas.*)
 ChatGPT Image*.webp
+
+# Next.js 16 dev-server auto-generated agent files (regenerated on every 'next dev')
+/AGENTS.md
+/CLAUDE.md
