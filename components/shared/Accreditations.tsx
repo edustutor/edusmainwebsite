@@ -69,6 +69,13 @@ const PARTNERS: Partner[] = [
     tagline: "Jaffna Innovation Hub",
   },
   {
+    name: "NCIT",
+    alt: "EDUS associated with NCIT, the Northern ICT network, the gateway to Northern ICT in Sri Lanka",
+    src: "/ncit-northern-ict-edus-partner.webp",
+    href: "https://ncit.lk/",
+    tagline: "Gateway to Northern ICT",
+  },
+  {
     name: "Innovate Lanka",
     alt: "EDUS featured by Innovate Lanka, the Sri Lankan innovation network",
     src: "/innovate-lanka-edus-partner.webp",
