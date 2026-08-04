@@ -57,14 +57,20 @@ export function AppShowcase() {
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             {/* LEFT - copy + CTAs */}
             <div>
-              <p className="eyebrow"><span className="dot" />The EDUS App</p>
-              <h2 className="heading mt-4" style={{ fontSize: "var(--fs-display)", lineHeight: 1.1 }}>
-                Your whole institute, <em>in your pocket.</em>
+              <p className="eyebrow"><span className="dot" />The EDUS LMS</p>
+              <p className="mt-3 text-[12px] font-700 uppercase tracking-[0.14em] text-[#5A6A82]">
+                Introducing the new EDUS Learning App
+              </p>
+              <h2 className="heading mt-3" style={{ fontSize: "var(--fs-display)", lineHeight: 1.1 }}>
+                Learn Live. Revise Anytime. <em>Achieve More.</em>
               </h2>
               <p className="mt-4 text-[#2B3950] text-[15.5px] leading-relaxed max-w-lg">
-                Live classes, homework, recordings, attendance, payments and chat -
-                all in one app, on Android, iPhone and the web. In English, Tamil
-                and Sinhala, and built to work fast even on mobile data.
+                Your classes, recordings, learning materials, homework, assessments
+                and academic progress are now available in one simple learning space.
+              </p>
+              <p className="mt-3 text-[#2B3950] text-[15.5px] leading-relaxed max-w-lg">
+                The new EDUS Learning App is designed to make your learning journey
+                easier, more organized and more engaging - wherever you are.
               </p>
 
               {/* Feature highlight pills */}
