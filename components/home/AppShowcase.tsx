@@ -120,42 +120,56 @@ export function AppShowcase() {
               </div>
             </div>
 
-            {/* RIGHT - illustration on a glass device card. Extra vertical
-                padding on the wrapper gives the floating badges room so
-                they overlap the card corners without being clipped or
-                colliding with the next section. */}
-            <div className="relative flex justify-center lg:justify-end pt-4 pb-8">
-              <div className="relative w-full max-w-[380px]">
-                <div className="glass rounded-[32px] p-8 sm:p-10 flex items-center justify-center relative overflow-hidden">
-                  <div aria-hidden className="absolute inset-0 -z-10">
-                    <span className="blob" style={{ top: "10%", left: "10%", width: 180, height: 180, background: "#8B5CF6", opacity: 0.18 }} />
-                    <span className="blob" style={{ bottom: "8%", right: "6%", width: 160, height: 160, background: "#2563EB", opacity: 0.16 }} />
-                  </div>
+            {/* RIGHT - the LMS hero illustration. DESKTOP ONLY (hidden on
+                mobile per request) - the rich portrait scene needs the
+                space, and the left column already carries the section on
+                small screens. The floating badges live inside this column
+                so they are hidden on mobile too. */}
+            <div className="relative hidden lg:flex justify-end">
+              {/* The frame IS the positioning context. overflow-hidden keeps
+                  the image corners rounded; the floating badges are placed
+                  INSIDE it (inset from the edges) so they sit ON the image,
+                  and clip cleanly to the rounded frame. */}
+              {/* Grid overlay so the badges anchor to the same box as the
+                  image without depending on the image establishing a
+                  containing block. The image and the badge layer share cell
+                  1/1; the badge layer is a flex column that pins one badge to
+                  the top and one to the bottom - reliable regardless of how
+                  the image sizes. */}
+              <div className="glass rounded-[32px] p-2.5 w-full max-w-[440px]">
+                <div className="grid rounded-[24px] overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/study-child2.webp"
-                    alt="A young EDUS student learning on the EDUS mobile app"
-                    width={240}
-                    height={240}
-                    className="w-[62%] max-w-[240px] h-auto drop-shadow-xl"
+                    src="/edus-lms-hero.webp"
+                    alt="EDUS student learning on the EDUS Learning App, surrounded by live classes, recordings, resources, assessments, progress and community features"
+                    width={900}
+                    height={1350}
+                    className="w-full h-auto object-cover"
+                    style={{ gridArea: "1 / 1" }}
                   />
-                </div>
 
-                {/* Floating badge - languages: hangs off the top-left
-                    corner, overlapping the card edge. z-10 keeps it above. */}
-                <div className="absolute top-3 -left-2 sm:-left-3 z-10 glass-strong rounded-full px-3.5 py-1.5 inline-flex items-center gap-2 text-[12px] font-700 text-[#102033] shadow-md">
-                  <span className="inline-block w-2 h-2 rounded-full bg-[#22C55E]" />
-                  EN · தமிழ் · සිංහල
-                </div>
-                {/* Floating badge - hangs off the bottom-right corner,
-                    overlapping the card edge. */}
-                <div className="absolute -bottom-4 right-2 sm:-right-3 z-10 glass-strong rounded-2xl px-4 py-2.5 inline-flex items-center gap-2.5 shadow-md">
-                  <span className="inline-flex w-8 h-8 rounded-lg items-center justify-center shrink-0" style={{ background: "linear-gradient(135deg,#2563EB,#8B5CF6)" }}>
-                    <FeatureIcon name="mobile" tint="#fff" size={16} />
-                  </span>
-                  <div className="leading-tight">
-                    <p className="font-display font-800 text-[13px] text-[#102033]">Learn anywhere</p>
-                    <p className="text-[11px] text-[#5A6A82]">Fast on mobile data</p>
+                  {/* Badge layer - same grid cell as the image, flex column
+                      spreading top badge and bottom badge. pointer-events
+                      stay on the links only. */}
+                  <div
+                    className="flex flex-col justify-between p-4 pointer-events-none"
+                    style={{ gridArea: "1 / 1" }}
+                  >
+                    {/* TOP-left - languages */}
+                    <div className="animate-floaty self-start glass-strong rounded-full px-3.5 py-1.5 inline-flex items-center gap-2 text-[12px] font-700 text-[#102033] shadow-lg">
+                      <span className="inline-block w-2 h-2 rounded-full bg-[#22C55E]" />
+                      EN · தமிழ் · සිංහල
+                    </div>
+                    {/* BOTTOM-right - learn anywhere */}
+                    <div className="animate-floaty2 self-end glass-strong rounded-2xl px-4 py-2.5 inline-flex items-center gap-2.5 shadow-lg">
+                      <span className="inline-flex w-8 h-8 rounded-lg items-center justify-center shrink-0" style={{ background: "linear-gradient(135deg,#2563EB,#8B5CF6)" }}>
+                        <FeatureIcon name="mobile" tint="#fff" size={16} />
+                      </span>
+                      <div className="leading-tight">
+                        <p className="font-display font-800 text-[13px] text-[#102033]">Learn anywhere</p>
+                        <p className="text-[11px] text-[#5A6A82]">Fast on mobile data</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

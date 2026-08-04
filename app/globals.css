@@ -316,6 +316,24 @@ body {
   [data-anim] { animation: none; opacity: 1; }
 }
 
+/* Gentle continuous float for badges / chips that sit over an image.
+   Two variants (offset timing + direction) so paired badges bob out of
+   sync and it feels organic rather than mechanical. */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-7px); }
+}
+@keyframes floaty2 {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+.animate-floaty  { animation: floaty 4.5s ease-in-out infinite; }
+.animate-floaty2 { animation: floaty2 5.2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-floaty,
+  .animate-floaty2 { animation: none; }
+}
+
 /* Card lift */
 .lift { transition: transform .25s ease, border-color .2s ease, box-shadow .25s ease; }
 .lift:hover {
