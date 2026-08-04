@@ -22,6 +22,9 @@ const QualifiedTutors = dynamic(() =>
 const LearningExperience = dynamic(() =>
   import("@/components/home/LearningExperience").then((m) => m.LearningExperience),
 );
+const AppShowcase = dynamic(() =>
+  import("@/components/home/AppShowcase").then((m) => m.AppShowcase),
+);
 const ParentTrust = dynamic(() =>
   import("@/components/home/ParentTrust").then((m) => m.ParentTrust),
 );
@@ -65,6 +68,7 @@ export default async function Home() {
       <WhyJoin />
       <QualifiedTutors />
       <LearningExperience />
+      <AppShowcase />
       <ParentTrust />
       <Success />
 
