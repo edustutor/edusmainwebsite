@@ -239,7 +239,7 @@ const TUTOR_FEATURES: Feature[] = [
 
 const DIFFERENT: Array<{ icon: string; tint: string; title: string; body: string }> = [
   { icon: "island", tint: "#2563EB", title: "Built for Sri Lanka", body: "Sinhala and Tamil throughout the interface, not an afterthought. PDF invoices render Tamil and Sinhala correctly. Local payment gateway, LKR pricing, local SMS, and Asia/Colombo timezone handled everywhere." },
-  { icon: "mobile", tint: "#8B5CF6", title: "Works on a real phone", body: "A native app, not a wrapped website. Offline-first, so screens open instantly from cache then refresh in the background. Designed for mobile data and low bandwidth, with everything opening in-app." },
+  { icon: "mobile", tint: "#8B5CF6", title: "Works on a real phone", body: "A native app, not a wrapped website. Screens load quickly and stay responsive, and everything - documents, PDFs, videos and images - opens in-app. Designed for mobile data and low-bandwidth connections." },
   { icon: "verified", tint: "#22C55E", title: "Honest by design", body: "Money is never shown as settled until the server confirms it. Attendance is never shown as marked until it is recorded. Every override, approval and edit is written to an audit trail with a reason." },
   { icon: "notification", tint: "#06B6D4", title: "Real-time", body: "Messages, attendance, notifications and unread counts update live. Dashboard badges reflect the truth without a refresh." },
   { icon: "care", tint: "#F59E0B", title: "Communication that respects people", body: "Every notification category is individually switchable across four channels. Muting a chat silences it without hiding the unread count. Fee reminders are warm early and only firm on the 5th, with one-click unsubscribe on every email." },
@@ -256,8 +256,8 @@ const FAQ = [
     a: "EDUS is a complete learning management system (LMS) for online tuition, built for Sri Lanka. It runs on the web and as native Android and iOS apps, in English, Tamil and Sinhala, and covers everything from live classes, homework and recordings to attendance, payments, a wallet, and built-in chat for students, tutors and staff.",
   },
   {
-    q: "Does the EDUS app work offline?",
-    a: "Yes. The EDUS mobile app is offline-first: screens open instantly from cache and refresh in the background, so it stays usable on mobile data and low-bandwidth connections. It is a native app, not a wrapped website.",
+    q: "Is the EDUS app fast on mobile data?",
+    a: "Yes. EDUS is a native Android and iOS app, not a wrapped website, and it is built for mobile data and low-bandwidth connections. Screens load quickly and stay responsive, and documents, PDFs, videos and images all open inside the app.",
   },
   {
     q: "What languages does EDUS support?",

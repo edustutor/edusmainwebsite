@@ -21,12 +21,15 @@ const PLAY_URL = "https://play.google.com/store/apps/details?id=com.edus.edustut
 const APP_STORE_URL = "https://apps.apple.com/lk/app/edus-tutor/id6742735384";
 const WEB_APP_URL = "https://lms.edustutor.com";
 
+// The most important student-facing features, as quick highlight pills.
 const HIGHLIGHTS: Array<{ icon: string; tint: string; label: string }> = [
   { icon: "live-classes", tint: "#2563EB", label: "Live classes" },
-  { icon: "class-recordings", tint: "#EF4444", label: "Recordings" },
+  { icon: "calendar", tint: "#0EA5E9", label: "Timetable & join" },
   { icon: "assignment", tint: "#F59E0B", label: "Homework" },
-  { icon: "monitoring", tint: "#22C55E", label: "Attendance" },
-  { icon: "message", tint: "#8B5CF6", label: "Chat" },
+  { icon: "class-recordings", tint: "#EF4444", label: "Recordings" },
+  { icon: "resources", tint: "#22C55E", label: "Study resources" },
+  { icon: "monitoring", tint: "#8B5CF6", label: "Attendance" },
+  { icon: "message", tint: "#EC4899", label: "Class chat" },
   { icon: "card", tint: "#06B6D4", label: "Payments & wallet" },
 ];
 
@@ -104,13 +107,18 @@ export function AppShowcase() {
                 </a>
                 <Link href="/lms-platform" className="btn btn-outline text-[13.5px] !py-2 !px-4">
                   Browse all features
-                  <FeatureIcon name="plus" tint="#2563EB" size={15} />
+                  {/* Plain glyph so it inherits the button text colour and
+                      turns white on hover along with the label. */}
+                  <span aria-hidden className="text-[16px] leading-none font-500">+</span>
                 </Link>
               </div>
             </div>
 
-            {/* RIGHT - illustration on a glass device card */}
-            <div className="relative flex justify-center lg:justify-end">
+            {/* RIGHT - illustration on a glass device card. Extra vertical
+                padding on the wrapper gives the floating badges room so
+                they overlap the card corners without being clipped or
+                colliding with the next section. */}
+            <div className="relative flex justify-center lg:justify-end pt-4 pb-8">
               <div className="relative w-full max-w-[380px]">
                 <div className="glass rounded-[32px] p-8 sm:p-10 flex items-center justify-center relative overflow-hidden">
                   <div aria-hidden className="absolute inset-0 -z-10">
@@ -127,18 +135,20 @@ export function AppShowcase() {
                   />
                 </div>
 
-                {/* Floating badge - languages */}
-                <div className="absolute -top-3 -left-2 sm:-left-4 glass rounded-full px-3.5 py-1.5 inline-flex items-center gap-2 text-[12px] font-700 text-[#102033] shadow-sm">
+                {/* Floating badge - languages: hangs off the top-left
+                    corner, overlapping the card edge. z-10 keeps it above. */}
+                <div className="absolute top-3 -left-2 sm:-left-3 z-10 glass-strong rounded-full px-3.5 py-1.5 inline-flex items-center gap-2 text-[12px] font-700 text-[#102033] shadow-md">
                   <span className="inline-block w-2 h-2 rounded-full bg-[#22C55E]" />
                   EN · தமிழ் · සිංහල
                 </div>
-                {/* Floating badge - offline */}
-                <div className="absolute -bottom-3 right-1 sm:-right-3 glass rounded-2xl px-4 py-2.5 inline-flex items-center gap-2.5 shadow-sm">
-                  <span className="inline-flex w-8 h-8 rounded-lg items-center justify-center" style={{ background: "linear-gradient(135deg,#2563EB,#8B5CF6)" }}>
+                {/* Floating badge - hangs off the bottom-right corner,
+                    overlapping the card edge. */}
+                <div className="absolute -bottom-4 right-2 sm:-right-3 z-10 glass-strong rounded-2xl px-4 py-2.5 inline-flex items-center gap-2.5 shadow-md">
+                  <span className="inline-flex w-8 h-8 rounded-lg items-center justify-center shrink-0" style={{ background: "linear-gradient(135deg,#2563EB,#8B5CF6)" }}>
                     <FeatureIcon name="mobile" tint="#fff" size={16} />
                   </span>
                   <div className="leading-tight">
-                    <p className="font-display font-800 text-[13px] text-[#102033]">Works offline</p>
+                    <p className="font-display font-800 text-[13px] text-[#102033]">Learn anywhere</p>
                     <p className="text-[11px] text-[#5A6A82]">Fast on mobile data</p>
                   </div>
                 </div>
