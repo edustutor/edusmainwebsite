@@ -12,7 +12,6 @@ import {
   SITE_URL,
 } from "@/components/layout/StructuredData";
 import { hreflangAlternates } from "@/lib/siteUrl";
-import { PlatformStat } from "@/components/platform/PlatformStat";
 
 /**
  * EDUS LMS Platform showcase - the full, audited feature list for the
@@ -32,26 +31,6 @@ import { PlatformStat } from "@/components/platform/PlatformStat";
 const SIGNUP_URL = "https://signup.edustutor.com/";
 const PLAY_URL = "https://play.google.com/store/apps/details?id=com.edus.edustutor";
 const APP_STORE_URL = "https://apps.apple.com/lk/app/edus-tutor/id6742735384";
-
-/* --------------------------------------------------------------- */
-/* At a glance                                                       */
-/* --------------------------------------------------------------- */
-
-const GLANCE: Array<{ icon: string; tint: string; label: string; value: string }> = [
-  { icon: "platform", tint: "#2563EB", label: "Platforms", value: "Web + native Android & iOS apps" },
-  { icon: "global", tint: "#8B5CF6", label: "Languages", value: "English, Tamil, Sinhala - full interface" },
-  { icon: "students", tint: "#06B6D4", label: "Roles", value: "Student, Tutor, Staff, Super Admin" },
-  { icon: "notification", tint: "#F59E0B", label: "Notifications", value: "In-app, push, email, SMS" },
-  { icon: "card", tint: "#22C55E", label: "Payments", value: "Card, bank, cash, cheque, wallet" },
-  { icon: "money", tint: "#EF4444", label: "Currencies", value: "LKR, USD, INR" },
-];
-
-const STATS: Array<{ value: number; suffix: string; label: string }> = [
-  { value: 4, suffix: "", label: "User roles" },
-  { value: 3, suffix: "", label: "Languages" },
-  { value: 4, suffix: "", label: "Notification channels" },
-  { value: 10, suffix: "+", label: "Notification categories" },
-];
 
 /* --------------------------------------------------------------- */
 /* Student features                                                  */
@@ -341,7 +320,6 @@ export default function LmsPlatformPage() {
       <JsonLdScript data={faqPage(FAQ)} />
 
       <Hero />
-      <Glance />
       <FeatureGroup
         eyebrow="For Students"
         title={<>Everything a student needs, <em>in one place.</em></>}
@@ -398,45 +376,6 @@ function Hero() {
           <span className="inline-flex items-center gap-2"><FeatureIcon name="checkmark" tint="#22C55E" size={17} />English · Tamil · Sinhala</span>
           <span className="inline-flex items-center gap-2"><FeatureIcon name="checkmark" tint="#22C55E" size={17} />Live in production</span>
         </div>
-      </div>
-    </section>
-  );
-}
-
-/* --------------------------------------------------------------- */
-/* At a glance                                                       */
-/* --------------------------------------------------------------- */
-
-function Glance() {
-  return (
-    <section className="container-edge mt-8 sm:mt-12">
-      {/* Stat band */}
-      <div className="glass-strong rounded-[32px] p-7 sm:p-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-          {STATS.map((s) => (
-            <div key={s.label}>
-              <p className="heading" style={{ fontSize: "clamp(30px,3.6vw,48px)" }}>
-                <em><PlatformStat value={s.value} suffix={s.suffix} /></em>
-              </p>
-              <p className="mt-1.5 text-[13.5px] font-600 text-[#2B3950]">{s.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* At-a-glance grid */}
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {GLANCE.map((g) => (
-          <div key={g.label} className="glass rounded-2xl p-5 flex items-start gap-4">
-            <span className="inline-flex w-11 h-11 rounded-xl items-center justify-center shrink-0" style={{ background: `${g.tint}1A` }}>
-              <FeatureIcon name={g.icon} tint={g.tint} size={22} />
-            </span>
-            <div>
-              <p className="text-[12px] font-700 uppercase tracking-wide text-[#5A6A82]">{g.label}</p>
-              <p className="mt-0.5 text-[14px] text-[#102033] font-600 leading-snug">{g.value}</p>
-            </div>
-          </div>
-        ))}
       </div>
     </section>
   );
