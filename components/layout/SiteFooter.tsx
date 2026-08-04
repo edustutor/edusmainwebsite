@@ -15,7 +15,7 @@ const QUICK: QuickItem[] = [
   { label: "Home", href: "/" },
   { label: "Choose Region", href: "/#regions" },
   { label: "How It Works", href: "/#how" },
-  { label: "LMS Platform & Features", href: "/lms-platform" },
+  { label: "LMS & Features", href: "/lms-platform" },
   { label: "Success Stories", href: "/#stories" },
   { label: "Teach with EDUS", href: "/teach" },
   { label: "About EDUS", href: "/about" },
