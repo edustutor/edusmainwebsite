@@ -153,6 +153,14 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2">
+            {/* Login -> /lms, which device-detects and sends the visitor to
+                the app store (Android/iOS) or the web LMS (desktop). */}
+            <Link
+              href="/lms"
+              className="btn btn-outline text-[12.5px] sm:text-[13px] py-1.5 sm:py-2 px-3.5 sm:px-4 h-9 sm:h-auto hidden sm:inline-flex"
+            >
+              Login
+            </Link>
             <a
               href={SIGN_UP_URL}
               target="_blank"
@@ -209,6 +217,13 @@ export function SiteHeader() {
                   </Link>
                 );
               })}
+              <Link
+                href="/lms"
+                className="btn btn-outline justify-center mt-2"
+                onClick={() => setOpen(false)}
+              >
+                Login
+              </Link>
               <a
                 href={SIGN_UP_URL}
                 target="_blank"

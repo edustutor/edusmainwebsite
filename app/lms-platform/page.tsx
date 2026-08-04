@@ -6,6 +6,7 @@ import {
   breadcrumbList,
   faqPage,
   signupWebApplication,
+  lmsWebApplication,
   edusAndroidApp,
   edusIosApp,
   SITE_URL,
@@ -281,7 +282,8 @@ const PAGE_URL = `${SITE_URL}/lms-platform`;
 
 export const metadata: Metadata = {
   title: {
-    absolute: "EDUS LMS Platform - Learning Management System for Students & Tutors",
+    // ~57 chars - shows in full in SERPs, keyword-first.
+    absolute: "EDUS LMS - Learning Management System | Sri Lanka",
   },
   description:
     "Explore the EDUS Learning Management System: live classes, homework, recordings, attendance, payments, wallet, and built-in chat. Web and native Android & iOS apps in English, Tamil & Sinhala. Built for Sri Lanka.",
@@ -332,6 +334,7 @@ export default function LmsPlatformPage() {
         { name: "Home", path: "/" },
         { name: "LMS Platform", path: "/lms-platform" },
       ])} />
+      <JsonLdScript data={lmsWebApplication()} />
       <JsonLdScript data={signupWebApplication()} />
       <JsonLdScript data={edusAndroidApp()} />
       <JsonLdScript data={edusIosApp()} />

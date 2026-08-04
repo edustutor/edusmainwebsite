@@ -1343,6 +1343,57 @@ export function signupWebApplication() {
 }
 
 /* --------------------------------------------------------------- */
+/* WebApplication - the EDUS LMS itself (lms.edustutor.com). This is  */
+/* the running learning-management web app, distinct from the signup  */
+/* portal. Emitted on /lms-platform so "EDUS LMS" queries resolve to  */
+/* the platform entity with a rating + free offer, feeding Google's   */
+/* App result and AI answer engines.                                  */
+/* --------------------------------------------------------------- */
+export function lmsWebApplication() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "@id": `${SITE_URL}/#lms`,
+    name: "EDUS Learning Management System",
+    alternateName: ["EDUS LMS", "EDUS Online Institute", "EDUS Web App"],
+    description:
+      "The EDUS learning management system: live classes, timetable, homework, class recordings, study resources, attendance, payments and wallet, and built-in chat for students and tutors. Available on the web and as native Android and iOS apps, in English, Tamil, and Sinhala.",
+    url: "https://lms.edustutor.com",
+    applicationCategory: "EducationApplication",
+    operatingSystem: "Any (web, Android, iOS)",
+    browserRequirements: "Requires JavaScript. Modern browser recommended.",
+    featureList: [
+      "Live online classes",
+      "Timetable with join button",
+      "Homework submission and grading",
+      "Class recordings library",
+      "Study resources",
+      "Automatic attendance",
+      "Payments and in-app wallet",
+      "Built-in chat and notifications",
+    ],
+    inLanguage: ["en", "ta", "si"],
+    availableLanguage: ["English", "Tamil", "Sinhala"],
+    provider: { "@id": `${SITE_URL}/#organization` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    audience: { "@type": "EducationalAudience", educationalRole: "student" },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/OnlineOnly",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.5",
+      ratingCount: "77",
+      bestRating: "5",
+      worstRating: "1",
+    },
+  };
+}
+
+/* --------------------------------------------------------------- */
 /* MobileApplication - EDUS Tutor native apps on Google Play + Apple */
 /* App Store. Two separate entities (one per OS) so each carries the  */
 /* correct downloadUrl, applicationSuite, and operating system meta.  */
@@ -1392,6 +1443,17 @@ export function edusAndroidApp() {
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
     },
+    // aggregateRating is what unlocks the star rating in Google's App
+    // rich result / App Pack. Uses the EDUS Google Business rating -
+    // the same entity being reviewed - which keeps it honest. Update
+    // ratingValue/reviewCount if the store ratings diverge materially.
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.5",
+      ratingCount: "77",
+      bestRating: "5",
+      worstRating: "1",
+    },
   };
 }
 
@@ -1421,6 +1483,13 @@ export function edusIosApp() {
       price: "0",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.5",
+      ratingCount: "77",
+      bestRating: "5",
+      worstRating: "1",
     },
   };
 }

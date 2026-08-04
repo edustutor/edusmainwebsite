@@ -37,6 +37,8 @@ export function buildSystemPrompt(
     "",
     OVERSEAS_OFFERING,
     "",
+    LMS_AND_APP,
+    "",
     formatCatalog(classes, tutors, intake),
     "",
     LEAD_CAPTURE_FLOW,
@@ -370,6 +372,31 @@ EXAMPLE (adapt to the user's language - Tamil / Sinhala / English):
 "Yes! For studying abroad, EDUS has a dedicated team - EDUS Overseas Consultancy. They help with university applications, scholarships, and student visas for the UK, Australia, Canada, Dubai, Ireland, and New Zealand, and the first consultation is free. You can see everything at https://edus.lk/overseas or talk to a counsellor directly on +94 70 701 2333 (call or WhatsApp) / overseas@edus.lk."
 
 ===== END SISTER SERVICE =====`;
+
+const LMS_AND_APP = `===== THE EDUS APP & LMS (learning management system) =====
+
+EDUS runs on a complete learning management system (LMS). If a student or parent asks about the app, how to download it, how to log in, or what the platform can do, use the facts below.
+
+WHERE TO GET IT / LOG IN:
+- Android app (Google Play): https://play.google.com/store/apps/details?id=com.edus.edustutor
+- iPhone / iPad app (Apple App Store): https://apps.apple.com/lk/app/edus-tutor/id6742735384
+- Web app (any browser, log in here): https://lms.edustutor.com
+- Easy link that auto-opens the right store or web app for the person's device: https://edustutor.com/lms
+- Full feature list / platform overview page: https://edustutor.com/lms-platform
+- To CREATE a new account (enrol): https://signup.edustutor.com/  (logging in to an existing account is at lms.edustutor.com or the app.)
+
+WHAT THE APP / LMS DOES (mention only what's relevant to the question):
+- Runs on the web and as native Android and iOS apps, fully in English, Tamil, and Sinhala.
+- For students: a one-screen dashboard, a timetable with a Join button that opens 5 minutes before class, homework (submit text or files, images auto-stitch into one PDF, see graded feedback and annotations, resubmit on revision), an auto-synced recordings library with timestamped personal notes, study resources that open in-app, automatic attendance, payments (card, bank transfer, in-app wallet, cash, cheque) with branded PDF invoices and pro-rata billing, and EDUS Connect chat (class groups + support, polls, voice messages, mentions, mute).
+- Notifications across in-app, push, email, and SMS, each category independently switchable.
+- Built for mobile data and low-bandwidth connections. It is a native app, not a wrapped website. (Do NOT claim it works fully offline.)
+
+HOW TO ANSWER app / login / download questions:
+1. Give the correct link for the person's need: download (Play/App Store), log in (lms.edustutor.com or the app), or create an account (signup.edustutor.com).
+2. If they are on a phone and you are not sure which store, share https://edustutor.com/lms which detects their device.
+3. For "what can the app do", give a short highlight list and point to https://edustutor.com/lms-platform for everything.
+
+===== END EDUS APP & LMS =====`;
 
 function formatCatalog(
   classes: ClassEntry[],
