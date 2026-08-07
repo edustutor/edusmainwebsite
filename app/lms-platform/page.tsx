@@ -218,7 +218,7 @@ const TUTOR_FEATURES: Feature[] = [
 /* --------------------------------------------------------------- */
 
 const DIFFERENT: Array<{ icon: string; tint: string; title: string; body: string }> = [
-  { icon: "island", tint: "#2563EB", title: "Built for Sri Lanka", body: "Sinhala and Tamil throughout the interface, not an afterthought. PDF invoices render Tamil and Sinhala correctly. Local payment gateway, LKR pricing, local SMS, and Asia/Colombo timezone handled everywhere." },
+  { icon: "island", tint: "#2563EB", title: "Built in Sri Lanka", body: "Designed and engineered in Sri Lanka by a local team who know how students here learn. Sinhala, Tamil and English throughout - including PDF invoices - with local payment gateways, LKR pricing, local SMS, and Asia/Colombo time handled correctly. Proudly Sri Lankan, ready for the region." },
   { icon: "mobile", tint: "#8B5CF6", title: "Works on a real phone", body: "A native app, not a wrapped website. Screens load quickly and stay responsive, and everything - documents, PDFs, videos and images - opens in-app. Designed for mobile data and low-bandwidth connections." },
   { icon: "verified", tint: "#22C55E", title: "Honest by design", body: "Money is never shown as settled until the server confirms it. Attendance is never shown as marked until it is recorded. Every override, approval and edit is written to an audit trail with a reason." },
   { icon: "notification", tint: "#06B6D4", title: "Real-time", body: "Messages, attendance, notifications and unread counts update live. Dashboard badges reflect the truth without a refresh." },
@@ -233,7 +233,7 @@ const DIFFERENT: Array<{ icon: string; tint: string; title: string; body: string
 const FAQ = [
   {
     q: "What is the EDUS Learning Management System?",
-    a: "EDUS is a complete learning management system (LMS) for online tuition, built for Sri Lanka. It runs on the web and as native Android and iOS apps, in English, Tamil and Sinhala, and covers everything from live classes, homework and recordings to attendance, payments, a wallet, and built-in chat for students, tutors and staff.",
+    a: "EDUS is a complete learning management system (LMS) for online tuition, designed and built in Sri Lanka. It runs on the web and as native Android and iOS apps, in English, Tamil and Sinhala, and covers everything from live classes, homework and recordings to attendance, payments, a wallet, and built-in chat for students, tutors and staff.",
   },
   {
     q: "Is the EDUS app fast on mobile data?",
@@ -265,7 +265,7 @@ export const metadata: Metadata = {
     absolute: "EDUS LMS - Learning Management System | Sri Lanka",
   },
   description:
-    "Explore the EDUS Learning Management System: live classes, homework, recordings, attendance, payments, wallet, and built-in chat. Web and native Android & iOS apps in English, Tamil & Sinhala. Built for Sri Lanka.",
+    "Explore the EDUS Learning Management System: live classes, homework, recordings, attendance, payments, wallet, and built-in chat. Web and native Android & iOS apps in English, Tamil & Sinhala. Built in Sri Lanka.",
   alternates: {
     canonical: "/lms-platform",
     languages: hreflangAlternates("/lms-platform"),
