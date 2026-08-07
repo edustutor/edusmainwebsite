@@ -11,6 +11,7 @@ import { MvExamPrep } from "@/components/markets/mv/MvExamPrep";
 import { MvSubjectDetails } from "@/components/markets/mv/MvSubjectDetails";
 import { MvFAQ } from "@/components/markets/mv/MvFAQ";
 import { MvCTA } from "@/components/markets/mv/MvCTA";
+import { AppShowcase } from "@/components/home/AppShowcase";
 import { OtherMarkets } from "@/components/markets/OtherMarkets";
 import {
   JsonLdScript,
@@ -188,6 +189,7 @@ export default function MaldivesPage() {
       <MvIslands />
       <MvExamPrep />
       <MvSubjectDetails />
+      <AppShowcase />
       <MvFAQ />
       <OtherMarkets current="mv" />
       <MvCTA />

@@ -16,6 +16,7 @@ import { GlCompare } from "@/components/markets/global/GlCompare";
 import { GlBrand } from "@/components/markets/global/GlBrand";
 import { GlFAQ } from "@/components/markets/global/GlFAQ";
 import { GlCTA } from "@/components/markets/global/GlCTA";
+import { AppShowcase } from "@/components/home/AppShowcase";
 import { OtherMarkets } from "@/components/markets/OtherMarkets";
 import {
   JsonLdScript,
@@ -220,6 +221,7 @@ export default function GlobalPage() {
       <GlParents />
       <GlCompare />
       <GlBrand />
+      <AppShowcase />
       <GlFAQ />
       <OtherMarkets current="gl" />
       <GlCTA />

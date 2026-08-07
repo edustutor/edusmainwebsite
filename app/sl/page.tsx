@@ -1,4 +1,5 @@
 import { CTA } from "@/components/shared/CTA";
+import { AppShowcase } from "@/components/home/AppShowcase";
 import { RegionSelector } from "@/components/home/RegionSelector";
 import { SlHero } from "@/components/markets/sl/SlHero";
 import { SlCurricula } from "@/components/markets/sl/SlCurricula";
@@ -255,6 +256,7 @@ export default async function SriLankaPage() {
           SlTestimonials below always carries the page. */}
       <GoogleReviews />
       <SlTestimonials />
+      <AppShowcase />
       <SlFAQ />
       {/* Full 4-market RegionSelector instead of OtherMarkets, because
           visitors landing on .lk domains hit /sl directly via middleware
