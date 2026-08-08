@@ -99,6 +99,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Trust & brand
     { path: "/about",            changeFrequency: "monthly", priority: 0.70 },
     { path: "/press",            changeFrequency: "monthly", priority: 0.60 },
+    // System status - live uptime page. Refreshed content daily; low
+    // priority since it is a utility/ops page, not a ranking target.
+    { path: "/status",           changeFrequency: "daily",   priority: 0.40 },
 
     // Blog index
     { path: "/blog",             changeFrequency: "weekly",  priority: 0.75 },

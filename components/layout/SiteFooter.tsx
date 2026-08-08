@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { CookiePreferencesLink } from "@/components/analytics/CookiePreferencesLink";
+import { StatusPill } from "@/components/status/StatusPill";
 
 type QuickItem = {
   label: string;
@@ -48,6 +49,7 @@ const LEGAL = [
   { label: "Refund Policy", href: "/refunds" },
   { label: "Safeguarding", href: "/safeguarding" },
   { label: "Acceptable Use", href: "/acceptable-use" },
+  { label: "System Status", href: "/status" },
 ];
 
 const SOCIALS = [
@@ -117,7 +119,11 @@ export function SiteFooter() {
 
           {/* Bottom strip */}
           <div className="mt-8 pt-5 border-t border-[rgba(16,32,51,0.08)] flex flex-wrap items-center justify-between gap-3 text-[11.5px] text-[#5A6A82]">
-            <p>© {new Date().getFullYear()} EDUS - All rights reserved.</p>
+            <div className="flex flex-wrap items-center gap-3">
+              <p>© {new Date().getFullYear()} EDUS - All rights reserved.</p>
+              {/* Live "All Systems Operational" pill - links to /status. */}
+              <StatusPill />
+            </div>
             <p className="flex flex-wrap items-center gap-2">
               <CookiePreferencesLink />
               <span aria-hidden>•</span>
