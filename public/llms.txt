@@ -41,6 +41,7 @@ Mobile apps: Google Play (https://play.google.com/store/apps/details?id=com.edus
 ## Trust and recognition
 
 - [Accreditations & Partners](https://edustutor.com/#recognitions): EDUS is recognised by Microsoft for Startups, ICTA Sri Lanka, SLASSCOM, Hemas Slingshot x Hatch, Spiralation by ICTA, Yarl IT Hub, and Innovate Lanka.
+- [System Status](https://edustutor.com/status): Live operational status and uptime for every EDUS service (the learning platform, websites, student signup, and internal systems). Shows 90-day uptime for each service and a day-by-day incident history, refreshed every 60 seconds. Services are independently monitored every 5 minutes from multiple global regions.
 
 ## How classes are delivered
 

@@ -134,6 +134,14 @@ export function StatusBoard({ initial }: { initial: StatusPayload | null }) {
         </div>
       </div>
 
+      {/* Plain-language summary - server-rendered so search and AI engines
+          can read and quote the current status directly. */}
+      {data && data.groups.length > 0 && (
+        <p className="mt-4 text-[13.5px] text-[#2B3950] leading-[1.6] max-w-3xl">
+          {summaryLine(data)}
+        </p>
+      )}
+
       {data?.stale && (
         <p className="mt-3 text-[12.5px] text-[#B45309] flex items-center gap-2">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#F59E0B]" aria-hidden />
@@ -549,6 +557,26 @@ function stateChar(state: SystemState): string {
   if (state === "degraded") return "d";
   if (state === "down") return "x";
   return "n";
+}
+
+// One plain sentence describing the current status - the line search and
+// AI engines quote. Built from the live data so it is always accurate.
+function summaryLine(data: StatusPayload): string {
+  const systems = data.groups.flatMap((g) => g.systems);
+  const n = systems.length;
+  const op = systems.filter((s) => s.state === "operational").length;
+  const avg = n ? systems.reduce((sum, s) => sum + s.uptime.d90, 0) / n : 100;
+  const avgStr = avg >= 100 ? "100%" : `${avg.toFixed(2)}%`;
+  const inc = data.incidents.length;
+  const incPhrase =
+    inc === 0
+      ? "no incidents reported in the last 90 days"
+      : `${inc} incident${inc === 1 ? "" : "s"} recorded in the last 90 days`;
+  const lead =
+    data.overall === "operational"
+      ? `As of the latest check, all ${n} EDUS services are operational`
+      : `As of the latest check, ${op} of ${n} EDUS services are operational`;
+  return `${lead}, with ${avgStr} average uptime over the past 90 days and ${incPhrase}.`;
 }
 
 function formatUptime(n: number): string {
