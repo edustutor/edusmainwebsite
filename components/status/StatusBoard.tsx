@@ -135,9 +135,10 @@ export function StatusBoard({ initial }: { initial: StatusPayload | null }) {
       </div>
 
       {/* Plain-language summary - server-rendered so search and AI engines
-          can read and quote the current status directly. */}
+          can read and quote the current status directly. Full width so it
+          reads as one clean line instead of wrapping to a short orphan. */}
       {data && data.groups.length > 0 && (
-        <p className="mt-4 text-[13.5px] text-[#2B3950] leading-[1.6] max-w-3xl">
+        <p className="mt-4 text-[13.5px] text-[#2B3950] leading-[1.6]">
           {summaryLine(data)}
         </p>
       )}
@@ -568,15 +569,12 @@ function summaryLine(data: StatusPayload): string {
   const avg = n ? systems.reduce((sum, s) => sum + s.uptime.d90, 0) / n : 100;
   const avgStr = avg >= 100 ? "100%" : `${avg.toFixed(2)}%`;
   const inc = data.incidents.length;
-  const incPhrase =
-    inc === 0
-      ? "no incidents reported in the last 90 days"
-      : `${inc} incident${inc === 1 ? "" : "s"} recorded in the last 90 days`;
+  const incShort = inc === 0 ? "no incidents" : `${inc} incident${inc === 1 ? "" : "s"}`;
   const lead =
     data.overall === "operational"
-      ? `As of the latest check, all ${n} EDUS services are operational`
-      : `As of the latest check, ${op} of ${n} EDUS services are operational`;
-  return `${lead}, with ${avgStr} average uptime over the past 90 days and ${incPhrase}.`;
+      ? `As of the latest check, all ${n} EDUS services are operational.`
+      : `As of the latest check, ${op} of ${n} EDUS services are operational.`;
+  return `${lead} Over the past 90 days, average uptime is ${avgStr} with ${incShort}.`;
 }
 
 function formatUptime(n: number): string {
