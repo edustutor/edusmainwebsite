@@ -232,7 +232,7 @@ export default function PrivacyPolicyPage() {
             <li>Your question, and any photo or PDF you attach to it (a PDF is sent as its text).</li>
             <li>Your first name, role (student, tutor or staff), age, grade, medium, syllabus, and the names of your classes and their tutors, so the answer fits your level.</li>
             <li>Earlier messages from the same chat, some in shortened form, so the helper can follow the conversation.</li>
-            <li>For a spoken question, the recording, which is turned into text. In Tamil and Sinhala, your browser may use its own speech service (for example Google&rsquo;s, in Chrome) instead.</li>
+            <li>For a spoken question, the recording, which is turned into text. In the EDUS app, your phone&rsquo;s own speech service (usually Google&rsquo;s on Android, Apple&rsquo;s on iPhone) listens first and may send your voice to that company to write it out; when your phone cannot, the recording comes to EDUS AI instead. On the website, in Tamil and Sinhala, your browser may use its own speech service (for example Google&rsquo;s, in Chrome) instead.</li>
             <li>For a picture, a description of the picture you asked for.</li>
           </UL>
 
