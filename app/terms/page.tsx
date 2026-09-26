@@ -11,7 +11,7 @@ export const metadata = {
   },
 };
 
-const LAST_UPDATED = "March 11, 2025";
+const LAST_UPDATED = "September 26, 2026";
 
 export default function TermsPage() {
   const year = new Date().getFullYear();
@@ -31,7 +31,7 @@ export default function TermsPage() {
           description:
             "Terms and conditions governing the use of EDUS Online services, including registration, fees, refunds, intellectual property, liability, and governing law.",
           path: "/terms",
-          lastUpdated: "2025-12-01",
+          lastUpdated: "2026-09-26",
         })}
       />
       {/* HERO - same pattern as other sub-pages */}
@@ -136,7 +136,57 @@ export default function TermsPage() {
             data but cannot guarantee the security of any data you disclose online.
           </p>
 
-          <H2>10. Governing Law</H2>
+          <H2 id="edus-ai">10. EDUS AI</H2>
+          <p>
+            EDUS AI is an optional study helper inside EDUS. You must accept these EDUS AI terms in
+            the app before you use it for the first time, and again whenever they change.
+          </p>
+          <UL>
+            <li>
+              <strong>It can make mistakes.</strong> Answers and pictures are made by AI and can be
+              wrong or incomplete. Check important answers with your tutor. EDUS AI does not give
+              medical, legal or financial advice.
+            </li>
+            <li>
+              <strong>Use it to learn, never to cheat.</strong> Do not hand in its work as your own,
+              or use it to break the rules of a class, homework or exam. EDUS AI pauses while a
+              student is writing an EDUS exam.
+            </li>
+            <li>
+              <strong>Use it safely.</strong> Do not ask for harmful, adult, violent, hateful or
+              illegal content, try to get around its safety rules, or upload anything you have no
+              right to share or that holds other people&rsquo;s private information.
+            </li>
+            <li>
+              <strong>Keep private details out.</strong> Never type passwords, OTP codes, bank or
+              card details, or phone numbers into a chat.
+            </li>
+            <li>
+              <strong>Outside AI services.</strong> What you send to EDUS AI is processed by outside
+              AI services, as explained in our{" "}
+              <a href="/privacy#edus-ai" className="text-[#2563EB] hover:underline">Privacy Policy</a>.
+              Chats, photos and files are deleted after 30 days.
+            </li>
+            <li>
+              <strong>Pictures.</strong> Pictures EDUS AI makes are marked as made by AI and cannot
+              show written labels. Use them for study only.
+            </li>
+            <li>
+              <strong>Credits and availability.</strong> Each person gets credits that refill over
+              time. EDUS may change the credits, switch features on or off, or pause EDUS AI at any
+              time, and it may sometimes be unavailable.
+            </li>
+            <li>
+              <strong>Misuse.</strong> EDUS may pause or end a person&rsquo;s access to EDUS AI if
+              these terms are broken.
+            </li>
+            <li>
+              <strong>Children.</strong> Students under 18 use EDUS AI under the supervision of a
+              parent or guardian, like the rest of EDUS.
+            </li>
+          </UL>
+
+          <H2>11. Governing Law</H2>
           <p>
             These terms and conditions are governed by and construed in accordance with the laws
             of the Democratic Socialist Republic of Sri Lanka. The competent courts of Sri Lanka
@@ -144,7 +194,7 @@ export default function TermsPage() {
             in connection with these terms.
           </p>
 
-          <H2>11. Contact Us</H2>
+          <H2>12. Contact Us</H2>
           <p>
             For any questions or concerns about these terms, please contact us through the
             channels below.
@@ -177,9 +227,9 @@ export default function TermsPage() {
 /* --------------------------------------------------------------- */
 /* Inline typography helpers                                        */
 /* --------------------------------------------------------------- */
-function H2({ children }: { children: React.ReactNode }) {
+function H2({ children, id }: { children: React.ReactNode; id?: string }) {
   return (
-    <h2 className="font-display font-700 text-[#102033] text-[22px] leading-[1.3] tracking-[-0.01em] mt-8 mb-2">
+    <h2 id={id} className="font-display font-700 text-[#102033] text-[22px] leading-[1.3] tracking-[-0.01em] mt-8 mb-2 scroll-mt-28">
       {children}
     </h2>
   );

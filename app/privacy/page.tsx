@@ -11,7 +11,7 @@ export const metadata = {
   },
 };
 
-const LAST_UPDATED = "July 26, 2026";
+const LAST_UPDATED = "September 26, 2026";
 
 export default function PrivacyPolicyPage() {
   const year = new Date().getFullYear();
@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
           description:
             "How EDUS Online Tuition collects, uses, retains, and protects information from students, parents, teachers, and administrators.",
           path: "/privacy",
-          lastUpdated: "2026-07-26",
+          lastUpdated: "2026-09-26",
         })}
       />
       {/* HERO - same pattern as other sub-pages */}
@@ -132,11 +132,19 @@ export default function PrivacyPolicyPage() {
             <li>Course enrolments, assignments, and assessments (to track student progress)</li>
           </UL>
 
+          <H3>f) EDUS AI (study helper)</H3>
+          <UL>
+            <li>Questions you type or speak, and the photos and PDF files you attach to them</li>
+            <li>Pictures you ask EDUS AI to make, and the answers and pictures it gives back</li>
+            <li>Your thumbs up or down on an answer, and usage details (when you used it, which helper answered, and the credits used)</li>
+          </UL>
+
           <H2>3. How We Use Your Data</H2>
           <p>We process data strictly for educational and operational purposes, including:</p>
           <UL>
             <li>Account Management &amp; Authentication (login, security, and support)</li>
             <li>Educational Services (managing student progress, submissions, and communication)</li>
+            <li>EDUS AI (answering the questions you ask the study helper, see section 5)</li>
             <li>Service Optimisation (enhancing app functionality and security)</li>
             <li>Legal Compliance (meeting regulatory requirements and fraud prevention)</li>
           </UL>
@@ -182,6 +190,21 @@ export default function PrivacyPolicyPage() {
                   <td className="py-3 pr-4">Sending service emails</td>
                   <td className="py-3">Email address and delivery status</td>
                 </tr>
+                <tr className="border-b border-[rgba(16,32,51,0.07)]">
+                  <td className="py-3 pr-4">Groq</td>
+                  <td className="py-3 pr-4">EDUS AI answers, reading photos, and turning spoken questions into text</td>
+                  <td className="py-3">EDUS AI questions, attached photos and PDF text, voice recordings, and the study details in section 5</td>
+                </tr>
+                <tr className="border-b border-[rgba(16,32,51,0.07)]">
+                  <td className="py-3 pr-4">Cloudflare Workers AI</td>
+                  <td className="py-3 pr-4">EDUS AI answers, reading photos, and making pictures</td>
+                  <td className="py-3">EDUS AI questions, attached photos and PDF text, picture requests, and the study details in section 5</td>
+                </tr>
+                <tr className="border-b border-[rgba(16,32,51,0.07)]">
+                  <td className="py-3 pr-4">NVIDIA (API trial)</td>
+                  <td className="py-3 pr-4">EDUS AI answers and reading photos</td>
+                  <td className="py-3">EDUS AI questions, attached photos and PDF text, and the study details in section 5</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -196,7 +219,51 @@ export default function PrivacyPolicyPage() {
             data outside Sri Lanka.
           </p>
 
-          <H2>5. Data Security &amp; Retention</H2>
+          <H2 id="edus-ai">5. EDUS AI</H2>
+          <p>
+            EDUS AI is the optional study helper inside EDUS. Before anyone uses it for the first
+            time, they read and accept its terms in the app, and they accept again whenever the
+            terms change. To answer, EDUS AI sends what you ask to outside AI services: Groq,
+            Cloudflare Workers AI and NVIDIA, listed in section 4.
+          </p>
+
+          <H3>What is sent</H3>
+          <UL>
+            <li>Your question, and any photo or PDF you attach to it (a PDF is sent as its text).</li>
+            <li>Your first name, role (student, tutor or staff), age, grade, medium, syllabus, and the names of your classes and their tutors, so the answer fits your level.</li>
+            <li>Earlier messages from the same chat, some in shortened form, so the helper can follow the conversation.</li>
+            <li>For a spoken question, the recording, which is turned into text. In Tamil and Sinhala, your browser may use its own speech service (for example Google&rsquo;s, in Chrome) instead.</li>
+            <li>For a picture, a description of the picture you asked for.</li>
+          </UL>
+
+          <H3>What is never sent</H3>
+          <UL>
+            <li>Your full name, your student, tutor or staff number, email address, phone number, home address, date of birth, or payment details.</li>
+          </UL>
+
+          <H3>How long it is kept</H3>
+          <UL>
+            <li>Chats, attached photos and files, and pictures EDUS AI makes are deleted from EDUS after 30 days. You can delete a chat, or all your chats, at any time.</li>
+            <li>Voice recordings are not stored by EDUS.</li>
+            <li>Usage details (who used EDUS AI and when, which helper and AI model answered, and the credits used, never the chat text) are kept for 30 days so EDUS can run the service fairly.</li>
+            <li>A record that you accepted the EDUS AI terms, and when, is kept while your account exists.</li>
+          </UL>
+
+          <H3>How the AI services use it</H3>
+          <p>
+            Each service processes what is sent to produce the answer, under its own terms, and may
+            process it outside Sri Lanka, including in the United States. NVIDIA&rsquo;s free trial
+            terms allow NVIDIA to use what it receives to improve its services, which is one reason
+            EDUS sends as little about you as possible. EDUS does not use your chats to train AI
+            models or for advertising.
+          </p>
+          <p>
+            Only you can see your chats. EDUS staff can see usage details, but not what was asked or
+            answered. Students under 18 use EDUS AI under the same parental supervision as the rest
+            of EDUS, and EDUS can switch EDUS AI off at any time.
+          </p>
+
+          <H2>6. Data Security &amp; Retention</H2>
           <p>
             We use industry-standard security measures to protect user data from unauthorised
             access, theft, or misuse.
@@ -242,7 +309,7 @@ export default function PrivacyPolicyPage() {
             delete anything we are not legally required to keep.
           </p>
 
-          <H2>6. User Rights (GDPR &amp; Privacy Compliance)</H2>
+          <H2>7. User Rights (GDPR &amp; Privacy Compliance)</H2>
           <p>
             Users have the following rights under GDPR and applicable App Store Privacy Guidelines:
           </p>
@@ -266,7 +333,7 @@ export default function PrivacyPolicyPage() {
           </UL>
           <p>To exercise any of these rights, contact our Data Protection Officer.</p>
 
-          <H2>7. Cookies &amp; Tracking Technologies</H2>
+          <H2>8. Cookies &amp; Tracking Technologies</H2>
           <p>We use cookies and similar technologies to:</p>
           <UL>
             <li>Enhance user experience</li>
@@ -275,7 +342,7 @@ export default function PrivacyPolicyPage() {
           </UL>
           <p>Users can control cookies through their browser settings.</p>
 
-          <H2>8. Children&rsquo;s Privacy &amp; Parental Controls</H2>
+          <H2>9. Children&rsquo;s Privacy &amp; Parental Controls</H2>
           <p>
             EDUS is an education service used by school students, including children under the
             age of 13. Protecting them is a core responsibility, and we design the platform to be
@@ -322,7 +389,7 @@ export default function PrivacyPolicyPage() {
             and we will remove it.
           </p>
 
-          <H2>9. App Store &amp; Play Store Privacy Compliance</H2>
+          <H2>10. App Store &amp; Play Store Privacy Compliance</H2>
           <p>
             Per Apple&rsquo;s App Store Connect and Google&rsquo;s Play Store Data Safety
             requirements, we collect and use the following data:
@@ -332,6 +399,7 @@ export default function PrivacyPolicyPage() {
           <UL>
             <li>Contact Info (name, email, phone, address): used for app functionality and account management.</li>
             <li>User Content (photos, videos): used for submitting assignments and homework.</li>
+            <li>User Content (EDUS AI questions, photos, files and voice): used to answer your questions, and shared with the AI services in section 5.</li>
           </UL>
 
           <H3>Data Not Linked to You</H3>
@@ -344,7 +412,7 @@ export default function PrivacyPolicyPage() {
             profiles or to track you across other apps or websites.
           </p>
 
-          <H2>10. Updates to This Policy</H2>
+          <H2>11. Updates to This Policy</H2>
           <p>
             We may update this Privacy Policy to reflect changes in data practices, legal
             requirements, or app functionality.
@@ -354,7 +422,7 @@ export default function PrivacyPolicyPage() {
             <li>Continued use of our services after updates implies acceptance.</li>
           </UL>
 
-          <H2>11. Contact Us</H2>
+          <H2>12. Contact Us</H2>
           <p>For any privacy-related questions or concerns, contact us:</p>
           <UL>
             <li>
@@ -384,9 +452,9 @@ export default function PrivacyPolicyPage() {
 /* --------------------------------------------------------------- */
 /* Inline typography helpers                                        */
 /* --------------------------------------------------------------- */
-function H2({ children }: { children: React.ReactNode }) {
+function H2({ children, id }: { children: React.ReactNode; id?: string }) {
   return (
-    <h2 className="font-display font-700 text-[#102033] text-[22px] leading-[1.3] tracking-[-0.01em] mt-8 mb-2">
+    <h2 id={id} className="font-display font-700 text-[#102033] text-[22px] leading-[1.3] tracking-[-0.01em] mt-8 mb-2 scroll-mt-28">
       {children}
     </h2>
   );
