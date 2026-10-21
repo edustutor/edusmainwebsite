@@ -39,6 +39,8 @@ export function buildSystemPrompt(
     "",
     LMS_AND_APP,
     "",
+    CLASS_RULES,
+    "",
     formatCatalog(classes, tutors, intake),
     "",
     LEAD_CAPTURE_FLOW,
@@ -397,6 +399,32 @@ HOW TO ANSWER app / login / download questions:
 3. For "what can the app do", give a short highlight list and point to https://edustutor.com/lms-platform for everything.
 
 ===== END EDUS APP & LMS =====`;
+
+// Official student and parent rules, Version 1.0 (September 2026). Keep in
+// step with components/legal/*Data.ts when a new version is issued.
+const CLASS_RULES = `===== CLASS RULES FOR STUDENTS AND PARENTS (official, part of the Terms) =====
+
+Use these when a parent asks about attendance, absences, fees due dates, payment, changing times, or stopping a class. Answer briefly and link the full page.
+
+GROUP CLASSES (full rules: https://edustutor.com/group-class-standards):
+- Join every class through the EDUS app or web platform at least 5 minutes early.
+- Missing three classes in a row without an accepted reason or proper communication MAY lead to removal from that class, after EDUS reviews and contacts the family. Do NOT say "removed with no rejoin".
+- Homework, assignments and all exams are required.
+- Monthly fees are due on or before the 5th of each month, paid in the EDUS LMS (or the EDUS Wallet, auto-deducted when an invoice is issued). Card payments confirm instantly; bank transfers take about 3 to 5 business days to verify.
+
+INDIVIDUAL CLASSES (full rules: https://edustutor.com/individual-class-guidelines):
+- Run in 30-day cycles, paid in advance. Pay the next cycle at least 3 days before it starts to keep the tutor's slot.
+- Timetable changes need at least 7 days' notice through EDUS Connect Support or the Hotline. Telling only the tutor is not an official request.
+- A student absence or unapproved cancellation counts as used time, with no automatic refund. Time cancelled by the tutor or EDUS is made up at no extra charge.
+- Unused hours do not carry forward past the cycle without written approval.
+
+BOTH:
+- Official channels only: EDUS Hotline +94 70 707 2072 (Monday to Saturday, 9:00 AM to 9:00 PM) or EDUS Connect Support Chat.
+- To stop a class, unenrol in the EDUS LMS or send an official request. Being absent, telling only the tutor, or leaving a chat group does not count.
+- No private payments or direct deals with tutors.
+- Do not invent rules beyond these. For anything not covered, point to the pages above or the Hotline.
+
+===== END CLASS RULES =====`;
 
 function formatCatalog(
   classes: ClassEntry[],

@@ -65,6 +65,10 @@ export default function AcceptableUsePage() {
             ,{" "}
             <a href="/privacy" className="text-[#2563EB] hover:underline">Privacy Policy</a>, and{" "}
             <a href="/safeguarding" className="text-[#2563EB] hover:underline">Safeguarding Policy</a>.
+            Students and parents should also read the{" "}
+            <a href="/group-class-standards" className="text-[#2563EB] hover:underline">Group Class Standards</a>{" "}
+            and the{" "}
+            <a href="/individual-class-guidelines" className="text-[#2563EB] hover:underline">Individual Class Guidelines</a>.
           </p>
           <p>
             By accessing or using our Services, you agree to comply with this Policy. EDUS may

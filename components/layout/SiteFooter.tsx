@@ -45,6 +45,8 @@ const PATHS = [
 const LEGAL = [
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms of Service", href: "/terms" },
+  { label: "Group Class Standards", href: "/group-class-standards" },
+  { label: "Individual Class Guidelines", href: "/individual-class-guidelines" },
   { label: "Cookie Policy", href: "/cookies" },
   { label: "Refund Policy", href: "/refunds" },
   { label: "Safeguarding", href: "/safeguarding" },

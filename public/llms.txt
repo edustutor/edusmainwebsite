@@ -58,16 +58,14 @@ Mobile apps: Google Play (https://play.google.com/store/apps/details?id=com.edus
 - **Monthly fees:** From LKR 1,000/subject/month for Primary and Grade 6-9; LKR 1,200/subject/month for O/L (Grade 10-11); LKR 2,500/subject/month for G.C.E A/L.
 - **Individual 1-to-1:** From LKR 2,500/hour, all grades, all subjects, all mediums.
 
-## Student Code (rules accepted before joining)
+## Student and parent rules (part of the EDUS Terms & Conditions)
 
-Every EDUS student accepts these standards before joining their first class. Strictly maintained.
+Official rules, Version 1.0 (September 2026), published in English, Tamil, and Sinhala. A student accepts them by paying the first invoice or attending the first class.
 
-1. Proper internet and device required to study.
-2. Video must be turned on during class unless culturally impossible.
-3. Sitting for exams and completing all assignments and homework is mandatory.
-4. Students must respond to tutor queries during class. Non-respondents are removed from class.
-5. Regular attendance is required. Continuous absence for 3 classes leads to removal without rejoin option.
-6. Classes are conducted only via the EDUS Tutor Mobile & Web App and Google Meet.
+- [Group Class Standards](https://edustutor.com/group-class-standards): EDUS Student Success, Safety & Learning Standards. Attend every class and join at least 5 minutes early through the EDUS App or web platform. Missing three consecutive classes without an accepted reason or proper communication may lead to discontinuation from that class, after EDUS reviews and contacts the family. Students stay attentive, respond to the tutor, complete all homework and assignments, and sit all exams. Platform for education only: no sharing logins, no copying content, no bullying or harassment; classes and support chats may be monitored and recorded for safeguarding. Monthly fees are due on or before the 5th of each month, paid through the EDUS LMS (or the EDUS Wallet, auto-deducted when a new invoice is issued). Online card payments confirm immediately; bank transfers take about 3 to 5 business days. Official channels only: EDUS Hotline +94 70 707 2072 (Monday to Saturday, 9:00 AM to 9:00 PM) and EDUS Connect Support Chat. To leave, unenrol in the LMS or send an official request; absence, telling only a tutor, or leaving a chat group does not count.
+- [Individual Class Guidelines](https://edustutor.com/individual-class-guidelines): runs in 30-calendar-day cycles paid in advance through the EDUS LMS; pay the next cycle at least 3 days before it starts to keep the tutor's slot. Timetable changes need at least 7 days' notice through EDUS Connect Support or the Hotline (telling only the tutor is not official). A student absence or unapproved cancellation counts as used time with no automatic refund; time cancelled by the tutor or EDUS is rescheduled or the cycle extended at no extra charge. Unused hours do not carry forward without written approval. No private payments or direct deals with tutors.
+
+Also expected in every class: a proper internet connection and device, and video on during class unless culturally impossible. Classes run only through the EDUS app and web app, with live sessions on Google Meet.
 
 ## Brand & company
 

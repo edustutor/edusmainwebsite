@@ -116,6 +116,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/refunds",          changeFrequency: "yearly",  priority: 0.30 },
     { path: "/safeguarding",     changeFrequency: "yearly",  priority: 0.30 },
     { path: "/acceptable-use",   changeFrequency: "yearly",  priority: 0.30 },
+    // Class rules for students and parents (EN / TA / SI on one page).
+    // Slightly above the other legal pages: parents search for these.
+    { path: "/group-class-standards",       changeFrequency: "yearly", priority: 0.40 },
+    { path: "/individual-class-guidelines", changeFrequency: "yearly", priority: 0.40 },
   ];
 
   // Blog posts - each gets its own entry with the post's actual datePublished.

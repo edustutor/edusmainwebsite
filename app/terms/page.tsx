@@ -11,7 +11,7 @@ export const metadata = {
   },
 };
 
-const LAST_UPDATED = "September 26, 2026";
+const LAST_UPDATED = "October 21, 2026";
 
 export default function TermsPage() {
   const year = new Date().getFullYear();
@@ -31,7 +31,7 @@ export default function TermsPage() {
           description:
             "Terms and conditions governing the use of EDUS Online services, including registration, fees, refunds, intellectual property, liability, and governing law.",
           path: "/terms",
-          lastUpdated: "2026-09-26",
+          lastUpdated: "2026-10-21",
         })}
       />
       {/* HERO - same pattern as other sub-pages */}
@@ -77,6 +77,31 @@ export default function TermsPage() {
             . These Services are subject to the terms and conditions contained herein, as well
             as any other course-specific terms and conditions that may apply.
           </p>
+          <p id="class-rules" className="scroll-mt-28">
+            Each class type also has its own rules for students and parents. These rules form
+            part of these Terms, and a student accepts them by paying the first invoice or
+            attending the first class:
+          </p>
+          <UL>
+            <li>
+              <a href="/group-class-standards" className="text-[#2563EB] hover:underline">
+                Group Class Standards
+              </a>{" "}
+              (Student Success, Safety &amp; Learning Standards): attendance, homework and
+              exams, safe platform use, monthly fees, official communication and leaving a class.
+            </li>
+            <li>
+              <a href="/individual-class-guidelines" className="text-[#2563EB] hover:underline">
+                Individual Class Guidelines
+              </a>
+              : tutor matching, the 30-day class cycle, advance payment, timetable changes,
+              absences, cancellations and renewal.
+            </li>
+          </UL>
+          <p>
+            Where these rules deal with a matter in more detail than these Terms, the rules for
+            that class type apply. Both are available in English, Tamil and Sinhala.
+          </p>
 
           <H2>2. Account Registration</H2>
           <p>
@@ -91,6 +116,22 @@ export default function TermsPage() {
             Fees must be paid in full prior to accessing the Services. All fees are exclusive of
             taxes, unless otherwise stated.
           </p>
+          <UL>
+            <li>
+              <strong>Group classes:</strong> monthly fees are due on or before the 5th of each
+              month.
+            </li>
+            <li>
+              <strong>Individual classes:</strong> each 30-day class cycle is paid in advance.
+              Pay the next cycle at least 3 days before it starts to keep the tutor&rsquo;s time
+              slot.
+            </li>
+            <li>
+              Pay through the EDUS LMS against the invoice, or add funds to the EDUS Wallet in
+              advance. Online card payments are confirmed immediately. Bank transfers and manual
+              payments are checked during office hours and can take 3 to 5 business days.
+            </li>
+          </UL>
 
           <H2>4. Cancellations and Refunds</H2>
           <p>
@@ -98,6 +139,18 @@ export default function TermsPage() {
             after the date we concluded our agreement, subject to certain conditions. If you
             access, download, or start to use an online course within this period, you will not
             be entitled to cancel your order.
+          </p>
+          <p>
+            In individual classes, a session the student misses or cancels without EDUS approval
+            counts as used and is not automatically refunded, and time cancelled by the tutor or
+            EDUS is made up at no extra charge. See our{" "}
+            <a href="/refunds" className="text-[#2563EB] hover:underline">Refund Policy</a>.
+          </p>
+          <p>
+            To stop a class or leave EDUS, unenrol in the EDUS LMS or send an official request
+            through the EDUS Hotline or EDUS Connect Support. Being absent, telling only the
+            tutor, or leaving a chat group does not count, and any unpaid fees must still be
+            settled.
           </p>
 
           <H2>5. Intellectual Property Rights</H2>
@@ -125,7 +178,10 @@ export default function TermsPage() {
           <p>
             We may terminate these terms and conditions and cease to provide you with any
             Services with immediate effect in certain circumstances, including if you fail to
-            comply with these terms.
+            comply with these terms. This includes missing three classes in a row without an
+            accepted reason (after EDUS reviews and contacts you), and unsafe, harmful or
+            unethical conduct such as bullying, harassment or misuse of the EDUS platform, as set
+            out in the class rules above.
           </p>
 
           <H2>9. Data Protection</H2>
@@ -210,7 +266,11 @@ export default function TermsPage() {
               <strong>Phone:</strong>{" "}
               <a href="tel:+94707072072" className="text-[#2563EB] hover:underline">
                 +94 70 707 2072
-              </a>
+              </a>{" "}
+              (EDUS Hotline, Monday to Saturday, 9:00 AM to 9:00 PM)
+            </li>
+            <li>
+              <strong>Chat:</strong> EDUS Connect Support Chat in the EDUS app
             </li>
           </UL>
 

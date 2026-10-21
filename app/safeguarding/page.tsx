@@ -136,6 +136,13 @@ export default function SafeguardingPage() {
             <li>Request academic updates, attendance reports, and progress reviews.</li>
             <li>Raise any concern relating to a tutor, class, or interaction directly with the EDUS team.</li>
           </UL>
+          <p>
+            The responsibilities of parents and guardians, including a safe learning space and
+            age-appropriate supervision, are set out in the{" "}
+            <a href="/group-class-standards" className="text-[#2563EB] hover:underline">Group Class Standards</a>{" "}
+            and the{" "}
+            <a href="/individual-class-guidelines" className="text-[#2563EB] hover:underline">Individual Class Guidelines</a>.
+          </p>
 
           <H2>7. Reporting a Concern or Objectionable Content</H2>
           <p>

@@ -49,13 +49,13 @@ EDUS is the quality-assured online live learning platform for school students. W
 
 **Class delivery:** All Sri Lanka classes are conducted through the EDUS Student Mobile App and the EDUS Web App. Live class sessions are delivered on Google Meet. Recordings, assignments, homework, and parent updates all live inside the EDUS app.
 
-**Student conduct (rules accepted before joining any group class):**
-1. Proper internet and device required.
-2. Video must be on during class (unless culturally impossible).
-3. Sitting for exams and completing all assignments and homework is mandatory.
-4. Students must respond to tutor queries during class - non-respondents are removed.
-5. Regular attendance is required. Continuous absence for 3 classes leads to removal with no rejoin.
-6. Classes are conducted only via the EDUS Tutor Mobile & Web App and Google Meet.
+**Student conduct (official rules, part of the EDUS Terms & Conditions):** full text in English, Tamil, and Sinhala at https://edustutor.com/group-class-standards (group classes) and https://edustutor.com/individual-class-guidelines (individual classes).
+1. Proper internet and device required; video on during class (unless culturally impossible).
+2. Attend every class and join at least 5 minutes early. Missing three consecutive classes without an accepted reason or proper communication may lead to discontinuation from that class, after EDUS reviews and contacts the family.
+3. Stay attentive, respond to the tutor, complete all homework and assignments, and sit all exams.
+4. Monthly group-class fees are due on or before the 5th of each month, paid through the EDUS LMS or EDUS Wallet.
+5. Individual classes run in prepaid 30-day cycles; a student absence or unapproved cancellation counts as used time, and tutor or EDUS cancellations are made up at no extra charge.
+6. Classes are conducted only via the EDUS Tutor Mobile & Web App and Google Meet. Official contact: EDUS Hotline +94 70 707 2072 (Monday to Saturday, 9 AM to 9 PM) or EDUS Connect Support Chat.
 
 **Subjects offered:**
 - Primary & Grade 6 to 11: Mathematics, Science, English, Tamil, Sinhala, Environmental Studies, History, ICT, Spoken English, Elocution, IQ

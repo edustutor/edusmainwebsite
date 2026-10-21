@@ -16,7 +16,7 @@ export const metadata = {
   },
 };
 
-const LAST_UPDATED = "April 3, 2024";
+const LAST_UPDATED = "October 21, 2026";
 
 export default function RefundPolicyPage() {
   const year = new Date().getFullYear();
@@ -36,7 +36,7 @@ export default function RefundPolicyPage() {
           description:
             "EDUS Online Tuition refund policy: eligibility, request process, non-refundable services, EDUS-initiated cancellations, and technical issue handling.",
           path: "/refunds",
-          lastUpdated: "2025-12-01",
+          lastUpdated: "2026-10-21",
         })}
       />
       <JsonLdScript data={merchantReturnPolicy()} />
@@ -110,19 +110,49 @@ export default function RefundPolicyPage() {
           <H2>4. Cancellations by EDUS</H2>
           <p>
             If a course or session is cancelled by EDUS Online Tuition, students will be
-            entitled to a full refund or the option to enrol in an alternative course.
+            entitled to a full refund or the option to enrol in an alternative course. For
+            individual classes, a session cancelled by the tutor or EDUS is first rescheduled, or
+            the class cycle is extended, at no extra charge.
           </p>
 
-          <H2>5. Technical Issues &amp; Complaints</H2>
+          <H2>5. Missed Classes and Class Time</H2>
+          <UL>
+            <li>
+              In individual classes, a session the student misses, or cancels without EDUS
+              approval, counts as used time and is not automatically refunded. Joining late does
+              not extend the session.
+            </li>
+            <li>
+              Unused individual-class hours do not carry forward past the 30-day class cycle
+              unless EDUS approves it in writing.
+            </li>
+            <li>
+              Full rules:{" "}
+              <a href="/individual-class-guidelines" className="text-[#2563EB] hover:underline">
+                Individual Class Guidelines
+              </a>{" "}
+              and{" "}
+              <a href="/group-class-standards" className="text-[#2563EB] hover:underline">
+                Group Class Standards
+              </a>
+              .
+            </li>
+          </UL>
+
+          <H2>6. Technical Issues &amp; Complaints</H2>
           <UL>
             <li>
               If you experience technical difficulties preventing you from accessing a course,
               contact our support team immediately for assistance.
             </li>
+            <li>
+              If an EDUS platform-wide failure stops a class, EDUS checks it and arranges the lost
+              class time.
+            </li>
             <li>Refunds for technical issues will be reviewed on a case-by-case basis.</li>
           </UL>
 
-          <H2>6. Contact Us</H2>
+          <H2>7. Contact Us</H2>
           <p>For any questions regarding our refund policy, please reach out through the channels below.</p>
           <UL>
             <li>
