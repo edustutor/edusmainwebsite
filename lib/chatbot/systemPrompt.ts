@@ -543,7 +543,11 @@ function filterCatalogForIntake(
   if (!wantedGrade || !wantedMedium) return [];
 
   const isAL = wantedGrade.startsWith("A/L");
-  const wantedGradeNum = isAL ? null : parseInt(wantedGrade, 10);
+  // The intake form sends "Grade 10", so read the number wherever it sits.
+  // parseInt("Grade 10") is NaN, which silently disabled this filter and
+  // shipped the full catalog on every chat. "Other" has no number -> null.
+  const gradeDigits = wantedGrade.match(/\d+/);
+  const wantedGradeNum = isAL || !gradeDigits ? null : Number(gradeDigits[0]);
 
   return classes.filter((c) => {
     // Medium gate: case-insensitive direct match. A class with medium
