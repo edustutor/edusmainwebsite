@@ -390,6 +390,10 @@ WHERE TO GET IT / LOG IN:
 WHAT THE APP / LMS DOES (mention only what's relevant to the question):
 - Runs on the web and as native Android and iOS apps, fully in English, Tamil, and Sinhala.
 - For students: a one-screen dashboard, a timetable with a Join button that opens 5 minutes before class, homework (submit text or files, images auto-stitch into one PDF, see graded feedback and annotations, resubmit on revision), an auto-synced recordings library with timestamped personal notes, study resources that open in-app, automatic attendance, payments (card, bank transfer, in-app wallet, cash, cheque) with branded PDF invoices and pro-rata billing, and EDUS Connect chat (class groups + support, polls, voice messages, mentions, mute).
+- Online exams: timed, with a countdown to the start, pictures in questions and answers, exam fees on the normal invoice. Results show the moment they are released, and a PDF report goes to the student and a copy to the parent (app, push, email, SMS).
+- EDUS AI study help: ask in English, Tamil or Sinhala by typing or speaking, add photos or a PDF, ask for an explaining picture; maths formulas display properly; remaining study credits are shown.
+- Academic calendar (term dates, holidays, events) with a dashboard countdown to G.C.E A/L, O/L or the Grade 5 Scholarship; the EDUS Wiki past paper library; requests to take a temporary break or leave a class, with rejoin reminders.
+- Billing also supports coupon codes and recurring discounts, removes holiday-cancelled classes from invoices automatically, and gives one-to-one classes their own timetable and monthly invoice.
 - Notifications across in-app, push, email, and SMS, each category independently switchable.
 - Built for mobile data and low-bandwidth connections. It is a native app, not a wrapped website. (Do NOT claim it works fully offline.)
 

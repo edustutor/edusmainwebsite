@@ -77,6 +77,36 @@ const STUDENT_FEATURES: Feature[] = [
     ],
   },
   {
+    icon: "exam", tint: "#EF4444",
+    title: "Online exams",
+    points: [
+      "Exams with a live countdown to the start, and a timer while you write",
+      "Questions with pictures in the questions and the answers",
+      "Exam papers and files open inside the app",
+      "Exam fees appear on your invoice and can be paid like any other",
+    ],
+  },
+  {
+    icon: "report", tint: "#22C55E",
+    title: "Exam reports",
+    points: [
+      "Marks show the moment results are released",
+      "Your report arrives in the app, by push, by email with the PDF, and by SMS",
+      "A copy of the report goes to your parent",
+      "Every exam you joined is listed on your profile, paid or unpaid",
+    ],
+  },
+  {
+    icon: "ai-helper", tint: "#8B5CF6",
+    title: "EDUS AI study help",
+    points: [
+      "Ask study questions in English, Tamil or Sinhala, and see the answer as it is written",
+      "Add photos of your work or a PDF, or speak your question",
+      "Ask for a picture to explain an idea",
+      "Maths formulas display properly, and your remaining study credits are always shown",
+    ],
+  },
+  {
     icon: "class-recordings", tint: "#EF4444",
     title: "Recordings library",
     points: [
@@ -92,6 +122,23 @@ const STUDENT_FEATURES: Feature[] = [
       "Documents, PDFs, videos, images and links from your tutors",
       "Everything opens inside the app - no bouncing to a browser",
       "Download to keep; filter by class, subject, grade, medium or date",
+    ],
+  },
+  {
+    icon: "library", tint: "#06B6D4",
+    title: "EDUS Wiki paper library",
+    points: [
+      "Past papers and study material in one library",
+      "Open any paper inside the app, or download it to keep",
+    ],
+  },
+  {
+    icon: "target", tint: "#F59E0B",
+    title: "Academic calendar and exam countdown",
+    points: [
+      "Term dates, holidays and school events for your grade and classes",
+      "A countdown on your dashboard to your next national exam: G.C.E A/L, O/L or the Grade 5 Scholarship",
+      "Your next exam shows on the dashboard beside your next class",
     ],
   },
   {
@@ -122,14 +169,22 @@ const STUDENT_FEATURES: Feature[] = [
       "A private resource library with a voice-note recorder",
     ],
   },
+  {
+    icon: "flexible", tint: "#22C55E",
+    title: "Taking a break",
+    points: [
+      "Ask to leave a class for good or take a temporary break, with a reason",
+      "Pick up again when you return: the platform reminds you to rejoin",
+    ],
+  },
 ];
 
 /* Payments deserve their own richer block. */
 const PAYMENT_POINTS: Array<{ title: string; body: string; icon: string; tint: string }> = [
   { icon: "card", tint: "#2563EB", title: "Every way to pay", body: "Card and online, bank transfer with account details shown in-app, wallet auto-draw-down, plus cash and cheque recorded by staff." },
-  { icon: "billing", tint: "#8B5CF6", title: "Clear invoices", body: "Full line-item breakdowns, downloadable branded PDF invoices and receipts, discounts shown as a clear saving, one click for everything outstanding." },
+  { icon: "billing", tint: "#8B5CF6", title: "Clear invoices", body: "Full line-item breakdowns, downloadable branded PDF invoices and receipts, coupon codes and recurring discounts shown as a clear saving, one click for everything outstanding." },
   { icon: "money", tint: "#22C55E", title: "Wallet", body: "Top up by card or bank transfer, full transaction history, and any overpayment surplus lands in your wallet automatically." },
-  { icon: "fee", tint: "#F59E0B", title: "Fair, transparent billing", body: "Pro-rata charging when you join mid-month, a coverage countdown showing how long a payment lasts, and payment-extension requests when you need time." },
+  { icon: "fee", tint: "#F59E0B", title: "Fair, transparent billing", body: "Pro-rata charging when you join mid-month, a coverage countdown showing how long a payment lasts, and payment-extension requests when you need time. Classes cancelled for a holiday are taken off your invoice automatically, and one-to-one classes have their own timetable and their own monthly invoice." },
 ];
 
 /* --------------------------------------------------------------- */
@@ -158,6 +213,13 @@ const TUTOR_FEATURES: Feature[] = [
     ],
   },
   {
+    icon: "clock", tint: "#22C55E",
+    title: "Your availability",
+    points: [
+      "Set the days and times you are free each week, so classes are planned around you",
+    ],
+  },
+  {
     icon: "students", tint: "#06B6D4",
     title: "Classes and students",
     points: [
@@ -174,6 +236,15 @@ const TUTOR_FEATURES: Feature[] = [
       "Assign to one class or several; annotate submissions directly",
       "Grade with feedback, request revisions, see who has not submitted",
       "Reminders to students at 24h/8h/1h and to you when marking is due",
+    ],
+  },
+  {
+    icon: "exams", tint: "#8B5CF6",
+    title: "Exams",
+    points: [
+      "Build exam papers from your question bank, with start times and durations",
+      "Review each student's completed answers",
+      "Issue reports that reach students and their parents in minutes",
     ],
   },
   {
@@ -201,6 +272,23 @@ const TUTOR_FEATURES: Feature[] = [
       "Per-session commission snapshot recorded automatically at creation",
       "Fixed or percentage, per session, hour, student or month",
       "Substitute-tutor payments tracked separately with a full audit trail",
+    ],
+  },
+  {
+    icon: "money", tint: "#22C55E",
+    title: "Earnings and payouts",
+    points: [
+      "See your earnings build up in your tutor wallet",
+      "Request a withdrawal and track it until it is paid",
+      "Download a payout slip for every payment",
+    ],
+  },
+  {
+    icon: "verified", tint: "#06B6D4",
+    title: "Quality reviews",
+    points: [
+      "Your sessions are reviewed against their recordings",
+      "You see your score, the feedback, and any adjustment to your pay, with the reason",
     ],
   },
   {
@@ -255,6 +343,22 @@ const FAQ = [
     q: "Is EDUS available on Android and iOS?",
     a: "Yes. EDUS has native apps on Google Play and the Apple App Store, plus a full web app that works in any browser.",
   },
+  {
+    q: "Does EDUS have online exams?",
+    a: "Yes. Students take timed exams inside the app, with pictures in questions and answers. Results and a PDF report go to the student and a copy goes to their parent, in the app, by email and by SMS.",
+  },
+  {
+    q: "What is EDUS AI?",
+    a: "A study helper built into EDUS. Students ask questions in English, Tamil or Sinhala by typing or speaking, add photos or a PDF, and get answers they can follow, with formulas displayed properly.",
+  },
+  {
+    q: "Can parents follow their child's progress?",
+    a: "Yes. Exam reports are copied to parents, and parent contact details sit with every student's record, so tutors can reach them directly.",
+  },
+  {
+    q: "Can a student take a break from a class?",
+    a: "Yes. Students can request a temporary break or leave a class with a reason, and EDUS reminds them to rejoin when they come back.",
+  },
 ];
 
 const PAGE_URL = `${SITE_URL}/lms-platform`;
@@ -265,7 +369,7 @@ export const metadata: Metadata = {
     absolute: "EDUS LMS - Learning Management System | Sri Lanka",
   },
   description:
-    "Explore the EDUS Learning Management System: live classes, homework, recordings, attendance, payments, wallet, and built-in chat. Web and native Android & iOS apps in English, Tamil & Sinhala. Built in Sri Lanka.",
+    "EDUS LMS: live classes, online exams, EDUS AI study help, homework, recordings, attendance, payments and chat. Web, Android & iOS in English, Tamil & Sinhala.",
   alternates: {
     canonical: "/lms-platform",
     languages: hreflangAlternates("/lms-platform"),
@@ -287,11 +391,14 @@ export const metadata: Metadata = {
     "live class app Sri Lanka",
     "homework and attendance app",
     "education app with wallet payments",
+    "online exam app Sri Lanka",
+    "AI study helper Tamil Sinhala",
+    "past papers app Sri Lanka",
   ],
   openGraph: {
     title: "EDUS LMS Platform - Learning Management System for Students & Tutors",
     description:
-      "Live classes, homework, recordings, attendance, payments, wallet and chat - on web and native Android & iOS apps, in English, Tamil & Sinhala.",
+      "Live classes, online exams, EDUS AI study help, homework, recordings, attendance, payments and chat - on web and native Android & iOS apps, in English, Tamil & Sinhala.",
     type: "website",
     url: PAGE_URL,
     siteName: "EDUS Online Institute",
@@ -358,9 +465,9 @@ function Hero() {
           One <em>learning management system</em> for live classes, homework, and everything in between.
         </h1>
         <p className="mt-6 text-[#2B3950] text-[16.5px] leading-relaxed max-w-2xl mx-auto">
-          EDUS runs your whole online institute - classes, recordings, attendance,
-          payments, and chat - on the web and native Android and iOS apps, in
-          English, Tamil and Sinhala. Every feature below is live in production.
+          EDUS runs your whole online institute: classes, recordings, exams, AI study
+          help, attendance, payments and chat, on the web and native Android and iOS
+          apps, in English, Tamil and Sinhala. Every feature below is live in production.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-primary text-[15px]">
