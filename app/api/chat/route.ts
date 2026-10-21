@@ -32,31 +32,19 @@ import type {
  *   500 application/json { "error": "..." }
  *   502 application/json { "error": "upstream failure" }
  *
- * STREAMING + TOOL USE:
- *   The model has access to a `search_edustutor` tool implemented by
- *   lib/chatbot/tavily.ts. Tavily restricts hits to EDUS apex domains.
+ * STREAMING + SITE SEARCH:
+ *   One NIM call per user turn, streamed straight to the browser as
+ *   plain text. When the turn is about something outside the class
+ *   catalog (founder, press, gallery, awards, contact...), the server
+ *   first runs a Tavily search (lib/chatbot/tavily.ts, EDUS domains
+ *   only) and appends the results to the system prompt.
  *
- *   Per-round flow:
- *     1. Open SSE stream to NIM with tools=[search_edustutor].
- *     2. Read SSE deltas as they arrive.
- *     3. If the first deltas describe a TOOL CALL, accumulate the
- *        tool_calls.function.arguments JSON across deltas, close the
- *        stream once we have a complete call, run Tavily, append the
- *        tool result to the conversation, then call NIM AGAIN with
- *        tools omitted - this second call streams plain content to
- *        the browser.
- *     4. If the deltas describe CONTENT instead, pipe them straight
- *        to the browser as plain text - same path as the no-tool case.
- *
- *   We cap tool calls at 1 per chat turn. Two reasons: (a) prevents
- *   runaway recursion, (b) Tavily free-tier quota is finite. If the
- *   model wants to search again, it must wait for the next user turn.
- *
- *   Why not interleave content + tool calls? Llama 3.3 emits one or
- *   the other per response, not both. Streaming-mid-tool-call is
- *   possible in theory but adds 100+ LOC of partial-content buffering
- *   for marginal UX gain - we'd save maybe 200ms on the rare
- *   acknowledgement token before the tool call.
+ *   Why the server searches instead of offering the model a tool:
+ *   on 2026-10-21 Nemotron 3 Ultra wrote its tool call into the reply
+ *   as plain text (raw JSON or <tool_call> tags) on 2 of 6 search
+ *   questions, which would show to the parent. Searching server-side
+ *   removes that failure, works with any model, and needs one model
+ *   call instead of two.
  *
  * NVIDIA NIM uses an OpenAI-compatible chat completions API.
  */
@@ -66,12 +54,18 @@ export const dynamic = "force-dynamic";
 
 /** OpenAI-compatible NIM endpoint. Model + key come from env. */
 const NIM_ENDPOINT = "https://integrate.api.nvidia.com/v1/chat/completions";
-const DEFAULT_MODEL = "meta/llama-3.3-70b-instruct";
+// Llama 3.3 70B was retired by NVIDIA on 2026-08-26 (HTTP 410), which took
+// the chatbot down. Nemotron 3 Ultra was the best of the NIM models tested
+// on 2026-10-21 for Tamil + Sinhala quality, tool calling and speed
+// (first token in about 2s). DeepSeek V4.1 Flash wrote slightly better
+// Sinhala but took over 70s on NIM's shared queue, so it is not usable here.
+const DEFAULT_MODEL = "nvidia/nemotron-3-ultra-550b-a55b";
 
 /** Conversation limits to keep latency + cost predictable. */
 const MAX_TURNS = 30;        // chat history length cap
 const MAX_USER_LEN = 2000;   // per-message char cap
 const MAX_TOTAL_LEN = 20000; // total history char cap
+const MAX_SEARCH_QUERY_LEN = 300; // Tavily works best with a short query
 
 /** Rate limit: 10 messages per IP per 60s rolling window. */
 const RATE_LIMIT_PER_MIN = 10;
@@ -82,37 +76,6 @@ const RATE_LIMIT_WINDOW_MS = 60_000;
  * (ms) of recent requests within the rolling window.
  */
 const rateLimitStore = new Map<string, number[]>();
-
-/* --------------------------------------------------------------- */
-/* Tool definition for NIM. OpenAI-style function-calling schema.   */
-/* --------------------------------------------------------------- */
-
-/**
- * The single tool we expose to the model. Tavily-backed, scoped to
- * EDUS apex domains via the server-side helper. Description copy is
- * tuned to make the model use it ONLY when the catalog can't answer.
- */
-const TOOLS = [
-  {
-    type: "function",
-    function: {
-      name: "search_edustutor",
-      description:
-        "Search the EDUS websites (edustutor.com, edus.lk, edus.edu.lk) for live content beyond the class catalog already in the system prompt. Use this ONLY when the parent asks about something not in the catalog: blog posts, gallery albums, accreditations, the founder, press coverage, partner organisations, recent news, the contact page, the press kit, or any specific URL on the EDUS sites. Do NOT use this for class recommendations, fees, tutors, or timetables - those facts live in the catalog already.",
-      parameters: {
-        type: "object",
-        properties: {
-          query: {
-            type: "string",
-            description:
-              "Short focused search query in English. 3-10 words. Examples: 'Grade 5 scholarship blog post', 'National ICT Award 2024 EDUS', 'EDUS founder Sugeevan'.",
-          },
-        },
-        required: ["query"],
-      },
-    },
-  },
-];
 
 /* --------------------------------------------------------------- */
 /* Rate limiting + helpers                                          */
@@ -238,15 +201,25 @@ export async function POST(req: Request) {
   // 3. Build the system prompt with the live catalog + intake injected.
   const catalog = await loadCatalog();
   const intake = sanitiseIntake(body.intake);
-  const systemPrompt = buildSystemPrompt(
+  let systemPrompt = buildSystemPrompt(
     catalog.classes,
     catalog.tutors,
     intake,
   );
 
-  // 4. Open the first NIM round WITH tools enabled. NimMessage is the
-  // OpenAI-compatible message shape - it supports the tool roles we
-  // need beyond the user/assistant pair the client speaks.
+  // 4. Off-catalog turns (founder, press, gallery, awards...) get a site
+  // search first, appended to the system prompt. Catalog turns skip it,
+  // since classes, fees, tutors and timetables are already in the prompt.
+  const latestUser = [...(clientMessages ?? [])]
+    .reverse()
+    .find((m) => m.role === "user");
+  const latestText = latestUser?.content ?? "";
+  if (userTurnNeedsSearchTool(latestText)) {
+    const results = await searchEdus(latestText.slice(0, MAX_SEARCH_QUERY_LEN));
+    console.log(`[chat] site search returned ${results.length} result(s)`);
+    systemPrompt = `${systemPrompt}\n\n${formatSearchResults(results)}`;
+  }
+
   const conversation: NimMessage[] = [
     { role: "system", content: systemPrompt },
     ...(clientMessages ?? []).map((m) => ({
@@ -255,151 +228,36 @@ export async function POST(req: Request) {
     })),
   ];
 
-  // SPEED OPTIMISATION (locked 2026-05-23):
-  // Most user turns are catalog questions ("class details for grade 6",
-  // "show me maths tutors", "fees for grade 8 science"). For those we
-  // KNOW the answer is in the system prompt and the search tool is
-  // irrelevant. Skip the tool wiring on those turns to save NIM's
-  // "should I call a tool?" deliberation latency (~300-500ms of
-  // first-token delay per round). The bot still has tools available on
-  // off-catalog turns (founder bio, blog posts, gallery, etc).
-  const latestUser = [...(clientMessages ?? [])]
-    .reverse()
-    .find((m) => m.role === "user");
-  const needsTools = userTurnNeedsSearchTool(latestUser?.content ?? "");
-
-  const round1 = await runRound({
-    apiKey,
-    model,
-    messages: conversation,
-    tools: needsTools ? TOOLS : undefined,
-  });
-
-  // 5a. If round 1 returned a content stream (no tool call), pipe it
-  // straight to the browser. This is the common path.
-  if (round1.kind === "content") {
-    return contentResponse(round1.body);
+  // 5. One streamed NIM call; pipe the reply straight to the browser.
+  const round = await runRound({ apiKey, model, messages: conversation });
+  if (round.kind === "content") {
+    return contentResponse(round.body);
   }
-
-  // 5b. If round 1 returned an error, surface it.
-  if (round1.kind === "error") {
-    return round1.response;
-  }
-
-  // 5c. The model called the search tool. Execute it, append the
-  // result + the model's tool call to the conversation, then run a
-  // second NIM round WITHOUT tools so the model produces a normal
-  // streamed reply incorporating the search results.
-  const toolCall = round1.toolCall;
-  console.log(
-    "[chat] tool call:",
-    toolCall.name,
-    "args:",
-    JSON.stringify(toolCall.args).slice(0, 200),
-  );
-
-  let toolResult: TavilyResult[] = [];
-  if (toolCall.name === "search_edustutor") {
-    const q = typeof toolCall.args.query === "string" ? toolCall.args.query : "";
-    toolResult = await searchEdus(q);
-    console.log(
-      `[chat] tavily returned ${toolResult.length} result(s) for query: ${q}`,
-    );
-  } else {
-    console.warn("[chat] unknown tool requested:", toolCall.name);
-  }
-
-  // Append the assistant's tool-call turn + the tool result to the
-  // conversation. The OpenAI spec requires the assistant turn to carry
-  // the tool_calls array and the tool turn to reference the same id.
-  const toolCallId = toolCall.id || `call_${Date.now()}`;
-  conversation.push({
-    role: "assistant",
-    content: "",
-    tool_calls: [
-      {
-        id: toolCallId,
-        type: "function",
-        function: {
-          name: toolCall.name,
-          arguments: JSON.stringify(toolCall.args),
-        },
-      },
-    ],
-  });
-  conversation.push({
-    role: "tool",
-    tool_call_id: toolCallId,
-    content: formatSearchResults(toolResult),
-  });
-
-  // Round 2: NO tools (so the model can't loop) + streaming so the
-  // parent gets the same fast feel as a non-tool answer.
-  const round2 = await runRound({
-    apiKey,
-    model,
-    messages: conversation,
-    tools: undefined, // disable tools - prevents recursion + saves quota
-  });
-
-  if (round2.kind === "content") {
-    return contentResponse(round2.body);
-  }
-  if (round2.kind === "error") {
-    return round2.response;
-  }
-  // Round 2 should never return a tool call (tools disabled). Treat
-  // as upstream confusion if it does.
-  console.error("[chat] unexpected tool call on round 2");
-  return NextResponse.json(
-    { error: "The assistant is temporarily unavailable. Please try again." },
-    { status: 502 },
-  );
+  return round.response;
 }
 
 /* --------------------------------------------------------------- */
 /* NIM round - one chat completion call, streaming                  */
 /* --------------------------------------------------------------- */
 
-/**
- * OpenAI-compatible chat message - includes the tool variants the
- * client doesn't speak (we add them server-side during tool flow).
- */
-type NimMessage =
-  | { role: "system" | "user"; content: string }
-  | {
-      role: "assistant";
-      content: string;
-      tool_calls?: Array<{
-        id: string;
-        type: "function";
-        function: { name: string; arguments: string };
-      }>;
-    }
-  | { role: "tool"; tool_call_id: string; content: string };
+/** OpenAI-compatible chat message. */
+type NimMessage = { role: "system" | "user" | "assistant"; content: string };
 
 type RunRoundArgs = {
   apiKey: string;
   model: string;
   messages: NimMessage[];
-  tools: typeof TOOLS | undefined;
 };
 
 type RunRoundResult =
   | { kind: "content"; body: ReadableStream<Uint8Array> }
-  | {
-      kind: "tool";
-      toolCall: { id: string; name: string; args: Record<string, unknown> };
-    }
   | { kind: "error"; response: Response };
 
 /**
- * Open a NIM streaming chat completion. Reads the SSE stream just long
- * enough to determine whether the first delta is content or a tool
- * call, then either:
+ * Open a NIM streaming chat completion. Reads the SSE stream until the
+ * first real content arrives, then either:
  *   - "content": returns the FULL stream wrapped to emit plain text
  *     (the remaining content tokens flow through to the browser).
- *   - "tool": cancels the SSE stream and returns the parsed tool call.
  *   - "error": returns a 502 Response to surface to the caller.
  *
  * We CANNOT split the stream into "what we already read" + "rest" with
@@ -408,7 +266,7 @@ type RunRoundResult =
  * below handles that initial-token replay.
  */
 async function runRound(args: RunRoundArgs): Promise<RunRoundResult> {
-  const { apiKey, model, messages, tools } = args;
+  const { apiKey, model, messages } = args;
 
   const payload: Record<string, unknown> = {
     model,
@@ -417,16 +275,14 @@ async function runRound(args: RunRoundArgs): Promise<RunRoundResult> {
     top_p: 0.9,
     // 500 tokens (~375 words) is enough for the longest realistic reply
     // (all-classes proforma listing with 6-8 cards + admission line +
-    // enrolment options). Was 800 - dropped to cut tail latency, since
-    // Llama 3.3 70B's streaming throughput is ~30 tok/s so 300 fewer
-    // tokens saves ~10s on the longest replies.
+    // enrolment options). Was 800 - dropped to cut tail latency.
     max_tokens: 500,
     stream: true,
+    // Nemotron 3 is a reasoning model. Left on, it spends the token budget
+    // thinking and sometimes writes its reasoning into the reply itself
+    // (seen in testing). Models without this switch ignore it.
+    chat_template_kwargs: { enable_thinking: false },
   };
-  if (tools) {
-    payload.tools = tools;
-    payload.tool_choice = "auto";
-  }
 
   let upstreamRes: Response;
   try {
@@ -473,16 +329,8 @@ async function runRound(args: RunRoundArgs): Promise<RunRoundResult> {
 
 /**
  * Peek at the upstream stream until we see either:
- *   - The first content delta -> stream the rest as plain text.
- *   - A complete tool call (one or more deltas assembling function.name
- *     and function.arguments JSON) -> cancel the stream, return the
- *     parsed tool call.
- *   - [DONE] with no content + no tool call -> error.
- *
- * This is the trickiest bit. NIM emits tool calls as multiple deltas
- * because the function arguments JSON streams in chunks. We assemble
- * them across deltas and complete the call when finish_reason is
- * "tool_calls" or "stop".
+ *   - The first real content delta -> stream the rest as plain text.
+ *   - [DONE] or end of stream with no content -> error.
  */
 async function classifyAndStream(
   upstream: ReadableStream<Uint8Array>,
@@ -491,25 +339,17 @@ async function classifyAndStream(
   const reader = upstream.getReader();
 
   let buffer = "";
-  // Tool call accumulators (per OpenAI streaming spec).
-  let toolId = "";
-  let toolName = "";
-  let toolArgs = "";
   let firstContent: string | null = null;
-  let pendingBytes: Uint8Array | null = null; // bytes after first content delta - we'll replay them
 
-  // Process bytes until we've classified.
   while (true) {
     const { value, done } = await reader.read();
     if (done) break;
-    if (value) pendingBytes = pendingBytes ? concat(pendingBytes, value) : value;
     buffer += decoder.decode(value, { stream: true });
 
     // Process every complete SSE frame in the buffer. A frame ends
     // with the SSE-standard blank line "\n\n".
     let sep: number;
-    let classified = false;
-    while ((sep = buffer.indexOf("\n\n")) !== -1) {
+    while (firstContent === null && (sep = buffer.indexOf("\n\n")) !== -1) {
       const frame = buffer.slice(0, sep);
       buffer = buffer.slice(sep + 2);
 
@@ -517,62 +357,23 @@ async function classifyAndStream(
         if (!line.startsWith("data: ")) continue;
         const payload = line.slice(6).trim();
         if (!payload || payload === "[DONE]") {
-          // Stream ended without content - if we have an accumulated
-          // tool call, complete it. Otherwise error.
-          if (toolName) {
-            return finishToolCall(toolId, toolName, toolArgs);
-          }
-          return {
-            kind: "error",
-            response: NextResponse.json(
-              { error: "The assistant returned an empty reply. Please try again." },
-              { status: 502 },
-            ),
-          };
+          return emptyReplyError();
         }
         try {
           const json = JSON.parse(payload) as {
-            choices?: Array<{
-              delta?: {
-                content?: string;
-                tool_calls?: Array<{
-                  index?: number;
-                  id?: string;
-                  type?: string;
-                  function?: { name?: string; arguments?: string };
-                }>;
-              };
-              finish_reason?: string | null;
-            }>;
+            choices?: Array<{ delta?: { content?: string } }>;
           };
-          const delta = json.choices?.[0]?.delta;
-          const finish = json.choices?.[0]?.finish_reason;
-
-          // Accumulate any tool_call deltas.
-          if (delta?.tool_calls) {
-            for (const tc of delta.tool_calls) {
-              if (tc.id) toolId = tc.id;
-              if (tc.function?.name) toolName = tc.function.name;
-              if (tc.function?.arguments) toolArgs += tc.function.arguments;
-            }
-          }
-
-          // First content delta = we know it's a content reply.
-          if (delta?.content && firstContent === null) {
-            firstContent = delta.content;
-            classified = true;
+          const content = json.choices?.[0]?.delta?.content;
+          // Leading whitespace alone does not start the reply: Nemotron
+          // often sends a lone "\n" first.
+          if (content && content.trim()) {
+            firstContent = content;
             break;
-          }
-
-          // finish_reason "tool_calls" with name = call complete.
-          if (finish === "tool_calls" && toolName) {
-            return finishToolCall(toolId, toolName, toolArgs);
           }
         } catch {
           // Malformed frame - skip.
         }
       }
-      if (classified) break;
     }
 
     if (firstContent !== null) {
@@ -588,10 +389,10 @@ async function classifyAndStream(
     }
   }
 
-  // Reader closed without classification - treat as error.
-  if (toolName) {
-    return finishToolCall(toolId, toolName, toolArgs);
-  }
+  return emptyReplyError();
+}
+
+function emptyReplyError(): RunRoundResult {
   return {
     kind: "error",
     response: NextResponse.json(
@@ -599,28 +400,6 @@ async function classifyAndStream(
       { status: 502 },
     ),
   };
-}
-
-/**
- * Build the result for a completed tool call. Parses the accumulated
- * arguments JSON; if parsing fails we treat it as an empty object so
- * the tool can still run (Tavily will get an empty query and return []).
- */
-function finishToolCall(
-  id: string,
-  name: string,
-  argsRaw: string,
-): RunRoundResult {
-  let args: Record<string, unknown> = {};
-  try {
-    args = JSON.parse(argsRaw || "{}") as Record<string, unknown>;
-  } catch {
-    console.warn(
-      "[chat] tool args JSON parse failed:",
-      argsRaw.slice(0, 200),
-    );
-  }
-  return { kind: "tool", toolCall: { id, name, args } };
 }
 
 /**
@@ -713,17 +492,10 @@ function drainContentFrames(buffer: string): {
 }
 
 /** Concatenate two Uint8Arrays. */
-function concat(a: Uint8Array, b: Uint8Array): Uint8Array {
-  const out = new Uint8Array(a.length + b.length);
-  out.set(a, 0);
-  out.set(b, a.length);
-  return out;
-}
-
 /** Format Tavily results into a compact text block the LLM can read. */
 function formatSearchResults(results: TavilyResult[]): string {
   if (results.length === 0) {
-    return "No matching pages found on the EDUS websites. Tell the parent we couldn't find a matching page and offer to connect them with the EDUS team via https://edustutor.com/contact.";
+    return "Website search: no matching pages found on the EDUS websites. If the catalog above answers the question, answer from it. Otherwise tell the parent honestly and offer to connect them with the EDUS team via https://edustutor.com/contact.";
   }
   const lines = results.map(
     (r, i) =>
@@ -734,7 +506,7 @@ function formatSearchResults(results: TavilyResult[]): string {
     "",
     ...lines,
     "",
-    "Use these results to answer the parent's question. Cite the most relevant URL in your reply. If none of these answer the question, tell the parent honestly and offer to connect them with the EDUS team.",
+    "Use these results only if they help answer the parent's question, and cite the most relevant URL. Class, fee, tutor and timetable facts always come from the catalog above. If neither answers the question, tell the parent honestly and offer to connect them with the EDUS team.",
   ].join("\n");
 }
 
@@ -769,23 +541,16 @@ function sanitiseIntake(input: unknown): IntakePayload | null {
 }
 
 /**
- * Decide whether the latest user turn likely needs the search tool.
+ * Decide whether the latest user turn needs a site search first.
  *
- * Speed optimisation: when the user is clearly asking about catalog
- * content (classes / fees / tutors / schedules) we skip wiring tools
- * into round 1, saving NIM's "should I call a tool?" deliberation
- * latency. Tools stay enabled for anything that LOOKS like an
- * off-catalog topic - founder, blog, gallery, press, accreditation,
- * specific URLs etc.
+ * Catalog questions (classes / fees / tutors / schedules) are answered
+ * from the system prompt, so they skip the search and its 1-2s cost.
+ * Anything that LOOKS off-catalog - founder, blog, gallery, press,
+ * awards, accreditation, specific URLs - is searched first.
  *
- * False positives (turning tools off when they were needed) just mean
- * the bot answers from the catalog or honestly says "I'm not sure,
- * try /contact" - no crash, no wrong answer.
- * False negatives (turning tools on when they weren't needed) cost
- * ~300-500ms of latency - the current bug we're trying to remove.
- *
- * Rule: tools ON only when the message contains an off-catalog signal
- * keyword. Otherwise tools OFF.
+ * A missed keyword just means the bot answers from what it already knows
+ * or honestly points to /contact. An extra search costs a second and one
+ * Tavily credit. Rule: search only when an off-catalog keyword appears.
  */
 function userTurnNeedsSearchTool(text: string): boolean {
   const lower = (text ?? "").toLowerCase().trim();
@@ -799,6 +564,7 @@ function userTurnNeedsSearchTool(text: string): boolean {
     "gallery", "photo", "video", "youtube",
     "review", "testimonial",
     "accreditation", "certified", "certificate", "license",
+    "award", "recogni",
     "partner", "scholarship", "edus aid",
     "contact", "address", "office", "location", "map",
     "career", "job", "vacancy", "hiring", "apply",
@@ -811,6 +577,6 @@ function userTurnNeedsSearchTool(text: string): boolean {
     if (lower.includes(hint)) return true;
   }
 
-  // Default: catalog turn - skip tools for speed.
+  // Default: catalog turn - no search needed.
   return false;
 }
