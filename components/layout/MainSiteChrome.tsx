@@ -5,7 +5,6 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { Atmosphere } from "@/components/effects/Atmosphere";
 import { ChatBotMount } from "@/components/chatbot/ChatBotMount";
-import { ProjectPromoPopup } from "@/components/promo/ProjectPromoPopup";
 
 /**
  * Gate for the MAIN EDUS tuition site chrome.
@@ -22,7 +21,7 @@ import { ProjectPromoPopup } from "@/components/promo/ProjectPromoPopup";
  *
  * `position`:
  *   - "frame"   -> header + atmosphere wrap (rendered around <main>)
- *   - "footer"  -> footer + global popups + chatbot (rendered after <main>)
+ *   - "footer"  -> footer + chatbot (rendered after <main>)
  * Split into two slots so the root layout keeps <main> in the middle.
  */
 export function MainSiteChrome({
@@ -53,7 +52,8 @@ export function MainSiteChrome({
     <>
       <SiteFooter />
       <ChatBotMount />
-      <ProjectPromoPopup />
+      {/* The 9A Project promo popup (components/promo/ProjectPromoPopup) is
+          switched off. To bring it back, import it and render it here. */}
     </>
   );
 }

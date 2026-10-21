@@ -398,11 +398,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             content freshness (Google Reviews, blog posts, prices)
             is preserved with zero stale-cache risk. */}
         <ServiceWorkerRegistrar />
-        {/* NOTE: the EDUS admissions chatbot (ChatBotMount) and the 9A
-            Challenge promo popup (ProjectPromoPopup) are now rendered
-            inside <MainSiteChrome position="footer"> above, so they are
+        {/* NOTE: the EDUS admissions chatbot (ChatBotMount) is rendered
+            inside <MainSiteChrome position="footer"> above, so it is
             automatically suppressed on the EDUS Overseas section
-            (/overseas) which carries its own separate branding. */}
+            (/overseas) which carries its own separate branding. The 9A
+            promo popup is currently switched off there. */}
       </body>
     </html>
   );

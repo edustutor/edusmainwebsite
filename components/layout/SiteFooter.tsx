@@ -30,9 +30,6 @@ const QUICK: QuickItem[] = [
   { label: "Resource Vault", href: "https://wiki.edustutor.com/", external: true },
   { label: "Enrol", href: "https://signup.edustutor.com/", external: true },
   { label: "Contact", href: "/contact" },
-  // Time-sensitive campaign - blink draws attention through the long
-  // Quick Links list. Removed when O/L 2026 enrolment window closes.
-  { label: "9A Project Class - O/L 2026", href: "/sl/9a-project", blink: true },
 ];
 
 const PATHS = [
